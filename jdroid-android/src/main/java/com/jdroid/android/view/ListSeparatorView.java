@@ -18,9 +18,9 @@ public class ListSeparatorView extends TextView {
 	public ListSeparatorView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		setTextColor(Color.WHITE);
-		setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+		setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.listSeparatorTextSize));
 		setTypeface(Typeface.DEFAULT_BOLD);
-		setBackgroundDrawable(context.getResources().getDrawable(R.drawable.list_separator_background));
+		setBackgroundDrawable(getResources().getDrawable(R.drawable.list_separator_background));
 		setPadding(20, 3, 20, 3);
 	}
 	
