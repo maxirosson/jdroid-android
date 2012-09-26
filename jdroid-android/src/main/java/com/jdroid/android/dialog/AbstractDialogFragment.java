@@ -8,7 +8,9 @@ import com.jdroid.android.AbstractApplication;
 import com.jdroid.android.domain.User;
 import com.jdroid.android.fragment.BaseFragment;
 import com.jdroid.android.fragment.FragmentIf;
+import com.jdroid.android.usecase.DefaultAbstractUseCase;
 import com.jdroid.android.usecase.DefaultUseCase;
+import com.jdroid.android.usecase.listener.DefaultUseCaseListener;
 
 /**
  * 
@@ -234,6 +236,18 @@ public class AbstractDialogFragment extends DialogFragment implements FragmentIf
 	@Override
 	public AdSize getAdSize() {
 		return AdSize.SMART_BANNER;
+	}
+	
+	public void onResumeUseCase(DefaultAbstractUseCase useCase, DefaultUseCaseListener listener) {
+		baseFragment.onResumeUseCase(useCase, listener);
+	}
+	
+	public void onResumeUseCase(DefaultAbstractUseCase useCase, DefaultUseCaseListener listener, Boolean initUseCase) {
+		baseFragment.onResumeUseCase(useCase, listener, initUseCase);
+	}
+	
+	public void onPauseUseCase(DefaultAbstractUseCase useCase, DefaultUseCaseListener listener) {
+		baseFragment.onPauseUseCase(useCase, listener);
 	}
 	
 }

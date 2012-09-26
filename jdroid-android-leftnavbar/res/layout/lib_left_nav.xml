@@ -6,7 +6,7 @@
 	governing permissions and limitations under the License. -->
 <merge xmlns:android="http://schemas.android.com/apk/res/android">
 
-	<com.android.leftnavbar.LeftNavView xmlns:android="http://schemas.android.com/apk/res/android"
+	<com.jdroid.android.leftnavbar.LeftNavView xmlns:android="http://schemas.android.com/apk/res/android"
 		android:id="@+id/left_nav" style="@android:style/Widget.Holo.ActionBar" android:layout_width="@dimen/left_nav_collapsed_apparent_width"
 		android:layout_height="match_parent" />
 </merge>

@@ -13,8 +13,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
-import com.jdroid.android.R;
 import com.jdroid.android.AbstractApplication;
+import com.jdroid.android.R;
 import com.jdroid.android.dialog.AbstractDialogFragment;
 import com.jdroid.android.domain.UriFileContent;
 import com.jdroid.android.utils.AndroidUtils;
@@ -43,7 +43,7 @@ public class PictureDialogFragment extends AbstractDialogFragment {
 		FragmentManager fm = targetFragment.getActivity().getSupportFragmentManager();
 		PictureDialogFragment pictureDialogFragment = new PictureDialogFragment();
 		pictureDialogFragment.setTargetFragment(targetFragment, 1);
-		pictureDialogFragment.show(fm, "pictureDialogFragment");
+		pictureDialogFragment.show(fm, PictureDialogFragment.class.getSimpleName());
 	}
 	
 	/**

@@ -4,7 +4,7 @@
 	Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS 
 	IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language 
 	governing permissions and limitations under the License. -->
-<com.android.leftnavbar.TabFrame xmlns:android="http://schemas.android.com/apk/res/android"
+<com.jdroid.android.leftnavbar.TabFrame xmlns:android="http://schemas.android.com/apk/res/android"
 	android:id="@+id/leftnav_bar_tab" style="@style/Widget.ActionBarView_TabView" android:layout_width="match_parent"
 	android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical"
 	android:focusable="true" android:clickable="true">
@@ -16,4 +16,4 @@
 		android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginLeft="7dip"
 		android:layout_marginRight="7dip" android:visibility="gone" android:duplicateParentState="true" />
 
-</com.android.leftnavbar.TabFrame>
+</com.jdroid.android.leftnavbar.TabFrame>
