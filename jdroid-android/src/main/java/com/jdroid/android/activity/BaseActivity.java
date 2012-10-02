@@ -135,7 +135,7 @@ public class BaseActivity implements ActivityIf {
 	public void onStart() {
 		Log.v(TAG, "Executing onStart on " + activity);
 		AbstractApplication.get().setCurrentActivity(activity);
-		if (AbstractApplication.get().isAnalyticsEnabled()) {
+		if (AbstractApplication.get().getAndroidApplicationContext().isAnalyticsEnabled()) {
 			EasyTracker.getInstance().activityStart(activity);
 		}
 	}
@@ -153,7 +153,7 @@ public class BaseActivity implements ActivityIf {
 	
 	public void onStop() {
 		Log.v(TAG, "Executing onStop on " + activity);
-		if (AbstractApplication.get().isAnalyticsEnabled()) {
+		if (AbstractApplication.get().getAndroidApplicationContext().isAnalyticsEnabled()) {
 			EasyTracker.getInstance().activityStop(activity);
 		}
 	}

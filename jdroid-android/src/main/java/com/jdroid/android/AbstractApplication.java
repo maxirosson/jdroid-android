@@ -161,7 +161,7 @@ public abstract class AbstractApplication extends RoboApplication {
 	}
 	
 	// private void initAnalytics() {
-	// if (isAnalyticsEnabled()) {
+	// if (applicationContext.isAnalyticsEnabled()) {
 	// GoogleAnalytics googleAnalytics = GoogleAnalytics.getInstance(getApplicationContext());
 	// Tracker defaultTracker = googleAnalytics.getTracker(applicationContext.getAnalyticsTrackingId());
 	// googleAnalytics.setDefaultTracker(defaultTracker);
@@ -211,10 +211,6 @@ public abstract class AbstractApplication extends RoboApplication {
 	}
 	
 	public Boolean isInAppBillingEnabled() {
-		return false;
-	}
-	
-	public Boolean isAnalyticsEnabled() {
 		return false;
 	}
 	

@@ -21,6 +21,7 @@ public class DefaultApplicationContext {
 	private String adUnitId;
 	private Set<String> testDevicesIds;
 	private Boolean cookieRepositoryEnabled = false;
+	private Boolean analyticsEnabled;
 	private String analyticsTrackingId;
 	
 	public DefaultApplicationContext() {
@@ -35,6 +36,7 @@ public class DefaultApplicationContext {
 		adsEnabled = PropertiesUtils.getBooleanProperty("ads.enabled", false);
 		adUnitId = PropertiesUtils.getStringProperty("ads.adUnitId");
 		testDevicesIds = PropertiesUtils.getStringSetProperty("ads.tests.devices.ids");
+		analyticsEnabled = PropertiesUtils.getBooleanProperty("analytics.enabled", false);
 		analyticsTrackingId = PropertiesUtils.getStringProperty("analytics.trackingId");
 	}
 	
@@ -96,6 +98,13 @@ public class DefaultApplicationContext {
 	 */
 	public String getAdUnitId() {
 		return adUnitId;
+	}
+	
+	/**
+	 * @return Whether the application has Google Analytics enabled or not
+	 */
+	public Boolean isAnalyticsEnabled() {
+		return analyticsEnabled;
 	}
 	
 	/**
