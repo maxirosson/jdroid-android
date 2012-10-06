@@ -38,6 +38,12 @@
 	<string name="noResultsSearch">There are no results for your search.</string>
 	<string name="requiredSearchTerm">The search term is required</string>
 
+	<!-- Date Picker Dialog Fragment -->
+	<string name="selectDate">Select Date</string>
+
+	<!-- Time Picker Dialog Fragment -->
+	<string name="selectTime">Select Time</string>
+
 	<!-- Picture Dialog Fragment -->
 	<string name="selectPhoto">Photo Source</string>
 	<string name="camera">Camera</string>

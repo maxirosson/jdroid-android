@@ -198,6 +198,14 @@ public abstract class DateUtils {
 		return date != null ? dateFormat.format(date) : null;
 	}
 	
+	public static String formatDate(Date date) {
+		return format(date, DateFormat.getDateInstance());
+	}
+	
+	public static String formatTime(Date date) {
+		return format(date, DateFormat.getTimeInstance(DateFormat.SHORT));
+	}
+	
 	/**
 	 * Creates a {@link Date} for the specified day
 	 * 
@@ -209,6 +217,18 @@ public abstract class DateUtils {
 	public static Date getDate(int year, int monthOfYear, int dayOfMonth) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(year, monthOfYear, dayOfMonth);
+		truncate(calendar);
+		return calendar.getTime();
+	}
+	
+	public static Date getTime(int hour, int minutes) {
+		return getTime(hour, minutes, true);
+	}
+	
+	public static Date getTime(int hour, int minutes, Boolean is24Hour) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(is24Hour ? Calendar.HOUR_OF_DAY : Calendar.HOUR, hour);
+		calendar.set(Calendar.MINUTE, minutes);
 		return calendar.getTime();
 	}
 	
@@ -234,15 +254,26 @@ public abstract class DateUtils {
 		return calendar.get(Calendar.DAY_OF_MONTH);
 	}
 	
-	public static int getHour(Date date) {
-		return DateUtils.getHour(date, TimeZone.getDefault());
+	public static int getHour(Date date, Boolean is24Hour) {
+		return DateUtils.getHour(date, TimeZone.getDefault(), is24Hour);
 	}
 	
-	public static int getHour(Date date, TimeZone timeZone) {
+	public static int getHour(Date date, TimeZone timeZone, Boolean is24Hour) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
 		calendar.setTimeZone(timeZone);
-		return calendar.get(Calendar.HOUR_OF_DAY);
+		return calendar.get(is24Hour ? Calendar.HOUR_OF_DAY : Calendar.HOUR);
+	}
+	
+	public static int getMinute(Date date) {
+		return DateUtils.getMinute(date, TimeZone.getDefault());
+	}
+	
+	public static int getMinute(Date date, TimeZone timeZone) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.setTimeZone(timeZone);
+		return calendar.get(Calendar.MINUTE);
 	}
 	
 	public static DayOfWeek getWeekDay(Date date) {
@@ -268,11 +299,20 @@ public abstract class DateUtils {
 	public static Date truncate(Date date) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
+		truncate(calendar);
+		return calendar.getTime();
+	}
+	
+	/**
+	 * Truncate the {@link Calendar} removing hours, minutes, seconds and milliseconds
+	 * 
+	 * @param calendar The {@link Calendar} to truncate
+	 */
+	public static void truncate(Calendar calendar) {
 		calendar.set(Calendar.HOUR_OF_DAY, 0);
 		calendar.set(Calendar.MINUTE, 0);
 		calendar.set(Calendar.SECOND, 0);
 		calendar.set(Calendar.MILLISECOND, 0);
-		return calendar.getTime();
 	}
 	
 	/**
@@ -412,22 +452,6 @@ public abstract class DateUtils {
 	 */
 	public static Date oneMonthInPast() {
 		return DateUtils.monthsAway(-1);
-	}
-	
-	/**
-	 * Creates a determined date.<br>
-	 * Month starts from 0 (January) so it's recommended to use Calendar.[MONTH] (i.e. Calendar.JANUARY).
-	 * 
-	 * @see Calendar#set(int, int, int)
-	 * @param year Year of the date.
-	 * @param month Month of the date.
-	 * @param date Day of the month of the date.
-	 * @return {@link Date} The generated date.
-	 */
-	public static Date createDate(int year, int month, int date) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(year, month, date);
-		return DateUtils.resetTime(calendar).getTime();
 	}
 	
 	/**

@@ -45,7 +45,7 @@ public class TimeView extends TextView implements Callback {
 			if (isInEditMode()) {
 				setText("09:34 PM");
 			} else {
-				setText(AndroidDateUtils.getFormattedTime());
+				setText(AndroidDateUtils.formatTime());
 			}
 			handler.sendMessageDelayed(Message.obtain(handler, MESSAGE_CODE), HANDLER_DELAY);
 		} else {
