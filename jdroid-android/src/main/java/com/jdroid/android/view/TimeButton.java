@@ -23,6 +23,9 @@ public class TimeButton extends Button {
 	
 	public TimeButton(Context context, AttributeSet attrs) {
 		super(context, attrs);
+		if (isInEditMode()) {
+			setText("11:13 PM");
+		}
 	}
 	
 	public void init(final Fragment fragment, final Date defaultTime) {

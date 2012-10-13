@@ -13,9 +13,9 @@ public interface ImageHolder {
 	
 	public void showStubImage();
 	
-	public Integer getMaxWidth();
+	public Integer getMaximumWidth();
 	
-	public Integer getMaxHeight();
+	public Integer getMaximumHeight();
 	
 	public Object getTag();
 	

@@ -6,7 +6,7 @@
 	governing permissions and limitations under the License. -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.jdroid.android.leftnavbar">
 
-	<uses-sdk android:minSdkVersion="11" android:targetSdkVersion="15" />
+	<uses-sdk android:minSdkVersion="11" android:targetSdkVersion="16" />
 
 	<application android:label="LeftNavBarLibrary">
 

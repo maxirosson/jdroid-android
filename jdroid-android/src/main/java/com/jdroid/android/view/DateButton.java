@@ -23,6 +23,9 @@ public class DateButton extends Button {
 	
 	public DateButton(Context context, AttributeSet attrs) {
 		super(context, attrs);
+		if (isInEditMode()) {
+			setText("08/10/2012");
+		}
 	}
 	
 	public void init(final Fragment fragment, final Date defaultDate) {

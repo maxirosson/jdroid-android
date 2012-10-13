@@ -10,7 +10,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<android.sdk.platform>15</android.sdk.platform>
+		<android.sdk.platform>16</android.sdk.platform>
 	</properties>
 
 	<repositories>
@@ -36,25 +36,25 @@
 		<dependency>
 			<groupId>android</groupId>
 			<artifactId>android</artifactId>
-			<version>4.0.3_r3</version>
+			<version>4.1_r3</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>android</groupId>
 			<artifactId>maps</artifactId>
-			<version>4.0.3_r1</version>
+			<version>4.1_r3</version>
 		</dependency>
 		<dependency>
 			<groupId>android.compatibility</groupId>
 			<artifactId>android-support-v4</artifactId>
-			<version>r9</version>
+			<version>r10</version>
 		</dependency>
 
 		<!-- Google Cloud Messaging -->
 		<dependency>
 			<groupId>android.gcm</groupId>
 			<artifactId>gcm-client</artifactId>
-			<version>r2</version>
+			<version>r3</version>
 		</dependency>
 
 		<!-- Google Analytics -->
@@ -74,8 +74,8 @@
 		<!-- ActionBar Sherlock -->
 		<dependency>
 			<groupId>com.actionbarsherlock</groupId>
-			<artifactId>library</artifactId>
-			<version>4.1.0</version>
+			<artifactId>actionbarsherlock</artifactId>
+			<version>4.2.0</version>
 			<type>apklib</type>
 			<exclusions>
 				<exclusion>
@@ -202,7 +202,7 @@
 			<plugin>
 				<groupId>com.jayway.maven.plugins.android.generation2</groupId>
 				<artifactId>android-maven-plugin</artifactId>
-				<version>3.3.0</version>
+				<version>3.3.2</version>
 				<extensions>true</extensions>
 			</plugin>
 		</plugins>

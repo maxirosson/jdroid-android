@@ -65,7 +65,15 @@ public class PushServiceImpl implements PushService {
 	 * @see com.jdroid.javaweb.push.PushService#send(com.jdroid.javaweb.push.PushMessage, java.lang.Long[])
 	 */
 	@Override
-	public void send(final PushMessage pushMessage, Long... userIds) {
+	public void send(PushMessage pushMessage, Long... userIds) {
+		send(pushMessage, Lists.newArrayList(userIds));
+	}
+	
+	/**
+	 * @see com.jdroid.javaweb.push.PushService#send(com.jdroid.javaweb.push.PushMessage, java.util.List)
+	 */
+	@Override
+	public void send(final PushMessage pushMessage, List<Long> userIds) {
 		Map<DeviceType, List<Device>> devicesMap = Maps.newHashMap();
 		for (Long userId : userIds) {
 			Collection<Device> userDevices = deviceRepository.findByUserId(userId);

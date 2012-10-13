@@ -63,18 +63,18 @@ public class CustomImageView extends ImageView implements ImageHolder {
 	}
 	
 	/**
-	 * @see com.jdroid.android.images.ImageHolder#getMaxWidth()
+	 * @see com.jdroid.android.images.ImageHolder#getMaximumWidth()
 	 */
 	@Override
-	public Integer getMaxWidth() {
+	public Integer getMaximumWidth() {
 		return maxWidth;
 	}
 	
 	/**
-	 * @see com.jdroid.android.images.ImageHolder#getMaxHeight()
+	 * @see com.jdroid.android.images.ImageHolder#getMaximumHeight()
 	 */
 	@Override
-	public Integer getMaxHeight() {
+	public Integer getMaximumHeight() {
 		return maxHeight;
 	}
 }

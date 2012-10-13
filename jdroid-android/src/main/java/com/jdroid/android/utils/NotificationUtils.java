@@ -10,8 +10,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.widget.RemoteViews;
-import com.jdroid.android.R;
 import com.jdroid.android.AbstractApplication;
+import com.jdroid.android.R;
 import com.jdroid.android.images.RemoteImageResolver;
 
 /**
@@ -70,7 +70,10 @@ public class NotificationUtils {
 	
 	public static void sendNotification(int id, int smallIcon, String largeIconUrl, String tickerText,
 			String contentTitle, String contentText, Class<?> clazz) {
-		sendNotification(id, smallIcon, largeIconUrl, tickerText, contentTitle, contentText, clazz);
+		Bitmap largeIconBitmap = createLargeIconBitmap(largeIconUrl);
+		NotificationCompat.Builder builder = createBuilder(smallIcon, largeIconBitmap, tickerText, contentTitle,
+			contentText, clazz, null, System.currentTimeMillis());
+		sendNotification(id, builder);
 	}
 	
 	public static void sendNotification(int id, int smallIcon, Bitmap largeIcon, String tickerText,

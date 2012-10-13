@@ -130,7 +130,7 @@ public class ImageLoader {
 		public Bitmap loadBitmap() {
 			ImageHolder imageHolder = getImageHolder();
 			if (imageHolder != null) {
-				bitmap = imageResolver.resolve(uri, imageHolder.getMaxWidth(), imageHolder.getMaxHeight());
+				bitmap = imageResolver.resolve(uri, imageHolder.getMaximumWidth(), imageHolder.getMaximumHeight());
 				Activity activity = (Activity)imageHolder.getContext();
 				activity.runOnUiThread(this);
 			}

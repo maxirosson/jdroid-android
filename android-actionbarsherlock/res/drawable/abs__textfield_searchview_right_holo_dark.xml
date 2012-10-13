@@ -13,9 +13,10 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources>
 
-    <!-- Background drawable for standalone items that need focus/pressed states. -->
-    <attr name="selectableItemBackground" format="reference" />
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_focused="true"
+        android:drawable="@drawable/abs__textfield_search_right_selected_holo_dark" />
+    <item android:drawable="@drawable/abs__textfield_search_right_default_holo_dark" />
+</selector>
 
-</resources>
