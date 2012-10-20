@@ -29,16 +29,20 @@ public class JsonMap extends LinkedHashMap<String, Object> {
 		this.extras = extras;
 	}
 	
-	/**
-	 * @see java.util.HashMap#put(java.lang.Object, java.lang.Object)
-	 */
-	@Override
-	public Object put(String key, Object value) {
+	public Object put(String key, Object value, MarshallerMode mode) {
 		Object marshalledValue = MarshallerProvider.get().marshall(value, mode, extras);
 		if ((marshalledValue != null) && !CollectionUtils.isEmptyCollection(marshalledValue)) {
 			super.put(key, marshalledValue);
 		}
 		return null;
+	}
+	
+	/**
+	 * @see java.util.HashMap#put(java.lang.Object, java.lang.Object)
+	 */
+	@Override
+	public Object put(String key, Object value) {
+		return put(key, value, mode);
 	}
 	
 	/**
