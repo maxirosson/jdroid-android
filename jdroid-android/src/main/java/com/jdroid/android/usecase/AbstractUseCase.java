@@ -9,7 +9,7 @@ import com.jdroid.java.collections.Lists;
  * 
  * @author Maxi Rosson
  */
-public abstract class AbstractUseCase<T> {
+public abstract class AbstractUseCase<T> implements DefaultUseCase<T> {
 	
 	public enum UseCaseStatus {
 		NOT_INVOKED,
@@ -25,6 +25,82 @@ public abstract class AbstractUseCase<T> {
 	private Boolean notified = false;
 	
 	/**
+	 * Executes the use case.
+	 */
+	@Override
+	public final void run() {
+		
+		markAsInProgress();
+		for (T listener : listeners) {
+			notifyUseCaseStart(listener);
+		}
+		try {
+			doExecute();
+			if (isCanceled()) {
+				for (T listener : listeners) {
+					notifyFinishedCanceledUseCase(listener);
+				}
+			} else {
+				for (T listener : listeners) {
+					notifyFinishedUseCase(listener);
+				}
+				markAsSuccessful();
+			}
+		} catch (RuntimeException e) {
+			markAsFailed(e);
+			for (T listener : listeners) {
+				notifyFailedUseCase(e, listener);
+			}
+		} finally {
+			if (!listeners.isEmpty()) {
+				markAsNotified();
+			}
+		}
+	}
+	
+	/**
+	 * Override this method with the functionality to be executed between
+	 * {@link NoResultUseCaseListener#onStartUseCase()} and {@link NoResultUseCaseListener#onFinishUseCase()}
+	 */
+	protected abstract void doExecute();
+	
+	/**
+	 * Notifies the listener that the use case has started. <br/>
+	 * You can override this method for a custom notification when your listeners may be listening to multiple use cases
+	 * at a time.
+	 * 
+	 * @param listener The listener to notify.
+	 */
+	protected abstract void notifyUseCaseStart(T listener);
+	
+	/**
+	 * Notifies the listener that a canceled use case has finished. <br/>
+	 * You can override this method for a custom notification when your listeners may be listening to multiple use cases
+	 * at a time.
+	 * 
+	 * @param listener The listener to notify.
+	 */
+	protected abstract void notifyFinishedCanceledUseCase(T listener);
+	
+	/**
+	 * Notifies the listener that the use case has finished successfully. <br/>
+	 * You can override this method for a custom notification when your listeners may be listening to multiple use cases
+	 * at a time.
+	 * 
+	 * @param listener The listener to notify.
+	 */
+	protected abstract void notifyFinishedUseCase(T listener);
+	
+	/**
+	 * Notifies the listener that the use case has failed to execute. <br/>
+	 * You can override this method for a custom notification when your listeners may be listening to multiple use cases
+	 * at a time.
+	 * 
+	 * @param listener The listener to notify.
+	 */
+	protected abstract void notifyFailedUseCase(RuntimeException e, T listener);
+	
+	/**
 	 * @return the listeners
 	 */
 	protected List<T> getListeners() {
@@ -34,6 +110,7 @@ public abstract class AbstractUseCase<T> {
 	/**
 	 * @param listener the listener to add
 	 */
+	@Override
 	public void addListener(T listener) {
 		if (!listeners.contains(listener)) {
 			this.listeners.add(listener);
@@ -43,6 +120,7 @@ public abstract class AbstractUseCase<T> {
 	/**
 	 * @param listener the listener to remove
 	 */
+	@Override
 	public void removeListener(T listener) {
 		this.listeners.remove(listener);
 	}

@@ -4,51 +4,42 @@ import com.jdroid.android.usecase.listener.DefaultUseCaseListener;
 
 /**
  * Abstract use case that handles the calls to {@link DefaultUseCaseListener#onStartUseCase()},
- * {@link DefaultUseCaseListener#onFinishUseCase()} and
+ * {@link DefaultUseCaseListener#onFinishUseCase()}, {@link DefaultUseCaseListener#onFinishCanceledUseCase()} and
  * {@link DefaultUseCaseListener#onFinishFailedUseCase(RuntimeException)} when executing.
  * 
  * @author Maxi Rosson
  */
-public abstract class DefaultAbstractUseCase extends AbstractUseCase<DefaultUseCaseListener> implements
-		DefaultUseCase<DefaultUseCaseListener> {
+public abstract class DefaultAbstractUseCase extends AbstractUseCase<DefaultUseCaseListener> {
 	
 	/**
-	 * Executes the use case.
+	 * @see com.jdroid.android.usecase.AbstractUseCase#notifyFailedUseCase(java.lang.RuntimeException, java.lang.Object)
 	 */
 	@Override
-	public final void run() {
-		
-		markAsInProgress();
-		for (DefaultUseCaseListener listener : getListeners()) {
-			listener.onStartUseCase();
-		}
-		try {
-			doExecute();
-			if (isCanceled()) {
-				for (DefaultUseCaseListener listener : getListeners()) {
-					listener.onFinishCanceledUseCase();
-				}
-			} else {
-				for (DefaultUseCaseListener listener : getListeners()) {
-					listener.onFinishUseCase();
-				}
-				markAsSuccessful();
-			}
-		} catch (RuntimeException e) {
-			markAsFailed(e);
-			for (DefaultUseCaseListener listener : getListeners()) {
-				listener.onFinishFailedUseCase(e);
-			}
-		} finally {
-			if (!getListeners().isEmpty()) {
-				markAsNotified();
-			}
-		}
+	protected void notifyFailedUseCase(RuntimeException e, DefaultUseCaseListener listener) {
+		listener.onFinishFailedUseCase(e);
 	}
 	
 	/**
-	 * Override this method with the login to be executed between {@link NoResultUseCaseListener#onStartUseCase()} and
-	 * before {@link NoResultUseCaseListener#onFinishUseCase()}
+	 * @see com.jdroid.android.usecase.AbstractUseCase#notifyFinishedUseCase(java.lang.Object)
 	 */
-	protected abstract void doExecute();
+	@Override
+	protected void notifyFinishedUseCase(DefaultUseCaseListener listener) {
+		listener.onFinishUseCase();
+	}
+	
+	/**
+	 * @see com.jdroid.android.usecase.AbstractUseCase#notifyFinishedCanceledUseCase(java.lang.Object)
+	 */
+	@Override
+	protected void notifyFinishedCanceledUseCase(DefaultUseCaseListener listener) {
+		listener.onFinishCanceledUseCase();
+	}
+	
+	/**
+	 * @see com.jdroid.android.usecase.AbstractUseCase#notifyUseCaseStart(java.lang.Object)
+	 */
+	@Override
+	protected void notifyUseCaseStart(DefaultUseCaseListener listener) {
+		listener.onStartUseCase();
+	}
 }
