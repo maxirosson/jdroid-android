@@ -290,7 +290,7 @@ public class AbstractHibernateRepository<T extends Entity> extends HibernateDaoS
 	 * @return If exist any entity that matched with the filter
 	 */
 	protected boolean exists(DetachedCriteria detachedCriteria) {
-		return !this.size(detachedCriteria).equals(0);
+		return !this.size(detachedCriteria).equals(0L);
 	}
 	
 	/**
