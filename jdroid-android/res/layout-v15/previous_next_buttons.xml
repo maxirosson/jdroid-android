@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<View android:id="@+id/divider" android:background="?android:attr/dividerHorizontal" android:layout_height="1dp"
+		android:layout_width="match_parent" />
+
+	<LinearLayout style="?android:attr/buttonBarStyle" android:layout_width="match_parent"
+		android:layout_height="wrap_content" android:orientation="horizontal">
+
+		<Button style="?android:attr/buttonBarButtonStyle" android:background="@drawable/selectable_item_background"
+			android:id="@+id/previous" android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content"
+			android:text="@string/previous" />
+
+		<Button style="?android:attr/buttonBarButtonStyle" android:background="@drawable/selectable_item_background"
+			android:id="@+id/next" android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content"
+			android:text="@string/next" />
+
+	</LinearLayout>
+
+</merge>

@@ -13,6 +13,8 @@
 	<string name="noResults">There are no available results</string>
 	<string name="featureNotAvailable">This feature is not available yet</string>
 	<string name="zeroPercent">0%</string>
+	<string name="next">Next</string>
+	<string name="previous">Previous</string>
 
 	<!-- GCM -->
 	<string name="onMissingGoogleAccountError">You need to set up a Google account on your device to use push notifications</string>

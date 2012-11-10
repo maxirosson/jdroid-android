@@ -92,6 +92,7 @@ mvn dependency:resolve clean install -Dmaven.test.skip=true
 
 if [ "$DEPLOY" = "true" ]
 then
+    mvn javadoc:aggregate
 	mvn deploy assembly:single -Dmaven.test.skip=true
 	cp ./target/*.zip $ASSEMBLIES_DIRECTORY/
 fi

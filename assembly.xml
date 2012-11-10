@@ -8,6 +8,10 @@
     </formats>
     <includeBaseDirectory>false</includeBaseDirectory>
     <fileSets>
+	    <fileSet>
+            <directory>target/site</directory>
+            <outputDirectory/>
+        </fileSet>
         <fileSet>
             <directory>jdroid-java/target</directory>
             <includes>
