@@ -39,6 +39,15 @@ public class FacebookConnector {
 		facebook.setAccessToken(accessToken);
 	}
 	
+	/**
+	 * @param accessToken The access token to use.
+	 * @param accessExpiresIn The time until the token expires (in milliseconds since Unix epoch).
+	 */
+	public void setAccessToken(String accessToken, Long accessExpiresIn) {
+		facebook.setAccessToken(accessToken);
+		facebook.setAccessExpires(accessExpiresIn);
+	}
+	
 	public void post(String message, String description, String name, String picure, String link) {
 		try {
 			Bundle parameters = new Bundle();

@@ -1,6 +1,7 @@
 package com.jdroid.javaweb.controller;
 
 import java.util.Map;
+import org.apache.commons.lang.StringUtils;
 import com.jdroid.java.marshaller.MarshallerMode;
 import com.jdroid.java.marshaller.MarshallerProvider;
 
@@ -27,6 +28,6 @@ public abstract class AbstractController {
 	}
 	
 	public String marshall(Object object, MarshallerMode mode, Map<String, String> extras) {
-		return MarshallerProvider.get().marshall(object, mode, extras).toString();
+		return object != null ? MarshallerProvider.get().marshall(object, mode, extras).toString() : StringUtils.EMPTY;
 	}
 }
