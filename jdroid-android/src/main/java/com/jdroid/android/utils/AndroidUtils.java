@@ -28,8 +28,7 @@ public class AndroidUtils {
 		return "google_sdk".equals(Build.PRODUCT);
 	}
 	
-	// TODO See if this is working
-	public static String getInstallationId() {
+	public static String getAndroidId() {
 		return Secure.getString(AbstractApplication.get().getContentResolver(), Secure.ANDROID_ID);
 	}
 	

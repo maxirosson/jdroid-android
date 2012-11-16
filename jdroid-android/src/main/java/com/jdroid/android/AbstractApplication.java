@@ -1,6 +1,7 @@
 package com.jdroid.android;
 
 import java.io.File;
+import java.util.UUID;
 import roboguice.RoboGuice;
 import roboguice.application.RoboApplication;
 import android.app.Activity;
@@ -19,6 +20,7 @@ import com.jdroid.android.exception.ExceptionHandler;
 import com.jdroid.android.fragment.BaseFragment;
 import com.jdroid.android.images.BitmapLruCache;
 import com.jdroid.android.utils.AlertDialogUtils;
+import com.jdroid.android.utils.SharedPreferencesUtils;
 import com.jdroid.android.utils.ToastUtils;
 import com.jdroid.java.utils.DateUtils;
 import com.jdroid.java.utils.ExecutorUtils;
@@ -29,6 +31,8 @@ import com.jdroid.java.utils.FileUtils;
  * @author Maxi Rosson
  */
 public abstract class AbstractApplication extends RoboApplication {
+	
+	private static final String INSTALLATION_ID_KEY = "installationId";
 	
 	/** Maximum size (in MB) of the images cache */
 	private static final int IMAGES_CACHE_SIZE = 5;
@@ -48,6 +52,7 @@ public abstract class AbstractApplication extends RoboApplication {
 	private File imagesCacheDirectory;
 	private BitmapLruCache bitmapLruCache;
 	
+	private String installationId;
 	private boolean inBackground = false;
 	
 	/** The {@link Runnable} to execute when the login activity is displayed */
@@ -67,6 +72,8 @@ public abstract class AbstractApplication extends RoboApplication {
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		
+		loadInstallationId();
 		
 		applicationContext = createApplicationContext();
 		
@@ -273,5 +280,29 @@ public abstract class AbstractApplication extends RoboApplication {
 	
 	public Boolean isLoadingCancelable() {
 		return false;
+	}
+	
+	public String getInstallationId() {
+		return installationId;
+	}
+	
+	private void loadInstallationId() {
+		ExecutorUtils.execute(new Runnable() {
+			
+			@Override
+			public void run() {
+				try {
+					if (SharedPreferencesUtils.hasPreference(INSTALLATION_ID_KEY)) {
+						installationId = SharedPreferencesUtils.loadPreference(INSTALLATION_ID_KEY);
+					} else {
+						installationId = UUID.randomUUID().toString();
+						SharedPreferencesUtils.savePreference(INSTALLATION_ID_KEY, installationId);
+					}
+					Log.d(TAG, "Installation id: " + installationId);
+				} catch (Exception e) {
+					throw new RuntimeException(e);
+				}
+			}
+		});
 	}
 }
