@@ -68,6 +68,11 @@ public abstract class DateUtils {
 	public static final String EHHMMAA_DATE_FORMAT = "E hh:mm aa";
 	
 	/**
+	 * Date format like Fri
+	 */
+	public static final String E_DATE_FORMAT = "E";
+	
+	/**
 	 * Date format like Nov 5 3:45 PM
 	 */
 	public static final String MMMDHHMMAA_DATE_FORMAT = "MMM d hh:mm aa";
@@ -76,6 +81,11 @@ public abstract class DateUtils {
 	 * Date format like Nov 5 1985 3:45 PM
 	 */
 	public static final String MMMDYYYYHHMMAA_DATE_FORMAT = "MMM d yyyy hh:mm aa";
+	
+	/**
+	 * Date format like Nov 5 1985
+	 */
+	public static final String MMMDYYYY_DATE_FORMAT = "MMM d yyyy";
 	
 	/**
 	 * Date format like Nov 5
@@ -218,6 +228,18 @@ public abstract class DateUtils {
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(year, monthOfYear, dayOfMonth);
 		truncate(calendar);
+		return calendar.getTime();
+	}
+	
+	public static Date getDate(Date date, Date time) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		if (time != null) {
+			calendar.set(Calendar.HOUR_OF_DAY, DateUtils.getHour(time, true));
+			calendar.set(Calendar.MINUTE, DateUtils.getMinute(time));
+		} else {
+			truncate(calendar);
+		}
 		return calendar.getTime();
 	}
 	
