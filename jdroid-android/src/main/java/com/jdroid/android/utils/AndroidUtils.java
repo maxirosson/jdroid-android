@@ -159,6 +159,14 @@ public class AndroidUtils {
 				&& (screenSize != Configuration.SCREENLAYOUT_SIZE_NORMAL);
 	}
 	
+	public static Boolean isXLargeScreenOrBigger() {
+		int screenSize = AbstractApplication.get().getResources().getConfiguration().screenLayout
+				& Configuration.SCREENLAYOUT_SIZE_MASK;
+		return (screenSize != Configuration.SCREENLAYOUT_SIZE_SMALL)
+				&& (screenSize != Configuration.SCREENLAYOUT_SIZE_NORMAL)
+				&& (screenSize != Configuration.SCREENLAYOUT_SIZE_LARGE);
+	}
+	
 	public static Boolean supportsContextualActionBar() {
 		return (AndroidUtils.getApiLevel() >= 11) && !AndroidUtils.isGoogleTV();
 	}
