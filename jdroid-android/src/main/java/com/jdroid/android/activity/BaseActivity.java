@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
@@ -19,6 +20,9 @@ import com.google.analytics.tracking.android.EasyTracker;
 import com.google.inject.Key;
 import com.jdroid.android.AbstractApplication;
 import com.jdroid.android.ActivityLauncher;
+import com.jdroid.android.R;
+import com.jdroid.android.ad.AdLoader;
+import com.jdroid.android.analytics.AnalyticsTracker;
 import com.jdroid.android.context.SecurityContext;
 import com.jdroid.android.dialog.LoadingDialog;
 import com.jdroid.android.domain.User;
@@ -109,6 +113,8 @@ public class BaseActivity implements ActivityIf {
 				activity.registerReceiver(logoutBroadcastReceiver, LogoutIntent.newIntentFilter());
 			}
 		}
+		
+		AdLoader.loadAd(activity, (ViewGroup)(activity.findViewById(R.id.adViewContainer)), getActivityIf().getAdSize());
 	}
 	
 	public void onContentChanged() {
@@ -135,9 +141,7 @@ public class BaseActivity implements ActivityIf {
 	public void onStart() {
 		Log.v(TAG, "Executing onStart on " + activity);
 		AbstractApplication.get().setCurrentActivity(activity);
-		if (AbstractApplication.get().getAndroidApplicationContext().isAnalyticsEnabled()) {
-			EasyTracker.getInstance().activityStart(activity);
-		}
+		AnalyticsTracker.activityStart(activity);
 	}
 	
 	public void onResume() {
@@ -153,9 +157,7 @@ public class BaseActivity implements ActivityIf {
 	
 	public void onStop() {
 		Log.v(TAG, "Executing onStop on " + activity);
-		if (AbstractApplication.get().getAndroidApplicationContext().isAnalyticsEnabled()) {
-			EasyTracker.getInstance().activityStop(activity);
-		}
+		AnalyticsTracker.activityStop(activity);
 	}
 	
 	public void onDestroy() {
@@ -470,6 +472,6 @@ public class BaseActivity implements ActivityIf {
 	 */
 	@Override
 	public AdSize getAdSize() {
-		return null;
+		return AdSize.SMART_BANNER;
 	}
 }

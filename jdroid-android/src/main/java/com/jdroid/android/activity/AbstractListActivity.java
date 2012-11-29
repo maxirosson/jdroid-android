@@ -15,10 +15,10 @@ import android.widget.ListView;
 import com.actionbarsherlock.app.SherlockListActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
-import com.jdroid.android.R;
 import com.google.ads.AdSize;
 import com.google.inject.Key;
 import com.jdroid.android.AbstractApplication;
+import com.jdroid.android.R;
 import com.jdroid.android.adapter.BaseArrayAdapter;
 import com.jdroid.android.domain.User;
 import com.jdroid.android.search.SearchResult;
@@ -512,6 +512,6 @@ public abstract class AbstractListActivity<T> extends SherlockListActivity imple
 	 */
 	@Override
 	public AdSize getAdSize() {
-		return null;
+		return baseActivity.getAdSize();
 	}
 }

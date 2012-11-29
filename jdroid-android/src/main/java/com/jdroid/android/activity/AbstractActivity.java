@@ -373,6 +373,6 @@ public abstract class AbstractActivity extends SherlockActivity implements Activ
 	 */
 	@Override
 	public AdSize getAdSize() {
-		return null;
+		return baseActivity.getAdSize();
 	}
 }

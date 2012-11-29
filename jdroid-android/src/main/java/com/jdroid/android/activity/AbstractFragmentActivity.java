@@ -10,10 +10,10 @@ import android.view.View;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
-import com.jdroid.android.R;
 import com.google.ads.AdSize;
 import com.google.inject.Key;
 import com.jdroid.android.AbstractApplication;
+import com.jdroid.android.R;
 import com.jdroid.android.domain.User;
 import com.jdroid.android.fragment.UseCaseFragment;
 import com.jdroid.android.usecase.DefaultUseCase;
@@ -408,6 +408,6 @@ public abstract class AbstractFragmentActivity extends SherlockFragmentActivity 
 	 */
 	@Override
 	public AdSize getAdSize() {
-		return null;
+		return baseActivity.getAdSize();
 	}
 }

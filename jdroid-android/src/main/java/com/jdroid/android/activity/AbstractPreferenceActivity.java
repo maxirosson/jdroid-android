@@ -364,6 +364,6 @@ public abstract class AbstractPreferenceActivity extends SherlockPreferenceActiv
 	 */
 	@Override
 	public AdSize getAdSize() {
-		return null;
+		return baseActivity.getAdSize();
 	}
 }
