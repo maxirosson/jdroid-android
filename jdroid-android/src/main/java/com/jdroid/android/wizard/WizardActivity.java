@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import com.jdroid.android.R;
 import com.jdroid.android.activity.AbstractFragmentActivity;
+import com.jdroid.android.utils.AndroidUtils;
 
 /**
  * 
@@ -82,14 +83,18 @@ public abstract class WizardActivity extends AbstractFragmentActivity {
 		int position = pager.getCurrentItem();
 		if (isOnFinishStep()) {
 			next.setText(R.string.finish);
-			next.setBackgroundResource(R.drawable.finish_background);
-			next.setTextAppearance(this, R.style.finishWizardText);
+			if (AndroidUtils.getApiLevel() > 10) {
+				next.setBackgroundResource(R.drawable.finish_background);
+				next.setTextAppearance(this, R.style.finishWizardText);
+			}
 		} else {
 			next.setText(R.string.next);
-			next.setBackgroundResource(R.drawable.selectable_item_background);
-			TypedValue v = new TypedValue();
-			getTheme().resolveAttribute(android.R.attr.textAppearanceMedium, v, true);
-			next.setTextAppearance(this, v.resourceId);
+			if (AndroidUtils.getApiLevel() > 10) {
+				next.setBackgroundResource(R.drawable.selectable_item_background);
+				TypedValue v = new TypedValue();
+				getTheme().resolveAttribute(android.R.attr.textAppearanceMedium, v, true);
+				next.setTextAppearance(this, v.resourceId);
+			}
 		}
 		
 		previous.setVisibility(position <= 0 ? View.INVISIBLE : View.VISIBLE);
