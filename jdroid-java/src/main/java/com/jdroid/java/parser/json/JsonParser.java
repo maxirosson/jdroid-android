@@ -114,4 +114,15 @@ public abstract class JsonParser<T> implements Parser {
 		}
 		return list;
 	}
+	
+	protected List<Long> parseListLong(JsonArrayWrapper jsonArray) throws JSONException {
+		List<Long> list = Lists.newArrayList();
+		if (jsonArray != null) {
+			int length = jsonArray.length();
+			for (int i = 0; i < length; i++) {
+				list.add(jsonArray.getLong(i));
+			}
+		}
+		return list;
+	}
 }

@@ -1,6 +1,7 @@
 package com.jdroid.android.fragment;
 
 import android.os.Bundle;
+import com.jdroid.android.fragment.BaseFragment.UseCaseTrigger;
 import com.jdroid.android.usecase.DefaultAbstractUseCase;
 
 /**
@@ -53,7 +54,7 @@ public abstract class UseCaseFragment<T extends DefaultAbstractUseCase> extends 
 	@Override
 	public void onResume() {
 		super.onResume();
-		onResumeUseCase(useCase, this, executeOnInit());
+		onResumeUseCase(useCase, this, getuseCaseTrigger());
 	}
 	
 	/**
@@ -65,8 +66,8 @@ public abstract class UseCaseFragment<T extends DefaultAbstractUseCase> extends 
 		onPauseUseCase(useCase, this);
 	}
 	
-	protected Boolean executeOnInit() {
-		return true;
+	protected UseCaseTrigger getuseCaseTrigger() {
+		return UseCaseTrigger.ONCE;
 	}
 	
 	public void executeUseCase() {

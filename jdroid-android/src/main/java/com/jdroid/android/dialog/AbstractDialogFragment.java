@@ -7,6 +7,7 @@ import com.google.ads.AdSize;
 import com.jdroid.android.AbstractApplication;
 import com.jdroid.android.domain.User;
 import com.jdroid.android.fragment.BaseFragment;
+import com.jdroid.android.fragment.BaseFragment.UseCaseTrigger;
 import com.jdroid.android.fragment.FragmentIf;
 import com.jdroid.android.usecase.DefaultAbstractUseCase;
 import com.jdroid.android.usecase.DefaultUseCase;
@@ -242,8 +243,9 @@ public class AbstractDialogFragment extends DialogFragment implements FragmentIf
 		baseFragment.onResumeUseCase(useCase, listener);
 	}
 	
-	public void onResumeUseCase(DefaultAbstractUseCase useCase, DefaultUseCaseListener listener, Boolean initUseCase) {
-		baseFragment.onResumeUseCase(useCase, listener, initUseCase);
+	public void onResumeUseCase(DefaultAbstractUseCase useCase, DefaultUseCaseListener listener,
+			UseCaseTrigger useCaseTrigger) {
+		baseFragment.onResumeUseCase(useCase, listener, useCaseTrigger);
 	}
 	
 	public void onPauseUseCase(DefaultAbstractUseCase useCase, DefaultUseCaseListener listener) {

@@ -112,6 +112,11 @@ public abstract class DateUtils {
 	 */
 	public static final String EEEEMMMM_DATE_FORMAT = "EEEE MMMM";
 	
+	/**
+	 * Date format like Sat, Dec 15, 2012
+	 */
+	public static final String EEMMMDYYYY_DATE_FORMAT = "EE, MMM d, yyyy";
+	
 	public enum DayOfWeek {
 		
 		SUNDAY("Sunday", true),

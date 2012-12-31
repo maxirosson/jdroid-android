@@ -68,7 +68,7 @@ public class AbstractGridFragment<T> extends AbstractFragment implements OnItemS
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 		
-		View rawGridView = findView(R.id.grid);
+		View rawGridView = view.findViewById(R.id.grid);
 		if (rawGridView == null) {
 			throw new RuntimeException("Your content must have a GridView whose id attribute is "
 					+ "'android.R.id.list'");
@@ -80,7 +80,7 @@ public class AbstractGridFragment<T> extends AbstractFragment implements OnItemS
 		gridView = (GridView)rawGridView;
 		gridView.setOnItemClickListener(onClickListener);
 		
-		View emptyView = findView(android.R.id.empty);
+		View emptyView = view.findViewById(android.R.id.empty);
 		if (emptyView != null) {
 			gridView.setEmptyView(emptyView);
 			emptyView.setVisibility(View.GONE);

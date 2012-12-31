@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * 
@@ -33,6 +34,10 @@ public class Lists {
 		ArrayList<E> list = new ArrayList<E>();
 		Collections.addAll(list, elements);
 		return list;
+	}
+	
+	public static <E> List<E> safeArrayList(List<E> list) {
+		return list != null ? list : Lists.<E>newArrayList();
 	}
 	
 	/**

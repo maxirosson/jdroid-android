@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import com.jdroid.android.fragment.DatePickerDialogFragment;
-import com.jdroid.android.utils.AndroidDateUtils;
 import com.jdroid.java.utils.DateUtils;
 
 /**
@@ -24,7 +23,7 @@ public class DateButton extends Button {
 	public DateButton(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		if (isInEditMode()) {
-			setText("08/10/2012");
+			setText("Sat, Dec 15, 2012");
 		}
 	}
 	
@@ -41,7 +40,7 @@ public class DateButton extends Button {
 	
 	public void setDate(Date date) {
 		this.date = date;
-		setText(AndroidDateUtils.formatDate(date));
+		setText(DateUtils.format(date, DateUtils.EEMMMDYYYY_DATE_FORMAT));
 	}
 	
 	public Date getDate() {

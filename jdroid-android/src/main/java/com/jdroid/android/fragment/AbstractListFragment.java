@@ -11,10 +11,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockListFragment;
-import com.jdroid.android.R;
 import com.google.ads.AdSize;
 import com.jdroid.android.AbstractApplication;
+import com.jdroid.android.R;
 import com.jdroid.android.domain.User;
+import com.jdroid.android.fragment.BaseFragment.UseCaseTrigger;
 import com.jdroid.android.usecase.DefaultAbstractUseCase;
 import com.jdroid.android.usecase.DefaultUseCase;
 import com.jdroid.android.usecase.listener.DefaultUseCaseListener;
@@ -364,8 +365,9 @@ public abstract class AbstractListFragment<T> extends SherlockListFragment imple
 		baseFragment.onResumeUseCase(useCase, listener);
 	}
 	
-	public void onResumeUseCase(DefaultAbstractUseCase useCase, DefaultUseCaseListener listener, Boolean initUseCase) {
-		baseFragment.onResumeUseCase(useCase, listener, initUseCase);
+	public void onResumeUseCase(DefaultAbstractUseCase useCase, DefaultUseCaseListener listener,
+			UseCaseTrigger useCaseTrigger) {
+		baseFragment.onResumeUseCase(useCase, listener, useCaseTrigger);
 	}
 	
 	public void onPauseUseCase(DefaultAbstractUseCase useCase, DefaultUseCaseListener listener) {

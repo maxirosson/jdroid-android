@@ -8,6 +8,7 @@ import com.actionbarsherlock.app.SherlockFragment;
 import com.google.ads.AdSize;
 import com.jdroid.android.AbstractApplication;
 import com.jdroid.android.domain.User;
+import com.jdroid.android.fragment.BaseFragment.UseCaseTrigger;
 import com.jdroid.android.usecase.DefaultAbstractUseCase;
 import com.jdroid.android.usecase.DefaultUseCase;
 import com.jdroid.android.usecase.listener.DefaultUseCaseListener;
@@ -301,8 +302,9 @@ public abstract class AbstractFragment extends SherlockFragment implements Fragm
 		baseFragment.onResumeUseCase(useCase, listener);
 	}
 	
-	public void onResumeUseCase(DefaultAbstractUseCase useCase, DefaultUseCaseListener listener, Boolean initUseCase) {
-		baseFragment.onResumeUseCase(useCase, listener, initUseCase);
+	public void onResumeUseCase(DefaultAbstractUseCase useCase, DefaultUseCaseListener listener,
+			UseCaseTrigger useCaseTrigger) {
+		baseFragment.onResumeUseCase(useCase, listener, useCaseTrigger);
 	}
 	
 	public void onPauseUseCase(DefaultAbstractUseCase useCase, DefaultUseCaseListener listener) {

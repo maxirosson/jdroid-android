@@ -5,11 +5,11 @@
 	android:layout_margin="15dp" android:minWidth="400dp">
 
 	<Button android:id="@+id/camera" android:layout_width="match_parent" android:layout_height="wrap_content"
-		android:layout_margin="3dp" android:text="@string/camera" android:textSize="18dp" android:layout_marginLeft="10dp"
+		android:layout_margin="3dp" android:text="@string/camera" android:textSize="18sp" android:layout_marginLeft="10dp"
 		android:layout_marginRight="10dp" />
 
 	<Button android:id="@+id/gallery" android:layout_width="match_parent" android:layout_height="wrap_content"
-		android:layout_margin="3dp" android:text="@string/gallery" android:textSize="18dp" android:layout_marginLeft="10dp"
+		android:layout_margin="3dp" android:text="@string/gallery" android:textSize="18sp" android:layout_marginLeft="10dp"
 		android:layout_marginRight="10dp" />
 
 </LinearLayout>

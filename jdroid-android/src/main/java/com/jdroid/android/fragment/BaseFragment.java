@@ -72,17 +72,21 @@ public class BaseFragment {
 	}
 	
 	public void onResumeUseCase(DefaultAbstractUseCase useCase, DefaultUseCaseListener listener) {
-		onResumeUseCase(useCase, listener, false);
+		onResumeUseCase(useCase, listener, UseCaseTrigger.MANUAL);
 	}
 	
 	public void onResumeUseCase(final DefaultAbstractUseCase useCase, final DefaultUseCaseListener listener,
-			final Boolean initUseCase) {
+			final UseCaseTrigger useCaseTrigger) {
 		ExecutorUtils.execute(new Runnable() {
 			
 			@Override
 			public void run() {
 				useCase.addListener(listener);
-				if (!useCase.isNotified()) {
+				if (useCase.isNotified()) {
+					if (useCaseTrigger.equals(UseCaseTrigger.ALWAYS)) {
+						useCase.run();
+					}
+				} else {
 					if (useCase.isInProgress()) {
 						listener.onStartUseCase();
 					} else if (useCase.isFinishSuccessful()) {
@@ -94,12 +98,19 @@ public class BaseFragment {
 						} finally {
 							useCase.markAsNotified();
 						}
-					} else if (useCase.isNotInvoked() && initUseCase) {
+					} else if (useCase.isNotInvoked()
+							&& (useCaseTrigger.equals(UseCaseTrigger.ONCE) || useCaseTrigger.equals(UseCaseTrigger.ALWAYS))) {
 						useCase.run();
 					}
 				}
 			}
 		});
+	}
+	
+	public enum UseCaseTrigger {
+		MANUAL,
+		ONCE,
+		ALWAYS;
 	}
 	
 	public void onPauseUseCase(final DefaultAbstractUseCase userCase, final DefaultUseCaseListener listener) {

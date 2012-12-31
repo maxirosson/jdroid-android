@@ -19,10 +19,10 @@ public class IdGenerator {
 	}
 	
 	public static long getRandomLongId() {
-		return new Random().nextLong();
+		return Math.abs(new Random().nextLong());
 	}
 	
 	public static int getRandomIntId() {
-		return new Random().nextInt();
+		return Math.abs(new Random().nextInt());
 	}
 }

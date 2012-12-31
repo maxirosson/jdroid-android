@@ -19,7 +19,7 @@ public class BaseArrayAdapter<T> extends ArrayAdapter<T> {
 	 * @param objects
 	 */
 	public BaseArrayAdapter(Context context, List<T> objects) {
-		super(context, 0, objects);
+		super(context, 0, Lists.safeArrayList(objects));
 	}
 	
 	/**
