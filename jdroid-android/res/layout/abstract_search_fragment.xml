@@ -2,12 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical"
 	android:layout_width="match_parent" android:layout_height="match_parent">
 
-	<com.template.android.common.view.ActionBar android:id="@+id/actionBar"
-		android:layout_width="match_parent" android:layout_height="wrap_content" />
-
-	<LinearLayout android:id="@+id/searchBar" android:orientation="horizontal" android:background="@drawable/search_bar_background"
-		android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingLeft="5dp" android:paddingTop="5dp"
-		android:paddingRight="5dp" android:paddingBottom="1dp">
+	<LinearLayout android:id="@+id/searchBar" android:orientation="horizontal" android:layout_width="match_parent"
+		android:layout_height="wrap_content" android:paddingLeft="5dp" android:paddingTop="5dp" android:paddingRight="5dp"
+		android:paddingBottom="1dp">
 		<EditText android:id="@+id/searchText" android:layout_width="0dp" android:layout_height="wrap_content"
 			android:inputType="text" android:hint="@string/typeHere" android:imeOptions="actionSearch" android:layout_weight="1" />
 		<ImageView android:id="@+id/searchButton" android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -17,8 +14,6 @@
 			android:src="@drawable/cancel" android:layout_gravity="center_vertical" android:layout_marginLeft="3dp"
 			android:layout_marginBottom="1dp" />
 	</LinearLayout>
-
-	<View android:layout_width="match_parent" android:layout_height="1dp" android:background="#7000" />
 
 	<ListView android:id="@+id/android:list" style="@style/list" android:fastScrollEnabled="true" />
 
