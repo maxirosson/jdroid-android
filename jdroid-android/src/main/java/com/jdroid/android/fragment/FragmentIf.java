@@ -85,6 +85,15 @@ public interface FragmentIf extends DefaultUseCaseListener {
 	 */
 	public <E> E getExtra(String key);
 	
+	/**
+	 * @param key The key of the argument extra
+	 * @param <E> The instance type
+	 * @return the entry with the given key as an object.
+	 */
+	public <E> E getArgument(String key);
+	
+	public <E> E getArgument(String key, E defaultValue);
+	
 	public void executeUseCase(DefaultUseCase<?> useCase);
 	
 	public User getUser();

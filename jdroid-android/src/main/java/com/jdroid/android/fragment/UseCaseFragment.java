@@ -20,18 +20,8 @@ public abstract class UseCaseFragment<T extends DefaultAbstractUseCase> extends 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setRetainInstance(true);
-	}
-	
-	/**
-	 * @see com.jdroid.android.fragment.AbstractFragment#onActivityCreated(android.os.Bundle)
-	 */
-	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
 		
-		if (useCase == null) {
-			getUseCase();
-		}
+		useCase = getInstance(getUseCaseClass());
 		intializeUseCase(useCase);
 	}
 	
@@ -40,9 +30,6 @@ public abstract class UseCaseFragment<T extends DefaultAbstractUseCase> extends 
 	}
 	
 	public T getUseCase() {
-		if (useCase == null) {
-			useCase = getInstance(getUseCaseClass());
-		}
 		return useCase;
 	}
 	
@@ -54,7 +41,7 @@ public abstract class UseCaseFragment<T extends DefaultAbstractUseCase> extends 
 	@Override
 	public void onResume() {
 		super.onResume();
-		onResumeUseCase(useCase, this, getuseCaseTrigger());
+		onResumeUseCase(useCase, this, getUseCaseTrigger());
 	}
 	
 	/**
@@ -66,7 +53,7 @@ public abstract class UseCaseFragment<T extends DefaultAbstractUseCase> extends 
 		onPauseUseCase(useCase, this);
 	}
 	
-	protected UseCaseTrigger getuseCaseTrigger() {
+	protected UseCaseTrigger getUseCaseTrigger() {
 		return UseCaseTrigger.ONCE;
 	}
 	

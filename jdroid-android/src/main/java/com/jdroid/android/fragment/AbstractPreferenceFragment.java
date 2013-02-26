@@ -159,6 +159,22 @@ public abstract class AbstractPreferenceFragment extends PreferenceFragment impl
 	}
 	
 	/**
+	 * @see com.jdroid.android.fragment.FragmentIf#getArgument(java.lang.String, java.lang.Object)
+	 */
+	@Override
+	public <E> E getArgument(String key, E defaultValue) {
+		return null;
+	}
+	
+	/**
+	 * @see com.jdroid.android.fragment.FragmentIf#getArgument(java.lang.String)
+	 */
+	@Override
+	public <E> E getArgument(String key) {
+		return null;
+	}
+	
+	/**
 	 * @see com.jdroid.android.fragment.FragmentIf#executeUseCase(com.jdroid.android.usecase.DefaultUseCase)
 	 */
 	@Override

@@ -75,7 +75,7 @@ public class AbstractDialogFragment extends DialogFragment implements FragmentIf
 	@Override
 	@SuppressWarnings("unchecked")
 	public <V extends View> V findView(int id) {
-		return (V)getActivity().findViewById(id);
+		return (V)getView().findViewById(id);
 	}
 	
 	/**
@@ -196,6 +196,22 @@ public class AbstractDialogFragment extends DialogFragment implements FragmentIf
 	@Override
 	public <E> E getExtra(String key) {
 		return getFragmentIf().<E>getExtra(key);
+	}
+	
+	/**
+	 * @see com.jdroid.android.fragment.FragmentIf#getArgument(java.lang.String)
+	 */
+	@Override
+	public <E> E getArgument(String key) {
+		return baseFragment.<E>getArgument(key);
+	}
+	
+	/**
+	 * @see com.jdroid.android.fragment.FragmentIf#getArgument(java.lang.String, java.lang.Object)
+	 */
+	@Override
+	public <E> E getArgument(String key, E defaultValue) {
+		return baseFragment.<E>getArgument(key, defaultValue);
 	}
 	
 	/**

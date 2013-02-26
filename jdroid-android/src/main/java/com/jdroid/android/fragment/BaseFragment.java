@@ -118,4 +118,15 @@ public class BaseFragment {
 			userCase.removeListener(listener);
 		}
 	}
+	
+	public <E> E getArgument(String key) {
+		return getArgument(key, null);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public <E> E getArgument(String key, E defaultValue) {
+		Bundle arguments = fragment.getArguments();
+		E value = (arguments != null) && arguments.containsKey(key) ? (E)arguments.get(key) : null;
+		return value != null ? value : defaultValue;
+	}
 }

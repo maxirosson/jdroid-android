@@ -279,6 +279,22 @@ public abstract class AbstractActivity extends SherlockActivity implements Activ
 	}
 	
 	/**
+	 * @see com.jdroid.android.fragment.FragmentIf#getArgument(java.lang.String)
+	 */
+	@Override
+	public <E> E getArgument(String key) {
+		return baseActivity.<E>getArgument(key);
+	}
+	
+	/**
+	 * @see com.jdroid.android.fragment.FragmentIf#getArgument(java.lang.String, java.lang.Object)
+	 */
+	@Override
+	public <E> E getArgument(String key, E defaultValue) {
+		return baseActivity.<E>getArgument(key, defaultValue);
+	}
+	
+	/**
 	 * @see com.jdroid.android.fragment.FragmentIf#executeUseCase(com.jdroid.android.usecase.DefaultUseCase)
 	 */
 	@Override

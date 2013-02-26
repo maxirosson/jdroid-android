@@ -248,6 +248,22 @@ public abstract class AbstractFragment extends SherlockFragment implements Fragm
 	}
 	
 	/**
+	 * @see com.jdroid.android.fragment.FragmentIf#getArgument(java.lang.String)
+	 */
+	@Override
+	public <E> E getArgument(String key) {
+		return baseFragment.<E>getArgument(key);
+	}
+	
+	/**
+	 * @see com.jdroid.android.fragment.FragmentIf#getArgument(java.lang.String, java.lang.Object)
+	 */
+	@Override
+	public <E> E getArgument(String key, E defaultValue) {
+		return baseFragment.<E>getArgument(key, defaultValue);
+	}
+	
+	/**
 	 * @see com.jdroid.android.fragment.FragmentIf#executeUseCase(com.jdroid.android.usecase.DefaultUseCase)
 	 */
 	@Override
@@ -287,4 +303,5 @@ public abstract class AbstractFragment extends SherlockFragment implements Fragm
 	public void onPauseUseCase(DefaultAbstractUseCase useCase, DefaultUseCaseListener listener) {
 		baseFragment.onPauseUseCase(useCase, listener);
 	}
+	
 }

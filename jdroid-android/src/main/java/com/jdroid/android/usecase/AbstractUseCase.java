@@ -156,6 +156,10 @@ public abstract class AbstractUseCase<T> implements DefaultUseCase<T> {
 		notified = true;
 	}
 	
+	public void markAsNotNotified() {
+		notified = false;
+	}
+	
 	protected void markAsInProgress() {
 		notified = false;
 		runtimeException = null;

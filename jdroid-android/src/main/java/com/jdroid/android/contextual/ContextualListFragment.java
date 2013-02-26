@@ -1,6 +1,5 @@
 package com.jdroid.android.contextual;
 
-import java.io.Serializable;
 import java.util.List;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,8 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ListView;
-import com.jdroid.android.R;
 import com.google.ads.AdSize;
+import com.jdroid.android.R;
 import com.jdroid.android.fragment.AbstractListFragment;
 import com.jdroid.android.fragment.OnItemSelectedListener;
 import com.jdroid.android.tabs.TabAction;
@@ -32,29 +31,22 @@ public class ContextualListFragment extends AbstractListFragment<TabAction> {
 	}
 	
 	public ContextualListFragment(List<? extends TabAction> actions, TabAction defaultContextualItem) {
-		this.actions = Lists.newArrayList(actions);
-		defaultIndex = actions.indexOf(defaultContextualItem);
-		
 		Bundle bundle = new Bundle();
-		bundle.putSerializable(ACTIONS_EXTRA, (Serializable)this.actions);
-		bundle.putInt(DEFAULT_INDEX_EXTRA, defaultIndex);
+		bundle.putSerializable(ACTIONS_EXTRA, Lists.newArrayList(actions));
+		bundle.putInt(DEFAULT_INDEX_EXTRA, actions.indexOf(defaultContextualItem));
 		setArguments(bundle);
 	}
 	
 	/**
 	 * @see com.jdroid.android.fragment.AbstractListFragment#onCreate(android.os.Bundle)
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setRetainInstance(true);
 		
-		Bundle args = getArguments();
-		if (args != null) {
-			actions = (List<TabAction>)args.getSerializable(ACTIONS_EXTRA);
-			defaultIndex = args.getInt(DEFAULT_INDEX_EXTRA);
-		}
+		actions = getArgument(ACTIONS_EXTRA);
+		defaultIndex = getArgument(DEFAULT_INDEX_EXTRA);
 	}
 	
 	/**
