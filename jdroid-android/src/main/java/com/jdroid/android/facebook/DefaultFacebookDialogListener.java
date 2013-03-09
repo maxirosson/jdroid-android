@@ -9,6 +9,7 @@ import com.jdroid.android.AbstractApplication;
 import com.jdroid.android.exception.CommonErrorCode;
 
 /**
+ * TODO FB
  * 
  * @author Estefania Caravatti
  */

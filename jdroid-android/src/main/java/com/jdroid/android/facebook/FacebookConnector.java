@@ -21,6 +21,7 @@ import com.jdroid.java.collections.Lists;
 import com.jdroid.java.parser.json.JsonObjectWrapper;
 
 /**
+ * TODO FB
  * 
  * @author Maxi Rosson
  */
@@ -57,7 +58,7 @@ public class FacebookConnector {
 			parameters.putString("picture", picure);
 			parameters.putString("link", link);
 			String response = facebook.request("me/feed", parameters, "POST");
-			Util.parseJson(response);
+			com.facebook.android.Util.parseJson(response);
 		} catch (FacebookError e) {
 			handleFacebookError(e);
 		} catch (FileNotFoundException e) {

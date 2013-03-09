@@ -2,13 +2,13 @@ package com.jdroid.android.facebook;
 
 import android.app.Activity;
 import android.os.Bundle;
-import com.jdroid.android.R;
 import com.facebook.android.Facebook;
 import com.jdroid.android.AbstractApplication;
+import com.jdroid.android.R;
 import com.jdroid.android.share.ShareLaunchable;
 
 /**
- * {@link ShareLaunchable} that shares content using the Facebook SDK.
+ * TODO FB {@link ShareLaunchable} that shares content using the Facebook SDK.
  * 
  * @author Estefania Caravatti
  */

@@ -3,6 +3,7 @@ package com.jdroid.android.facebook;
 import android.util.Log;
 import com.facebook.android.FacebookError;
 
+// TODO FB
 public enum FacebookErrorType {
 	
 	OAUTH_ERROR("OAuthException");
