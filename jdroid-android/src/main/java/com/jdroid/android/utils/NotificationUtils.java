@@ -159,7 +159,7 @@ public class NotificationUtils {
 	private static NotificationCompat.Builder createBuilder(int smallIcon, Bitmap largeIcon, String tickerText,
 			String contentTitle, String contentText, Class<?> clazz, Bundle notificationBundle, Long when) {
 		Intent notificationIntent = clazz != null ? new Intent(AbstractApplication.get(), clazz) : new Intent();
-		notificationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		notificationIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 		if (notificationBundle != null) {
 			notificationIntent.replaceExtras(notificationBundle);
 		}

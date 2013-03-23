@@ -10,6 +10,8 @@ import com.jdroid.java.repository.Repository;
  */
 public interface SynchronizedRepository<T extends Identifiable> extends Repository<T> {
 	
+	public void refreshUpdateTimestamp();
+	
 	/**
 	 * @return The last update timestamp
 	 */

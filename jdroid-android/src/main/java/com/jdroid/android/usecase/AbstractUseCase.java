@@ -1,6 +1,7 @@
 package com.jdroid.android.usecase;
 
 import java.util.List;
+import android.util.Log;
 import com.jdroid.java.collections.Lists;
 
 /**
@@ -10,6 +11,8 @@ import com.jdroid.java.collections.Lists;
  * @author Maxi Rosson
  */
 public abstract class AbstractUseCase<T> implements DefaultUseCase<T> {
+	
+	private static final String TAG = AbstractUseCase.class.getSimpleName();
 	
 	public enum UseCaseStatus {
 		NOT_INVOKED,
@@ -30,6 +33,7 @@ public abstract class AbstractUseCase<T> implements DefaultUseCase<T> {
 	@Override
 	public final void run() {
 		
+		Log.d(TAG, "Executing " + getClass().getSimpleName());
 		markAsInProgress();
 		for (T listener : listeners) {
 			notifyUseCaseStart(listener);

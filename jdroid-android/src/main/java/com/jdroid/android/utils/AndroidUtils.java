@@ -1,5 +1,6 @@
 package com.jdroid.android.utils;
 
+import android.annotation.TargetApi;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -235,6 +236,7 @@ public class AndroidUtils {
 		return metrics.densityDpi == DisplayMetrics.DENSITY_XHIGH;
 	}
 	
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
 	public static Boolean isTVdpiDensity() {
 		DisplayMetrics metrics = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(metrics);

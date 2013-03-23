@@ -32,6 +32,7 @@ import com.jdroid.android.R;
 /**
  * Provides a Fragment that displays a list of a user's friends and allows one or more of the friends to be selected.
  */
+@SuppressLint("ValidFragment")
 public class FriendPickerFragment extends PickerFragment<GraphUser> {
 	
 	/**

@@ -16,7 +16,11 @@ public class SynchronizedInMemoryRepository<T extends Identifiable> extends InMe
 	
 	private Long lastUpdateTimestamp;
 	
-	protected void refreshUpdateTimestamp() {
+	/**
+	 * @see com.jdroid.android.repository.SynchronizedRepository#refreshUpdateTimestamp()
+	 */
+	@Override
+	public void refreshUpdateTimestamp() {
 		lastUpdateTimestamp = System.currentTimeMillis();
 	}
 	

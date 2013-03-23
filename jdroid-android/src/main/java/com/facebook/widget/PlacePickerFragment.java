@@ -19,6 +19,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -46,6 +47,7 @@ import com.facebook.internal.Utility;
 import com.facebook.model.GraphPlace;
 import com.jdroid.android.R;
 
+@SuppressLint("ValidFragment")
 public class PlacePickerFragment extends PickerFragment<GraphPlace> {
 	
 	/**
