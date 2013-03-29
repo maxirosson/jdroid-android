@@ -23,6 +23,10 @@ public class TimePickerDialogFragment extends AbstractDialogFragment {
 	private static final String DEFAULT_TIME_EXTRA = "defaultTime";
 	
 	public static void show(Fragment targetFragment, Date defaultTime) {
+		TimePickerDialogFragment.show(targetFragment, defaultTime, 1);
+	}
+	
+	public static void show(Fragment targetFragment, Date defaultTime, int requestCode) {
 		FragmentManager fm = targetFragment.getActivity().getSupportFragmentManager();
 		TimePickerDialogFragment fragment = new TimePickerDialogFragment();
 		
@@ -30,7 +34,7 @@ public class TimePickerDialogFragment extends AbstractDialogFragment {
 		bundle.putSerializable(DEFAULT_TIME_EXTRA, defaultTime);
 		fragment.setArguments(bundle);
 		
-		fragment.setTargetFragment(targetFragment, 1);
+		fragment.setTargetFragment(targetFragment, requestCode);
 		fragment.show(fm, TimePickerDialogFragment.class.getSimpleName());
 	}
 	
@@ -38,7 +42,7 @@ public class TimePickerDialogFragment extends AbstractDialogFragment {
 	
 	public interface OnTimeSetListener {
 		
-		public void onTimeSet(Date time);
+		public void onTimeSet(Date time, int requestCode);
 	}
 	
 	/**
@@ -79,7 +83,8 @@ public class TimePickerDialogFragment extends AbstractDialogFragment {
 			@Override
 			public void onClick(View v) {
 				Date time = DateUtils.getTime(timePicker.getCurrentHour(), timePicker.getCurrentMinute());
-				((OnTimeSetListener)getTargetFragment()).onTimeSet(time);
+				int requestCode = getTargetRequestCode();
+				((OnTimeSetListener)getTargetFragment()).onTimeSet(time, requestCode);
 				dismiss();
 			}
 		});

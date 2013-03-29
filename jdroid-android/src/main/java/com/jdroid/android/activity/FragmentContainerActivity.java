@@ -54,10 +54,10 @@ public abstract class FragmentContainerActivity extends AbstractFragmentActivity
 	}
 	
 	protected Fragment createNewFragment() {
-		return instance(getFragmentClass(), getIntent().getExtras());
+		return instanceFragment(getFragmentClass(), getIntent().getExtras());
 	}
 	
-	private <E extends Fragment> E instance(Class<E> fragmentClass, Bundle bundle) {
+	public <E extends Fragment> E instanceFragment(Class<E> fragmentClass, Bundle bundle) {
 		E fragment = null;
 		try {
 			fragment = fragmentClass.newInstance();

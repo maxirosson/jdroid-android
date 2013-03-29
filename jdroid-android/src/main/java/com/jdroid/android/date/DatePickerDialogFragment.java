@@ -1,6 +1,5 @@
 package com.jdroid.android.date;
 
-import java.io.Serializable;
 import java.util.Date;
 import android.annotation.TargetApi;
 import android.app.Dialog;
@@ -29,14 +28,13 @@ public class DatePickerDialogFragment extends AbstractDialogFragment implements 
 	private static final String MIN_DATE_EXTRA = "minDate";
 	private static final String MAX_DATE_EXTRA = "maxDate";
 	private static final String TITLE_EXTRA = "title";
-	private static final String LISTENER_EXTRA = "listener";
 	
 	public static void show(Fragment targetFragment, Date defaultDate) {
-		DatePickerDialogFragment.show(targetFragment, defaultDate, null, null, null);
+		DatePickerDialogFragment.show(targetFragment, defaultDate, null);
 	}
 	
 	public static void show(Fragment targetFragment, Date defaultDate, Integer titleResId) {
-		DatePickerDialogFragment.show(targetFragment, defaultDate, titleResId, null, null);
+		DatePickerDialogFragment.show(targetFragment, defaultDate, titleResId, null);
 	}
 	
 	public static void show(Fragment targetFragment, Date defaultDate, Integer titleResId, Date minDate) {
@@ -44,11 +42,11 @@ public class DatePickerDialogFragment extends AbstractDialogFragment implements 
 	}
 	
 	public static void show(Fragment targetFragment, Date defaultDate, Integer titleResId, Date minDate, Date maxDate) {
-		DatePickerDialogFragment.show(targetFragment, defaultDate, titleResId, minDate, maxDate, 1, null);
+		DatePickerDialogFragment.show(targetFragment, defaultDate, titleResId, minDate, maxDate, 1);
 	}
 	
 	public static void show(Fragment targetFragment, Date defaultDate, Integer titleResId, Date minDate, Date maxDate,
-			int requestCode, OnDateSetListener onDateSetListener) {
+			int requestCode) {
 		FragmentManager fm = targetFragment.getActivity().getSupportFragmentManager();
 		DatePickerDialogFragment fragment = new DatePickerDialogFragment();
 		
@@ -59,9 +57,6 @@ public class DatePickerDialogFragment extends AbstractDialogFragment implements 
 		}
 		bundle.putSerializable(MIN_DATE_EXTRA, minDate);
 		bundle.putSerializable(MAX_DATE_EXTRA, maxDate);
-		if (onDateSetListener != null) {
-			bundle.putSerializable(LISTENER_EXTRA, (Serializable)onDateSetListener);
-		}
 		fragment.setArguments(bundle);
 		
 		fragment.setTargetFragment(targetFragment, requestCode);
@@ -72,7 +67,6 @@ public class DatePickerDialogFragment extends AbstractDialogFragment implements 
 	private Date minDate;
 	private Date maxDate;
 	private Integer titleResId;
-	private OnDateSetListener onDateSetListener;
 	
 	/**
 	 * The callback used to indicate the user is done filling in the date.
@@ -93,11 +87,6 @@ public class DatePickerDialogFragment extends AbstractDialogFragment implements 
 		titleResId = getArgument(TITLE_EXTRA);
 		minDate = getArgument(MIN_DATE_EXTRA);
 		maxDate = getArgument(MAX_DATE_EXTRA);
-		onDateSetListener = getArgument(LISTENER_EXTRA);
-	}
-	
-	private OnDateSetListener getOnDateSetListener() {
-		return onDateSetListener != null ? onDateSetListener : ((OnDateSetListener)getTargetFragment());
 	}
 	
 	/**
@@ -145,10 +134,10 @@ public class DatePickerDialogFragment extends AbstractDialogFragment implements 
 			
 			@Override
 			public void onClick(View v) {
-				int requestCode = getTargetRequestCode();
 				Date date = com.jdroid.java.utils.DateUtils.getDate(datePicker.getYear(), datePicker.getMonth(),
 					datePicker.getDayOfMonth());
-				getOnDateSetListener().onDateSet(date, requestCode);
+				int requestCode = getTargetRequestCode();
+				((OnDateSetListener)getTargetFragment()).onDateSet(date, requestCode);
 				dismiss();
 			}
 		});
