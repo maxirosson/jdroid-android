@@ -202,6 +202,15 @@ public abstract class AbstractFragmentActivity extends SherlockFragmentActivity 
 	}
 	
 	/**
+	 * @see com.jdroid.android.fragment.FragmentIf#findViewOnActivity(int)
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public <V extends View> V findViewOnActivity(int id) {
+		return (V)findViewById(id);
+	}
+	
+	/**
 	 * @see com.jdroid.android.fragment.FragmentIf#showLoading()
 	 */
 	@Override
@@ -382,6 +391,19 @@ public abstract class AbstractFragmentActivity extends SherlockFragmentActivity 
 	
 	public UseCaseFragment<?> getUseCaseUseCaseFragment(Class<? extends UseCaseFragment<?>> useCaseFragmentClass) {
 		return (UseCaseFragment<?>)getSupportFragmentManager().findFragmentByTag(useCaseFragmentClass.getSimpleName());
+	}
+	
+	public <E extends Fragment> E instanceFragment(Class<E> fragmentClass, Bundle bundle) {
+		E fragment = null;
+		try {
+			fragment = fragmentClass.newInstance();
+		} catch (InstantiationException e) {
+			throw new UnexpectedException(e);
+		} catch (IllegalAccessException e) {
+			throw new UnexpectedException(e);
+		}
+		fragment.setArguments(bundle);
+		return fragment;
 	}
 	
 	public void commitFragment(Fragment fragment) {

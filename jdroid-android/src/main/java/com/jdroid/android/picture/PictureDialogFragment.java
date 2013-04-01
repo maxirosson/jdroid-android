@@ -34,9 +34,6 @@ public class PictureDialogFragment extends AbstractDialogFragment {
 	
 	private Uri outputFileUri;
 	
-	private Button camera;
-	private Button gallery;
-	
 	public static Boolean display() {
 		return AndroidUtils.hasCamera() || AndroidUtils.hasGallery();
 	}
@@ -66,13 +63,7 @@ public class PictureDialogFragment extends AbstractDialogFragment {
 	 */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.picture_dialog_fragment, container, false);
-		
-		camera = (Button)view.findViewById(R.id.camera);
-		gallery = (Button)view.findViewById(R.id.gallery);
-		
-		getDialog().setTitle(R.string.selectPhoto);
-		return view;
+		return inflater.inflate(R.layout.picture_dialog_fragment, container, false);
 	}
 	
 	/**
@@ -82,7 +73,10 @@ public class PictureDialogFragment extends AbstractDialogFragment {
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 		
+		getDialog().setTitle(R.string.selectPhoto);
+		
 		// Configure the take photo button.
+		Button camera = findView(R.id.camera);
 		if (AndroidUtils.hasCamera()) {
 			camera.setOnClickListener(new OnClickListener() {
 				
@@ -101,6 +95,7 @@ public class PictureDialogFragment extends AbstractDialogFragment {
 		}
 		
 		// Configure the choose from library button.
+		Button gallery = findView(R.id.gallery);
 		if (AndroidUtils.hasGallery()) {
 			gallery.setOnClickListener(new OnClickListener() {
 				

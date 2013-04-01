@@ -215,6 +215,15 @@ public abstract class AbstractListActivity<T> extends SherlockListActivity imple
 	}
 	
 	/**
+	 * @see com.jdroid.android.fragment.FragmentIf#findViewOnActivity(int)
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public <V extends View> V findViewOnActivity(int id) {
+		return (V)findViewById(id);
+	}
+	
+	/**
 	 * @see com.jdroid.android.fragment.FragmentIf#showLoading()
 	 */
 	@Override

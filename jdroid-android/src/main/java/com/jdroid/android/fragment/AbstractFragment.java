@@ -136,6 +136,15 @@ public abstract class AbstractFragment extends SherlockFragment implements Fragm
 	}
 	
 	/**
+	 * @see com.jdroid.android.fragment.FragmentIf#findViewOnActivity(int)
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public <V extends View> V findViewOnActivity(int id) {
+		return (V)getActivity().findViewById(id);
+	}
+	
+	/**
 	 * @see com.jdroid.android.fragment.FragmentIf#inflate(int)
 	 */
 	@Override

@@ -1,6 +1,7 @@
 package com.jdroid.android.fragment;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.view.View;
 import com.google.ads.AdSize;
 import com.jdroid.android.context.DefaultApplicationContext;
@@ -19,7 +20,8 @@ public interface FragmentIf extends DefaultUseCaseListener {
 	public DefaultApplicationContext getAndroidApplicationContext();
 	
 	/**
-	 * Finds a view that was identified by the id attribute from the XML that was processed in {@link Activity#onCreate}
+	 * Finds a view that was identified by the id attribute from the XML that was processed in
+	 * {@link Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)}
 	 * 
 	 * @param id The id to search for.
 	 * @param <V> The {@link View} class
@@ -27,6 +29,16 @@ public interface FragmentIf extends DefaultUseCaseListener {
 	 * @return The view if found or null otherwise.
 	 */
 	public <V extends View> V findView(int id);
+	
+	/**
+	 * Finds a view that was identified by the id attribute from the XML that was processed in {@link Activity#onCreate}
+	 * 
+	 * @param id The id to search for.
+	 * @param <V> The {@link View} class
+	 * 
+	 * @return The view if found or null otherwise.
+	 */
+	public <V extends View> V findViewOnActivity(int id);
 	
 	/**
 	 * Inflate a new view hierarchy from the specified xml resource.

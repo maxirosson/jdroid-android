@@ -425,6 +425,15 @@ public class BaseActivity implements ActivityIf {
 	}
 	
 	/**
+	 * @see com.jdroid.android.fragment.FragmentIf#findViewOnActivity(int)
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public <V extends View> V findViewOnActivity(int id) {
+		return (V)activity.findViewById(id);
+	}
+	
+	/**
 	 * @see com.jdroid.android.fragment.FragmentIf#inflate(int)
 	 */
 	@Override
