@@ -5,6 +5,9 @@
 			android:summary="@string/httpMockEnabledDescription" android:defaultValue="false" />
 		<CheckBoxPreference android:key="httpMockSleep" android:title="@string/httpMockSleepTitle"
 			android:summary="@string/httpMockSleepDescription" android:defaultValue="false" />
+		<ListPreference android:key="httpMockCrashType" android:title="@string/httpMockCrashType"
+			android:summary="@string/httpMockCrashTypeDescription" android:entries="@array/httpMockCrashTypeEntries"
+			android:entryValues="@array/httpMockCrashTypeEntries" android:dialogTitle="@string/httpMockCrashType" />
 	</PreferenceCategory>
 	<PreferenceCategory android:title="@string/crashSettings">
 		<ListPreference android:key="crashType" android:title="@string/crashType" android:summary="@string/crashTypeDescription"

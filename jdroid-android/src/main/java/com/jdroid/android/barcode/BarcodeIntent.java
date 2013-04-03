@@ -1,11 +1,10 @@
 package com.jdroid.android.barcode;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import com.jdroid.android.R;
 import com.jdroid.android.AbstractApplication;
+import com.jdroid.android.R;
 import com.jdroid.android.utils.GooglePlayUtils;
 import com.jdroid.java.utils.IdGenerator;
 
@@ -30,10 +29,7 @@ public final class BarcodeIntent {
 	private static final String SCAN_RESULT = "SCAN_RESULT";
 	private static final String SCAN_RESULT_FORMAT = "SCAN_RESULT_FORMAT";
 	
-	/**
-	 * @return AlertDialog
-	 */
-	public static AlertDialog initiateScan() {
+	public static void initiateScan() {
 		Activity activity = AbstractApplication.get().getCurrentActivity();
 		
 		Intent intentScan = new Intent(PACKAGE + ".SCAN");
@@ -42,9 +38,8 @@ public final class BarcodeIntent {
 		
 		try {
 			activity.startActivityForResult(intentScan, REQUEST_CODE);
-			return null;
 		} catch (ActivityNotFoundException e) {
-			return GooglePlayUtils.showDownloadDialog(activity, R.string.barcodeScanner, PACKAGE);
+			GooglePlayUtils.showDownloadDialog(R.string.barcodeScanner, PACKAGE);
 		}
 	}
 	

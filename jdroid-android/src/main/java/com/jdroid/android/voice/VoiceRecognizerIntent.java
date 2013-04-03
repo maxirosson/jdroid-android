@@ -2,12 +2,11 @@ package com.jdroid.android.voice;
 
 import java.util.List;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.speech.RecognizerIntent;
-import com.jdroid.android.R;
 import com.jdroid.android.AbstractApplication;
+import com.jdroid.android.R;
 import com.jdroid.android.utils.GooglePlayUtils;
 import com.jdroid.java.utils.IdGenerator;
 
@@ -29,7 +28,7 @@ public class VoiceRecognizerIntent {
 	private static final int REQUEST_CODE = IdGenerator.getIntId();
 	private static final String PACKAGE = "com.google.android.voicesearch";
 	
-	public static AlertDialog initiateRecord() {
+	public static void initiateRecord() {
 		Activity activity = AbstractApplication.get().getCurrentActivity();
 		
 		Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
@@ -37,9 +36,8 @@ public class VoiceRecognizerIntent {
 		
 		try {
 			activity.startActivityForResult(intent, REQUEST_CODE);
-			return null;
 		} catch (ActivityNotFoundException e) {
-			return GooglePlayUtils.showDownloadDialog(activity, R.string.voiceSearch, PACKAGE);
+			GooglePlayUtils.showDownloadDialog(R.string.voiceSearch, PACKAGE);
 		}
 	}
 	

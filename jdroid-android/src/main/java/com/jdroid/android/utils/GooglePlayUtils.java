@@ -1,13 +1,12 @@
 package com.jdroid.android.utils;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v4.app.FragmentActivity;
 import com.jdroid.android.AbstractApplication;
 import com.jdroid.android.R;
+import com.jdroid.android.dialog.AlertDialogFragment;
 
 /**
  * 
@@ -15,43 +14,48 @@ import com.jdroid.android.R;
  */
 public class GooglePlayUtils {
 	
-	public static void showUpdateDialog() {
+	public static class UpdateAppDialogFragment extends AlertDialogFragment {
 		
-		final Context context = AbstractApplication.get().getCurrentActivity();
-		AlertDialog.Builder downloadDialog = new AlertDialog.Builder(context);
-		String appName = AndroidUtils.getApplicationName();
-		downloadDialog.setTitle(context.getString(R.string.updateAppTitle, appName));
-		downloadDialog.setMessage(context.getString(R.string.updateAppMessage, appName));
-		downloadDialog.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-			
-			@Override
-			public void onClick(DialogInterface dialogInterface, int i) {
-				launchAppDetails(context, AndroidUtils.getPackageName());
-			}
-		});
-		AlertDialogUtils.show(downloadDialog);
+		@Override
+		protected void onPostivieClick() {
+			FragmentActivity fragmentActivity = (FragmentActivity)AbstractApplication.get().getCurrentActivity();
+			launchAppDetails(fragmentActivity, AndroidUtils.getPackageName());
+		};
 	}
 	
-	public static AlertDialog showDownloadDialog(final Activity activity, int appNameResId, final String packageName) {
-		AlertDialog.Builder downloadDialog = new AlertDialog.Builder(activity);
-		String appName = activity.getString(appNameResId);
-		downloadDialog.setTitle(activity.getString(R.string.installAppTitle, appName));
-		downloadDialog.setMessage(activity.getString(R.string.installAppMessage, appName));
-		downloadDialog.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-			
-			@Override
-			public void onClick(DialogInterface dialogInterface, int i) {
-				launchAppDetails(activity, packageName);
-			}
-		});
-		downloadDialog.setNegativeButton(activity.getString(R.string.no), new DialogInterface.OnClickListener() {
-			
-			@Override
-			public void onClick(DialogInterface dialogInterface, int i) {
-			}
-		});
+	public static class DownloadAppDialogFragment extends AlertDialogFragment {
 		
-		return downloadDialog.show();
+		private static final String PACKAGE_NAME = "PACKAGE_NAME";
+		
+		@Override
+		protected void onPostivieClick() {
+			FragmentActivity fragmentActivity = (FragmentActivity)AbstractApplication.get().getCurrentActivity();
+			launchAppDetails(fragmentActivity, getArguments().getString(PACKAGE_NAME));
+		};
+		
+		public void setPackageName(String packageName) {
+			addParameter(PACKAGE_NAME, packageName);
+		}
+	}
+	
+	public static void showUpdateDialog() {
+		FragmentActivity fragmentActivity = (FragmentActivity)AbstractApplication.get().getCurrentActivity();
+		String appName = AndroidUtils.getApplicationName();
+		String title = fragmentActivity.getString(R.string.updateAppTitle, appName);
+		String message = fragmentActivity.getString(R.string.updateAppMessage, appName);
+		AlertDialogFragment.show(fragmentActivity, new UpdateAppDialogFragment(), title, message,
+			fragmentActivity.getString(R.string.ok), null, true);
+	}
+	
+	public static void showDownloadDialog(int appNameResId, String packageName) {
+		FragmentActivity fragmentActivity = (FragmentActivity)AbstractApplication.get().getCurrentActivity();
+		String appName = fragmentActivity.getString(appNameResId);
+		String title = fragmentActivity.getString(R.string.installAppTitle, appName);
+		String message = fragmentActivity.getString(R.string.installAppMessage, appName);
+		DownloadAppDialogFragment fragment = new DownloadAppDialogFragment();
+		fragment.setPackageName(packageName);
+		AlertDialogFragment.show(fragmentActivity, fragment, title, message, fragmentActivity.getString(R.string.yes),
+			fragmentActivity.getString(R.string.no), true);
 	}
 	
 	public static void launchAppDetails(Context context, String packageName) {

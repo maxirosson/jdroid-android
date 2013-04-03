@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+	<string-array name="httpMockCrashTypeEntries">
+		<item>None</item>
+		<item>BusinessException</item>
+		<item>ConnectionException</item>
+		<item>ApplicationException</item>
+		<item>RuntimeException</item>
+	</string-array>
+
 	<string-array name="crashTypeEntries">
 		<item>BusinessException - Main Thread</item>
 		<item>BusinessException - Worker Thread</item>

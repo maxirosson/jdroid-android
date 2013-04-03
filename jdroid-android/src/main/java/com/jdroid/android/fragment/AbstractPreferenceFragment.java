@@ -200,6 +200,15 @@ public abstract class AbstractPreferenceFragment extends PreferenceFragment impl
 	}
 	
 	/**
+	 * @see com.jdroid.android.fragment.FragmentIf#executeUseCase(com.jdroid.android.usecase.DefaultUseCase,
+	 *      java.lang.Long)
+	 */
+	@Override
+	public void executeUseCase(DefaultUseCase<?> useCase, Long delaySeconds) {
+		getFragmentIf().executeUseCase(useCase, delaySeconds);
+	}
+	
+	/**
 	 * @see com.jdroid.android.fragment.FragmentIf#getUser()
 	 */
 	@Override

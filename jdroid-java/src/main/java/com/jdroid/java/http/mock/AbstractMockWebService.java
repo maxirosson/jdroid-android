@@ -82,6 +82,8 @@ public abstract class AbstractMockWebService implements MultipartWebService {
 			ExecutorUtils.sleep(httpMockSleep);
 		}
 		
+		simulateCrash();
+		
 		if (parser != null) {
 			InputStream inputStream = getClass().getClassLoader().getResourceAsStream(filePath);
 			if (inputStream == null) {
@@ -103,6 +105,10 @@ public abstract class AbstractMockWebService implements MultipartWebService {
 	@Override
 	public <T> T execute() {
 		return (T)execute(null);
+	}
+	
+	protected void simulateCrash() {
+		// Do nothing by default
 	}
 	
 	/**

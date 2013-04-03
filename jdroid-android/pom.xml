@@ -97,7 +97,7 @@
 		<dependency>
 			<groupId>android.ads</groupId>
 			<artifactId>google-admob-ads-sdk</artifactId>
-			<version>6.3.0</version>
+			<version>6.3.1</version>
 		</dependency>
 
 		<!-- Merge Adapter -->

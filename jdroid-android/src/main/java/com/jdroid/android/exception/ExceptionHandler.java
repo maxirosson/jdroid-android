@@ -12,6 +12,12 @@ import com.jdroid.java.exception.ConnectionException;
 public interface ExceptionHandler extends UncaughtExceptionHandler {
 	
 	/**
+	 * @param thread
+	 * @param throwable
+	 */
+	public void handleMainThreadException(Thread thread, Throwable throwable);
+	
+	/**
 	 * @param businessException
 	 */
 	public void handleException(BusinessException businessException);
@@ -33,5 +39,11 @@ public interface ExceptionHandler extends UncaughtExceptionHandler {
 	 * @param applicationException
 	 */
 	public void handleException(Thread thread, ApplicationException applicationException);
+	
+	/**
+	 * @param thread
+	 * @param throwable
+	 */
+	public void handleException(Thread thread, Throwable throwable);
 	
 }

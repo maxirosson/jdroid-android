@@ -141,6 +141,11 @@ public class DefaultApplicationContext {
 		return PreferenceManager.getDefaultSharedPreferences(AbstractApplication.get()).getString("crashType", null);
 	}
 	
+	public String getHttpMockCrashType() {
+		return PreferenceManager.getDefaultSharedPreferences(AbstractApplication.get()).getString("httpMockCrashType",
+			null);
+	}
+	
 	public Boolean isCrittercismEnabled() {
 		return crittercismEnabled;
 	}

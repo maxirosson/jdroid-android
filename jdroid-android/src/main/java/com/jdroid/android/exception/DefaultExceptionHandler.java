@@ -2,15 +2,12 @@ package com.jdroid.android.exception;
 
 import java.lang.Thread.UncaughtExceptionHandler;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import com.crittercism.app.Crittercism;
 import com.jdroid.android.AbstractApplication;
 import com.jdroid.android.R;
 import com.jdroid.android.context.DefaultApplicationContext;
-import com.jdroid.android.utils.AlertDialogUtils;
 import com.jdroid.android.utils.AndroidUtils;
 import com.jdroid.android.utils.LocalizationUtils;
 import com.jdroid.android.utils.ToastUtils;
@@ -53,11 +50,16 @@ public class DefaultExceptionHandler implements ExceptionHandler {
 		}
 	}
 	
-	public Boolean doUncaughtException(Thread thread, Throwable throwable) {
+	protected Boolean doUncaughtException(Thread thread, Throwable throwable) {
 		return false;
 	}
 	
-	private void handleMainThreadException(Thread thread, Throwable throwable) {
+	/**
+	 * @see com.jdroid.android.exception.ExceptionHandler#handleMainThreadException(java.lang.Thread,
+	 *      java.lang.Throwable)
+	 */
+	@Override
+	public void handleMainThreadException(Thread thread, Throwable throwable) {
 		defaultExceptionHandler.uncaughtException(thread, throwable);
 	}
 	
@@ -90,7 +92,8 @@ public class DefaultExceptionHandler implements ExceptionHandler {
 	@Override
 	public void handleException(Thread thread, ConnectionException connectionException) {
 		Log.w(TAG, "Connection error", connectionException);
-		ToastUtils.showToastOnUIThread(R.string.connectionError);
+		displayError(LocalizationUtils.getString(R.string.connectionErrorTitle),
+			LocalizationUtils.getString(R.string.connectionError), connectionException);
 	}
 	
 	/**
@@ -101,10 +104,16 @@ public class DefaultExceptionHandler implements ExceptionHandler {
 	public void handleException(Thread thread, ApplicationException applicationException) {
 		String message = LocalizationUtils.getMessageFor(applicationException.getErrorCode());
 		Log.e(TAG, message, applicationException);
-		ToastUtils.showToastOnUIThread(message);
+		displayError(
+			LocalizationUtils.getString(R.string.exceptionReportDialogTitle, AndroidUtils.getApplicationName()),
+			message, applicationException);
 	}
 	
-	private void handleException(Thread thread, Throwable throwable) {
+	/**
+	 * @see com.jdroid.android.exception.ExceptionHandler#handleException(java.lang.Thread, java.lang.Throwable)
+	 */
+	@Override
+	public void handleException(Thread thread, Throwable throwable) {
 		Log.e(TAG, "Unexepected error", throwable);
 		DefaultApplicationContext appContext = AbstractApplication.get().getAndroidApplicationContext();
 		if (appContext.isCrittercismEnabled()) {
@@ -114,33 +123,41 @@ public class DefaultExceptionHandler implements ExceptionHandler {
 				ExceptionReportActivity.reportException(thread, throwable);
 			}
 		}
-		
+		displayError(
+			LocalizationUtils.getString(R.string.exceptionReportDialogTitle, AndroidUtils.getApplicationName()),
+			LocalizationUtils.getString(R.string.serverError), throwable);
+	}
+	
+	protected void displayError(String title, String message, Throwable throwable) {
 		Activity activity = AbstractApplication.get().getCurrentActivity();
 		if (activity != null) {
-			AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
-			dialog.setTitle(activity.getString(R.string.exceptionReportDialogTitle, AndroidUtils.getApplicationName()));
-			dialog.setMessage(R.string.serverError);
-			dialog.setCancelable(false);
-			dialog.setPositiveButton(R.string.ok, new OnClickListener() {
-				
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					Activity activity = AbstractApplication.get().getCurrentActivity();
-					if (activity != null) {
-						activity.finish();
-					}
-				}
-			});
-			AlertDialogUtils.show(dialog);
+			ErrorDialogFragment.show((FragmentActivity)activity, title, message, goBackOnError(throwable));
 		}
 	}
 	
-	// private Boolean shouldGoBack(AbstractException abstractException, Boolean defaultValue) {
-	// return abstractException.hasParameter(GO_BACK_KEY) ? abstractException.<Boolean>getParameter(GO_BACK_KEY)
-	// : defaultValue;
-	// }
+	private Boolean goBackOnError(Throwable throwable) {
+		if (throwable instanceof AbstractException) {
+			AbstractException abstractException = (AbstractException)throwable;
+			return abstractException.hasParameter(GO_BACK_KEY) ? abstractException.<Boolean>getParameter(GO_BACK_KEY)
+					: goBackOnErrorByDefault(abstractException);
+		} else {
+			return goBackOnErrorByDefault(throwable);
+		}
+	}
 	
-	public static void markAsNotGoBack(AbstractException abstractException) {
-		abstractException.addParameter(GO_BACK_KEY, false);
+	protected Boolean goBackOnErrorByDefault(Throwable throwable) {
+		return true;
+	}
+	
+	public static void markAsGoBackOnError(RuntimeException runtimeException) {
+		if (runtimeException instanceof AbstractException) {
+			((AbstractException)runtimeException).addParameter(GO_BACK_KEY, true);
+		}
+	}
+	
+	public static void markAsNotGoBackOnError(RuntimeException runtimeException) {
+		if (runtimeException instanceof AbstractException) {
+			((AbstractException)runtimeException).addParameter(GO_BACK_KEY, false);
+		}
 	}
 }

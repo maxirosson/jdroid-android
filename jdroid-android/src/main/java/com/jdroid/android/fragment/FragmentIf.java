@@ -108,6 +108,8 @@ public interface FragmentIf extends DefaultUseCaseListener {
 	
 	public void executeUseCase(DefaultUseCase<?> useCase);
 	
+	public void executeUseCase(DefaultUseCase<?> useCase, Long delaySeconds);
+	
 	public User getUser();
 	
 	public AdSize getAdSize();

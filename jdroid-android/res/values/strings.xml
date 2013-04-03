@@ -6,8 +6,6 @@
 	<string name="cancel">Cancel</string>
 	<string name="yes">Yes</string>
 	<string name="no">No</string>
-	<string name="confirmExit">If you exit this screen, you will lose any unsaved changes </string>
-	<string name="areYouSure">Are you sure ?</string>
 	<string name="noResults">There are no available results</string>
 	<string name="featureNotAvailable">This feature is not available yet</string>
 	<string name="zeroPercent">0%</string>
@@ -19,10 +17,12 @@
 	<string name="onMissingGoogleAccountError">You need to set up a Google account on your device to use push notifications</string>
 
 	<!-- Errors -->
-	<string name="internalError">Oops! We\'re having technical problems. Try again later.</string>
-	<string name="serverError">Oops! We\'re having technical problems. Try again later.</string>
-	<string name="connectionError">Connection Error. Please try again</string>
-	<string name="facebookError">There is a problem connecting to Facebook. Please try again.</string>
+	<string name="internalError">Oops! We\'re having technical problems. Please try again later.</string>
+	<string name="serverError">Oops! We\'re having technical problems. Please try again later.</string>
+	<string name="connectionError">Please check your internet connection and then try again.
+	</string>
+	<string name="connectionErrorTitle">Connection Error</string>
+	<string name="facebookError">There is a problem connecting to Facebook. Please try again later.</string>
 
 	<!-- Google Play Utils -->
 	<string name="updateAppTitle">%1$s outdated</string>
@@ -90,6 +90,8 @@
 	<string name="httpMockEnabledDescription">Enable/disable http mocks</string>
 	<string name="httpMockSleepTitle">Http Mocks sleep</string>
 	<string name="httpMockSleepDescription">Enable/disable http mocks sleep</string>
+	<string name="httpMockCrashType">Http Mocks Crash Type</string>
+	<string name="httpMockCrashTypeDescription">Pick the crash type for your mocks calls</string>
 	<string name="packageName">Package Name: %1$s</string>
 	<string name="environmentName">Environment Name: %1$s</string>
 	<string name="analyticsEnabled">Analytics Enabled: %1$s</string>
@@ -98,13 +100,11 @@
 	<string name="commitId">Commit Id: %1$s</string>
 	<string name="commitTime">Commit Time: %1$s</string>
 	<string name="buildTime">Build Time: %1$s</string>
+	<string name="crashSettings">Crash</string>
+	<string name="crashType">Crash Type</string>
+	<string name="crashTypeDescription">Pick the crash type</string>
 
 	<!-- Facebook SDK 3.0 -->
-	<!-- Copyright 2012 Facebook Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except 
-		in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 Unless 
-		required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, 
-		WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing 
-		permissions and limitations under the License. -->
 	<string name="com_facebook_loginview_log_out_button">Log Out</string>
 	<string name="com_facebook_loginview_log_in_button">Log In</string>
 	<string name="com_facebook_loginview_logged_in_as">Logged in as: %1$s</string>
@@ -133,9 +133,5 @@
 	<string name="com_facebook_requesterror_permissions">An app connection with Facebook failed due to insufficient permissions, please grant the app
 		permissions to perform the operation.
 	</string>
-
-	<string name="crashSettings">Crash</string>
-	<string name="crashType">Crash Type</string>
-	<string name="crashTypeDescription">Pick the crash type</string>
 
 </resources>

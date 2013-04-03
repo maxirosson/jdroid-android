@@ -375,6 +375,15 @@ public class BaseActivity implements ActivityIf {
 	}
 	
 	/**
+	 * @see com.jdroid.android.fragment.FragmentIf#executeUseCase(com.jdroid.android.usecase.DefaultUseCase,
+	 *      java.lang.Long)
+	 */
+	@Override
+	public void executeUseCase(DefaultUseCase<?> useCase, Long delaySeconds) {
+		ExecutorUtils.schedule(useCase, delaySeconds);
+	}
+	
+	/**
 	 * @see com.jdroid.android.usecase.listener.DefaultUseCaseListener#onStartUseCase()
 	 */
 	@Override

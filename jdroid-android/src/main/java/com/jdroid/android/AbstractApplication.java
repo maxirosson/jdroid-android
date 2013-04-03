@@ -26,7 +26,6 @@ import com.jdroid.android.exception.DefaultExceptionHandler;
 import com.jdroid.android.exception.ExceptionHandler;
 import com.jdroid.android.fragment.BaseFragment;
 import com.jdroid.android.images.BitmapLruCache;
-import com.jdroid.android.utils.AlertDialogUtils;
 import com.jdroid.android.utils.SharedPreferencesUtils;
 import com.jdroid.android.utils.ToastUtils;
 import com.jdroid.java.exception.UnexpectedException;
@@ -91,7 +90,6 @@ public abstract class AbstractApplication extends Application {
 		initStrictMode();
 		
 		// This is required to initialize the statics fields of the utils classes.
-		AlertDialogUtils.init();
 		ToastUtils.init();
 		DateUtils.init();
 		

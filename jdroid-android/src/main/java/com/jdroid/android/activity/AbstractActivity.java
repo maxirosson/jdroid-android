@@ -310,6 +310,15 @@ public abstract class AbstractActivity extends SherlockActivity implements Activ
 	}
 	
 	/**
+	 * @see com.jdroid.android.fragment.FragmentIf#executeUseCase(com.jdroid.android.usecase.DefaultUseCase,
+	 *      java.lang.Long)
+	 */
+	@Override
+	public void executeUseCase(DefaultUseCase<?> useCase, Long delaySeconds) {
+		baseActivity.executeUseCase(useCase, delaySeconds);
+	}
+	
+	/**
 	 * @see com.jdroid.android.usecase.listener.DefaultUseCaseListener#onStartUseCase()
 	 */
 	@Override
