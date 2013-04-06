@@ -1,12 +1,13 @@
 package com.jdroid.android.wizard;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 /**
  * 
  * @author Maxi Rosson
  */
-public abstract class WizardStep {
+public interface WizardStep {
 	
-	public abstract Fragment createFragment(Object args);
+	public Fragment createFragment(Bundle bundle);
 }

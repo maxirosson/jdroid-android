@@ -12,11 +12,14 @@ import com.actionbarsherlock.view.MenuItem;
 import com.google.ads.AdSize;
 import com.jdroid.android.AbstractApplication;
 import com.jdroid.android.R;
+import com.jdroid.android.activity.BaseActivity.UseCaseTrigger;
 import com.jdroid.android.context.DefaultApplicationContext;
 import com.jdroid.android.domain.User;
 import com.jdroid.android.fragment.UseCaseFragment;
 import com.jdroid.android.loading.LoadingDialogBuilder;
+import com.jdroid.android.usecase.DefaultAbstractUseCase;
 import com.jdroid.android.usecase.DefaultUseCase;
+import com.jdroid.android.usecase.listener.DefaultUseCaseListener;
 import com.jdroid.java.exception.UnexpectedException;
 
 /**
@@ -307,6 +310,35 @@ public abstract class AbstractFragmentActivity extends SherlockFragmentActivity 
 	}
 	
 	/**
+	 * @see com.jdroid.android.fragment.FragmentIf#onResumeUseCase(com.jdroid.android.usecase.DefaultAbstractUseCase,
+	 *      com.jdroid.android.usecase.listener.DefaultUseCaseListener)
+	 */
+	@Override
+	public void onResumeUseCase(DefaultAbstractUseCase useCase, DefaultUseCaseListener listener) {
+		baseActivity.onResumeUseCase(useCase, listener);
+	}
+	
+	/**
+	 * @see com.jdroid.android.fragment.FragmentIf#onResumeUseCase(com.jdroid.android.usecase.DefaultAbstractUseCase,
+	 *      com.jdroid.android.usecase.listener.DefaultUseCaseListener,
+	 *      com.jdroid.android.activity.BaseActivity.UseCaseTrigger)
+	 */
+	@Override
+	public void onResumeUseCase(DefaultAbstractUseCase useCase, DefaultUseCaseListener listener,
+			UseCaseTrigger useCaseTrigger) {
+		baseActivity.onResumeUseCase(useCase, listener, useCaseTrigger);
+	}
+	
+	/**
+	 * @see com.jdroid.android.fragment.FragmentIf#onPauseUseCase(com.jdroid.android.usecase.DefaultAbstractUseCase,
+	 *      com.jdroid.android.usecase.listener.DefaultUseCaseListener)
+	 */
+	@Override
+	public void onPauseUseCase(DefaultAbstractUseCase useCase, DefaultUseCaseListener listener) {
+		baseActivity.onPauseUseCase(useCase, listener);
+	}
+	
+	/**
 	 * @see com.jdroid.android.fragment.FragmentIf#executeUseCase(com.jdroid.android.usecase.DefaultUseCase)
 	 */
 	@Override
@@ -364,6 +396,14 @@ public abstract class AbstractFragmentActivity extends SherlockFragmentActivity 
 	}
 	
 	/**
+	 * @see com.jdroid.android.fragment.FragmentIf#goBackOnError()
+	 */
+	@Override
+	public Boolean goBackOnError() {
+		return baseActivity.goBackOnError();
+	}
+	
+	/**
 	 * @see com.jdroid.android.activity.ActivityIf#requiresAuthentication()
 	 */
 	@Override
@@ -396,6 +436,12 @@ public abstract class AbstractFragmentActivity extends SherlockFragmentActivity 
 				throw new UnexpectedException(e);
 			}
 		}
+	}
+	
+	public void removeUseCaseFragment(Class<? extends UseCaseFragment<?>> useCaseFragmentClass) {
+		FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+		fragmentTransaction.remove(getUseCaseUseCaseFragment(useCaseFragmentClass));
+		fragmentTransaction.commit();
 	}
 	
 	public UseCaseFragment<?> getUseCaseUseCaseFragment(Class<? extends UseCaseFragment<?>> useCaseFragmentClass) {

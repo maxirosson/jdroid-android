@@ -25,10 +25,13 @@ import com.jdroid.android.context.SecurityContext;
 import com.jdroid.android.debug.DebugSettingsActivity;
 import com.jdroid.android.debug.PreHoneycombDebugSettingsActivity;
 import com.jdroid.android.domain.User;
+import com.jdroid.android.exception.DefaultExceptionHandler;
 import com.jdroid.android.intent.ClearTaskIntent;
 import com.jdroid.android.loading.DefaultLoadingDialogBuilder;
 import com.jdroid.android.loading.LoadingDialogBuilder;
+import com.jdroid.android.usecase.DefaultAbstractUseCase;
 import com.jdroid.android.usecase.DefaultUseCase;
+import com.jdroid.android.usecase.listener.DefaultUseCaseListener;
 import com.jdroid.android.utils.AndroidUtils;
 import com.jdroid.java.utils.ExecutorUtils;
 
@@ -367,6 +370,72 @@ public class BaseActivity implements ActivityIf {
 	}
 	
 	/**
+	 * @see com.jdroid.android.fragment.FragmentIf#onResumeUseCase(com.jdroid.android.usecase.DefaultAbstractUseCase,
+	 *      com.jdroid.android.usecase.listener.DefaultUseCaseListener)
+	 */
+	@Override
+	public void onResumeUseCase(DefaultAbstractUseCase useCase, DefaultUseCaseListener listener) {
+		onResumeUseCase(useCase, listener, UseCaseTrigger.MANUAL);
+	}
+	
+	/**
+	 * @see com.jdroid.android.fragment.FragmentIf#onResumeUseCase(com.jdroid.android.usecase.DefaultAbstractUseCase,
+	 *      com.jdroid.android.usecase.listener.DefaultUseCaseListener,
+	 *      com.jdroid.android.activity.BaseActivity.UseCaseTrigger)
+	 */
+	@Override
+	public void onResumeUseCase(final DefaultAbstractUseCase useCase, final DefaultUseCaseListener listener,
+			final UseCaseTrigger useCaseTrigger) {
+		if (useCase != null) {
+			ExecutorUtils.execute(new Runnable() {
+				
+				@Override
+				public void run() {
+					useCase.addListener(listener);
+					if (useCase.isNotified()) {
+						if (useCaseTrigger.equals(UseCaseTrigger.ALWAYS)) {
+							useCase.run();
+						}
+					} else {
+						if (useCase.isInProgress()) {
+							listener.onStartUseCase();
+						} else if (useCase.isFinishSuccessful()) {
+							listener.onFinishUseCase();
+							useCase.markAsNotified();
+						} else if (useCase.isFinishFailed()) {
+							try {
+								listener.onFinishFailedUseCase(useCase.getRuntimeException());
+							} finally {
+								useCase.markAsNotified();
+							}
+						} else if (useCase.isNotInvoked()
+								&& (useCaseTrigger.equals(UseCaseTrigger.ONCE) || useCaseTrigger.equals(UseCaseTrigger.ALWAYS))) {
+							useCase.run();
+						}
+					}
+				}
+			});
+		}
+	}
+	
+	public enum UseCaseTrigger {
+		MANUAL,
+		ONCE,
+		ALWAYS;
+	}
+	
+	/**
+	 * @see com.jdroid.android.fragment.FragmentIf#onPauseUseCase(com.jdroid.android.usecase.DefaultAbstractUseCase,
+	 *      com.jdroid.android.usecase.listener.DefaultUseCaseListener)
+	 */
+	@Override
+	public void onPauseUseCase(final DefaultAbstractUseCase userCase, final DefaultUseCaseListener listener) {
+		if (userCase != null) {
+			userCase.removeListener(listener);
+		}
+	}
+	
+	/**
 	 * @see com.jdroid.android.fragment.FragmentIf#executeUseCase(com.jdroid.android.usecase.DefaultUseCase)
 	 */
 	@Override
@@ -412,6 +481,11 @@ public class BaseActivity implements ActivityIf {
 	 */
 	@Override
 	public void onFinishFailedUseCase(RuntimeException runtimeException) {
+		if (getActivityIf().goBackOnError()) {
+			DefaultExceptionHandler.markAsGoBackOnError(runtimeException);
+		} else {
+			DefaultExceptionHandler.markAsNotGoBackOnError(runtimeException);
+		}
 		getActivityIf().dismissLoadingOnUIThread();
 		throw runtimeException;
 	}
@@ -422,6 +496,14 @@ public class BaseActivity implements ActivityIf {
 	@Override
 	public void onFinishCanceledUseCase() {
 		// Do nothing by default
+	}
+	
+	/**
+	 * @see com.jdroid.android.fragment.FragmentIf#goBackOnError()
+	 */
+	@Override
+	public Boolean goBackOnError() {
+		return true;
 	}
 	
 	/**

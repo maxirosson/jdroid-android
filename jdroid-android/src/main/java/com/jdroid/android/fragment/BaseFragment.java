@@ -7,9 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.jdroid.android.R;
 import com.jdroid.android.ad.AdLoader;
-import com.jdroid.android.usecase.DefaultAbstractUseCase;
-import com.jdroid.android.usecase.listener.DefaultUseCaseListener;
-import com.jdroid.java.utils.ExecutorUtils;
+import com.jdroid.android.exception.DefaultExceptionHandler;
 
 /**
  * 
@@ -73,54 +71,6 @@ public class BaseFragment {
 		Log.v(TAG, "Executing onDestroy on " + fragment);
 	}
 	
-	public void onResumeUseCase(DefaultAbstractUseCase useCase, DefaultUseCaseListener listener) {
-		onResumeUseCase(useCase, listener, UseCaseTrigger.MANUAL);
-	}
-	
-	public void onResumeUseCase(final DefaultAbstractUseCase useCase, final DefaultUseCaseListener listener,
-			final UseCaseTrigger useCaseTrigger) {
-		ExecutorUtils.execute(new Runnable() {
-			
-			@Override
-			public void run() {
-				useCase.addListener(listener);
-				if (useCase.isNotified()) {
-					if (useCaseTrigger.equals(UseCaseTrigger.ALWAYS)) {
-						useCase.run();
-					}
-				} else {
-					if (useCase.isInProgress()) {
-						listener.onStartUseCase();
-					} else if (useCase.isFinishSuccessful()) {
-						listener.onFinishUseCase();
-						useCase.markAsNotified();
-					} else if (useCase.isFinishFailed()) {
-						try {
-							listener.onFinishFailedUseCase(useCase.getRuntimeException());
-						} finally {
-							useCase.markAsNotified();
-						}
-					} else if (useCase.isNotInvoked()
-							&& (useCaseTrigger.equals(UseCaseTrigger.ONCE) || useCaseTrigger.equals(UseCaseTrigger.ALWAYS))) {
-						useCase.run();
-					}
-				}
-			}
-		});
-	}
-	
-	public enum UseCaseTrigger {
-		MANUAL,
-		ONCE,
-		ALWAYS;
-	}
-	
-	public void onPauseUseCase(final DefaultAbstractUseCase userCase, final DefaultUseCaseListener listener) {
-		if (userCase != null) {
-			userCase.removeListener(listener);
-		}
-	}
-	
 	public <E> E getArgument(String key) {
 		return getArgument(key, null);
 	}
@@ -130,5 +80,15 @@ public class BaseFragment {
 		Bundle arguments = fragment.getArguments();
 		E value = (arguments != null) && arguments.containsKey(key) ? (E)arguments.get(key) : null;
 		return value != null ? value : defaultValue;
+	}
+	
+	public void onFinishFailedUseCase(RuntimeException runtimeException) {
+		if (getFragmentIf().goBackOnError()) {
+			DefaultExceptionHandler.markAsGoBackOnError(runtimeException);
+		} else {
+			DefaultExceptionHandler.markAsNotGoBackOnError(runtimeException);
+		}
+		getFragmentIf().dismissLoadingOnUIThread();
+		throw runtimeException;
 	}
 }

@@ -2,6 +2,7 @@ package com.jdroid.android.wizard;
 
 import java.util.List;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.util.TypedValue;
 import android.view.View;
@@ -29,8 +30,12 @@ public abstract class WizardActivity extends AbstractFragmentActivity {
 	}
 	
 	protected void loadWizard() {
+		loadWizard(null);
+	}
+	
+	protected void loadWizard(Bundle fragmentsBundle) {
 		WizardStepFragmentAdapter pagerAdapter = new WizardStepFragmentAdapter(getSupportFragmentManager(),
-				getWizardSteps());
+				getWizardSteps(), fragmentsBundle);
 		
 		pager = findView(R.id.pager);
 		pager.setAdapter(pagerAdapter);

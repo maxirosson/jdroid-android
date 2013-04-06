@@ -9,10 +9,13 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.google.ads.AdSize;
 import com.jdroid.android.AbstractApplication;
+import com.jdroid.android.activity.BaseActivity.UseCaseTrigger;
 import com.jdroid.android.context.DefaultApplicationContext;
 import com.jdroid.android.domain.User;
 import com.jdroid.android.loading.LoadingDialogBuilder;
+import com.jdroid.android.usecase.DefaultAbstractUseCase;
 import com.jdroid.android.usecase.DefaultUseCase;
+import com.jdroid.android.usecase.listener.DefaultUseCaseListener;
 
 /**
  * Base {@link Activity}
@@ -302,6 +305,35 @@ public abstract class AbstractActivity extends SherlockActivity implements Activ
 	}
 	
 	/**
+	 * @see com.jdroid.android.fragment.FragmentIf#onResumeUseCase(com.jdroid.android.usecase.DefaultAbstractUseCase,
+	 *      com.jdroid.android.usecase.listener.DefaultUseCaseListener)
+	 */
+	@Override
+	public void onResumeUseCase(DefaultAbstractUseCase useCase, DefaultUseCaseListener listener) {
+		baseActivity.onResumeUseCase(useCase, listener);
+	}
+	
+	/**
+	 * @see com.jdroid.android.fragment.FragmentIf#onResumeUseCase(com.jdroid.android.usecase.DefaultAbstractUseCase,
+	 *      com.jdroid.android.usecase.listener.DefaultUseCaseListener,
+	 *      com.jdroid.android.activity.BaseActivity.UseCaseTrigger)
+	 */
+	@Override
+	public void onResumeUseCase(DefaultAbstractUseCase useCase, DefaultUseCaseListener listener,
+			UseCaseTrigger useCaseTrigger) {
+		baseActivity.onResumeUseCase(useCase, listener, useCaseTrigger);
+	}
+	
+	/**
+	 * @see com.jdroid.android.fragment.FragmentIf#onPauseUseCase(com.jdroid.android.usecase.DefaultAbstractUseCase,
+	 *      com.jdroid.android.usecase.listener.DefaultUseCaseListener)
+	 */
+	@Override
+	public void onPauseUseCase(DefaultAbstractUseCase useCase, DefaultUseCaseListener listener) {
+		baseActivity.onPauseUseCase(useCase, listener);
+	}
+	
+	/**
 	 * @see com.jdroid.android.fragment.FragmentIf#executeUseCase(com.jdroid.android.usecase.DefaultUseCase)
 	 */
 	@Override
@@ -356,6 +388,14 @@ public abstract class AbstractActivity extends SherlockActivity implements Activ
 	@Override
 	public void onFinishCanceledUseCase() {
 		baseActivity.onFinishCanceledUseCase();
+	}
+	
+	/**
+	 * @see com.jdroid.android.fragment.FragmentIf#goBackOnError()
+	 */
+	@Override
+	public Boolean goBackOnError() {
+		return baseActivity.goBackOnError();
 	}
 	
 	/**

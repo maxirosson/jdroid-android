@@ -150,12 +150,16 @@ public class DefaultExceptionHandler implements ExceptionHandler {
 	}
 	
 	public static void markAsGoBackOnError(RuntimeException runtimeException) {
+		// FIXME The RuntimeException is not flagged. Possible fixes: wrap the RuntimeException or move the goBack logic
+		// to the use case listener
 		if (runtimeException instanceof AbstractException) {
 			((AbstractException)runtimeException).addParameter(GO_BACK_KEY, true);
 		}
 	}
 	
 	public static void markAsNotGoBackOnError(RuntimeException runtimeException) {
+		// FIXME The RuntimeException is not flagged. Possible fixes: wrap the RuntimeException or move the goBack logic
+		// to the use case listener
 		if (runtimeException instanceof AbstractException) {
 			((AbstractException)runtimeException).addParameter(GO_BACK_KEY, false);
 		}

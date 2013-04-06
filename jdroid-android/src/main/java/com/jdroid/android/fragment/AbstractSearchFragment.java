@@ -10,9 +10,8 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 import com.jdroid.android.R;
+import com.jdroid.android.activity.BaseActivity.UseCaseTrigger;
 import com.jdroid.android.adapter.BaseArrayAdapter;
-import com.jdroid.android.exception.DefaultExceptionHandler;
-import com.jdroid.android.fragment.BaseFragment.UseCaseTrigger;
 import com.jdroid.android.listener.OnEnterKeyListener;
 import com.jdroid.android.search.PagedResult;
 import com.jdroid.android.search.SearchResult;
@@ -196,12 +195,11 @@ public abstract class AbstractSearchFragment<T> extends AbstractListFragment<T> 
 	}
 	
 	/**
-	 * @see com.jdroid.android.fragment.AbstractListFragment#onFinishFailedUseCase(java.lang.RuntimeException)
+	 * @see com.jdroid.android.fragment.AbstractListFragment#goBackOnError()
 	 */
 	@Override
-	public void onFinishFailedUseCase(RuntimeException runtimeException) {
-		DefaultExceptionHandler.markAsNotGoBackOnError(runtimeException);
-		super.onFinishFailedUseCase(runtimeException);
+	public Boolean goBackOnError() {
+		return false;
 	}
 	
 	/**

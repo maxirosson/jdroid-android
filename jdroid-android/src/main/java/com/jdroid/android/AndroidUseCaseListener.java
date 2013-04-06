@@ -1,6 +1,7 @@
 package com.jdroid.android;
 
 import com.jdroid.android.activity.ActivityIf;
+import com.jdroid.android.exception.DefaultExceptionHandler;
 import com.jdroid.android.usecase.listener.DefaultUseCaseListener;
 
 /**
@@ -30,8 +31,17 @@ public abstract class AndroidUseCaseListener implements DefaultUseCaseListener {
 	 */
 	@Override
 	public void onFinishFailedUseCase(RuntimeException runtimeException) {
-		getActivityIf().onFinishFailedUseCase(runtimeException);
-		
+		if (goBackOnError()) {
+			DefaultExceptionHandler.markAsGoBackOnError(runtimeException);
+		} else {
+			DefaultExceptionHandler.markAsNotGoBackOnError(runtimeException);
+		}
+		getActivityIf().dismissLoadingOnUIThread();
+		throw runtimeException;
+	}
+	
+	public Boolean goBackOnError() {
+		return getActivityIf().goBackOnError();
 	}
 	
 	/**

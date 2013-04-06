@@ -4,10 +4,12 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.view.View;
 import com.google.ads.AdSize;
+import com.jdroid.android.activity.BaseActivity.UseCaseTrigger;
 import com.jdroid.android.context.DefaultApplicationContext;
 import com.jdroid.android.domain.User;
 import com.jdroid.android.loading.LoadingDialog;
 import com.jdroid.android.loading.LoadingDialogBuilder;
+import com.jdroid.android.usecase.DefaultAbstractUseCase;
 import com.jdroid.android.usecase.DefaultUseCase;
 import com.jdroid.android.usecase.listener.DefaultUseCaseListener;
 
@@ -106,9 +108,18 @@ public interface FragmentIf extends DefaultUseCaseListener {
 	
 	public <E> E getArgument(String key, E defaultValue);
 	
+	public void onResumeUseCase(DefaultAbstractUseCase useCase, DefaultUseCaseListener listener);
+	
+	public void onResumeUseCase(DefaultAbstractUseCase useCase, DefaultUseCaseListener listener,
+			UseCaseTrigger useCaseTrigger);
+	
+	public void onPauseUseCase(DefaultAbstractUseCase useCase, DefaultUseCaseListener listener);
+	
 	public void executeUseCase(DefaultUseCase<?> useCase);
 	
 	public void executeUseCase(DefaultUseCase<?> useCase, Long delaySeconds);
+	
+	public Boolean goBackOnError();
 	
 	public User getUser();
 	
