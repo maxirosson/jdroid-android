@@ -1,14 +1,15 @@
 package com.jdroid.android.date;
 
 import java.util.Date;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.text.format.DateFormat;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.TimePicker;
 import com.jdroid.android.R;
 import com.jdroid.android.dialog.AbstractDialogFragment;
@@ -56,45 +57,34 @@ public class TimePickerDialogFragment extends AbstractDialogFragment {
 	}
 	
 	/**
-	 * @see android.support.v4.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup,
-	 *      android.os.Bundle)
+	 * @see android.support.v4.app.DialogFragment#onCreateDialog(android.os.Bundle)
 	 */
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.time_picker_dialog_fragment, container, false);
-	}
-	
-	/**
-	 * @see com.jdroid.android.dialog.AbstractDialogFragment#onViewCreated(android.view.View, android.os.Bundle)
-	 */
-	@Override
-	public void onViewCreated(View view, Bundle savedInstanceState) {
-		super.onViewCreated(view, savedInstanceState);
+	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		
-		getDialog().setTitle(R.string.selectTime);
+		AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
+		View view = inflate(R.layout.time_picker_dialog_fragment);
+		dialogBuilder.setView(view);
 		
-		final TimePicker timePicker = findView(R.id.timePicker);
+		dialogBuilder.setTitle(R.string.selectTime);
+		
+		final TimePicker timePicker = (TimePicker)view.findViewById(R.id.timePicker);
 		timePicker.setIs24HourView(DateFormat.is24HourFormat(getActivity()));
 		timePicker.setCurrentHour(DateUtils.getHour(defaultTime, true));
 		timePicker.setCurrentMinute(DateUtils.getMinute(defaultTime));
 		
-		findView(R.id.ok).setOnClickListener(new OnClickListener() {
+		dialogBuilder.setPositiveButton(getString(R.string.ok), new OnClickListener() {
 			
 			@Override
-			public void onClick(View v) {
+			public void onClick(DialogInterface dialog, int whichButton) {
 				Date time = DateUtils.getTime(timePicker.getCurrentHour(), timePicker.getCurrentMinute());
 				int requestCode = getTargetRequestCode();
 				((OnTimeSetListener)getTargetFragment()).onTimeSet(time, requestCode);
-				dismiss();
 			}
 		});
 		
-		findView(R.id.cancel).setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				dismiss();
-			}
-		});
+		dialogBuilder.setNegativeButton(getString(R.string.cancel), null);
+		
+		return dialogBuilder.create();
 	}
 }

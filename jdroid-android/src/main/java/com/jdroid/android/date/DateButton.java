@@ -26,13 +26,30 @@ public class DateButton extends Button {
 		}
 	}
 	
-	public void init(final Fragment fragment, final Date defaultDate) {
+	public void init(Fragment targetFragment, final Date defaultDate) {
+		init(targetFragment, defaultDate, null);
+	}
+	
+	public void init(Fragment targetFragment, Date defaultDate, Integer titleResId) {
+		init(targetFragment, defaultDate, titleResId, null);
+	}
+	
+	public void init(Fragment targetFragment, Date defaultDate, Integer titleResId, Date minDate) {
+		init(targetFragment, defaultDate, titleResId, minDate, null);
+	}
+	
+	public void init(Fragment targetFragment, Date defaultDate, Integer titleResId, Date minDate, Date maxDate) {
+		init(targetFragment, defaultDate, titleResId, minDate, maxDate, 1);
+	}
+	
+	public void init(final Fragment targetFragment, final Date defaultDate, final Integer titleResId,
+			final Date minDate, final Date maxDate, final int requestCode) {
 		setDate(defaultDate);
 		setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				DatePickerDialogFragment.show(fragment, date);
+				DatePickerDialogFragment.show(targetFragment, defaultDate, titleResId, minDate, maxDate, requestCode);
 			}
 		});
 	}
