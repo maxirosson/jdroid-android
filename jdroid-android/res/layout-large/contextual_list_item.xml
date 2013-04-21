@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="horizontal"
 	android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingLeft="4dp"
-	android:paddingRight="4dp" android:paddingTop="4dp" android:paddingBottom="4dp" android:gravity="center_vertical"
-	android:background="@drawable/contextual_list_background">
+	android:paddingRight="4dp" android:paddingTop="8dp" android:paddingBottom="8dp" android:gravity="center_vertical"
+	android:background="@drawable/contextual_list_selector">
 
 	<ImageView android:id="@+id/image" android:layout_width="@dimen/contextual_list_item_icon_size"
 		android:layout_height="@dimen/contextual_list_item_icon_size" android:scaleType="centerInside"
