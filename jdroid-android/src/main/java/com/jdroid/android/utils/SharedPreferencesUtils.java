@@ -13,7 +13,7 @@ import com.jdroid.android.AbstractApplication;
  */
 public class SharedPreferencesUtils {
 	
-	private static final String DEFAULT_NAME = AndroidUtils.getPackageName();
+	private static final String DEFAULT_NAME = AbstractApplication.get().getPackageName();
 	
 	public static void savePreference(String key, String value) {
 		if (value != null) {

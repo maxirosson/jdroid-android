@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<color name="black">@android:color/black</color>
-	<color name="white">@android:color/white</color>
-	<color name="gray">#C0C0C0</color>
 
 	<color name="searchBarStartColor">#636263</color>
 	<color name="searchBarEndColor">#8C8C8C</color>
 
 	<color name="listSeparatorCenter">#99000000</color>
 	<color name="listSeparatorBorder">#99CCCCCC</color>
-	
-	<color name="finishWizard">#ff669900</color>
+
+	<color name="finishWizard">#FF669900</color>
 </resources>

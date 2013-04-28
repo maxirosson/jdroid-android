@@ -1,19 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <lint>
     <issue id="ContentDescription" severity="ignore" />
+    <issue id="DefaultLocale">
+        <ignore path="src\main\java\com\facebook\Request.java" />
+        <ignore path="src\main\java\com\facebook\Response.java" />
+        <ignore path="src\main\java\com\facebook\model\GraphObject.java" />
+        <ignore path="src\main\java\com\facebook\widget\GraphObjectAdapter.java" />
+    </issue>
     <issue id="FieldGetter" severity="warning">
         <ignore path="src\main\java\com\facebook\android\Facebook.java" />
     </issue>
+    <issue id="HandlerLeak">
+        <ignore path="src\main\java\com\facebook\GetTokenClient.java" />
+    </issue>
+    <issue id="IconDuplicates">
+        <ignore path="res\drawable-hdpi\com_facebook_loginbutton_blue_pressed.png" />
+        <ignore path="res\drawable-xhdpi\com_facebook_loginbutton_blue_pressed.png" />
+        <ignore path="res\drawable\com_facebook_icon.png" />
+        <ignore path="res\drawable\com_facebook_loginbutton_blue_pressed.png" />
+    </issue>
     <issue id="IconExpectedSize" severity="warning" />
+    <issue id="IconLocation">
+        <ignore path="res\drawable\com_facebook_button_check_off.png" />
+        <ignore path="res\drawable\com_facebook_button_check_on.png" />
+        <ignore path="res\drawable\com_facebook_button_grey_focused.9.png" />
+        <ignore path="res\drawable\com_facebook_button_grey_normal.9.png" />
+        <ignore path="res\drawable\com_facebook_button_grey_pressed.9.png" />
+        <ignore path="res\drawable\com_facebook_close.png" />
+        <ignore path="res\drawable\com_facebook_icon.png" />
+        <ignore path="res\drawable\com_facebook_list_divider.9.png" />
+        <ignore path="res\drawable\com_facebook_list_section_header_background.9.png" />
+        <ignore path="res\drawable\com_facebook_loginbutton_blue_focused.png" />
+        <ignore path="res\drawable\com_facebook_loginbutton_blue_normal.png" />
+        <ignore path="res\drawable\com_facebook_loginbutton_blue_pressed.png" />
+        <ignore path="res\drawable\com_facebook_logo.png" />
+        <ignore path="res\drawable\com_facebook_picker_list_focused.9.png" />
+        <ignore path="res\drawable\com_facebook_picker_list_longpressed.9.png" />
+        <ignore path="res\drawable\com_facebook_picker_list_pressed.9.png" />
+        <ignore path="res\drawable\com_facebook_picker_list_selector_disabled.9.png" />
+        <ignore path="res\drawable\com_facebook_place_default_icon.png" />
+        <ignore path="res\drawable\com_facebook_profile_default_icon.png" />
+        <ignore path="res\drawable\com_facebook_profile_picture_blank_portrait.png" />
+        <ignore path="res\drawable\com_facebook_profile_picture_blank_square.png" />
+    </issue>
+    <issue id="InefficientWeight">
+        <ignore path="res\layout\com_facebook_picker_list_row.xml" />
+    </issue>
+    <issue id="NestedWeights">
+        <ignore path="res\layout\com_facebook_placepickerfragment_list_row.xml" />
+    </issue>
+    <issue id="Overdraw">
+        <ignore path="res\layout\com_facebook_friendpickerfragment.xml" />
+        <ignore path="res\layout\com_facebook_placepickerfragment.xml" />
+    </issue>
     <issue id="Registered">
         <ignore path="src\main\java\com\jdroid\android\exception\ExceptionReportActivity.java" />
+    </issue>
+    <issue id="ScrollViewSize">
+        <ignore path="res\layout\com_facebook_usersettingsfragment.xml" />
     </issue>
     <issue id="SelectableText" severity="ignore" />
     <issue id="SetJavaScriptEnabled">
         <ignore path="src\main\java\com\facebook\android\FbDialog.java" />
     </issue>
+    <issue id="TextFields">
+        <ignore path="res\layout\com_facebook_picker_search_box.xml" />
+    </issue>
     <issue id="UnusedIds" severity="ignore" />
     <issue id="UnusedResources">
+        <ignore path="res\drawable\com_facebook_picker_item_background.xml" />
         <ignore path="res\values\analytics.xml" />
     </issue>
     <issue id="ValidFragment">

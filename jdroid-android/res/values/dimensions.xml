@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+	<!-- Texts -->
+
+	<dimen name="smallTextSize">12sp</dimen>
+	<dimen name="normalTextSize">16sp</dimen>
+
+	<!-- Lists & Grids -->
+
 	<dimen name="contextual_list_item_icon_size">36dp</dimen>
-	<dimen name="listSeparatorTextSize">16sp</dimen>
+
+	<!-- Images -->
 
 	<dimen name="borderedCustomImageViewMargin">3dp</dimen>
 	<dimen name="borderedCustomImageViewPadding">2dp</dimen>
-
-	<!-- About Dialog -->
-	<dimen name="aboutDialogTitleTextSize">20sp</dimen>
-	<dimen name="aboutDialogTextSize">16sp</dimen>
 
 </resources>

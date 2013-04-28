@@ -357,4 +357,8 @@ public abstract class AbstractApplication extends Application {
 			}
 		});
 	}
+	
+	public String getAppName() {
+		return getString(R.string.appName);
+	}
 }

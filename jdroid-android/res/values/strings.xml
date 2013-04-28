@@ -60,19 +60,17 @@
 	<string name="about">About</string>
 	<string name="version">Version %1$s</string>
 	<string name="contactUs">Contact Us</string>
-	<string name="termsOfService">Terms of Service</string>
-	<string name="privacy">Privacy</string>
 	<string name="share">Share</string>
 	<string name="shareTitle">Share %1$s</string>
 	<string name="copyright">© %1$s %2$s.</string>
 	<string name="allRightsReservedLegend">All Rights Reserved.</string>
 
 	<!-- In-app Billing -->
-	<string name="inAppBillingNotSupported">In-app billing is not supported</string>
+	<!-- <string name="inAppBillingNotSupported">In-app billing is not supported</string> -->
 	<string name="googlePlayConnectionError">There was an error connecting with the Google Play app</string>
-	<string name="requestPurchaseCanceledByUser">Your purchase was cancelled</string>
-	<string name="requestPurchaseServiceUnavailable">The purchase service is unavailable</string>
-	<string name="requestPurchaseError">Error when trying to purchase the product</string>
+	<!-- <string name="requestPurchaseCanceledByUser">Your purchase was cancelled</string> -->
+	<!-- <string name="requestPurchaseServiceUnavailable">The purchase service is unavailable</string> -->
+	<!-- <string name="requestPurchaseError">Error when trying to purchase the product</string> -->
 
 	<!-- External Apps -->
 	<string name="barcodeScanner">Barcode Scanner</string>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<!-- Texts -->
+
+	<dimen name="smallTextSize">16sp</dimen>
+	<dimen name="normalTextSize">20sp</dimen>
+
+</resources>

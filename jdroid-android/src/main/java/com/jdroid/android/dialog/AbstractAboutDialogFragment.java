@@ -1,19 +1,18 @@
 package com.jdroid.android.dialog;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
-import android.content.Intent;
-import android.net.Uri;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
+import com.jdroid.android.AbstractApplication;
 import com.jdroid.android.R;
 import com.jdroid.android.utils.AndroidUtils;
-import com.jdroid.java.http.MimeType;
 import com.jdroid.java.utils.DateUtils;
 
 /**
@@ -28,38 +27,28 @@ public abstract class AbstractAboutDialogFragment extends AbstractDialogFragment
 	}
 	
 	/**
-	 * @see com.jdroid.android.dialog.AbstractDialogFragment#onCreate(android.os.Bundle)
+	 * @see android.support.v4.app.DialogFragment#onCreateDialog(android.os.Bundle)
 	 */
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1)
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setStyle(STYLE_NO_TITLE, 0);
-	}
-	
-	/**
-	 * @see android.support.v4.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup,
-	 *      android.os.Bundle)
-	 */
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.about_dialog, container, false);
-	}
-	
-	/**
-	 * @see com.jdroid.android.dialog.AbstractDialogFragment#onViewCreated(android.view.View, android.os.Bundle)
-	 */
-	@Override
-	public void onViewCreated(View view, Bundle savedInstanceState) {
-		super.onViewCreated(view, savedInstanceState);
+	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		
-		TextView appName = findView(R.id.appName);
-		appName.setText(getAppName());
+		AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
+		View view = inflate(R.layout.about_dialog);
+		dialogBuilder.setView(view);
 		
-		TextView version = findView(R.id.version);
+		dialogBuilder.setTitle(R.string.about);
+		
+		dialogBuilder.setPositiveButton(getString(R.string.ok), null);
+		
+		TextView appName = (TextView)view.findViewById(R.id.appName);
+		appName.setText(AbstractApplication.get().getAppName());
+		
+		TextView version = (TextView)view.findViewById(R.id.version);
 		version.setText(getString(R.string.version, AndroidUtils.getVersionName()));
 		
-		TextView contactUsLabel = findView(R.id.contactUsLabel);
-		TextView contactUsEmail = findView(R.id.contactUsEmail);
+		TextView contactUsLabel = (TextView)view.findViewById(R.id.contactUsLabel);
+		TextView contactUsEmail = (TextView)view.findViewById(R.id.contactUsEmail);
 		final String contactUsEmailAddress = getContactUsEmail();
 		if (contactUsEmailAddress != null) {
 			contactUsEmail.setText(contactUsEmailAddress);
@@ -68,66 +57,13 @@ public abstract class AbstractAboutDialogFragment extends AbstractDialogFragment
 			contactUsEmail.setVisibility(View.GONE);
 		}
 		
-		TextView copyright = findView(R.id.copyright);
+		TextView copyright = (TextView)view.findViewById(R.id.copyright);
 		copyright.setText(getCopyRightLegend());
 		
-		TextView allRightsReservedLegend = findView(R.id.allRightsReservedLegend);
+		TextView allRightsReservedLegend = (TextView)view.findViewById(R.id.allRightsReservedLegend);
 		allRightsReservedLegend.setText(getAllRightsReservedLegend());
 		
-		Button termsOfService = findView(R.id.termsOfService);
-		final String termsOfUseURL = getTermsOfUseURL();
-		if (termsOfUseURL != null) {
-			termsOfService.setOnClickListener(new android.view.View.OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
-					Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(termsOfUseURL));
-					startActivity(intent);
-				}
-			});
-			termsOfService.setVisibility(View.VISIBLE);
-		}
-		
-		Button privacy = findView(R.id.privacy);
-		final String privacyURL = getPrivacyURL();
-		if (privacyURL != null) {
-			privacy.setOnClickListener(new android.view.View.OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
-					Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(privacyURL));
-					startActivity(intent);
-				}
-			});
-			privacy.setVisibility(View.VISIBLE);
-		}
-		
-		Button share = findView(R.id.share);
-		final String shareEmailSubject = getShareEmailSubject();
-		final String shareEmailContent = getShareEmailContent();
-		if ((shareEmailSubject != null) && (shareEmailContent != null)) {
-			share.setOnClickListener(new android.view.View.OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
-					Intent intent = new Intent(Intent.ACTION_SEND);
-					intent.setType(MimeType.TEXT.toString());
-					intent.putExtra(Intent.EXTRA_SUBJECT, shareEmailSubject);
-					intent.putExtra(Intent.EXTRA_TEXT, shareEmailContent);
-					startActivity(Intent.createChooser(intent, getString(R.string.shareTitle, getAppName())));
-				}
-			});
-		} else {
-			share.setVisibility(View.GONE);
-		}
-		
-		findView(R.id.ok).setOnClickListener(new android.view.View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				dismiss();
-			}
-		});
+		return dialogBuilder.create();
 	}
 	
 	protected String getAllRightsReservedLegend() {
@@ -135,27 +71,7 @@ public abstract class AbstractAboutDialogFragment extends AbstractDialogFragment
 	}
 	
 	protected String getCopyRightLegend() {
-		return getString(R.string.copyright, DateUtils.getYear(), getAppName());
-	}
-	
-	protected String getAppName() {
-		return getString(R.string.appName);
-	}
-	
-	protected String getTermsOfUseURL() {
-		return null;
-	}
-	
-	protected String getPrivacyURL() {
-		return null;
-	}
-	
-	protected String getShareEmailSubject() {
-		return null;
-	}
-	
-	protected String getShareEmailContent() {
-		return null;
+		return getString(R.string.copyright, DateUtils.getYear(), AbstractApplication.get().getAppName());
 	}
 	
 	protected String getContactUsEmail() {

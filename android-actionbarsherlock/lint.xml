@@ -36,6 +36,7 @@
     <issue id="IconNoDpi" severity="ignore" />
     <issue id="InconsistentArrays" severity="ignore" />
     <issue id="InefficientWeight" severity="ignore" />
+    <issue id="InvalidPackage" severity="ignore" />
     <issue id="LibraryCustomView" severity="ignore" />
     <issue id="ManifestOrder" severity="ignore" />
     <issue id="MergeRootFrame" severity="ignore" />
@@ -77,6 +78,7 @@
     <issue id="UnknownId" severity="ignore" />
     <issue id="UnknownIdInLayout" severity="ignore" />
     <issue id="UnlocalizedSms" severity="ignore" />
+    <issue id="UnusedIds" severity="ignore" />
     <issue id="UnusedNamespace" severity="ignore" />
     <issue id="UnusedResources" severity="ignore" />
     <issue id="UseCompoundDrawables" severity="ignore" />

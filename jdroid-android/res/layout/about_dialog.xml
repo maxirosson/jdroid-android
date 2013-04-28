@@ -1,45 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-	android:layout_height="wrap_content" android:orientation="vertical" android:minWidth="400dp">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="wrap_content"
+	android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
 
-	<LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent"
-		android:orientation="horizontal" android:background="@color/black" android:gravity="center_vertical">
-		<ImageView android:src="@drawable/ic_launcher" style="@style/wrapContentElement" android:layout_margin="5dp" />
+	<TextView android:id="@+id/appName" style="@style/normalText" android:text="@string/appName"
+		android:textStyle="bold" />
+	<TextView android:id="@+id/version" style="@style/smallText" android:text="@string/version" />
 
-		<TextView android:text="@string/about" android:layout_width="match_parent" android:layout_height="wrap_content"
-			android:textSize="@dimen/aboutDialogTitleTextSize" android:padding="2dp" android:textColor="@android:color/white"
-			android:textStyle="bold" />
-	</LinearLayout>
+	<TextView android:id="@+id/contactUsLabel" style="@style/smallText" android:text="@string/contactUs"
+		android:textStyle="bold" android:layout_marginTop="12dp" />
+	<TextView android:id="@+id/contactUsEmail" style="@style/smallText" />
 
-	<LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent"
-		android:orientation="vertical" android:background="@color/white" android:padding="10dp">
+	<TextView android:id="@+id/copyright" style="@style/smallText" android:layout_marginTop="12dp" android:text="@string/copyright" />
+	<TextView android:id="@+id/allRightsReservedLegend" style="@style/smallText" android:text="@string/allRightsReservedLegend" />
 
-		<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/appName"
-			android:text="@string/appName" android:textStyle="bold" style="@style/blackShadowText" android:shadowRadius="3"
-			android:textSize="@dimen/aboutDialogTitleTextSize" />
-		<TextView style="@style/wrapContentElement" android:id="@+id/version" android:text="@string/version"
-			android:textColor="@color/black" android:textSize="@dimen/aboutDialogTextSize" />
-
-		<TextView android:id="@+id/contactUsLabel" style="@style/wrapContentElement" android:textSize="@dimen/aboutDialogTextSize"
-			android:text="@string/contactUs" android:textColor="@color/black" android:textStyle="bold" android:layout_marginTop="10dp" />
-		<TextView android:id="@+id/contactUsEmail" style="@style/wrapContentElement" android:textSize="@dimen/aboutDialogTextSize"
-			android:textColor="@color/black" />
-
-		<TextView style="@style/wrapContentElement" android:id="@+id/copyright" android:textColor="@color/black"
-			android:textSize="@dimen/aboutDialogTextSize" android:layout_marginTop="10dp" android:text="@string/copyright" />
-		<TextView style="@style/wrapContentElement" android:id="@+id/allRightsReservedLegend" android:textColor="@color/black"
-			android:textSize="@dimen/aboutDialogTextSize" android:layout_marginTop="10dp" android:text="@string/allRightsReservedLegend" />
-	</LinearLayout>
-
-	<LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent"
-		android:orientation="horizontal" android:background="@color/gray" android:padding="3dp" android:gravity="center_horizontal">
-
-		<Button android:id="@+id/termsOfService" style="@style/defaultButton" android:text="@string/termsOfService"
-			android:visibility="gone" />
-		<Button android:id="@+id/privacy" style="@style/defaultButton" android:text="@string/privacy" android:minWidth="80dp"
-			android:visibility="gone" />
-		<Button android:id="@+id/share" style="@style/defaultButton" android:text="@string/share" android:minWidth="80dp" />
-		<Button android:id="@+id/ok" style="@style/defaultButton" android:text="@string/ok" android:minWidth="80dp" />
-
-	</LinearLayout>
 </LinearLayout>
