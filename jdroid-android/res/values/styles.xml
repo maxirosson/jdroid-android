@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android">
 
 	<!-- Texts -->
 
@@ -36,6 +36,17 @@
 		<item name="android:layout_width">match_parent</item>
 		<item name="android:gravity">center_horizontal</item>
 		<item name="android:layout_marginTop">10dp</item>
+	</style>
+
+	<style name="sectionTitle" parent="normalText">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:textColor">@android:color/white</item>
+		<item name="android:textStyle">bold</item>
+		<item name="android:background">@drawable/section_title_background</item>
+		<item name="android:paddingLeft">10dp</item>
+		<item name="android:paddingRight">10dp</item>
+		<item name="android:paddingTop">4dp</item>
+		<item name="android:paddingBottom">4dp</item>
 	</style>
 
 	<!-- Buttons -->

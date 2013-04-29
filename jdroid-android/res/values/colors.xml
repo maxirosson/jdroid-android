@@ -4,8 +4,8 @@
 	<color name="searchBarStartColor">#636263</color>
 	<color name="searchBarEndColor">#8C8C8C</color>
 
-	<color name="listSeparatorCenter">#99000000</color>
-	<color name="listSeparatorBorder">#99CCCCCC</color>
+	<color name="sectionTitleLeft">#357EC7</color>
+	<color name="sectionTitleRight">#33B5E5</color>
 
 	<color name="finishWizard">#FF669900</color>
 </resources>
