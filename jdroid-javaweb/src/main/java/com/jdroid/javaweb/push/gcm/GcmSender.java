@@ -3,6 +3,7 @@ package com.jdroid.javaweb.push.gcm;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Set;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import com.google.android.gcm.server.Constants;
@@ -11,6 +12,7 @@ import com.google.android.gcm.server.MulticastResult;
 import com.google.android.gcm.server.Result;
 import com.google.android.gcm.server.Sender;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.jdroid.java.utils.StringUtils;
 import com.jdroid.javaweb.context.AbstractApplicationContext;
 import com.jdroid.javaweb.push.Device;
@@ -37,7 +39,7 @@ public class GcmSender implements PushMessageSender {
 	@Override
 	public PushResponse send(List<Device> devices, PushMessage pushMessage) {
 		
-		List<String> registrationIds = Lists.newArrayList();
+		Set<String> registrationIds = Sets.newHashSet();
 		for (Device device : devices) {
 			registrationIds.add(device.getRegistrationId());
 		}
@@ -62,7 +64,7 @@ public class GcmSender implements PushMessageSender {
 		Message message = messageBuilder.build();
 		PushResponse pushResponse = new PushResponse();
 		try {
-			MulticastResult multicastResult = sender.send(message, registrationIds, 10);
+			MulticastResult multicastResult = sender.send(message, Lists.newArrayList(registrationIds), 10);
 			
 			// analyze the results
 			for (int i = 0; i < registrationIds.size(); i++) {
