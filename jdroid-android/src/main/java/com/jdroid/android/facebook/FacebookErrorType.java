@@ -1,14 +1,15 @@
 package com.jdroid.android.facebook;
 
-import android.util.Log;
+import org.slf4j.Logger;
 import com.facebook.android.FacebookError;
+import com.jdroid.java.utils.LoggerUtils;
 
 // TODO FB
 public enum FacebookErrorType {
 	
 	OAUTH_ERROR("OAuthException");
 	
-	private static final String TAG = FacebookErrorType.class.getSimpleName();
+	private final static Logger LOGGER = LoggerUtils.getLogger(FacebookErrorType.class);
 	private String errorType;
 	
 	private FacebookErrorType(String errorType) {
@@ -21,7 +22,7 @@ public enum FacebookErrorType {
 				return each;
 			}
 		}
-		Log.w(TAG, "The Facebook error type [" + e.getErrorType() + "] is unknown");
+		LOGGER.warn("The Facebook error type [" + e.getErrorType() + "] is unknown");
 		return null;
 	}
 	

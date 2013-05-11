@@ -1,8 +1,9 @@
 package com.jdroid.android.usecase;
 
 import java.util.List;
-import android.util.Log;
+import org.slf4j.Logger;
 import com.jdroid.java.collections.Lists;
+import com.jdroid.java.utils.LoggerUtils;
 
 /**
  * 
@@ -10,9 +11,9 @@ import com.jdroid.java.collections.Lists;
  * 
  * @author Maxi Rosson
  */
-public abstract class AbstractUseCase<T> implements DefaultUseCase<T> {
+public abstract class AbstractUseCase<T> implements UseCase<T> {
 	
-	private static final String TAG = AbstractUseCase.class.getSimpleName();
+	private final static Logger LOGGER = LoggerUtils.getLogger(AbstractUseCase.class);
 	
 	public enum UseCaseStatus {
 		NOT_INVOKED,
@@ -33,7 +34,7 @@ public abstract class AbstractUseCase<T> implements DefaultUseCase<T> {
 	@Override
 	public final void run() {
 		
-		Log.d(TAG, "Executing " + getClass().getSimpleName());
+		LOGGER.debug("Executing " + getClass().getSimpleName());
 		markAsInProgress();
 		for (T listener : listeners) {
 			notifyUseCaseStart(listener);

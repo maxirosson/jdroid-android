@@ -1,12 +1,13 @@
 package com.jdroid.android.billing;
 
+import org.slf4j.Logger;
 import roboguice.service.RoboService;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.IBinder;
-import android.util.Log;
 import com.google.inject.Inject;
 import com.jdroid.android.utils.AndroidUtils;
+import com.jdroid.java.utils.LoggerUtils;
 
 /**
  * This class sends messages to the Google Play app on behalf of the application by connecting (binding) to the
@@ -18,7 +19,7 @@ import com.jdroid.android.utils.AndroidUtils;
 @SuppressLint("Registered")
 public class BillingService extends RoboService {
 	
-	private static final String TAG = BillingService.class.getSimpleName();
+	private final static Logger LOGGER = LoggerUtils.getLogger(BillingService.class);
 	
 	// Intent actions that we send from the BillingReceiver to the BillingService.
 	public static final String ACTION_GET_PURCHASE_INFORMATION = AndroidUtils.getPackageName()
@@ -57,7 +58,7 @@ public class BillingService extends RoboService {
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		
 		String action = intent.getAction();
-		Log.i(TAG, "Handling action: " + action);
+		LOGGER.debug("Handling action: " + action);
 		if (ACTION_GET_PURCHASE_INFORMATION.equals(action)) {
 			String notificationId = intent.getStringExtra(NOTIFICATION_ID);
 			billingManager.getPurchaseInformation(new String[] { notificationId });
@@ -73,7 +74,7 @@ public class BillingService extends RoboService {
 			billingManager.checkResponseCode(requestId, responseCode);
 			stopSelf();
 		} else {
-			Log.w(TAG, "Unexpected action: " + action);
+			LOGGER.warn("Unexpected action: " + action);
 		}
 		
 		stopSelf();

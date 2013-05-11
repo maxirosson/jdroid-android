@@ -13,19 +13,19 @@ public class AndroidHttpClientFactory implements HttpClientFactory {
 	private final static String DEFAULT_USER_AGENT = "android";
 	
 	/**
-	 * @see com.jdroid.java.http.HttpClientFactory#createDefaultHttpClient()
+	 * @see com.jdroid.java.http.HttpClientFactory#createHttpClient()
 	 */
 	@Override
-	public HttpClient createDefaultHttpClient() {
+	public HttpClient createHttpClient() {
 		return AndroidHttpClient.newInstance(DEFAULT_USER_AGENT);
 	}
 	
 	/**
-	 * @see com.jdroid.java.http.HttpClientFactory#createDefaultHttpClient(java.lang.Boolean, java.lang.Integer,
+	 * @see com.jdroid.java.http.HttpClientFactory#createHttpClient(java.lang.Boolean, java.lang.Integer,
 	 *      java.lang.String)
 	 */
 	@Override
-	public HttpClient createDefaultHttpClient(Boolean ssl, Integer timeout, String userAgent) {
+	public HttpClient createHttpClient(Boolean ssl, Integer timeout, String userAgent) {
 		return AndroidHttpClient.newInstance(userAgent);
 	}
 	

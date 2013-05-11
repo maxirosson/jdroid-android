@@ -3,6 +3,7 @@ package com.jdroid.android.billing;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import org.slf4j.Logger;
 import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
@@ -11,11 +12,11 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
-import android.util.Log;
 import com.android.vending.billing.IMarketBillingService;
 import com.jdroid.android.AbstractApplication;
 import com.jdroid.android.utils.AndroidUtils;
 import com.jdroid.java.collections.Maps;
+import com.jdroid.java.utils.LoggerUtils;
 
 /**
  * 
@@ -23,7 +24,7 @@ import com.jdroid.java.collections.Maps;
  */
 public class BillingManagerImpl implements BillingManager, ServiceConnection {
 	
-	private static final String TAG = BillingManagerImpl.class.getSimpleName();
+	private final static Logger LOGGER = LoggerUtils.getLogger(BillingManagerImpl.class);
 	
 	// This is the action we use to bind to the MarketBillingService.
 	public static final String MARKET_BILLING_SERVICE_ACTION = "com.android.vending.billing.MarketBillingService.BIND";
@@ -129,7 +130,7 @@ public class BillingManagerImpl implements BillingManager, ServiceConnection {
 			if (service != null) {
 				try {
 					requestId = doExecute();
-					Log.d(TAG, "BillingRequest id: " + requestId);
+					LOGGER.debug("BillingRequest id: " + requestId);
 					if (requestId >= 0) {
 						sentRequests.put(requestId, this);
 					}
@@ -148,7 +149,7 @@ public class BillingManagerImpl implements BillingManager, ServiceConnection {
 		 * @param e the exception
 		 */
 		protected void onRemoteException(RemoteException e) {
-			Log.w(TAG, "Remote billing service crashed");
+			LOGGER.warn("Remote billing service crashed");
 			service = null;
 		}
 		
@@ -171,7 +172,7 @@ public class BillingManagerImpl implements BillingManager, ServiceConnection {
 		
 		protected void logResponseCode(String request, Bundle response) {
 			BillingResponseCode responseCode = BillingResponseCode.valueOf(response);
-			Log.i(TAG, request + " response code: " + responseCode);
+			LOGGER.debug(request + " response code: " + responseCode);
 		}
 	}
 	
@@ -188,12 +189,12 @@ public class BillingManagerImpl implements BillingManager, ServiceConnection {
 		@Override
 		protected long doExecute() throws RemoteException {
 			
-			Log.d(TAG, "Checking if billing is supported");
+			LOGGER.debug("Checking if billing is supported");
 			
 			Bundle requestBundle = makeRequestBundle(CHECK_BILLING_SUPPORTED);
 			Bundle responseBundle = service.sendBillingRequest(requestBundle);
 			BillingResponseCode responseCode = BillingResponseCode.valueOf(responseBundle);
-			Log.i(TAG, "CheckBillingSupported response code: " + responseCode);
+			LOGGER.debug("CheckBillingSupported response code: " + responseCode);
 			BillingResponseHandler.checkBillingSupportedResponse(responseCode);
 			return BILLING_RESPONSE_INVALID_REQUEST_ID;
 		}
@@ -227,7 +228,7 @@ public class BillingManagerImpl implements BillingManager, ServiceConnection {
 		@Override
 		protected long doExecute() throws RemoteException {
 			
-			Log.d(TAG, "Requesting purchase for product id: " + purchasable.getProductId());
+			LOGGER.debug("Requesting purchase for product id: " + purchasable.getProductId());
 			
 			Bundle request = makeRequestBundle(REQUEST_PURCHASE);
 			request.putString(BILLING_REQUEST_ITEM_ID, purchasable.getProductId());
@@ -238,7 +239,7 @@ public class BillingManagerImpl implements BillingManager, ServiceConnection {
 			Bundle response = service.sendBillingRequest(request);
 			PendingIntent pendingIntent = response.getParcelable(BILLING_RESPONSE_PURCHASE_INTENT);
 			if (pendingIntent == null) {
-				Log.e(TAG, "Error with requestPurchase for product id: " + purchasable.getProductId());
+				LOGGER.error("Error with requestPurchase for product id: " + purchasable.getProductId());
 				return BILLING_RESPONSE_INVALID_REQUEST_ID;
 			}
 			
@@ -269,7 +270,7 @@ public class BillingManagerImpl implements BillingManager, ServiceConnection {
 		@Override
 		protected long doExecute() throws RemoteException {
 			
-			Log.d(TAG, "Confirming notifications for notification ids: " + notifyIds);
+			LOGGER.debug("Confirming notifications for notification ids: " + notifyIds);
 			
 			Bundle request = makeRequestBundle(CONFIRM_NOTIFICATIONS);
 			request.putStringArray(BILLING_REQUEST_NOTIFY_IDS, notifyIds);
@@ -300,7 +301,7 @@ public class BillingManagerImpl implements BillingManager, ServiceConnection {
 		@Override
 		protected long doExecute() throws RemoteException {
 			
-			Log.d(TAG, "Getting purchase information for notification ids: " + notifyIds);
+			LOGGER.debug("Getting purchase information for notification ids: " + notifyIds);
 			
 			nonce = Security.generateNonce();
 			
@@ -333,7 +334,7 @@ public class BillingManagerImpl implements BillingManager, ServiceConnection {
 		@Override
 		protected long doExecute() throws RemoteException {
 			
-			Log.d(TAG, "Executing restore transactions");
+			LOGGER.debug("Executing restore transactions");
 			
 			nonce = Security.generateNonce();
 			
@@ -364,7 +365,7 @@ public class BillingManagerImpl implements BillingManager, ServiceConnection {
 	public void checkResponseCode(long requestId, BillingResponseCode responseCode) {
 		BillingRequest request = sentRequests.get(requestId);
 		if (request != null) {
-			Log.d(TAG, request.getClass().getSimpleName() + " response code: " + responseCode);
+			LOGGER.debug(request.getClass().getSimpleName() + " response code: " + responseCode);
 			request.responseCodeReceived(responseCode);
 		}
 		sentRequests.remove(requestId);
@@ -377,20 +378,20 @@ public class BillingManagerImpl implements BillingManager, ServiceConnection {
 	 */
 	private boolean bindToMarketBillingService() {
 		try {
-			Log.i(TAG, "Binding to Market billing service");
+			LOGGER.debug("Binding to Market billing service");
 			boolean bindResult = false;
 			if (context != null) {
 				bindResult = context.bindService(new Intent(MARKET_BILLING_SERVICE_ACTION), this,
 					Context.BIND_AUTO_CREATE);
 			}
 			if (bindResult) {
-				Log.i(TAG, "Market billing service bind successful.");
+				LOGGER.debug("Market billing service bind successful.");
 				return true;
 			} else {
-				Log.e(TAG, "Could not bind to Market billing service.");
+				LOGGER.error("Could not bind to Market billing service.");
 			}
 		} catch (SecurityException e) {
-			Log.e(TAG, "Security exception: " + e);
+			LOGGER.error("Security exception: " + e);
 		}
 		return false;
 	}
@@ -454,7 +455,7 @@ public class BillingManagerImpl implements BillingManager, ServiceConnection {
 	 */
 	@Override
 	public void onServiceConnected(ComponentName name, IBinder binder) {
-		Log.d(TAG, "MarketBillingService connected");
+		LOGGER.debug("MarketBillingService connected");
 		service = IMarketBillingService.Stub.asInterface(binder);
 		runPendingRequests();
 	}
@@ -484,7 +485,7 @@ public class BillingManagerImpl implements BillingManager, ServiceConnection {
 	 */
 	@Override
 	public void onServiceDisconnected(ComponentName name) {
-		Log.w(TAG, "Billing service disconnected");
+		LOGGER.warn("Billing service disconnected");
 		service = null;
 	}
 	

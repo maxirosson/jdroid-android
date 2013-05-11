@@ -1,9 +1,10 @@
 package com.jdroid.android.utils;
 
+import org.slf4j.Logger;
 import android.content.Context;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
-import android.util.Log;
+import com.jdroid.java.utils.LoggerUtils;
 
 /**
  * Manager that control the acquire and release of the different kinds of {@link WakeLock}s
@@ -12,7 +13,7 @@ import android.util.Log;
  */
 public class WakeLockManager {
 	
-	private final static String TAG = WakeLockManager.class.getSimpleName();
+	private final static Logger LOGGER = LoggerUtils.getLogger(WakeLockManager.class);
 	
 	private static PowerManager.WakeLock screenDimWakeLock;
 	private static PowerManager.WakeLock partialWakeLock;
@@ -54,7 +55,7 @@ public class WakeLockManager {
 	
 	private static void release(PowerManager.WakeLock wakeLock) {
 		if (wakeLock != null) {
-			Log.v(TAG, "Releasing wakelock");
+			LOGGER.debug("Releasing wakelock");
 			wakeLock.release();
 		}
 	}
@@ -62,9 +63,9 @@ public class WakeLockManager {
 	private static PowerManager.WakeLock aquire(Context context, PowerManager.WakeLock wakeLock, int flags) {
 		if (wakeLock == null) {
 			PowerManager pm = (PowerManager)context.getSystemService(Context.POWER_SERVICE);
-			wakeLock = pm.newWakeLock(flags, TAG);
+			wakeLock = pm.newWakeLock(flags, WakeLockManager.class.getSimpleName());
 		}
-		Log.v(TAG, "Acquiring wakelock");
+		LOGGER.debug("Acquiring wakelock");
 		wakeLock.acquire();
 		return wakeLock;
 	}

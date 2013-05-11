@@ -26,7 +26,7 @@ import com.jdroid.android.search.SearchResult;
 import com.jdroid.android.search.SearchResult.PaginationListener;
 import com.jdroid.android.search.SearchResult.SortingListener;
 import com.jdroid.android.usecase.DefaultAbstractUseCase;
-import com.jdroid.android.usecase.DefaultUseCase;
+import com.jdroid.android.usecase.UseCase;
 import com.jdroid.android.usecase.listener.DefaultUseCaseListener;
 import com.jdroid.android.view.PaginationFooter;
 import com.jdroid.java.exception.AbstractException;
@@ -473,19 +473,19 @@ public abstract class AbstractListActivity<T> extends SherlockListActivity imple
 	}
 	
 	/**
-	 * @see com.jdroid.android.fragment.FragmentIf#executeUseCase(com.jdroid.android.usecase.DefaultUseCase)
+	 * @see com.jdroid.android.fragment.FragmentIf#executeUseCase(com.jdroid.android.usecase.UseCase)
 	 */
 	@Override
-	public void executeUseCase(DefaultUseCase<?> useCase) {
+	public void executeUseCase(UseCase<?> useCase) {
 		baseActivity.executeUseCase(useCase);
 	}
 	
 	/**
-	 * @see com.jdroid.android.fragment.FragmentIf#executeUseCase(com.jdroid.android.usecase.DefaultUseCase,
+	 * @see com.jdroid.android.fragment.FragmentIf#executeUseCase(com.jdroid.android.usecase.UseCase,
 	 *      java.lang.Long)
 	 */
 	@Override
-	public void executeUseCase(DefaultUseCase<?> useCase, Long delaySeconds) {
+	public void executeUseCase(UseCase<?> useCase, Long delaySeconds) {
 		baseActivity.executeUseCase(useCase, delaySeconds);
 	}
 	

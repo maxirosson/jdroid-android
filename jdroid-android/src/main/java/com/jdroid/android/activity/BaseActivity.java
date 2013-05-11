@@ -1,12 +1,12 @@
 package com.jdroid.android.activity;
 
+import org.slf4j.Logger;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,10 +30,11 @@ import com.jdroid.android.intent.ClearTaskIntent;
 import com.jdroid.android.loading.DefaultLoadingDialogBuilder;
 import com.jdroid.android.loading.LoadingDialogBuilder;
 import com.jdroid.android.usecase.DefaultAbstractUseCase;
-import com.jdroid.android.usecase.DefaultUseCase;
+import com.jdroid.android.usecase.UseCase;
 import com.jdroid.android.usecase.listener.DefaultUseCaseListener;
 import com.jdroid.android.utils.AndroidUtils;
 import com.jdroid.java.utils.ExecutorUtils;
+import com.jdroid.java.utils.LoggerUtils;
 
 /**
  * 
@@ -41,7 +42,7 @@ import com.jdroid.java.utils.ExecutorUtils;
  */
 public class BaseActivity implements ActivityIf {
 	
-	private final static String TAG = BaseActivity.class.getSimpleName();
+	private final static Logger LOGGER = LoggerUtils.getLogger(BaseActivity.class);
 	
 	private Activity activity;
 	protected Dialog loadingDialog;
@@ -106,7 +107,7 @@ public class BaseActivity implements ActivityIf {
 	}
 	
 	public void onCreate(Bundle savedInstanceState) {
-		Log.v(TAG, "Executing onCreate on " + activity);
+		LOGGER.trace("Executing onCreate on " + activity);
 		AbstractApplication.get().setCurrentActivity(activity);
 		
 		AbstractApplication.get().initExceptionHandlers();
@@ -152,38 +153,38 @@ public class BaseActivity implements ActivityIf {
 	}
 	
 	public void onSaveInstanceState(Bundle outState) {
-		Log.v(TAG, "Executing onSaveInstanceState on " + activity);
+		LOGGER.trace("Executing onSaveInstanceState on " + activity);
 		dismissLoading();
 	}
 	
 	public void onRestoreInstanceState(Bundle savedInstanceState) {
-		Log.v(TAG, "Executing onRestoreInstanceState on " + activity);
+		LOGGER.trace("Executing onRestoreInstanceState on " + activity);
 	}
 	
 	public void onStart() {
-		Log.v(TAG, "Executing onStart on " + activity);
+		LOGGER.trace("Executing onStart on " + activity);
 		AbstractApplication.get().setCurrentActivity(activity);
 		AnalyticsSender.get().onActivityStart(activity);
 	}
 	
 	public void onResume() {
-		Log.v(TAG, "Executing onResume on " + activity);
+		LOGGER.trace("Executing onResume on " + activity);
 		AbstractApplication.get().setInBackground(false);
 		AbstractApplication.get().setCurrentActivity(activity);
 	}
 	
 	public void onPause() {
-		Log.v(TAG, "Executing onPause on " + activity);
+		LOGGER.trace("Executing onPause on " + activity);
 		AbstractApplication.get().setInBackground(true);
 	}
 	
 	public void onStop() {
-		Log.v(TAG, "Executing onStop on " + activity);
+		LOGGER.trace("Executing onStop on " + activity);
 		AnalyticsSender.get().onActivityStop(activity);
 	}
 	
 	public void onDestroy() {
-		Log.v(TAG, "Executing onDestroy on " + activity);
+		LOGGER.trace("Executing onDestroy on " + activity);
 		if (clearTaskBroadcastReceiver != null) {
 			activity.unregisterReceiver(clearTaskBroadcastReceiver);
 		}
@@ -436,19 +437,18 @@ public class BaseActivity implements ActivityIf {
 	}
 	
 	/**
-	 * @see com.jdroid.android.fragment.FragmentIf#executeUseCase(com.jdroid.android.usecase.DefaultUseCase)
+	 * @see com.jdroid.android.fragment.FragmentIf#executeUseCase(com.jdroid.android.usecase.UseCase)
 	 */
 	@Override
-	public void executeUseCase(DefaultUseCase<?> useCase) {
+	public void executeUseCase(UseCase<?> useCase) {
 		ExecutorUtils.execute(useCase);
 	}
 	
 	/**
-	 * @see com.jdroid.android.fragment.FragmentIf#executeUseCase(com.jdroid.android.usecase.DefaultUseCase,
-	 *      java.lang.Long)
+	 * @see com.jdroid.android.fragment.FragmentIf#executeUseCase(com.jdroid.android.usecase.UseCase, java.lang.Long)
 	 */
 	@Override
-	public void executeUseCase(DefaultUseCase<?> useCase, Long delaySeconds) {
+	public void executeUseCase(UseCase<?> useCase, Long delaySeconds) {
 		ExecutorUtils.schedule(useCase, delaySeconds);
 	}
 	

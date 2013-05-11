@@ -1,10 +1,11 @@
 package com.jdroid.android.gcm;
 
+import org.slf4j.Logger;
 import android.app.IntentService;
 import android.content.Context;
-import android.util.Log;
 import com.google.android.gcm.GCMBaseIntentService;
 import com.jdroid.android.AbstractApplication;
+import com.jdroid.java.utils.LoggerUtils;
 
 /**
  * Base {@link IntentService} to handle Google Cloud Messaging (GCM) messages.
@@ -20,6 +21,8 @@ import com.jdroid.android.AbstractApplication;
  * </pre>
  */
 public abstract class AbstractGcmService extends GCMBaseIntentService {
+	
+	private final static Logger LOGGER = LoggerUtils.getLogger(AbstractGcmService.class);
 	
 	// Error codes
 	private static final String ERR_ACCOUNT_MISSING = "ACCOUNT_MISSING";
@@ -38,19 +41,19 @@ public abstract class AbstractGcmService extends GCMBaseIntentService {
 	@Override
 	protected void onError(Context context, String errorId) {
 		if (ERR_ACCOUNT_MISSING.equals(errorId)) {
-			Log.w(TAG, "There is no Google account on the device.");
+			LOGGER.warn("There is no Google account on the device.");
 			onMissingGoogleAccountError(context);
 		} else if (ERR_AUTHENTICATION_FAILED.equals(errorId)) {
-			Log.w(TAG, "Authentication failed.");
+			LOGGER.warn("Authentication failed.");
 			onAuthenticationFailedError(context);
 		} else if (ERR_INVALID_PARAMETERS.equals(errorId)) {
-			Log.w(TAG, "The request sent by this device does not contain the expected parameters.");
+			LOGGER.warn("The request sent by this device does not contain the expected parameters.");
 			onInvalidParametersError(context);
 		} else if (ERR_INVALID_SENDER.equals(errorId)) {
-			Log.w(TAG, "The sender account is not recognized.");
+			LOGGER.warn("The sender account is not recognized.");
 			onInvalidSenderError(context);
 		} else if (ERR_PHONE_REGISTRATION_ERROR.equals(errorId)) {
-			Log.w(TAG, "This phone doesn't currently support GCM.");
+			LOGGER.warn("This phone doesn't currently support GCM.");
 			onGcmNotSupportedError(context);
 		}
 	}

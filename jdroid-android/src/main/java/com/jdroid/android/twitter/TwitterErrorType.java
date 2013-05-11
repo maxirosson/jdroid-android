@@ -1,7 +1,8 @@
 package com.jdroid.android.twitter;
 
+import org.slf4j.Logger;
 import twitter4j.TwitterException;
-import android.util.Log;
+import com.jdroid.java.utils.LoggerUtils;
 
 /**
  * 
@@ -11,7 +12,7 @@ public enum TwitterErrorType {
 	
 	OAUTH_ERROR(401);
 	
-	private static final String TAG = TwitterErrorType.class.getSimpleName();
+	private final static Logger LOGGER = LoggerUtils.getLogger(TwitterErrorType.class);
 	
 	private Integer errorCode;
 	
@@ -25,7 +26,7 @@ public enum TwitterErrorType {
 				return each;
 			}
 		}
-		Log.w(TAG, "The Twitter status code [" + twitterException.getStatusCode() + "] is unknown");
+		LOGGER.warn("The Twitter status code [" + twitterException.getStatusCode() + "] is unknown");
 		return null;
 	}
 	

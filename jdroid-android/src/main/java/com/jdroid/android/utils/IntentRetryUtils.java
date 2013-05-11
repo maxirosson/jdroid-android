@@ -1,11 +1,12 @@
 package com.jdroid.android.utils;
 
+import org.slf4j.Logger;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.SystemClock;
-import android.util.Log;
 import com.jdroid.android.AbstractApplication;
+import com.jdroid.java.utils.LoggerUtils;
 
 /**
  * 
@@ -13,7 +14,7 @@ import com.jdroid.android.AbstractApplication;
  */
 public class IntentRetryUtils {
 	
-	private static final String TAG = IntentRetryUtils.class.getSimpleName();
+	private final static Logger LOGGER = LoggerUtils.getLogger(IntentRetryUtils.class);
 	
 	// Used internally to count retries.
 	private static final String EXTRA_CURRENT_RETRY_COUNT = "currentRetryCount";
@@ -45,7 +46,7 @@ public class IntentRetryUtils {
 			PendingIntent.FLAG_CANCEL_CURRENT);
 		if (count >= maximumRetryCount) {
 			// Discard retry
-			Log.w(TAG, "Operation reached the maximum retry count and will be discarded.");
+			LOGGER.warn("Operation reached the maximum retry count and will be discarded.");
 			return false;
 		}
 		// Retry using an exponential backoff

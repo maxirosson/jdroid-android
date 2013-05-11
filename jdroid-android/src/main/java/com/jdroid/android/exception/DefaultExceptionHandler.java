@@ -1,9 +1,9 @@
 package com.jdroid.android.exception;
 
 import java.lang.Thread.UncaughtExceptionHandler;
+import org.slf4j.Logger;
 import android.app.Activity;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import com.crittercism.app.Crittercism;
 import com.jdroid.android.AbstractApplication;
 import com.jdroid.android.R;
@@ -15,6 +15,7 @@ import com.jdroid.java.exception.AbstractException;
 import com.jdroid.java.exception.ApplicationException;
 import com.jdroid.java.exception.BusinessException;
 import com.jdroid.java.exception.ConnectionException;
+import com.jdroid.java.utils.LoggerUtils;
 
 /**
  * 
@@ -22,7 +23,8 @@ import com.jdroid.java.exception.ConnectionException;
  */
 public class DefaultExceptionHandler implements ExceptionHandler {
 	
-	private static final String TAG = DefaultExceptionHandler.class.getSimpleName();
+	private final static Logger LOGGER = LoggerUtils.getLogger(DefaultExceptionHandler.class);
+	
 	private static final String MAIN_THREAD_NAME = "main";
 	
 	private static final String GO_BACK_KEY = "goBack";
@@ -91,7 +93,7 @@ public class DefaultExceptionHandler implements ExceptionHandler {
 	 */
 	@Override
 	public void handleException(Thread thread, ConnectionException connectionException) {
-		Log.w(TAG, "Connection error", connectionException);
+		LOGGER.warn("Connection error", connectionException);
 		displayError(LocalizationUtils.getString(R.string.connectionErrorTitle),
 			LocalizationUtils.getString(R.string.connectionError), connectionException);
 	}
@@ -103,7 +105,7 @@ public class DefaultExceptionHandler implements ExceptionHandler {
 	@Override
 	public void handleException(Thread thread, ApplicationException applicationException) {
 		String message = LocalizationUtils.getMessageFor(applicationException.getErrorCode());
-		Log.e(TAG, message, applicationException);
+		LOGGER.error(message, applicationException);
 		displayError(
 			LocalizationUtils.getString(R.string.exceptionReportDialogTitle, AndroidUtils.getApplicationName()),
 			message, applicationException);
@@ -114,7 +116,7 @@ public class DefaultExceptionHandler implements ExceptionHandler {
 	 */
 	@Override
 	public void handleException(Thread thread, Throwable throwable) {
-		Log.e(TAG, "Unexepected error", throwable);
+		LOGGER.error("Unexepected error", throwable);
 		DefaultApplicationContext appContext = AbstractApplication.get().getAndroidApplicationContext();
 		if (appContext.isCrittercismEnabled()) {
 			if (appContext.isCrittercismPremium()) {
@@ -133,9 +135,10 @@ public class DefaultExceptionHandler implements ExceptionHandler {
 	 */
 	@Override
 	public void logHandledException(Throwable throwable) {
-		Log.e(TAG, "Handled Exception", throwable);
+		LOGGER.error("Handled Exception", throwable);
 		DefaultApplicationContext appContext = AbstractApplication.get().getAndroidApplicationContext();
-		if (appContext.isCrittercismEnabled() && appContext.isCrittercismPremium()) {
+		if (appContext.isCrittercismEnabled() && appContext.isCrittercismPremium()
+				&& !(throwable instanceof ConnectionException)) {
 			Crittercism.logHandledException(throwable);
 		}
 	}

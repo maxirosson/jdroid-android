@@ -1,12 +1,13 @@
 package com.jdroid.android.facebook;
 
+import org.slf4j.Logger;
 import android.os.Bundle;
-import android.util.Log;
 import com.facebook.android.DialogError;
 import com.facebook.android.Facebook.DialogListener;
 import com.facebook.android.FacebookError;
 import com.jdroid.android.AbstractApplication;
 import com.jdroid.android.exception.CommonErrorCode;
+import com.jdroid.java.utils.LoggerUtils;
 
 /**
  * TODO FB
@@ -15,14 +16,14 @@ import com.jdroid.android.exception.CommonErrorCode;
  */
 public class DefaultFacebookDialogListener implements DialogListener {
 	
-	private static final String TAG = DefaultFacebookDialogListener.class.getSimpleName();
+	private final static Logger LOGGER = LoggerUtils.getLogger(DefaultFacebookDialogListener.class);
 	
 	/**
 	 * @see com.facebook.android.Facebook.DialogListener#onComplete(android.os.Bundle)
 	 */
 	@Override
 	public void onComplete(Bundle values) {
-		Log.d(TAG, "Facebook connection completed.");
+		LOGGER.debug("Facebook connection completed.");
 	}
 	
 	/**
@@ -30,7 +31,7 @@ public class DefaultFacebookDialogListener implements DialogListener {
 	 */
 	@Override
 	public void onFacebookError(FacebookError e) {
-		Log.d(TAG, "Facebook error while connecting.", e);
+		LOGGER.debug("Facebook error while connecting.", e);
 		AbstractApplication.get().getExceptionHandler().handleException(Thread.currentThread(),
 			CommonErrorCode.FACEBOOK_ERROR.newApplicationException(e));
 	}
@@ -40,7 +41,7 @@ public class DefaultFacebookDialogListener implements DialogListener {
 	 */
 	@Override
 	public void onError(DialogError e) {
-		Log.d(TAG, "Error while connecting.", e);
+		LOGGER.debug("Error while connecting.", e);
 		AbstractApplication.get().getExceptionHandler().handleException(Thread.currentThread(),
 			CommonErrorCode.FACEBOOK_ERROR.newApplicationException(e));
 	}
@@ -50,7 +51,7 @@ public class DefaultFacebookDialogListener implements DialogListener {
 	 */
 	@Override
 	public void onCancel() {
-		Log.d(TAG, "Connection to Facebook has been canceled.");
+		LOGGER.debug("Connection to Facebook has been canceled.");
 	}
 	
 }

@@ -1,5 +1,6 @@
 package com.jdroid.android.twitter;
 
+import org.slf4j.Logger;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
@@ -8,12 +9,12 @@ import twitter4j.auth.RequestToken;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import com.jdroid.android.R;
 import com.jdroid.android.activity.AbstractActivity;
 import com.jdroid.android.utils.AndroidUtils;
 import com.jdroid.android.utils.ToastUtils;
 import com.jdroid.java.utils.ExecutorUtils;
+import com.jdroid.java.utils.LoggerUtils;
 
 /**
  * TwitterBridgeActivity Activity
@@ -21,7 +22,7 @@ import com.jdroid.java.utils.ExecutorUtils;
  */
 public class TwitterBridgeActivity extends AbstractActivity {
 	
-	private static final String TAG = TwitterBridgeActivity.class.getSimpleName();
+	private final static Logger LOGGER = LoggerUtils.getLogger(TwitterBridgeActivity.class);
 	
 	public static final String OAUTH_TOKEN = "FkvSasdasdA";
 	public static final String SECRET_KEY = "clCvzVRK0bKALKmnN38NasdasdslgYpg0yndTb78HndwmG2K7A";
@@ -61,9 +62,9 @@ public class TwitterBridgeActivity extends AbstractActivity {
 					
 				} catch (TwitterException te) {
 					if (TwitterErrorType.find(te).equals(TwitterErrorType.OAUTH_ERROR)) {
-						Log.e(TAG, "Unable to get the Twitter access token.", te);
+						LOGGER.error("Unable to get the Twitter access token.", te);
 					} else {
-						Log.e(TAG, "Error connecting with Twitter.", te);
+						LOGGER.error("Error connecting with Twitter.", te);
 					}
 					finish();
 					ToastUtils.showToastOnUIThread(R.string.twitterError);
@@ -88,7 +89,7 @@ public class TwitterBridgeActivity extends AbstractActivity {
 			}
 			
 		} catch (TwitterException te) {
-			Log.e(TAG, "Error connecting with Twitter.", te);
+			LOGGER.error("Error connecting with Twitter.", te);
 			ToastUtils.showToastOnUIThread(R.string.twitterError);
 			finish();
 		}

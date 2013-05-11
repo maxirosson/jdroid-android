@@ -5,12 +5,13 @@ import java.util.Map;
 import java.util.Map.Entry;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.impl.cookie.BasicClientCookie;
+import org.slf4j.Logger;
 import android.content.SharedPreferences.Editor;
-import android.util.Log;
 import com.jdroid.android.utils.SharedPreferencesUtils;
 import com.jdroid.java.collections.Lists;
 import com.jdroid.java.collections.Maps;
 import com.jdroid.java.utils.DateUtils;
+import com.jdroid.java.utils.LoggerUtils;
 
 /**
  * {@link CookieRepository} implementation.
@@ -19,7 +20,7 @@ import com.jdroid.java.utils.DateUtils;
  */
 public class CookieRepositoryImpl implements CookieRepository {
 	
-	private static final String TAG = CookieRepositoryImpl.class.getSimpleName();
+	private final static Logger LOGGER = LoggerUtils.getLogger(CookieRepositoryImpl.class);
 	
 	private static final String NAME = ".cookie.name";
 	private static final String VALUE = ".cookie.value";
@@ -34,7 +35,7 @@ public class CookieRepositoryImpl implements CookieRepository {
 	@Override
 	public void add(Cookie cookie) {
 		String cookieName = cookie.getName();
-		Log.d(TAG, "Saving cookie " + cookieName + "[" + cookie.getValue() + "]");
+		LOGGER.debug("Saving cookie " + cookieName + "[" + cookie.getValue() + "]");
 		
 		Editor editor = SharedPreferencesUtils.getEditor();
 		editor.putString(generateCookieNameKey(cookieName), cookieName);
@@ -87,7 +88,7 @@ public class CookieRepositoryImpl implements CookieRepository {
 	 * @param cookieName The {@link Cookie}'s name.
 	 */
 	private void remove(String cookieName) {
-		Log.d(TAG, "Removing cookie " + cookieName);
+		LOGGER.debug("Removing cookie " + cookieName);
 		
 		Editor editor = SharedPreferencesUtils.getEditor();
 		editor.remove(generateCookieNameKey(cookieName));
@@ -122,7 +123,7 @@ public class CookieRepositoryImpl implements CookieRepository {
 			cookiesMap.put(cookieName, cookie);
 		}
 		
-		Log.d(TAG, "Retrieving cookie " + cookieName + "[" + cookie.getValue() + "]");
+		LOGGER.debug("Retrieving cookie " + cookieName + "[" + cookie.getValue() + "]");
 		return cookie;
 	}
 	

@@ -11,11 +11,10 @@ import com.jdroid.android.utils.WakeLockManager;
  */
 public abstract class WorkerService extends RoboIntentService {
 	
-	private static final String TAG = WorkerService.class.getSimpleName();
 	private static final String ENABLE_PARTIAL_WAKE_LOCK = "enablePartialWakeLock";
 	
 	public WorkerService() {
-		super(TAG);
+		super(WorkerService.class.getSimpleName());
 	}
 	
 	/**

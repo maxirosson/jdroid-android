@@ -1,7 +1,8 @@
 package com.jdroid.android.billing;
 
-import android.util.Log;
+import org.slf4j.Logger;
 import com.jdroid.android.AbstractApplication;
+import com.jdroid.java.utils.LoggerUtils;
 import com.jdroid.java.utils.PropertiesUtils;
 
 /**
@@ -10,7 +11,7 @@ import com.jdroid.java.utils.PropertiesUtils;
  */
 public class BillingContext implements BillingListener {
 	
-	private static final String TAG = BillingContext.class.getSimpleName();
+	private final static Logger LOGGER = LoggerUtils.getLogger(BillingContext.class);
 	
 	private static final String GOOGLE_PLAY_PUBLIC_KEY = PropertiesUtils.getStringProperty("google.play.public.key");
 	
@@ -96,7 +97,7 @@ public class BillingContext implements BillingListener {
 	 */
 	@Override
 	public void onGooglePlayConnectionError() {
-		Log.e(TAG, "There was an error connecting with the Google Play app");
+		LOGGER.error("There was an error connecting with the Google Play app");
 	}
 	
 	public String getGooglePlayPublicKey() {

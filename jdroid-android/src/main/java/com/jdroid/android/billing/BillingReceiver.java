@@ -1,9 +1,10 @@
 package com.jdroid.android.billing;
 
+import org.slf4j.Logger;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
+import com.jdroid.java.utils.LoggerUtils;
 
 /**
  * This class implements the broadcast receiver for in-app billing. All asynchronous messages from the Google Play app
@@ -14,7 +15,7 @@ import android.util.Log;
  */
 public class BillingReceiver extends BroadcastReceiver {
 	
-	private static final String TAG = BillingReceiver.class.getSimpleName();
+	private final static Logger LOGGER = LoggerUtils.getLogger(BillingReceiver.class);
 	
 	// Intent actions that we receive from the Google Play app
 	public static final String ACTION_NOTIFY = "com.android.vending.billing.IN_APP_NOTIFY";
@@ -42,7 +43,7 @@ public class BillingReceiver extends BroadcastReceiver {
 			long requestId = intent.getLongExtra(BillingService.INAPP_REQUEST_ID, -1);
 			checkResponseCode(context, requestId, BillingResponseCode.valueOf(intent));
 		} else {
-			Log.w(TAG, "Unexpected action: " + action);
+			LOGGER.warn("Unexpected action: " + action);
 		}
 	}
 	
@@ -74,7 +75,7 @@ public class BillingReceiver extends BroadcastReceiver {
 	 * @param notifyId the notification ID
 	 */
 	private void handleNotify(Context context, String notificationId) {
-		Log.i(TAG, "Notification id: " + notificationId);
+		LOGGER.debug("Notification id: " + notificationId);
 		Intent intent = new Intent(BillingService.ACTION_GET_PURCHASE_INFORMATION);
 		intent.setClass(context, BillingService.class);
 		intent.putExtra(BillingService.NOTIFICATION_ID, notificationId);

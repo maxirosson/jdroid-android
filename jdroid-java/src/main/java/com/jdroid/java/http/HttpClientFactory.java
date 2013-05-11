@@ -14,7 +14,7 @@ public interface HttpClientFactory {
 	 * 
 	 * @return {@link HttpClient} The created client.
 	 */
-	public HttpClient createDefaultHttpClient();
+	public HttpClient createHttpClient();
 	
 	/**
 	 * Creates a {@link HttpClient} and sets a timeout for it.
@@ -25,5 +25,5 @@ public interface HttpClientFactory {
 	 * 
 	 * @return {@link HttpClient} The created client.
 	 */
-	public HttpClient createDefaultHttpClient(Boolean ssl, Integer timeout, String userAgent);
+	public HttpClient createHttpClient(Boolean ssl, Integer timeout, String userAgent);
 }

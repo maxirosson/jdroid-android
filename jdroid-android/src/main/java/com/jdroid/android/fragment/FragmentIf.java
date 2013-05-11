@@ -10,7 +10,7 @@ import com.jdroid.android.domain.User;
 import com.jdroid.android.loading.LoadingDialog;
 import com.jdroid.android.loading.LoadingDialogBuilder;
 import com.jdroid.android.usecase.DefaultAbstractUseCase;
-import com.jdroid.android.usecase.DefaultUseCase;
+import com.jdroid.android.usecase.UseCase;
 import com.jdroid.android.usecase.listener.DefaultUseCaseListener;
 
 /**
@@ -115,9 +115,9 @@ public interface FragmentIf extends DefaultUseCaseListener {
 	
 	public void onPauseUseCase(DefaultAbstractUseCase useCase, DefaultUseCaseListener listener);
 	
-	public void executeUseCase(DefaultUseCase<?> useCase);
+	public void executeUseCase(UseCase<?> useCase);
 	
-	public void executeUseCase(DefaultUseCase<?> useCase, Long delaySeconds);
+	public void executeUseCase(UseCase<?> useCase, Long delaySeconds);
 	
 	public Boolean goBackOnError();
 	

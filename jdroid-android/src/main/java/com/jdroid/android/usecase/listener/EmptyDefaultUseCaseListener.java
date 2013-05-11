@@ -1,5 +1,7 @@
 package com.jdroid.android.usecase.listener;
 
+import com.jdroid.android.AbstractApplication;
+
 /**
  * Empty Default Use Case Listener
  * 
@@ -37,7 +39,7 @@ public class EmptyDefaultUseCaseListener implements DefaultUseCaseListener {
 	 */
 	@Override
 	public void onFinishFailedUseCase(RuntimeException runtimeException) {
-		// Do Nothing
+		AbstractApplication.get().getExceptionHandler().logHandledException(runtimeException);
 	}
 	
 	/**

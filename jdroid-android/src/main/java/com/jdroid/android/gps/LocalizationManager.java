@@ -1,6 +1,7 @@
 package com.jdroid.android.gps;
 
 import java.util.List;
+import org.slf4j.Logger;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -12,9 +13,9 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.util.Log;
 import com.jdroid.android.AbstractApplication;
 import com.jdroid.android.utils.AlarmManagerUtils;
+import com.jdroid.java.utils.LoggerUtils;
 
 /**
  * 
@@ -22,7 +23,8 @@ import com.jdroid.android.utils.AlarmManagerUtils;
  */
 public class LocalizationManager implements LocationListener {
 	
-	private static final String TAG = LocalizationManager.class.getSimpleName();
+	private final static Logger LOGGER = LoggerUtils.getLogger(LocalizationManager.class);
+	
 	private static final String GPS_TIMEOUT_ACTION = "ACTION_GPS_TIMEOUT";
 	private static final long GPS_TIMEOUT = 30000;
 	
@@ -89,10 +91,10 @@ public class LocalizationManager implements LocationListener {
 				AlarmManagerUtils.scheduleAlarm(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime()
 						+ GPS_TIMEOUT, pendingIntent);
 				
-				Log.i(TAG, "Localization started");
+				LOGGER.debug("Localization started");
 			} else {
 				started = false;
-				Log.i(TAG, "All providers disabled");
+				LOGGER.debug("All providers disabled");
 			}
 		}
 	}
@@ -110,7 +112,7 @@ public class LocalizationManager implements LocationListener {
 				}
 			}
 			started = false;
-			Log.i(TAG, "Localization stopped");
+			LOGGER.debug("Localization stopped");
 		}
 	}
 	
@@ -120,10 +122,10 @@ public class LocalizationManager implements LocationListener {
 	@Override
 	public void onLocationChanged(Location location) {
 		if (isBetterLocation(location, this.location)) {
-			Log.i(TAG, "Location changed");
+			LOGGER.debug("Location changed");
 			this.location = location;
 		} else {
-			Log.i(TAG, "Location discarded");
+			LOGGER.debug("Location discarded");
 		}
 	}
 	
@@ -140,7 +142,7 @@ public class LocalizationManager implements LocationListener {
 	 */
 	@Override
 	public void onProviderEnabled(String provider) {
-		Log.i(TAG, "Provider enabled: " + provider);
+		LOGGER.debug("Provider enabled: " + provider);
 		// Do Nothing
 	}
 	
@@ -149,7 +151,7 @@ public class LocalizationManager implements LocationListener {
 	 */
 	@Override
 	public void onProviderDisabled(String provider) {
-		Log.i(TAG, "Provider disabled: " + provider);
+		LOGGER.debug("Provider disabled: " + provider);
 		// Do Nothing
 	}
 	

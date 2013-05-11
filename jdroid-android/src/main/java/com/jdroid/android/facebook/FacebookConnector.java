@@ -7,18 +7,19 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.slf4j.Logger;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import com.facebook.android.Facebook;
 import com.facebook.android.FacebookError;
 import com.facebook.android.Util;
 import com.jdroid.android.exception.CommonErrorCode;
 import com.jdroid.java.collections.Lists;
 import com.jdroid.java.parser.json.JsonObjectWrapper;
+import com.jdroid.java.utils.LoggerUtils;
 
 /**
  * TODO FB
@@ -27,7 +28,7 @@ import com.jdroid.java.parser.json.JsonObjectWrapper;
  */
 public class FacebookConnector {
 	
-	private static final String TAG = FacebookConnector.class.getSimpleName();
+	private final static Logger LOGGER = LoggerUtils.getLogger(FacebookConnector.class);
 	
 	private Facebook facebook;
 	
@@ -135,20 +136,20 @@ public class FacebookConnector {
 	 * @param activity The {@link Activity} where the authorization dialog will be shown.
 	 */
 	public void connect(Activity activity) {
-		Log.d(TAG, "Attempting to connect to Facebook.");
+		LOGGER.debug("Attempting to connect to Facebook.");
 		facebook.authorize(activity, new DefaultFacebookDialogListener());
 	}
 	
 	public void disconnect(Context context) {
 		try {
-			Log.d(TAG, "Logging out from Facebook.");
+			LOGGER.debug("Logging out from Facebook.");
 			facebook.logout(context);
-			Log.d(TAG, "Log out from Facebook completed successfully.");
+			LOGGER.debug("Log out from Facebook completed successfully.");
 		} catch (MalformedURLException e) {
-			Log.d(TAG, "Error while logging out from Facebook.", e);
+			LOGGER.debug("Error while logging out from Facebook.", e);
 			throw CommonErrorCode.INTERNAL_ERROR.newApplicationException(e);
 		} catch (IOException e) {
-			Log.d(TAG, "Error while logging out from Facebook.", e);
+			LOGGER.debug("Error while logging out from Facebook.", e);
 			throw CommonErrorCode.CONNECTION_ERROR.newApplicationException(e);
 		}
 	}
@@ -165,7 +166,7 @@ public class FacebookConnector {
 	 */
 	public String connectCallback(int requestCode, int resultCode, Intent data) {
 		facebook.authorizeCallback(requestCode, resultCode, data);
-		Log.d(TAG, "Facebook connection callback completed successfully.");
+		LOGGER.debug("Facebook connection callback completed successfully.");
 		return facebook.getAccessToken();
 	}
 	

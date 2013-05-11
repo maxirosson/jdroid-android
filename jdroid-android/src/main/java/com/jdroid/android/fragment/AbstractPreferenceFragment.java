@@ -10,7 +10,7 @@ import com.jdroid.android.context.DefaultApplicationContext;
 import com.jdroid.android.domain.User;
 import com.jdroid.android.loading.LoadingDialogBuilder;
 import com.jdroid.android.usecase.DefaultAbstractUseCase;
-import com.jdroid.android.usecase.DefaultUseCase;
+import com.jdroid.android.usecase.UseCase;
 import com.jdroid.android.usecase.listener.DefaultUseCaseListener;
 
 /**
@@ -235,19 +235,19 @@ public abstract class AbstractPreferenceFragment extends PreferenceFragment impl
 	}
 	
 	/**
-	 * @see com.jdroid.android.fragment.FragmentIf#executeUseCase(com.jdroid.android.usecase.DefaultUseCase)
+	 * @see com.jdroid.android.fragment.FragmentIf#executeUseCase(com.jdroid.android.usecase.UseCase)
 	 */
 	@Override
-	public void executeUseCase(DefaultUseCase<?> useCase) {
+	public void executeUseCase(UseCase<?> useCase) {
 		getFragmentIf().executeUseCase(useCase);
 	}
 	
 	/**
-	 * @see com.jdroid.android.fragment.FragmentIf#executeUseCase(com.jdroid.android.usecase.DefaultUseCase,
+	 * @see com.jdroid.android.fragment.FragmentIf#executeUseCase(com.jdroid.android.usecase.UseCase,
 	 *      java.lang.Long)
 	 */
 	@Override
-	public void executeUseCase(DefaultUseCase<?> useCase, Long delaySeconds) {
+	public void executeUseCase(UseCase<?> useCase, Long delaySeconds) {
 		getFragmentIf().executeUseCase(useCase, delaySeconds);
 	}
 	

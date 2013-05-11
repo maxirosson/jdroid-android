@@ -1,14 +1,15 @@
 package com.jdroid.android.contacts;
 
 import java.io.InputStream;
+import org.slf4j.Logger;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.Contacts;
-import android.util.Log;
 import com.jdroid.android.AbstractApplication;
 import com.jdroid.android.images.ImageResolver;
 import com.jdroid.android.utils.BitmapUtils;
+import com.jdroid.java.utils.LoggerUtils;
 
 /**
  * 
@@ -16,7 +17,7 @@ import com.jdroid.android.utils.BitmapUtils;
  */
 public class ContactImageResolver implements ImageResolver {
 	
-	private static final String TAG = ContactImageResolver.class.getSimpleName();
+	private final static Logger LOGGER = LoggerUtils.getLogger(ContactImageResolver.class);
 	
 	private static final ContactImageResolver INSTANCE = new ContactImageResolver();
 	
@@ -42,9 +43,9 @@ public class ContactImageResolver implements ImageResolver {
 		Bitmap bitmap = null;
 		if (input != null) {
 			bitmap = BitmapUtils.toBitmap(input, maxWidth, maxHeight);
-			Log.d(TAG, "Image [" + uri.toString() + "] loaded.");
+			LOGGER.debug("Image [" + uri.toString() + "] loaded.");
 		} else {
-			Log.d(TAG, "Image [" + uri.toString() + "] not found.");
+			LOGGER.debug("Image [" + uri.toString() + "] not found.");
 		}
 		return bitmap;
 	}

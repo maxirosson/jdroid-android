@@ -2,9 +2,10 @@ package com.jdroid.android.search;
 
 import java.util.Collection;
 import java.util.List;
-import android.util.Log;
+import org.slf4j.Logger;
 import com.jdroid.java.exception.AbstractException;
 import com.jdroid.java.utils.ExecutorUtils;
+import com.jdroid.java.utils.LoggerUtils;
 
 /**
  * 
@@ -13,7 +14,7 @@ import com.jdroid.java.utils.ExecutorUtils;
  */
 public abstract class SearchResult<E> {
 	
-	private final static String TAG = SearchResult.class.getSimpleName();
+	private final static Logger LOGGER = LoggerUtils.getLogger(SearchResult.class);
 	
 	private final static int PAGE_SIZE = 20;
 	private SortingListener<E> sortingListener;
@@ -48,7 +49,7 @@ public abstract class SearchResult<E> {
 	
 	private List<E> populate() {
 		pagedResult = doPopulate(pageOffset, PAGE_SIZE, sortingType);
-		Log.i(TAG, "Results: " + pagedResult.getResults().size() + " / Page Offset: " + pageOffset + " / Sorting: "
+		LOGGER.debug("Results: " + pagedResult.getResults().size() + " / Page Offset: " + pageOffset + " / Sorting: "
 				+ sortingType);
 		return pagedResult.getResults();
 	}

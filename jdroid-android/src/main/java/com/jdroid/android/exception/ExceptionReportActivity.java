@@ -3,18 +3,19 @@ package com.jdroid.android.exception;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
+import org.slf4j.Logger;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import com.jdroid.android.AbstractApplication;
 import com.jdroid.android.R;
 import com.jdroid.android.utils.AndroidUtils;
 import com.jdroid.android.utils.NotificationUtils;
 import com.jdroid.java.utils.DateUtils;
 import com.jdroid.java.utils.IdGenerator;
+import com.jdroid.java.utils.LoggerUtils;
 
 /**
  * 
@@ -22,7 +23,7 @@ import com.jdroid.java.utils.IdGenerator;
  */
 public class ExceptionReportActivity extends Activity {
 	
-	private static final String TAG = ExceptionReportActivity.class.getSimpleName();
+	private final static Logger LOGGER = LoggerUtils.getLogger(ExceptionReportActivity.class);
 	
 	private static final String EXCEPTION_EXTRA = "exceptionExtra";
 	
@@ -70,7 +71,7 @@ public class ExceptionReportActivity extends Activity {
 				notificationTitle, notificationTitle, notificationText, ExceptionReportActivity.class,
 				DateUtils.now().getTime(), bundle);
 		} catch (Exception e) {
-			Log.e(TAG, "Unexepected error from the exception reporter", e);
+			LOGGER.error("Unexepected error from the exception reporter", e);
 		}
 	}
 }

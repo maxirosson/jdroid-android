@@ -14,7 +14,7 @@ import com.jdroid.android.context.DefaultApplicationContext;
 import com.jdroid.android.domain.User;
 import com.jdroid.android.loading.LoadingDialogBuilder;
 import com.jdroid.android.usecase.DefaultAbstractUseCase;
-import com.jdroid.android.usecase.DefaultUseCase;
+import com.jdroid.android.usecase.UseCase;
 import com.jdroid.android.usecase.listener.DefaultUseCaseListener;
 
 /**
@@ -334,19 +334,19 @@ public abstract class AbstractActivity extends SherlockActivity implements Activ
 	}
 	
 	/**
-	 * @see com.jdroid.android.fragment.FragmentIf#executeUseCase(com.jdroid.android.usecase.DefaultUseCase)
+	 * @see com.jdroid.android.fragment.FragmentIf#executeUseCase(com.jdroid.android.usecase.UseCase)
 	 */
 	@Override
-	public void executeUseCase(DefaultUseCase<?> useCase) {
+	public void executeUseCase(UseCase<?> useCase) {
 		baseActivity.executeUseCase(useCase);
 	}
 	
 	/**
-	 * @see com.jdroid.android.fragment.FragmentIf#executeUseCase(com.jdroid.android.usecase.DefaultUseCase,
+	 * @see com.jdroid.android.fragment.FragmentIf#executeUseCase(com.jdroid.android.usecase.UseCase,
 	 *      java.lang.Long)
 	 */
 	@Override
-	public void executeUseCase(DefaultUseCase<?> useCase, Long delaySeconds) {
+	public void executeUseCase(UseCase<?> useCase, Long delaySeconds) {
 		baseActivity.executeUseCase(useCase, delaySeconds);
 	}
 	

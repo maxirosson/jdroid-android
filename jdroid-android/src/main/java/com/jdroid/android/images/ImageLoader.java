@@ -4,18 +4,20 @@ import java.lang.ref.SoftReference;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
+import org.slf4j.Logger;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.util.Log;
 import com.jdroid.android.AbstractApplication;
 import com.jdroid.android.contacts.ContactImageResolver;
 import com.jdroid.java.collections.Lists;
 import com.jdroid.java.collections.Maps;
+import com.jdroid.java.utils.LoggerUtils;
 
 public class ImageLoader {
 	
-	private static final String TAG = ImageLoader.class.getSimpleName();
+	private final static Logger LOGGER = LoggerUtils.getLogger(ImageLoader.class);
+	
 	private static final ImageLoader INSTANCE = new ImageLoader();
 	
 	// Retry Interval in milliseconds
@@ -81,7 +83,7 @@ public class ImageLoader {
 				imagesQueue.notifyAll();
 			}
 		} else {
-			Log.e(TAG, "The Image loader can't not resolve the uri: " + uri.toString());
+			LOGGER.error("The Image loader can't not resolve the uri: " + uri.toString());
 		}
 	}
 	
@@ -204,7 +206,7 @@ public class ImageLoader {
 					}
 				}
 			} catch (InterruptedException e) {
-				Log.e(TAG, "", e);
+				LOGGER.error("", e);
 			}
 		}
 	}

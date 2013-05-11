@@ -4,6 +4,7 @@ import java.io.File;
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.UUID;
 import org.json.JSONObject;
+import org.slf4j.Logger;
 import roboguice.RoboGuice;
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -14,7 +15,6 @@ import android.os.Build;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import com.crittercism.app.Crittercism;
 import com.google.android.gcm.GCMRegistrar;
 import com.google.inject.AbstractModule;
@@ -32,6 +32,7 @@ import com.jdroid.java.exception.UnexpectedException;
 import com.jdroid.java.utils.DateUtils;
 import com.jdroid.java.utils.ExecutorUtils;
 import com.jdroid.java.utils.FileUtils;
+import com.jdroid.java.utils.LoggerUtils;
 import com.jdroid.java.utils.ReflectionUtils;
 
 /**
@@ -40,12 +41,12 @@ import com.jdroid.java.utils.ReflectionUtils;
  */
 public abstract class AbstractApplication extends Application {
 	
+	private final static Logger LOGGER = LoggerUtils.getLogger(AbstractApplication.class);
+	
 	private static final String INSTALLATION_ID_KEY = "installationId";
 	
 	/** Maximum size (in MB) of the images cache */
 	private static final int IMAGES_CACHE_SIZE = 5;
-	
-	private static final String TAG = AbstractApplication.class.getSimpleName();
 	
 	private static final String IMAGES_DIRECTORY = "images";
 	protected static AbstractApplication INSTANCE;
@@ -137,12 +138,12 @@ public abstract class AbstractApplication extends Application {
 			// TODO We could listen the Intent.ACTION_DEVICE_STORAGE_LOW and clear the cache
 			cacheDirectory = getCacheDir();
 		}
-		Log.d(TAG, "Cache directory: " + cacheDirectory.getPath());
+		LOGGER.debug("Cache directory: " + cacheDirectory.getPath());
 	}
 	
 	private void initImagesCacheDirectory() {
 		imagesCacheDirectory = new File(getCacheDirectory(), IMAGES_DIRECTORY);
-		Log.d(TAG, "Images cache directory: " + imagesCacheDirectory.getPath());
+		LOGGER.debug("Images cache directory: " + imagesCacheDirectory.getPath());
 		ExecutorUtils.execute(new Runnable() {
 			
 			@Override
@@ -178,7 +179,7 @@ public abstract class AbstractApplication extends Application {
 				@Override
 				public void run() {
 					Thread.setDefaultUncaughtExceptionHandler(ReflectionUtils.newInstance(getExceptionHandlerClass()));
-					Log.i(TAG, "Custom exception handler initialized");
+					LOGGER.debug("Custom exception handler initialized");
 				}
 			}, 100L);
 		}
@@ -198,7 +199,7 @@ public abstract class AbstractApplication extends Application {
 					Crittercism.setUsername(installationId);
 				}
 			} catch (Exception e) {
-				Log.e(TAG, "Error when initializing Crittercism");
+				LOGGER.error("Error when initializing Crittercism");
 			}
 		}
 	}
@@ -221,7 +222,7 @@ public abstract class AbstractApplication extends Application {
 			try {
 				GCMRegistrar.checkDevice(this);
 			} catch (UnsupportedOperationException e) {
-				Log.e(TAG, "This device does not support GCM", e);
+				LOGGER.error("This device does not support GCM", e);
 			}
 			// GCMRegistrar.checkManifest(this);
 		}
@@ -350,7 +351,7 @@ public abstract class AbstractApplication extends Application {
 						installationId = UUID.randomUUID().toString();
 						SharedPreferencesUtils.savePreference(INSTALLATION_ID_KEY, installationId);
 					}
-					Log.d(TAG, "Installation id: " + installationId);
+					LOGGER.debug("Installation id: " + installationId);
 				} catch (Exception e) {
 					throw new UnexpectedException(e);
 				}

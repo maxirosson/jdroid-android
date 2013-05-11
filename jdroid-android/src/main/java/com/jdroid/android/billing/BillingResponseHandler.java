@@ -1,12 +1,13 @@
 package com.jdroid.android.billing;
 
 import java.util.List;
+import org.slf4j.Logger;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentSender.SendIntentException;
-import android.util.Log;
 import com.jdroid.android.billing.BillingManagerImpl.RequestPurchase;
 import com.jdroid.android.billing.BillingManagerImpl.RestoreTransactions;
+import com.jdroid.java.utils.LoggerUtils;
 
 /**
  * This class contains the methods that handle responses from the Google Play app. An application might also want to
@@ -14,7 +15,7 @@ import com.jdroid.android.billing.BillingManagerImpl.RestoreTransactions;
  */
 public class BillingResponseHandler {
 	
-	private static final String TAG = BillingResponseHandler.class.getSimpleName();
+	private final static Logger LOGGER = LoggerUtils.getLogger(BillingResponseHandler.class);
 	
 	// {@link PurchaseObserver} that the application creates and registers to listen responses from the Google Play app.
 	private static PurchaseObserver purchaseObserver;
@@ -60,16 +61,16 @@ public class BillingResponseHandler {
 		if (billingListener != null) {
 			
 			if (responseCode.equals(BillingResponseCode.RESULT_OK)) {
-				Log.d(TAG, "In App Billing is supported");
+				LOGGER.debug("In App Billing is supported");
 				billingListener.onBillingSupported();
 			} else if (responseCode.equals(BillingResponseCode.RESULT_BILLING_UNAVAILABLE)) {
-				Log.d(TAG, "In App Billing is not supported");
+				LOGGER.debug("In App Billing is not supported");
 				billingListener.onBillingNotSupported();
 			} else if (responseCode.equals(BillingResponseCode.RESULT_ERROR)) {
-				Log.i(TAG, "There was an error connecting with the Google Play app.");
+				LOGGER.debug("There was an error connecting with the Google Play app.");
 				billingListener.onGooglePlayConnectionError();
 			} else if (responseCode.equals(BillingResponseCode.RESULT_DEVELOPER_ERROR)) {
-				Log.e(TAG, "Developer error when trying to make an in-app billing request");
+				LOGGER.debug("Developer error when trying to make an in-app billing request");
 			}
 		}
 	}
@@ -88,10 +89,10 @@ public class BillingResponseHandler {
 			try {
 				purchaseObserver.getActivity().startIntentSender(pendingIntent.getIntentSender(), intent, 0, 0, 0);
 			} catch (SendIntentException e) {
-				Log.e(TAG, "Error starting activity", e);
+				LOGGER.error("Error starting activity", e);
 			}
 		} else {
-			Log.d(TAG, "Not purchase observer registered");
+			LOGGER.debug("Not purchase observer registered");
 		}
 	}
 	
@@ -108,25 +109,25 @@ public class BillingResponseHandler {
 		if (purchaseObserver != null) {
 			
 			if (responseCode.equals(BillingResponseCode.RESULT_OK)) {
-				Log.i(TAG, "Purchase request was successfully sent to server");
+				LOGGER.debug("Purchase request was successfully sent to server");
 				purchaseObserver.onRequestPurchaseOk(request);
 			} else if (responseCode.equals(BillingResponseCode.RESULT_USER_CANCELED)) {
-				Log.i(TAG, "User canceled purchase");
+				LOGGER.debug("User canceled purchase");
 				purchaseObserver.onRequestPurchaseCanceledByUser(request);
 			} else if (responseCode.equals(BillingResponseCode.RESULT_SERVICE_UNAVAILABLE)) {
-				Log.i(TAG, "Purchase Service Unavailable");
+				LOGGER.debug("Purchase Service Unavailable");
 				purchaseObserver.onRequestPurchaseServiceUnavailable(request);
 			} else if (responseCode.equals(BillingResponseCode.RESULT_BILLING_UNAVAILABLE)) {
-				Log.i(TAG, "In-app billing is not supported yet");
+				LOGGER.debug("In-app billing is not supported yet");
 				purchaseObserver.onRequestPurchaseBillingUnavailable(request);
 			} else if (responseCode.equals(BillingResponseCode.RESULT_ITEM_UNAVAILABLE)) {
-				Log.i(TAG, "The item this app offered for sale does not exist in the server-side catalog");
+				LOGGER.debug("The item this app offered for sale does not exist in the server-side catalog");
 				purchaseObserver.onRequestPurchaseItemUnavailable(request);
 			} else if (responseCode.equals(BillingResponseCode.RESULT_ERROR)) {
-				Log.i(TAG, "Purchase error");
+				LOGGER.debug("Purchase error");
 				purchaseObserver.onRequestPurchaseError(request);
 			} else if (responseCode.equals(BillingResponseCode.RESULT_DEVELOPER_ERROR)) {
-				Log.e(TAG, "Developer error when trying to make an in-app billing request");
+				LOGGER.error("Developer error when trying to make an in-app billing request");
 			}
 		}
 	}
@@ -140,10 +141,10 @@ public class BillingResponseHandler {
 	public static void responseCodeReceived(RestoreTransactions request, BillingResponseCode responseCode) {
 		if (purchaseObserver != null) {
 			if (responseCode == BillingResponseCode.RESULT_OK) {
-				Log.d(TAG, "Completed RestoreTransactions request");
+				LOGGER.debug("Completed RestoreTransactions request");
 				purchaseObserver.onRestoreTransactionsResponseOk(request);
 			} else {
-				Log.d(TAG, "RestoreTransactions error: " + responseCode);
+				LOGGER.debug("RestoreTransactions error: " + responseCode);
 				purchaseObserver.onRestoreTransactionsResponseError(request);
 			}
 			
@@ -165,17 +166,17 @@ public class BillingResponseHandler {
 			for (PurchaseOrder order : orders) {
 				
 				if (order.getPurchaseState().equals(PurchaseState.PURCHASED)) {
-					Log.i(TAG, "Purchased product: " + order.toString());
+					LOGGER.debug("Purchased product: " + order.toString());
 					billingListener.onPurchased(order);
 				}
 				
 				if (order.getPurchaseState().equals(PurchaseState.REFUNDED)) {
-					Log.i(TAG, "Refunded product: " + order.toString());
+					LOGGER.debug("Refunded product: " + order.toString());
 					billingListener.onRefunded(order);
 				}
 				
 				if (order.getPurchaseState().equals(PurchaseState.CANCELED)) {
-					Log.i(TAG, "Canceled product: " + order.toString());
+					LOGGER.debug("Canceled product: " + order.toString());
 					billingListener.onCanceled(order);
 				}
 			}

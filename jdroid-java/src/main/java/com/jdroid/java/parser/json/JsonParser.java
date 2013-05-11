@@ -30,7 +30,7 @@ public abstract class JsonParser<T> implements Parser {
 		
 		LOGGER.debug("Parsing started.");
 		try {
-			LOGGER.debug(input);
+			LOGGER.trace(input);
 			
 			// Create a wrapped JsonObjectWrapper or JsonArrayWrapper
 			T json = null;

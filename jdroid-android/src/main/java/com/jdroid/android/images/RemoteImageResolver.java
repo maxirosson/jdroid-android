@@ -8,13 +8,14 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpUriRequest;
+import org.slf4j.Logger;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.util.Log;
 import com.jdroid.android.AbstractApplication;
 import com.jdroid.android.utils.BitmapUtils;
 import com.jdroid.java.http.DefaultHttpClientFactory;
 import com.jdroid.java.utils.FileUtils;
+import com.jdroid.java.utils.LoggerUtils;
 import com.jdroid.java.utils.ValidationUtils;
 
 /**
@@ -23,7 +24,7 @@ import com.jdroid.java.utils.ValidationUtils;
  */
 public class RemoteImageResolver implements ImageResolver {
 	
-	private static final String TAG = RemoteImageResolver.class.getSimpleName();
+	private final static Logger LOGGER = LoggerUtils.getLogger(RemoteImageResolver.class);
 	
 	private static final RemoteImageResolver INSTANCE = new RemoteImageResolver();
 	
@@ -59,7 +60,7 @@ public class RemoteImageResolver implements ImageResolver {
 			OutputStream os = null;
 			try {
 				// make client for http.
-				HttpClient client = DefaultHttpClientFactory.get().createDefaultHttpClient();
+				HttpClient client = DefaultHttpClientFactory.get().createHttpClient();
 				
 				// make request.
 				HttpUriRequest request = new HttpGet(url);
@@ -72,14 +73,14 @@ public class RemoteImageResolver implements ImageResolver {
 					is = httpResponse.getEntity().getContent();
 					os = new FileOutputStream(file);
 					FileUtils.copyStream(is, os);
-					Log.d(TAG, "Image [" + url + "] downloaded.");
+					LOGGER.debug("Image [" + url + "] downloaded.");
 				} else {
-					Log.d(TAG, "Image [" + url + "] not found.");
+					LOGGER.debug("Image [" + url + "] not found.");
 					return null;
 				}
 				
 			} catch (Exception ex) {
-				Log.e(TAG, "Error when downloading image [" + url + "]", ex);
+				LOGGER.error("Error when downloading image [" + url + "]", ex);
 				return null;
 			} finally {
 				FileUtils.safeClose(os);

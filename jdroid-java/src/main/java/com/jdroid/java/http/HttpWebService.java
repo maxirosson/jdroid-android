@@ -105,7 +105,7 @@ public abstract class HttpWebService implements WebService {
 			}
 			
 			// make client for http.
-			client = httpClientFactory.createDefaultHttpClient(ssl, connectionTimeout, userAgent);
+			client = httpClientFactory.createHttpClient(ssl, connectionTimeout, userAgent);
 			
 			// Add Cookies
 			addCookies(client);

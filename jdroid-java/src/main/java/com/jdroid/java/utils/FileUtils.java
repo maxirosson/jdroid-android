@@ -128,7 +128,7 @@ public abstract class FileUtils {
 	public static boolean renameOrMove(File fileToBeMoved, File destination) {
 		boolean result = fileToBeMoved.renameTo(destination);
 		if (result) {
-			LOGGER.info("File " + fileToBeMoved.getPath() + " was succesfully renamed or moved.");
+			LOGGER.debug("File " + fileToBeMoved.getPath() + " was succesfully renamed or moved.");
 		} else {
 			LOGGER.error("File " + fileToBeMoved.getPath() + " couldn't be renamed or moved.");
 		}

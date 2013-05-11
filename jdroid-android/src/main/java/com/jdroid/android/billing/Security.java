@@ -14,10 +14,11 @@ import java.util.Set;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.slf4j.Logger;
 import android.util.Base64;
-import android.util.Log;
 import com.jdroid.java.collections.Lists;
 import com.jdroid.java.collections.Sets;
+import com.jdroid.java.utils.LoggerUtils;
 import com.jdroid.java.utils.StringUtils;
 
 /**
@@ -28,7 +29,7 @@ import com.jdroid.java.utils.StringUtils;
  */
 public class Security {
 	
-	private static final String TAG = Security.class.getSimpleName();
+	private final static Logger LOGGER = LoggerUtils.getLogger(Security.class);
 	
 	private static final String KEY_FACTORY_ALGORITHM = "RSA";
 	private static final String SIGNATURE_ALGORITHM = "SHA1withRSA";
@@ -74,10 +75,10 @@ public class Security {
 	 */
 	public static List<PurchaseOrder> verifyPurchase(String signedData, String signature) {
 		if (signedData == null) {
-			Log.e(TAG, "Signed data is null");
+			LOGGER.error("Signed data is null");
 			return null;
 		}
-		Log.i(TAG, "Signed data: " + signedData);
+		LOGGER.debug("Signed data: " + signedData);
 		boolean verified = false;
 		if (StringUtils.isNotEmpty(signature)) {
 			/**
@@ -94,7 +95,7 @@ public class Security {
 			PublicKey key = Security.generatePublicKey(BillingContext.get().getGooglePlayPublicKey());
 			verified = Security.verify(key, signedData, signature);
 			if (!verified) {
-				Log.w(TAG, "Signature does not match data.");
+				LOGGER.warn("Signature does not match data.");
 				return null;
 			}
 		}
@@ -116,7 +117,7 @@ public class Security {
 		}
 		
 		if (!Security.isNonceKnown(nonce)) {
-			Log.w(TAG, "Nonce not found: " + nonce);
+			LOGGER.warn("Nonce not found: " + nonce);
 			return null;
 		}
 		
@@ -144,7 +145,7 @@ public class Security {
 						developerPayload));
 			}
 		} catch (JSONException e) {
-			Log.e(TAG, "JSON exception: ", e);
+			LOGGER.error("JSON exception: ", e);
 			return null;
 		}
 		removeNonce(nonce);
@@ -166,7 +167,7 @@ public class Security {
 		} catch (NoSuchAlgorithmException e) {
 			throw new RuntimeException(e);
 		} catch (InvalidKeySpecException e) {
-			Log.e(TAG, "Invalid key specification.");
+			LOGGER.error("Invalid key specification.");
 			throw new IllegalArgumentException(e);
 		}
 	}
@@ -181,23 +182,23 @@ public class Security {
 	 * @return true if the data and signature match
 	 */
 	private static boolean verify(PublicKey publicKey, String signedData, String signature) {
-		Log.i(TAG, "Signature: " + signature);
+		LOGGER.debug("Signature: " + signature);
 		Signature sig;
 		try {
 			sig = Signature.getInstance(SIGNATURE_ALGORITHM);
 			sig.initVerify(publicKey);
 			sig.update(signedData.getBytes());
 			if (!sig.verify(Base64.decode(signature, Base64.DEFAULT))) {
-				Log.e(TAG, "Signature verification failed.");
+				LOGGER.error("Signature verification failed.");
 				return false;
 			}
 			return true;
 		} catch (NoSuchAlgorithmException e) {
-			Log.e(TAG, "NoSuchAlgorithmException.");
+			LOGGER.error("NoSuchAlgorithmException.");
 		} catch (InvalidKeyException e) {
-			Log.e(TAG, "Invalid key specification.");
+			LOGGER.error("Invalid key specification.");
 		} catch (SignatureException e) {
-			Log.e(TAG, "Signature exception.");
+			LOGGER.error("Signature exception.");
 		}
 		return false;
 	}

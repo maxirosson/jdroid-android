@@ -41,7 +41,7 @@ public class ZipFileParser implements Parser {
 			ZipEntry entry = null;
 			while ((entry = zipInputStream.getNextEntry()) != null) {
 				if (entry.getName().equals(fileName)) {
-					LOGGER.info("Starting to parse " + fileName + " file.");
+					LOGGER.debug("Starting to parse " + fileName + " file.");
 					return innerParser.parse(zipInputStream);
 				}
 			}
