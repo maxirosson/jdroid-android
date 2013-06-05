@@ -21,9 +21,10 @@
 	<classpathentry exported="true" kind="var" path="M2_REPO/android/gcm/gcm-client/r3/gcm-client-r3.jar" sourcepath="M2_REPO/android/gcm/gcm-client/r3/gcm-client-r3-sources.jar"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/android/analytics/google-analytics-sdk/2.0Beta4/google-analytics-sdk-2.0Beta4.jar"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/android/crittercism/crittercism-sdk/3.0.7/crittercism-sdk-3.0.7.jar"/>
-	<classpathentry kind="var" path="M2_REPO/com/pivotallabs/robolectric/1.2/robolectric-1.2-jar-with-dependencies.jar" />
+	<classpathentry kind="var" path="M2_REPO/com/pivotallabs/robolectric/1.2/robolectric-1.2-jar-with-dependencies.jar"/>
 	<classpathentry kind="var" path="M2_REPO/junit/junit/4.8.2/junit-4.8.2.jar"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
-	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
+	<classpathentry kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

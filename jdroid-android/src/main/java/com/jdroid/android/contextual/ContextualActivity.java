@@ -1,6 +1,7 @@
 package com.jdroid.android.contextual;
 
 import java.util.List;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -79,11 +80,39 @@ public abstract class ContextualActivity<T extends TabAction> extends AbstractFr
 			ActivityLauncher.launchActivity(item.getActivityClass());
 		} else {
 			if (!oldFragment.getTag().equals(item.getName())) {
-				FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-				fragmentTransaction.replace(R.id.detailsFragmentContainer, item.createFragment(null), item.getName());
-				fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-				fragmentTransaction.commit();
+				replaceDetailsFragment(item);
 			}
+		}
+	}
+	
+	private void replaceDetailsFragment(T item) {
+		FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+		fragmentTransaction.replace(R.id.detailsFragmentContainer, item.createFragment(null), item.getName());
+		fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+		fragmentTransaction.commit();
+	}
+	
+	/**
+	 * @see android.support.v4.app.FragmentActivity#onNewIntent(android.content.Intent)
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	protected void onNewIntent(Intent intent) {
+		super.onNewIntent(intent);
+		
+		T contextualItem = (T)intent.getExtras().getSerializable(DEFAULT_CONTEXTUAL_ITEM_EXTRA);
+		
+		if (AndroidUtils.isLargeScreenOrBigger()) {
+			
+			// Refresh the detail
+			replaceDetailsFragment(contextualItem);
+			
+			// Refresh the list (only on large or bigger)
+			FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+			fragmentTransaction.replace(R.id.contextualFragmentContainer,
+				newContextualListFragment(getContextualItems(), contextualItem));
+			fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+			fragmentTransaction.commit();
 		}
 	}
 }

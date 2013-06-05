@@ -158,6 +158,22 @@ public class JsonObjectWrapper {
 		return date;
 	}
 	
+	public Date optDate(String key) throws JSONException {
+		return optDate(key, DateUtils.YYYYMMDDHHMMSSZ_DATE_FORMAT);
+	}
+	
+	public Date optDate(String key, String dateFormat) throws JSONException {
+		return optDate(key, dateFormat, null);
+	}
+	
+	public Date optDate(String key, String dateFormat, Date defaultDate) throws JSONException {
+		if (has(key) && !jsonObject.isNull(key)) {
+			String value = jsonObject.getString(key);
+			return DateUtils.parse(value, dateFormat);
+		}
+		return defaultDate;
+	}
+	
 	/**
 	 * @param key
 	 * @return the boolean
