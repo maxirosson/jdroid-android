@@ -1,4 +1,4 @@
-package com.jdroid.java.http;
+package com.jdroid.java.http.apache;
 
 import java.io.UnsupportedEncodingException;
 import org.apache.http.HttpEntity;
@@ -7,23 +7,24 @@ import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.protocol.HTTP;
 import com.jdroid.java.exception.UnexpectedException;
+import com.jdroid.java.http.HttpWebServiceProcessor;
 import com.jdroid.java.http.post.EntityEnclosingWebService;
 
 /**
  * 
  * @author Maxi Rosson
  */
-public abstract class HttpEntityEnclosingWebService extends HttpWebService implements EntityEnclosingWebService {
+public abstract class ApacheHttpEntityEnclosingWebService extends ApacheHttpWebService implements EntityEnclosingWebService {
 	
 	private HttpEntity entity;
 	
-	public HttpEntityEnclosingWebService(HttpClientFactory httpClientFactory, String baseURL,
+	public ApacheHttpEntityEnclosingWebService(HttpClientFactory httpClientFactory, String baseURL,
 			HttpWebServiceProcessor... httpWebServiceProcessors) {
 		super(httpClientFactory, baseURL, httpWebServiceProcessors);
 	}
 	
 	/**
-	 * @see com.jdroid.java.http.HttpWebService#createHttpUriRequest()
+	 * @see com.jdroid.java.http.apache.ApacheHttpWebService#createHttpUriRequest()
 	 */
 	@Override
 	protected HttpUriRequest createHttpUriRequest(String protocol) {
@@ -58,7 +59,7 @@ public abstract class HttpEntityEnclosingWebService extends HttpWebService imple
 	public void setEntity(String content) {
 		try {
 			entity = new StringEntity(content, HTTP.UTF_8);
-			HttpWebService.LOGGER.debug("Entity: " + content);
+			ApacheHttpWebService.LOGGER.debug("Entity: " + content);
 		} catch (UnsupportedEncodingException e) {
 			throw new UnexpectedException(e);
 		}

@@ -3,6 +3,7 @@ package com.jdroid.android.analytics;
 import android.app.Activity;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.jdroid.android.AbstractApplication;
+import com.jdroid.java.exception.ConnectionException;
 
 /**
  * 
@@ -38,6 +39,14 @@ public class GoogleAnalyticsTracker extends DefaultAnalyticsTracker {
 	@Override
 	public void onActivityStop(Activity activity) {
 		EasyTracker.getInstance().activityStop(activity);
+	}
+	
+	/**
+	 * @see com.jdroid.android.analytics.AnalyticsTracker#trackConnectionException(com.jdroid.java.exception.ConnectionException)
+	 */
+	@Override
+	public void trackConnectionException(ConnectionException connectionException) {
+		// TODO Implement this
 	}
 	
 	public void trackEvent(String category, String action, String label, Integer value) {

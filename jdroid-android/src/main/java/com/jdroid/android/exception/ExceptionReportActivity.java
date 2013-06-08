@@ -49,10 +49,9 @@ public class ExceptionReportActivity extends Activity {
 	/**
 	 * Sends an error report.
 	 * 
-	 * @param thread The thread where the exception occurred (e.g. {@link java.lang.Thread#currentThread()})
 	 * @param ex The exception
 	 */
-	public static void reportException(Thread thread, Throwable ex) {
+	public static void reportException(Throwable ex) {
 		
 		try {
 			Context context = AbstractApplication.get();

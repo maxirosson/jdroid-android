@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentActivity;
 import com.crittercism.app.Crittercism;
 import com.jdroid.android.AbstractApplication;
 import com.jdroid.android.R;
+import com.jdroid.android.analytics.AnalyticsSender;
 import com.jdroid.android.context.DefaultApplicationContext;
 import com.jdroid.android.utils.AndroidUtils;
 import com.jdroid.android.utils.LocalizationUtils;
@@ -93,7 +94,7 @@ public class DefaultExceptionHandler implements ExceptionHandler {
 	 */
 	@Override
 	public void handleException(Thread thread, ConnectionException connectionException) {
-		LOGGER.warn("Connection error", connectionException);
+		logHandledException("Connection error", connectionException);
 		displayError(LocalizationUtils.getString(R.string.connectionErrorTitle),
 			LocalizationUtils.getString(R.string.connectionError), connectionException);
 	}
@@ -105,7 +106,7 @@ public class DefaultExceptionHandler implements ExceptionHandler {
 	@Override
 	public void handleException(Thread thread, ApplicationException applicationException) {
 		String message = LocalizationUtils.getMessageFor(applicationException.getErrorCode());
-		LOGGER.error(message, applicationException);
+		logHandledException(message, applicationException);
 		displayError(
 			LocalizationUtils.getString(R.string.exceptionReportDialogTitle, AndroidUtils.getApplicationName()),
 			message, applicationException);
@@ -116,15 +117,7 @@ public class DefaultExceptionHandler implements ExceptionHandler {
 	 */
 	@Override
 	public void handleException(Thread thread, Throwable throwable) {
-		LOGGER.error("Unexepected error", throwable);
-		DefaultApplicationContext appContext = AbstractApplication.get().getAndroidApplicationContext();
-		if (appContext.isCrittercismEnabled()) {
-			if (appContext.isCrittercismPremium()) {
-				Crittercism.logHandledException(throwable);
-			} else if (!appContext.isProductionEnvironment()) {
-				ExceptionReportActivity.reportException(thread, throwable);
-			}
-		}
+		logHandledException("Unexepected error", throwable);
 		displayError(
 			LocalizationUtils.getString(R.string.exceptionReportDialogTitle, AndroidUtils.getApplicationName()),
 			LocalizationUtils.getString(R.string.serverError), throwable);
@@ -135,11 +128,27 @@ public class DefaultExceptionHandler implements ExceptionHandler {
 	 */
 	@Override
 	public void logHandledException(Throwable throwable) {
-		LOGGER.error("Handled Exception", throwable);
-		DefaultApplicationContext appContext = AbstractApplication.get().getAndroidApplicationContext();
-		if (appContext.isCrittercismEnabled() && appContext.isCrittercismPremium()
-				&& !(throwable instanceof ConnectionException)) {
-			Crittercism.logHandledException(throwable);
+		logHandledException("Handled Exception", throwable);
+	}
+	
+	/**
+	 * @see com.jdroid.android.exception.ExceptionHandler#logHandledException(java.lang.String, java.lang.Throwable)
+	 */
+	@Override
+	public void logHandledException(String message, Throwable throwable) {
+		if (throwable instanceof ConnectionException) {
+			LOGGER.warn(message, throwable);
+			AnalyticsSender.get().trackConnectionException((ConnectionException)throwable);
+		} else {
+			LOGGER.error(message, throwable);
+			DefaultApplicationContext appContext = AbstractApplication.get().getAndroidApplicationContext();
+			if (appContext.isCrittercismEnabled()) {
+				if (appContext.isCrittercismPremium()) {
+					Crittercism.logHandledException(throwable);
+				} else if (!appContext.isProductionEnvironment()) {
+					ExceptionReportActivity.reportException(throwable);
+				}
+			}
 		}
 	}
 	

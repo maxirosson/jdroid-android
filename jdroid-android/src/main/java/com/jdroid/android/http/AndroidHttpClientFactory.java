@@ -2,7 +2,7 @@ package com.jdroid.android.http;
 
 import org.apache.http.client.HttpClient;
 import android.net.http.AndroidHttpClient;
-import com.jdroid.java.http.HttpClientFactory;
+import com.jdroid.java.http.apache.HttpClientFactory;
 
 /**
  * 
@@ -13,7 +13,7 @@ public class AndroidHttpClientFactory implements HttpClientFactory {
 	private final static String DEFAULT_USER_AGENT = "android";
 	
 	/**
-	 * @see com.jdroid.java.http.HttpClientFactory#createHttpClient()
+	 * @see com.jdroid.java.http.apache.HttpClientFactory#createHttpClient()
 	 */
 	@Override
 	public HttpClient createHttpClient() {
@@ -21,7 +21,7 @@ public class AndroidHttpClientFactory implements HttpClientFactory {
 	}
 	
 	/**
-	 * @see com.jdroid.java.http.HttpClientFactory#createHttpClient(java.lang.Boolean, java.lang.Integer,
+	 * @see com.jdroid.java.http.apache.HttpClientFactory#createHttpClient(java.lang.Boolean, java.lang.Integer,
 	 *      java.lang.String)
 	 */
 	@Override

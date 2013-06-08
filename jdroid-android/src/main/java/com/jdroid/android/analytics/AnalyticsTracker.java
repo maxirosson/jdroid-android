@@ -1,6 +1,7 @@
 package com.jdroid.android.analytics;
 
 import android.app.Activity;
+import com.jdroid.java.exception.ConnectionException;
 
 /**
  * 
@@ -13,4 +14,6 @@ public interface AnalyticsTracker {
 	public void onActivityStart(Activity activity);
 	
 	public void onActivityStop(Activity activity);
+	
+	public void trackConnectionException(ConnectionException connectionException);
 }

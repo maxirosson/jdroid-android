@@ -12,6 +12,7 @@ public class CustomImageView extends ImageView implements ImageHolder {
 	private Integer maxWidth;
 	private Integer maxHeight;
 	private Uri imageUri;
+	private ImageLoadingListener imageLoadingListener;
 	
 	public CustomImageView(Context context) {
 		super(context);
@@ -64,6 +65,9 @@ public class CustomImageView extends ImageView implements ImageHolder {
 			ImageLoader.get().displayImage(imageUri, this);
 		} else {
 			showStubImage();
+			if (imageLoadingListener != null) {
+				imageLoadingListener.onStubImageLoaded();
+			}
 		}
 	}
 	
@@ -98,4 +102,27 @@ public class CustomImageView extends ImageView implements ImageHolder {
 	public Uri getImageUri() {
 		return imageUri;
 	}
+	
+	/**
+	 * @see com.jdroid.android.images.ImageHolder#getImageLoadingListener()
+	 */
+	@Override
+	public ImageLoadingListener getImageLoadingListener() {
+		return imageLoadingListener;
+	}
+	
+	/**
+	 * @param imageLoadingListener the imageLoadingListener to set
+	 */
+	public void setImageLoadingListener(ImageLoadingListener imageLoadingListener) {
+		this.imageLoadingListener = imageLoadingListener;
+	}
+	
+	public static interface ImageLoadingListener {
+		
+		public void onImageLoaded();
+		
+		public void onStubImageLoaded();
+	}
+	
 }

@@ -1,4 +1,4 @@
-package com.jdroid.java.http;
+package com.jdroid.java.http.apache;
 
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreConnectionPNames;
@@ -26,7 +26,7 @@ public class DefaultHttpClientFactory implements HttpClientFactory {
 	}
 	
 	/**
-	 * @see com.jdroid.java.http.HttpClientFactory#createHttpClient()
+	 * @see com.jdroid.java.http.apache.HttpClientFactory#createHttpClient()
 	 */
 	@Override
 	public DefaultHttpClient createHttpClient() {
@@ -34,7 +34,7 @@ public class DefaultHttpClientFactory implements HttpClientFactory {
 	}
 	
 	/**
-	 * @see com.jdroid.java.http.HttpClientFactory#createHttpClient(java.lang.Boolean, java.lang.Integer,
+	 * @see com.jdroid.java.http.apache.HttpClientFactory#createHttpClient(java.lang.Boolean, java.lang.Integer,
 	 *      java.lang.String)
 	 */
 	@Override

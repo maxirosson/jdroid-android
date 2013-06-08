@@ -1,20 +1,20 @@
-package com.jdroid.java.http.delete;
+package com.jdroid.java.http.apache.delete;
 
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpUriRequest;
-import com.jdroid.java.http.HttpClientFactory;
-import com.jdroid.java.http.HttpWebService;
 import com.jdroid.java.http.HttpWebServiceProcessor;
+import com.jdroid.java.http.apache.ApacheHttpWebService;
+import com.jdroid.java.http.apache.HttpClientFactory;
 
-public class HttpDeleteWebService extends HttpWebService {
+public class ApacheHttpDeleteWebService extends ApacheHttpWebService {
 	
-	public HttpDeleteWebService(HttpClientFactory httpClientFactory, String baseURL,
+	public ApacheHttpDeleteWebService(HttpClientFactory httpClientFactory, String baseURL,
 			HttpWebServiceProcessor... httpWebServiceProcessors) {
 		super(httpClientFactory, baseURL, httpWebServiceProcessors);
 	}
 	
 	/**
-	 * @see com.jdroid.java.http.HttpWebService#getMethodName()
+	 * @see com.jdroid.java.http.apache.ApacheHttpWebService#getMethodName()
 	 */
 	@Override
 	public String getMethodName() {
@@ -22,7 +22,7 @@ public class HttpDeleteWebService extends HttpWebService {
 	}
 	
 	/**
-	 * @see com.jdroid.java.http.HttpWebService#createHttpUriRequest()
+	 * @see com.jdroid.java.http.apache.ApacheHttpWebService#createHttpUriRequest()
 	 */
 	@Override
 	protected HttpUriRequest createHttpUriRequest(String protocol) {

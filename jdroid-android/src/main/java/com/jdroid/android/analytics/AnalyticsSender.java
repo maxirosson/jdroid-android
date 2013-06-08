@@ -5,6 +5,7 @@ import android.app.Activity;
 import com.jdroid.android.AbstractApplication;
 import com.jdroid.android.exception.ExceptionHandler;
 import com.jdroid.java.collections.Lists;
+import com.jdroid.java.exception.ConnectionException;
 import com.jdroid.java.utils.ExecutorUtils;
 
 /**
@@ -80,6 +81,20 @@ public class AnalyticsSender implements AnalyticsTracker {
 	@Override
 	public Boolean isEnabled() {
 		return null;
+	}
+	
+	/**
+	 * @see com.jdroid.android.analytics.AnalyticsTracker#trackConnectionException(com.jdroid.java.exception.ConnectionException)
+	 */
+	@Override
+	public void trackConnectionException(final ConnectionException connectionException) {
+		ExecutorUtils.execute(new TrackerRunnable() {
+			
+			@Override
+			protected void track(AnalyticsTracker tracker) {
+				tracker.trackConnectionException(connectionException);
+			}
+		});
 	}
 	
 }

@@ -1,4 +1,4 @@
-package com.jdroid.java.http;
+package com.jdroid.java.http.apache;
 
 import org.apache.http.client.HttpClient;
 

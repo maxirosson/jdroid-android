@@ -2,19 +2,19 @@ package com.jdroid.java.api;
 
 import java.util.List;
 import java.util.Map;
-import com.jdroid.java.http.DefaultHttpClientFactory;
-import com.jdroid.java.http.HttpClientFactory;
 import com.jdroid.java.http.HttpWebServiceProcessor;
 import com.jdroid.java.http.MultipartWebService;
 import com.jdroid.java.http.WebService;
-import com.jdroid.java.http.delete.HttpDeleteWebService;
-import com.jdroid.java.http.get.HttpGetWebService;
+import com.jdroid.java.http.apache.DefaultHttpClientFactory;
+import com.jdroid.java.http.apache.HttpClientFactory;
+import com.jdroid.java.http.apache.delete.ApacheHttpDeleteWebService;
+import com.jdroid.java.http.apache.get.ApacheHttpGetWebService;
+import com.jdroid.java.http.apache.post.ApacheHttpPostWebService;
+import com.jdroid.java.http.apache.post.ApacheFormHttpPostWebService;
+import com.jdroid.java.http.apache.put.ApacheHttpPutWebService;
+import com.jdroid.java.http.apache.put.ApacheMultipartHttpPutWebService;
 import com.jdroid.java.http.mock.AbstractMockWebService;
 import com.jdroid.java.http.post.EntityEnclosingWebService;
-import com.jdroid.java.http.post.FormHttpPostWebService;
-import com.jdroid.java.http.post.HttpPostWebService;
-import com.jdroid.java.http.put.HttpPutWebService;
-import com.jdroid.java.http.put.MultipartHttpPutWebService;
 import com.jdroid.java.marshaller.MarshallerMode;
 import com.jdroid.java.marshaller.MarshallerProvider;
 import com.jdroid.java.utils.StringUtils;
@@ -34,7 +34,7 @@ public abstract class AbstractApiService {
 			return getAbstractMockWebServiceInstance(urlSegments);
 		} else {
 			String baseURL = getBaseURL(getServerURL(), urlSegments);
-			return new HttpGetWebService(getHttpClientFactoryInstance(), baseURL,
+			return new ApacheHttpGetWebService(getHttpClientFactoryInstance(), baseURL,
 					toArray(getHttpWebServiceProcessors()));
 		}
 	}
@@ -48,7 +48,7 @@ public abstract class AbstractApiService {
 			return getAbstractMockWebServiceInstance(urlSegments);
 		} else {
 			String baseURL = getBaseURL(getServerURL(), urlSegments);
-			return new HttpPostWebService(getHttpClientFactoryInstance(), baseURL,
+			return new ApacheHttpPostWebService(getHttpClientFactoryInstance(), baseURL,
 					toArray(getHttpWebServiceProcessors()));
 		}
 	}
@@ -62,7 +62,7 @@ public abstract class AbstractApiService {
 			return getAbstractMockWebServiceInstance(urlSegments);
 		} else {
 			String baseURL = getBaseURL(getServerURL(), urlSegments);
-			return new HttpPutWebService(getHttpClientFactoryInstance(), baseURL,
+			return new ApacheHttpPutWebService(getHttpClientFactoryInstance(), baseURL,
 					toArray(getHttpWebServiceProcessors()));
 		}
 	}
@@ -76,7 +76,7 @@ public abstract class AbstractApiService {
 			return getAbstractMockWebServiceInstance(urlSegments);
 		} else {
 			String baseURL = getBaseURL(getServerURL(), urlSegments);
-			return new MultipartHttpPutWebService(getHttpClientFactoryInstance(), baseURL,
+			return new ApacheMultipartHttpPutWebService(getHttpClientFactoryInstance(), baseURL,
 					toArray(getHttpWebServiceProcessors()));
 		}
 	}
@@ -90,7 +90,7 @@ public abstract class AbstractApiService {
 			return getAbstractMockWebServiceInstance(urlSegments);
 		} else {
 			String baseURL = getBaseURL(getServerURL(), urlSegments);
-			return new HttpDeleteWebService(getHttpClientFactoryInstance(), baseURL,
+			return new ApacheHttpDeleteWebService(getHttpClientFactoryInstance(), baseURL,
 					toArray(getHttpWebServiceProcessors()));
 		}
 	}
@@ -104,7 +104,7 @@ public abstract class AbstractApiService {
 			return getAbstractMockWebServiceInstance(urlSegments);
 		} else {
 			String baseURL = getBaseURL(getServerURL(), urlSegments);
-			return new FormHttpPostWebService(getHttpClientFactoryInstance(), baseURL,
+			return new ApacheFormHttpPostWebService(getHttpClientFactoryInstance(), baseURL,
 					toArray(getHttpWebServiceProcessors()));
 		}
 	}

@@ -1,4 +1,4 @@
-package com.jdroid.java.http;
+package com.jdroid.java.http.apache;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,15 +18,17 @@ import org.slf4j.Logger;
 import com.jdroid.java.collections.Lists;
 import com.jdroid.java.exception.ConnectionException;
 import com.jdroid.java.exception.UnexpectedException;
+import com.jdroid.java.http.HttpWebServiceProcessor;
+import com.jdroid.java.http.WebService;
 import com.jdroid.java.parser.Parser;
 import com.jdroid.java.utils.EncodingUtils;
 import com.jdroid.java.utils.FileUtils;
 import com.jdroid.java.utils.LoggerUtils;
 import com.jdroid.java.utils.StringUtils;
 
-public abstract class HttpWebService implements WebService {
+public abstract class ApacheHttpWebService implements WebService {
 	
-	protected static final Logger LOGGER = LoggerUtils.getLogger(HttpWebService.class);
+	protected static final Logger LOGGER = LoggerUtils.getLogger(ApacheHttpWebService.class);
 	
 	private static final String HTTPS_PROTOCOL = "https";
 	private static final String HTTP_PROTOCOL = "http";
@@ -71,7 +73,7 @@ public abstract class HttpWebService implements WebService {
 	 * @param httpWebServiceProcessors
 	 * @param baseURL The Base URL of the request to execute
 	 */
-	public HttpWebService(HttpClientFactory httpClientFactory, String baseURL,
+	public ApacheHttpWebService(HttpClientFactory httpClientFactory, String baseURL,
 			HttpWebServiceProcessor... httpWebServiceProcessors) {
 		this.httpClientFactory = httpClientFactory;
 		this.baseURL = baseURL;

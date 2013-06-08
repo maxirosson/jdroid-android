@@ -13,7 +13,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import com.jdroid.android.AbstractApplication;
 import com.jdroid.android.utils.BitmapUtils;
-import com.jdroid.java.http.DefaultHttpClientFactory;
+import com.jdroid.java.http.apache.DefaultHttpClientFactory;
 import com.jdroid.java.utils.FileUtils;
 import com.jdroid.java.utils.LoggerUtils;
 import com.jdroid.java.utils.ValidationUtils;

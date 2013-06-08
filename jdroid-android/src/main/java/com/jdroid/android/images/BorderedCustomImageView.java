@@ -10,6 +10,7 @@ import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 import com.jdroid.android.R;
 import com.jdroid.android.domain.FileContent;
+import com.jdroid.android.images.CustomImageView.ImageLoadingListener;
 
 /**
  * 
@@ -119,5 +120,13 @@ public class BorderedCustomImageView extends LinearLayout implements ImageHolder
 	@Override
 	public Uri getImageUri() {
 		return customImageView.getImageUri();
+	}
+	
+	/**
+	 * @see com.jdroid.android.images.ImageHolder#getImageLoadingListener()
+	 */
+	@Override
+	public ImageLoadingListener getImageLoadingListener() {
+		return customImageView.getImageLoadingListener();
 	}
 }

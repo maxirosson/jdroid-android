@@ -46,6 +46,8 @@ public interface ExceptionHandler extends UncaughtExceptionHandler {
 	 */
 	public void handleException(Thread thread, Throwable throwable);
 	
+	public void logHandledException(String message, Throwable throwable);
+	
 	public void logHandledException(Throwable throwable);
 	
 }

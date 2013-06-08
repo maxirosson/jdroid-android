@@ -49,6 +49,9 @@ public class ImageLoader {
 		Bitmap bitmap = AbstractApplication.get().getBitmapLruCache().get(uriString);
 		if (bitmap != null) {
 			imageHolder.setImageBitmap(bitmap);
+			if (imageHolder.getImageLoadingListener() != null) {
+				imageHolder.getImageLoadingListener().onImageLoaded();
+			}
 		} else {
 			// If the image failed to be downloaded previously, try again after the RETRY_INTERVAL
 			if (failedBitmapCache.containsKey(uriString)) {
@@ -119,8 +122,14 @@ public class ImageLoader {
 			if ((imageHolder != null) && imageHolder.getImageUri().equals(uri)) {
 				if (bitmap != null) {
 					imageHolder.setImageBitmap(bitmap);
+					if (imageHolder.getImageLoadingListener() != null) {
+						imageHolder.getImageLoadingListener().onImageLoaded();
+					}
 				} else {
 					imageHolder.showStubImage();
+					if (imageHolder.getImageLoadingListener() != null) {
+						imageHolder.getImageLoadingListener().onStubImageLoaded();
+					}
 				}
 			}
 		}

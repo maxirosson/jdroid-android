@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import com.jdroid.android.domain.FileContent;
+import com.jdroid.android.images.CustomImageView.ImageLoadingListener;
 
 /**
  * 
@@ -36,4 +37,6 @@ public interface ImageHolder {
 	 * @param maxHeight The maximum height of the image used to scale it. If null, the image won't be scaled
 	 */
 	public void setImageContent(Uri imageUri, int stubId, Integer maxWidth, Integer maxHeight);
+	
+	public ImageLoadingListener getImageLoadingListener();
 }

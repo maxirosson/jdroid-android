@@ -1,4 +1,4 @@
-package com.jdroid.java.http.put;
+package com.jdroid.java.http.apache.put;
 
 import java.io.ByteArrayInputStream;
 import java.io.UnsupportedEncodingException;
@@ -7,11 +7,11 @@ import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.StringBody;
 import com.jdroid.java.exception.UnexpectedException;
-import com.jdroid.java.http.HttpClientFactory;
-import com.jdroid.java.http.HttpWebService;
 import com.jdroid.java.http.HttpWebServiceProcessor;
 import com.jdroid.java.http.MimeType;
 import com.jdroid.java.http.MultipartWebService;
+import com.jdroid.java.http.apache.ApacheHttpWebService;
+import com.jdroid.java.http.apache.HttpClientFactory;
 import com.jdroid.java.http.post.ByteArrayInputStreamBody;
 import com.jdroid.java.marshaller.MarshallerMode;
 import com.jdroid.java.marshaller.MarshallerProvider;
@@ -20,17 +20,17 @@ import com.jdroid.java.marshaller.MarshallerProvider;
  * 
  * @author Maxi Rosson
  */
-public class MultipartHttpPutWebService extends HttpPutWebService implements MultipartWebService {
+public class ApacheMultipartHttpPutWebService extends ApacheHttpPutWebService implements MultipartWebService {
 	
 	private MultipartEntity multipartEntity = new MultipartEntity();
 	
-	public MultipartHttpPutWebService(HttpClientFactory httpClientFactory, String baseURL,
+	public ApacheMultipartHttpPutWebService(HttpClientFactory httpClientFactory, String baseURL,
 			HttpWebServiceProcessor... httpWebServiceProcessors) {
 		super(httpClientFactory, baseURL, httpWebServiceProcessors);
 	}
 	
 	/**
-	 * @see com.jdroid.java.http.post.HttpPostWebService#addEntity(org.apache.http.client.methods.HttpEntityEnclosingRequestBase)
+	 * @see com.jdroid.java.http.apache.post.ApacheHttpPostWebService#addEntity(org.apache.http.client.methods.HttpEntityEnclosingRequestBase)
 	 */
 	@Override
 	protected void addEntity(HttpEntityEnclosingRequestBase httpEntityEnclosingRequestBase) {
@@ -38,12 +38,12 @@ public class MultipartHttpPutWebService extends HttpPutWebService implements Mul
 	}
 	
 	/**
-	 * @see com.jdroid.java.http.HttpWebService#addHeader(java.lang.String, java.lang.String)
+	 * @see com.jdroid.java.http.apache.ApacheHttpWebService#addHeader(java.lang.String, java.lang.String)
 	 */
 	@Override
 	public void addHeader(String name, String value) {
 		// The MultipartEntity will fill the proper content type header. So, we need to avoid the override of it
-		if (!name.equals(HttpWebService.CONTENT_TYPE_HEADER)) {
+		if (!name.equals(ApacheHttpWebService.CONTENT_TYPE_HEADER)) {
 			super.addHeader(name, value);
 		}
 	}
