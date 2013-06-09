@@ -1,4 +1,4 @@
-package com.jdroid.java.http.post;
+package com.jdroid.java.http.apache.post;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

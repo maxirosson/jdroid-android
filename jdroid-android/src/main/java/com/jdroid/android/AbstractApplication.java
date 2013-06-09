@@ -213,8 +213,11 @@ public abstract class AbstractApplication extends Application {
 	}
 	
 	private void initRoboGuice() {
-		RoboGuice.setBaseApplicationInjector(this, RoboGuice.DEFAULT_STAGE,
-			Modules.override(RoboGuice.newDefaultRoboModule(this)).with(createAndroidModule()));
+		AbstractModule androidModule = createAndroidModule();
+		if (androidModule != null) {
+			RoboGuice.setBaseApplicationInjector(this, RoboGuice.DEFAULT_STAGE,
+				Modules.override(RoboGuice.newDefaultRoboModule(this)).with(androidModule));
+		}
 	}
 	
 	private void initGCM() {
@@ -247,7 +250,7 @@ public abstract class AbstractApplication extends Application {
 	public abstract Class<? extends Activity> getHomeActivityClass();
 	
 	protected AbstractModule createAndroidModule() {
-		return new DefaultAndroidModule();
+		return null;
 	}
 	
 	protected DefaultApplicationContext createApplicationContext() {

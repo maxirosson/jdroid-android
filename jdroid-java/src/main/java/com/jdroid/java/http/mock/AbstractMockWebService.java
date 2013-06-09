@@ -4,8 +4,6 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.Collection;
 import java.util.Map;
-import org.apache.http.HttpEntity;
-import org.apache.http.cookie.Cookie;
 import org.slf4j.Logger;
 import com.jdroid.java.collections.Maps;
 import com.jdroid.java.exception.UnexpectedException;
@@ -173,14 +171,6 @@ public abstract class AbstractMockWebService implements MultipartWebService {
 	}
 	
 	/**
-	 * @see com.jdroid.java.http.post.EntityEnclosingWebService#setEntity(org.apache.http.HttpEntity)
-	 */
-	@Override
-	public void setEntity(HttpEntity entity) {
-		// Do Nothing
-	}
-	
-	/**
 	 * @see com.jdroid.java.http.post.EntityEnclosingWebService#setEntity(java.lang.String)
 	 */
 	@Override
@@ -201,14 +191,6 @@ public abstract class AbstractMockWebService implements MultipartWebService {
 	 */
 	@Override
 	public void setUserAgent(String userAgent) {
-		// Do Nothing
-	}
-	
-	/**
-	 * @see com.jdroid.java.http.WebService#addCookie(org.apache.http.cookie.Cookie)
-	 */
-	@Override
-	public void addCookie(Cookie cookie) {
 		// Do Nothing
 	}
 	

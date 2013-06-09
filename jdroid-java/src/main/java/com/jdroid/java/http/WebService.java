@@ -1,10 +1,22 @@
 package com.jdroid.java.http;
 
 import java.util.Collection;
-import org.apache.http.cookie.Cookie;
 import com.jdroid.java.parser.Parser;
 
 public interface WebService {
+	
+	public static final String HTTPS_PROTOCOL = "https";
+	public static final String HTTP_PROTOCOL = "http";
+	
+	public static final String ACCEPT_ENCODING_HEADER = "Accept-Encoding";
+	public static final String CONTENT_ENCODING_HEADER = "Content-Encoding";
+	public static final String GZIP_ENCODING = "gzip";
+	public static final String ACCEPT_HEADER = "accept";
+	public static final String CONTENT_TYPE_HEADER = "content-type";
+	
+	public static final String QUESTION_MARK = "?";
+	public static final String EQUALS = "=";
+	public static final String AMPERSAND = "&";
 	
 	/**
 	 * @param <T>
@@ -51,11 +63,6 @@ public interface WebService {
 	 * @param userAgent The user agent
 	 */
 	public void setUserAgent(String userAgent);
-	
-	/**
-	 * @param cookie The {@link Cookie} to add
-	 */
-	public void addCookie(Cookie cookie);
 	
 	/**
 	 * @param ssl

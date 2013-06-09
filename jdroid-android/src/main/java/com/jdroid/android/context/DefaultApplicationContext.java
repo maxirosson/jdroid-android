@@ -22,7 +22,6 @@ public class DefaultApplicationContext {
 	private Boolean adsEnabled;
 	private String adUnitId;
 	private Set<String> testDevicesIds;
-	private Boolean cookieRepositoryEnabled = false;
 	private Boolean googleAnalyticsEnabled;
 	private String googleAnalyticsTrackingId;
 	private Boolean crittercismEnabled;
@@ -92,10 +91,6 @@ public class DefaultApplicationContext {
 	 */
 	public Boolean areAdsEnabled() {
 		return adsEnabled;
-	}
-	
-	public Boolean isCookieRepositoryEnabled() {
-		return cookieRepositoryEnabled;
 	}
 	
 	/**

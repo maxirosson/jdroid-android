@@ -18,6 +18,7 @@ import org.slf4j.Logger;
 import com.jdroid.java.collections.Lists;
 import com.jdroid.java.exception.ConnectionException;
 import com.jdroid.java.exception.UnexpectedException;
+import com.jdroid.java.http.HttpResponseWrapper;
 import com.jdroid.java.http.HttpWebServiceProcessor;
 import com.jdroid.java.http.WebService;
 import com.jdroid.java.parser.Parser;
@@ -29,19 +30,6 @@ import com.jdroid.java.utils.StringUtils;
 public abstract class ApacheHttpWebService implements WebService {
 	
 	protected static final Logger LOGGER = LoggerUtils.getLogger(ApacheHttpWebService.class);
-	
-	private static final String HTTPS_PROTOCOL = "https";
-	private static final String HTTP_PROTOCOL = "http";
-	
-	public static final String ACCEPT_ENCODING_HEADER = "Accept-Encoding";
-	public static final String CONTENT_ENCODING_HEADER = "Content-Encoding";
-	public static final String GZIP_ENCODING = "gzip";
-	public static final String ACCEPT_HEADER = "accept";
-	public static final String CONTENT_TYPE_HEADER = "content-type";
-	
-	private static final String QUESTION_MARK = "?";
-	private static final String EQUALS = "=";
-	private static final String AMPERSAND = "&";
 	
 	private Boolean ssl = false;
 	
@@ -131,8 +119,9 @@ public abstract class ApacheHttpWebService implements WebService {
 			HttpResponse httpResponse = client.execute(request);
 			
 			if (httpWebServiceProcessors != null) {
+				HttpResponseWrapper httpResponseWrapper = new ApacheHttpResponseWrapper(httpResponse);
 				for (HttpWebServiceProcessor each : httpWebServiceProcessors) {
-					each.afterExecute(this, client, httpResponse);
+					each.afterExecute(this, httpResponseWrapper);
 				}
 			}
 			
@@ -202,10 +191,6 @@ public abstract class ApacheHttpWebService implements WebService {
 		}
 	}
 	
-	/**
-	 * @see com.jdroid.java.http.WebService#addCookie(org.apache.http.cookie.Cookie)
-	 */
-	@Override
 	public void addCookie(Cookie cookie) {
 		cookies.add(cookie);
 	}

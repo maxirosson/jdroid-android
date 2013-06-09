@@ -14,7 +14,8 @@ import com.jdroid.java.http.post.EntityEnclosingWebService;
  * 
  * @author Maxi Rosson
  */
-public abstract class ApacheHttpEntityEnclosingWebService extends ApacheHttpWebService implements EntityEnclosingWebService {
+public abstract class ApacheHttpEntityEnclosingWebService extends ApacheHttpWebService implements
+		EntityEnclosingWebService {
 	
 	private HttpEntity entity;
 	
@@ -44,10 +45,6 @@ public abstract class ApacheHttpEntityEnclosingWebService extends ApacheHttpWebS
 		httpEntityEnclosingRequestBase.setEntity(entity);
 	}
 	
-	/**
-	 * @see com.jdroid.java.http.post.EntityEnclosingWebService#setEntity(org.apache.http.HttpEntity)
-	 */
-	@Override
 	public void setEntity(HttpEntity entity) {
 		this.entity = entity;
 	}

@@ -12,7 +12,7 @@ import com.jdroid.java.http.MimeType;
 import com.jdroid.java.http.MultipartWebService;
 import com.jdroid.java.http.apache.ApacheHttpWebService;
 import com.jdroid.java.http.apache.HttpClientFactory;
-import com.jdroid.java.http.post.ByteArrayInputStreamBody;
+import com.jdroid.java.http.apache.post.ByteArrayInputStreamBody;
 import com.jdroid.java.marshaller.MarshallerMode;
 import com.jdroid.java.marshaller.MarshallerProvider;
 
