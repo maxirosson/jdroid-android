@@ -54,6 +54,8 @@ public interface WebService {
 	 */
 	public void addUrlSegment(Object segment);
 	
+	public void addHttpWebServiceProcessor(HttpWebServiceProcessor httpWebServiceProcessor);
+	
 	/**
 	 * @param connectionTimeout The connection timeout in milliseconds.
 	 */

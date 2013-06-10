@@ -5,14 +5,6 @@ import java.util.Map;
 import com.jdroid.java.http.HttpWebServiceProcessor;
 import com.jdroid.java.http.MultipartWebService;
 import com.jdroid.java.http.WebService;
-import com.jdroid.java.http.apache.DefaultHttpClientFactory;
-import com.jdroid.java.http.apache.HttpClientFactory;
-import com.jdroid.java.http.apache.delete.ApacheHttpDeleteWebService;
-import com.jdroid.java.http.apache.get.ApacheHttpGetWebService;
-import com.jdroid.java.http.apache.post.ApacheHttpPostWebService;
-import com.jdroid.java.http.apache.post.ApacheFormHttpPostWebService;
-import com.jdroid.java.http.apache.put.ApacheHttpPutWebService;
-import com.jdroid.java.http.apache.put.ApacheMultipartHttpPutWebService;
 import com.jdroid.java.http.mock.AbstractMockWebService;
 import com.jdroid.java.http.post.EntityEnclosingWebService;
 import com.jdroid.java.marshaller.MarshallerMode;
@@ -34,10 +26,11 @@ public abstract class AbstractApiService {
 			return getAbstractMockWebServiceInstance(urlSegments);
 		} else {
 			String baseURL = getBaseURL(getServerURL(), urlSegments);
-			return new ApacheHttpGetWebService(getHttpClientFactoryInstance(), baseURL,
-					toArray(getHttpWebServiceProcessors()));
+			return newGetServiceImpl(baseURL, toArray(getHttpWebServiceProcessors()));
 		}
 	}
+	
+	protected abstract WebService newGetServiceImpl(String baseURL, HttpWebServiceProcessor... httpWebServiceProcessors);
 	
 	protected EntityEnclosingWebService newPostService(Object... urlSegments) {
 		return newPostService(false, urlSegments);
@@ -48,10 +41,12 @@ public abstract class AbstractApiService {
 			return getAbstractMockWebServiceInstance(urlSegments);
 		} else {
 			String baseURL = getBaseURL(getServerURL(), urlSegments);
-			return new ApacheHttpPostWebService(getHttpClientFactoryInstance(), baseURL,
-					toArray(getHttpWebServiceProcessors()));
+			return newPostServiceImpl(baseURL, toArray(getHttpWebServiceProcessors()));
 		}
 	}
+	
+	protected abstract EntityEnclosingWebService newPostServiceImpl(String baseURL,
+			HttpWebServiceProcessor... httpWebServiceProcessors);
 	
 	protected EntityEnclosingWebService newPutService(Object... urlSegments) {
 		return newPutService(false, urlSegments);
@@ -62,10 +57,12 @@ public abstract class AbstractApiService {
 			return getAbstractMockWebServiceInstance(urlSegments);
 		} else {
 			String baseURL = getBaseURL(getServerURL(), urlSegments);
-			return new ApacheHttpPutWebService(getHttpClientFactoryInstance(), baseURL,
-					toArray(getHttpWebServiceProcessors()));
+			return newPutServiceImpl(baseURL, toArray(getHttpWebServiceProcessors()));
 		}
 	}
+	
+	protected abstract EntityEnclosingWebService newPutServiceImpl(String baseURL,
+			HttpWebServiceProcessor... httpWebServiceProcessors);
 	
 	protected MultipartWebService newMultipartPutService(Object... urlSegments) {
 		return newMultipartPutService(false, urlSegments);
@@ -76,10 +73,12 @@ public abstract class AbstractApiService {
 			return getAbstractMockWebServiceInstance(urlSegments);
 		} else {
 			String baseURL = getBaseURL(getServerURL(), urlSegments);
-			return new ApacheMultipartHttpPutWebService(getHttpClientFactoryInstance(), baseURL,
-					toArray(getHttpWebServiceProcessors()));
+			return newMultipartPutServiceImpl(baseURL, toArray(getHttpWebServiceProcessors()));
 		}
 	}
+	
+	protected abstract MultipartWebService newMultipartPutServiceImpl(String baseURL,
+			HttpWebServiceProcessor... httpWebServiceProcessors);
 	
 	protected WebService newDeleteService(Object... urlSegments) {
 		return newDeleteService(false, urlSegments);
@@ -90,10 +89,12 @@ public abstract class AbstractApiService {
 			return getAbstractMockWebServiceInstance(urlSegments);
 		} else {
 			String baseURL = getBaseURL(getServerURL(), urlSegments);
-			return new ApacheHttpDeleteWebService(getHttpClientFactoryInstance(), baseURL,
-					toArray(getHttpWebServiceProcessors()));
+			return newDeleteServiceImpl(baseURL, toArray(getHttpWebServiceProcessors()));
 		}
 	}
+	
+	protected abstract WebService newDeleteServiceImpl(String baseURL,
+			HttpWebServiceProcessor... httpWebServiceProcessors);
 	
 	protected EntityEnclosingWebService newFormPostService(Object... urlSegments) {
 		return newFormPostService(false, urlSegments);
@@ -104,12 +105,14 @@ public abstract class AbstractApiService {
 			return getAbstractMockWebServiceInstance(urlSegments);
 		} else {
 			String baseURL = getBaseURL(getServerURL(), urlSegments);
-			return new ApacheFormHttpPostWebService(getHttpClientFactoryInstance(), baseURL,
-					toArray(getHttpWebServiceProcessors()));
+			return newFormPostServiceImpl(baseURL, toArray(getHttpWebServiceProcessors()));
 		}
 	}
 	
-	private HttpWebServiceProcessor[] toArray(List<HttpWebServiceProcessor> httpWebServiceProcessors) {
+	protected abstract EntityEnclosingWebService newFormPostServiceImpl(String baseURL,
+			HttpWebServiceProcessor... httpWebServiceProcessors);
+	
+	protected HttpWebServiceProcessor[] toArray(List<HttpWebServiceProcessor> httpWebServiceProcessors) {
 		if (httpWebServiceProcessors != null) {
 			return httpWebServiceProcessors.toArray(new HttpWebServiceProcessor[] {});
 		} else {
@@ -135,12 +138,6 @@ public abstract class AbstractApiService {
 			}
 		}
 		return builder.toString();
-	}
-	
-	protected HttpClientFactory getHttpClientFactoryInstance() {
-		// TODO See how the AndroidHttpClient works
-		// return AndroidHttpClientFactory.get();
-		return DefaultHttpClientFactory.get();
 	}
 	
 	public void marshallSimple(EntityEnclosingWebService webservice, Object object) {

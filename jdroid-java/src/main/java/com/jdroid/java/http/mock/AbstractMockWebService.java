@@ -7,6 +7,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import com.jdroid.java.collections.Maps;
 import com.jdroid.java.exception.UnexpectedException;
+import com.jdroid.java.http.HttpWebServiceProcessor;
 import com.jdroid.java.http.MultipartWebService;
 import com.jdroid.java.http.WebService;
 import com.jdroid.java.http.post.EntityEnclosingWebService;
@@ -167,6 +168,14 @@ public abstract class AbstractMockWebService implements MultipartWebService {
 	 */
 	@Override
 	public void addUrlSegment(Object segment) {
+		// Do Nothing
+	}
+	
+	/**
+	 * @see com.jdroid.java.http.WebService#addHttpWebServiceProcessor(com.jdroid.java.http.HttpWebServiceProcessor)
+	 */
+	@Override
+	public void addHttpWebServiceProcessor(HttpWebServiceProcessor httpWebServiceProcessor) {
 		// Do Nothing
 	}
 	

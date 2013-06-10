@@ -52,7 +52,7 @@ public abstract class ApacheHttpWebService implements WebService {
 	
 	private InputStream inputStream;
 	
-	private HttpWebServiceProcessor[] httpWebServiceProcessors;
+	private List<HttpWebServiceProcessor> httpWebServiceProcessors;
 	
 	private HttpClientFactory httpClientFactory;
 	
@@ -65,7 +65,8 @@ public abstract class ApacheHttpWebService implements WebService {
 			HttpWebServiceProcessor... httpWebServiceProcessors) {
 		this.httpClientFactory = httpClientFactory;
 		this.baseURL = baseURL;
-		this.httpWebServiceProcessors = httpWebServiceProcessors;
+		this.httpWebServiceProcessors = httpWebServiceProcessors != null ? Lists.newArrayList(httpWebServiceProcessors)
+				: null;
 	}
 	
 	public abstract String getMethodName();
@@ -225,6 +226,14 @@ public abstract class ApacheHttpWebService implements WebService {
 				DefaultHttpClient.class.cast(client).getCookieStore().addCookie(cookie);
 			}
 		}
+	}
+	
+	/**
+	 * @see com.jdroid.java.http.WebService#addHttpWebServiceProcessor(com.jdroid.java.http.HttpWebServiceProcessor)
+	 */
+	@Override
+	public void addHttpWebServiceProcessor(HttpWebServiceProcessor httpWebServiceProcessor) {
+		httpWebServiceProcessors.add(httpWebServiceProcessor);
 	}
 	
 	/**
