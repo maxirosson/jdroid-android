@@ -195,10 +195,10 @@ public abstract class AbstractSearchFragment<T> extends AbstractListFragment<T> 
 	}
 	
 	/**
-	 * @see com.jdroid.android.fragment.AbstractListFragment#goBackOnError()
+	 * @see com.jdroid.android.fragment.AbstractListFragment#goBackOnError(java.lang.RuntimeException)
 	 */
 	@Override
-	public Boolean goBackOnError() {
+	public Boolean goBackOnError(RuntimeException runtimeException) {
 		return false;
 	}
 	

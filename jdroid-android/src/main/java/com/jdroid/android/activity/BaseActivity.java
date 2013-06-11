@@ -481,7 +481,7 @@ public class BaseActivity implements ActivityIf {
 	 */
 	@Override
 	public void onFinishFailedUseCase(RuntimeException runtimeException) {
-		if (getActivityIf().goBackOnError()) {
+		if (getActivityIf().goBackOnError(runtimeException)) {
 			DefaultExceptionHandler.markAsGoBackOnError(runtimeException);
 		} else {
 			DefaultExceptionHandler.markAsNotGoBackOnError(runtimeException);
@@ -499,10 +499,10 @@ public class BaseActivity implements ActivityIf {
 	}
 	
 	/**
-	 * @see com.jdroid.android.fragment.FragmentIf#goBackOnError()
+	 * @see com.jdroid.android.fragment.FragmentIf#goBackOnError(java.lang.RuntimeException)
 	 */
 	@Override
-	public Boolean goBackOnError() {
+	public Boolean goBackOnError(RuntimeException runtimeException) {
 		return true;
 	}
 	

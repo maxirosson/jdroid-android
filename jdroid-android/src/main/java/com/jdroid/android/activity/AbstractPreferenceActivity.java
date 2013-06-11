@@ -333,8 +333,7 @@ public abstract class AbstractPreferenceActivity extends SherlockPreferenceActiv
 	}
 	
 	/**
-	 * @see com.jdroid.android.fragment.FragmentIf#executeUseCase(com.jdroid.android.usecase.UseCase,
-	 *      java.lang.Long)
+	 * @see com.jdroid.android.fragment.FragmentIf#executeUseCase(com.jdroid.android.usecase.UseCase, java.lang.Long)
 	 */
 	@Override
 	public void executeUseCase(UseCase<?> useCase, Long delaySeconds) {
@@ -382,11 +381,11 @@ public abstract class AbstractPreferenceActivity extends SherlockPreferenceActiv
 	}
 	
 	/**
-	 * @see com.jdroid.android.fragment.FragmentIf#goBackOnError()
+	 * @see com.jdroid.android.fragment.FragmentIf#goBackOnError(java.lang.RuntimeException)
 	 */
 	@Override
-	public Boolean goBackOnError() {
-		return baseActivity.goBackOnError();
+	public Boolean goBackOnError(RuntimeException runtimeException) {
+		return baseActivity.goBackOnError(runtimeException);
 	}
 	
 	/**

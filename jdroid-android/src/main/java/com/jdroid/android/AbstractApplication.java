@@ -11,6 +11,7 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
 import android.os.Build;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
@@ -80,6 +81,8 @@ public abstract class AbstractApplication extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		
+		LoggerUtils.setRelease(isDebuggable());
 		
 		loadInstallationId();
 		
@@ -364,5 +367,10 @@ public abstract class AbstractApplication extends Application {
 	
 	public String getAppName() {
 		return getString(R.string.appName);
+	}
+	
+	private boolean isDebuggable() {
+		int flags = this.getApplicationInfo().flags;
+		return (flags & ApplicationInfo.FLAG_DEBUGGABLE) == 0;
 	}
 }

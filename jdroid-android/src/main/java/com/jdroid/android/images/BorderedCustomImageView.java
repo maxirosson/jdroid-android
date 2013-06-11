@@ -129,4 +129,12 @@ public class BorderedCustomImageView extends LinearLayout implements ImageHolder
 	public ImageLoadingListener getImageLoadingListener() {
 		return customImageView.getImageLoadingListener();
 	}
+	
+	/**
+	 * @see com.jdroid.android.images.ImageHolder#runOnUiThread(java.lang.Runnable)
+	 */
+	@Override
+	public void runOnUiThread(Runnable runnable) {
+		customImageView.runOnUiThread(runnable);
+	}
 }

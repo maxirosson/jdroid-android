@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 import org.slf4j.Logger;
-import android.app.Activity;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import com.jdroid.android.AbstractApplication;
@@ -142,8 +141,7 @@ public class ImageLoader {
 			ImageHolder imageHolder = getImageHolder();
 			if (imageHolder != null) {
 				bitmap = imageResolver.resolve(uri, imageHolder.getMaximumWidth(), imageHolder.getMaximumHeight());
-				Activity activity = (Activity)imageHolder.getContext();
-				activity.runOnUiThread(this);
+				imageHolder.runOnUiThread(this);
 			}
 			return bitmap;
 		}

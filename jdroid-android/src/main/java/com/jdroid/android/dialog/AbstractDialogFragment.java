@@ -145,11 +145,11 @@ public class AbstractDialogFragment extends DialogFragment implements FragmentIf
 	}
 	
 	/**
-	 * @see com.jdroid.android.fragment.FragmentIf#goBackOnError()
+	 * @see com.jdroid.android.fragment.FragmentIf#goBackOnError(java.lang.RuntimeException)
 	 */
 	@Override
-	public Boolean goBackOnError() {
-		return getFragmentIf().goBackOnError();
+	public Boolean goBackOnError(RuntimeException runtimeException) {
+		return getFragmentIf().goBackOnError(runtimeException);
 	}
 	
 	/**
@@ -281,8 +281,7 @@ public class AbstractDialogFragment extends DialogFragment implements FragmentIf
 	}
 	
 	/**
-	 * @see com.jdroid.android.fragment.FragmentIf#executeUseCase(com.jdroid.android.usecase.UseCase,
-	 *      java.lang.Long)
+	 * @see com.jdroid.android.fragment.FragmentIf#executeUseCase(com.jdroid.android.usecase.UseCase, java.lang.Long)
 	 */
 	@Override
 	public void executeUseCase(UseCase<?> useCase, Long delaySeconds) {

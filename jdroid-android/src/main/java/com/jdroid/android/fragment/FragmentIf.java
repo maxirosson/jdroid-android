@@ -119,7 +119,7 @@ public interface FragmentIf extends DefaultUseCaseListener {
 	
 	public void executeUseCase(UseCase<?> useCase, Long delaySeconds);
 	
-	public Boolean goBackOnError();
+	public Boolean goBackOnError(RuntimeException runtimeException);
 	
 	public User getUser();
 	

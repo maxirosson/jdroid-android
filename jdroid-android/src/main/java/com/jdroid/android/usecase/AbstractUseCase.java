@@ -3,6 +3,7 @@ package com.jdroid.android.usecase;
 import java.util.List;
 import org.slf4j.Logger;
 import com.jdroid.java.collections.Lists;
+import com.jdroid.java.utils.DateUtils;
 import com.jdroid.java.utils.LoggerUtils;
 
 /**
@@ -28,11 +29,15 @@ public abstract class AbstractUseCase<T> implements UseCase<T> {
 	private RuntimeException runtimeException;
 	private Boolean notified = false;
 	
+	private Long executionTime = 0L;
+	
 	/**
 	 * Executes the use case.
 	 */
 	@Override
 	public final void run() {
+		
+		long startTime = System.currentTimeMillis();
 		
 		LOGGER.debug("Executing " + getClass().getSimpleName());
 		markAsInProgress();
@@ -40,7 +45,12 @@ public abstract class AbstractUseCase<T> implements UseCase<T> {
 			notifyUseCaseStart(listener);
 		}
 		try {
+			
+			LOGGER.debug("Started use case " + getClass().getSimpleName());
 			doExecute();
+			executionTime = System.currentTimeMillis() - startTime;
+			LOGGER.debug("Finished use case. Execution time: " + DateUtils.formatSecondsAndMilli(executionTime));
+			
 			if (isCanceled()) {
 				for (T listener : listeners) {
 					notifyFinishedCanceledUseCase(listener);
@@ -61,6 +71,13 @@ public abstract class AbstractUseCase<T> implements UseCase<T> {
 				markAsNotified();
 			}
 		}
+	}
+	
+	/**
+	 * @return the executionTime
+	 */
+	public Long getExecutionTime() {
+		return executionTime;
 	}
 	
 	/**

@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
+import java.util.concurrent.TimeUnit;
 import com.jdroid.java.exception.UnexpectedException;
 
 /**
@@ -510,6 +511,11 @@ public abstract class DateUtils {
 		calendar.setTime(date);
 		calendar.set(Calendar.DATE, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
 		return DateUtils.resetTime(calendar).getTime();
+	}
+	
+	public static String formatSecondsAndMilli(long duration) {
+		return TimeUnit.MICROSECONDS.toSeconds(duration) + "s, "
+				+ (duration - TimeUnit.SECONDS.toMillis(TimeUnit.MILLISECONDS.toSeconds(duration))) + "ms";
 	}
 	
 }

@@ -39,4 +39,6 @@ public interface ImageHolder {
 	public void setImageContent(Uri imageUri, int stubId, Integer maxWidth, Integer maxHeight);
 	
 	public ImageLoadingListener getImageLoadingListener();
+	
+	public void runOnUiThread(Runnable runnable);
 }

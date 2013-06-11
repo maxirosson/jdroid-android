@@ -31,7 +31,7 @@ public abstract class AndroidUseCaseListener implements DefaultUseCaseListener {
 	 */
 	@Override
 	public void onFinishFailedUseCase(RuntimeException runtimeException) {
-		if (goBackOnError()) {
+		if (goBackOnError(runtimeException)) {
 			DefaultExceptionHandler.markAsGoBackOnError(runtimeException);
 		} else {
 			DefaultExceptionHandler.markAsNotGoBackOnError(runtimeException);
@@ -44,8 +44,8 @@ public abstract class AndroidUseCaseListener implements DefaultUseCaseListener {
 		throw runtimeException;
 	}
 	
-	public Boolean goBackOnError() {
-		return getActivityIf().goBackOnError();
+	public Boolean goBackOnError(RuntimeException runtimeException) {
+		return getActivityIf().goBackOnError(runtimeException);
 	}
 	
 	/**

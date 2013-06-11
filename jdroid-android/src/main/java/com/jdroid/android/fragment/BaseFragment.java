@@ -86,7 +86,7 @@ public class BaseFragment {
 	public void onFinishFailedUseCase(RuntimeException runtimeException) {
 		FragmentIf fragmentIf = getFragmentIf();
 		if (fragmentIf != null) {
-			if (fragmentIf.goBackOnError()) {
+			if (fragmentIf.goBackOnError(runtimeException)) {
 				DefaultExceptionHandler.markAsGoBackOnError(runtimeException);
 			} else {
 				DefaultExceptionHandler.markAsNotGoBackOnError(runtimeException);
