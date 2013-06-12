@@ -5,10 +5,10 @@
 		android:layout_above="@+id/adViewContainer">
 
 		<LinearLayout android:id="@+id/contextualFragmentContainer" android:layout_width="200dp"
-			android:layout_height="match_parent" />
+			android:layout_height="match_parent" android:orientation="horizontal" />
 
 		<LinearLayout android:id="@+id/detailsFragmentContainer" android:layout_width="match_parent"
-			android:layout_height="match_parent" />
+			android:layout_height="match_parent" android:orientation="horizontal" />
 
 	</LinearLayout>
 	<include layout="@layout/ad_view_container" />

@@ -32,6 +32,7 @@ public abstract class AbstractSearchFragment<T> extends AbstractListFragment<T> 
 	private EditText searchText;
 	private View searchButton;
 	private View cancelButton;
+	private View loading;
 	
 	/**
 	 * @see android.support.v4.app.ListFragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup,
@@ -68,7 +69,9 @@ public abstract class AbstractSearchFragment<T> extends AbstractListFragment<T> 
 		
 		searchButton = findView(R.id.searchButton);
 		if (isInstantSearchEnabled()) {
-			searchButton.setVisibility(View.GONE);
+			if (searchButton != null) {
+				searchButton.setVisibility(View.GONE);
+			}
 		} else {
 			searchButton.setOnClickListener(new OnClickListener() {
 				
@@ -97,6 +100,8 @@ public abstract class AbstractSearchFragment<T> extends AbstractListFragment<T> 
 		emptyLegend.setVisibility(View.GONE);
 		
 		setListAdapter(createBaseArrayAdapter());
+		
+		loading = findView(R.id.loading);
 	}
 	
 	public Boolean isInstantSearchEnabled() {
@@ -191,7 +196,15 @@ public abstract class AbstractSearchFragment<T> extends AbstractListFragment<T> 
 	 */
 	@Override
 	public void onStartUseCase() {
-		// Do nothing
+		executeOnUIThread(new Runnable() {
+			
+			@Override
+			public void run() {
+				if (loading != null) {
+					loading.setVisibility(View.VISIBLE);
+				}
+			}
+		});
 	}
 	
 	/**
@@ -203,6 +216,17 @@ public abstract class AbstractSearchFragment<T> extends AbstractListFragment<T> 
 	}
 	
 	/**
+	 * @see com.jdroid.android.fragment.AbstractListFragment#onFinishFailedUseCase(java.lang.RuntimeException)
+	 */
+	@Override
+	public void onFinishFailedUseCase(RuntimeException runtimeException) {
+		super.onFinishFailedUseCase(runtimeException);
+		if (loading != null) {
+			loading.setVisibility(View.INVISIBLE);
+		}
+	}
+	
+	/**
 	 * @see com.jdroid.android.activity.AbstractListActivity#onFinishUseCase()
 	 */
 	@Override
@@ -211,6 +235,10 @@ public abstract class AbstractSearchFragment<T> extends AbstractListFragment<T> 
 			
 			@Override
 			public void run() {
+				if (loading != null) {
+					loading.setVisibility(View.INVISIBLE);
+				}
+				
 				SearchResult<T> searchResult = getSearchUseCase().getSearchResult();
 				PagedResult<T> pagedResult = searchResult != null ? searchResult.getPagedResult()
 						: new PagedResult<T>();

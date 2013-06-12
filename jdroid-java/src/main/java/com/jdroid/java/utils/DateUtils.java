@@ -514,8 +514,8 @@ public abstract class DateUtils {
 	}
 	
 	public static String formatSecondsAndMilli(long duration) {
-		return TimeUnit.MICROSECONDS.toSeconds(duration) + "s, "
-				+ (duration - TimeUnit.SECONDS.toMillis(TimeUnit.MILLISECONDS.toSeconds(duration))) + "ms";
+		long seconds = TimeUnit.MILLISECONDS.toSeconds(duration);
+		return seconds + "s, " + (duration - (seconds * 1000)) + "ms";
 	}
 	
 }

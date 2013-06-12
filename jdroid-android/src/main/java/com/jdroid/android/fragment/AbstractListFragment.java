@@ -72,7 +72,6 @@ public abstract class AbstractListFragment<T> extends SherlockListFragment imple
 		baseFragment.onViewCreated(view, savedInstanceState);
 		View emptyView = getListView().getEmptyView();
 		if (emptyView != null) {
-			emptyView.setVisibility(View.GONE);
 			if (emptyView instanceof TextView) {
 				((TextView)emptyView).setText(getNoResultsText());
 			}

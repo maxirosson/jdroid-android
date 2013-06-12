@@ -19,24 +19,24 @@ if [ -z "$diff_result" ]
 then
 	echo "**************************************************************"
 	echo "* Status: OK. The following i19n files match:"
-    	echo "*  $FILE_1"
+    echo "*  $FILE_1"
 	echo "*  $FILE_2"
 	echo "**************************************************************"
 	exit 0
 else
 	echo "**************************************************************"
 	echo "* Status: ERROR. The following i19n files match:"
-    	echo "*  $FILE_1"
+    echo "*  $FILE_1"
 	echo "*  $FILE_2"
 	echo "*"
-    	echo "* Remember that the i19n files should have the same keys "
+    echo "* Remember that the i19n files should have the same keys "
 	echo "* on the same lines."
-    	echo "* If you don't have the translation for any language, please "
+    echo "* If you don't have the translation for any language, please "
 	echo "* add the key on all the files, and 'TODO' as value"
-    	echo "*"
-    	echo "Diff:"
-    	echo $diff_result
-    	echo "**************************************************************"
+    echo "*"
+    echo "Diff:"
+    echo $diff_result
+    echo "**************************************************************"
 	exit 1
 fi
 

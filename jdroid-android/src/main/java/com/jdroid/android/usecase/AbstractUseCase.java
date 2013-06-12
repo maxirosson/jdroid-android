@@ -37,8 +37,6 @@ public abstract class AbstractUseCase<T> implements UseCase<T> {
 	@Override
 	public final void run() {
 		
-		long startTime = System.currentTimeMillis();
-		
 		LOGGER.debug("Executing " + getClass().getSimpleName());
 		markAsInProgress();
 		for (T listener : listeners) {
@@ -47,6 +45,7 @@ public abstract class AbstractUseCase<T> implements UseCase<T> {
 		try {
 			
 			LOGGER.debug("Started use case " + getClass().getSimpleName());
+			long startTime = System.currentTimeMillis();
 			doExecute();
 			executionTime = System.currentTimeMillis() - startTime;
 			LOGGER.debug("Finished use case. Execution time: " + DateUtils.formatSecondsAndMilli(executionTime));

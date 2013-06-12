@@ -23,8 +23,6 @@ public class AbstractGridFragment<T> extends AbstractFragment implements OnItemS
 	private ListAdapter adapter;
 	private GridView gridView;
 	private View emptyView;
-	private TextView standardEmptyView;
-	private CharSequence emptyText;
 	private boolean listShown;
 	
 	private Handler handler = new Handler();
@@ -59,9 +57,9 @@ public class AbstractGridFragment<T> extends AbstractFragment implements OnItemS
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 		ensureGrid();
+		
 		View emptyView = gridView.getEmptyView();
 		if (emptyView != null) {
-			emptyView.setVisibility(View.GONE);
 			if (emptyView instanceof TextView) {
 				((TextView)emptyView).setText(getNoResultsText());
 			}
@@ -77,7 +75,6 @@ public class AbstractGridFragment<T> extends AbstractFragment implements OnItemS
 		gridView = null;
 		listShown = false;
 		emptyView = null;
-		standardEmptyView = null;
 		super.onDestroyView();
 	}
 	
@@ -123,24 +120,6 @@ public class AbstractGridFragment<T> extends AbstractFragment implements OnItemS
 	public GridView getGridView() {
 		ensureGrid();
 		return gridView;
-	}
-	
-	/**
-	 * The default content for a ListFragment has a TextView that can be shown when the list is empty. If you would like
-	 * to have it shown, call this method to supply the text it should use.
-	 * 
-	 * @param text
-	 */
-	public void setEmptyText(CharSequence text) {
-		ensureGrid();
-		if (standardEmptyView == null) {
-			throw new IllegalStateException("Can't be used with a custom content view");
-		}
-		standardEmptyView.setText(text);
-		if (emptyText == null) {
-			gridView.setEmptyView(standardEmptyView);
-		}
-		emptyText = text;
 	}
 	
 	/**
@@ -198,27 +177,19 @@ public class AbstractGridFragment<T> extends AbstractFragment implements OnItemS
 		if (root instanceof GridView) {
 			gridView = (GridView)root;
 		} else {
-			standardEmptyView = (TextView)root.findViewById(android.R.id.empty);
-			if (standardEmptyView == null) {
-				emptyView = root.findViewById(android.R.id.empty);
-			} else {
-				standardEmptyView.setVisibility(View.GONE);
-			}
-			View rawListView = root.findViewById(R.id.grid);
-			if (!(rawListView instanceof GridView)) {
+			emptyView = root.findViewById(android.R.id.empty);
+			View rawGridView = root.findViewById(R.id.grid);
+			if (!(rawGridView instanceof GridView)) {
 				throw new RuntimeException("Content has view with id attribute 'R.id.grid' "
 						+ "that is not a GridView class");
 			}
-			gridView = (GridView)rawListView;
+			gridView = (GridView)rawGridView;
 			if (gridView == null) {
 				throw new RuntimeException("Your content must have a GridView whose id attribute is "
 						+ "'android.R.id.grid'");
 			}
 			if (emptyView != null) {
 				gridView.setEmptyView(emptyView);
-			} else if (emptyText != null) {
-				standardEmptyView.setText(emptyText);
-				gridView.setEmptyView(standardEmptyView);
 			}
 		}
 		listShown = true;

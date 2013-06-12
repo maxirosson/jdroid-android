@@ -2,16 +2,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical"
 	android:layout_width="match_parent" android:layout_height="match_parent">
 
-	<LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="wrap_content"
-		android:paddingLeft="5dp" android:paddingTop="5dp" android:paddingRight="5dp" android:paddingBottom="1dp">
-		<EditText android:id="@+id/searchText" android:layout_width="0dp" android:layout_height="wrap_content"
-			android:inputType="text" android:hint="@string/typeHere" android:imeOptions="actionSearch" android:layout_weight="1" />
+	<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+		android:orientation="horizontal">
+		<RelativeLayout android:id="@+id/searchBox" android:layout_width="0dp" android:layout_height="wrap_content"
+			android:paddingLeft="5dp" android:paddingTop="5dp" android:paddingRight="5dp" android:paddingBottom="1dp"
+			android:layout_weight="1">
+			<EditText android:id="@+id/searchText" android:layout_width="match_parent" android:layout_height="wrap_content"
+				android:inputType="text" android:hint="@string/typeHere" android:imeOptions="actionSearch" android:paddingRight="64dp" />
+			<ProgressBar android:id="@+id/loading" android:layout_width="24dp" android:layout_height="24dp"
+				android:layout_centerVertical="true" android:layout_marginLeft="4dp" android:layout_marginRight="4dp"
+				android:indeterminate="true" android:layout_toLeftOf="@+id/cancelButton" android:visibility="invisible" />
+			<ImageView android:id="@+id/cancelButton" android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:src="@drawable/close_selector" android:layout_alignParentRight="true" android:layout_centerVertical="true"
+				android:layout_marginLeft="4dp" android:layout_marginRight="4dp" />
+		</RelativeLayout>
+
 		<ImageView android:id="@+id/searchButton" android:layout_width="wrap_content" android:layout_height="wrap_content"
 			android:src="@drawable/search" android:layout_gravity="center_vertical" android:layout_marginBottom="2dp"
 			android:layout_marginLeft="3dp" android:layout_marginRight="3dp" />
-		<ImageView android:id="@+id/cancelButton" android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:src="@drawable/cancel" android:layout_gravity="center_vertical" android:layout_marginLeft="3dp"
-			android:layout_marginBottom="1dp" />
 	</LinearLayout>
 
 	<ListView android:id="@+id/android:list" style="@style/list" android:fastScrollEnabled="true" />
