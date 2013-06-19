@@ -6,7 +6,6 @@
 		android:verticalSpacing="20dp" android:horizontalSpacing="5dp" android:gravity="center" android:numColumns="auto_fit"
 		android:columnWidth="150dp" android:stretchMode="columnWidth" style="@style/grid" android:layout_margin="5dp" />
 
-	<TextView android:id="@id/android:empty" android:text="@string/noResults" style="@style/noResultsText"
-		android:textSize="20sp" />
+	<TextView android:id="@id/android:empty" android:text="@string/noResults" style="@style/noResultsText" />
 
 </LinearLayout>

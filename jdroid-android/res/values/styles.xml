@@ -19,16 +19,37 @@
 		<item name="android:shadowDy">1</item>
 	</style>
 
-	<style name="smallText">
+	<style name="baseText">
 		<item name="android:layout_height">wrap_content</item>
 		<item name="android:layout_width">wrap_content</item>
-		<item name="android:textSize">@dimen/smallTextSize</item>
+		<item name="android:fontFamily" tools:ignore="NewApi">sans-serif</item>
 	</style>
 
-	<style name="normalText">
-		<item name="android:layout_height">wrap_content</item>
-		<item name="android:layout_width">wrap_content</item>
-		<item name="android:textSize">@dimen/normalTextSize</item>
+	<style name="title1Text" parent="baseText">
+		<item name="android:textSize">@dimen/title1Text</item>
+		<item name="android:textStyle">bold</item>
+	</style>
+
+	<style name="title2Text" parent="baseText">
+		<item name="android:textSize">@dimen/title2Text</item>
+		<item name="android:textStyle">bold</item>
+	</style>
+
+	<style name="h1Text" parent="baseText">
+		<item name="android:textSize">@dimen/h1Text</item>
+		<item name="android:textStyle">bold</item>
+	</style>
+
+	<style name="h2Text" parent="baseText">
+		<item name="android:textSize">@dimen/h2Text</item>
+	</style>
+
+	<style name="normalText" parent="baseText">
+		<item name="android:textSize">@dimen/normalText</item>
+	</style>
+
+	<style name="smallText" parent="baseText">
+		<item name="android:textSize">@dimen/smallText</item>
 	</style>
 
 	<style name="noResultsText" parent="normalText">
@@ -38,10 +59,8 @@
 		<item name="android:layout_marginTop">10dp</item>
 	</style>
 
-	<style name="sectionTitle" parent="normalText">
+	<style name="sectionTitle" parent="h1Text">
 		<item name="android:layout_width">match_parent</item>
-		<item name="android:textColor">@android:color/white</item>
-		<item name="android:textStyle">bold</item>
 		<item name="android:background">@drawable/section_title_background</item>
 		<item name="android:paddingLeft">10dp</item>
 		<item name="android:paddingRight">10dp</item>
@@ -51,12 +70,9 @@
 
 	<!-- Buttons -->
 
-	<style name="button">
-		<item name="android:layout_height">wrap_content</item>
-		<item name="android:layout_width">wrap_content</item>
+	<style name="button" parent="h1Text">
 		<item name="android:paddingLeft">20dp</item>
 		<item name="android:paddingRight">20dp</item>
-		<item name="android:textStyle">bold</item>
 	</style>
 
 	<style name="largeButton">
@@ -67,6 +83,16 @@
 		<item name="android:textStyle">bold</item>
 		<item name="android:layout_margin">10dp</item>
 	</style>
+
+	<style name="optionButton" parent="title2Text">
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_marginLeft">10dp</item>
+		<item name="android:layout_marginRight">10dp</item>
+		<item name="android:layout_marginTop">4dp</item>
+		<item name="android:layout_marginBottom">4dp</item>
+	</style>
+
 
 	<!-- Lists & Grids -->
 
@@ -85,9 +111,9 @@
 		<item name="android:listSelector">@android:color/transparent</item>
 	</style>
 
-	<style name="contextualItemText">
-		<item name="android:textAppearance">@android:style/TextAppearance.Medium</item>
+	<style name="contextualItemText" parent="title2Text">
 		<item name="android:textColor">@color/contextual_item_text_color</item>
+		<item name="android:textStyle">normal</item>
 		<item name="android:singleLine">true</item>
 		<item name="android:ellipsize">end</item>
 	</style>

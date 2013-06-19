@@ -3,7 +3,13 @@
 
 	<!-- Texts -->
 
-	<dimen name="smallTextSize">16sp</dimen>
-	<dimen name="normalTextSize">20sp</dimen>
+	<dimen name="title1Text">24sp</dimen>
+	<dimen name="title2Text">22sp</dimen>
+
+	<dimen name="h1Text">20sp</dimen>
+	<dimen name="h2Text">18sp</dimen>
+
+	<dimen name="normalText">18sp</dimen>
+	<dimen name="smallText">16sp</dimen>
 
 </resources>

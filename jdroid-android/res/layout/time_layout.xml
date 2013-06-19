@@ -2,8 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="horizontal"
 	android:layout_width="wrap_content" android:layout_height="wrap_content">
 
-	<com.jdroid.android.date.TimeView android:layout_height="wrap_content"
-		android:layout_width="wrap_content" android:textStyle="bold" android:textSize="20sp" android:layout_marginLeft="20dp"
+	<com.jdroid.android.date.TimeView style="@style/title1Text" android:layout_marginLeft="20dp"
 		android:layout_marginRight="20dp" />
 
 </LinearLayout>

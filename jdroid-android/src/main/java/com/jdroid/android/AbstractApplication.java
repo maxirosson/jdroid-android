@@ -176,15 +176,8 @@ public abstract class AbstractApplication extends Application {
 		UncaughtExceptionHandler currentExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
 		if ((currentExceptionHandler == null) || !currentExceptionHandler.getClass().equals(getExceptionHandlerClass())) {
 			initCrittercism();
-			
-			ExecutorUtils.scheduleInMillis(new Runnable() {
-				
-				@Override
-				public void run() {
-					Thread.setDefaultUncaughtExceptionHandler(ReflectionUtils.newInstance(getExceptionHandlerClass()));
-					LOGGER.debug("Custom exception handler initialized");
-				}
-			}, 100L);
+			Thread.setDefaultUncaughtExceptionHandler(ReflectionUtils.newInstance(getExceptionHandlerClass()));
+			LOGGER.debug("Custom exception handler initialized");
 		}
 	}
 	
@@ -201,6 +194,7 @@ public abstract class AbstractApplication extends Application {
 				if (installationId != null) {
 					Crittercism.setUsername(installationId);
 				}
+				LOGGER.debug("Crittercism initialized");
 			} catch (Exception e) {
 				LOGGER.error("Error when initializing Crittercism");
 			}

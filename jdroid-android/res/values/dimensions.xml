@@ -3,8 +3,14 @@
 
 	<!-- Texts -->
 
-	<dimen name="smallTextSize">12sp</dimen>
-	<dimen name="normalTextSize">16sp</dimen>
+	<dimen name="title1Text">20sp</dimen>
+	<dimen name="title2Text">18sp</dimen>
+
+	<dimen name="h1Text">16sp</dimen>
+	<dimen name="h2Text">14sp</dimen>
+
+	<dimen name="normalText">14sp</dimen>
+	<dimen name="smallText">12sp</dimen>
 
 	<!-- Lists & Grids -->
 
