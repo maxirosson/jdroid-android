@@ -51,6 +51,13 @@
 			</exclusions>
 		</dependency>
 
+		<!-- Google Play Services -->
+		<dependency>
+			<groupId>android</groupId>
+			<artifactId>google-play-services</artifactId>
+			<version>r7</version>
+		</dependency>
+
 		<!-- Google Cloud Messaging -->
 		<dependency>
 			<groupId>android.gcm</groupId>

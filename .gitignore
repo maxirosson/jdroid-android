@@ -18,11 +18,6 @@ jdroid-android/target/
 jdroid-android/tmp/
 jdroid-android/.settings/org.maven.ide.eclipse.prefs
 
-jdroid-android-googlemaps/bin/
-jdroid-android-googlemaps/gen/
-jdroid-android-googlemaps/target/
-jdroid-android-googlemaps/.settings/org.maven.ide.eclipse.prefs
-
 jdroid-android-leftnavbar/bin/
 jdroid-android-leftnavbar/gen/
 jdroid-android-leftnavbar/target/

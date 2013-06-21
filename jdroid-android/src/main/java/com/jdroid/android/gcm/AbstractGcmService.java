@@ -36,6 +36,22 @@ public abstract class AbstractGcmService extends GCMBaseIntentService {
 	}
 	
 	/**
+	 * @see com.google.android.gcm.GCMBaseIntentService#onRegistered(android.content.Context, java.lang.String)
+	 */
+	@Override
+	public void onRegistered(Context context, String registrationId) {
+		// This method shouldn't be called
+	}
+	
+	/**
+	 * @see com.google.android.gcm.GCMBaseIntentService#onUnregistered(android.content.Context, java.lang.String)
+	 */
+	@Override
+	public void onUnregistered(Context context, String registrationId) {
+		// This method shouldn't be called
+	}
+	
+	/**
 	 * @see com.google.android.gcm.GCMBaseIntentService#onError(android.content.Context, java.lang.String)
 	 */
 	@Override
