@@ -19,8 +19,8 @@
 	<jdroid.version>1.1.0-SNAPSHOT</jdroid.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<eclipse.plugin.version>2.9</eclipse.plugin.version>
-		<android.sdk.platform>16</android.sdk.platform>
-		<android.version>4.1_r3</android.version>
+		<android.sdk.platform>17</android.sdk.platform>
+		<android.version>4.2_r2</android.version>
 		<android.compatibility.support.version>r12</android.compatibility.support.version>
 		<actionbarsherlock.version>4.3.1</actionbarsherlock.version>
 		<android.maven.plugin.version>3.6.0</android.maven.plugin.version>
