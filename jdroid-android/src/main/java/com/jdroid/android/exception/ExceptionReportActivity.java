@@ -12,8 +12,8 @@ import android.os.Bundle;
 import com.jdroid.android.AbstractApplication;
 import com.jdroid.android.R;
 import com.jdroid.android.utils.AndroidUtils;
+import com.jdroid.android.utils.NotificationBuilder;
 import com.jdroid.android.utils.NotificationUtils;
-import com.jdroid.java.utils.DateUtils;
 import com.jdroid.java.utils.IdGenerator;
 import com.jdroid.java.utils.LoggerUtils;
 
@@ -64,11 +64,17 @@ public class ExceptionReportActivity extends Activity {
 			
 			String notificationTitle = context.getString(R.string.exceptionReportNotificationTitle,
 				AndroidUtils.getApplicationName());
-			String notificationText = context.getString(R.string.exceptionReportNotificationText);
 			
-			NotificationUtils.sendNotification(IdGenerator.getRandomIntId(), android.R.drawable.stat_notify_error,
-				notificationTitle, notificationTitle, notificationText, ExceptionReportActivity.class,
-				DateUtils.now().getTime(), bundle);
+			NotificationBuilder builder = new NotificationBuilder();
+			builder.setSmallIcon(android.R.drawable.stat_notify_error);
+			builder.setTicker(notificationTitle);
+			builder.setContentTitle(notificationTitle);
+			builder.setContentText(R.string.exceptionReportNotificationText);
+			builder.setWhen(System.currentTimeMillis());
+			builder.setContentIntent(ExceptionReportActivity.class, bundle);
+			
+			NotificationUtils.sendNotification(IdGenerator.getRandomIntId(), builder);
+			
 		} catch (Exception e) {
 			LOGGER.error("Unexepected error from the exception reporter", e);
 		}
