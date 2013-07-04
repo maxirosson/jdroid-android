@@ -26,6 +26,30 @@ public abstract class DefaultGcmMessage implements GcmMessage {
 	}
 	
 	/**
+	 * @see com.jdroid.javaweb.push.PushMessage#addParameter(java.lang.String, java.lang.Boolean)
+	 */
+	@Override
+	public void addParameter(String key, Boolean value) {
+		parameters.put(key, value.toString());
+	}
+	
+	/**
+	 * @see com.jdroid.javaweb.push.PushMessage#addParameter(java.lang.String, java.lang.Integer)
+	 */
+	@Override
+	public void addParameter(String key, Integer value) {
+		parameters.put(key, value.toString());
+	}
+	
+	/**
+	 * @see com.jdroid.javaweb.push.PushMessage#addParameter(java.lang.String, java.lang.Long)
+	 */
+	@Override
+	public void addParameter(String key, Long value) {
+		parameters.put(key, value.toString());
+	}
+	
+	/**
 	 * @see com.jdroid.javaweb.push.gcm.GcmMessage#getParameters()
 	 */
 	@Override

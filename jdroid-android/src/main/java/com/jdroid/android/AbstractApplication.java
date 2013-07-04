@@ -17,7 +17,6 @@ import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import com.crittercism.app.Crittercism;
-import com.google.android.gcm.GCMRegistrar;
 import com.google.inject.AbstractModule;
 import com.google.inject.util.Modules;
 import com.jdroid.android.activity.BaseActivity;
@@ -104,8 +103,6 @@ public abstract class AbstractApplication extends Application {
 		initInAppBilling();
 		
 		initRoboGuice();
-		
-		initGCM();
 		
 		// TODO This is not working on the analytics beta3
 		// initAnalytics();
@@ -217,17 +214,6 @@ public abstract class AbstractApplication extends Application {
 		}
 	}
 	
-	private void initGCM() {
-		if (isGcmEnabled()) {
-			try {
-				GCMRegistrar.checkDevice(this);
-			} catch (UnsupportedOperationException e) {
-				LOGGER.error("This device does not support GCM", e);
-			}
-			// GCMRegistrar.checkManifest(this);
-		}
-	}
-	
 	// private void initAnalytics() {
 	// if (applicationContext.isAnalyticsEnabled()) {
 	// GoogleAnalytics googleAnalytics = GoogleAnalytics.getInstance(getApplicationContext());
@@ -264,10 +250,6 @@ public abstract class AbstractApplication extends Application {
 	
 	public BaseFragment createBaseFragment(Fragment fragment) {
 		return new BaseFragment(fragment);
-	}
-	
-	public Boolean isGcmEnabled() {
-		return false;
 	}
 	
 	public Boolean isInAppBillingEnabled() {

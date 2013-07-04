@@ -41,7 +41,9 @@ public class GcmSender implements PushMessageSender {
 		
 		Set<String> registrationIds = Sets.newHashSet();
 		for (Device device : devices) {
-			registrationIds.add(device.getRegistrationId());
+			if (device.getRegistrationId() != null) {
+				registrationIds.add(device.getRegistrationId());
+			}
 		}
 		GcmMessage gcmMessage = (GcmMessage)pushMessage;
 		

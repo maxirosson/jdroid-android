@@ -3,6 +3,7 @@ package com.jdroid.android.service;
 import roboguice.service.RoboIntentService;
 import android.content.Context;
 import android.content.Intent;
+import com.jdroid.android.AbstractApplication;
 import com.jdroid.android.utils.WakeLockManager;
 
 /**
@@ -24,6 +25,8 @@ public abstract class WorkerService extends RoboIntentService {
 	protected final void onHandleIntent(Intent intent) {
 		try {
 			doExecute(intent);
+		} catch (Exception e) {
+			AbstractApplication.get().getExceptionHandler().logHandledException(e);
 		} finally {
 			if (intent.hasExtra(ENABLE_PARTIAL_WAKE_LOCK)) {
 				WakeLockManager.releasePartialWakeLock();

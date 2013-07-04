@@ -58,13 +58,6 @@
 			<version>r7</version>
 		</dependency>
 
-		<!-- Google Cloud Messaging -->
-		<dependency>
-			<groupId>android.gcm</groupId>
-			<artifactId>gcm-client</artifactId>
-			<version>r3</version>
-		</dependency>
-
 		<!-- Google Analytics -->
 		<dependency>
 			<groupId>android.analytics</groupId>

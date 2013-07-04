@@ -1,6 +1,6 @@
 package com.jdroid.javaweb.push;
 
-import java.util.Collection;
+import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import com.jdroid.javaweb.hibernate.AbstractHibernateRepository;
 
@@ -11,20 +11,13 @@ public class DeviceHibernateRepository extends AbstractHibernateRepository<Devic
 	}
 	
 	/**
-	 * @see com.jdroid.javaweb.push.DeviceRepository#find(java.lang.Long, java.lang.String)
+	 * @see com.jdroid.javaweb.push.DeviceRepository#find(java.lang.String, com.jdroid.javaweb.push.DeviceType)
 	 */
 	@Override
-	public Device find(Long userId, String installationId) {
-		return this.findUnique(this.createDetachedCriteria().add(Restrictions.eq("userId", userId)).add(
-			Restrictions.eq("installationId", installationId)));
+	public Device find(String installationId, DeviceType deviceType) {
+		DetachedCriteria criteria = createDetachedCriteria();
+		criteria.add(Restrictions.and(Restrictions.eq("installationId", installationId),
+			Restrictions.eq("deviceType", deviceType)));
+		return this.findUnique(criteria);
 	}
-	
-	/**
-	 * @see com.jdroid.javaweb.push.DeviceRepository#findByUserId(java.lang.Long)
-	 */
-	@Override
-	public Collection<Device> findByUserId(Long userId) {
-		return find("userId", userId);
-	}
-	
 }

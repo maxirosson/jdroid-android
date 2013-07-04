@@ -12,12 +12,13 @@ import com.jdroid.javaweb.domain.Entity;
 @javax.persistence.Entity
 public class Device extends Entity {
 	
-	private Long userId;
 	private String installationId;
 	private String registrationId;
 	
 	@Enumerated(value = EnumType.STRING)
 	private DeviceType deviceType;
+	
+	private Boolean disabled;
 	
 	/**
 	 * Default constructor.
@@ -27,27 +28,24 @@ public class Device extends Entity {
 		// Do nothing, is required by hibernate
 	}
 	
-	public Device(Long userId, String installationId, String registrationId, DeviceType deviceType) {
+	public Device(String installationId, DeviceType deviceType) {
+		this(installationId, null, deviceType);
+	}
+	
+	public Device(String installationId, String registrationId, DeviceType deviceType) {
 		
 		if (deviceType == null) {
 			throw new UnexpectedException("The device type is required");
 		}
+		this.deviceType = deviceType;
 		
-		this.userId = userId;
 		this.installationId = installationId;
 		this.registrationId = registrationId;
-		this.deviceType = deviceType;
+		disabled = false;
 	}
 	
 	public void updateRegistrationId(String registrationId) {
 		this.registrationId = registrationId;
-	}
-	
-	/**
-	 * @return the userId
-	 */
-	public Long getUserId() {
-		return userId;
 	}
 	
 	/**
@@ -72,12 +70,26 @@ public class Device extends Entity {
 	}
 	
 	/**
+	 * @return the disabled
+	 */
+	public Boolean isDisabled() {
+		return disabled;
+	}
+	
+	/**
+	 * @param disabled the disabled to set
+	 */
+	public void setDisabled(Boolean disabled) {
+		this.disabled = disabled;
+	}
+	
+	/**
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "Device [userId=" + userId + ", installationId=" + installationId + ", registrationId=" + registrationId
-				+ ", deviceType=" + deviceType + "]";
+		return "Device [installationId=" + installationId + ", registrationId=" + registrationId + ", deviceType="
+				+ deviceType + ", disabled=" + disabled + "]";
 	}
 	
 }

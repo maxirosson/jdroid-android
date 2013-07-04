@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<string name="debugSettings">Debug Settings</string>
+	<string name="apiUrl">Api URL</string>
+	<string name="apiUrlTitle">Api Url</string>
+	<string name="apiUrlDescription">Pick url to use to comunicate with api</string>
+	<string name="httpMocks">HTTP Mocks</string>
+	<string name="httpMockEnabledTitle">Http Mocks</string>
+	<string name="httpMockEnabledDescription">Enable/disable http mocks</string>
+	<string name="httpMockSleepTitle">Http Mocks sleep</string>
+	<string name="httpMockSleepDescription">Enable/disable http mocks sleep</string>
+	<string name="httpMockCrashType">Http Mocks Crash Type</string>
+	<string name="httpMockCrashTypeDescription">Pick the crash type for your mocks calls</string>
+	<string name="packageName">Package Name: %1$s</string>
+	<string name="environmentName">Environment Name: %1$s</string>
+	<string name="analyticsEnabled">Analytics Enabled: %1$s</string>
+	<string name="screenSize">Screen Size: %1$s</string>
+	<string name="screenDensity">Screen Density: %1$s</string>
+	<string name="commitId">Commit Id: %1$s</string>
+	<string name="commitTime">Commit Time: %1$s</string>
+	<string name="buildTime">Build Time: %1$s</string>
+	<string name="crashSettings">Crash</string>
+	<string name="crashType">Crash Type</string>
+	<string name="crashTypeDescription">Pick the crash type</string>
+
+</resources>

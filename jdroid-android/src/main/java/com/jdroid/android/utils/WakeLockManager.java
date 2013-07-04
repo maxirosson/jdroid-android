@@ -15,26 +15,7 @@ public class WakeLockManager {
 	
 	private final static Logger LOGGER = LoggerUtils.getLogger(WakeLockManager.class);
 	
-	private static PowerManager.WakeLock screenDimWakeLock;
 	private static PowerManager.WakeLock partialWakeLock;
-	
-	/**
-	 * Makes sure the device is on at the {@link PowerManager#SCREEN_DIM_WAKE_LOCK} level when you created the wake
-	 * lock.
-	 * 
-	 * @param context The {@link Context}
-	 */
-	public static synchronized void acquireScreenDimWakeLock(Context context) {
-		screenDimWakeLock = aquire(context, screenDimWakeLock, PowerManager.SCREEN_DIM_WAKE_LOCK);
-	}
-	
-	/**
-	 * Release your claim to the {@link PowerManager#SCREEN_DIM_WAKE_LOCK} being on.
-	 */
-	public static synchronized void releaseScreenDimWakeLock() {
-		release(screenDimWakeLock);
-		screenDimWakeLock = null;
-	}
 	
 	/**
 	 * Makes sure the device is on at the {@link PowerManager#PARTIAL_WAKE_LOCK} level when you created the wake lock.

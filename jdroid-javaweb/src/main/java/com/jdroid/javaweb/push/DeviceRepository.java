@@ -1,6 +1,5 @@
 package com.jdroid.javaweb.push;
 
-import java.util.Collection;
 import com.jdroid.java.repository.Repository;
 
 /**
@@ -9,8 +8,6 @@ import com.jdroid.java.repository.Repository;
  */
 public interface DeviceRepository extends Repository<Device> {
 	
-	public Device find(Long userId, String installationId);
-	
-	public Collection<Device> findByUserId(Long userId);
+	public Device find(String installationId, DeviceType deviceType);
 	
 }

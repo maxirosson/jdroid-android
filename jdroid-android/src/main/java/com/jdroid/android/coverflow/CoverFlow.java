@@ -34,11 +34,6 @@ public class CoverFlow extends Gallery {
 	 */
 	private int maxZoom = 60;
 	
-	/**
-	 * The Centre of the Coverflow.
-	 */
-	private int coveflowCenter;
-	
 	public CoverFlow(final Context context) {
 		super(context);
 		this.setStaticTransformationsEnabled(true);

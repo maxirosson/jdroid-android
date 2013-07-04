@@ -51,7 +51,11 @@ public class NumberUtils {
 	}
 	
 	public static Boolean getBoolean(String value) {
-		return Boolean.parseBoolean(value);
+		return getBoolean(value, null);
+	}
+	
+	public static Boolean getBoolean(String value, Boolean defaultValue) {
+		return StringUtils.isNotEmpty(value) ? Boolean.parseBoolean(value) : defaultValue;
 	}
 	
 	public static String getString(Integer value) {

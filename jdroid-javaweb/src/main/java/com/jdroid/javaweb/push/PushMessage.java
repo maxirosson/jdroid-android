@@ -16,4 +16,10 @@ public interface PushMessage {
 	 */
 	public void addParameter(String key, String value);
 	
+	public void addParameter(String key, Boolean value);
+	
+	public void addParameter(String key, Integer value);
+	
+	public void addParameter(String key, Long value);
+	
 }
