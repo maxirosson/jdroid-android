@@ -21,7 +21,7 @@ import com.google.inject.AbstractModule;
 import com.google.inject.util.Modules;
 import com.jdroid.android.activity.BaseActivity;
 import com.jdroid.android.analytics.AnalyticsSender;
-import com.jdroid.android.analytics.GoogleAnalyticsTracker;
+import com.jdroid.android.analytics.AnalyticsTracker;
 import com.jdroid.android.billing.BillingContext;
 import com.jdroid.android.context.DefaultApplicationContext;
 import com.jdroid.android.exception.DefaultExceptionHandler;
@@ -54,7 +54,6 @@ public abstract class AbstractApplication extends Application {
 	protected static AbstractApplication INSTANCE;
 	
 	private DefaultApplicationContext applicationContext;
-	private AnalyticsSender analyticsSender;
 	
 	/** Current activity in the top stack. */
 	private Activity currentActivity;
@@ -89,7 +88,6 @@ public abstract class AbstractApplication extends Application {
 		loadInstallationId();
 		
 		applicationContext = createApplicationContext();
-		analyticsSender = createAnalyticsSender();
 		
 		if (applicationContext.displayDebugSettings()) {
 			PreferenceManager.setDefaultValues(this, R.xml.debug_preferences, false);
@@ -123,6 +121,10 @@ public abstract class AbstractApplication extends Application {
 		if (level >= TRIM_MEMORY_MODERATE) {
 			bitmapLruCache.evictAll();
 		}
+	}
+	
+	public <T extends AnalyticsTracker> AnalyticsSender<T> getAnalyticsSender() {
+		return null;
 	}
 	
 	public Boolean isStrictModeEnabled() {
@@ -246,14 +248,6 @@ public abstract class AbstractApplication extends Application {
 	
 	public DefaultApplicationContext getAndroidApplicationContext() {
 		return applicationContext;
-	}
-	
-	protected AnalyticsSender createAnalyticsSender() {
-		return new AnalyticsSender(GoogleAnalyticsTracker.get());
-	}
-	
-	public AnalyticsSender getAnalyticsSender() {
-		return analyticsSender;
 	}
 	
 	public BaseActivity createBaseActivity(Activity activity) {

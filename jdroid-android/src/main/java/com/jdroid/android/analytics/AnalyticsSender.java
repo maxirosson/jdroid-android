@@ -10,17 +10,18 @@ import com.jdroid.java.utils.ExecutorUtils;
 
 /**
  * 
+ * @param <T>
  * @author Maxi Rosson
  */
-public class AnalyticsSender implements AnalyticsTracker {
+public class AnalyticsSender<T extends AnalyticsTracker> implements AnalyticsTracker {
 	
-	private List<? extends AnalyticsTracker> trackers;
+	private List<T> trackers = Lists.newArrayList();
 	
-	public AnalyticsSender(AnalyticsTracker... trackers) {
+	public AnalyticsSender(T... trackers) {
 		this(Lists.newArrayList(trackers));
 	}
 	
-	public AnalyticsSender(List<? extends AnalyticsTracker> trackers) {
+	public AnalyticsSender(List<T> trackers) {
 		this.trackers = trackers;
 	}
 	
@@ -29,7 +30,7 @@ public class AnalyticsSender implements AnalyticsTracker {
 		@Override
 		public void run() {
 			try {
-				for (AnalyticsTracker tracker : trackers) {
+				for (T tracker : trackers) {
 					if (tracker.isEnabled()) {
 						track(tracker);
 					}
@@ -42,7 +43,7 @@ public class AnalyticsSender implements AnalyticsTracker {
 			}
 		}
 		
-		protected abstract void track(AnalyticsTracker tracker);
+		protected abstract void track(T tracker);
 	}
 	
 	/**
@@ -61,7 +62,7 @@ public class AnalyticsSender implements AnalyticsTracker {
 		ExecutorUtils.execute(new TrackerRunnable() {
 			
 			@Override
-			protected void track(AnalyticsTracker tracker) {
+			protected void track(T tracker) {
 				tracker.onActivityStart(activity);
 			}
 		});
@@ -75,7 +76,7 @@ public class AnalyticsSender implements AnalyticsTracker {
 		ExecutorUtils.execute(new TrackerRunnable() {
 			
 			@Override
-			protected void track(AnalyticsTracker tracker) {
+			protected void track(T tracker) {
 				tracker.onActivityStop(activity);
 			}
 		});
@@ -89,7 +90,7 @@ public class AnalyticsSender implements AnalyticsTracker {
 		ExecutorUtils.execute(new TrackerRunnable() {
 			
 			@Override
-			protected void track(AnalyticsTracker tracker) {
+			protected void track(T tracker) {
 				tracker.trackConnectionException(connectionException);
 			}
 		});
