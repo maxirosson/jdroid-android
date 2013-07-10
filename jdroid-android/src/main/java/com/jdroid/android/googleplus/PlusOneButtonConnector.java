@@ -22,9 +22,13 @@ public class PlusOneButtonConnector implements ConnectionCallbacks, OnConnection
 	private Fragment context;
 	
 	public PlusOneButtonConnector(Fragment context, int plusOneButton) {
+		this(context, (PlusOneButton)context.getView().findViewById(plusOneButton));
+	}
+	
+	public PlusOneButtonConnector(Fragment context, PlusOneButton plusOneButton) {
 		this.context = context;
 		plusClient = new PlusClient.Builder(context.getActivity(), this, this).clearScopes().build();
-		this.plusOneButton = (PlusOneButton)context.getView().findViewById(plusOneButton);
+		this.plusOneButton = plusOneButton;
 		url = getUrl();
 	}
 	
@@ -61,15 +65,15 @@ public class PlusOneButtonConnector implements ConnectionCallbacks, OnConnection
 		plusClient.disconnect();
 	}
 	
-	public void onPlusOne() {
+	protected void onPlusOne() {
 		// Do Nothing
 	}
 	
-	public void onUndoPlusOne() {
+	protected void onUndoPlusOne() {
 		// Do Nothing
 	}
 	
-	public String getUrl() {
+	protected String getUrl() {
 		return PLAY_STORE_BASE_URL + context.getActivity().getPackageName();
 	}
 	

@@ -12,4 +12,8 @@
 	<TextView android:id="@+id/copyright" style="@style/normalText" android:layout_marginTop="12dp" android:text="@string/copyright" />
 	<TextView android:id="@+id/allRightsReservedLegend" style="@style/normalText" android:text="@string/allRightsReservedLegend" />
 
+	<com.google.android.gms.plus.PlusOneButton xmlns:plus="http://schemas.android.com/apk/lib/com.google.android.gms.plus"
+		android:id="@+id/plusOneButton" android:layout_width="wrap_content" android:layout_height="wrap_content" plus:size="standard"
+		plus:annotation="inline" android:layout_marginTop="12dp" />
+
 </LinearLayout>

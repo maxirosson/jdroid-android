@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.PowerManager;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.jdroid.android.AbstractApplication;
 import com.jdroid.java.utils.LoggerUtils;
 
 /**
@@ -21,15 +22,15 @@ import com.jdroid.java.utils.LoggerUtils;
  * &lt;uses-permission android:name="android.permission.GET_ACCOUNTS" />
  * </pre>
  */
-public abstract class AbstractGcmService extends IntentService {
+public class GcmService extends IntentService {
 	
-	private static final Logger LOGGER = LoggerUtils.getLogger(AbstractGcmService.class);
+	private static final Logger LOGGER = LoggerUtils.getLogger(GcmService.class);
 	
 	// wakelock
 	private static PowerManager.WakeLock sWakeLock;
 	
 	// Java lock used to synchronize access to sWakelock
-	private static final Object LOCK = AbstractGcmService.class;
+	private static final Object LOCK = GcmService.class;
 	
 	/**
 	 * Constructor that does not set a sender id, useful when the sender id is context-specific.
@@ -37,8 +38,8 @@ public abstract class AbstractGcmService extends IntentService {
 	 * When using this constructor, the subclass <strong>must</strong> override {@link #getSenderIds(Context)},
 	 * otherwise methods such as {@link #onHandleIntent(Intent)} will throw an {@link IllegalStateException} on runtime.
 	 */
-	protected AbstractGcmService() {
-		super(AbstractGcmService.class.getSimpleName());
+	public GcmService() {
+		super(GcmService.class.getSimpleName());
 	}
 	
 	/**
@@ -47,7 +48,12 @@ public abstract class AbstractGcmService extends IntentService {
 	 * @param context application's context.
 	 * @param intent intent containing the message payload as extras.
 	 */
-	protected abstract void onMessage(Context context, Intent intent);
+	public void onMessage(Context context, Intent intent) {
+		GcmMessage gcmMessage = AbstractApplication.get().getGcmResolver().resolve(intent);
+		if (gcmMessage != null) {
+			gcmMessage.handle(intent);
+		}
+	}
 	
 	/**
 	 * Called to indicate that the server deleted some pending messages because they were collapsible.
@@ -111,7 +117,7 @@ public abstract class AbstractGcmService extends IntentService {
 			if (sWakeLock == null) {
 				// This is called from BroadcastReceiver, there is no init.
 				PowerManager pm = (PowerManager)context.getSystemService(Context.POWER_SERVICE);
-				sWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, AbstractGcmService.class.getSimpleName());
+				sWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, GcmService.class.getSimpleName());
 			}
 		}
 		LOGGER.trace("Acquiring wakelock");

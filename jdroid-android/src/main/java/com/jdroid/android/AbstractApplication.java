@@ -27,6 +27,7 @@ import com.jdroid.android.context.DefaultApplicationContext;
 import com.jdroid.android.exception.DefaultExceptionHandler;
 import com.jdroid.android.exception.ExceptionHandler;
 import com.jdroid.android.fragment.BaseFragment;
+import com.jdroid.android.gcm.GcmMessageResolver;
 import com.jdroid.android.images.BitmapLruCache;
 import com.jdroid.android.utils.SharedPreferencesUtils;
 import com.jdroid.android.utils.ToastUtils;
@@ -354,5 +355,9 @@ public abstract class AbstractApplication extends Application {
 	private boolean isDebuggable() {
 		int flags = this.getApplicationInfo().flags;
 		return (flags & ApplicationInfo.FLAG_DEBUGGABLE) == 0;
+	}
+	
+	public GcmMessageResolver getGcmResolver() {
+		return null;
 	}
 }

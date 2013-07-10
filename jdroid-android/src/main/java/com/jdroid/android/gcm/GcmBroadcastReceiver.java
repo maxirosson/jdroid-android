@@ -8,14 +8,14 @@ import android.content.Intent;
 import com.jdroid.java.utils.LoggerUtils;
 
 /**
- * {@link BroadcastReceiver} that receives GCM messages and delivers them to an application-specific
- * {@link AbstractGcmService} subclass.
+ * {@link BroadcastReceiver} that receives GCM messages and delivers them to an application-specific {@link GcmService}
+ * subclass.
  * 
  * @author Maxi Rosson
  */
-public abstract class AbstractGcmBroadcastReceiver extends BroadcastReceiver {
+public class GcmBroadcastReceiver extends BroadcastReceiver {
 	
-	private static final Logger LOGGER = LoggerUtils.getLogger(AbstractGcmBroadcastReceiver.class);
+	private static final Logger LOGGER = LoggerUtils.getLogger(GcmBroadcastReceiver.class);
 	
 	@Override
 	public final void onReceive(Context context, Intent intent) {
@@ -24,7 +24,7 @@ public abstract class AbstractGcmBroadcastReceiver extends BroadcastReceiver {
 		
 		// Delegates to the application-specific intent service.
 		String className = getGCMIntentServiceClassName(context);
-		AbstractGcmService.runIntentInService(context, intent, className);
+		GcmService.runIntentInService(context, intent, className);
 		
 		setResult(Activity.RESULT_OK, null, null);
 	}
@@ -32,5 +32,7 @@ public abstract class AbstractGcmBroadcastReceiver extends BroadcastReceiver {
 	/**
 	 * Gets the class name of the intent service that will handle GCM messages.
 	 */
-	protected abstract String getGCMIntentServiceClassName(Context context);
+	protected String getGCMIntentServiceClassName(Context context) {
+		return GcmService.class.getName();
+	}
 }
