@@ -11,7 +11,7 @@ public class ClearTaskIntent {
 	
 	public static void execute(Boolean requiresAuthentication) {
 		Intent broadcastIntent = new Intent();
-		broadcastIntent.putExtra(REQUIRES_AUTHENTICATION_EXTRA, true);
+		broadcastIntent.putExtra(REQUIRES_AUTHENTICATION_EXTRA, requiresAuthentication);
 		broadcastIntent.setAction(CLEAR_TASK_ACTION);
 		AbstractApplication.get().sendBroadcast(broadcastIntent);
 	}

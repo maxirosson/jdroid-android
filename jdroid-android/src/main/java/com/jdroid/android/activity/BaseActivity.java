@@ -121,20 +121,20 @@ public class BaseActivity implements ActivityIf {
 				activity.setContentView(getContentView());
 				getActivityIf().onAfterSetContentView(savedInstanceState);
 			}
-			if (AndroidUtils.isPreHoneycomb()) {
-				clearTaskBroadcastReceiver = new BroadcastReceiver() {
-					
-					@Override
-					public void onReceive(Context context, Intent intent) {
-						Boolean requiresAuthentication = intent.getBooleanExtra(
-							ClearTaskIntent.REQUIRES_AUTHENTICATION_EXTRA, true);
-						if (!requiresAuthentication || getActivityIf().requiresAuthentication()) {
-							activity.finish();
-						}
+			clearTaskBroadcastReceiver = new BroadcastReceiver() {
+				
+				@Override
+				public void onReceive(Context context, Intent intent) {
+					Boolean requiresAuthentication = intent.getBooleanExtra(
+						ClearTaskIntent.REQUIRES_AUTHENTICATION_EXTRA, true);
+					if (requiresAuthentication.equals(getActivityIf().requiresAuthentication())) {
+						LOGGER.debug("Finishing activity [" + activity + "] with requiresAuthentication = "
+								+ requiresAuthentication);
+						activity.finish();
 					}
-				};
-				activity.registerReceiver(clearTaskBroadcastReceiver, ClearTaskIntent.newIntentFilter());
-			}
+				}
+			};
+			activity.registerReceiver(clearTaskBroadcastReceiver, ClearTaskIntent.newIntentFilter());
 		}
 		
 		AdLoader adLoader = createAdLoader();
