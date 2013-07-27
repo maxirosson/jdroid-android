@@ -447,6 +447,21 @@ public abstract class AbstractFragmentActivity extends SherlockFragmentActivity 
 		return (UseCaseFragment<?>)getSupportFragmentManager().findFragmentByTag(useCaseFragmentClass.getSimpleName());
 	}
 	
+	@SuppressWarnings("unchecked")
+	public <E extends Fragment> E getFragment(Class<E> fragmentClass) {
+		return (E)getSupportFragmentManager().findFragmentByTag(fragmentClass.getSimpleName());
+	}
+	
+	public void addFragment(Fragment newFragment, int containerId, boolean addToBackStack) {
+		FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+		fragmentTransaction.add(containerId, newFragment, newFragment.getClass().getSimpleName());
+		if (addToBackStack) {
+			fragmentTransaction.addToBackStack(newFragment.getClass().getSimpleName());
+		}
+		fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+		fragmentTransaction.commit();
+	}
+	
 	public <E extends Fragment> E instanceFragment(Class<E> fragmentClass, Bundle bundle) {
 		E fragment = null;
 		try {

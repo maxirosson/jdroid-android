@@ -8,12 +8,12 @@
 		android:layout_height="wrap_content" android:orientation="horizontal">
 
 		<Button style="?android:attr/buttonBarButtonStyle" android:background="@drawable/selectable_item_background"
-			android:id="@+id/previous" android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content"
-			android:text="@string/previous" />
+			android:id="@+id/leftButton" android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content"
+			android:text="@string/cancel" />
 
 		<Button style="?android:attr/buttonBarButtonStyle" android:background="@drawable/selectable_item_background"
-			android:id="@+id/next" android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content"
-			android:text="@string/next" />
+			android:id="@+id/rightButton" android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content"
+			android:text="@string/ok" />
 
 	</LinearLayout>
 

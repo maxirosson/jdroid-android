@@ -32,11 +32,4 @@ public enum DeviceType {
 	public PushResponse send(List<Device> devices, PushMessage pushMessage) {
 		return pushMessageSender.send(devices, pushMessage);
 	}
-	
-	/**
-	 * @return the pushMessageSender
-	 */
-	public PushMessageSender getPushMessageSender() {
-		return pushMessageSender;
-	}
 }

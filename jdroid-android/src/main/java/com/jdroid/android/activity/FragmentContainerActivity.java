@@ -29,7 +29,7 @@ public abstract class FragmentContainerActivity extends AbstractFragmentActivity
 		if (savedInstanceState == null) {
 			FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 			Fragment fragment = createNewFragment();
-			fragmentTransaction.add(R.id.fragmentContainer, fragment);
+			fragmentTransaction.add(R.id.fragmentContainer, fragment, fragment.getClass().getSimpleName());
 			if (addToBackStack()) {
 				fragmentTransaction.addToBackStack(fragment.getClass().getSimpleName());
 			}
@@ -40,6 +40,17 @@ public abstract class FragmentContainerActivity extends AbstractFragmentActivity
 	
 	protected Boolean addToBackStack() {
 		return false;
+	}
+	
+	@Override
+	public void addFragment(Fragment newFragment, int containerId, boolean addToBackStack) {
+		FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+		fragmentTransaction.add(containerId, newFragment, newFragment.getClass().getSimpleName());
+		if (addToBackStack) {
+			fragmentTransaction.addToBackStack(newFragment.getClass().getSimpleName());
+		}
+		fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+		fragmentTransaction.commit();
 	}
 	
 	public void replaceFragment(Fragment newFragment) {

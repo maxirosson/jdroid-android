@@ -29,6 +29,7 @@ import com.jdroid.android.exception.ExceptionHandler;
 import com.jdroid.android.fragment.BaseFragment;
 import com.jdroid.android.gcm.GcmMessageResolver;
 import com.jdroid.android.images.BitmapLruCache;
+import com.jdroid.android.utils.AndroidEncryptionUtils;
 import com.jdroid.android.utils.SharedPreferencesUtils;
 import com.jdroid.android.utils.ToastUtils;
 import com.jdroid.java.exception.UnexpectedException;
@@ -100,6 +101,7 @@ public abstract class AbstractApplication extends Application {
 		ToastUtils.init();
 		DateUtils.init();
 		
+		initEncryptionUtils();
 		initCacheDirectory();
 		initImagesCacheDirectory();
 		initBitmapLruCache();
@@ -215,6 +217,17 @@ public abstract class AbstractApplication extends Application {
 				LOGGER.error("Error when initializing Crittercism");
 			}
 		}
+	}
+	
+	protected void initEncryptionUtils() {
+		// Init EncryptationUtils outside the UI thread
+		ExecutorUtils.execute(new Runnable() {
+			
+			@Override
+			public void run() {
+				AndroidEncryptionUtils.init();
+			}
+		});
 	}
 	
 	public ExceptionHandler getExceptionHandler() {

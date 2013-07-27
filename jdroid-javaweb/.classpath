@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <classpath>
   <classpathentry kind="src" path="src/test/java" output="target/test-classes" including="**/*.java"/>
   <classpathentry kind="src" path="src/test/resources" output="target/test-classes" excluding="**/*.java"/>
@@ -47,7 +48,7 @@
   <classpathentry kind="var" path="M2_REPO/org/jboss/resteasy/resteasy-jaxrs/2.3.4.Final/resteasy-jaxrs-2.3.4.Final.jar" sourcepath="M2_REPO/org/jboss/resteasy/resteasy-jaxrs/2.3.4.Final/resteasy-jaxrs-2.3.4.Final-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/jboss/resteasy/resteasy-jettison-provider/2.3.4.Final/resteasy-jettison-provider-2.3.4.Final.jar" sourcepath="M2_REPO/org/jboss/resteasy/resteasy-jettison-provider/2.3.4.Final/resteasy-jettison-provider-2.3.4.Final-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/jboss/resteasy/resteasy-spring/2.3.4.Final/resteasy-spring-2.3.4.Final.jar" sourcepath="M2_REPO/org/jboss/resteasy/resteasy-spring/2.3.4.Final/resteasy-spring-2.3.4.Final-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/com/restfb/restfb/1.6.9/restfb-1.6.9.jar" sourcepath="M2_REPO/com/restfb/restfb/1.6.9/restfb-1.6.9-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/restfb/restfb/1.6.12/restfb-1.6.12.jar" sourcepath="M2_REPO/com/restfb/restfb/1.6.12/restfb-1.6.12-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/scannotation/scannotation/1.0.3/scannotation-1.0.3.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-api/1.6.3/slf4j-api-1.6.3.jar" sourcepath="M2_REPO/org/slf4j/slf4j-api/1.6.3/slf4j-api-1.6.3-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-log4j12/1.6.3/slf4j-log4j12-1.6.3.jar" sourcepath="M2_REPO/org/slf4j/slf4j-log4j12/1.6.3/slf4j-log4j12-1.6.3-sources.jar"/>

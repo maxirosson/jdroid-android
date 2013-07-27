@@ -2,7 +2,6 @@ package com.jdroid.javaweb.facebook;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import com.jdroid.javaweb.search.PagedResult;
 import com.restfb.Connection;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
@@ -14,7 +13,8 @@ public class FacebookRepository {
 	
 	private static String FRIEND_FQL = "SELECT uid,name FROM user WHERE uid in (SELECT uid1 FROM friend WHERE uid2 = me() and uid1 = #friendId#)";
 	private static String FRIEND_FQL_REPLACEMENT = "#friendId#";
-	private static String FRIENDS_FQL = "SELECT uid,name,is_app_user FROM user WHERE uid in (SELECT uid1 FROM friend WHERE uid2 = me()) order by name";
+	private static String FRIENDS_FQL = "SELECT uid,first_name,last_name,is_app_user FROM user WHERE uid in (SELECT uid1 FROM friend WHERE uid2 = me()) order by name";
+	private static String APP_FRIENDS_FQL = "SELECT uid,first_name,last_name FROM user WHERE is_app_user AND uid in (SELECT uid1 FROM friend WHERE uid2 = me()) order by name";
 	private static String FB_ID = "id";
 	private static String FB_ME = "me";
 	private static String FB_FEED = "/feed";
@@ -46,8 +46,7 @@ public class FacebookRepository {
 	
 	public User getFriend(String accessToken, String facebookId) {
 		FacebookClient fb = createFacebookClient(accessToken);
-		List<User> users = fb.executeQuery(FRIEND_FQL.replaceAll(FRIEND_FQL_REPLACEMENT, facebookId), User.class);
-		
+		List<User> users = fb.executeFqlQuery(FRIEND_FQL.replaceAll(FRIEND_FQL_REPLACEMENT, facebookId), User.class);
 		try {
 			return users.iterator().next();
 		} catch (NoSuchElementException e) {
@@ -55,10 +54,14 @@ public class FacebookRepository {
 		}
 	}
 	
-	public PagedResult<FqlUser> getFriends(String accessToken) {
+	public List<FacebookUser> getFriends(String accessToken) {
 		FacebookClient fb = createFacebookClient(accessToken);
-		List<FqlUser> users = fb.executeQuery(FRIENDS_FQL, FqlUser.class);
-		return new PagedResult<FqlUser>(users, true);
+		return fb.executeFqlQuery(FRIENDS_FQL, FacebookUser.class);
+	}
+	
+	public List<FacebookUser> getAppFriends(String accessToken) {
+		FacebookClient fb = createFacebookClient(accessToken);
+		return fb.executeFqlQuery(APP_FRIENDS_FQL, FacebookUser.class);
 	}
 	
 	public void publish(String accessToken, String message) {

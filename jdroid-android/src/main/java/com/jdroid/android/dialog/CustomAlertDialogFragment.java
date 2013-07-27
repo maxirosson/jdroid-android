@@ -2,21 +2,24 @@ package com.jdroid.android.dialog;
 
 import java.io.Serializable;
 import java.util.Map;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+import com.jdroid.android.R;
 import com.jdroid.java.collections.Maps;
 
 /**
  * 
  * @author Maxi Rosson
  */
-public class AlertDialogFragment extends AbstractDialogFragment {
+public class CustomAlertDialogFragment extends AbstractDialogFragment {
 	
 	private static final String TITLE_EXTRA = "titleExtra";
 	private static final String MESSAGE_EXTRA = "messageExtra";
@@ -33,18 +36,18 @@ public class AlertDialogFragment extends AbstractDialogFragment {
 	
 	public static void show(Fragment fragment, String title, String message, String positiveButtonText,
 			String negativeButtonText, Boolean cancelable) {
-		show(fragment.getActivity(), new AlertDialogFragment(), title, message, positiveButtonText, negativeButtonText,
-			cancelable);
+		show(fragment.getActivity(), new CustomAlertDialogFragment(), title, message, positiveButtonText,
+			negativeButtonText, cancelable);
 	}
 	
-	public static void show(FragmentActivity fragmentActivity, AlertDialogFragment alertDialogFragment, String title,
-			String message, String positiveButtonText, String negativeButtonText, Boolean cancelable) {
+	public static void show(FragmentActivity fragmentActivity, CustomAlertDialogFragment alertDialogFragment,
+			String title, String message, String positiveButtonText, String negativeButtonText, Boolean cancelable) {
 		show(fragmentActivity.getSupportFragmentManager(), alertDialogFragment, title, message, positiveButtonText,
 			negativeButtonText, cancelable);
 	}
 	
-	public static void show(FragmentManager fragmentManager, AlertDialogFragment alertDialogFragment, String title,
-			String message, String positiveButtonText, String negativeButtonText, Boolean cancelable) {
+	public static void show(FragmentManager fragmentManager, CustomAlertDialogFragment alertDialogFragment,
+			String title, String message, String positiveButtonText, String negativeButtonText, Boolean cancelable) {
 		
 		Bundle bundle = new Bundle();
 		bundle.putSerializable(TITLE_EXTRA, title);
@@ -75,39 +78,53 @@ public class AlertDialogFragment extends AbstractDialogFragment {
 	}
 	
 	@Override
-	public Dialog onCreateDialog(Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		return inflater.inflate(R.layout.alert_dialog_fragment, container, false);
+	}
+	
+	/**
+	 * @see com.jdroid.android.dialog.AbstractDialogFragment#onViewCreated(android.view.View, android.os.Bundle)
+	 */
+	@Override
+	public void onViewCreated(View view, Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
 		
-		AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
-		dialog.setTitle(title);
-		dialog.setMessage(message);
-		dialog.setCancelable(cancelable);
+		TextView contentText = findView(R.id.contentText);
+		contentText.setText(message);
+		
 		if (positiveButtonText != null) {
-			dialog.setPositiveButton(positiveButtonText, new OnClickListener() {
+			Button positiveButton = findView(R.id.rightButton);
+			positiveButton.setText(positiveButtonText);
+			positiveButton.setOnClickListener(new OnClickListener() {
 				
 				@Override
-				public void onClick(DialogInterface dialog, int whichButton) {
-					onPostivieClick();
+				public void onClick(View v) {
+					onPositiveClick();
 				}
 			});
 		}
 		if (negativeButtonText != null) {
-			dialog.setNegativeButton(negativeButtonText, new OnClickListener() {
+			Button negativeButton = findView(R.id.leftButton);
+			negativeButton.setText(negativeButtonText);
+			negativeButton.setOnClickListener(new OnClickListener() {
 				
 				@Override
-				public void onClick(DialogInterface dialog, int whichButton) {
+				public void onClick(View v) {
 					onNegativeClick();
 				}
 			});
 		}
-		return dialog.create();
+		
+		getDialog().setTitle(title);
+		getDialog().setCancelable(cancelable);
 	}
 	
-	protected void onPostivieClick() {
+	protected void onPositiveClick() {
 		// Do nothing by default
 	}
 	
 	protected void onNegativeClick() {
-		// Do nothing by default
+		dismiss();
 	}
 	
 	public void addParameter(String key, Serializable value) {

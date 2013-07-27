@@ -47,7 +47,7 @@ public abstract class WizardActivity extends AbstractFragmentActivity {
 			}
 		});
 		
-		next = findView(R.id.next);
+		next = findView(R.id.leftButton);
 		next.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -60,7 +60,8 @@ public abstract class WizardActivity extends AbstractFragmentActivity {
 			}
 		});
 		
-		previous = findView(R.id.previous);
+		previous = findView(R.id.rightButton);
+		previous.setText(R.string.previous);
 		previous.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
