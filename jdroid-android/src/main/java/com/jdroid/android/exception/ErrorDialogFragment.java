@@ -29,10 +29,10 @@ public class ErrorDialogFragment extends AlertDialogFragment {
 	}
 	
 	/**
-	 * @see com.jdroid.android.dialog.AlertDialogFragment#onPostivieClick()
+	 * @see com.jdroid.android.dialog.AlertDialogFragment#onPositiveClick()
 	 */
 	@Override
-	protected void onPostivieClick() {
+	protected void onPositiveClick() {
 		goBackIfrequired();
 	}
 	

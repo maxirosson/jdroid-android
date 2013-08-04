@@ -17,7 +17,7 @@ public class GooglePlayUtils {
 	public static class UpdateAppDialogFragment extends AlertDialogFragment {
 		
 		@Override
-		protected void onPostivieClick() {
+		protected void onPositiveClick() {
 			FragmentActivity fragmentActivity = (FragmentActivity)AbstractApplication.get().getCurrentActivity();
 			launchAppDetails(fragmentActivity, AndroidUtils.getPackageName());
 		};
@@ -28,7 +28,7 @@ public class GooglePlayUtils {
 		private static final String PACKAGE_NAME = "PACKAGE_NAME";
 		
 		@Override
-		protected void onPostivieClick() {
+		protected void onPositiveClick() {
 			FragmentActivity fragmentActivity = (FragmentActivity)AbstractApplication.get().getCurrentActivity();
 			launchAppDetails(fragmentActivity, getArguments().getString(PACKAGE_NAME));
 		};

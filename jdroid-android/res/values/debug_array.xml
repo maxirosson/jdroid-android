@@ -2,7 +2,10 @@
 <resources>
 
 	<string-array name="apiUrlsEntries">
+		<item>PROD</item>
+		<item>QA</item>
 		<item>DEV</item>
+		<item>Mockey</item>
 	</string-array>
 
 	<string-array name="httpMockCrashTypeEntries">

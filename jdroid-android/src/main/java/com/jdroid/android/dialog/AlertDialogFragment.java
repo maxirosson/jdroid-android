@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.view.View;
+import android.widget.Button;
 import com.jdroid.java.collections.Maps;
 
 /**
@@ -77,21 +79,28 @@ public class AlertDialogFragment extends AbstractDialogFragment {
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		
-		AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
-		dialog.setTitle(title);
-		dialog.setMessage(message);
-		dialog.setCancelable(cancelable);
+		AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
+		dialogBuilder.setTitle(title);
+		dialogBuilder.setCancelable(cancelable);
+		
+		View contentView = createContentView();
+		if (contentView != null) {
+			dialogBuilder.setView(contentView);
+		} else if (message != null) {
+			dialogBuilder.setMessage(message);
+		}
+		
 		if (positiveButtonText != null) {
-			dialog.setPositiveButton(positiveButtonText, new OnClickListener() {
+			dialogBuilder.setPositiveButton(positiveButtonText, new OnClickListener() {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int whichButton) {
-					onPostivieClick();
+					onPositiveClick();
 				}
 			});
 		}
 		if (negativeButtonText != null) {
-			dialog.setNegativeButton(negativeButtonText, new OnClickListener() {
+			dialogBuilder.setNegativeButton(negativeButtonText, new OnClickListener() {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int whichButton) {
@@ -99,10 +108,30 @@ public class AlertDialogFragment extends AbstractDialogFragment {
 				}
 			});
 		}
-		return dialog.create();
+		
+		AlertDialog dialog = dialogBuilder.create();
+		if ((positiveButtonText != null) && !dismissOnPositivoButtonClick()) {
+			// As workaround, to override default dismiss behavior the listener is directly set on the button.
+			dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+				
+				@Override
+				public void onShow(final DialogInterface dialogInterface) {
+					Button possitiveButton = ((AlertDialog)dialogInterface).getButton(DialogInterface.BUTTON_POSITIVE);
+					possitiveButton.setOnClickListener(new View.OnClickListener() {
+						
+						@Override
+						public void onClick(View arg0) {
+							onPositiveClick();
+						}
+					});
+				}
+			});
+		}
+		
+		return dialog;
 	}
 	
-	protected void onPostivieClick() {
+	protected void onPositiveClick() {
 		// Do nothing by default
 	}
 	
@@ -113,4 +142,13 @@ public class AlertDialogFragment extends AbstractDialogFragment {
 	public void addParameter(String key, Serializable value) {
 		parameters.put(key, value);
 	}
+	
+	protected boolean dismissOnPositivoButtonClick() {
+		return true;
+	}
+	
+	protected View createContentView() {
+		return null;
+	}
+	
 }

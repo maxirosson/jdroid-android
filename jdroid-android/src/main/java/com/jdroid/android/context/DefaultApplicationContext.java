@@ -56,13 +56,13 @@ public class DefaultApplicationContext {
 		if (isProductionEnvironment() || !displayDebugSettings()) {
 			return serverApiURL;
 		} else {
-			Environment environment = Environment.valueOf(PreferenceManager.getDefaultSharedPreferences(
-				AbstractApplication.get()).getString("apiUrl", Environment.DEV.toString()));
-			return getServerApiUrlForDebug(environment);
+			String urlEntry = PreferenceManager.getDefaultSharedPreferences(AbstractApplication.get()).getString(
+				"apiUrl", Environment.DEV.toString());
+			return getServerApiUrlForDebug(urlEntry);
 		}
 	}
 	
-	public String getServerApiUrlForDebug(Environment environment) {
+	public String getServerApiUrlForDebug(String urlEntry) {
 		return serverApiURL;
 	}
 	
