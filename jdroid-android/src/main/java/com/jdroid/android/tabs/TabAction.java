@@ -1,8 +1,8 @@
 package com.jdroid.android.tabs;
 
 import java.io.Serializable;
-import android.app.Activity;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 
 /**
  * 
@@ -18,5 +18,7 @@ public interface TabAction extends Serializable {
 	
 	public Fragment createFragment(Object args);
 	
-	public Class<? extends Activity> getActivityClass();
+	public void startActivity(FragmentActivity fragmentActivity);
+	
+	public Boolean matchesActivity(FragmentActivity fragmentActivity);
 }

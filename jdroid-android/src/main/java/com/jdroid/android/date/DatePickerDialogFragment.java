@@ -109,10 +109,13 @@ public class DatePickerDialogFragment extends AbstractDialogFragment implements 
 			dialogBuilder.setTitle(titleResId);
 		}
 		if (AndroidUtils.getApiLevel() > Build.VERSION_CODES.GINGERBREAD_MR1) {
-			if (minDate != null) {
+			
+			Boolean disableMinMaxDate = disableMinMaxDate();
+			
+			if ((minDate != null) && !disableMinMaxDate) {
 				datePicker.setMinDate(minDate.getTime());
 			}
-			if (maxDate != null) {
+			if ((maxDate != null) && !disableMinMaxDate) {
 				datePicker.setMaxDate(maxDate.getTime());
 			}
 			
@@ -137,6 +140,19 @@ public class DatePickerDialogFragment extends AbstractDialogFragment implements 
 		Dialog dialog = dialogBuilder.create();
 		updateTitle(dialog, defaultDate);
 		return dialog;
+	}
+	
+	private Boolean disableMinMaxDate() {
+		
+		// Disable the min/max date feature on devices where it crashes
+		if ((AndroidUtils.getApiLevel() >= Build.VERSION_CODES.JELLY_BEAN)
+				&& (AndroidUtils.getApiLevel() <= Build.VERSION_CODES.JELLY_BEAN_MR1)) {
+			String model = AndroidUtils.getDeviceModel();
+			if ((model != null) && (model.equals("Nexus 7") || model.contains("ST26i") || model.contains("ST26a"))) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	@Override

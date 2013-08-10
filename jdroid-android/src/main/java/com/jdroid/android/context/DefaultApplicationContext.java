@@ -3,6 +3,7 @@ package com.jdroid.android.context;
 import java.util.Set;
 import android.preference.PreferenceManager;
 import com.jdroid.android.AbstractApplication;
+import com.jdroid.java.http.Server;
 import com.jdroid.java.utils.PropertiesUtils;
 
 /**
@@ -14,7 +15,8 @@ public class DefaultApplicationContext {
 	private static final String PROPERTIES_RESOURCE_NAME = "settings.properties";
 	private static final String LOCAL_PROPERTIES_RESOURCE_NAME = "settings.local.properties";
 	
-	private String serverApiURL;
+	private Server server;
+	private String localIp;
 	private Environment environment;
 	private String googleProjectId;
 	private String facebookAppId;
@@ -33,7 +35,8 @@ public class DefaultApplicationContext {
 		PropertiesUtils.loadProperties(LOCAL_PROPERTIES_RESOURCE_NAME);
 		PropertiesUtils.loadProperties(PROPERTIES_RESOURCE_NAME);
 		
-		serverApiURL = PropertiesUtils.getStringProperty("server.url");
+		server = createServer(PropertiesUtils.getStringProperty("server.name"));
+		localIp = PropertiesUtils.getStringProperty("local.ip");
 		environment = Environment.valueOf(PropertiesUtils.getStringProperty("environment.name"));
 		googleProjectId = PropertiesUtils.getStringProperty("google.projectId");
 		facebookAppId = PropertiesUtils.getStringProperty("facebook.app.id");
@@ -49,21 +52,18 @@ public class DefaultApplicationContext {
 		crittercismPremium = PropertiesUtils.getBooleanProperty("crittercism.premium", false);
 	}
 	
-	/**
-	 * @return The base URL of the API server
-	 */
-	public String getServerApiUrl() {
-		if (isProductionEnvironment() || !displayDebugSettings()) {
-			return serverApiURL;
-		} else {
-			String urlEntry = PreferenceManager.getDefaultSharedPreferences(AbstractApplication.get()).getString(
-				"apiUrl", Environment.DEV.toString());
-			return getServerApiUrlForDebug(urlEntry);
-		}
+	protected Server createServer(String serverName) {
+		return null;
 	}
 	
-	public String getServerApiUrlForDebug(String urlEntry) {
-		return serverApiURL;
+	@SuppressWarnings("unchecked")
+	public <T extends Server> T getServer() {
+		if (isProductionEnvironment() || !displayDebugSettings()) {
+			return (T)server;
+		} else {
+			return (T)createServer(PreferenceManager.getDefaultSharedPreferences(AbstractApplication.get()).getString(
+				"serverName", server.getName()).toUpperCase());
+		}
 	}
 	
 	/**
@@ -170,5 +170,9 @@ public class DefaultApplicationContext {
 	
 	public Boolean isCrittercismPremium() {
 		return crittercismPremium;
+	}
+	
+	public String getLocalIp() {
+		return localIp;
 	}
 }

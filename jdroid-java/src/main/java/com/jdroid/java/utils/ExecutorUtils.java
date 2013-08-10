@@ -46,7 +46,7 @@ public final class ExecutorUtils {
 	/**
 	 * @param millis The time to sleep in milliseconds.
 	 */
-	public static void sleepInMillis(int millis) {
+	public static void sleepInMillis(long millis) {
 		try {
 			Thread.sleep(millis);
 		} catch (InterruptedException e) {

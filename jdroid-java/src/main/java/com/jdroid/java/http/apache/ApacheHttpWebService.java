@@ -20,6 +20,7 @@ import com.jdroid.java.exception.ConnectionException;
 import com.jdroid.java.exception.UnexpectedException;
 import com.jdroid.java.http.HttpResponseWrapper;
 import com.jdroid.java.http.HttpWebServiceProcessor;
+import com.jdroid.java.http.Server;
 import com.jdroid.java.http.WebService;
 import com.jdroid.java.parser.Parser;
 import com.jdroid.java.utils.EncodingUtils;
@@ -37,10 +38,11 @@ public abstract class ApacheHttpWebService implements WebService {
 	private Integer connectionTimeout;
 	private String userAgent;
 	
+	private Server server;
+	private List<Object> urlSegments;
+	
 	/** Query Parameter values of the request. */
 	private List<NameValuePair> queryParameters = Lists.newArrayList();
-	
-	private List<String> urlSegments = Lists.newArrayList();
 	
 	/** Base URL of the request to execute */
 	private String baseURL;
@@ -59,12 +61,18 @@ public abstract class ApacheHttpWebService implements WebService {
 	/**
 	 * @param httpClientFactory the httpClientFactory
 	 * @param httpWebServiceProcessors
-	 * @param baseURL The Base URL of the request to execute
+	 * @param urlSegments
+	 * @param server The {@link Server} where execute the request
 	 */
-	public ApacheHttpWebService(HttpClientFactory httpClientFactory, String baseURL,
+	public ApacheHttpWebService(HttpClientFactory httpClientFactory, Server server, List<Object> urlSegments,
 			HttpWebServiceProcessor... httpWebServiceProcessors) {
 		this.httpClientFactory = httpClientFactory;
-		this.baseURL = baseURL;
+		this.server = server;
+		this.urlSegments = urlSegments;
+		if (urlSegments == null) {
+			this.urlSegments = Lists.newArrayList();
+		}
+		
 		this.httpWebServiceProcessors = httpWebServiceProcessors != null ? Lists.newArrayList(httpWebServiceProcessors)
 				: null;
 	}
@@ -102,7 +110,7 @@ public abstract class ApacheHttpWebService implements WebService {
 			addCookies(client);
 			
 			// make request.
-			HttpUriRequest request = createHttpUriRequest(ssl ? HTTPS_PROTOCOL : HTTP_PROTOCOL);
+			HttpUriRequest request = createHttpUriRequest(createUrl());
 			
 			// Log request
 			LOGGER.debug(getMethodName() + ": " + request.getRequestLine().getUri());
@@ -145,6 +153,16 @@ public abstract class ApacheHttpWebService implements WebService {
 				client.getConnectionManager().shutdown();
 			}
 		}
+	}
+	
+	private String createUrl() {
+		StringBuilder builder = new StringBuilder();
+		builder.append(ssl && server.supportsSsl() ? HTTPS_PROTOCOL : HTTP_PROTOCOL);
+		builder.append("://");
+		builder.append(server.getBaseUrl());
+		builder.append(getUrlSegments());
+		builder.append(makeStringParameters());
+		return builder.toString();
 	}
 	
 	protected String makeStringParameters() {
@@ -269,9 +287,9 @@ public abstract class ApacheHttpWebService implements WebService {
 	/**
 	 * Create the {@link HttpUriRequest} to send.
 	 * 
-	 * @param protocol
+	 * @param url
 	 */
-	protected abstract HttpUriRequest createHttpUriRequest(String protocol);
+	protected abstract HttpUriRequest createHttpUriRequest(String url);
 	
 	/**
 	 * @see com.jdroid.java.http.WebService#setUserAgent(java.lang.String)

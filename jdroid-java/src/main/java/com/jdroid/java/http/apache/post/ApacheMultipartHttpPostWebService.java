@@ -3,6 +3,7 @@ package com.jdroid.java.http.apache.post;
 import java.io.ByteArrayInputStream;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
+import java.util.List;
 import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.StringBody;
@@ -10,7 +11,8 @@ import com.jdroid.java.exception.UnexpectedException;
 import com.jdroid.java.http.HttpWebServiceProcessor;
 import com.jdroid.java.http.MimeType;
 import com.jdroid.java.http.MultipartWebService;
-import com.jdroid.java.http.apache.ApacheHttpWebService;
+import com.jdroid.java.http.Server;
+import com.jdroid.java.http.WebService;
 import com.jdroid.java.http.apache.HttpClientFactory;
 import com.jdroid.java.marshaller.MarshallerMode;
 import com.jdroid.java.marshaller.MarshallerProvider;
@@ -23,9 +25,9 @@ public class ApacheMultipartHttpPostWebService extends ApacheHttpPostWebService 
 	
 	private MultipartEntity multipartEntity = new MultipartEntity();
 	
-	public ApacheMultipartHttpPostWebService(HttpClientFactory httpClientFactory, String baseURL,
-			HttpWebServiceProcessor... httpWebServiceProcessors) {
-		super(httpClientFactory, baseURL, httpWebServiceProcessors);
+	public ApacheMultipartHttpPostWebService(HttpClientFactory httpClientFactory, Server server,
+			List<Object> urlSegments, HttpWebServiceProcessor... httpWebServiceProcessors) {
+		super(httpClientFactory, server, urlSegments, httpWebServiceProcessors);
 	}
 	
 	/**
@@ -42,7 +44,7 @@ public class ApacheMultipartHttpPostWebService extends ApacheHttpPostWebService 
 	@Override
 	public void addHeader(String name, String value) {
 		// The MultipartEntity will fill the proper content type header. So, we need to avoid the override of it
-		if (!name.equals(ApacheHttpWebService.CONTENT_TYPE_HEADER)) {
+		if (!name.equals(WebService.CONTENT_TYPE_HEADER)) {
 			super.addHeader(name, value);
 		}
 	}

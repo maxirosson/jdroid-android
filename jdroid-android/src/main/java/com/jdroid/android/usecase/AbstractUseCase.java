@@ -4,6 +4,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import com.jdroid.java.collections.Lists;
 import com.jdroid.java.utils.DateUtils;
+import com.jdroid.java.utils.ExecutorUtils;
 import com.jdroid.java.utils.LoggerUtils;
 
 /**
@@ -30,6 +31,7 @@ public abstract class AbstractUseCase<T> implements UseCase<T> {
 	private Boolean notified = false;
 	
 	private Long executionTime = 0L;
+	private Long minimumExecutionTime = 0L;
 	
 	/**
 	 * Executes the use case.
@@ -49,6 +51,12 @@ public abstract class AbstractUseCase<T> implements UseCase<T> {
 			doExecute();
 			executionTime = System.currentTimeMillis() - startTime;
 			LOGGER.debug("Finished use case. Execution time: " + DateUtils.formatSecondsAndMilli(executionTime));
+			
+			if (executionTime < minimumExecutionTime) {
+				ExecutorUtils.sleepInMillis(minimumExecutionTime - executionTime);
+				LOGGER.debug("Delaying the use case to achieve the minimum execution time of " + minimumExecutionTime
+						+ "ms");
+			}
 			
 			if (isCanceled()) {
 				for (T listener : listeners) {
@@ -70,6 +78,13 @@ public abstract class AbstractUseCase<T> implements UseCase<T> {
 				markAsNotified();
 			}
 		}
+	}
+	
+	/**
+	 * @param minimumExecutionTime the minimumExecutionTime to set
+	 */
+	public void setMinimumExecutionTime(Long minimumExecutionTime) {
+		this.minimumExecutionTime = minimumExecutionTime;
 	}
 	
 	/**

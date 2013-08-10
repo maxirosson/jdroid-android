@@ -1,7 +1,9 @@
 package com.jdroid.java.api;
 
+import java.util.List;
 import com.jdroid.java.http.HttpWebServiceProcessor;
 import com.jdroid.java.http.MultipartWebService;
+import com.jdroid.java.http.Server;
 import com.jdroid.java.http.WebService;
 import com.jdroid.java.http.apache.DefaultHttpClientFactory;
 import com.jdroid.java.http.apache.HttpClientFactory;
@@ -24,8 +26,9 @@ public abstract class AbstractApacheApiService extends AbstractApiService {
 	 *      com.jdroid.java.http.HttpWebServiceProcessor[])
 	 */
 	@Override
-	protected WebService newGetServiceImpl(String baseURL, HttpWebServiceProcessor... httpWebServiceProcessors) {
-		return new ApacheHttpGetWebService(getHttpClientFactoryInstance(), baseURL,
+	protected WebService newGetServiceImpl(Server server, List<Object> urlSegments,
+			HttpWebServiceProcessor... httpWebServiceProcessors) {
+		return new ApacheHttpGetWebService(getHttpClientFactoryInstance(), server, urlSegments,
 				toArray(getHttpWebServiceProcessors()));
 	}
 	
@@ -34,52 +37,53 @@ public abstract class AbstractApacheApiService extends AbstractApiService {
 	 *      com.jdroid.java.http.HttpWebServiceProcessor[])
 	 */
 	@Override
-	protected EntityEnclosingWebService newPostServiceImpl(String baseURL,
+	protected EntityEnclosingWebService newPostServiceImpl(Server server, List<Object> urlSegments,
 			HttpWebServiceProcessor... httpWebServiceProcessors) {
-		return new ApacheHttpPostWebService(getHttpClientFactoryInstance(), baseURL,
+		return new ApacheHttpPostWebService(getHttpClientFactoryInstance(), server, urlSegments,
 				toArray(getHttpWebServiceProcessors()));
 	}
 	
 	/**
-	 * @see com.jdroid.java.api.AbstractApiService#newPutService(java.lang.String,
+	 * @see com.jdroid.java.api.AbstractApiService#newPutServiceImpl(com.jdroid.java.http.Server, java.util.List,
 	 *      com.jdroid.java.http.HttpWebServiceProcessor[])
 	 */
 	@Override
-	protected EntityEnclosingWebService newPutServiceImpl(String baseURL,
+	protected EntityEnclosingWebService newPutServiceImpl(Server server, List<Object> urlSegments,
 			HttpWebServiceProcessor... httpWebServiceProcessors) {
-		return new ApacheHttpPutWebService(getHttpClientFactoryInstance(), baseURL,
+		return new ApacheHttpPutWebService(getHttpClientFactoryInstance(), server, urlSegments,
 				toArray(getHttpWebServiceProcessors()));
 	}
 	
 	/**
-	 * @see com.jdroid.java.api.AbstractApiService#newMultipartPutService(java.lang.String,
-	 *      com.jdroid.java.http.HttpWebServiceProcessor[])
+	 * @see com.jdroid.java.api.AbstractApiService#newMultipartPutServiceImpl(com.jdroid.java.http.Server,
+	 *      java.util.List, com.jdroid.java.http.HttpWebServiceProcessor[])
 	 */
 	@Override
-	protected MultipartWebService newMultipartPutServiceImpl(String baseURL,
+	protected MultipartWebService newMultipartPutServiceImpl(Server server, List<Object> urlSegments,
 			HttpWebServiceProcessor... httpWebServiceProcessors) {
-		return new ApacheMultipartHttpPutWebService(getHttpClientFactoryInstance(), baseURL,
+		return new ApacheMultipartHttpPutWebService(getHttpClientFactoryInstance(), server, urlSegments,
 				toArray(getHttpWebServiceProcessors()));
 	}
 	
 	/**
-	 * @see com.jdroid.java.api.AbstractApiService#newDeleteService(java.lang.String,
+	 * @see com.jdroid.java.api.AbstractApiService#newDeleteServiceImpl(com.jdroid.java.http.Server, java.util.List,
 	 *      com.jdroid.java.http.HttpWebServiceProcessor[])
 	 */
 	@Override
-	protected WebService newDeleteServiceImpl(String baseURL, HttpWebServiceProcessor... httpWebServiceProcessors) {
-		return new ApacheHttpDeleteWebService(getHttpClientFactoryInstance(), baseURL,
+	protected WebService newDeleteServiceImpl(Server server, List<Object> urlSegments,
+			HttpWebServiceProcessor... httpWebServiceProcessors) {
+		return new ApacheHttpDeleteWebService(getHttpClientFactoryInstance(), server, urlSegments,
 				toArray(getHttpWebServiceProcessors()));
 	}
 	
 	/**
-	 * @see com.jdroid.java.api.AbstractApiService#newFormPostService(java.lang.String,
+	 * @see com.jdroid.java.api.AbstractApiService#newFormPostServiceImpl(com.jdroid.java.http.Server, java.util.List,
 	 *      com.jdroid.java.http.HttpWebServiceProcessor[])
 	 */
 	@Override
-	protected EntityEnclosingWebService newFormPostServiceImpl(String baseURL,
+	protected EntityEnclosingWebService newFormPostServiceImpl(Server server, List<Object> urlSegments,
 			HttpWebServiceProcessor... httpWebServiceProcessors) {
-		return new ApacheFormHttpPostWebService(getHttpClientFactoryInstance(), baseURL,
+		return new ApacheFormHttpPostWebService(getHttpClientFactoryInstance(), server, urlSegments,
 				toArray(getHttpWebServiceProcessors()));
 	}
 	

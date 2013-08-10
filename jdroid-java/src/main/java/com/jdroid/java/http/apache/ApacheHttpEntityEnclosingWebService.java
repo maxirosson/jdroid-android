@@ -1,6 +1,7 @@
 package com.jdroid.java.http.apache;
 
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
 import org.apache.http.client.methods.HttpUriRequest;
@@ -8,6 +9,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.protocol.HTTP;
 import com.jdroid.java.exception.UnexpectedException;
 import com.jdroid.java.http.HttpWebServiceProcessor;
+import com.jdroid.java.http.Server;
 import com.jdroid.java.http.post.EntityEnclosingWebService;
 
 /**
@@ -19,19 +21,18 @@ public abstract class ApacheHttpEntityEnclosingWebService extends ApacheHttpWebS
 	
 	private HttpEntity entity;
 	
-	public ApacheHttpEntityEnclosingWebService(HttpClientFactory httpClientFactory, String baseURL,
-			HttpWebServiceProcessor... httpWebServiceProcessors) {
-		super(httpClientFactory, baseURL, httpWebServiceProcessors);
+	public ApacheHttpEntityEnclosingWebService(HttpClientFactory httpClientFactory, Server server,
+			List<Object> urlSegments, HttpWebServiceProcessor... httpWebServiceProcessors) {
+		super(httpClientFactory, server, urlSegments, httpWebServiceProcessors);
 	}
 	
 	/**
 	 * @see com.jdroid.java.http.apache.ApacheHttpWebService#createHttpUriRequest()
 	 */
 	@Override
-	protected HttpUriRequest createHttpUriRequest(String protocol) {
+	protected HttpUriRequest createHttpUriRequest(String url) {
 		// New HttpEntityEnclosingRequestBase for send request.
-		HttpEntityEnclosingRequestBase httpEntityEnclosingRequestBase = createHttpEntityEnclosingRequestBase(protocol
-				+ "://" + getBaseURL() + getUrlSegments() + makeStringParameters());
+		HttpEntityEnclosingRequestBase httpEntityEnclosingRequestBase = createHttpEntityEnclosingRequestBase(url);
 		
 		// set body for request.
 		addEntity(httpEntityEnclosingRequestBase);

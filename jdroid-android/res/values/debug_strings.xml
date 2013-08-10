@@ -2,9 +2,9 @@
 <resources>
 
 	<string name="debugSettings">Debug Settings</string>
-	<string name="apiUrl">Api URL</string>
-	<string name="apiUrlTitle">Api Url</string>
-	<string name="apiUrlDescription">Pick url to use to comunicate with api</string>
+	<string name="server">Server</string>
+	<string name="serverNameTitle">Server Name</string>
+	<string name="serverNameDescription">Pick the server used comunicate with the api</string>
 	<string name="httpMocks">HTTP Mocks</string>
 	<string name="httpMockEnabledTitle">Http Mocks</string>
 	<string name="httpMockEnabledDescription">Enable/disable http mocks</string>

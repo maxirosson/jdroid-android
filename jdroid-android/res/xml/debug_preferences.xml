@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-	<PreferenceCategory android:title="@string/apiUrl">
-		<ListPreference android:key="apiUrl" android:title="@string/apiUrlTitle" android:entryValues="@array/apiUrlsEntries"
-			android:entries="@array/apiUrlsEntries" android:summary="@string/apiUrlDescription" />
+	<PreferenceCategory android:title="@string/server">
+		<ListPreference android:key="serverName" android:title="@string/serverNameTitle" android:entryValues="@array/serverEntries"
+			android:entries="@array/serverEntries" android:summary="@string/serverNameDescription" />
 	</PreferenceCategory>
 	<PreferenceCategory android:title="@string/httpMocks">
 		<CheckBoxPreference android:key="httpMockEnabled" android:title="@string/httpMockEnabledTitle"

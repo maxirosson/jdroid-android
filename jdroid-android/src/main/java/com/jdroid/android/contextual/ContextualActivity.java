@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import com.jdroid.android.ActivityLauncher;
 import com.jdroid.android.R;
 import com.jdroid.android.activity.AbstractFragmentActivity;
 import com.jdroid.android.fragment.OnItemSelectedListener;
@@ -77,7 +76,7 @@ public abstract class ContextualActivity<T extends TabAction> extends AbstractFr
 		
 		Fragment oldFragment = getSupportFragmentManager().findFragmentById(R.id.detailsFragmentContainer);
 		if (oldFragment == null) {
-			ActivityLauncher.launchActivity(item.getActivityClass());
+			item.startActivity(this);
 		} else {
 			if (!oldFragment.getTag().equals(item.getName())) {
 				replaceDetailsFragment(item);
