@@ -4,7 +4,6 @@ package com.jdroid.android.domain;
  * 
  * @author Maxi Rosson
  */
-// TODO Provisory. Find a better way to do this
 public interface User {
 	
 	public Long getId();

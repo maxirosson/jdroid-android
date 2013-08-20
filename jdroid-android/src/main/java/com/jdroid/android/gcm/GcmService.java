@@ -34,9 +34,6 @@ public class GcmService extends IntentService {
 	
 	/**
 	 * Constructor that does not set a sender id, useful when the sender id is context-specific.
-	 * <p>
-	 * When using this constructor, the subclass <strong>must</strong> override {@link #getSenderIds(Context)},
-	 * otherwise methods such as {@link #onHandleIntent(Intent)} will throw an {@link IllegalStateException} on runtime.
 	 */
 	public GcmService() {
 		super(GcmService.class.getSimpleName());

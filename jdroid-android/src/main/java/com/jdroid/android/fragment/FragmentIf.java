@@ -127,4 +127,5 @@ public interface FragmentIf extends DefaultUseCaseListener {
 	
 	public Boolean shouldRetainInstance();
 	
+	public Long getLocationFrequency();
 }

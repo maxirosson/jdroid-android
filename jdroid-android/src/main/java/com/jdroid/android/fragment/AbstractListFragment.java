@@ -417,4 +417,12 @@ public abstract class AbstractListFragment<T> extends SherlockListFragment imple
 	public void onPauseUseCase(DefaultAbstractUseCase useCase, DefaultUseCaseListener listener) {
 		getFragmentIf().onPauseUseCase(useCase, listener);
 	}
+	
+	/**
+	 * @see com.jdroid.android.fragment.FragmentIf#getLocationFrequency()
+	 */
+	@Override
+	public Long getLocationFrequency() {
+		return getFragmentIf().getLocationFrequency();
+	}
 }

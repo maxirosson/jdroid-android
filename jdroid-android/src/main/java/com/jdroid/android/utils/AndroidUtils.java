@@ -114,6 +114,7 @@ public class AndroidUtils {
 	/**
 	 * @return The available storage in MegaBytes
 	 */
+	@SuppressWarnings("deprecation")
 	public static Long getAvailableInternalDataSize() {
 		StatFs stat = new StatFs(Environment.getDataDirectory().getPath());
 		long size = stat.getAvailableBlocks() * stat.getBlockSize();
@@ -123,6 +124,7 @@ public class AndroidUtils {
 	/**
 	 * @return The total storage in MegaBytes
 	 */
+	@SuppressWarnings("deprecation")
 	public static Long getTotalInternalDataSize() {
 		StatFs stat = new StatFs(Environment.getDataDirectory().getPath());
 		long size = stat.getBlockCount() * stat.getBlockSize();

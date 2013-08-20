@@ -4,5 +4,6 @@
 	<item android:state_pressed="true" android:drawable="@drawable/leftnav_bar_item_background_pressed_dark" />
 	<item android:state_selected="true" android:drawable="@drawable/leftnav_bar_item_background_focused_dark" />
 	<item android:state_focused="true" android:drawable="@drawable/leftnav_bar_item_background_focused_dark" />
+	<item android:state_activated="true" android:drawable="@drawable/leftnav_bar_item_background_pressed_dark" />
 	<item android:drawable="@android:color/transparent" />
 </selector>

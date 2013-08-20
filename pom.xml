@@ -22,7 +22,7 @@
 		<android.sdk.platform>18</android.sdk.platform>
 		<android.version>4.3_r1</android.version>
 		<android.compatibility.support.version>r12</android.compatibility.support.version>
-		<actionbarsherlock.version>4.3.1</actionbarsherlock.version>
+		<actionbarsherlock.version>4.4.0</actionbarsherlock.version>
 		<android.maven.plugin.version>3.6.0</android.maven.plugin.version>
 	</properties>
 	

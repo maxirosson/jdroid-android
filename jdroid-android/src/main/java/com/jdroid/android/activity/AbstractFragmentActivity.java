@@ -166,7 +166,7 @@ public abstract class AbstractFragmentActivity extends SherlockFragmentActivity 
 	 * @see com.jdroid.android.activity.ActivityIf#getMenuResourceId()
 	 */
 	@Override
-	public int getMenuResourceId() {
+	public Integer getMenuResourceId() {
 		return baseActivity.getMenuResourceId();
 	}
 	
@@ -191,7 +191,6 @@ public abstract class AbstractFragmentActivity extends SherlockFragmentActivity 
 	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// REVIEW See if this is the correct approach
 		return baseActivity.onOptionsItemSelected(item) ? true : super.onOptionsItemSelected(item);
 	}
 	
@@ -500,5 +499,13 @@ public abstract class AbstractFragmentActivity extends SherlockFragmentActivity 
 	@Override
 	public Boolean isLauncherActivity() {
 		return baseActivity.isLauncherActivity();
+	}
+	
+	/**
+	 * @see com.jdroid.android.fragment.FragmentIf#getLocationFrequency()
+	 */
+	@Override
+	public Long getLocationFrequency() {
+		return null;
 	}
 }

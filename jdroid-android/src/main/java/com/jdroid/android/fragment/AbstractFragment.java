@@ -356,4 +356,12 @@ public abstract class AbstractFragment extends SherlockFragment implements Fragm
 		getFragmentIf().onPauseUseCase(useCase, listener);
 	}
 	
+	/**
+	 * @see com.jdroid.android.fragment.FragmentIf#getLocationFrequency()
+	 */
+	@Override
+	public Long getLocationFrequency() {
+		return getFragmentIf().getLocationFrequency();
+	}
+	
 }

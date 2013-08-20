@@ -14,7 +14,6 @@ import javax.crypto.spec.SecretKeySpec;
 import android.content.SharedPreferences;
 import android.util.Base64;
 import com.jdroid.java.exception.UnexpectedException;
-import com.jdroid.java.utils.EncryptionUtils;
 
 /**
  * 
@@ -52,7 +51,7 @@ public class AndroidEncryptionUtils {
 	
 	/**
 	 * Returns the data encrypted. Avoid calling this method on the UI thread if possible, since it may access to shared
-	 * preferences. If it has to be called from the UI thread, call {@link EncryptionUtils#init()} first.
+	 * preferences. If it has to be called from the UI thread, call {@link AndroidEncryptionUtils#init()} first.
 	 * 
 	 * @param cleartext
 	 * @return encrypted data

@@ -265,4 +265,12 @@ public abstract class AbstractPreferenceFragment extends PreferenceFragment impl
 	public AdSize getAdSize() {
 		return AdSize.SMART_BANNER;
 	}
+	
+	/**
+	 * @see com.jdroid.android.fragment.FragmentIf#getLocationFrequency()
+	 */
+	@Override
+	public Long getLocationFrequency() {
+		return getFragmentIf().getLocationFrequency();
+	}
 }

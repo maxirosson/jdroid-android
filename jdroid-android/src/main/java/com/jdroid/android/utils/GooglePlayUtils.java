@@ -20,6 +20,7 @@ public class GooglePlayUtils {
 		protected void onPositiveClick() {
 			FragmentActivity fragmentActivity = (FragmentActivity)AbstractApplication.get().getCurrentActivity();
 			launchAppDetails(fragmentActivity, AndroidUtils.getPackageName());
+			fragmentActivity.finish();
 		};
 	}
 	
@@ -40,11 +41,10 @@ public class GooglePlayUtils {
 	
 	public static void showUpdateDialog() {
 		FragmentActivity fragmentActivity = (FragmentActivity)AbstractApplication.get().getCurrentActivity();
-		String appName = AndroidUtils.getApplicationName();
-		String title = fragmentActivity.getString(R.string.updateAppTitle, appName);
-		String message = fragmentActivity.getString(R.string.updateAppMessage, appName);
-		AlertDialogFragment.show(fragmentActivity, new UpdateAppDialogFragment(), title, message,
-			fragmentActivity.getString(R.string.ok), null, true);
+		String title = fragmentActivity.getString(R.string.updateAppTitle);
+		String message = fragmentActivity.getString(R.string.updateAppMessage);
+		AlertDialogFragment.show(fragmentActivity, new UpdateAppDialogFragment(), title, message, null, null,
+			fragmentActivity.getString(R.string.ok), false);
 	}
 	
 	public static void showDownloadDialog(int appNameResId, String packageName) {
@@ -54,8 +54,8 @@ public class GooglePlayUtils {
 		String message = fragmentActivity.getString(R.string.installAppMessage, appName);
 		DownloadAppDialogFragment fragment = new DownloadAppDialogFragment();
 		fragment.setPackageName(packageName);
-		AlertDialogFragment.show(fragmentActivity, fragment, title, message, fragmentActivity.getString(R.string.yes),
-			fragmentActivity.getString(R.string.no), true);
+		AlertDialogFragment.show(fragmentActivity, fragment, title, message, fragmentActivity.getString(R.string.no),
+			null, fragmentActivity.getString(R.string.yes), true);
 	}
 	
 	public static void launchAppDetails(Context context, String packageName) {

@@ -24,7 +24,7 @@ public class ErrorDialogFragment extends AlertDialogFragment {
 			fragment.addParameter(SHOULD_GO_BACK_EXTRA, shouldGoBack);
 			
 			String okButton = activity.getString(R.string.ok);
-			AlertDialogFragment.show(activity, fragment, title, message, okButton, null, true);
+			AlertDialogFragment.show(activity, fragment, title, message, null, null, okButton, true);
 		}
 	}
 	

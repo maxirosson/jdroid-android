@@ -20,6 +20,7 @@ public abstract class ContextualActivity<T extends TabAction> extends AbstractFr
 		OnItemSelectedListener<T> {
 	
 	public static final String DEFAULT_CONTEXTUAL_ITEM_EXTRA = "defaultContextualItem";
+	public static final String DEFAULT_CONTEXTUAL_ITEM_BUNDLE_EXTRA = "defaultContextualItemBundle";
 	
 	/**
 	 * @see com.jdroid.android.activity.ActivityIf#getContentView()
@@ -52,7 +53,8 @@ public abstract class ContextualActivity<T extends TabAction> extends AbstractFr
 				newContextualListFragment(getContextualItems(), defaultContextualItem));
 			
 			if (AndroidUtils.isLargeScreenOrBigger()) {
-				fragmentTransaction.add(R.id.detailsFragmentContainer, defaultContextualItem.createFragment(null),
+				fragmentTransaction.add(R.id.detailsFragmentContainer,
+					defaultContextualItem.createFragment(getExtra(DEFAULT_CONTEXTUAL_ITEM_BUNDLE_EXTRA)),
 					defaultContextualItem.getName());
 			}
 			fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);

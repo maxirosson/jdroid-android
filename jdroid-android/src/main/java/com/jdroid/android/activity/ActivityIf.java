@@ -19,7 +19,7 @@ public interface ActivityIf extends FragmentIf {
 	
 	public int getContentView();
 	
-	public int getMenuResourceId();
+	public Integer getMenuResourceId();
 	
 	public void doOnCreateOptionsMenu(com.actionbarsherlock.view.Menu menu);
 	

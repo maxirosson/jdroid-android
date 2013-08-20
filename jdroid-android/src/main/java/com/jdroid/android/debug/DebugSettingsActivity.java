@@ -36,7 +36,14 @@ public class DebugSettingsActivity extends AbstractFragmentActivity {
 			fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 			fragmentTransaction.commit();
 		}
-		
+	}
+	
+	/**
+	 * @see com.jdroid.android.activity.AbstractFragmentActivity#getMenuResourceId()
+	 */
+	@Override
+	public Integer getMenuResourceId() {
+		return null;
 	}
 	
 	/**

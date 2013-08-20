@@ -42,6 +42,12 @@ public interface ExceptionHandler extends UncaughtExceptionHandler {
 	
 	/**
 	 * @param thread
+	 * @param exception
+	 */
+	public void handleException(Thread thread, InvalidApiVersionException exception);
+	
+	/**
+	 * @param thread
 	 * @param throwable
 	 */
 	public void handleException(Thread thread, Throwable throwable);

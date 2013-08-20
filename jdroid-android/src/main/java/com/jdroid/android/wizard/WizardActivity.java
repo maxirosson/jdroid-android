@@ -18,8 +18,8 @@ import com.jdroid.android.utils.AndroidUtils;
 public abstract class WizardActivity extends AbstractFragmentActivity {
 	
 	private ViewPager pager;
-	private Button previous;
-	private Button next;
+	private Button leftButton;
+	private Button rightButton;
 	
 	/**
 	 * @see com.jdroid.android.activity.ActivityIf#getContentView()
@@ -47,8 +47,18 @@ public abstract class WizardActivity extends AbstractFragmentActivity {
 			}
 		});
 		
-		next = findView(R.id.leftButton);
-		next.setOnClickListener(new View.OnClickListener() {
+		leftButton = findView(R.id.leftButton);
+		leftButton.setText(R.string.previous);
+		leftButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View view) {
+				pager.setCurrentItem(pager.getCurrentItem() - 1);
+			}
+		});
+		
+		rightButton = findView(R.id.rightButton);
+		rightButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View view) {
@@ -57,16 +67,6 @@ public abstract class WizardActivity extends AbstractFragmentActivity {
 				} else {
 					pager.setCurrentItem(pager.getCurrentItem() + 1);
 				}
-			}
-		});
-		
-		previous = findView(R.id.rightButton);
-		previous.setText(R.string.previous);
-		previous.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View view) {
-				pager.setCurrentItem(pager.getCurrentItem() - 1);
 			}
 		});
 		
@@ -82,22 +82,22 @@ public abstract class WizardActivity extends AbstractFragmentActivity {
 	private void updateBottomBar() {
 		int position = pager.getCurrentItem();
 		if (isOnFinishStep()) {
-			next.setText(R.string.finish);
+			rightButton.setText(R.string.finish);
 			if (AndroidUtils.getApiLevel() >= Build.VERSION_CODES.JELLY_BEAN) {
-				next.setBackgroundResource(R.drawable.finish_background);
-				next.setTextAppearance(this, R.style.finishWizardText);
+				rightButton.setBackgroundResource(R.drawable.finish_background);
+				rightButton.setTextAppearance(this, R.style.finishWizardText);
 			}
 		} else {
-			next.setText(R.string.next);
+			rightButton.setText(R.string.next);
 			if (AndroidUtils.getApiLevel() >= Build.VERSION_CODES.JELLY_BEAN) {
-				next.setBackgroundResource(R.drawable.selectable_item_background);
+				rightButton.setBackgroundResource(R.drawable.selectable_item_background);
 				TypedValue v = new TypedValue();
 				getTheme().resolveAttribute(android.R.attr.textAppearanceMedium, v, true);
-				next.setTextAppearance(this, v.resourceId);
+				rightButton.setTextAppearance(this, v.resourceId);
 			}
 		}
 		
-		previous.setVisibility(position <= 0 ? View.INVISIBLE : View.VISIBLE);
+		leftButton.setVisibility(position <= 0 ? View.INVISIBLE : View.VISIBLE);
 	}
 	
 	private Boolean isOnFinishStep() {

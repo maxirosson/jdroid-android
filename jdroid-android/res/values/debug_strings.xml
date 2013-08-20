@@ -4,7 +4,7 @@
 	<string name="debugSettings">Debug Settings</string>
 	<string name="server">Server</string>
 	<string name="serverNameTitle">Server Name</string>
-	<string name="serverNameDescription">Pick the server used comunicate with the api</string>
+	<string name="serverNameDescription">Pick the server used to communicate with the api</string>
 	<string name="httpMocks">HTTP Mocks</string>
 	<string name="httpMockEnabledTitle">Http Mocks</string>
 	<string name="httpMockEnabledDescription">Enable/disable http mocks</string>

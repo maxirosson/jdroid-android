@@ -9,6 +9,7 @@ import com.jdroid.android.AbstractApplication;
 import com.jdroid.android.R;
 import com.jdroid.android.context.DefaultApplicationContext;
 import com.jdroid.android.utils.AndroidUtils;
+import com.jdroid.android.utils.GooglePlayUtils;
 import com.jdroid.android.utils.LocalizationUtils;
 import com.jdroid.android.utils.ToastUtils;
 import com.jdroid.java.exception.AbstractException;
@@ -47,6 +48,8 @@ public class DefaultExceptionHandler implements ExceptionHandler {
 			handleException(thread, (ConnectionException)throwable);
 		} else if (throwable instanceof ApplicationException) {
 			handleException(thread, (ApplicationException)throwable);
+		} else if (throwable instanceof InvalidApiVersionException) {
+			handleException(thread, (InvalidApiVersionException)throwable);
 		} else if (!doUncaughtException(thread, throwable)) {
 			handleException(thread, throwable);
 		}
@@ -122,6 +125,15 @@ public class DefaultExceptionHandler implements ExceptionHandler {
 			LocalizationUtils.getString(R.string.serverError), throwable);
 	}
 	
+	/**
+	 * @see com.jdroid.android.exception.ExceptionHandler#handleException(java.lang.Thread,
+	 *      com.jdroid.android.exception.InvalidApiVersionException)
+	 */
+	@Override
+	public void handleException(Thread thread, InvalidApiVersionException exception) {
+		GooglePlayUtils.showUpdateDialog();
+	}
+	
 	public void logWarningException(String errorMessage, Throwable throwable) {
 		logHandledException(errorMessage, new WarningException(errorMessage, throwable));
 	}
@@ -146,6 +158,9 @@ public class DefaultExceptionHandler implements ExceptionHandler {
 		if (throwable instanceof ConnectionException) {
 			LOGGER.warn(message, throwable);
 			AbstractApplication.get().getAnalyticsSender().trackConnectionException((ConnectionException)throwable);
+		} else if (throwable instanceof InvalidApiVersionException) {
+			LOGGER.warn(message, throwable);
+			handleException(Thread.currentThread(), (InvalidApiVersionException)throwable);
 		} else {
 			LOGGER.error(message, throwable);
 			DefaultApplicationContext appContext = AbstractApplication.get().getAndroidApplicationContext();

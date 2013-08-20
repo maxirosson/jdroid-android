@@ -68,9 +68,6 @@ public abstract class AbstractApplication extends Application {
 	private String installationId;
 	private boolean inBackground = false;
 	
-	/** The {@link Runnable} to execute when the login activity is displayed */
-	private Runnable loginRunnable;
-	
 	public AbstractApplication() {
 		INSTANCE = this;
 	}
@@ -329,20 +326,6 @@ public abstract class AbstractApplication extends Application {
 	
 	public static <T> T getInstance(Class<T> type) {
 		return RoboGuice.getInjector(AbstractApplication.get()).getInstance(type);
-	}
-	
-	/**
-	 * @return the loginRunnable
-	 */
-	public Runnable getLoginRunnable() {
-		return loginRunnable;
-	}
-	
-	/**
-	 * @param loginRunnable the loginRunnable to set
-	 */
-	public void setLoginRunnable(Runnable loginRunnable) {
-		this.loginRunnable = loginRunnable;
 	}
 	
 	public Boolean isLoadingCancelable() {

@@ -23,19 +23,24 @@ import com.jdroid.java.utils.LoggerUtils;
  */
 public class LocalizationManager implements LocationListener {
 	
-	private final static Logger LOGGER = LoggerUtils.getLogger(LocalizationManager.class);
-	
+	private static final Logger LOGGER = LoggerUtils.getLogger(LocalizationManager.class);
 	private static final String GPS_TIMEOUT_ACTION = "ACTION_GPS_TIMEOUT";
-	private static final long GPS_TIMEOUT = 30000;
+	
+	// 5 minutes
+	public static final Long DEFAULT_FREQUENCY = 300000L;
 	
 	// 2 minutes
 	private static final int MAXIMUM_TIME_DELTA = 120000;
 	
 	private static final LocalizationManager INSTANCE = new LocalizationManager();
 	private static final int LOCATION_MIN_TIME = 10000;
+	private static final int LOCATION_MAX_TIME = 30000;
+	
 	private Location location;
-	private LocationManager locationManager;
+	private Long locationTime;
 	private Boolean started = false;
+	
+	private LocationManager locationManager;
 	
 	public static LocalizationManager get() {
 		return INSTANCE;
@@ -65,7 +70,7 @@ public class LocalizationManager implements LocationListener {
 	/**
 	 * Register the listener with the Location Manager to receive location updates
 	 */
-	public void startLocalization() {
+	public synchronized void startLocalization() {
 		if (!started && hasSignificantlyOlderLocation()) {
 			
 			started = true;
@@ -84,35 +89,40 @@ public class LocalizationManager implements LocationListener {
 					locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, LOCATION_MIN_TIME, 0, this);
 				}
 				
-				Intent gpsIntent = new Intent(GPS_TIMEOUT_ACTION);
-				PendingIntent pendingIntent = PendingIntent.getBroadcast(AbstractApplication.get(), 0, gpsIntent,
-					PendingIntent.FLAG_CANCEL_CURRENT);
-				
 				AlarmManagerUtils.scheduleAlarm(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime()
-						+ GPS_TIMEOUT, pendingIntent);
+						+ LOCATION_MAX_TIME, getCancelPendingIntent());
 				
-				LOGGER.debug("Localization started");
+				LOGGER.info("Localization started");
 			} else {
 				started = false;
-				LOGGER.debug("All providers disabled");
+				LOGGER.info("All providers disabled");
 			}
 		}
+	}
+	
+	private PendingIntent getCancelPendingIntent() {
+		Intent gpsIntent = new Intent(GPS_TIMEOUT_ACTION);
+		PendingIntent pendingIntent = PendingIntent.getBroadcast(AbstractApplication.get(), 0, gpsIntent,
+			PendingIntent.FLAG_CANCEL_CURRENT);
+		return pendingIntent;
 	}
 	
 	/**
 	 * Remove the listener to receive location updates
 	 */
-	public void stopLocalization() {
+	public synchronized void stopLocalization() {
 		if (started) {
+			AlarmManagerUtils.cancelAlarm(getCancelPendingIntent());
 			locationManager.removeUpdates(this);
 			if (location == null) {
 				location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 				if (location == null) {
 					location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 				}
+				locationTime = System.currentTimeMillis();
 			}
 			started = false;
-			LOGGER.debug("Localization stopped");
+			LOGGER.info("Localization stopped");
 		}
 	}
 	
@@ -122,10 +132,21 @@ public class LocalizationManager implements LocationListener {
 	@Override
 	public void onLocationChanged(Location location) {
 		if (isBetterLocation(location, this.location)) {
-			LOGGER.debug("Location changed");
+			LOGGER.info("Location changed");
 			this.location = location;
+			locationTime = System.currentTimeMillis();
 		} else {
-			LOGGER.debug("Location discarded");
+			LOGGER.info("Location discarded");
+		}
+	}
+	
+	public void onMapLocationChanged(Location location) {
+		if (location != null) {
+			LOGGER.info("Location changed");
+			this.location = location;
+			locationTime = System.currentTimeMillis();
+		} else {
+			LOGGER.info("Location discarded");
 		}
 	}
 	
@@ -142,7 +163,7 @@ public class LocalizationManager implements LocationListener {
 	 */
 	@Override
 	public void onProviderEnabled(String provider) {
-		LOGGER.debug("Provider enabled: " + provider);
+		LOGGER.info("Provider enabled: " + provider);
 		// Do Nothing
 	}
 	
@@ -151,7 +172,7 @@ public class LocalizationManager implements LocationListener {
 	 */
 	@Override
 	public void onProviderDisabled(String provider) {
-		LOGGER.debug("Provider disabled: " + provider);
+		LOGGER.info("Provider disabled: " + provider);
 		// Do Nothing
 	}
 	
@@ -229,7 +250,7 @@ public class LocalizationManager implements LocationListener {
 	
 	public Boolean hasSignificantlyOlderLocation() {
 		if (location != null) {
-			long timeDelta = System.currentTimeMillis() - location.getTime();
+			long timeDelta = System.currentTimeMillis() - locationTime;
 			return timeDelta > MAXIMUM_TIME_DELTA;
 		}
 		return true;

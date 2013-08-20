@@ -303,4 +303,12 @@ public class AbstractDialogFragment extends DialogFragment implements FragmentIf
 	public AdSize getAdSize() {
 		return AdSize.SMART_BANNER;
 	}
+	
+	/**
+	 * @see com.jdroid.android.fragment.FragmentIf#getLocationFrequency()
+	 */
+	@Override
+	public Long getLocationFrequency() {
+		return getFragmentIf().getLocationFrequency();
+	}
 }

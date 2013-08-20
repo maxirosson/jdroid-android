@@ -1,12 +1,15 @@
 package com.jdroid.android.activity;
 
 import org.slf4j.Logger;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +28,7 @@ import com.jdroid.android.debug.DebugSettingsActivity;
 import com.jdroid.android.debug.PreHoneycombDebugSettingsActivity;
 import com.jdroid.android.domain.User;
 import com.jdroid.android.exception.DefaultExceptionHandler;
+import com.jdroid.android.gps.LocalizationManager;
 import com.jdroid.android.intent.ClearTaskIntent;
 import com.jdroid.android.loading.DefaultLoadingDialogBuilder;
 import com.jdroid.android.loading.LoadingDialogBuilder;
@@ -33,6 +37,7 @@ import com.jdroid.android.usecase.UseCase;
 import com.jdroid.android.usecase.listener.DefaultUseCaseListener;
 import com.jdroid.android.utils.AndroidUtils;
 import com.jdroid.java.utils.ExecutorUtils;
+import com.jdroid.java.utils.IdGenerator;
 import com.jdroid.java.utils.LoggerUtils;
 
 /**
@@ -43,8 +48,11 @@ public class BaseActivity implements ActivityIf {
 	
 	private final static Logger LOGGER = LoggerUtils.getLogger(BaseActivity.class);
 	
+	private static final int LOCATION_UPDATE_TIMER_CODE = IdGenerator.getIntId();
+	
 	private Activity activity;
 	protected Dialog loadingDialog;
+	private Handler locationHandler;
 	private BroadcastReceiver clearTaskBroadcastReceiver;
 	
 	/**
@@ -168,12 +176,35 @@ public class BaseActivity implements ActivityIf {
 		LOGGER.trace("Executing onRestoreInstanceState on " + activity);
 	}
 	
+	@SuppressLint("HandlerLeak")
 	public void onStart() {
 		LOGGER.trace("Executing onStart on " + activity);
 		AbstractApplication.get().setCurrentActivity(activity);
 		if (AbstractApplication.get().hasAnalyticsSender()) {
 			AbstractApplication.get().getAnalyticsSender().onActivityStart(activity);
 		}
+		
+		final Long locationFrequency = getLocationFrequency();
+		if (locationFrequency != null) {
+			locationHandler = new Handler() {
+				
+				@Override
+				public void handleMessage(Message m) {
+					LocalizationManager.get().startLocalization();
+					locationHandler.sendMessageDelayed(Message.obtain(locationHandler, LOCATION_UPDATE_TIMER_CODE),
+						locationFrequency);
+				}
+			};
+			locationHandler.sendMessage(Message.obtain(locationHandler, LOCATION_UPDATE_TIMER_CODE));
+		}
+	}
+	
+	/**
+	 * @see com.jdroid.android.fragment.FragmentIf#getLocationFrequency()
+	 */
+	@Override
+	public Long getLocationFrequency() {
+		return getActivityIf().getLocationFrequency();
 	}
 	
 	public void onResume() {
@@ -208,6 +239,10 @@ public class BaseActivity implements ActivityIf {
 		if (AbstractApplication.get().hasAnalyticsSender()) {
 			AbstractApplication.get().getAnalyticsSender().onActivityStop(activity);
 		}
+		
+		if (locationHandler != null) {
+			locationHandler.removeCallbacksAndMessages(null);
+		}
 	}
 	
 	public void onDestroy() {
@@ -223,7 +258,7 @@ public class BaseActivity implements ActivityIf {
 	}
 	
 	public boolean onCreateOptionsMenu(Menu menu) {
-		if (getActivityIf().getMenuResourceId() != 0) {
+		if (getActivityIf().getMenuResourceId() != null) {
 			MenuInflater inflater = getActivityIf().getSupportMenuInflater();
 			inflater.inflate(getActivityIf().getMenuResourceId(), menu);
 			getActivityIf().doOnCreateOptionsMenu(menu);
@@ -232,7 +267,7 @@ public class BaseActivity implements ActivityIf {
 	}
 	
 	public boolean onCreateOptionsMenu(android.view.Menu menu) {
-		if (getActivityIf().getMenuResourceId() != 0) {
+		if (getActivityIf().getMenuResourceId() != null) {
 			android.view.MenuInflater inflater = activity.getMenuInflater();
 			inflater.inflate(getActivityIf().getMenuResourceId(), menu);
 			getActivityIf().doOnCreateOptionsMenu(menu);
@@ -244,8 +279,8 @@ public class BaseActivity implements ActivityIf {
 	 * @see com.jdroid.android.activity.ActivityIf#getMenuResourceId()
 	 */
 	@Override
-	public int getMenuResourceId() {
-		return 0;
+	public Integer getMenuResourceId() {
+		return null;
 	}
 	
 	/**

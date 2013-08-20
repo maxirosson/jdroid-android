@@ -66,13 +66,16 @@ public abstract class ApacheHttpWebService implements WebService {
 	 */
 	public ApacheHttpWebService(HttpClientFactory httpClientFactory, Server server, List<Object> urlSegments,
 			HttpWebServiceProcessor... httpWebServiceProcessors) {
+		
+		this.urlSegments = Lists.newArrayList();
+		if (urlSegments != null) {
+			for (Object segment : urlSegments) {
+				addUrlSegment(segment);
+			}
+		}
 		this.httpClientFactory = httpClientFactory;
 		this.server = server;
 		this.urlSegments = urlSegments;
-		if (urlSegments == null) {
-			this.urlSegments = Lists.newArrayList();
-		}
-		
 		this.httpWebServiceProcessors = httpWebServiceProcessors != null ? Lists.newArrayList(httpWebServiceProcessors)
 				: null;
 	}
