@@ -181,16 +181,16 @@ public abstract class AbstractApplication extends Application {
 	}
 	
 	public void initExceptionHandlers() {
-		initExceptionHandlers(null);
-	}
-	
-	public void initExceptionHandlers(JsonObjectWrapper metadata) {
 		UncaughtExceptionHandler currentExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
 		if ((currentExceptionHandler == null) || !currentExceptionHandler.getClass().equals(getExceptionHandlerClass())) {
-			initCrittercism(metadata);
+			initCrittercism(getExceptionHandlerMetadata());
 			Thread.setDefaultUncaughtExceptionHandler(ReflectionUtils.newInstance(getExceptionHandlerClass()));
 			LOGGER.debug("Custom exception handler initialized");
 		}
+	}
+	
+	protected JsonObjectWrapper getExceptionHandlerMetadata() {
+		return null;
 	}
 	
 	private void initCrittercism(JsonObjectWrapper metadata) {

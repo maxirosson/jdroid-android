@@ -74,6 +74,11 @@ public abstract class DateUtils {
 	public static final String E_DATE_FORMAT = "E";
 	
 	/**
+	 * Date format like Friday
+	 */
+	public static final String EEEE_DATE_FORMAT = "EEEE";
+	
+	/**
 	 * Date format like Nov 5 3:45 PM
 	 */
 	public static final String MMMDHHMMAA_DATE_FORMAT = "MMM d hh:mm aa";
@@ -89,9 +94,19 @@ public abstract class DateUtils {
 	public static final String MMMDYYYY_DATE_FORMAT = "MMM d yyyy";
 	
 	/**
+	 * Date format like Monday Nov 5 1985
+	 */
+	public static final String EEEE_MMMDYYYY_DATE_FORMAT = "EEEE MMM d yyyy";
+	
+	/**
 	 * Date format like Nov 5
 	 */
 	public static final String MMMD_DATE_FORMAT = "MMM d";
+	
+	/**
+	 * Date format like Monday Nov 5
+	 */
+	public static final String EEEE_MMMD_DATE_FORMAT = "EEEE MMM d";
 	
 	/**
 	 * Date format like November 5

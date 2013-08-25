@@ -280,7 +280,7 @@ public abstract class StringUtils {
 	 * @return The input text word wrapped to two lines or the original text.
 	 */
 	public static String wordWrapToTwoLines(String text, int minLength) {
-		String wordWrapText = text.trim();
+		String wordWrapText = text != null ? text.trim() : null;
 		if ((wordWrapText != null) && (wordWrapText.length() > minLength)) {
 			int middle = wordWrapText.length() / 2;
 			int leftSpaceIndex = wordWrapText.substring(0, middle).lastIndexOf(SPACE);
