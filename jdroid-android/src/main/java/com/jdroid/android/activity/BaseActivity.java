@@ -10,6 +10,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.NavUtils;
+import android.support.v4.app.TaskStackBuilder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -122,6 +124,9 @@ public class BaseActivity implements ActivityIf {
 		ActionBar actionBar = getActivityIf().getSupportActionBar();
 		if (actionBar != null) {
 			actionBar.setHomeButtonEnabled(true);
+			if (!getActivityIf().isLauncherActivity()) {
+				actionBar.setDisplayHomeAsUpEnabled(true);
+			}
 		}
 		
 		if (getActivityIf().onBeforeSetContentView()) {
@@ -305,27 +310,34 @@ public class BaseActivity implements ActivityIf {
 	}
 	
 	public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId() == android.R.id.home) {
-			ActivityLauncher.launchHomeActivity();
-			return true;
-		} else if (item.getItemId() == R.id.debugSettingsItem) {
-			Class<? extends Activity> targetActivity;
-			if (AndroidUtils.isPreHoneycomb()) {
-				targetActivity = PreHoneycombDebugSettingsActivity.class;
-			} else {
-				targetActivity = DebugSettingsActivity.class;
-			}
-			ActivityLauncher.launchActivity(targetActivity);
-			return true;
-		}
-		return false;
+		return onOptionsItemSelected(item.getItemId());
 	}
 	
 	public boolean onOptionsItemSelected(android.view.MenuItem item) {
-		if (item.getItemId() == android.R.id.home) {
-			ActivityLauncher.launchHomeActivity();
+		return onOptionsItemSelected(item.getItemId());
+	}
+	
+	private boolean onOptionsItemSelected(int itemId) {
+		if (itemId == android.R.id.home) {
+			Intent upIntent = NavUtils.getParentActivityIntent(activity);
+			if (NavUtils.shouldUpRecreateTask(activity, upIntent)) {
+				// This activity is NOT part of this app's task, so create a new task
+				// when navigating up, with a synthesized back stack.
+				TaskStackBuilder.create(activity)
+				// Add all of this activity's parents to the back stack
+				.addNextIntentWithParentStack(upIntent)
+				// Navigate up to the closest parent
+				.startActivities();
+			} else {
+				// This activity is part of this app's task, so simply
+				// navigate up to the logical parent activity.
+				// NavUtils.navigateUpTo(activity, upIntent);
+				upIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				activity.startActivity(upIntent);
+				activity.finish();
+			}
 			return true;
-		} else if (item.getItemId() == R.id.debugSettingsItem) {
+		} else if (itemId == R.id.debugSettingsItem) {
 			Class<? extends Activity> targetActivity;
 			if (AndroidUtils.isPreHoneycomb()) {
 				targetActivity = PreHoneycombDebugSettingsActivity.class;
