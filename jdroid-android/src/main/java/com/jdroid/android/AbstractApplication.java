@@ -142,7 +142,7 @@ public abstract class AbstractApplication extends Application {
 		}
 	}
 	
-	private void initCacheDirectory() {
+	protected void initCacheDirectory() {
 		// Configure the cache dir for the whole application
 		cacheDirectory = getExternalCacheDir();
 		if (cacheDirectory == null) {
@@ -152,7 +152,7 @@ public abstract class AbstractApplication extends Application {
 		LOGGER.debug("Cache directory: " + cacheDirectory.getPath());
 	}
 	
-	private void initImagesCacheDirectory() {
+	protected void initImagesCacheDirectory() {
 		imagesCacheDirectory = new File(getCacheDirectory(), IMAGES_DIRECTORY);
 		LOGGER.debug("Images cache directory: " + imagesCacheDirectory.getPath());
 		ExecutorUtils.execute(new Runnable() {

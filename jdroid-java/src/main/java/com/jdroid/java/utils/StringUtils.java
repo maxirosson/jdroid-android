@@ -253,7 +253,7 @@ public abstract class StringUtils {
 	 * @return The resultant string
 	 */
 	public static String getFirstToken(String string, String token) {
-		if (string.contains(token)) {
+		if ((string != null) && string.contains(token)) {
 			return string.split(token)[0];
 		}
 		return string;

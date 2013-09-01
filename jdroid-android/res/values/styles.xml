@@ -173,4 +173,20 @@
 		<item name="android:textColor">#fff</item>
 	</style>
 
+	<!-- Facebook -->
+
+	<style name="facebookLoginButton">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:background">@drawable/com_facebook_button_blue</item>
+		<item name="android:drawableLeft">@drawable/com_facebook_inverse_icon</item>
+		<item name="android:drawablePadding">@dimen/com_facebook_loginview_compound_drawable_padding</item>
+		<item name="android:paddingBottom">@dimen/com_facebook_loginview_padding_bottom</item>
+		<item name="android:paddingLeft">@dimen/com_facebook_loginview_padding_left</item>
+		<item name="android:paddingRight">@dimen/com_facebook_loginview_padding_right</item>
+		<item name="android:paddingTop">@dimen/com_facebook_loginview_padding_top</item>
+		<item name="android:textColor">@color/com_facebook_loginview_text_color</item>
+		<item name="android:textSize">@dimen/com_facebook_loginview_text_size</item>
+	</style>
+
 </resources>

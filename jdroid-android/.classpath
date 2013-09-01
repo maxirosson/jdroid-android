@@ -6,7 +6,7 @@
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry exported="true" kind="src" path="/jdroid-java"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/android/compatibility/android-support-v4/r18/android-support-v4-r18.jar"/>
-	<classpathentry exported="true" kind="var" path="M2_REPO/android/google-play-services/r7/google-play-services-r7.jar"/>
+	<classpathentry exported="true" kind="var" path="M2_REPO/android/google-play-services/r9/google-play-services-r9.jar"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/android/ads/google-admob-ads-sdk/6.3.1/google-admob-ads-sdk-6.3.1.jar"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/javax/inject/javax.inject/1/javax.inject-1.jar" sourcepath="M2_REPO/javax/inject/javax.inject/1/javax.inject-1-sources.jar"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/aopalliance/aopalliance/1.0/aopalliance-1.0.jar" sourcepath="M2_REPO/aopalliance/aopalliance/1.0/aopalliance-1.0-sources.jar"/>

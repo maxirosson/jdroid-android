@@ -17,7 +17,6 @@ import org.hibernate.impl.CriteriaImpl;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import com.google.common.base.Function;
-import com.jdroid.java.repository.ObjectNotFoundException;
 import com.jdroid.java.repository.Repository;
 import com.jdroid.javaweb.domain.Entity;
 import com.jdroid.javaweb.search.PagedResult;
@@ -60,12 +59,8 @@ public class AbstractHibernateRepository<T extends Entity> extends HibernateDaoS
 	 * @see com.jdroid.java.repository.Repository#get(java.lang.Long)
 	 */
 	@Override
-	public T get(Long id) throws ObjectNotFoundException {
-		T t = getHibernateTemplate().get(this.entityClass, id);
-		if (t == null) {
-			throw new ObjectNotFoundException(entityClass, id);
-		}
-		return t;
+	public T get(Long id) {
+		return getHibernateTemplate().get(this.entityClass, id);
 	}
 	
 	/**
@@ -163,10 +158,10 @@ public class AbstractHibernateRepository<T extends Entity> extends HibernateDaoS
 	 * @param detachedCriteria The {@link DetachedCriteria} with the filter specification
 	 * @return The object which matches with the criteria
 	 */
-	protected T findUnique(DetachedCriteria detachedCriteria) throws ObjectNotFoundException {
+	protected T findUnique(DetachedCriteria detachedCriteria) {
 		List<T> list = this.find(detachedCriteria);
 		if (list.isEmpty()) {
-			throw new ObjectNotFoundException(this.entityClass);
+			return null;
 		}
 		return list.iterator().next();
 	}

@@ -1,6 +1,5 @@
 package com.jdroid.javaweb.repository;
 
-import com.jdroid.java.repository.ObjectNotFoundException;
 import com.jdroid.javaweb.domain.FileEntity;
 import com.jdroid.javaweb.hibernate.AbstractHibernateRepository;
 
@@ -19,7 +18,7 @@ public class FileEntityHibernateRepository extends AbstractHibernateRepository<F
 	 * @see com.jdroid.javaweb.repository.FileEntityRepository#getByName(java.lang.String)
 	 */
 	@Override
-	public FileEntity getByName(String name) throws ObjectNotFoundException {
+	public FileEntity getByName(String name) {
 		return findUnique("name", name);
 	}
 }

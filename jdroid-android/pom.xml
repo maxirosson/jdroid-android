@@ -55,7 +55,7 @@
 		<dependency>
 			<groupId>android</groupId>
 			<artifactId>google-play-services</artifactId>
-			<version>r7</version>
+			<version>r9</version>
 		</dependency>
 
 		<!-- Google Analytics -->

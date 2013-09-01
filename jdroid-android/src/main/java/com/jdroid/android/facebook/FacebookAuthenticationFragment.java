@@ -1,8 +1,12 @@
 package com.jdroid.android.facebook;
 
 import org.slf4j.Logger;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import com.jdroid.android.activity.AbstractFragmentActivity;
 import com.jdroid.android.fragment.AbstractFragment;
 import com.jdroid.java.utils.LoggerUtils;
 
@@ -13,6 +17,21 @@ public abstract class FacebookAuthenticationFragment<T extends FacebookAuthentic
 	
 	private FacebookConnector facebookConnector;
 	private T facebookAuthenticationUseCase;
+	
+	public static void add(Activity activity, FacebookAuthenticationFragment<?> facebookAuthenticationFragment,
+			Fragment targetFragment) {
+		if (get(activity) == null) {
+			facebookAuthenticationFragment.setTargetFragment(targetFragment, 0);
+			FragmentTransaction fragmentTransaction = ((AbstractFragmentActivity)activity).getSupportFragmentManager().beginTransaction();
+			fragmentTransaction.add(0, facebookAuthenticationFragment,
+				FacebookAuthenticationFragment.class.getSimpleName());
+			fragmentTransaction.commit();
+		}
+	}
+	
+	public static FacebookAuthenticationFragment<?> get(Activity activity) {
+		return ((AbstractFragmentActivity)activity).getFragment(FacebookAuthenticationFragment.class);
+	}
 	
 	/**
 	 * @see com.jdroid.android.fragment.AbstractFragment#onCreate(android.os.Bundle)
@@ -96,7 +115,7 @@ public abstract class FacebookAuthenticationFragment<T extends FacebookAuthentic
 	public void onFacebookLoginCompleted(FacebookConnector facebookConnector) {
 		facebookAuthenticationUseCase.setLoginMode(true);
 		facebookAuthenticationUseCase.setFacebookConnector(facebookConnector);
-		executeFacebookLoginUseCase(facebookConnector);
+		executeUseCase(facebookAuthenticationUseCase);
 	}
 	
 	/**
@@ -105,6 +124,7 @@ public abstract class FacebookAuthenticationFragment<T extends FacebookAuthentic
 	@Override
 	public void onFacebookLogoutCompleted() {
 		facebookAuthenticationUseCase.setLoginMode(false);
+		facebookAuthenticationUseCase.setFacebookConnector(facebookConnector);
 		executeUseCase(facebookAuthenticationUseCase);
 	}
 	
@@ -156,12 +176,6 @@ public abstract class FacebookAuthenticationFragment<T extends FacebookAuthentic
 	
 	protected void onFacebookLogoutUseCaseFinised() {
 		// Do nothing
-	}
-	
-	private void executeFacebookLoginUseCase(FacebookConnector facebookConnector) {
-		facebookAuthenticationUseCase.setLoginMode(true);
-		facebookAuthenticationUseCase.setFacebookConnector(facebookConnector);
-		executeUseCase(facebookAuthenticationUseCase);
 	}
 	
 	/**

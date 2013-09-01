@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.jdroid.java.repository.ObjectNotFoundException;
 import com.jdroid.java.utils.ExecutorUtils;
 
 /**
@@ -34,12 +33,12 @@ public class PushServiceImpl implements PushService {
 	@Transactional
 	@Override
 	public void enableDevice(String installationId, DeviceType deviceType, String registrationId) {
-		try {
-			Device device = deviceRepository.find(installationId, deviceType);
+		Device device = deviceRepository.find(installationId, deviceType);
+		if (device != null) {
 			device.updateRegistrationId(registrationId);
 			LOG.info("Updated " + device);
-		} catch (ObjectNotFoundException e) {
-			Device device = new Device(installationId, registrationId, deviceType);
+		} else {
+			device = new Device(installationId, registrationId, deviceType);
 			deviceRepository.add(device);
 			LOG.info("Enabled " + device);
 		}
@@ -51,12 +50,10 @@ public class PushServiceImpl implements PushService {
 	@Transactional
 	@Override
 	public void disableDevice(String installationId, DeviceType deviceType) {
-		try {
-			Device device = deviceRepository.find(installationId, deviceType);
+		Device device = deviceRepository.find(installationId, deviceType);
+		if (device != null) {
 			device.setDisabled(true);
 			LOG.info("Disabled " + device);
-		} catch (ObjectNotFoundException e) {
-			// Do nothing
 		}
 	}
 	

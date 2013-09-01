@@ -13,8 +13,9 @@
 
 package com.facebook.widget;
 
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Arrays;
 import java.util.List;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -31,6 +32,10 @@ import com.facebook.Session;
 import com.facebook.SessionDefaultAudience;
 import com.facebook.SessionLoginBehavior;
 import com.facebook.SessionState;
+import com.facebook.internal.AnalyticsEvents;
+import com.facebook.internal.ImageDownloader;
+import com.facebook.internal.ImageRequest;
+import com.facebook.internal.ImageResponse;
 import com.facebook.model.GraphUser;
 import com.jdroid.android.R;
 
@@ -66,6 +71,8 @@ public class UserSettingsFragment extends FacebookFragment {
 		loginButton = (LoginButton)view.findViewById(R.id.com_facebook_usersettingsfragment_login_button);
 		loginButton.setProperties(loginButtonProperties);
 		loginButton.setFragment(this);
+		loginButton.setLoginLogoutEventName(AnalyticsEvents.EVENT_USER_SETTINGS_USAGE);
+		
 		Session session = getSession();
 		if ((session != null) && !session.equals(Session.getActiveSession())) {
 			loginButton.setSession(session);
@@ -161,6 +168,29 @@ public class UserSettingsFragment extends FacebookFragment {
 	}
 	
 	/**
+	 * Set the permissions to use when the session is opened. The permissions here can only be read permissions. If any
+	 * publish permissions are included, the login attempt by the user will fail. The LoginButton can only be associated
+	 * with either read permissions or publish permissions, but not both. Calling both setReadPermissions and
+	 * setPublishPermissions on the same instance of LoginButton will result in an exception being thrown unless
+	 * clearPermissions is called in between.
+	 * <p/>
+	 * This method is only meaningful if called before the session is open. If this is called after the session is
+	 * opened, and the list of permissions passed in is not a subset of the permissions granted during the
+	 * authorization, it will log an error.
+	 * <p/>
+	 * Since the session can be automatically opened when the UserSettingsFragment is constructed, it's important to
+	 * always pass in a consistent set of permissions to this method, or manage the setting of permissions outside of
+	 * the LoginButton class altogether (by managing the session explicitly).
+	 * 
+	 * @param permissions the read permissions to use
+	 * 
+	 * @throws UnsupportedOperationException if setPublishPermissions has been called
+	 */
+	public void setReadPermissions(String... permissions) {
+		loginButtonProperties.setReadPermissions(Arrays.asList(permissions), getSession());
+	}
+	
+	/**
 	 * Set the permissions to use when the session is opened. The permissions here should only be publish permissions.
 	 * If any read permissions are included, the login attempt by the user may fail. The LoginButton can only be
 	 * associated with either read permissions or publish permissions, but not both. Calling both setReadPermissions and
@@ -182,6 +212,30 @@ public class UserSettingsFragment extends FacebookFragment {
 	 */
 	public void setPublishPermissions(List<String> permissions) {
 		loginButtonProperties.setPublishPermissions(permissions, getSession());
+	}
+	
+	/**
+	 * Set the permissions to use when the session is opened. The permissions here should only be publish permissions.
+	 * If any read permissions are included, the login attempt by the user may fail. The LoginButton can only be
+	 * associated with either read permissions or publish permissions, but not both. Calling both setReadPermissions and
+	 * setPublishPermissions on the same instance of LoginButton will result in an exception being thrown unless
+	 * clearPermissions is called in between.
+	 * <p/>
+	 * This method is only meaningful if called before the session is open. If this is called after the session is
+	 * opened, and the list of permissions passed in is not a subset of the permissions granted during the
+	 * authorization, it will log an error.
+	 * <p/>
+	 * Since the session can be automatically opened when the LoginButton is constructed, it's important to always pass
+	 * in a consistent set of permissions to this method, or manage the setting of permissions outside of the
+	 * LoginButton class altogether (by managing the session explicitly).
+	 * 
+	 * @param permissions the read permissions to use
+	 * 
+	 * @throws UnsupportedOperationException if setReadPermissions has been called
+	 * @throws IllegalArgumentException if permissions is null or empty
+	 */
+	public void setPublishPermissions(String... permissions) {
+		loginButtonProperties.setPublishPermissions(Arrays.asList(permissions), getSession());
 	}
 	
 	/**
@@ -307,7 +361,7 @@ public class UserSettingsFragment extends FacebookFragment {
 			if (user != null) {
 				ImageRequest request = getImageRequest();
 				if (request != null) {
-					URL requestUrl = request.getImageUrl();
+					URI requestUrl = request.getImageUri();
 					// Do we already have the right picture? If so, leave it alone.
 					if (!requestUrl.equals(connectedStateLabel.getTag())) {
 						if (user.getId().equals(userProfilePicID)) {
@@ -361,7 +415,7 @@ public class UserSettingsFragment extends FacebookFragment {
 					processImageResponse(user.getId(), response);
 				}
 			}).build();
-		} catch (MalformedURLException e) {
+		} catch (URISyntaxException e) {
 		}
 		return request;
 	}
@@ -381,7 +435,7 @@ public class UserSettingsFragment extends FacebookFragment {
 				userProfilePic = drawable;
 				userProfilePicID = id;
 				connectedStateLabel.setCompoundDrawables(null, drawable, null, null);
-				connectedStateLabel.setTag(response.getRequest().getImageUrl());
+				connectedStateLabel.setTag(response.getRequest().getImageUri());
 			}
 		}
 	}

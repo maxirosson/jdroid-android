@@ -1,6 +1,5 @@
 package com.jdroid.javaweb.push;
 
-import com.jdroid.java.repository.ObjectNotFoundException;
 import com.jdroid.java.repository.Repository;
 
 /**
@@ -9,6 +8,6 @@ import com.jdroid.java.repository.Repository;
  */
 public interface DeviceRepository extends Repository<Device> {
 	
-	public Device find(String installationId, DeviceType deviceType) throws ObjectNotFoundException;
+	public Device find(String installationId, DeviceType deviceType);
 	
 }

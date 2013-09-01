@@ -322,7 +322,7 @@ public final class FacebookRequestError {
 	@Override
 	public String toString() {
 		return new StringBuilder("{HttpStatus: ").append(requestStatusCode).append(", errorCode: ").append(errorCode).append(
-			", errorType: ").append(errorType).append(", errorMessage: ").append(errorMessage).append("}").toString();
+			", errorType: ").append(errorType).append(", errorMessage: ").append(getErrorMessage()).append("}").toString();
 	}
 	
 	static FacebookRequestError checkResponseAndCreateError(JSONObject singleResult, Object batchResult,

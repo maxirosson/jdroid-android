@@ -1,5 +1,6 @@
 package com.jdroid.android.exception;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -48,7 +49,10 @@ public class ErrorDialogFragment extends AlertDialogFragment {
 	private void goBackIfrequired() {
 		Boolean shouldGoBack = getArgument(SHOULD_GO_BACK_EXTRA);
 		if (shouldGoBack) {
-			getActivity().finish();
+			Activity activiy = getActivity();
+			if (activiy != null) {
+				activiy.finish();
+			}
 		}
 	}
 }

@@ -23,9 +23,11 @@ import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import com.facebook.AppEventsLogger;
 import com.facebook.FacebookException;
 import com.facebook.Request;
 import com.facebook.Session;
+import com.facebook.internal.AnalyticsEvents;
 import com.facebook.model.GraphUser;
 import com.jdroid.android.R;
 
@@ -191,6 +193,22 @@ public class FriendPickerFragment extends PickerFragment<GraphUser> {
 	@Override
 	String getDefaultTitleText() {
 		return getString(R.string.com_facebook_choose_friends);
+	}
+	
+	@Override
+	void logAppEvents(boolean doneButtonClicked) {
+		AppEventsLogger logger = AppEventsLogger.newLogger(this.getActivity(), getSession());
+		Bundle parameters = new Bundle();
+		
+		// If Done was clicked, we know this completed successfully. If not, we don't know (caller might have
+		// dismissed us in response to selection changing, or user might have hit back button). Either way
+		// we'll log the number of selections.
+		String outcome = doneButtonClicked ? AnalyticsEvents.PARAMETER_DIALOG_OUTCOME_VALUE_COMPLETED
+				: AnalyticsEvents.PARAMETER_DIALOG_OUTCOME_VALUE_UNKNOWN;
+		parameters.putString(AnalyticsEvents.PARAMETER_DIALOG_OUTCOME, outcome);
+		parameters.putInt("num_friends_picked", getSelection().size());
+		
+		logger.logSdkEvent(AnalyticsEvents.EVENT_FRIEND_PICKER_USAGE, null, parameters);
 	}
 	
 	private Request createRequest(String userID, Set<String> extraFields, Session session) {

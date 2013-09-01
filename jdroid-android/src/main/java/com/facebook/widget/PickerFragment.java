@@ -58,8 +58,6 @@ import com.jdroid.android.R;
  * (for certain properties) by specifying attributes in their XML layout files. <br/>
  * PickerFragments support callbacks that will be called in the event of an error, when the underlying data has been
  * changed, or when the set of selected graph objects changes.
- * 
- * @param <T>
  */
 public abstract class PickerFragment<T extends GraphObject> extends Fragment {
 	
@@ -114,6 +112,7 @@ public abstract class PickerFragment<T extends GraphObject> extends Fragment {
 	private Button doneButton;
 	private Drawable titleBarBackground;
 	private Drawable doneButtonBackground;
+	private boolean appEventsLogged;
 	
 	PickerFragment(Class<T> graphObjectClass, int layout, Bundle args) {
 		this.graphObjectClass = graphObjectClass;
@@ -180,9 +179,12 @@ public abstract class PickerFragment<T extends GraphObject> extends Fragment {
 			}
 		});
 		listView.setOnScrollListener(onScrollListener);
-		listView.setAdapter(adapter);
 		
 		activityCircle = (ProgressBar)view.findViewById(R.id.com_facebook_picker_activity_circle);
+		
+		setupViews(view);
+		
+		listView.setAdapter(adapter);
 		
 		return view;
 	}
@@ -246,6 +248,14 @@ public abstract class PickerFragment<T extends GraphObject> extends Fragment {
 		if (activityCircle != null) {
 			outState.putBoolean(ACTIVITY_CIRCLE_SHOW_KEY, activityCircle.getVisibility() == View.VISIBLE);
 		}
+	}
+	
+	@Override
+	public void onStop() {
+		if (!appEventsLogged) {
+			logAppEvents(false);
+		}
+		super.onStop();
 	}
 	
 	@Override
@@ -501,6 +511,9 @@ public abstract class PickerFragment<T extends GraphObject> extends Fragment {
 		setPickerFragmentSettingsFromBundle(inState);
 	}
 	
+	void setupViews(ViewGroup view) {
+	}
+	
 	boolean filterIncludesItem(T graphObject) {
 		if (filter != null) {
 			return filter.includeItem(graphObject);
@@ -573,6 +586,9 @@ public abstract class PickerFragment<T extends GraphObject> extends Fragment {
 		}
 	}
 	
+	void logAppEvents(boolean doneButtonClicked) {
+	}
+	
 	private static void setAlpha(View view, float alpha) {
 		// Set the alpha appropriately (setAlpha is API >= 11, this technique works on all API levels).
 		AlphaAnimation alphaAnimation = new AlphaAnimation(alpha, alpha);
@@ -608,14 +624,13 @@ public abstract class PickerFragment<T extends GraphObject> extends Fragment {
 		}
 	}
 	
-	@SuppressWarnings("deprecation")
 	private void inflateTitleBar(ViewGroup view) {
 		ViewStub stub = (ViewStub)view.findViewById(R.id.com_facebook_picker_title_bar_stub);
 		if (stub != null) {
 			View titleBar = stub.inflate();
 			
-			final RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(LayoutParams.FILL_PARENT,
-					LayoutParams.FILL_PARENT);
+			final RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT,
+					LayoutParams.MATCH_PARENT);
 			layoutParams.addRule(RelativeLayout.BELOW, R.id.com_facebook_picker_title_bar);
 			listView.setLayoutParams(layoutParams);
 			
@@ -629,6 +644,9 @@ public abstract class PickerFragment<T extends GraphObject> extends Fragment {
 					
 					@Override
 					public void onClick(View v) {
+						logAppEvents(true);
+						appEventsLogged = true;
+						
 						if (onDoneButtonClickedListener != null) {
 							onDoneButtonClickedListener.onDoneButtonClicked(PickerFragment.this);
 						}
@@ -762,8 +780,6 @@ public abstract class PickerFragment<T extends GraphObject> extends Fragment {
 		/**
 		 * Called when a network or other error is encountered.
 		 * 
-		 * @param fragment
-		 * 
 		 * @param error a FacebookException representing the error that was encountered.
 		 */
 		void onError(PickerFragment<?> fragment, FacebookException error);
@@ -777,7 +793,7 @@ public abstract class PickerFragment<T extends GraphObject> extends Fragment {
 		/**
 		 * Called when the set of data being displayed in the picker has changed.
 		 */
-		void onDataChanged(@SuppressWarnings("javadoc") PickerFragment<?> fragment);
+		void onDataChanged(PickerFragment<?> fragment);
 	}
 	
 	/**
@@ -787,8 +803,6 @@ public abstract class PickerFragment<T extends GraphObject> extends Fragment {
 		
 		/**
 		 * Called when the user selects or unselects graph objects in the picker.
-		 * 
-		 * @param fragment
 		 */
 		void onSelectionChanged(PickerFragment<?> fragment);
 	}
@@ -800,8 +814,6 @@ public abstract class PickerFragment<T extends GraphObject> extends Fragment {
 		
 		/**
 		 * Called when the user clicks the Done button.
-		 * 
-		 * @param fragment
 		 */
 		void onDoneButtonClicked(PickerFragment<?> fragment);
 	}
@@ -827,7 +839,6 @@ public abstract class PickerFragment<T extends GraphObject> extends Fragment {
 		protected final static int CACHED_RESULT_REFRESH_DELAY = 2 * 1000;
 		
 		protected GraphObjectPagingLoader<T> loader;
-		@SuppressWarnings("hiding")
 		protected GraphObjectAdapter<T> adapter;
 		
 		public void attach(GraphObjectAdapter<T> adapter) {

@@ -47,6 +47,14 @@ public class AndroidTestRunner extends RobolectricTestRunner {
 			}
 			
 			@Override
+			protected void initCacheDirectory() {
+			}
+			
+			@Override
+			protected void initImagesCacheDirectory() {
+			}
+			
+			@Override
 			public Class<? extends Activity> getHomeActivityClass() {
 				return null;
 			}

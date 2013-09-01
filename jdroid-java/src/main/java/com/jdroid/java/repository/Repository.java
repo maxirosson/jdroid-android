@@ -12,13 +12,13 @@ import com.jdroid.java.domain.Identifiable;
 public interface Repository<T extends Identifiable> {
 	
 	/**
-	 * Retrieves an {@link Identifiable} from the repository according to an id.
+	 * Retrieves an {@link Identifiable} from the repository according to an id or null in case no {@link Identifiable}
+	 * with the given id is not found
 	 * 
 	 * @param id the id for the {@link Identifiable} to retrieve
 	 * @return the {@link Identifiable} retrieved.
-	 * @throws ObjectNotFoundException in case no {@link Identifiable} with the given id is not found
 	 */
-	public T get(Long id) throws ObjectNotFoundException;
+	public T get(Long id);
 	
 	/**
 	 * Adds an {@link Identifiable} to the repository.

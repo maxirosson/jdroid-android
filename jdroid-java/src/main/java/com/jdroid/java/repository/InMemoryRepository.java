@@ -84,12 +84,8 @@ public class InMemoryRepository<T extends Identifiable> implements Repository<T>
 	 * @see com.jdroid.java.repository.Repository#get(java.lang.Long)
 	 */
 	@Override
-	public T get(Long id) throws ObjectNotFoundException {
-		if (items.containsKey(id)) {
-			return items.get(id);
-		} else {
-			throw new ObjectNotFoundException(id);
-		}
+	public T get(Long id) {
+		return items.get(id);
 	}
 	
 	/**
