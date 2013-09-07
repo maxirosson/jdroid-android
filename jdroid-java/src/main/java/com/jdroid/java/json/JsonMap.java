@@ -30,7 +30,7 @@ public class JsonMap extends LinkedHashMap<String, Object> {
 	}
 	
 	public Object put(String key, Object value, MarshallerMode mode) {
-		Object marshalledValue = MarshallerProvider.get().marshall(value, mode, extras);
+		Object marshalledValue = MarshallerProvider.get().innerMarshall(value, mode, extras);
 		if ((marshalledValue != null) && !CollectionUtils.isEmptyCollection(marshalledValue)) {
 			super.put(key, marshalledValue);
 		}

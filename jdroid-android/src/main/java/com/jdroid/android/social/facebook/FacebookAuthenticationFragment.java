@@ -1,4 +1,4 @@
-package com.jdroid.android.facebook;
+package com.jdroid.android.social.facebook;
 
 import org.slf4j.Logger;
 import android.app.Activity;
@@ -109,7 +109,7 @@ public abstract class FacebookAuthenticationFragment<T extends FacebookAuthentic
 	}
 	
 	/**
-	 * @see com.jdroid.android.facebook.FacebookAuthenticationListener#onFacebookLoginCompleted(com.jdroid.android.facebook.FacebookConnector)
+	 * @see com.jdroid.android.social.facebook.FacebookAuthenticationListener#onFacebookLoginCompleted(com.jdroid.android.social.facebook.FacebookConnector)
 	 */
 	@Override
 	public void onFacebookLoginCompleted(FacebookConnector facebookConnector) {
@@ -119,7 +119,7 @@ public abstract class FacebookAuthenticationFragment<T extends FacebookAuthentic
 	}
 	
 	/**
-	 * @see com.jdroid.android.facebook.FacebookAuthenticationListener#onFacebookLogoutCompleted()
+	 * @see com.jdroid.android.social.facebook.FacebookAuthenticationListener#onFacebookLogoutCompleted()
 	 */
 	@Override
 	public void onFacebookLogoutCompleted() {
@@ -187,7 +187,7 @@ public abstract class FacebookAuthenticationFragment<T extends FacebookAuthentic
 	}
 	
 	/**
-	 * @see com.jdroid.android.facebook.SessionStateListener#onSessionOpened()
+	 * @see com.jdroid.android.social.facebook.SessionStateListener#onSessionOpened()
 	 */
 	@Override
 	public void onSessionOpened() {
@@ -195,7 +195,7 @@ public abstract class FacebookAuthenticationFragment<T extends FacebookAuthentic
 	}
 	
 	/**
-	 * @see com.jdroid.android.facebook.SessionStateListener#onSessionClosed()
+	 * @see com.jdroid.android.social.facebook.SessionStateListener#onSessionClosed()
 	 */
 	@Override
 	public void onSessionClosed() {
@@ -203,7 +203,7 @@ public abstract class FacebookAuthenticationFragment<T extends FacebookAuthentic
 	}
 	
 	/**
-	 * @see com.jdroid.android.facebook.SessionStateListener#onSessionOpenedWithUpdatedToken()
+	 * @see com.jdroid.android.social.facebook.SessionStateListener#onSessionOpenedWithUpdatedToken()
 	 */
 	@Override
 	public void onSessionOpenedWithUpdatedToken() {
@@ -211,7 +211,7 @@ public abstract class FacebookAuthenticationFragment<T extends FacebookAuthentic
 	}
 	
 	/**
-	 * @see com.jdroid.android.facebook.SessionStateListener#onSessionClosedLoginFailed()
+	 * @see com.jdroid.android.social.facebook.SessionStateListener#onSessionClosedLoginFailed()
 	 */
 	@Override
 	public void onSessionClosedLoginFailed() {

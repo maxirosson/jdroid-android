@@ -9,8 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.jdroid.android.R;
 import com.jdroid.android.adapter.BaseHolderArrayAdapter;
-import com.jdroid.android.facebook.FacebookShareLaunchable;
 import com.jdroid.android.share.ShareAdapter.ShareViewHolder;
+import com.jdroid.android.social.facebook.FacebookShareLaunchable;
 import com.jdroid.java.collections.Lists;
 
 /**

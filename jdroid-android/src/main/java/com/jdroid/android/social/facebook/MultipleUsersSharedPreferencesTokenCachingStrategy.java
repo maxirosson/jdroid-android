@@ -1,4 +1,4 @@
-package com.jdroid.android.facebook;
+package com.jdroid.android.social.facebook;
 
 import android.content.Context;
 import com.facebook.Session;

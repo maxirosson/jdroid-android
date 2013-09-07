@@ -2,6 +2,7 @@ package com.jdroid.javaweb.facebook;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import com.google.common.collect.Lists;
 import com.restfb.Connection;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
@@ -15,6 +16,7 @@ public class FacebookRepository {
 	private static String FRIEND_FQL_REPLACEMENT = "#friendId#";
 	private static String FRIENDS_FQL = "SELECT uid,first_name,last_name,is_app_user FROM user WHERE uid in (SELECT uid1 FROM friend WHERE uid2 = me()) order by name";
 	private static String APP_FRIENDS_FQL = "SELECT uid,first_name,last_name FROM user WHERE is_app_user AND uid in (SELECT uid1 FROM friend WHERE uid2 = me()) order by name";
+	private static String APP_FRIENDS_IDS_FQL = "SELECT uid FROM user WHERE is_app_user AND uid in (SELECT uid1 FROM friend WHERE uid2 = me()) order by name";
 	private static String FB_ID = "id";
 	private static String FB_ME = "me";
 	private static String FB_FEED = "/feed";
@@ -62,6 +64,16 @@ public class FacebookRepository {
 	public List<FacebookUser> getAppFriends(String accessToken) {
 		FacebookClient fb = createFacebookClient(accessToken);
 		return fb.executeFqlQuery(APP_FRIENDS_FQL, FacebookUser.class);
+	}
+	
+	public List<String> getAppFriendsIds(String accessToken) {
+		FacebookClient fb = createFacebookClient(accessToken);
+		List<FacebookUser> facebookUsers = fb.executeFqlQuery(APP_FRIENDS_IDS_FQL, FacebookUser.class);
+		List<String> facebookIds = Lists.newArrayList();
+		for (FacebookUser each : facebookUsers) {
+			facebookIds.add(each.getFacebookId());
+		}
+		return facebookIds;
 	}
 	
 	public void publish(String accessToken, String message) {

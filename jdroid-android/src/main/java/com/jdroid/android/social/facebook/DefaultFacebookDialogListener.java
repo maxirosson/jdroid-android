@@ -1,4 +1,4 @@
-package com.jdroid.android.facebook;
+package com.jdroid.android.social.facebook;
 
 import org.slf4j.Logger;
 import android.os.Bundle;

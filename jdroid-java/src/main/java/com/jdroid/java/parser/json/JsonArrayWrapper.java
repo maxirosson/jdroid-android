@@ -1,5 +1,6 @@
 package com.jdroid.java.parser.json;
 
+import java.util.Collection;
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -21,6 +22,10 @@ public class JsonArrayWrapper {
 	
 	public JsonArrayWrapper(String string) throws JSONException {
 		this(new JSONArray(string));
+	}
+	
+	public JsonArrayWrapper(Collection<Object> values) {
+		this(new JSONArray(values));
 	}
 	
 	public JsonArrayWrapper() {
