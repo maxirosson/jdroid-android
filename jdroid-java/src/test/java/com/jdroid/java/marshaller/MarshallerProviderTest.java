@@ -49,7 +49,7 @@ public class MarshallerProviderTest {
 		Assert.assertEquals(result.replace(" ", ""), expectedJson);
 	}
 	
-	public static class DummyClass {
+	private class DummyClass {
 		
 		private String stringProperty;
 		private Long longProperty;

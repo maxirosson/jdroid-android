@@ -13,6 +13,9 @@
 	<string name="previous">Previous</string>
 	<string name="finish">Finish</string>
 	<string name="refresh">Refresh</string>
+	<string name="logout">Logout</string>
+	<string name="revokeAccess">Revoke Access</string>
+	<string name="signIn">Sign in</string>
 
 	<!-- Errors -->
 	<string name="internalError">Oops! We\'re having technical problems. Please try again later.</string>
@@ -71,12 +74,6 @@
 	<!-- External Apps -->
 	<string name="barcodeScanner">Barcode Scanner</string>
 	<string name="voiceSearch">Voice Search</string>
-
-	<!-- Facebook -->
-	<string name="connectToFacebook">Connect to Facebook</string>
-	<string name="disconnectFromFacebook">Disconnect from Facebook</string>
-	<string name="accountConnected">Your account has been connected to Facebook successfully!</string>
-	<string name="accountDisconnected">Your account has been disconnected from Facebook.</string>
 
 	<!-- Google Plus -->
 	<string name="signingToGooglePlus">Signing in to Google&#8230;</string>

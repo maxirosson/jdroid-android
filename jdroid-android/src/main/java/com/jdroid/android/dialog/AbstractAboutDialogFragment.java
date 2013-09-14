@@ -1,11 +1,9 @@
 package com.jdroid.android.dialog;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -14,7 +12,7 @@ import android.widget.TextView;
 import com.google.android.gms.plus.PlusOneButton;
 import com.jdroid.android.AbstractApplication;
 import com.jdroid.android.R;
-import com.jdroid.android.googleplus.PlusOneButtonConnector;
+import com.jdroid.android.social.googleplus.GooglePlusOneButtonHelper;
 import com.jdroid.android.utils.AndroidUtils;
 import com.jdroid.java.utils.DateUtils;
 
@@ -24,7 +22,7 @@ import com.jdroid.java.utils.DateUtils;
  */
 public abstract class AbstractAboutDialogFragment extends AbstractDialogFragment {
 	
-	private PlusOneButtonConnector plusOneButtonConnector;
+	private GooglePlusOneButtonHelper googlePlusOneButtonHelper;
 	
 	public void show(Activity activity) {
 		FragmentManager fm = ((FragmentActivity)activity).getSupportFragmentManager();
@@ -34,7 +32,6 @@ public abstract class AbstractAboutDialogFragment extends AbstractDialogFragment
 	/**
 	 * @see android.support.v4.app.DialogFragment#onCreateDialog(android.os.Bundle)
 	 */
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1)
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		
@@ -70,7 +67,7 @@ public abstract class AbstractAboutDialogFragment extends AbstractDialogFragment
 		
 		PlusOneButton plusOneButton = (PlusOneButton)view.findViewById(R.id.plusOneButton);
 		if (displayGooglePlusOneButton()) {
-			plusOneButtonConnector = new PlusOneButtonConnector(this, plusOneButton);
+			googlePlusOneButtonHelper = new GooglePlusOneButtonHelper(this, plusOneButton);
 		} else {
 			plusOneButton.setVisibility(View.GONE);
 		}
@@ -101,8 +98,8 @@ public abstract class AbstractAboutDialogFragment extends AbstractDialogFragment
 	public void onStart() {
 		super.onStart();
 		
-		if (plusOneButtonConnector != null) {
-			plusOneButtonConnector.onStart();
+		if (googlePlusOneButtonHelper != null) {
+			googlePlusOneButtonHelper.onStart();
 		}
 	}
 	
@@ -113,8 +110,8 @@ public abstract class AbstractAboutDialogFragment extends AbstractDialogFragment
 	public void onResume() {
 		super.onResume();
 		
-		if (plusOneButtonConnector != null) {
-			plusOneButtonConnector.onResume();
+		if (googlePlusOneButtonHelper != null) {
+			googlePlusOneButtonHelper.onResume();
 		}
 	}
 	
@@ -125,8 +122,8 @@ public abstract class AbstractAboutDialogFragment extends AbstractDialogFragment
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		
-		if (plusOneButtonConnector != null) {
-			plusOneButtonConnector.onActivityResult(requestCode, resultCode, data);
+		if (googlePlusOneButtonHelper != null) {
+			googlePlusOneButtonHelper.onActivityResult(requestCode, resultCode, data);
 		}
 	}
 	
@@ -137,8 +134,8 @@ public abstract class AbstractAboutDialogFragment extends AbstractDialogFragment
 	public void onStop() {
 		super.onStop();
 		
-		if (plusOneButtonConnector != null) {
-			plusOneButtonConnector.onStop();
+		if (googlePlusOneButtonHelper != null) {
+			googlePlusOneButtonHelper.onStop();
 		}
 	}
 	

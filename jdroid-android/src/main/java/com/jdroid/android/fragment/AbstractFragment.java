@@ -1,10 +1,9 @@
 package com.jdroid.android.fragment;
 
+import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockFragment;
 import com.google.ads.AdSize;
 import com.jdroid.android.AbstractApplication;
 import com.jdroid.android.activity.BaseActivity.UseCaseTrigger;
@@ -20,7 +19,7 @@ import com.jdroid.android.usecase.listener.DefaultUseCaseListener;
  * 
  * @author Maxi Rosson
  */
-public abstract class AbstractFragment extends SherlockFragment implements FragmentIf {
+public abstract class AbstractFragment extends Fragment implements FragmentIf {
 	
 	private BaseFragment baseFragment;
 	
@@ -315,8 +314,8 @@ public abstract class AbstractFragment extends SherlockFragment implements Fragm
 		return getFragmentIf().getUser();
 	}
 	
-	public ActionBar getSupportActionBar() {
-		return getSherlockActivity().getSupportActionBar();
+	public ActionBar getActionBar() {
+		return getActivity().getActionBar();
 	}
 	
 	/**

@@ -4,11 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
 import com.google.ads.AdSize;
 import com.jdroid.android.AbstractApplication;
 import com.jdroid.android.R;
@@ -26,7 +26,7 @@ import com.jdroid.java.exception.UnexpectedException;
  * Base {@link Activity}
  * 
  */
-public abstract class AbstractFragmentActivity extends SherlockFragmentActivity implements ActivityIf {
+public abstract class AbstractFragmentActivity extends FragmentActivity implements ActivityIf {
 	
 	private BaseActivity baseActivity;
 	
@@ -171,15 +171,7 @@ public abstract class AbstractFragmentActivity extends SherlockFragmentActivity 
 	}
 	
 	/**
-	 * @see com.jdroid.android.activity.ActivityIf#doOnCreateOptionsMenu(com.actionbarsherlock.view.Menu)
-	 */
-	@Override
-	public void doOnCreateOptionsMenu(android.view.Menu menu) {
-		throw new UnsupportedOperationException();
-	}
-	
-	/**
-	 * @see com.jdroid.android.activity.ActivityIf#doOnCreateOptionsMenu(com.actionbarsherlock.view.Menu)
+	 * @see com.jdroid.android.activity.ActivityIf#doOnCreateOptionsMenu(android.view.Menu)
 	 */
 	@Override
 	public void doOnCreateOptionsMenu(Menu menu) {

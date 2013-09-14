@@ -3,8 +3,7 @@
 	android:layout_height="match_parent">
 
 	<ImageButton android:id="@+id/refresh_button" android:layout_width="match_parent" android:layout_height="match_parent"
-		android:padding="10dp" android:background="@drawable/abs__item_background_holo_dark" android:contentDescription="@string/refresh"
-		android:src="@drawable/ic_menu_refresh" />
+		android:padding="10dp" android:contentDescription="@string/refresh" android:src="@drawable/ic_menu_refresh" />
 
 	<ProgressBar android:id="@+id/progress_bar" style="?android:attr/progressBarStyle" android:layout_width="32dp"
 		android:layout_height="32dp" android:layout_gravity="center" />

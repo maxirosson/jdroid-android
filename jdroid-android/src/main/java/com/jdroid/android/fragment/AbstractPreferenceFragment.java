@@ -1,7 +1,5 @@
 package com.jdroid.android.fragment;
 
-import android.annotation.TargetApi;
-import android.os.Build;
 import android.preference.PreferenceFragment;
 import android.view.View;
 import com.google.ads.AdSize;
@@ -17,7 +15,6 @@ import com.jdroid.android.usecase.listener.DefaultUseCaseListener;
  * 
  * @author Maxi Rosson
  */
-@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public abstract class AbstractPreferenceFragment extends PreferenceFragment implements FragmentIf {
 	
 	protected FragmentIf getFragmentIf() {

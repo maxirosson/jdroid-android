@@ -143,10 +143,6 @@ public class AndroidUtils {
 		return android.os.Build.VERSION.SDK_INT;
 	}
 	
-	public static Boolean isPreHoneycomb() {
-		return android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB;
-	}
-	
 	public static String getPlatformVersion() {
 		return android.os.Build.VERSION.RELEASE;
 	}
@@ -240,7 +236,6 @@ public class AndroidUtils {
 		return metrics.densityDpi == DisplayMetrics.DENSITY_XHIGH;
 	}
 	
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
 	public static Boolean isTVdpiDensity() {
 		DisplayMetrics metrics = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -273,7 +268,7 @@ public class AndroidUtils {
 	}
 	
 	public static Boolean supportsContextualActionBar() {
-		return !AndroidUtils.isPreHoneycomb() && !AndroidUtils.isGoogleTV();
+		return !AndroidUtils.isGoogleTV();
 	}
 	
 	public static void startSkypeCall(String username) {

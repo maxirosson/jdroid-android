@@ -33,6 +33,10 @@ public abstract class FacebookAuthenticationFragment<T extends FacebookAuthentic
 		return ((AbstractFragmentActivity)activity).getFragment(FacebookAuthenticationFragment.class);
 	}
 	
+	private FacebookListener getFacebookListener() {
+		return (FacebookListener)getTargetFragment();
+	}
+	
 	/**
 	 * @see com.jdroid.android.fragment.AbstractFragment#onCreate(android.os.Bundle)
 	 */
@@ -62,6 +66,13 @@ public abstract class FacebookAuthenticationFragment<T extends FacebookAuthentic
 		super.onResume();
 		onResumeUseCase(facebookAuthenticationUseCase, this);
 		facebookConnector.onResume();
+		
+		// TODO Move this to an use case
+		if (FacebookPreferencesUtils.verifyFacebookAccesToken()) {
+			getFacebookListener().onFacebookConnected(FacebookPreferencesUtils.loadFacebookUser());
+		} else {
+			getFacebookListener().onFacebookDisconnected();
+		}
 	}
 	
 	/**
@@ -156,26 +167,13 @@ public abstract class FacebookAuthenticationFragment<T extends FacebookAuthentic
 			@Override
 			public void run() {
 				if (facebookAuthenticationUseCase.isLoginMode()) {
-					onFacebookLoginUseCaseFinished(facebookAuthenticationUseCase.getFacebookUser());
+					getFacebookListener().onFacebookConnected(facebookAuthenticationUseCase.getFacebookUser());
 				} else {
-					onFacebookLogoutUseCaseFinised();
+					getFacebookListener().onFacebookDisconnected();
 				}
 				dismissLoading();
 			}
 		});
-	}
-	
-	/**
-	 * Called when {@link FacebookAuthenticationUseCase} finishes. This method is called from the UI thread.
-	 * 
-	 * @param facebookUser contains the basic info of the user.
-	 */
-	protected void onFacebookLoginUseCaseFinished(FacebookUser facebookUser) {
-		// Do nothing
-	}
-	
-	protected void onFacebookLogoutUseCaseFinised() {
-		// Do nothing
 	}
 	
 	/**

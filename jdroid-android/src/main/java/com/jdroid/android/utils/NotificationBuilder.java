@@ -114,8 +114,7 @@ public class NotificationBuilder {
 	
 	private Bitmap createLargeIconBitmap(String largeIconUrl) {
 		Bitmap largeIconBitmap = null;
-		// Avoid loading the image if the Android version doesn't supports large bitmap icons on the notifications
-		if (!AndroidUtils.isPreHoneycomb() && StringUtils.isNotEmpty(largeIconUrl)) {
+		if (StringUtils.isNotEmpty(largeIconUrl)) {
 			largeIconBitmap = RemoteImageResolver.get().resolve(Uri.parse(largeIconUrl), LARGE_ICON_WIDHT,
 				LARGE_ICON_HEIGHT);
 		}

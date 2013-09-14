@@ -1,7 +1,7 @@
 package com.jdroid.android.fragment;
 
 import android.app.Activity;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.view.View;
 import com.google.ads.AdSize;
 import com.jdroid.android.activity.BaseActivity.UseCaseTrigger;

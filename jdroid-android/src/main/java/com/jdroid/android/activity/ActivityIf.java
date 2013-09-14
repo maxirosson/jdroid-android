@@ -1,10 +1,10 @@
 package com.jdroid.android.activity;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.view.MenuInflater;
+import android.view.MenuInflater;
 import com.jdroid.android.fragment.FragmentIf;
 
 /**
@@ -21,8 +21,6 @@ public interface ActivityIf extends FragmentIf {
 	
 	public Integer getMenuResourceId();
 	
-	public void doOnCreateOptionsMenu(com.actionbarsherlock.view.Menu menu);
-	
 	public void doOnCreateOptionsMenu(Menu menu);
 	
 	/**
@@ -30,9 +28,9 @@ public interface ActivityIf extends FragmentIf {
 	 */
 	public Boolean requiresAuthentication();
 	
-	public MenuInflater getSupportMenuInflater();
+	public MenuInflater getMenuInflater();
 	
-	public ActionBar getSupportActionBar();
+	public ActionBar getActionBar();
 	
 	public Boolean isLauncherActivity();
 	

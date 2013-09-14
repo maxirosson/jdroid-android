@@ -1,5 +1,6 @@
 package com.jdroid.android.fragment;
 
+import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.MenuItem;
@@ -9,8 +10,6 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockListFragment;
 import com.google.ads.AdSize;
 import com.jdroid.android.AbstractApplication;
 import com.jdroid.android.R;
@@ -28,7 +27,7 @@ import com.jdroid.android.usecase.listener.DefaultUseCaseListener;
  * @param <T>
  * @author Maxi Rosson
  */
-public abstract class AbstractListFragment<T> extends SherlockListFragment implements FragmentIf, OnItemClickListener,
+public abstract class AbstractListFragment<T> extends ListFragment implements FragmentIf, OnItemClickListener,
 		OnItemSelectedListener<T> {
 	
 	private BaseFragment baseFragment;
@@ -377,8 +376,8 @@ public abstract class AbstractListFragment<T> extends SherlockListFragment imple
 		return (T)getListView().getItemAtPosition(info.position);
 	}
 	
-	public ActionBar getSupportActionBar() {
-		return getSherlockActivity().getSupportActionBar();
+	public ActionBar getActionBar() {
+		return getActivity().getActionBar();
 	}
 	
 	/**

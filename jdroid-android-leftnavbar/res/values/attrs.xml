@@ -1,0 +1,6 @@
+<resources>
+
+	<!-- Background drawable for standalone items that need focus/pressed states. -->
+	<attr name="selectableItemBackground" format="reference" />
+
+</resources>

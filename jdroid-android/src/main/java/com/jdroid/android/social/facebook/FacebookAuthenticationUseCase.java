@@ -38,6 +38,7 @@ public class FacebookAuthenticationUseCase extends DefaultAbstractUseCase {
 				facebookUser = new FacebookUser();
 				facebookUser.setFirstName(fbUser.getFirstName());
 				facebookUser.setLastName(fbUser.getLastName());
+				facebookUser.setFacebookId(fbUser.getId());
 				Object email = fbUser.asMap().get("email");
 				if (email != null) {
 					facebookUser.setEmail(email.toString());

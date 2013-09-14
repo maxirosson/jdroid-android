@@ -196,6 +196,10 @@ public abstract class AbstractUseCase<T> implements UseCase<T> {
 		notified = false;
 	}
 	
+	public void markAsNotInvoked() {
+		this.useCaseStatus = UseCaseStatus.NOT_INVOKED;
+	}
+	
 	protected void markAsInProgress() {
 		notified = false;
 		runtimeException = null;

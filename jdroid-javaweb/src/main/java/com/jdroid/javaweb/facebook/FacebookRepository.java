@@ -3,6 +3,7 @@ package com.jdroid.javaweb.facebook;
 import java.util.List;
 import java.util.NoSuchElementException;
 import com.google.common.collect.Lists;
+import com.jdroid.javaweb.guava.function.PropertyFunction;
 import com.restfb.Connection;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
@@ -69,11 +70,7 @@ public class FacebookRepository {
 	public List<String> getAppFriendsIds(String accessToken) {
 		FacebookClient fb = createFacebookClient(accessToken);
 		List<FacebookUser> facebookUsers = fb.executeFqlQuery(APP_FRIENDS_IDS_FQL, FacebookUser.class);
-		List<String> facebookIds = Lists.newArrayList();
-		for (FacebookUser each : facebookUsers) {
-			facebookIds.add(each.getFacebookId());
-		}
-		return facebookIds;
+		return Lists.transform(facebookUsers, new PropertyFunction<FacebookUser, String>("facebookId"));
 	}
 	
 	public void publish(String accessToken, String message) {

@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.jdroid.android"
 	android:versionCode="1" android:versionName="1.0">
 
-	<uses-sdk android:minSdkVersion="9" android:targetSdkVersion="18" />
+	<uses-sdk android:minSdkVersion="13" android:targetSdkVersion="18" />
 
 	<application android:icon="@drawable/ic_launcher" android:label="@string/appName">
 

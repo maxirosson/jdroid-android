@@ -5,15 +5,14 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import com.actionbarsherlock.app.SherlockListActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
 import com.google.ads.AdSize;
 import com.jdroid.android.AbstractApplication;
 import com.jdroid.android.R;
@@ -37,8 +36,8 @@ import com.jdroid.java.exception.AbstractException;
  * @author Maxi Rosson
  * @param <T>
  */
-public abstract class AbstractListActivity<T> extends SherlockListActivity implements SortingListener<T>,
-		OnItemClickListener, ActivityIf {
+public abstract class AbstractListActivity<T> extends ListActivity implements SortingListener<T>, OnItemClickListener,
+		ActivityIf {
 	
 	private BaseActivity baseActivity;
 	private PaginationFooter paginationFooter;
@@ -184,19 +183,11 @@ public abstract class AbstractListActivity<T> extends SherlockListActivity imple
 	}
 	
 	/**
-	 * @see com.jdroid.android.activity.ActivityIf#doOnCreateOptionsMenu(com.actionbarsherlock.view.Menu)
+	 * @see com.jdroid.android.activity.ActivityIf#doOnCreateOptionsMenu(android.view.Menu)
 	 */
 	@Override
 	public void doOnCreateOptionsMenu(Menu menu) {
 		baseActivity.doOnCreateOptionsMenu(menu);
-	}
-	
-	/**
-	 * @see com.jdroid.android.activity.ActivityIf#doOnCreateOptionsMenu(com.actionbarsherlock.view.Menu)
-	 */
-	@Override
-	public void doOnCreateOptionsMenu(android.view.Menu menu) {
-		throw new UnsupportedOperationException();
 	}
 	
 	/**

@@ -114,7 +114,7 @@ public class GooglePlusHelperFragment extends AbstractFragment implements Connec
 	@Override
 	public void onAccessRevoked(ConnectionResult connectionResult) {
 		plusClient.connect();
-		getGooglePlusListener().onAccessRevoked();
+		getGooglePlusListener().onGooglePlusAccessRevoked();
 	}
 	
 	/**
@@ -129,7 +129,7 @@ public class GooglePlusHelperFragment extends AbstractFragment implements Connec
 			executeUseCase(googlePlusAuthenticationUseCase);
 		}
 		
-		getGooglePlusListener().onConnectionFailed();
+		getGooglePlusListener().onGooglePlusConnectionFailed();
 	}
 	
 	/**
@@ -146,7 +146,7 @@ public class GooglePlusHelperFragment extends AbstractFragment implements Connec
 			executeUseCase(googlePlusAuthenticationUseCase);
 		}
 		
-		getGooglePlusListener().onConnected(me);
+		getGooglePlusListener().onGooglePlusConnected(me);
 	}
 	
 	private Boolean shouldConnectOnServer(Person me) {
@@ -171,7 +171,7 @@ public class GooglePlusHelperFragment extends AbstractFragment implements Connec
 	@Override
 	public void onDisconnected() {
 		plusClient.connect();
-		getGooglePlusListener().onDisconnected();
+		getGooglePlusListener().onGooglePlusDisconnected();
 	}
 	
 	/**
@@ -201,7 +201,7 @@ public class GooglePlusHelperFragment extends AbstractFragment implements Connec
 					plusClient.connect();
 				}
 			} else {
-				getGooglePlusListener().onSignInCanceled();
+				getGooglePlusListener().onGooglePlusSignInCanceled();
 			}
 		}
 	}
@@ -222,7 +222,7 @@ public class GooglePlusHelperFragment extends AbstractFragment implements Connec
 					googlePlusUsers.add(new SocialUser(null, person.getId(), SocialNetwork.GOOGLE_PLUS,
 							person.getDisplayName(), "", person.getImage().getUrl()));
 				}
-				getGooglePlusListener().onPeopleLoaded(googlePlusUsers);
+				getGooglePlusListener().onGooglePlusFriendsLoaded(googlePlusUsers);
 			} finally {
 				personBuffer.close();
 			}

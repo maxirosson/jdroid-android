@@ -1,8 +1,9 @@
 package com.jdroid.android.refresh;
 
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
+import android.support.v4.view.MenuItemCompat;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import com.jdroid.android.R;
 import com.jdroid.android.activity.ActivityIf;
 import com.jdroid.android.exception.DefaultExceptionHandler;
@@ -18,7 +19,7 @@ public abstract class RefreshActionConnector implements RefreshActionProvider.On
 	
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		MenuItem menuItem = menu.findItem(R.id.refresh_action_item);
-		refreshActionProvider = (RefreshActionProvider)menuItem.getActionProvider();
+		refreshActionProvider = (RefreshActionProvider)MenuItemCompat.getActionProvider(menuItem);
 		refreshActionProvider.setTitle(menuItem.getTitle());
 		refreshActionProvider.setOnRefreshListener(this);
 	}

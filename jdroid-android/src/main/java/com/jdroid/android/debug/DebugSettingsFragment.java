@@ -1,7 +1,5 @@
 package com.jdroid.android.debug;
 
-import android.annotation.TargetApi;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
@@ -12,7 +10,6 @@ import com.jdroid.android.fragment.AbstractPreferenceFragment;
  * 
  * @author Maxi Rosson
  */
-@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class DebugSettingsFragment extends AbstractPreferenceFragment {
 	
 	/**

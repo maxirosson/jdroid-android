@@ -2,6 +2,7 @@ package com.jdroid.android.refresh;
 
 import android.content.Context;
 import android.graphics.Rect;
+import android.support.v4.view.ActionProvider;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,13 +11,8 @@ import android.view.View.OnLongClickListener;
 import android.widget.ImageButton;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
-import com.actionbarsherlock.view.ActionProvider;
 import com.jdroid.android.R;
 
-/**
- * 
- * @author emallo
- */
 public class RefreshActionProvider extends ActionProvider {
 	
 	public interface OnRefreshListener {

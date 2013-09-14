@@ -1,7 +1,6 @@
 package com.jdroid.android.date;
 
 import java.util.Date;
-import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -92,7 +91,6 @@ public class DatePickerDialogFragment extends AbstractDialogFragment implements 
 	/**
 	 * @see android.support.v4.app.DialogFragment#onCreateDialog(android.os.Bundle)
 	 */
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1)
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		
@@ -108,21 +106,17 @@ public class DatePickerDialogFragment extends AbstractDialogFragment implements 
 		if (titleResId != null) {
 			dialogBuilder.setTitle(titleResId);
 		}
-		if (AndroidUtils.getApiLevel() > Build.VERSION_CODES.GINGERBREAD_MR1) {
-			
-			Boolean disableMinMaxDate = disableMinMaxDate();
-			
-			if ((minDate != null) && !disableMinMaxDate) {
-				datePicker.setMinDate(minDate.getTime());
-			}
-			if ((maxDate != null) && !disableMinMaxDate) {
-				datePicker.setMaxDate(maxDate.getTime());
-			}
-			
-			if (AndroidUtils.getApiLevel() > Build.VERSION_CODES.HONEYCOMB) {
-				datePicker.getCalendarView().setShowWeekNumber(false);
-			}
+		
+		Boolean disableMinMaxDate = disableMinMaxDate();
+		
+		if ((minDate != null) && !disableMinMaxDate) {
+			datePicker.setMinDate(minDate.getTime());
 		}
+		if ((maxDate != null) && !disableMinMaxDate) {
+			datePicker.setMaxDate(maxDate.getTime());
+		}
+		
+		datePicker.getCalendarView().setShowWeekNumber(false);
 		
 		dialogBuilder.setPositiveButton(getString(R.string.ok), new OnClickListener() {
 			

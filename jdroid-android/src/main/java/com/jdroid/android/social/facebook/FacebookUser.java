@@ -51,6 +51,10 @@ public class FacebookUser {
 		this.facebookId = facebookId;
 	}
 	
+	public String getFullname() {
+		return firstName + " " + lastName;
+	}
+	
 	/**
 	 * @see java.lang.Object#toString()
 	 */

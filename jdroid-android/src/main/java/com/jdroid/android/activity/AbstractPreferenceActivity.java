@@ -3,10 +3,9 @@ package com.jdroid.android.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import com.actionbarsherlock.app.SherlockPreferenceActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
 import com.google.ads.AdSize;
 import com.jdroid.android.AbstractApplication;
 import com.jdroid.android.activity.BaseActivity.UseCaseTrigger;
@@ -22,7 +21,7 @@ import com.jdroid.android.usecase.listener.DefaultUseCaseListener;
  * 
  * @author Maxi Rosson
  */
-public abstract class AbstractPreferenceActivity extends SherlockPreferenceActivity implements ActivityIf {
+public abstract class AbstractPreferenceActivity extends PreferenceActivity implements ActivityIf {
 	
 	private BaseActivity baseActivity;
 	
@@ -157,15 +156,7 @@ public abstract class AbstractPreferenceActivity extends SherlockPreferenceActiv
 	}
 	
 	/**
-	 * @see com.jdroid.android.activity.ActivityIf#doOnCreateOptionsMenu(com.actionbarsherlock.view.Menu)
-	 */
-	@Override
-	public void doOnCreateOptionsMenu(android.view.Menu menu) {
-		throw new UnsupportedOperationException();
-	}
-	
-	/**
-	 * @see com.jdroid.android.activity.ActivityIf#doOnCreateOptionsMenu(com.actionbarsherlock.view.Menu)
+	 * @see com.jdroid.android.activity.ActivityIf#doOnCreateOptionsMenu(android.view.Menu)
 	 */
 	@Override
 	public void doOnCreateOptionsMenu(Menu menu) {

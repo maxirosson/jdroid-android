@@ -1,15 +1,12 @@
 package com.jdroid.android.coverflow;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Camera;
 import android.graphics.Matrix;
-import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.Transformation;
 import android.widget.Gallery;
-import com.jdroid.android.utils.AndroidUtils;
 import com.jdroid.java.utils.ReflectionUtils;
 
 /**
@@ -89,15 +86,12 @@ public class CoverFlow extends Gallery {
 	 * @param t transformation
 	 * @param rotationAngle the Angle by which to rotate the Bitmap
 	 */
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	private void transformImageBitmap(View child, Transformation t, int selectedIndex) {
 		camera.save();
 		
 		int currentIndex = (Integer)child.getTag();
 		boolean isSelected = currentIndex == selectedIndex;
-		if (AndroidUtils.getApiLevel() >= 11) {
-			child.setAlpha(isSelected ? 1 : 0.3f);
-		}
+		child.setAlpha(isSelected ? 1 : 0.3f);
 		
 		Matrix imageMatrix = t.getMatrix();
 		int height = child.getLayoutParams().height;

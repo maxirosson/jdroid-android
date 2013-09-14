@@ -10,15 +10,15 @@ import com.jdroid.android.social.SocialUser;
  */
 public interface GooglePlusListener {
 	
-	public void onSignInCanceled();
+	public void onGooglePlusSignInCanceled();
 	
-	public void onAccessRevoked();
+	public void onGooglePlusAccessRevoked();
 	
-	public void onConnectionFailed();
+	public void onGooglePlusConnectionFailed();
 	
-	public void onConnected(Person me);
+	public void onGooglePlusConnected(Person me);
 	
-	public void onDisconnected();
+	public void onGooglePlusDisconnected();
 	
-	public void onPeopleLoaded(List<SocialUser> friends);
+	public void onGooglePlusFriendsLoaded(List<SocialUser> friends);
 }

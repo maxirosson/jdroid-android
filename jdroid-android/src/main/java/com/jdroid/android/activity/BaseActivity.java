@@ -2,23 +2,25 @@ package com.jdroid.android.activity;
 
 import org.slf4j.Logger;
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
 import com.google.ads.AdSize;
 import com.jdroid.android.AbstractApplication;
 import com.jdroid.android.ActivityLauncher;
@@ -27,7 +29,6 @@ import com.jdroid.android.ad.AdLoader;
 import com.jdroid.android.context.DefaultApplicationContext;
 import com.jdroid.android.context.SecurityContext;
 import com.jdroid.android.debug.DebugSettingsActivity;
-import com.jdroid.android.debug.PreHoneycombDebugSettingsActivity;
 import com.jdroid.android.domain.User;
 import com.jdroid.android.exception.DefaultExceptionHandler;
 import com.jdroid.android.gps.LocalizationManager;
@@ -115,15 +116,19 @@ public class BaseActivity implements ActivityIf {
 	public void beforeOnCreate() {
 	}
 	
+	@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 	public void onCreate(Bundle savedInstanceState) {
 		LOGGER.trace("Executing onCreate on " + activity);
 		AbstractApplication.get().setCurrentActivity(activity);
 		
 		AbstractApplication.get().initExceptionHandlers();
 		
-		ActionBar actionBar = getActivityIf().getSupportActionBar();
+		ActionBar actionBar = getActivityIf().getActionBar();
 		if (actionBar != null) {
-			actionBar.setHomeButtonEnabled(true);
+			
+			if (AndroidUtils.getApiLevel() >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+				actionBar.setHomeButtonEnabled(true);
+			}
 			if (!getActivityIf().isLauncherActivity()) {
 				actionBar.setDisplayHomeAsUpEnabled(true);
 			}
@@ -217,21 +222,16 @@ public class BaseActivity implements ActivityIf {
 		AbstractApplication.get().setInBackground(false);
 		AbstractApplication.get().setCurrentActivity(activity);
 		
-		ActionBar actionBar = getActivityIf().getSupportActionBar();
+		ActionBar actionBar = getActivityIf().getActionBar();
 		if (actionBar != null) {
 			DefaultApplicationContext context = AbstractApplication.get().getAndroidApplicationContext();
 			if (!context.isProductionEnvironment() && context.displayDebugSettings()) {
-				int actionbarBackground = getActionBarDrawableResource();
 				if (context.isHttpMockEnabled()) {
-					actionbarBackground = R.color.actionbarMockBackground;
+					actionBar.setBackgroundDrawable(getActivity().getResources().getDrawable(
+						R.color.actionbarMockBackground));
 				}
-				actionBar.setBackgroundDrawable(getActivity().getResources().getDrawable(actionbarBackground));
 			}
 		}
-	}
-	
-	protected int getActionBarDrawableResource() {
-		return R.drawable.abs__ab_transparent_dark_holo;
 	}
 	
 	public void onPause() {
@@ -264,16 +264,7 @@ public class BaseActivity implements ActivityIf {
 	
 	public boolean onCreateOptionsMenu(Menu menu) {
 		if (getActivityIf().getMenuResourceId() != null) {
-			MenuInflater inflater = getActivityIf().getSupportMenuInflater();
-			inflater.inflate(getActivityIf().getMenuResourceId(), menu);
-			getActivityIf().doOnCreateOptionsMenu(menu);
-		}
-		return true;
-	}
-	
-	public boolean onCreateOptionsMenu(android.view.Menu menu) {
-		if (getActivityIf().getMenuResourceId() != null) {
-			android.view.MenuInflater inflater = activity.getMenuInflater();
+			MenuInflater inflater = getActivityIf().getMenuInflater();
 			inflater.inflate(getActivityIf().getMenuResourceId(), menu);
 			getActivityIf().doOnCreateOptionsMenu(menu);
 		}
@@ -301,19 +292,7 @@ public class BaseActivity implements ActivityIf {
 		}
 	}
 	
-	/**
-	 * @see com.jdroid.android.activity.ActivityIf#doOnCreateOptionsMenu(com.actionbarsherlock.view.Menu)
-	 */
-	@Override
-	public void doOnCreateOptionsMenu(android.view.Menu menu) {
-		// Do Nothing by Default
-	}
-	
 	public boolean onOptionsItemSelected(MenuItem item) {
-		return onOptionsItemSelected(item.getItemId());
-	}
-	
-	public boolean onOptionsItemSelected(android.view.MenuItem item) {
 		return onOptionsItemSelected(item.getItemId());
 	}
 	
@@ -332,19 +311,17 @@ public class BaseActivity implements ActivityIf {
 				// This activity is part of this app's task, so simply
 				// navigate up to the logical parent activity.
 				// NavUtils.navigateUpTo(activity, upIntent);
-				upIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				activity.startActivity(upIntent);
-				activity.finish();
+				if (upIntent != null) {
+					upIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					activity.startActivity(upIntent);
+					activity.finish();
+				} else {
+					ActivityLauncher.launchHomeActivity();
+				}
 			}
 			return true;
 		} else if (itemId == R.id.debugSettingsItem) {
-			Class<? extends Activity> targetActivity;
-			if (AndroidUtils.isPreHoneycomb()) {
-				targetActivity = PreHoneycombDebugSettingsActivity.class;
-			} else {
-				targetActivity = DebugSettingsActivity.class;
-			}
-			ActivityLauncher.launchActivity(targetActivity);
+			ActivityLauncher.launchActivity(DebugSettingsActivity.class);
 			return true;
 		}
 		return false;
@@ -627,18 +604,18 @@ public class BaseActivity implements ActivityIf {
 	}
 	
 	/**
-	 * @see com.jdroid.android.activity.ActivityIf#getSupportMenuInflater()
+	 * @see com.jdroid.android.activity.ActivityIf#getMenuInflater()
 	 */
 	@Override
-	public MenuInflater getSupportMenuInflater() {
+	public MenuInflater getMenuInflater() {
 		return null;
 	}
 	
 	/**
-	 * @see com.jdroid.android.activity.ActivityIf#getSupportActionBar()
+	 * @see com.jdroid.android.activity.ActivityIf#getActionBar()
 	 */
 	@Override
-	public ActionBar getSupportActionBar() {
+	public ActionBar getActionBar() {
 		return null;
 	}
 	

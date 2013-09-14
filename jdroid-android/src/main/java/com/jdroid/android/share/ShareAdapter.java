@@ -43,7 +43,7 @@ public class ShareAdapter extends BaseHolderArrayAdapter<ShareLaunchable, ShareV
 		}
 		launchables.add(new FacebookShareLaunchable(facebookAppId, accessToken));
 		
-		add(launchables);
+		addAll(launchables);
 	}
 	
 	/**
