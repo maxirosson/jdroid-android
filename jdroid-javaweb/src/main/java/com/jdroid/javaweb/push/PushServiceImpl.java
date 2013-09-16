@@ -73,7 +73,7 @@ public class PushServiceImpl implements PushService {
 	public void send(final PushMessage pushMessage, List<Device> devices) {
 		Map<DeviceType, List<Device>> devicesMap = Maps.newHashMap();
 		for (Device device : devices) {
-			if (!device.isDisabled()) {
+			if (!device.isDisabled() && (device.getRegistrationId() != null)) {
 				List<Device> devicesByType = devicesMap.get(device.getDeviceType());
 				if (devicesByType == null) {
 					devicesByType = Lists.newArrayList();

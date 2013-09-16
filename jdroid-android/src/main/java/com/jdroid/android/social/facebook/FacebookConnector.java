@@ -220,6 +220,12 @@ public class FacebookConnector {
 		}
 	}
 	
+	public void localLogout() {
+		Session currentSession = getCurrentSession();
+		currentSession.closeAndClearTokenInformation();
+		FacebookPreferencesUtils.cleanFacebookUser();
+	}
+	
 	public void logout() {
 		Session currentSession = getCurrentSession();
 		currentSession.closeAndClearTokenInformation();

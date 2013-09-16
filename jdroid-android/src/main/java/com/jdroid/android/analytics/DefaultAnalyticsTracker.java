@@ -10,6 +10,14 @@ import com.jdroid.java.exception.ConnectionException;
 public abstract class DefaultAnalyticsTracker implements AnalyticsTracker {
 	
 	/**
+	 * @see com.jdroid.android.analytics.AnalyticsTracker#trackAppInstallation()
+	 */
+	@Override
+	public void trackAppInstallation() {
+		// Do Nothing
+	}
+	
+	/**
 	 * @see com.jdroid.android.analytics.AnalyticsTracker#onActivityStart(android.app.Activity)
 	 */
 	@Override
@@ -32,4 +40,5 @@ public abstract class DefaultAnalyticsTracker implements AnalyticsTracker {
 	public void trackConnectionException(ConnectionException connectionException) {
 		// Do Nothing
 	}
+	
 }

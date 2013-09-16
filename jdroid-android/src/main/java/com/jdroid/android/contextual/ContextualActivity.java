@@ -76,7 +76,7 @@ public abstract class ContextualActivity<T extends TabAction> extends AbstractFr
 	@Override
 	public void onItemSelected(T item) {
 		
-		Fragment oldFragment = getSupportFragmentManager().findFragmentById(R.id.detailsFragmentContainer);
+		Fragment oldFragment = getDetailsFragment();
 		if (oldFragment == null) {
 			item.startActivity(this);
 		} else {
@@ -84,6 +84,10 @@ public abstract class ContextualActivity<T extends TabAction> extends AbstractFr
 				replaceDetailsFragment(item);
 			}
 		}
+	}
+	
+	public Fragment getDetailsFragment() {
+		return getSupportFragmentManager().findFragmentById(R.id.detailsFragmentContainer);
 	}
 	
 	private void replaceDetailsFragment(T item) {

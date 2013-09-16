@@ -8,6 +8,7 @@ import com.restfb.Connection;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
 import com.restfb.Parameter;
+import com.restfb.exception.FacebookOAuthException;
 import com.restfb.types.FacebookType;
 import com.restfb.types.User;
 
@@ -47,7 +48,7 @@ public class FacebookRepository {
 		return getFriend(accessToken, facebookId) != null;
 	}
 	
-	public User getFriend(String accessToken, String facebookId) {
+	public User getFriend(String accessToken, String facebookId) throws FacebookOAuthException {
 		FacebookClient fb = createFacebookClient(accessToken);
 		List<User> users = fb.executeFqlQuery(FRIEND_FQL.replaceAll(FRIEND_FQL_REPLACEMENT, facebookId), User.class);
 		try {
@@ -57,17 +58,17 @@ public class FacebookRepository {
 		}
 	}
 	
-	public List<FacebookUser> getFriends(String accessToken) {
+	public List<FacebookUser> getFriends(String accessToken) throws FacebookOAuthException {
 		FacebookClient fb = createFacebookClient(accessToken);
 		return fb.executeFqlQuery(FRIENDS_FQL, FacebookUser.class);
 	}
 	
-	public List<FacebookUser> getAppFriends(String accessToken) {
+	public List<FacebookUser> getAppFriends(String accessToken) throws FacebookOAuthException {
 		FacebookClient fb = createFacebookClient(accessToken);
 		return fb.executeFqlQuery(APP_FRIENDS_FQL, FacebookUser.class);
 	}
 	
-	public List<String> getAppFriendsIds(String accessToken) {
+	public List<String> getAppFriendsIds(String accessToken) throws FacebookOAuthException {
 		FacebookClient fb = createFacebookClient(accessToken);
 		List<FacebookUser> facebookUsers = fb.executeFqlQuery(APP_FRIENDS_IDS_FQL, FacebookUser.class);
 		return Lists.transform(facebookUsers, new PropertyFunction<FacebookUser, String>("facebookId"));

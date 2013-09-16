@@ -20,7 +20,8 @@
 	<classpathentry exported="true" kind="var" path="M2_REPO/android/commonsware/sackofviewsadapter/0.3.1/sackofviewsadapter-0.3.1.jar"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/org/slf4j/slf4j-android/1.6.1-RC1/slf4j-android-1.6.1-RC1.jar" sourcepath="M2_REPO/org/slf4j/slf4j-android/1.6.1-RC1/slf4j-android-1.6.1-RC1-sources.jar"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/android/twitter/twitter4j-core-android/2.2.6/twitter4j-core-android-2.2.6.jar"/>
-	<classpathentry exported="true" kind="var" path="M2_REPO/android/analytics/google-analytics-sdk/2.0Beta4/google-analytics-sdk-2.0Beta4.jar"/>
+	<classpathentry exported="true" kind="var" path="M2_REPO/android/analytics/google-analytics-sdk/3.0.0/google-analytics-sdk-3.0.0.jar"/>
+	<classpathentry exported="true" kind="var" path="M2_REPO/android/analytics/flurry-analytics-sdk/3.2.0/flurry-analytics-sdk-3.2.0.jar"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/android/crittercism/crittercism-sdk/3.0.11/crittercism-sdk-3.0.11.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/pivotallabs/robolectric/1.2/robolectric-1.2-jar-with-dependencies.jar"/>
 	<classpathentry kind="var" path="M2_REPO/junit/junit/4.8.2/junit-4.8.2.jar"/>

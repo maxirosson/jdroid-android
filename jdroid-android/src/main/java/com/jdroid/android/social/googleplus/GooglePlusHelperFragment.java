@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient.ConnectionCallbacks;
@@ -32,16 +33,44 @@ public class GooglePlusHelperFragment extends AbstractFragment implements Connec
 	
 	private static final int REQUEST_CODE_SIGN_IN = 1;
 	
-	public static void add(Activity activity, GooglePlusHelperFragment googlePlusHelperFragment, Fragment targetFragment) {
-		if ((get(activity) == null) && GooglePlayUtils.isGooglePlayServicesAvailable(activity)) {
-			googlePlusHelperFragment.setTargetFragment(targetFragment, 0);
-			FragmentTransaction fragmentTransaction = ((AbstractFragmentActivity)activity).getSupportFragmentManager().beginTransaction();
-			fragmentTransaction.add(0, googlePlusHelperFragment, GooglePlusHelperFragment.class.getSimpleName());
+	public static void add(FragmentActivity activity,
+			Class<? extends GooglePlusHelperFragment> googlePlusHelperFragmentClass, Fragment targetFragment) {
+		add(activity, googlePlusHelperFragmentClass, null, targetFragment);
+	}
+	
+	public static void add(FragmentActivity activity,
+			Class<? extends GooglePlusHelperFragment> googlePlusHelperFragmentClass, Bundle bundle,
+			Fragment targetFragment) {
+		
+		AbstractFragmentActivity abstractFragmentActivity = (AbstractFragmentActivity)activity;
+		if (GooglePlayUtils.isGooglePlayServicesAvailable(activity)) {
+			GooglePlusHelperFragment googlePlusHelperFragment = get(activity);
+			if (googlePlusHelperFragment == null) {
+				googlePlusHelperFragment = abstractFragmentActivity.instanceFragment(googlePlusHelperFragmentClass,
+					bundle);
+				googlePlusHelperFragment.setTargetFragment(targetFragment, 0);
+				FragmentTransaction fragmentTransaction = abstractFragmentActivity.getSupportFragmentManager().beginTransaction();
+				fragmentTransaction.add(0, googlePlusHelperFragment, GooglePlusHelperFragment.class.getSimpleName());
+				fragmentTransaction.commit();
+			} else {
+				googlePlusHelperFragment.setTargetFragment(targetFragment, 0);
+				if (googlePlusHelperFragment.plusClient != null) {
+					googlePlusHelperFragment.plusClient.connect();
+				}
+			}
+		}
+	}
+	
+	public static void remove(FragmentActivity activity) {
+		Fragment fragmentToRemove = get(activity);
+		if (fragmentToRemove != null) {
+			FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
+			fragmentTransaction.remove(fragmentToRemove);
 			fragmentTransaction.commit();
 		}
 	}
 	
-	public static GooglePlusHelperFragment get(Activity activity) {
+	public static GooglePlusHelperFragment get(FragmentActivity activity) {
 		return ((AbstractFragmentActivity)activity).getFragment(GooglePlusHelperFragment.class);
 	}
 	

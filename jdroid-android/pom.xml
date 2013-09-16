@@ -62,9 +62,16 @@
 		<dependency>
 			<groupId>android.analytics</groupId>
 			<artifactId>google-analytics-sdk</artifactId>
-			<version>2.0Beta4</version>
+			<version>3.0.0</version>
 		</dependency>
 
+		<!-- Flurry Analytics -->
+		<dependency>
+			<groupId>android.analytics</groupId>
+			<artifactId>flurry-analytics-sdk</artifactId>
+			<version>3.2.0</version>
+		</dependency>
+		
 		<!-- Android Annotations -->
 		<dependency>
 			<groupId>android.compatibility</groupId>

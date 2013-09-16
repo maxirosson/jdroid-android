@@ -131,12 +131,25 @@ public class AndroidUtils {
 		return size / FileUtils.BYTES_TO_MB;
 	}
 	
+	/**
+	 * Checks if the application is installed on the SD card.
+	 * 
+	 * @return <code>true</code> if the application is installed on the sd card
+	 */
+	public static Boolean isInstalledOnSdCard() {
+		return (getPackageInfo().applicationInfo.flags & ApplicationInfo.FLAG_EXTERNAL_STORAGE) == ApplicationInfo.FLAG_EXTERNAL_STORAGE;
+	}
+	
 	public static Boolean isMediaMounted() {
 		return android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED);
 	}
 	
 	public static String getDeviceModel() {
 		return android.os.Build.MODEL;
+	}
+	
+	public static String getDeviceManufacturer() {
+		return android.os.Build.MANUFACTURER;
 	}
 	
 	public static Integer getApiLevel() {
@@ -269,6 +282,18 @@ public class AndroidUtils {
 	
 	public static Boolean supportsContextualActionBar() {
 		return !AndroidUtils.isGoogleTV();
+	}
+	
+	public static String getDeviceName() {
+		String manufacturer = getDeviceManufacturer();
+		String model = getDeviceModel();
+		if ((model != null) && model.startsWith(manufacturer)) {
+			return StringUtils.capitalize(model);
+		} else if (manufacturer != null) {
+			return StringUtils.capitalize(manufacturer) + " " + model;
+		} else {
+			return "Unknown";
+		}
 	}
 	
 	public static void startSkypeCall(String username) {

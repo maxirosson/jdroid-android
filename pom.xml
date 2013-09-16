@@ -38,11 +38,6 @@
 			<url>https://repository.jboss.org/nexus/content/groups/public/</url>
 		</repository>
 		<repository>
-			<id>actionbarsherlock-repo</id>
-			<name>Actionbarsherlock Maven Repository</name>
-			<url>http://r.jakewharton.com/maven/release/</url>
-		</repository>
-		<repository>
 			<id>dropbox-maven-repository</id>
 			<name>Dropbox Maven Repository</name>
 			<url>http://dl.dropbox.com/u/8520947/maven-repository/</url>

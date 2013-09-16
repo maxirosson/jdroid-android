@@ -11,6 +11,8 @@ public interface AnalyticsTracker {
 	
 	public Boolean isEnabled();
 	
+	public void trackAppInstallation();
+	
 	public void onActivityStart(Activity activity);
 	
 	public void onActivityStop(Activity activity);

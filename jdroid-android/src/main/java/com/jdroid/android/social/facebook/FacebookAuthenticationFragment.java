@@ -1,13 +1,14 @@
 package com.jdroid.android.social.facebook;
 
 import org.slf4j.Logger;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import com.jdroid.android.activity.AbstractFragmentActivity;
 import com.jdroid.android.fragment.AbstractFragment;
+import com.jdroid.java.utils.ExecutorUtils;
 import com.jdroid.java.utils.LoggerUtils;
 
 public abstract class FacebookAuthenticationFragment<T extends FacebookAuthenticationUseCase> extends AbstractFragment
@@ -18,18 +19,42 @@ public abstract class FacebookAuthenticationFragment<T extends FacebookAuthentic
 	private FacebookConnector facebookConnector;
 	private T facebookAuthenticationUseCase;
 	
-	public static void add(Activity activity, FacebookAuthenticationFragment<?> facebookAuthenticationFragment,
+	public static void add(FragmentActivity activity,
+			Class<? extends FacebookAuthenticationFragment<?>> facebookAuthenticationFragmentClass,
 			Fragment targetFragment) {
-		if (get(activity) == null) {
+		add(activity, facebookAuthenticationFragmentClass, null, targetFragment);
+	}
+	
+	public static void add(FragmentActivity activity,
+			Class<? extends FacebookAuthenticationFragment<?>> facebookAuthenticationFragmentClass, Bundle bundle,
+			Fragment targetFragment) {
+		
+		AbstractFragmentActivity abstractFragmentActivity = (AbstractFragmentActivity)activity;
+		FacebookAuthenticationFragment<?> facebookAuthenticationFragment = get(activity);
+		if (facebookAuthenticationFragment == null) {
+			facebookAuthenticationFragment = abstractFragmentActivity.instanceFragment(
+				facebookAuthenticationFragmentClass, bundle);
 			facebookAuthenticationFragment.setTargetFragment(targetFragment, 0);
-			FragmentTransaction fragmentTransaction = ((AbstractFragmentActivity)activity).getSupportFragmentManager().beginTransaction();
+			FragmentTransaction fragmentTransaction = abstractFragmentActivity.getSupportFragmentManager().beginTransaction();
 			fragmentTransaction.add(0, facebookAuthenticationFragment,
 				FacebookAuthenticationFragment.class.getSimpleName());
+			fragmentTransaction.commit();
+		} else {
+			facebookAuthenticationFragment.setTargetFragment(targetFragment, 0);
+			facebookAuthenticationFragment.verifyFacebookConnection();
+		}
+	}
+	
+	public static void remove(FragmentActivity activity) {
+		Fragment fragmentToRemove = get(activity);
+		if (fragmentToRemove != null) {
+			FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
+			fragmentTransaction.remove(fragmentToRemove);
 			fragmentTransaction.commit();
 		}
 	}
 	
-	public static FacebookAuthenticationFragment<?> get(Activity activity) {
+	public static FacebookAuthenticationFragment<?> get(FragmentActivity activity) {
 		return ((AbstractFragmentActivity)activity).getFragment(FacebookAuthenticationFragment.class);
 	}
 	
@@ -67,12 +92,28 @@ public abstract class FacebookAuthenticationFragment<T extends FacebookAuthentic
 		onResumeUseCase(facebookAuthenticationUseCase, this);
 		facebookConnector.onResume();
 		
-		// TODO Move this to an use case
-		if (FacebookPreferencesUtils.verifyFacebookAccesToken()) {
-			getFacebookListener().onFacebookConnected(FacebookPreferencesUtils.loadFacebookUser());
-		} else {
-			getFacebookListener().onFacebookDisconnected();
-		}
+		verifyFacebookConnection();
+	}
+	
+	private void verifyFacebookConnection() {
+		ExecutorUtils.execute(new Runnable() {
+			
+			@Override
+			public void run() {
+				final Boolean isConnected = FacebookPreferencesUtils.verifyFacebookAccesToken();
+				executeOnUIThread(new Runnable() {
+					
+					@Override
+					public void run() {
+						if (isConnected) {
+							getFacebookListener().onFacebookConnected(FacebookPreferencesUtils.loadFacebookUser());
+						} else {
+							getFacebookListener().onFacebookDisconnected();
+						}
+					}
+				});
+			}
+		});
 	}
 	
 	/**
