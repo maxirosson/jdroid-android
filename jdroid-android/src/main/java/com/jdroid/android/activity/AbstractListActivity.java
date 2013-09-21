@@ -16,7 +16,7 @@ import android.widget.ListView;
 import com.google.ads.AdSize;
 import com.jdroid.android.AbstractApplication;
 import com.jdroid.android.R;
-import com.jdroid.android.activity.BaseActivity.UseCaseTrigger;
+import com.jdroid.android.activity.ActivityHelper.UseCaseTrigger;
 import com.jdroid.android.adapter.BaseArrayAdapter;
 import com.jdroid.android.context.DefaultApplicationContext;
 import com.jdroid.android.domain.User;
@@ -39,7 +39,7 @@ import com.jdroid.java.exception.AbstractException;
 public abstract class AbstractListActivity<T> extends ListActivity implements SortingListener<T>, OnItemClickListener,
 		ActivityIf {
 	
-	private BaseActivity baseActivity;
+	private ActivityHelper activityHelper;
 	private PaginationFooter paginationFooter;
 	
 	/**
@@ -47,7 +47,7 @@ public abstract class AbstractListActivity<T> extends ListActivity implements So
 	 */
 	@Override
 	public DefaultApplicationContext getAndroidApplicationContext() {
-		return baseActivity.getAndroidApplicationContext();
+		return activityHelper.getAndroidApplicationContext();
 	}
 	
 	/**
@@ -63,7 +63,7 @@ public abstract class AbstractListActivity<T> extends ListActivity implements So
 	 */
 	@Override
 	public Boolean onBeforeSetContentView() {
-		return baseActivity.onBeforeSetContentView();
+		return activityHelper.onBeforeSetContentView();
 	}
 	
 	/**
@@ -71,7 +71,7 @@ public abstract class AbstractListActivity<T> extends ListActivity implements So
 	 */
 	@Override
 	public void onAfterSetContentView(Bundle savedInstanceState) {
-		baseActivity.onAfterSetContentView(savedInstanceState);
+		activityHelper.onAfterSetContentView(savedInstanceState);
 	}
 	
 	/**
@@ -79,10 +79,10 @@ public abstract class AbstractListActivity<T> extends ListActivity implements So
 	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		baseActivity = AbstractApplication.get().createBaseActivity(this);
-		baseActivity.beforeOnCreate();
+		activityHelper = AbstractApplication.get().createActivityHelper(this);
+		activityHelper.beforeOnCreate();
 		super.onCreate(savedInstanceState);
-		baseActivity.onCreate(savedInstanceState);
+		activityHelper.onCreate(savedInstanceState);
 	}
 	
 	/**
@@ -91,7 +91,7 @@ public abstract class AbstractListActivity<T> extends ListActivity implements So
 	@Override
 	public void onContentChanged() {
 		super.onContentChanged();
-		baseActivity.onContentChanged();
+		activityHelper.onContentChanged();
 	}
 	
 	/**
@@ -100,7 +100,7 @@ public abstract class AbstractListActivity<T> extends ListActivity implements So
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		baseActivity.onSaveInstanceState(outState);
+		activityHelper.onSaveInstanceState(outState);
 	}
 	
 	/**
@@ -109,7 +109,7 @@ public abstract class AbstractListActivity<T> extends ListActivity implements So
 	@Override
 	protected void onRestoreInstanceState(Bundle savedInstanceState) {
 		super.onRestoreInstanceState(savedInstanceState);
-		baseActivity.onRestoreInstanceState(savedInstanceState);
+		activityHelper.onRestoreInstanceState(savedInstanceState);
 	}
 	
 	/**
@@ -118,7 +118,7 @@ public abstract class AbstractListActivity<T> extends ListActivity implements So
 	@Override
 	protected void onStart() {
 		super.onStart();
-		baseActivity.onStart();
+		activityHelper.onStart();
 	}
 	
 	/**
@@ -127,7 +127,7 @@ public abstract class AbstractListActivity<T> extends ListActivity implements So
 	@Override
 	protected void onResume() {
 		super.onResume();
-		baseActivity.onResume();
+		activityHelper.onResume();
 	}
 	
 	/**
@@ -136,7 +136,7 @@ public abstract class AbstractListActivity<T> extends ListActivity implements So
 	@Override
 	protected void onPause() {
 		super.onPause();
-		baseActivity.onPause();
+		activityHelper.onPause();
 	}
 	
 	/**
@@ -145,7 +145,7 @@ public abstract class AbstractListActivity<T> extends ListActivity implements So
 	@Override
 	protected void onStop() {
 		super.onStop();
-		baseActivity.onStop();
+		activityHelper.onStop();
 	}
 	
 	/**
@@ -154,7 +154,7 @@ public abstract class AbstractListActivity<T> extends ListActivity implements So
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		baseActivity.onDestroy();
+		activityHelper.onDestroy();
 	}
 	
 	/**
@@ -163,7 +163,7 @@ public abstract class AbstractListActivity<T> extends ListActivity implements So
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		baseActivity.onActivityResult(requestCode, resultCode, data);
+		activityHelper.onActivityResult(requestCode, resultCode, data);
 	}
 	
 	/**
@@ -171,7 +171,7 @@ public abstract class AbstractListActivity<T> extends ListActivity implements So
 	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		return baseActivity.onCreateOptionsMenu(menu);
+		return activityHelper.onCreateOptionsMenu(menu);
 	}
 	
 	/**
@@ -179,7 +179,7 @@ public abstract class AbstractListActivity<T> extends ListActivity implements So
 	 */
 	@Override
 	public Integer getMenuResourceId() {
-		return baseActivity.getMenuResourceId();
+		return activityHelper.getMenuResourceId();
 	}
 	
 	/**
@@ -187,7 +187,7 @@ public abstract class AbstractListActivity<T> extends ListActivity implements So
 	 */
 	@Override
 	public void doOnCreateOptionsMenu(Menu menu) {
-		baseActivity.doOnCreateOptionsMenu(menu);
+		activityHelper.doOnCreateOptionsMenu(menu);
 	}
 	
 	/**
@@ -195,7 +195,7 @@ public abstract class AbstractListActivity<T> extends ListActivity implements So
 	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		return baseActivity.onOptionsItemSelected(item) ? true : super.onOptionsItemSelected(item);
+		return activityHelper.onOptionsItemSelected(item) ? true : super.onOptionsItemSelected(item);
 	}
 	
 	/**
@@ -221,7 +221,7 @@ public abstract class AbstractListActivity<T> extends ListActivity implements So
 	 */
 	@Override
 	public void showLoading() {
-		baseActivity.showLoading();
+		activityHelper.showLoading();
 	}
 	
 	/**
@@ -229,7 +229,7 @@ public abstract class AbstractListActivity<T> extends ListActivity implements So
 	 */
 	@Override
 	public void showLoading(LoadingDialogBuilder builder) {
-		baseActivity.showLoading(builder);
+		activityHelper.showLoading(builder);
 	}
 	
 	/**
@@ -237,7 +237,7 @@ public abstract class AbstractListActivity<T> extends ListActivity implements So
 	 */
 	@Override
 	public void showLoadingOnUIThread() {
-		baseActivity.showLoadingOnUIThread();
+		activityHelper.showLoadingOnUIThread();
 	}
 	
 	/**
@@ -245,7 +245,7 @@ public abstract class AbstractListActivity<T> extends ListActivity implements So
 	 */
 	@Override
 	public void showLoadingOnUIThread(LoadingDialogBuilder builder) {
-		baseActivity.showLoadingOnUIThread(builder);
+		activityHelper.showLoadingOnUIThread(builder);
 	}
 	
 	/**
@@ -253,7 +253,7 @@ public abstract class AbstractListActivity<T> extends ListActivity implements So
 	 */
 	@Override
 	public void dismissLoading() {
-		baseActivity.dismissLoading();
+		activityHelper.dismissLoading();
 	}
 	
 	/**
@@ -261,7 +261,7 @@ public abstract class AbstractListActivity<T> extends ListActivity implements So
 	 */
 	@Override
 	public void dismissLoadingOnUIThread() {
-		baseActivity.dismissLoadingOnUIThread();
+		activityHelper.dismissLoadingOnUIThread();
 	}
 	
 	/**
@@ -269,7 +269,7 @@ public abstract class AbstractListActivity<T> extends ListActivity implements So
 	 */
 	@Override
 	public void executeOnUIThread(Runnable runnable) {
-		baseActivity.executeOnUIThread(runnable);
+		activityHelper.executeOnUIThread(runnable);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -398,7 +398,7 @@ public abstract class AbstractListActivity<T> extends ListActivity implements So
 	 */
 	@Override
 	public View inflate(int resource) {
-		return baseActivity.inflate(resource);
+		return activityHelper.inflate(resource);
 	}
 	
 	/**
@@ -406,7 +406,7 @@ public abstract class AbstractListActivity<T> extends ListActivity implements So
 	 */
 	@Override
 	public <I> I getInstance(Class<I> clazz) {
-		return baseActivity.getInstance(clazz);
+		return activityHelper.getInstance(clazz);
 	}
 	
 	/**
@@ -414,7 +414,7 @@ public abstract class AbstractListActivity<T> extends ListActivity implements So
 	 */
 	@Override
 	public <E> E getExtra(String key) {
-		return baseActivity.<E>getExtra(key);
+		return activityHelper.<E>getExtra(key);
 	}
 	
 	/**
@@ -422,7 +422,7 @@ public abstract class AbstractListActivity<T> extends ListActivity implements So
 	 */
 	@Override
 	public <E> E getArgument(String key) {
-		return baseActivity.<E>getArgument(key);
+		return activityHelper.<E>getArgument(key);
 	}
 	
 	/**
@@ -430,7 +430,7 @@ public abstract class AbstractListActivity<T> extends ListActivity implements So
 	 */
 	@Override
 	public <E> E getArgument(String key, E defaultValue) {
-		return baseActivity.<E>getArgument(key, defaultValue);
+		return activityHelper.<E>getArgument(key, defaultValue);
 	}
 	
 	/**
@@ -439,18 +439,18 @@ public abstract class AbstractListActivity<T> extends ListActivity implements So
 	 */
 	@Override
 	public void onResumeUseCase(DefaultAbstractUseCase useCase, DefaultUseCaseListener listener) {
-		baseActivity.onResumeUseCase(useCase, listener);
+		activityHelper.onResumeUseCase(useCase, listener);
 	}
 	
 	/**
 	 * @see com.jdroid.android.fragment.FragmentIf#onResumeUseCase(com.jdroid.android.usecase.DefaultAbstractUseCase,
 	 *      com.jdroid.android.usecase.listener.DefaultUseCaseListener,
-	 *      com.jdroid.android.activity.BaseActivity.UseCaseTrigger)
+	 *      com.jdroid.android.activity.ActivityHelper.UseCaseTrigger)
 	 */
 	@Override
 	public void onResumeUseCase(DefaultAbstractUseCase useCase, DefaultUseCaseListener listener,
 			UseCaseTrigger useCaseTrigger) {
-		baseActivity.onResumeUseCase(useCase, listener, useCaseTrigger);
+		activityHelper.onResumeUseCase(useCase, listener, useCaseTrigger);
 	}
 	
 	/**
@@ -459,7 +459,7 @@ public abstract class AbstractListActivity<T> extends ListActivity implements So
 	 */
 	@Override
 	public void onPauseUseCase(DefaultAbstractUseCase useCase, DefaultUseCaseListener listener) {
-		baseActivity.onPauseUseCase(useCase, listener);
+		activityHelper.onPauseUseCase(useCase, listener);
 	}
 	
 	/**
@@ -467,7 +467,7 @@ public abstract class AbstractListActivity<T> extends ListActivity implements So
 	 */
 	@Override
 	public void executeUseCase(UseCase<?> useCase) {
-		baseActivity.executeUseCase(useCase);
+		activityHelper.executeUseCase(useCase);
 	}
 	
 	/**
@@ -475,7 +475,7 @@ public abstract class AbstractListActivity<T> extends ListActivity implements So
 	 */
 	@Override
 	public void executeUseCase(UseCase<?> useCase, Long delaySeconds) {
-		baseActivity.executeUseCase(useCase, delaySeconds);
+		activityHelper.executeUseCase(useCase, delaySeconds);
 	}
 	
 	/**
@@ -483,7 +483,7 @@ public abstract class AbstractListActivity<T> extends ListActivity implements So
 	 */
 	@Override
 	public void onStartUseCase() {
-		baseActivity.onStartUseCase();
+		activityHelper.onStartUseCase();
 	}
 	
 	/**
@@ -491,7 +491,7 @@ public abstract class AbstractListActivity<T> extends ListActivity implements So
 	 */
 	@Override
 	public void onUpdateUseCase() {
-		baseActivity.onUpdateUseCase();
+		activityHelper.onUpdateUseCase();
 	}
 	
 	/**
@@ -499,7 +499,7 @@ public abstract class AbstractListActivity<T> extends ListActivity implements So
 	 */
 	@Override
 	public void onFinishUseCase() {
-		baseActivity.onFinishUseCase();
+		activityHelper.onFinishUseCase();
 	}
 	
 	/**
@@ -507,7 +507,7 @@ public abstract class AbstractListActivity<T> extends ListActivity implements So
 	 */
 	@Override
 	public void onFinishFailedUseCase(RuntimeException runtimeException) {
-		baseActivity.onFinishFailedUseCase(runtimeException);
+		activityHelper.onFinishFailedUseCase(runtimeException);
 	}
 	
 	/**
@@ -515,7 +515,7 @@ public abstract class AbstractListActivity<T> extends ListActivity implements So
 	 */
 	@Override
 	public void onFinishCanceledUseCase() {
-		baseActivity.onFinishCanceledUseCase();
+		activityHelper.onFinishCanceledUseCase();
 	}
 	
 	/**
@@ -523,7 +523,7 @@ public abstract class AbstractListActivity<T> extends ListActivity implements So
 	 */
 	@Override
 	public Boolean goBackOnError(RuntimeException runtimeException) {
-		return baseActivity.goBackOnError(runtimeException);
+		return activityHelper.goBackOnError(runtimeException);
 	}
 	
 	/**
@@ -531,7 +531,7 @@ public abstract class AbstractListActivity<T> extends ListActivity implements So
 	 */
 	@Override
 	public Boolean requiresAuthentication() {
-		return baseActivity.requiresAuthentication();
+		return activityHelper.requiresAuthentication();
 	}
 	
 	/**
@@ -539,11 +539,11 @@ public abstract class AbstractListActivity<T> extends ListActivity implements So
 	 */
 	@Override
 	public User getUser() {
-		return baseActivity.getUser();
+		return activityHelper.getUser();
 	}
 	
 	public Boolean isAuthenticated() {
-		return baseActivity.isAuthenticated();
+		return activityHelper.isAuthenticated();
 	}
 	
 	/**
@@ -551,7 +551,7 @@ public abstract class AbstractListActivity<T> extends ListActivity implements So
 	 */
 	@Override
 	public AdSize getAdSize() {
-		return baseActivity.getAdSize();
+		return activityHelper.getAdSize();
 	}
 	
 	/**
@@ -559,7 +559,7 @@ public abstract class AbstractListActivity<T> extends ListActivity implements So
 	 */
 	@Override
 	public Boolean isLauncherActivity() {
-		return baseActivity.isLauncherActivity();
+		return activityHelper.isLauncherActivity();
 	}
 	
 	/**

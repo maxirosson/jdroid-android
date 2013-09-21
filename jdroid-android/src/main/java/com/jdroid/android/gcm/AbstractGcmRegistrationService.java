@@ -7,6 +7,7 @@ import android.content.Intent;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.jdroid.android.AbstractApplication;
 import com.jdroid.android.service.WorkerService;
+import com.jdroid.android.utils.GooglePlayUtils;
 import com.jdroid.android.utils.IntentRetryUtils;
 import com.jdroid.java.exception.ApplicationException;
 import com.jdroid.java.utils.LoggerUtils;
@@ -50,7 +51,8 @@ public abstract class AbstractGcmRegistrationService extends WorkerService {
 	
 	public static void runRegistrationService(Context context,
 			Class<? extends AbstractGcmRegistrationService> serviceClass) {
-		if (!GcmPreferences.isRegistered(context) || !GcmPreferences.isRegisteredOnServer(context)) {
+		if (GooglePlayUtils.isGooglePlayServicesAvailable(context)
+				&& (!GcmPreferences.isRegistered(context) || !GcmPreferences.isRegisteredOnServer(context))) {
 			WorkerService.runIntentInService(context, new Intent(), serviceClass);
 		}
 	}

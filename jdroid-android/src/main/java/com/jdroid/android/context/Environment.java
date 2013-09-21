@@ -8,5 +8,6 @@ public enum Environment {
 	DEV,
 	TEST,
 	QA,
+	UAT,
 	PROD;
 }

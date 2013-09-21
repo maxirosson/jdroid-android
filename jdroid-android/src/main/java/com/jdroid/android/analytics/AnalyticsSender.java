@@ -22,7 +22,21 @@ public class AnalyticsSender<T extends AnalyticsTracker> implements AnalyticsTra
 	}
 	
 	public AnalyticsSender(List<T> trackers) {
-		this.trackers = trackers;
+		for (T tracker : trackers) {
+			if (tracker.isEnabled()) {
+				this.trackers.add(tracker);
+			}
+		}
+	}
+	
+	/**
+	 * @see com.jdroid.android.analytics.AnalyticsTracker#init()
+	 */
+	@Override
+	public void init() {
+		for (T tracker : trackers) {
+			tracker.init();
+		}
 	}
 	
 	private abstract class TrackerRunnable implements Runnable {

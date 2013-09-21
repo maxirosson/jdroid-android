@@ -142,7 +142,9 @@ public class DatePickerDialogFragment extends AbstractDialogFragment implements 
 		if ((AndroidUtils.getApiLevel() >= Build.VERSION_CODES.JELLY_BEAN)
 				&& (AndroidUtils.getApiLevel() <= Build.VERSION_CODES.JELLY_BEAN_MR1)) {
 			String model = AndroidUtils.getDeviceModel();
-			if ((model != null) && (model.equals("Nexus 7") || model.contains("ST26i") || model.contains("ST26a"))) {
+			if ((model != null)
+					&& (model.equals("Nexus 7") || model.contains("ST26i") || model.contains("ST26a")
+							|| model.contains("Galaxy Nexus") || model.contains("Amazon Kindle Fire"))) {
 				return true;
 			}
 		}

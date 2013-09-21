@@ -9,6 +9,8 @@ import com.jdroid.java.exception.ConnectionException;
  */
 public interface AnalyticsTracker {
 	
+	public void init();
+	
 	public Boolean isEnabled();
 	
 	public void trackAppInstallation();
@@ -18,4 +20,5 @@ public interface AnalyticsTracker {
 	public void onActivityStop(Activity activity);
 	
 	public void trackConnectionException(ConnectionException connectionException);
+	
 }

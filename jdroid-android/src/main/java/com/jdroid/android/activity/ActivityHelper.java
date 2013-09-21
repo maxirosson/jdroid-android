@@ -47,9 +47,9 @@ import com.jdroid.java.utils.LoggerUtils;
  * 
  * @author Maxi Rosson
  */
-public class BaseActivity implements ActivityIf {
+public class ActivityHelper implements ActivityIf {
 	
-	private final static Logger LOGGER = LoggerUtils.getLogger(BaseActivity.class);
+	private final static Logger LOGGER = LoggerUtils.getLogger(ActivityHelper.class);
 	
 	private static final int LOCATION_UPDATE_TIMER_CODE = IdGenerator.getIntId();
 	
@@ -61,7 +61,7 @@ public class BaseActivity implements ActivityIf {
 	/**
 	 * @param activity
 	 */
-	public BaseActivity(Activity activity) {
+	public ActivityHelper(Activity activity) {
 		this.activity = activity;
 	}
 	
@@ -123,6 +123,7 @@ public class BaseActivity implements ActivityIf {
 		
 		AbstractApplication.get().initExceptionHandlers();
 		
+		// Action bar
 		ActionBar actionBar = getActivityIf().getActionBar();
 		if (actionBar != null) {
 			
@@ -155,11 +156,24 @@ public class BaseActivity implements ActivityIf {
 			activity.registerReceiver(clearTaskBroadcastReceiver, ClearTaskIntent.newIntentFilter());
 		}
 		
+		// Ads
 		AdLoader adLoader = createAdLoader();
 		if (adLoader != null) {
 			adLoader.loadAd(activity, (ViewGroup)(activity.findViewById(R.id.adViewContainer)),
 				getActivityIf().getAdSize());
 		}
+		
+		// Analytics
+		ExecutorUtils.execute(new Runnable() {
+			
+			@Override
+			public void run() {
+				AbstractApplication.get().saveInstallationSource();
+				if (AbstractApplication.get().hasAnalyticsSender()) {
+					AbstractApplication.get().getAnalyticsSender().trackAppInstallation();
+				}
+			}
+		});
 	}
 	
 	protected AdLoader createAdLoader() {
@@ -433,7 +447,7 @@ public class BaseActivity implements ActivityIf {
 	/**
 	 * @see com.jdroid.android.fragment.FragmentIf#onResumeUseCase(com.jdroid.android.usecase.DefaultAbstractUseCase,
 	 *      com.jdroid.android.usecase.listener.DefaultUseCaseListener,
-	 *      com.jdroid.android.activity.BaseActivity.UseCaseTrigger)
+	 *      com.jdroid.android.activity.ActivityHelper.UseCaseTrigger)
 	 */
 	@Override
 	public void onResumeUseCase(final DefaultAbstractUseCase useCase, final DefaultUseCaseListener listener,

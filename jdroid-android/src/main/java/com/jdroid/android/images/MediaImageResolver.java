@@ -23,7 +23,8 @@ public class MediaImageResolver implements ImageResolver {
 	@Override
 	public Boolean canResolve(Uri uri) {
 		return uri.toString().startsWith(MediaStore.Images.Media.EXTERNAL_CONTENT_URI.toString())
-				|| uri.toString().startsWith(MediaStore.Images.Media.INTERNAL_CONTENT_URI.toString());
+				|| uri.toString().startsWith(MediaStore.Images.Media.INTERNAL_CONTENT_URI.toString())
+				|| uri.toString().startsWith("content://com.google.android.gallery3d.provider/picasa");
 	}
 	
 	/**

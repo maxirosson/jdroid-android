@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 import com.jdroid.android.R;
-import com.jdroid.android.activity.BaseActivity.UseCaseTrigger;
+import com.jdroid.android.activity.ActivityHelper.UseCaseTrigger;
 import com.jdroid.android.adapter.BaseArrayAdapter;
 import com.jdroid.android.listener.OnEnterKeyListener;
 import com.jdroid.android.search.PagedResult;

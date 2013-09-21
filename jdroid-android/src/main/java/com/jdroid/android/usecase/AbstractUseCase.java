@@ -1,5 +1,6 @@
 package com.jdroid.android.usecase;
 
+import java.io.Serializable;
 import java.util.List;
 import org.slf4j.Logger;
 import com.jdroid.java.collections.Lists;
@@ -13,7 +14,7 @@ import com.jdroid.java.utils.LoggerUtils;
  * 
  * @author Maxi Rosson
  */
-public abstract class AbstractUseCase<T> implements UseCase<T> {
+public abstract class AbstractUseCase<T> implements UseCase<T>, Serializable {
 	
 	private final static Logger LOGGER = LoggerUtils.getLogger(AbstractUseCase.class);
 	

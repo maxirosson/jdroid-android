@@ -4,8 +4,8 @@
 	<LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="match_parent"
 		android:layout_above="@+id/adViewContainer">
 
-		<LinearLayout android:id="@+id/contextualFragmentContainer" android:layout_width="200dp"
-			android:layout_height="match_parent" android:orientation="horizontal" />
+		<LinearLayout android:id="@+id/fragmentContainer" android:layout_width="200dp" android:layout_height="match_parent"
+			android:orientation="horizontal" />
 
 		<LinearLayout android:id="@+id/detailsFragmentContainer" android:layout_width="match_parent"
 			android:layout_height="match_parent" android:orientation="horizontal" />

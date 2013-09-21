@@ -3,6 +3,7 @@ package com.jdroid.android.gcm;
 import java.util.List;
 import org.slf4j.Logger;
 import android.content.Intent;
+import com.jdroid.android.AbstractApplication;
 import com.jdroid.android.context.SecurityContext;
 import com.jdroid.java.collections.Lists;
 import com.jdroid.java.utils.LoggerUtils;
@@ -51,7 +52,8 @@ public abstract class DefaultGcmMessageResolver implements GcmMessageResolver {
 				return each;
 			}
 		}
-		LOGGER.warn("The GCM message key [" + messageKey + "] is unknown");
+		AbstractApplication.get().getExceptionHandler().logWarningException(
+			"The GCM message key [" + messageKey + "] is unknown");
 		return null;
 	}
 	

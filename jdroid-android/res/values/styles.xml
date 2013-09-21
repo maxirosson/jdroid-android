@@ -75,6 +75,12 @@
 		<item name="android:paddingRight">20dp</item>
 	</style>
 
+	<style name="mediumButton" parent="h1Text">
+		<item name="android:paddingLeft">8dp</item>
+		<item name="android:paddingRight">8dp</item>
+		<item name="android:minWidth">180dp</item>
+	</style>
+
 	<style name="largeButton">
 		<item name="android:layout_height">wrap_content</item>
 		<item name="android:layout_width">match_parent</item>

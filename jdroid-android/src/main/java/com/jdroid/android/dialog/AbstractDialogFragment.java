@@ -5,10 +5,10 @@ import android.support.v4.app.DialogFragment;
 import android.view.View;
 import com.google.ads.AdSize;
 import com.jdroid.android.AbstractApplication;
-import com.jdroid.android.activity.BaseActivity.UseCaseTrigger;
+import com.jdroid.android.activity.ActivityHelper.UseCaseTrigger;
 import com.jdroid.android.context.DefaultApplicationContext;
 import com.jdroid.android.domain.User;
-import com.jdroid.android.fragment.BaseFragment;
+import com.jdroid.android.fragment.FragmentHelper;
 import com.jdroid.android.fragment.FragmentIf;
 import com.jdroid.android.fragment.SafeExecuteWrapperRunnable;
 import com.jdroid.android.loading.LoadingDialogBuilder;
@@ -23,7 +23,7 @@ import com.jdroid.android.utils.AndroidUtils;
  */
 public class AbstractDialogFragment extends DialogFragment implements FragmentIf {
 	
-	private BaseFragment baseFragment;
+	private FragmentHelper fragmentHelper;
 	
 	protected FragmentIf getFragmentIf() {
 		return (FragmentIf)this.getActivity();
@@ -51,8 +51,8 @@ public class AbstractDialogFragment extends DialogFragment implements FragmentIf
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		baseFragment = AbstractApplication.get().createBaseFragment(this);
-		baseFragment.onCreate(savedInstanceState);
+		fragmentHelper = AbstractApplication.get().createFragmentHelper(this);
+		fragmentHelper.onCreate(savedInstanceState);
 		
 		// Google TV is not displaying the title of the dialog.
 		if (AndroidUtils.isGoogleTV()) {
@@ -66,7 +66,7 @@ public class AbstractDialogFragment extends DialogFragment implements FragmentIf
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		baseFragment.onViewCreated(view, savedInstanceState);
+		fragmentHelper.onViewCreated(view, savedInstanceState);
 	}
 	
 	/**
@@ -75,7 +75,7 @@ public class AbstractDialogFragment extends DialogFragment implements FragmentIf
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		baseFragment.onActivityCreated(savedInstanceState);
+		fragmentHelper.onActivityCreated(savedInstanceState);
 	}
 	
 	/**
@@ -125,7 +125,7 @@ public class AbstractDialogFragment extends DialogFragment implements FragmentIf
 	 */
 	@Override
 	public void onFinishFailedUseCase(RuntimeException runtimeException) {
-		baseFragment.onFinishFailedUseCase(runtimeException);
+		fragmentHelper.onFinishFailedUseCase(runtimeException);
 	}
 	
 	/**
@@ -232,7 +232,7 @@ public class AbstractDialogFragment extends DialogFragment implements FragmentIf
 	 */
 	@Override
 	public <E> E getArgument(String key) {
-		return baseFragment.<E>getArgument(key);
+		return fragmentHelper.<E>getArgument(key);
 	}
 	
 	/**
@@ -240,7 +240,7 @@ public class AbstractDialogFragment extends DialogFragment implements FragmentIf
 	 */
 	@Override
 	public <E> E getArgument(String key, E defaultValue) {
-		return baseFragment.<E>getArgument(key, defaultValue);
+		return fragmentHelper.<E>getArgument(key, defaultValue);
 	}
 	
 	/**
@@ -255,7 +255,7 @@ public class AbstractDialogFragment extends DialogFragment implements FragmentIf
 	/**
 	 * @see com.jdroid.android.fragment.FragmentIf#onResumeUseCase(com.jdroid.android.usecase.DefaultAbstractUseCase,
 	 *      com.jdroid.android.usecase.listener.DefaultUseCaseListener,
-	 *      com.jdroid.android.activity.BaseActivity.UseCaseTrigger)
+	 *      com.jdroid.android.activity.ActivityHelper.UseCaseTrigger)
 	 */
 	@Override
 	public void onResumeUseCase(DefaultAbstractUseCase useCase, DefaultUseCaseListener listener,

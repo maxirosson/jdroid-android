@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>GCM Push Sender</title>
+<script type="text/javascript">
+	function send() {
+
+		var url = "api/gcm/send?";
+
+		url += "registrationId="
+				+ document.getElementById("registrationId").value;
+		url += "&messageKey=" + document.getElementById("messageKey").value;
+
+		var params;
+		var key1 = document.getElementById("key1").value;
+		if (key1 != "") {
+			params += key1 + ":" + document.getElementById("value1").value;
+		}
+
+		var key2 = document.getElementById("key2").value
+		if (key2 != "") {
+			params += "," + key2 + ":"
+					+ document.getElementById("value2").value;
+		}
+
+		var key3 = document.getElementById("key3").value
+		if (key3 != "") {
+			params += "," + key3 + ":"
+					+ document.getElementById("value3").value;
+		}
+
+		var key4 = document.getElementById("key4").value
+		if (key4 != "") {
+			params += "," + key4 + ":"
+					+ document.getElementById("value4").value;
+		}
+
+		var key5 = document.getElementById("key5").value
+		if (key5 != "") {
+			params += "," + key5 + ":"
+					+ document.getElementById("value5").value;
+		}
+
+		if (params != null) {
+			url += "&params=[" + params + "]"
+		}
+
+		var i = document.createElement("img");
+		i.src = url;
+	}
+</script>
+</head>
+<body>
+	<h1>GCM Push Sender</h1>
+	Registration id
+	<input id="registrationId" type="text" />
+	<br /> Message key
+	<input id="messageKey" type="text" />
+	<br />
+	<br /> Key 1
+	<input id="key1" type="text" /> Value 1
+	<input id="value1" type="text" />
+	<br /> Key 2
+	<input id="key2" type="text" /> Value 2
+	<input id="value2" type="text" />
+	<br /> Key 3
+	<input id="key3" type="text" /> Value 3
+	<input id="value3" type="text" />
+	<br /> Key 4
+	<input id="key4" type="text" /> Value 4
+	<input id="value4" type="text" />
+	<br /> Key 5
+	<input id="key5" type="text" /> Value 5
+	<input id="value5" type="text" />
+	<br />
+	<br />
+	<input type="button" value="Send" onclick="javascript:send();" />
+
+</body>
+</html>

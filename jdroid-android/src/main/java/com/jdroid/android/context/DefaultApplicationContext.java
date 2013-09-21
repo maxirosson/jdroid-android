@@ -34,6 +34,7 @@ public class DefaultApplicationContext {
 	private Boolean crittercismEnabled;
 	private String crittercismAppId;
 	private Boolean crittercismPremium;
+	private String installationSource;
 	
 	public DefaultApplicationContext() {
 		PropertiesUtils.loadProperties(LOCAL_PROPERTIES_RESOURCE_NAME);
@@ -58,6 +59,7 @@ public class DefaultApplicationContext {
 		crittercismEnabled = PropertiesUtils.getBooleanProperty("crittercism.enabled", false);
 		crittercismAppId = PropertiesUtils.getStringProperty("crittercism.appId");
 		crittercismPremium = PropertiesUtils.getBooleanProperty("crittercism.premium", false);
+		installationSource = PropertiesUtils.getStringProperty("installation.source", "GooglePlay");
 	}
 	
 	protected Server createServer(String serverName) {
@@ -198,5 +200,9 @@ public class DefaultApplicationContext {
 	
 	public String getLocalIp() {
 		return localIp;
+	}
+	
+	public String getInstallationSource() {
+		return installationSource;
 	}
 }

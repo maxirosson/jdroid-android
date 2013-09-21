@@ -14,13 +14,13 @@ import com.jdroid.java.utils.LoggerUtils;
  * 
  * @author Maxi Rosson
  */
-public class BaseFragment {
+public class FragmentHelper {
 	
-	private final static Logger LOGGER = LoggerUtils.getLogger(BaseFragment.class);
+	private final static Logger LOGGER = LoggerUtils.getLogger(FragmentHelper.class);
 	
 	private Fragment fragment;
 	
-	public BaseFragment(Fragment fragment) {
+	public FragmentHelper(Fragment fragment) {
 		this.fragment = fragment;
 	}
 	

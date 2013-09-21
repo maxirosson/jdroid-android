@@ -12,21 +12,25 @@ import com.jdroid.android.AbstractApplication;
  */
 public class GoogleAnalyticsTracker extends DefaultAnalyticsTracker {
 	
-	public GoogleAnalyticsTracker() {
-		GoogleAnalytics googleAnalytics = GoogleAnalytics.getInstance(AbstractApplication.get());
-		
-		if (AbstractApplication.get().getAndroidApplicationContext().isGoogleAnalyticsDebugEnabled()) {
-			googleAnalytics.getLogger().setLogLevel(LogLevel.VERBOSE);
-		}
-		googleAnalytics.getTracker(AbstractApplication.get().getAndroidApplicationContext().getGoogleAnalyticsTrackingId());
-	}
-	
 	/**
 	 * @see com.jdroid.android.analytics.AnalyticsTracker#isEnabled()
 	 */
 	@Override
 	public Boolean isEnabled() {
 		return AbstractApplication.get().getAndroidApplicationContext().isGoogleAnalyticsEnabled();
+	}
+	
+	/**
+	 * @see com.jdroid.android.analytics.AnalyticsTracker#init()
+	 */
+	@Override
+	public void init() {
+		GoogleAnalytics googleAnalytics = GoogleAnalytics.getInstance(AbstractApplication.get());
+		
+		if (AbstractApplication.get().getAndroidApplicationContext().isGoogleAnalyticsDebugEnabled()) {
+			googleAnalytics.getLogger().setLogLevel(LogLevel.VERBOSE);
+		}
+		googleAnalytics.getTracker(AbstractApplication.get().getAndroidApplicationContext().getGoogleAnalyticsTrackingId());
 	}
 	
 	/**

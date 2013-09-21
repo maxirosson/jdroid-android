@@ -10,7 +10,8 @@ import com.jdroid.javaweb.push.gcm.GcmSender;
 public enum DeviceType {
 	ANDROID("android", GcmSender.get()),
 	IPHONE("iphone", null),
-	BLACKBERRY("blackberry", null);
+	BLACKBERRY("blackberry", null),
+	WINDOWS_PHONE("windowsPhone", null);
 	
 	private String userAgent;
 	private PushMessageSender pushMessageSender;

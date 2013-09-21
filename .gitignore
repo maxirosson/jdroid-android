@@ -23,7 +23,12 @@ jdroid-android-leftnavbar/gen/
 jdroid-android-leftnavbar/target/
 jdroid-android-leftnavbar/.settings/org.maven.ide.eclipse.prefs
 
-android-actionbarsherlock/bin/
-android-actionbarsherlock/gen/
-android-actionbarsherlock/target/
-android-actionbarsherlock/.settings/org.maven.ide.eclipse.prefs
+jdroid-sample-server/bin/
+jdroid-sample-server/target/
+jdroid-sample-server/test-output/
+jdroid-sample-server/work/
+jdroid-sample-server/.settings/org.maven.ide.eclipse.prefs
+jdroid-sample-server/src/main/resources/settings.local.properties
+jdroid-sample-server/src/main/resources/git.properties
+jdroid-sample-server/src/main/resources/log4j.xml
+jdroid-sample-server/src/main/webapp/.#webclasspath

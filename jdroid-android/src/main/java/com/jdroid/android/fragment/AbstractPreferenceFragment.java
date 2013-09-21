@@ -3,7 +3,7 @@ package com.jdroid.android.fragment;
 import android.preference.PreferenceFragment;
 import android.view.View;
 import com.google.ads.AdSize;
-import com.jdroid.android.activity.BaseActivity.UseCaseTrigger;
+import com.jdroid.android.activity.ActivityHelper.UseCaseTrigger;
 import com.jdroid.android.context.DefaultApplicationContext;
 import com.jdroid.android.domain.User;
 import com.jdroid.android.loading.LoadingDialogBuilder;
@@ -214,7 +214,7 @@ public abstract class AbstractPreferenceFragment extends PreferenceFragment impl
 	/**
 	 * @see com.jdroid.android.fragment.FragmentIf#onResumeUseCase(com.jdroid.android.usecase.DefaultAbstractUseCase,
 	 *      com.jdroid.android.usecase.listener.DefaultUseCaseListener,
-	 *      com.jdroid.android.activity.BaseActivity.UseCaseTrigger)
+	 *      com.jdroid.android.activity.ActivityHelper.UseCaseTrigger)
 	 */
 	@Override
 	public void onResumeUseCase(DefaultAbstractUseCase useCase, DefaultUseCaseListener listener,

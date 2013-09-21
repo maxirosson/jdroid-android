@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.View;
 import com.google.ads.AdSize;
 import com.jdroid.android.AbstractApplication;
-import com.jdroid.android.activity.BaseActivity.UseCaseTrigger;
+import com.jdroid.android.activity.ActivityHelper.UseCaseTrigger;
 import com.jdroid.android.context.DefaultApplicationContext;
 import com.jdroid.android.domain.User;
 import com.jdroid.android.loading.LoadingDialogBuilder;
@@ -21,7 +21,7 @@ import com.jdroid.android.usecase.listener.DefaultUseCaseListener;
  */
 public abstract class AbstractFragment extends Fragment implements FragmentIf {
 	
-	private BaseFragment baseFragment;
+	private FragmentHelper fragmentHelper;
 	
 	protected FragmentIf getFragmentIf() {
 		return (FragmentIf)this.getActivity();
@@ -40,7 +40,7 @@ public abstract class AbstractFragment extends Fragment implements FragmentIf {
 	 */
 	@Override
 	public Boolean shouldRetainInstance() {
-		return baseFragment.shouldRetainInstance();
+		return fragmentHelper.shouldRetainInstance();
 	}
 	
 	/**
@@ -49,8 +49,8 @@ public abstract class AbstractFragment extends Fragment implements FragmentIf {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		baseFragment = AbstractApplication.get().createBaseFragment(this);
-		baseFragment.onCreate(savedInstanceState);
+		fragmentHelper = AbstractApplication.get().createFragmentHelper(this);
+		fragmentHelper.onCreate(savedInstanceState);
 	}
 	
 	/**
@@ -59,7 +59,7 @@ public abstract class AbstractFragment extends Fragment implements FragmentIf {
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		baseFragment.onViewCreated(view, savedInstanceState);
+		fragmentHelper.onViewCreated(view, savedInstanceState);
 	}
 	
 	/**
@@ -68,7 +68,7 @@ public abstract class AbstractFragment extends Fragment implements FragmentIf {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		baseFragment.onActivityCreated(savedInstanceState);
+		fragmentHelper.onActivityCreated(savedInstanceState);
 	}
 	
 	/**
@@ -77,7 +77,7 @@ public abstract class AbstractFragment extends Fragment implements FragmentIf {
 	@Override
 	public void onStart() {
 		super.onStart();
-		baseFragment.onStart();
+		fragmentHelper.onStart();
 	}
 	
 	/**
@@ -86,7 +86,7 @@ public abstract class AbstractFragment extends Fragment implements FragmentIf {
 	@Override
 	public void onResume() {
 		super.onResume();
-		baseFragment.onResume();
+		fragmentHelper.onResume();
 	}
 	
 	/**
@@ -95,7 +95,7 @@ public abstract class AbstractFragment extends Fragment implements FragmentIf {
 	@Override
 	public void onPause() {
 		super.onPause();
-		baseFragment.onPause();
+		fragmentHelper.onPause();
 	}
 	
 	/**
@@ -104,7 +104,7 @@ public abstract class AbstractFragment extends Fragment implements FragmentIf {
 	@Override
 	public void onStop() {
 		super.onStop();
-		baseFragment.onStop();
+		fragmentHelper.onStop();
 	}
 	
 	/**
@@ -113,7 +113,7 @@ public abstract class AbstractFragment extends Fragment implements FragmentIf {
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
-		baseFragment.onDestroyView();
+		fragmentHelper.onDestroyView();
 	}
 	
 	/**
@@ -122,7 +122,7 @@ public abstract class AbstractFragment extends Fragment implements FragmentIf {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		baseFragment.onDestroy();
+		fragmentHelper.onDestroy();
 	}
 	
 	/**
@@ -172,7 +172,7 @@ public abstract class AbstractFragment extends Fragment implements FragmentIf {
 	 */
 	@Override
 	public void onFinishFailedUseCase(RuntimeException runtimeException) {
-		baseFragment.onFinishFailedUseCase(runtimeException);
+		fragmentHelper.onFinishFailedUseCase(runtimeException);
 	}
 	
 	/**
@@ -279,7 +279,7 @@ public abstract class AbstractFragment extends Fragment implements FragmentIf {
 	 */
 	@Override
 	public <E> E getArgument(String key) {
-		return baseFragment.<E>getArgument(key);
+		return fragmentHelper.<E>getArgument(key);
 	}
 	
 	/**
@@ -287,7 +287,7 @@ public abstract class AbstractFragment extends Fragment implements FragmentIf {
 	 */
 	@Override
 	public <E> E getArgument(String key, E defaultValue) {
-		return baseFragment.<E>getArgument(key, defaultValue);
+		return fragmentHelper.<E>getArgument(key, defaultValue);
 	}
 	
 	/**
@@ -338,7 +338,7 @@ public abstract class AbstractFragment extends Fragment implements FragmentIf {
 	/**
 	 * @see com.jdroid.android.fragment.FragmentIf#onResumeUseCase(com.jdroid.android.usecase.DefaultAbstractUseCase,
 	 *      com.jdroid.android.usecase.listener.DefaultUseCaseListener,
-	 *      com.jdroid.android.activity.BaseActivity.UseCaseTrigger)
+	 *      com.jdroid.android.activity.ActivityHelper.UseCaseTrigger)
 	 */
 	@Override
 	public void onResumeUseCase(DefaultAbstractUseCase useCase, DefaultUseCaseListener listener,

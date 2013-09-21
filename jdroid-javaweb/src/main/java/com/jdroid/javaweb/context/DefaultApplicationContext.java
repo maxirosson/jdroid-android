@@ -1,21 +1,11 @@
 package com.jdroid.javaweb.context;
 
 import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.BeansException;
-import org.springframework.context.ApplicationContextAware;
-import com.jdroid.javaweb.domain.Entity;
 
 /**
- * The {@link AbstractApplicationContext}
- * 
- * @param <T>
+ * The {@link DefaultApplicationContext}
  */
-public abstract class AbstractApplicationContext<T extends Entity> implements ApplicationContextAware {
-	
-	private static AbstractApplicationContext<?> INSTANCE;
-	
-	private SecurityContextHolder<T> securityContextHolder;
-	private org.springframework.context.ApplicationContext applicationContext;
+public class DefaultApplicationContext {
 	
 	private String appName;
 	private String appURL;
@@ -24,21 +14,6 @@ public abstract class AbstractApplicationContext<T extends Entity> implements Ap
 	private String googleServerApiKey;
 	private Boolean httpMockEnabled;
 	private Integer httpMockSleepDuration;
-	
-	public AbstractApplicationContext() {
-		INSTANCE = this;
-	}
-	
-	public static AbstractApplicationContext<?> get() {
-		return INSTANCE;
-	}
-	
-	/**
-	 * @return The {@link AbstractSecurityContext} instance
-	 */
-	public AbstractSecurityContext<T> getSecurityContext() {
-		return securityContextHolder.getContext();
-	}
 	
 	/**
 	 * @param applicationUrl the application URL
@@ -55,23 +30,6 @@ public abstract class AbstractApplicationContext<T extends Entity> implements Ap
 	
 	public String getAppName() {
 		return appName;
-	}
-	
-	/**
-	 * @param beanName The bean name
-	 * @return The spring bean with the bean name
-	 */
-	public Object getBean(String beanName) {
-		return applicationContext.getBean(beanName);
-	}
-	
-	/**
-	 * @see org.springframework.context.ApplicationContextAware#setApplicationContext(org.springframework.context.ApplicationContext)
-	 */
-	@Override
-	public void setApplicationContext(org.springframework.context.ApplicationContext applicationContext)
-			throws BeansException {
-		this.applicationContext = applicationContext;
 	}
 	
 	public void setAppName(String appName) {
@@ -131,12 +89,5 @@ public abstract class AbstractApplicationContext<T extends Entity> implements Ap
 	
 	public void setGoogleServerApiKey(String googleServerApiKey) {
 		this.googleServerApiKey = googleServerApiKey;
-	}
-	
-	/**
-	 * @param securityContextHolder The {@link SecurityContextHolder} to set
-	 */
-	public void setSecurityContextHolder(SecurityContextHolder<T> securityContextHolder) {
-		this.securityContextHolder = securityContextHolder;
 	}
 }

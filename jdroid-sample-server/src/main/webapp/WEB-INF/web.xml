@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+	<display-name>Jdroid Sample Server</display-name>
+	<description>Jdroid Sample Server</description>
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			classpath:spring/applicationcontext.xml,
+			classpath:spring/applicationcontext-repository.xml
+		</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>resteasy.providers</param-name>
+		<param-value>com.jdroid.javaweb.exception.ExceptionHandler</param-value>
+	</context-param>
+
+	<filter>
+		<filter-name>Log4j Filter</filter-name>
+		<filter-class>com.jdroid.javaweb.filter.Log4jFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>Log4j Filter</filter-name>
+		<url-pattern>/api/*</url-pattern>
+	</filter-mapping>
+
+	<listener>
+		<listener-class>com.jdroid.javaweb.log.ClasspathLog4jServletContextListener</listener-class>
+	</listener>
+
+	<listener>
+		<listener-class>org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap</listener-class>
+	</listener>
+
+	<!-- Any beans annotated with JAX-RS are automatically loaded (@Path...) -->
+	<listener>
+		<listener-class>org.jboss.resteasy.plugins.spring.SpringContextLoaderListener</listener-class>
+	</listener>
+
+	<listener>
+		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+	</listener>
+
+	<servlet>
+		<servlet-name>Resteasy</servlet-name>
+		<servlet-class>org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Resteasy</servlet-name>
+		<url-pattern>/api/*</url-pattern>
+	</servlet-mapping>
+
+	<session-config>
+		<session-timeout>
+			30<!-- minutes -->
+		</session-timeout>
+	</session-config>
+
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+
+
+</web-app>

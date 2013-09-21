@@ -45,7 +45,12 @@ public abstract class AndroidUseCaseListener implements DefaultUseCaseListener {
 	}
 	
 	public Boolean goBackOnError(RuntimeException runtimeException) {
-		return getActivityIf().goBackOnError(runtimeException);
+		ActivityIf activityIf = getActivityIf();
+		if (activityIf != null) {
+			return activityIf.goBackOnError(runtimeException);
+		} else {
+			return true;
+		}
 	}
 	
 	/**

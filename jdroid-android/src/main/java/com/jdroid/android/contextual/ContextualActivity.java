@@ -46,10 +46,7 @@ public abstract class ContextualActivity<T extends TabAction> extends AbstractFr
 			}
 			
 			FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-			
-			int contextualListFragmentId = AndroidUtils.isLargeScreenOrBigger() ? R.id.contextualFragmentContainer
-					: R.id.fragmentContainer;
-			fragmentTransaction.add(contextualListFragmentId,
+			fragmentTransaction.add(R.id.fragmentContainer,
 				newContextualListFragment(getContextualItems(), defaultContextualItem));
 			
 			if (AndroidUtils.isLargeScreenOrBigger()) {
@@ -86,6 +83,10 @@ public abstract class ContextualActivity<T extends TabAction> extends AbstractFr
 		}
 	}
 	
+	public Fragment getContextualFragment() {
+		return getSupportFragmentManager().findFragmentById(R.id.fragmentContainer);
+	}
+	
 	public Fragment getDetailsFragment() {
 		return getSupportFragmentManager().findFragmentById(R.id.detailsFragmentContainer);
 	}
@@ -114,7 +115,7 @@ public abstract class ContextualActivity<T extends TabAction> extends AbstractFr
 			
 			// Refresh the list (only on large or bigger)
 			FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-			fragmentTransaction.replace(R.id.contextualFragmentContainer,
+			fragmentTransaction.replace(R.id.fragmentContainer,
 				newContextualListFragment(getContextualItems(), contextualItem));
 			fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 			fragmentTransaction.commit();

@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import com.google.ads.AdSize;
-import com.jdroid.android.activity.BaseActivity.UseCaseTrigger;
+import com.jdroid.android.activity.ActivityHelper.UseCaseTrigger;
 import com.jdroid.android.context.DefaultApplicationContext;
 import com.jdroid.android.domain.User;
 import com.jdroid.android.loading.LoadingDialog;

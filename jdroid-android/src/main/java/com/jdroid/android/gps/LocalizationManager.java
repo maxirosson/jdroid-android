@@ -78,8 +78,10 @@ public class LocalizationManager implements LocationListener {
 			// get all enabled providers
 			List<String> enabledProviders = locationManager.getProviders(true);
 			
-			boolean gpsProviderEnabled = enabledProviders.contains(LocationManager.GPS_PROVIDER);
-			boolean networkProviderEnabled = enabledProviders.contains(LocationManager.NETWORK_PROVIDER);
+			boolean gpsProviderEnabled = enabledProviders != null ? enabledProviders.contains(LocationManager.GPS_PROVIDER)
+					: false;
+			boolean networkProviderEnabled = enabledProviders != null ? enabledProviders.contains(LocationManager.NETWORK_PROVIDER)
+					: false;
 			
 			if (gpsProviderEnabled || networkProviderEnabled) {
 				if (gpsProviderEnabled) {

@@ -3,17 +3,23 @@ package com.jdroid.android.images;
 import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 import com.jdroid.android.domain.FileContent;
 
 public class CustomImageView extends ImageView implements ImageHolder {
 	
+	private static final String INSTANCE_STATE_EXTRA = "instanceState";
+	private static final String IMAGE_URI_EXTRA = "imageUri";
+	
 	private int stubId;
 	private Integer maxWidth;
 	private Integer maxHeight;
 	private Uri imageUri;
 	private ImageLoadingListener imageLoadingListener;
+	private Boolean saveState = false;
 	
 	public CustomImageView(Context context) {
 		super(context);
@@ -25,6 +31,10 @@ public class CustomImageView extends ImageView implements ImageHolder {
 	
 	public CustomImageView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
+	}
+	
+	public void setSaveState(Boolean saveState) {
+		this.saveState = saveState;
 	}
 	
 	/**
@@ -69,6 +79,35 @@ public class CustomImageView extends ImageView implements ImageHolder {
 			if (imageLoadingListener != null) {
 				imageLoadingListener.onStubImageLoaded();
 			}
+		}
+	}
+	
+	/**
+	 * @see android.view.View#onSaveInstanceState()
+	 */
+	@Override
+	protected Parcelable onSaveInstanceState() {
+		if (saveState && (imageUri != null)) {
+			Bundle bundle = new Bundle();
+			bundle.putParcelable(INSTANCE_STATE_EXTRA, super.onSaveInstanceState());
+			bundle.putParcelable(IMAGE_URI_EXTRA, imageUri);
+			return bundle;
+		} else {
+			return super.onSaveInstanceState();
+		}
+	}
+	
+	@Override
+	public void onRestoreInstanceState(Parcelable state) {
+		if (state instanceof Bundle) {
+			Bundle bundle = (Bundle)state;
+			imageUri = bundle.getParcelable(IMAGE_URI_EXTRA);
+			if (imageUri != null) {
+				ImageLoader.get().displayImage(imageUri, this);
+			}
+			super.onRestoreInstanceState(bundle.getParcelable(INSTANCE_STATE_EXTRA));
+		} else {
+			super.onRestoreInstanceState(state);
 		}
 	}
 	

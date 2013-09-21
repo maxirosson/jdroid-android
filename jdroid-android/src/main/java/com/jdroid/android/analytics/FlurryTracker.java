@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.util.Log;
 import com.flurry.android.FlurryAgent;
 import com.jdroid.android.AbstractApplication;
-import com.jdroid.android.context.DefaultApplicationContext;
 import com.jdroid.android.utils.AndroidUtils;
 import com.jdroid.android.utils.SharedPreferencesUtils;
 import com.jdroid.java.collections.Maps;
@@ -29,12 +28,11 @@ public class FlurryTracker implements AnalyticsTracker {
 	}
 	
 	/**
-	 * @see com.jdroid.android.analytics.AnalyticsTracker#onActivityStart(android.app.Activity)
+	 * @see com.jdroid.android.analytics.AnalyticsTracker#init()
 	 */
 	@Override
-	public void onActivityStart(Activity activity) {
-		DefaultApplicationContext appContext = AbstractApplication.get().getAndroidApplicationContext();
-		if (appContext.isFlurryDebugEnabled()) {
+	public void init() {
+		if (AbstractApplication.get().getAndroidApplicationContext().isFlurryDebugEnabled()) {
 			FlurryAgent.setLogEnabled(true);
 			FlurryAgent.setLogLevel(Log.VERBOSE);
 		} else {
@@ -43,7 +41,14 @@ public class FlurryTracker implements AnalyticsTracker {
 		
 		FlurryAgent.setCaptureUncaughtExceptions(false);
 		FlurryAgent.setVersionName(AndroidUtils.getVersionName());
-		FlurryAgent.onStartSession(activity, appContext.getFlurryApiKey());
+	}
+	
+	/**
+	 * @see com.jdroid.android.analytics.AnalyticsTracker#onActivityStart(android.app.Activity)
+	 */
+	@Override
+	public void onActivityStart(Activity activity) {
+		FlurryAgent.onStartSession(activity, AbstractApplication.get().getAndroidApplicationContext().getFlurryApiKey());
 		FlurryAgent.setUserId(AbstractApplication.get().getInstallationId());
 	}
 	
@@ -62,8 +67,9 @@ public class FlurryTracker implements AnalyticsTracker {
 	public void trackAppInstallation() {
 		Boolean appLoadSent = SharedPreferencesUtils.loadPreferenceAsBoolean(APP_INSTALL_SENT, false);
 		if (!appLoadSent) {
+			String installationSource = SharedPreferencesUtils.loadPreference(AbstractApplication.INSTALLATION_SOURCE);
 			Map<String, String> params = Maps.newHashMap();
-			params.put("installationSource", "GooglePlay");
+			params.put("installationSource", installationSource);
 			Boolean installedOnSdCard = AndroidUtils.isInstalledOnSdCard();
 			params.put("installedOnSdCard", installedOnSdCard.toString());
 			params.put("availableInternalDataSize", getDataRange(AndroidUtils.getAvailableInternalDataSize()));

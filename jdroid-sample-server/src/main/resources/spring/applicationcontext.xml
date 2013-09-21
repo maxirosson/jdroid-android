@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+	http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+		<property name="locations">
+			<list>
+				<value>classpath:settings.properties</value>
+				<value>classpath:settings.local.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="applicationContext" class="com.jdroid.javaweb.context.DefaultApplicationContext">
+		<property name="appName" value="${app.name}" />
+		<property name="appVersion" value="${app.version}" />
+		<property name="googleServerApiKey" value="${google.server.api.key}" />
+		<property name="httpMockEnabled" value="${http.mock.enabled}" />
+		<property name="httpMockSleepDuration" value="${http.mock.sleep.duration}" />
+	</bean>
+
+	<bean id="application" class="com.jdroid.javaweb.context.DefaultApplication">
+		<property name="applicationContext" ref="applicationContext" />
+	</bean>
+
+	<context:annotation-config />
+	<context:component-scan base-package="com.jdroid.sample.server.controller" />
+	<context:component-scan base-package="com.jdroid.javaweb.push" />
+
+</beans>

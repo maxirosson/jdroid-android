@@ -56,4 +56,15 @@ public interface ExceptionHandler extends UncaughtExceptionHandler {
 	
 	public void logHandledException(Throwable throwable);
 	
+	/**
+	 * @param errorMessage
+	 * @param throwable
+	 */
+	public void logWarningException(String errorMessage, Throwable throwable);
+	
+	/**
+	 * @param errorMessage
+	 */
+	public void logWarningException(String errorMessage);
+	
 }

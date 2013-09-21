@@ -19,14 +19,14 @@ import android.support.v4.app.Fragment;
 import com.crittercism.app.Crittercism;
 import com.google.inject.AbstractModule;
 import com.google.inject.util.Modules;
-import com.jdroid.android.activity.BaseActivity;
+import com.jdroid.android.activity.ActivityHelper;
 import com.jdroid.android.analytics.AnalyticsSender;
 import com.jdroid.android.analytics.AnalyticsTracker;
 import com.jdroid.android.billing.BillingContext;
 import com.jdroid.android.context.DefaultApplicationContext;
 import com.jdroid.android.exception.DefaultExceptionHandler;
 import com.jdroid.android.exception.ExceptionHandler;
-import com.jdroid.android.fragment.BaseFragment;
+import com.jdroid.android.fragment.FragmentHelper;
 import com.jdroid.android.gcm.GcmMessageResolver;
 import com.jdroid.android.images.BitmapLruCache;
 import com.jdroid.android.utils.AndroidEncryptionUtils;
@@ -39,6 +39,7 @@ import com.jdroid.java.utils.ExecutorUtils;
 import com.jdroid.java.utils.FileUtils;
 import com.jdroid.java.utils.LoggerUtils;
 import com.jdroid.java.utils.ReflectionUtils;
+import com.jdroid.java.utils.StringUtils;
 
 /**
  * 
@@ -49,6 +50,7 @@ public abstract class AbstractApplication extends Application {
 	private final static Logger LOGGER = LoggerUtils.getLogger(AbstractApplication.class);
 	
 	private static final String INSTALLATION_ID_KEY = "installationId";
+	public static final String INSTALLATION_SOURCE = "installationSource";
 	
 	/** Maximum size (in MB) of the images cache */
 	private static final int IMAGES_CACHE_SIZE = 5;
@@ -94,6 +96,8 @@ public abstract class AbstractApplication extends Application {
 		}
 		initStrictMode();
 		
+		initAnalytics();
+		
 		// This is required to initialize the statics fields of the utils classes.
 		ToastUtils.init();
 		DateUtils.init();
@@ -106,9 +110,6 @@ public abstract class AbstractApplication extends Application {
 		initInAppBilling();
 		
 		initRoboGuice();
-		
-		// TODO This is not working on the analytics beta3
-		// initAnalytics();
 	}
 	
 	/**
@@ -121,6 +122,12 @@ public abstract class AbstractApplication extends Application {
 		
 		if (level >= TRIM_MEMORY_MODERATE) {
 			bitmapLruCache.evictAll();
+		}
+	}
+	
+	protected void initAnalytics() {
+		if (hasAnalyticsSender()) {
+			getAnalyticsSender().init();
 		}
 	}
 	
@@ -235,6 +242,15 @@ public abstract class AbstractApplication extends Application {
 		return DefaultExceptionHandler.class;
 	}
 	
+	public void saveInstallationSource() {
+		String installationSource = SharedPreferencesUtils.loadPreference(INSTALLATION_SOURCE);
+		if (StringUtils.isBlank(installationSource)) {
+			installationSource = applicationContext.getInstallationSource();
+			SharedPreferencesUtils.savePreference(INSTALLATION_SOURCE, installationSource);
+			LOGGER.debug("Saved installation source: " + installationSource);
+		}
+	}
+	
 	private void initRoboGuice() {
 		AbstractModule androidModule = createAndroidModule();
 		if (androidModule != null) {
@@ -242,15 +258,6 @@ public abstract class AbstractApplication extends Application {
 				Modules.override(RoboGuice.newDefaultRoboModule(this)).with(androidModule));
 		}
 	}
-	
-	// private void initAnalytics() {
-	// if (applicationContext.isAnalyticsEnabled()) {
-	// GoogleAnalytics googleAnalytics = GoogleAnalytics.getInstance(getApplicationContext());
-	// Tracker defaultTracker = googleAnalytics.getTracker(applicationContext.getAnalyticsTrackingId());
-	// googleAnalytics.setDefaultTracker(defaultTracker);
-	// // googleAnalytics.setDebug(true);
-	// }
-	// }
 	
 	/**
 	 * @return the bitmapLruCache
@@ -273,12 +280,12 @@ public abstract class AbstractApplication extends Application {
 		return applicationContext;
 	}
 	
-	public BaseActivity createBaseActivity(Activity activity) {
-		return new BaseActivity(activity);
+	public ActivityHelper createActivityHelper(Activity activity) {
+		return new ActivityHelper(activity);
 	}
 	
-	public BaseFragment createBaseFragment(Fragment fragment) {
-		return new BaseFragment(fragment);
+	public FragmentHelper createFragmentHelper(Fragment fragment) {
+		return new FragmentHelper(fragment);
 	}
 	
 	public Boolean isInAppBillingEnabled() {

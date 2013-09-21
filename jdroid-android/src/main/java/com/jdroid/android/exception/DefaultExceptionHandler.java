@@ -134,10 +134,18 @@ public class DefaultExceptionHandler implements ExceptionHandler {
 		GooglePlayUtils.showUpdateDialog();
 	}
 	
+	/**
+	 * @see com.jdroid.android.exception.ExceptionHandler#logWarningException(java.lang.String, java.lang.Throwable)
+	 */
+	@Override
 	public void logWarningException(String errorMessage, Throwable throwable) {
 		logHandledException(errorMessage, new WarningException(errorMessage, throwable));
 	}
 	
+	/**
+	 * @see com.jdroid.android.exception.ExceptionHandler#logWarningException(java.lang.String)
+	 */
+	@Override
 	public void logWarningException(String errorMessage) {
 		logHandledException(errorMessage, new WarningException(errorMessage));
 	}
