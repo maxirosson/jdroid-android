@@ -42,8 +42,7 @@ public class FacebookPreferencesUtils {
 		String email = SharedPreferencesUtils.loadPreference(PREFS_USER_EMAIL);
 		String facebookId = SharedPreferencesUtils.loadPreference(PREFS_FACEBOOK_USER_ID);
 		
-		if (StringUtils.isNotBlank(firstName) && StringUtils.isNotBlank(lastName) && StringUtils.isNotBlank(email)
-				&& StringUtils.isNotBlank(facebookId)) {
+		if (StringUtils.isNotBlank(firstName) && StringUtils.isNotBlank(lastName) && StringUtils.isNotBlank(facebookId)) {
 			facebookUserInfo = new FacebookUser();
 			facebookUserInfo.setFirstName(firstName);
 			facebookUserInfo.setEmail(email);

@@ -187,6 +187,18 @@ public class AbstractHibernateRepository<T extends Entity> extends HibernateDaoS
 	}
 	
 	/**
+	 * Finds a list of objects that matches with the {@link DetachedCriteria} and with a specific rows maximum limit.
+	 * 
+	 * @param detachedCriteria The {@link DetachedCriteria} with the filter specification
+	 * @param maxRows The max quantity of objects to find.
+	 * @return An objects list
+	 */
+	@SuppressWarnings("unchecked")
+	protected List<T> find(DetachedCriteria detachedCriteria, Integer maxRows) {
+		return this.getHibernateTemplate().findByCriteria(detachedCriteria, 0, maxRows);
+	}
+	
+	/**
 	 * Find a list of objects with pagination.
 	 * 
 	 * @param pager
