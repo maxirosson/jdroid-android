@@ -25,11 +25,11 @@ public abstract class MySQLHibernateRepository<T extends Entity> extends Abstrac
 	}
 	
 	/**
-	 * @see com.jdroid.java.repository.RandomRepository#getRandom(java.lang.Integer)
+	 * @see com.jdroid.java.repository.RandomRepository#getRandomList(java.lang.Integer)
 	 */
 	@Override
-	public List<T> getRandom(Integer maxResults) {
-		return findRandom(createDetachedCriteria(), maxResults);
+	public List<T> getRandomList(Integer maxResults) {
+		return findRandomList(createDetachedCriteria(), maxResults);
 	}
 	
 	/**
@@ -39,9 +39,28 @@ public abstract class MySQLHibernateRepository<T extends Entity> extends Abstrac
 	 * @param maxResults Maximum quantity of results to find.
 	 * @return The random list.
 	 */
-	protected List<T> findRandom(DetachedCriteria criteria, Integer maxResults) {
+	protected List<T> findRandomList(DetachedCriteria criteria, Integer maxResults) {
 		criteria.add(getRandomRestriction());
 		return find(criteria, maxResults);
+	}
+	
+	/**
+	 * @see com.jdroid.java.repository.RandomRepository#getRandom()
+	 */
+	@Override
+	public T getRandom() {
+		return getRandom(createDetachedCriteria());
+	}
+	
+	/**
+	 * Find a random result that fulfill the given criteria.
+	 * 
+	 * @param criteria The {@link DetachedCriteria} to fulfill.
+	 * @return The random result.
+	 */
+	protected T getRandom(DetachedCriteria criteria) {
+		criteria.add(getRandomRestriction());
+		return findUnique(criteria);
 	}
 	
 	/**

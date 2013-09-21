@@ -18,5 +18,12 @@ public interface RandomRepository<T extends Identifiable> extends Repository<T> 
 	 * @param maxResults Maximum quantity of objects to get.
 	 * @return The random list.
 	 */
-	public List<T> getRandom(Integer maxResults);
+	public List<T> getRandomList(Integer maxResults);
+	
+	/**
+	 * Gets a random object from the repository.
+	 * 
+	 * @return The random object.
+	 */
+	public T getRandom();
 }
