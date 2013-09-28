@@ -64,10 +64,10 @@ public abstract class AbstractUseCase<T> implements UseCase<T>, Serializable {
 					notifyFinishedCanceledUseCase(listener);
 				}
 			} else {
+				markAsSuccessful();
 				for (T listener : listeners) {
 					notifyFinishedUseCase(listener);
 				}
-				markAsSuccessful();
 			}
 		} catch (RuntimeException e) {
 			markAsFailed(e);

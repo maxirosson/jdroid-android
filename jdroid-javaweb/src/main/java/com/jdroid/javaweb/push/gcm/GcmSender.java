@@ -4,8 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
 import com.google.android.gcm.server.Constants;
 import com.google.android.gcm.server.Message;
 import com.google.android.gcm.server.MulticastResult;
@@ -13,6 +12,7 @@ import com.google.android.gcm.server.Result;
 import com.google.android.gcm.server.Sender;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import com.jdroid.java.utils.LoggerUtils;
 import com.jdroid.java.utils.StringUtils;
 import com.jdroid.javaweb.context.DefaultApplication;
 import com.jdroid.javaweb.push.Device;
@@ -22,7 +22,7 @@ import com.jdroid.javaweb.push.PushResponse;
 
 public class GcmSender implements PushMessageSender {
 	
-	private static final Log LOG = LogFactory.getLog(GcmSender.class);
+	private static final Logger LOGGER = LoggerUtils.getLogger(GcmSender.class);
 	
 	private final static PushMessageSender INSTANCE = new GcmSender();
 	
@@ -73,29 +73,28 @@ public class GcmSender implements PushMessageSender {
 				Result result = multicastResult.getResults().get(i);
 				Device device = devices.get(i);
 				if (result.getMessageId() != null) {
-					LOG.info("Succesfully sent GCM message to device " + device);
+					LOGGER.info("Succesfully sent GCM message to device " + device);
 					String canonicalRegId = result.getCanonicalRegistrationId();
 					if (canonicalRegId != null) {
 						// same device has more than on registration id: update it
 						device.updateRegistrationId(canonicalRegId);
 						pushResponse.addDeviceToUpdate(device);
-						LOG.info("Updated registration id of device " + device);
+						LOGGER.info("Updated registration id of device " + device);
 					}
 				} else {
 					String error = result.getErrorCodeName();
 					if (error.equals(Constants.ERROR_NOT_REGISTERED)) {
 						// Application has been removed from device - unregister it
 						pushResponse.addDeviceToRemove(device);
-						LOG.info("Unregistered device " + device);
+						LOGGER.info("Unregistered device " + device);
 					} else {
-						LOG.info("Error [" + error + "] when sending message to device " + device);
+						LOGGER.info("Error [" + error + "] when sending message to device " + device);
 					}
 				}
 			}
 			
 		} catch (IOException e) {
-			// The message could not be sent.
-			LOG.warn(e);
+			LOGGER.warn("The GCM message could not be sent", e);
 		}
 		return pushResponse;
 	}

@@ -1,7 +1,7 @@
 package com.jdroid.javaweb.context;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import com.jdroid.java.utils.LoggerUtils;
 import com.jdroid.javaweb.domain.Entity;
 import com.jdroid.javaweb.exception.InvalidAuthenticationException;
 
@@ -12,7 +12,7 @@ import com.jdroid.javaweb.exception.InvalidAuthenticationException;
  */
 public abstract class AbstractSecurityContext<T extends Entity> {
 	
-	private static final Log LOG = LogFactory.getLog(AbstractSecurityContext.class);
+	private static final Logger LOGGER = LoggerUtils.getLogger(AbstractSecurityContext.class);
 	
 	private T user;
 	
@@ -31,13 +31,13 @@ public abstract class AbstractSecurityContext<T extends Entity> {
 	 */
 	public T authenticateUser(String email, String password) throws InvalidAuthenticationException {
 		user = verifyPassword(email, password);
-		LOG.info("User [id: " + user.getId() + ", email: " + email + "] authenticated.");
+		LOGGER.info("User [id: " + user.getId() + ", email: " + email + "] authenticated.");
 		return user;
 	}
 	
 	public T authenticateUser(String userToken) throws InvalidAuthenticationException {
 		user = verifyToken(userToken);
-		LOG.info("User [id: " + user.getId() + ", userToken: " + userToken + "] authenticated.");
+		LOGGER.info("User [id: " + user.getId() + ", userToken: " + userToken + "] authenticated.");
 		return user;
 	}
 	

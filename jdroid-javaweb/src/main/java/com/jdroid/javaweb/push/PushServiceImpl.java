@@ -3,14 +3,14 @@ package com.jdroid.javaweb.push;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.jdroid.java.utils.ExecutorUtils;
+import com.jdroid.java.utils.LoggerUtils;
 
 /**
  * 
@@ -21,7 +21,7 @@ import com.jdroid.java.utils.ExecutorUtils;
 @Service
 public class PushServiceImpl implements PushService {
 	
-	private static final Log LOG = LogFactory.getLog(PushServiceImpl.class);
+	private static final Logger LOGGER = LoggerUtils.getLogger(PushServiceImpl.class);
 	
 	@Autowired
 	private DeviceRepository deviceRepository;
@@ -36,11 +36,11 @@ public class PushServiceImpl implements PushService {
 		Device device = deviceRepository.find(installationId, deviceType);
 		if (device != null) {
 			device.updateRegistrationId(registrationId);
-			LOG.info("Updated " + device);
+			LOGGER.info("Updated " + device);
 		} else {
 			device = new Device(installationId, registrationId, deviceType);
 			deviceRepository.add(device);
-			LOG.info("Enabled " + device);
+			LOGGER.info("Enabled " + device);
 		}
 	}
 	
@@ -53,7 +53,7 @@ public class PushServiceImpl implements PushService {
 		Device device = deviceRepository.find(installationId, deviceType);
 		if (device != null) {
 			device.setDisabled(true);
-			LOG.info("Disabled " + device);
+			LOGGER.info("Disabled " + device);
 		}
 	}
 	

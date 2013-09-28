@@ -87,7 +87,7 @@ public abstract class AbstractApplication extends Application {
 	public void onCreate() {
 		super.onCreate();
 		
-		LoggerUtils.setRelease(isDebuggable());
+		LoggerUtils.setMute(!isDebuggable());
 		LOGGER = LoggerUtils.getLogger(AbstractApplication.class);
 		
 		loadInstallationId();
@@ -355,7 +355,7 @@ public abstract class AbstractApplication extends Application {
 	
 	private boolean isDebuggable() {
 		int flags = this.getApplicationInfo().flags;
-		return (flags & ApplicationInfo.FLAG_DEBUGGABLE) == 0;
+		return (flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
 	}
 	
 	public GcmMessageResolver getGcmResolver() {
