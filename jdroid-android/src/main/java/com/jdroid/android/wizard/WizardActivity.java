@@ -48,7 +48,7 @@ public abstract class WizardActivity extends AbstractFragmentActivity {
 		});
 		
 		leftButton = findView(R.id.leftButton);
-		leftButton.setText(R.string.previous);
+		leftButton.setText(getLeftStringResId());
 		leftButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -75,6 +75,18 @@ public abstract class WizardActivity extends AbstractFragmentActivity {
 	
 	public abstract List<? extends WizardStep> getWizardSteps();
 	
+	protected int getLeftStringResId() {
+		return R.string.previous;
+	}
+	
+	protected int getRightStringResId() {
+		return R.string.next;
+	}
+	
+	protected int getFinishStringResId() {
+		return R.string.finish;
+	}
+	
 	public WizardStep getCurrentWizardStep() {
 		return getWizardSteps().get(pager.getCurrentItem());
 	}
@@ -82,13 +94,13 @@ public abstract class WizardActivity extends AbstractFragmentActivity {
 	private void updateBottomBar() {
 		int position = pager.getCurrentItem();
 		if (isOnFinishStep()) {
-			rightButton.setText(R.string.finish);
+			rightButton.setText(getFinishStringResId());
 			if (AndroidUtils.getApiLevel() >= Build.VERSION_CODES.JELLY_BEAN) {
 				rightButton.setBackgroundResource(R.drawable.finish_background);
 				rightButton.setTextAppearance(this, R.style.finishWizardText);
 			}
 		} else {
-			rightButton.setText(R.string.next);
+			rightButton.setText(getRightStringResId());
 			if (AndroidUtils.getApiLevel() >= Build.VERSION_CODES.JELLY_BEAN) {
 				rightButton.setBackgroundResource(R.drawable.selectable_item_background);
 				TypedValue v = new TypedValue();

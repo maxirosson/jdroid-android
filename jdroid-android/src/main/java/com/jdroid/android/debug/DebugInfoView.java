@@ -37,6 +37,10 @@ public class DebugInfoView extends LinearLayout {
 		TextView screenSize = (TextView)findViewById(R.id.screenSize);
 		screenSize.setText(context.getString(R.string.screenSize, AndroidUtils.getScreenSize()));
 		
+		TextView smallestScreenWidthDp = (TextView)findViewById(R.id.smallestScreenWidthDp);
+		smallestScreenWidthDp.setText(context.getString(R.string.smallestScreenWidthDp,
+			AndroidUtils.getSmallestScreenWidthDp()));
+		
 		TextView screenDensity = (TextView)findViewById(R.id.screenDensity);
 		screenDensity.setText(context.getString(R.string.screenDensity, AndroidUtils.getScreenDensity()));
 		

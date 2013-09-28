@@ -7,6 +7,9 @@
 		<ignore path="src/main/java/com/facebook/model/GraphObject.java" />
 		<ignore path="src/main/java/com/facebook/widget/GraphObjectAdapter.java" />
 	</issue>
+	<issue id="DisableBaselineAlignment">
+		<ignore path="res/layout/com_facebook_placepickerfragment_list_row.xml" />
+	</issue>
 	<issue id="FieldGetter" severity="warning">
 		<ignore path="src/main/java/com/facebook/android/Facebook.java" />
 	</issue>
@@ -55,8 +58,11 @@
 	<issue id="Overdraw">
 		<ignore path="res/layout/com_facebook_friendpickerfragment.xml" />
 		<ignore path="res/layout/com_facebook_friendpickerfragment.xml" />
+		<ignore path="res/layout/com_facebook_friendpickerfragment.xml" />
 		<ignore path="res/layout/com_facebook_placepickerfragment.xml" />
 		<ignore path="res/layout/com_facebook_placepickerfragment.xml" />
+		<ignore path="res/layout/com_facebook_placepickerfragment.xml" />
+		<ignore path="res/layout/com_facebook_search_bar_layout.xml" />
 	</issue>
 	<issue id="Registered">
 		<ignore path="src/main/java/com/jdroid/android/exception/ExceptionReportActivity.java" />
@@ -68,8 +74,12 @@
 	<issue id="SetJavaScriptEnabled">
 		<ignore path="src/main/java/com/facebook/android/FbDialog.java" />
 	</issue>
+	<issue id="SpUsage">
+		<ignore path="res/layout/com_facebook_search_bar_layout.xml" />
+	</issue>
 	<issue id="TextFields">
 		<ignore path="res/layout/com_facebook_picker_search_box.xml" />
+		<ignore path="res/layout/com_facebook_search_bar_layout.xml" />
 	</issue>
 	<issue id="TypographyEllipsis">
 		<ignore path="res/values/fb_strings.xml" />
@@ -84,7 +94,9 @@
 		<ignore path="res/drawable/common_signin_btn_icon_light.xml" />
 		<ignore path="res/drawable/common_signin_btn_text_dark.xml" />
 		<ignore path="res/drawable/common_signin_btn_text_light.xml" />
+		<ignore path="res/menu/example_menu.xml" />
 		<ignore path="res/values/analytics.xml" />
+		<ignore path="res/values/fb_strings.xml" />
 		<ignore path="res/values/gps_colors.xml" />
 		<ignore path="res/values/gps_strings.xml" />
 	</issue>

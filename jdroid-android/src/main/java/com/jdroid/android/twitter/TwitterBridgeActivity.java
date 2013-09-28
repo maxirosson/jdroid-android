@@ -6,6 +6,7 @@ import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import com.jdroid.java.utils.LoggerUtils;
  * TwitterBridgeActivity Activity
  * 
  */
+@SuppressLint("Registered")
 public class TwitterBridgeActivity extends AbstractActivity {
 	
 	private final static Logger LOGGER = LoggerUtils.getLogger(TwitterBridgeActivity.class);

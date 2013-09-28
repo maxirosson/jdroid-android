@@ -1,4 +1,4 @@
-package com.jdroid.android.search;
+package com.jdroid.java.search;
 
 import java.util.Collection;
 import java.util.List;
@@ -12,19 +12,23 @@ import com.jdroid.java.collections.Lists;
  */
 public class PagedResult<T> {
 	
-	private boolean lastPage;
+	private Boolean lastPage;
 	private List<T> results;
 	
-	public PagedResult(boolean lastPage, List<T> results) {
-		this.lastPage = lastPage;
+	public PagedResult(List<T> results, Boolean lastPage) {
 		this.results = results;
+		this.lastPage = lastPage;
 	}
 	
 	/**
 	 * @param lastPage Whether the paginates list contains the last page or not.
 	 */
-	public PagedResult(boolean lastPage) {
-		this(lastPage, Lists.<T>newArrayList());
+	public PagedResult(Boolean lastPage) {
+		this(Lists.<T>newArrayList(), lastPage);
+	}
+	
+	public PagedResult(List<T> results) {
+		this(results, true);
 	}
 	
 	public PagedResult() {

@@ -6,23 +6,19 @@
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry exported="true" kind="src" path="/jdroid-java"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/android/compatibility/android-support-v4/r18/android-support-v4-r18.jar"/>
-	<classpathentry exported="true" kind="var" path="M2_REPO/android/google-play-services/r10/google-play-services-r10.jar"/>
+	<classpathentry exported="true" kind="var" path="M2_REPO/android/google-play-services/r12/google-play-services-r12.jar"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/android/ads/google-admob-ads-sdk/6.4.1/google-admob-ads-sdk-6.4.1.jar"/>
-	<classpathentry exported="true" kind="var" path="M2_REPO/javax/inject/javax.inject/1/javax.inject-1.jar" sourcepath="M2_REPO/javax/inject/javax.inject/1/javax.inject-1-sources.jar"/>
-	<classpathentry exported="true" kind="var" path="M2_REPO/aopalliance/aopalliance/1.0/aopalliance-1.0.jar" sourcepath="M2_REPO/aopalliance/aopalliance/1.0/aopalliance-1.0-sources.jar"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/org/apache/james/apache-mime4j/0.6/apache-mime4j-0.6.jar" sourcepath="M2_REPO/org/apache/james/apache-mime4j/0.6/apache-mime4j-0.6-sources.jar"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/commons-lang/commons-lang/2.6/commons-lang-2.6.jar" sourcepath="M2_REPO/commons-lang/commons-lang/2.6/commons-lang-2.6-sources.jar"/>
-	<classpathentry exported="true" kind="var" path="M2_REPO/com/google/inject/guice/3.0/guice-3.0-no_aop.jar"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/org/apache/httpcomponents/httpmime/4.0.1/httpmime-4.0.1.jar" sourcepath="M2_REPO/org/apache/httpcomponents/httpmime/4.0.1/httpmime-4.0.1-sources.jar"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/android/commonsware/mergeadapter/0.3.0/mergeadapter-0.3.0.jar"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/net/sf/opencsv/opencsv/2.3/opencsv-2.3.jar" sourcepath="M2_REPO/net/sf/opencsv/opencsv/2.3/opencsv-2.3-sources.jar"/>
-	<classpathentry exported="true" kind="var" path="M2_REPO/org/roboguice/roboguice/2.0/roboguice-2.0.jar" sourcepath="/M2_REPO/org/roboguice/roboguice/2.0/roboguice-2.0-sources.jar"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/android/commonsware/sackofviewsadapter/0.3.1/sackofviewsadapter-0.3.1.jar"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/org/slf4j/slf4j-android/1.6.1-RC1/slf4j-android-1.6.1-RC1.jar" sourcepath="M2_REPO/org/slf4j/slf4j-android/1.6.1-RC1/slf4j-android-1.6.1-RC1-sources.jar"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/android/twitter/twitter4j-core-android/2.2.6/twitter4j-core-android-2.2.6.jar"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/android/analytics/google-analytics-sdk/3.0.0/google-analytics-sdk-3.0.0.jar"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/android/analytics/flurry-analytics-sdk/3.2.0/flurry-analytics-sdk-3.2.0.jar"/>
-	<classpathentry exported="true" kind="var" path="M2_REPO/android/crittercism/crittercism-sdk/3.0.11/crittercism-sdk-3.0.11.jar"/>
+	<classpathentry exported="true" kind="var" path="M2_REPO/android/crittercism/crittercism-sdk/4.0.2/crittercism-sdk-4.0.2.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/pivotallabs/robolectric/1.2/robolectric-1.2-jar-with-dependencies.jar"/>
 	<classpathentry kind="var" path="M2_REPO/junit/junit/4.8.2/junit-4.8.2.jar"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>

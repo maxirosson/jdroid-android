@@ -2,7 +2,6 @@ package com.jdroid.android.share;
 
 import java.util.Collections;
 import java.util.List;
-import roboguice.inject.InjectExtra;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
@@ -23,22 +22,11 @@ public abstract class ShareActivity extends AbstractListActivity<ShareLaunchable
 	public static final String LINK_IMAGE_URL_EXTRA = "linkImage";
 	public static final String CAPTION_EXTRA = "caption";
 	
-	@InjectExtra(SUBJECT_EXTRA)
 	private String shareSubject;
-	
-	@InjectExtra(MESSAGE_EXTRA)
 	private String shareMessage;
-	
-	@InjectExtra(LINK_EXTRA)
 	private String link;
-	
-	@InjectExtra(LINK_NAME_EXTRA)
 	private String linkName;
-	
-	@InjectExtra(LINK_IMAGE_URL_EXTRA)
 	private String linkImageURL;
-	
-	@InjectExtra(CAPTION_EXTRA)
 	private String linkCaption;
 	
 	/**
@@ -47,6 +35,13 @@ public abstract class ShareActivity extends AbstractListActivity<ShareLaunchable
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		shareSubject = getExtra(SUBJECT_EXTRA);
+		shareMessage = getExtra(MESSAGE_EXTRA);
+		link = getExtra(LINK_EXTRA);
+		linkName = getExtra(LINK_NAME_EXTRA);
+		linkImageURL = getExtra(LINK_IMAGE_URL_EXTRA);
+		linkCaption = getExtra(CAPTION_EXTRA);
 		
 		// Get the list of activities that can handle the share intent.
 		PackageManager packageManager = getPackageManager();

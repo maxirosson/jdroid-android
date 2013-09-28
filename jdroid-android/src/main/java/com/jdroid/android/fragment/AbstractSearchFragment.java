@@ -13,10 +13,10 @@ import com.jdroid.android.R;
 import com.jdroid.android.activity.ActivityHelper.UseCaseTrigger;
 import com.jdroid.android.adapter.BaseArrayAdapter;
 import com.jdroid.android.listener.OnEnterKeyListener;
-import com.jdroid.android.search.PagedResult;
 import com.jdroid.android.search.SearchResult;
 import com.jdroid.android.usecase.SearchUseCase;
 import com.jdroid.android.utils.ToastUtils;
+import com.jdroid.java.search.PagedResult;
 import com.jdroid.java.utils.StringUtils;
 
 /**

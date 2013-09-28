@@ -15,19 +15,20 @@ public class LoggerUtils {
 	private static final Logger MUTE_LOGGER = new MuteLogger();
 	
 	public static Logger getLogger(Object name) {
-		if (release) {
-			return MUTE_LOGGER;
-		} else {
-			return LoggerFactory.getLogger(name.getClass());
-		}
+		return LoggerUtils.getLogger(name.getClass());
 	}
 	
 	public static Logger getLogger(Class<?> clazz) {
 		if (release) {
 			return MUTE_LOGGER;
 		} else {
-			return LoggerFactory.getLogger(clazz.getSimpleName());
+			return LoggerFactory.getLogger(getLmitedName(clazz.getSimpleName()));
 		}
+	}
+	
+	private static String getLmitedName(String name) {
+		// Logcat support 23 characters as maximum
+		return name.substring(0, Math.min(name.length(), 23));
 	}
 	
 	public static void setRelease(boolean release) {

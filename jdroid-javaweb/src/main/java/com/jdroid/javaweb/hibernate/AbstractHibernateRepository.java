@@ -18,8 +18,8 @@ import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import com.google.common.base.Function;
 import com.jdroid.java.repository.Repository;
+import com.jdroid.java.search.PagedResult;
 import com.jdroid.javaweb.domain.Entity;
-import com.jdroid.javaweb.search.PagedResult;
 import com.jdroid.javaweb.search.Pager;
 import com.jdroid.javaweb.search.Sorting;
 

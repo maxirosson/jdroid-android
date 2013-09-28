@@ -1,6 +1,6 @@
 package com.jdroid.android.service;
 
-import roboguice.service.RoboIntentService;
+import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
 import com.jdroid.android.AbstractApplication;
@@ -10,7 +10,7 @@ import com.jdroid.android.utils.WakeLockManager;
  * 
  * @author Maxi Rosson
  */
-public abstract class WorkerService extends RoboIntentService {
+public abstract class WorkerService extends IntentService {
 	
 	private static final String ENABLE_PARTIAL_WAKE_LOCK = "enablePartialWakeLock";
 	

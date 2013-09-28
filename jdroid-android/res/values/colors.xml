@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-	<color name="searchBarStartColor">#636263</color>
-	<color name="searchBarEndColor">#8C8C8C</color>
-
 	<color name="sectionTitleLeft">#357EC7</color>
 	<color name="sectionTitleRight">#33B5E5</color>
 

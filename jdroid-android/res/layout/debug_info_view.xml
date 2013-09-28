@@ -11,6 +11,7 @@
 			android:text="@string/analyticsEnabled" />
 		<TextView android:id="@+id/screenDensity" android:layout_width="wrap_content" android:layout_height="wrap_content" />
 		<TextView android:id="@+id/screenSize" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+		<TextView android:id="@+id/smallestScreenWidthDp" android:layout_width="wrap_content" android:layout_height="wrap_content" />
 		<TextView android:id="@+id/commitId" android:layout_width="wrap_content" android:layout_height="wrap_content"
 			android:text="@string/commitId" />
 		<TextView android:id="@+id/commitTime" android:layout_width="wrap_content" android:layout_height="wrap_content"

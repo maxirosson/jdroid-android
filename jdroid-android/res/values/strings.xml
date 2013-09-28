@@ -75,9 +75,6 @@
 	<string name="barcodeScanner">Barcode Scanner</string>
 	<string name="voiceSearch">Voice Search</string>
 
-	<!-- Google Plus -->
-	<string name="signingToGooglePlus">Signing in to Google&#8230;</string>
-
 	<!-- Twitter -->
 	<string name="twitterConnect">Connecting with Twitter…</string>
 	<string name="twitterNoAuth">Twitter was no authorized</string>

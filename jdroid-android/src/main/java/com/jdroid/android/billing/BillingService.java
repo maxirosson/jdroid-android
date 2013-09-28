@@ -1,11 +1,10 @@
 package com.jdroid.android.billing;
 
 import org.slf4j.Logger;
-import roboguice.service.RoboService;
 import android.annotation.SuppressLint;
+import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
-import com.google.inject.Inject;
 import com.jdroid.android.utils.AndroidUtils;
 import com.jdroid.java.utils.LoggerUtils;
 
@@ -17,7 +16,7 @@ import com.jdroid.java.utils.LoggerUtils;
  * The {@link BillingReceiver} class starts this service to process commands that it receives from the Google Play app.
  */
 @SuppressLint("Registered")
-public class BillingService extends RoboService {
+public class BillingService extends Service {
 	
 	private final static Logger LOGGER = LoggerUtils.getLogger(BillingService.class);
 	
@@ -33,7 +32,6 @@ public class BillingService extends RoboService {
 	public static final String INAPP_REQUEST_ID = "request_id";
 	public static final String INAPP_RESPONSE_CODE = "response_code";
 	
-	@Inject
 	private BillingManager billingManager;
 	
 	/**

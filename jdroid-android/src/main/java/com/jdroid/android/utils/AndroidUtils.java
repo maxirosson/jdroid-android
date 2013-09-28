@@ -225,6 +225,48 @@ public class AndroidUtils {
 		return screenSize;
 	}
 	
+	public static Integer getSmallestScreenWidthDp() {
+		if (AndroidUtils.getApiLevel() >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+			Configuration config = AbstractApplication.get().getResources().getConfiguration();
+			return config.smallestScreenWidthDp;
+		} else {
+			return null;
+		}
+	}
+	
+	public static Boolean is10InchesOrBigger() {
+		Integer smallestScreenWidthDp = AndroidUtils.getSmallestScreenWidthDp();
+		if (smallestScreenWidthDp != null) {
+			return smallestScreenWidthDp >= 720;
+		}
+		return null;
+	}
+	
+	public static Boolean isBetween7And10Inches() {
+		Integer smallestScreenWidthDp = AndroidUtils.getSmallestScreenWidthDp();
+		if (smallestScreenWidthDp != null) {
+			return (smallestScreenWidthDp >= 600) && (smallestScreenWidthDp < 720);
+		}
+		return null;
+	}
+	
+	public static String getDeviceType() {
+		Integer smallestScreenWidthDp = AndroidUtils.getSmallestScreenWidthDp();
+		if (smallestScreenWidthDp != null) {
+			if (AndroidUtils.is10InchesOrBigger()) {
+				return "10\" tablet";
+			} else if (AndroidUtils.isBetween7And10Inches()) {
+				return "7\" tablet";
+			} else {
+				return "phone";
+			}
+		} else if (AndroidUtils.isSmallScreen() || AndroidUtils.isNormalScreen()) {
+			return "phone";
+		} else {
+			return "unknown";
+		}
+	}
+	
 	public static Boolean isLdpiDensity() {
 		DisplayMetrics metrics = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(metrics);

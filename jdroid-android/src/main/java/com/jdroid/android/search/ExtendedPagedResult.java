@@ -3,6 +3,7 @@ package com.jdroid.android.search;
 import java.util.Collection;
 import java.util.List;
 import com.jdroid.java.collections.Lists;
+import com.jdroid.java.search.PagedResult;
 
 /**
  * 

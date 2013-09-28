@@ -2,7 +2,6 @@ package com.jdroid.android.context;
 
 import com.jdroid.android.AbstractApplication;
 import com.jdroid.android.domain.User;
-import com.jdroid.android.repository.UserRepository;
 
 /**
  * 
@@ -12,7 +11,6 @@ public class SecurityContext {
 	
 	private static final SecurityContext INSTANCE = new SecurityContext();
 	
-	private UserRepository userRepository;
 	private User user;
 	
 	/**
@@ -23,17 +21,16 @@ public class SecurityContext {
 	}
 	
 	private SecurityContext() {
-		userRepository = AbstractApplication.getInstance(UserRepository.class);
-		user = userRepository.getUser();
+		user = AbstractApplication.get().getUserRepository().getUser();
 	}
 	
 	public void attach(User user) {
 		this.user = user;
-		userRepository.saveUser(user);
+		AbstractApplication.get().getUserRepository().saveUser(user);
 	}
 	
 	public void detachUser() {
-		userRepository.removeUser();
+		AbstractApplication.get().getUserRepository().removeUser();
 		user = null;
 	}
 	

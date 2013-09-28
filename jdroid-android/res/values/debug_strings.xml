@@ -16,6 +16,7 @@
 	<string name="environmentName">Environment Name: %1$s</string>
 	<string name="analyticsEnabled">Analytics Enabled: %1$s</string>
 	<string name="screenSize">Screen Size: %1$s</string>
+	<string name="smallestScreenWidthDp">Smallest Screen Width: %1$sdp</string>
 	<string name="screenDensity">Screen Density: %1$s</string>
 	<string name="commitId">Commit Id: %1$s</string>
 	<string name="commitTime">Commit Time: %1$s</string>

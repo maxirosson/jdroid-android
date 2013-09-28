@@ -3,9 +3,7 @@ package com.jdroid.android;
 import java.io.File;
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.UUID;
-import org.json.JSONObject;
 import org.slf4j.Logger;
-import roboguice.RoboGuice;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -17,8 +15,7 @@ import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import com.crittercism.app.Crittercism;
-import com.google.inject.AbstractModule;
-import com.google.inject.util.Modules;
+import com.crittercism.app.CrittercismConfig;
 import com.jdroid.android.activity.ActivityHelper;
 import com.jdroid.android.analytics.AnalyticsSender;
 import com.jdroid.android.analytics.AnalyticsTracker;
@@ -29,6 +26,7 @@ import com.jdroid.android.exception.ExceptionHandler;
 import com.jdroid.android.fragment.FragmentHelper;
 import com.jdroid.android.gcm.GcmMessageResolver;
 import com.jdroid.android.images.BitmapLruCache;
+import com.jdroid.android.repository.UserRepository;
 import com.jdroid.android.utils.AndroidEncryptionUtils;
 import com.jdroid.android.utils.SharedPreferencesUtils;
 import com.jdroid.android.utils.ToastUtils;
@@ -47,7 +45,11 @@ import com.jdroid.java.utils.StringUtils;
  */
 public abstract class AbstractApplication extends Application {
 	
-	private final static Logger LOGGER = LoggerUtils.getLogger(AbstractApplication.class);
+	/**
+	 * The LOGGER variable is initialized in the "OnCreate" method, after that "LoggerUtils" has been properly
+	 * configured by the superclass.
+	 */
+	private static Logger LOGGER;
 	
 	private static final String INSTALLATION_ID_KEY = "installationId";
 	public static final String INSTALLATION_SOURCE = "installationSource";
@@ -86,6 +88,7 @@ public abstract class AbstractApplication extends Application {
 		super.onCreate();
 		
 		LoggerUtils.setRelease(isDebuggable());
+		LOGGER = LoggerUtils.getLogger(AbstractApplication.class);
 		
 		loadInstallationId();
 		
@@ -108,8 +111,6 @@ public abstract class AbstractApplication extends Application {
 		initBitmapLruCache();
 		
 		initInAppBilling();
-		
-		initRoboGuice();
 	}
 	
 	/**
@@ -205,10 +206,11 @@ public abstract class AbstractApplication extends Application {
 		if (applicationContext.isCrittercismEnabled()) {
 			try {
 				// send logcat data for devices with API Level 16 and higher
-				JSONObject crittercismConfig = new JSONObject();
-				crittercismConfig.put("shouldCollectLogcat", true);
+				CrittercismConfig crittercismConfig = new CrittercismConfig();
+				crittercismConfig.setLogcatReportingEnabled(true);
 				
-				Crittercism.init(getApplicationContext(), applicationContext.getCrittercismAppId(), crittercismConfig);
+				Crittercism.initialize(getApplicationContext(), applicationContext.getCrittercismAppId(),
+					crittercismConfig);
 				
 				if (installationId != null) {
 					Crittercism.setUsername(installationId);
@@ -251,14 +253,6 @@ public abstract class AbstractApplication extends Application {
 		}
 	}
 	
-	private void initRoboGuice() {
-		AbstractModule androidModule = createAndroidModule();
-		if (androidModule != null) {
-			RoboGuice.setBaseApplicationInjector(this, RoboGuice.DEFAULT_STAGE,
-				Modules.override(RoboGuice.newDefaultRoboModule(this)).with(androidModule));
-		}
-	}
-	
 	/**
 	 * @return the bitmapLruCache
 	 */
@@ -267,10 +261,6 @@ public abstract class AbstractApplication extends Application {
 	}
 	
 	public abstract Class<? extends Activity> getHomeActivityClass();
-	
-	protected AbstractModule createAndroidModule() {
-		return null;
-	}
 	
 	protected DefaultApplicationContext createApplicationContext() {
 		return new DefaultApplicationContext();
@@ -331,10 +321,6 @@ public abstract class AbstractApplication extends Application {
 		this.inBackground = inBackground;
 	}
 	
-	public static <T> T getInstance(Class<T> type) {
-		return RoboGuice.getInjector(AbstractApplication.get()).getInstance(type);
-	}
-	
 	public Boolean isLoadingCancelable() {
 		return false;
 	}
@@ -373,6 +359,10 @@ public abstract class AbstractApplication extends Application {
 	}
 	
 	public GcmMessageResolver getGcmResolver() {
+		return null;
+	}
+	
+	public UserRepository getUserRepository() {
 		return null;
 	}
 }

@@ -1,7 +1,6 @@
 package com.jdroid.android.billing;
 
 import org.slf4j.Logger;
-import com.jdroid.android.AbstractApplication;
 import com.jdroid.java.utils.LoggerUtils;
 import com.jdroid.java.utils.PropertiesUtils;
 
@@ -35,7 +34,7 @@ public class BillingContext implements BillingListener {
 	}
 	
 	public void initialize() {
-		billingManager = AbstractApplication.getInstance(BillingManager.class);
+		billingManager = new BillingManagerImpl();
 		billingManager.register(this);
 		
 		// Check if billing is supported.

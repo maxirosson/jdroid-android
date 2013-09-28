@@ -1,6 +1,7 @@
 package com.jdroid.android.video;
 
 import java.io.File;
+import android.annotation.SuppressLint;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.media.MediaPlayer.OnPreparedListener;
@@ -27,6 +28,7 @@ import com.jdroid.android.activity.AbstractActivity;
  * </table>
  * 
  */
+@SuppressLint("Registered")
 public class VideoActivity extends AbstractActivity {
 	
 	private VideoView video;

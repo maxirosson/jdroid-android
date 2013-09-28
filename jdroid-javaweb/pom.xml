@@ -13,9 +13,9 @@
 	</parent>
 
 	<properties>
-		<resteasy.version>2.3.4.Final</resteasy.version>
-		<hibernate.version>3.5.6-Final</hibernate.version>
-		<spring.version>3.0.6.RELEASE</spring.version>
+		<resteasy.version>3.0.4.Final</resteasy.version>
+		<hibernate.version>3.6.10.Final</hibernate.version>
+		<spring.version>3.2.4.RELEASE</spring.version>
 	</properties>
 
 	<build>
@@ -120,16 +120,6 @@
 			<artifactId>hibernate-core</artifactId>
 			<version>${hibernate.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-annotations</artifactId>
-			<version>${hibernate.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>javassist</groupId>
-			<artifactId>javassist</artifactId>
-			<version>3.5.0.GA</version>
-		</dependency>
 
 		<!-- Rest Easy -->
 		<dependency>
@@ -142,6 +132,11 @@
 			<artifactId>resteasy-spring</artifactId>
 			<version>${resteasy.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-multipart-provider</artifactId>
+			<version>${resteasy.version}</version>
+		</dependency>
 
 		<!-- Facebook -->
 		<dependency>
@@ -151,11 +146,6 @@
 		</dependency>
 
 		<!-- Apache Commons -->
-		<dependency>
-			<groupId>commons-lang</groupId>
-			<artifactId>commons-lang</artifactId>
-			<version>2.6</version>
-		</dependency>
 		<dependency>
 			<groupId>commons-collections</groupId>
 			<artifactId>commons-collections</artifactId>

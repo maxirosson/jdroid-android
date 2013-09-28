@@ -38,7 +38,7 @@ public class GooglePlusOneButtonHelper implements ConnectionCallbacks, OnConnect
 	
 	public void onResume() {
 		
-		plusOneButton.initialize(plusClient, url, new OnPlusOneClickListener() {
+		plusOneButton.initialize(url, new OnPlusOneClickListener() {
 			
 			@Override
 			public void onPlusOneClick(Intent intent) {

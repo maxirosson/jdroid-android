@@ -22,6 +22,7 @@ public abstract class StringUtils {
 	public final static String SPACE = " ";
 	public final static String DASH = "-";
 	public final static String SLASH = "/";
+	public final static String NEW_LINE = "\n";
 	
 	private final static String PLACEHOLDER_PATTERN = "\\$\\{(.*?)\\}";
 	private final static String ALPHANUMERIC_PATTERN = "([^\\w\\s])*";

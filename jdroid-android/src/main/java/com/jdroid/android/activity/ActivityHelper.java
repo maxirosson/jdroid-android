@@ -42,6 +42,7 @@ import com.jdroid.android.utils.AndroidUtils;
 import com.jdroid.java.utils.ExecutorUtils;
 import com.jdroid.java.utils.IdGenerator;
 import com.jdroid.java.utils.LoggerUtils;
+import com.jdroid.java.utils.ReflectionUtils;
 
 /**
  * 
@@ -422,7 +423,7 @@ public class ActivityHelper implements ActivityIf {
 	 */
 	@Override
 	public <I> I getInstance(Class<I> clazz) {
-		return AbstractApplication.getInstance(clazz);
+		return ReflectionUtils.newInstance(clazz);
 	}
 	
 	/**
