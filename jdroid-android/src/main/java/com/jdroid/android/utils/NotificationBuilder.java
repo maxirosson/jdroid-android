@@ -1,6 +1,5 @@
 package com.jdroid.android.utils;
 
-import org.apache.commons.lang.StringUtils;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -13,6 +12,7 @@ import android.widget.RemoteViews;
 import com.jdroid.android.AbstractApplication;
 import com.jdroid.android.R;
 import com.jdroid.android.images.RemoteImageResolver;
+import com.jdroid.java.utils.StringUtils;
 
 /**
  * 

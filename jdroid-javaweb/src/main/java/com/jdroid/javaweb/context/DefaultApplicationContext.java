@@ -1,6 +1,6 @@
 package com.jdroid.javaweb.context;
 
-import org.apache.commons.lang.StringUtils;
+import com.jdroid.java.utils.StringUtils;
 
 /**
  * The {@link DefaultApplicationContext}

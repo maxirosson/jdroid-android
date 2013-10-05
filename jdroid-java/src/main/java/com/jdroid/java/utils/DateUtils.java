@@ -28,6 +28,18 @@ public abstract class DateUtils {
 	/** Seconds in a week */
 	public static final int WEEK = DAY * 7;
 	
+	/** Number of milliseconds in a standard second. */
+	public static final long MILLIS_PER_SECOND = 1000;
+	
+	/** Number of milliseconds in a standard minute. */
+	public static final long MILLIS_PER_MINUTE = 60 * MILLIS_PER_SECOND;
+	
+	/** Number of milliseconds in a standard hour. */
+	public static final long MILLIS_PER_HOUR = 60 * MILLIS_PER_MINUTE;
+	
+	/** Number of milliseconds in a standard day. */
+	public static final long MILLIS_PER_DAY = 24 * MILLIS_PER_HOUR;
+	
 	/**
 	 * Date format like yyyy-MM-ddTHH:mm:ss Z
 	 */
@@ -346,6 +358,13 @@ public abstract class DateUtils {
 		return calendar.getTime();
 	}
 	
+	public static Date addMonths(Date date, int days) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.add(Calendar.MONTH, days);
+		return calendar.getTime();
+	}
+	
 	public static Date addYears(Date date, int years) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
@@ -472,11 +491,8 @@ public abstract class DateUtils {
 	
 	private static Calendar todayCalendar() {
 		Calendar calendar = Calendar.getInstance();
-		return DateUtils.resetTime(calendar);
-	}
-	
-	private static Calendar resetTime(Calendar calendar) {
-		return org.apache.commons.lang.time.DateUtils.truncate(calendar, Calendar.DATE);
+		DateUtils.truncate(calendar);
+		return calendar;
 	}
 	
 	/**
@@ -484,7 +500,7 @@ public abstract class DateUtils {
 	 */
 	public static Date tomorrow() {
 		Calendar calendar = DateUtils.todayCalendar();
-		return org.apache.commons.lang.time.DateUtils.addDays(calendar.getTime(), 1);
+		return DateUtils.addDays(calendar.getTime(), 1);
 	}
 	
 	public static Date today() {
@@ -497,7 +513,7 @@ public abstract class DateUtils {
 	 */
 	public static Date yesterday() {
 		Calendar calendar = DateUtils.todayCalendar();
-		return org.apache.commons.lang.time.DateUtils.addDays(calendar.getTime(), -1);
+		return DateUtils.addDays(calendar.getTime(), -1);
 	}
 	
 	/**
@@ -505,7 +521,7 @@ public abstract class DateUtils {
 	 * @return a date that is <code>months</code> in the future/past. Use negative values for past dates.
 	 */
 	public static Date monthsAway(int months) {
-		return org.apache.commons.lang.time.DateUtils.addMonths(DateUtils.todayCalendar().getTime(), months);
+		return DateUtils.addMonths(DateUtils.todayCalendar().getTime(), months);
 	}
 	
 	/**
@@ -530,7 +546,8 @@ public abstract class DateUtils {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
 		calendar.set(Calendar.DATE, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
-		return DateUtils.resetTime(calendar).getTime();
+		DateUtils.truncate(calendar);
+		return calendar.getTime();
 	}
 	
 	public static String formatSecondsAndMilli(long duration) {

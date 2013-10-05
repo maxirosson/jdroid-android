@@ -1,6 +1,5 @@
 package com.jdroid.android.social.facebook;
 
-import org.apache.commons.lang.StringUtils;
 import android.content.Context;
 import android.content.SharedPreferences.Editor;
 import com.facebook.Session;
@@ -8,6 +7,7 @@ import com.facebook.Session.Builder;
 import com.facebook.SessionState;
 import com.jdroid.android.utils.AndroidEncryptionUtils;
 import com.jdroid.android.utils.SharedPreferencesUtils;
+import com.jdroid.java.utils.StringUtils;
 
 public class FacebookPreferencesUtils {
 	

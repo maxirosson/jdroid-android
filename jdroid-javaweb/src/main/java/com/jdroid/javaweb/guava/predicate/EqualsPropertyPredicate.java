@@ -1,10 +1,8 @@
 package com.jdroid.javaweb.guava.predicate;
 
 import java.io.Serializable;
-
-import org.apache.commons.lang.ObjectUtils;
-
 import com.google.common.base.Predicate;
+import com.jdroid.java.utils.ObjectUtils;
 import com.jdroid.javaweb.guava.function.PropertyFunction;
 
 /**

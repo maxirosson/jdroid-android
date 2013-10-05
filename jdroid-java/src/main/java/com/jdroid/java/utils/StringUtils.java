@@ -3,6 +3,7 @@ package com.jdroid.java.utils;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,7 +23,11 @@ public abstract class StringUtils {
 	public final static String SPACE = " ";
 	public final static String DASH = "-";
 	public final static String SLASH = "/";
+	public final static String DOT = ".";
 	public final static String NEW_LINE = "\n";
+	public final static String UNDERSCORE = "_";
+	public final static String BANG = "!";
+	public final static String PIPE = "|";
 	
 	private final static String PLACEHOLDER_PATTERN = "\\$\\{(.*?)\\}";
 	private final static String ALPHANUMERIC_PATTERN = "([^\\w\\s])*";
@@ -115,6 +120,100 @@ public abstract class StringUtils {
 			return text.toUpperCase();
 		}
 		return text.substring(0, 1).toUpperCase() + text.substring(1).toLowerCase();
+	}
+	
+	/**
+	 * <p>
+	 * Capitalizes all the whitespace separated words in a String. Only the first letter of each word is changed. To
+	 * convert the rest of each word to lowercase at the same time, use {@link #capitalizeFully(String)}.
+	 * </p>
+	 * 
+	 * <p>
+	 * Whitespace is defined by {@link Character#isWhitespace(char)}. A <code>null</code> input String returns
+	 * <code>null</code>. Capitalization uses the unicode title case, normally equivalent to upper case.
+	 * </p>
+	 * 
+	 * <pre>
+	 * WordUtils.capitalize(null)        = null
+	 * WordUtils.capitalize("")          = ""
+	 * WordUtils.capitalize("i am FINE") = "I Am FINE"
+	 * </pre>
+	 * 
+	 * @param str the String to capitalize, may be null
+	 * @return capitalized String, <code>null</code> if null String input
+	 */
+	public static String capitalizeWords(String str) {
+		return capitalizeWords(str, null);
+	}
+	
+	/**
+	 * <p>
+	 * Capitalizes all the delimiter separated words in a String. Only the first letter of each word is changed.
+	 * </p>
+	 * 
+	 * <p>
+	 * The delimiters represent a set of characters understood to separate words. The first string character and the
+	 * first non-delimiter character after a delimiter will be capitalized.
+	 * </p>
+	 * 
+	 * <p>
+	 * A <code>null</code> input String returns <code>null</code>. Capitalization uses the unicode title case, normally
+	 * equivalent to upper case.
+	 * </p>
+	 * 
+	 * <pre>
+	 * WordUtils.capitalize(null, *)            = null
+	 * WordUtils.capitalize("", *)              = ""
+	 * WordUtils.capitalize(*, new char[0])     = *
+	 * WordUtils.capitalize("i am fine", null)  = "I Am Fine"
+	 * WordUtils.capitalize("i aM.fine", {'.'}) = "I aM.Fine"
+	 * </pre>
+	 * 
+	 * @param str the String to capitalize, may be null
+	 * @param delimiters set of characters to determine capitalization, null means whitespace
+	 * @return capitalized String, <code>null</code> if null String input
+	 */
+	public static String capitalizeWords(String str, char[] delimiters) {
+		int delimLen = (delimiters == null ? -1 : delimiters.length);
+		if ((str == null) || (str.length() == 0) || (delimLen == 0)) {
+			return str;
+		}
+		int strLen = str.length();
+		StringBuffer buffer = new StringBuffer(strLen);
+		boolean capitalizeNext = true;
+		for (int i = 0; i < strLen; i++) {
+			char ch = str.charAt(i);
+			
+			if (isDelimiter(ch, delimiters)) {
+				buffer.append(ch);
+				capitalizeNext = true;
+			} else if (capitalizeNext) {
+				buffer.append(Character.toTitleCase(ch));
+				capitalizeNext = false;
+			} else {
+				buffer.append(ch);
+			}
+		}
+		return buffer.toString();
+	}
+	
+	/**
+	 * Is the character a delimiter.
+	 * 
+	 * @param ch the character to check
+	 * @param delimiters the delimiters
+	 * @return true if it is a delimiter
+	 */
+	private static boolean isDelimiter(char ch, char[] delimiters) {
+		if (delimiters == null) {
+			return Character.isWhitespace(ch);
+		}
+		for (int i = 0, isize = delimiters.length; i < isize; i++) {
+			if (ch == delimiters[i]) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	/**
@@ -240,7 +339,7 @@ public abstract class StringUtils {
 	public static Collection<String> splitToCollection(String text, String separator) {
 		Collection<String> values = Lists.newArrayList();
 		if (isNotEmpty(text)) {
-			values = Lists.newArrayList(org.apache.commons.lang.StringUtils.split(text, separator));
+			values = Lists.newArrayList(text.split(separator));
 		}
 		return values;
 	}
@@ -298,5 +397,29 @@ public abstract class StringUtils {
 		}
 		
 		return wordWrapText;
+	}
+	
+	public static String replaceValues(final String template, final Map<String, String> values) {
+		
+		final StringBuffer sb = new StringBuffer();
+		final Pattern pattern = Pattern.compile("\\$\\{(.*?)\\}", Pattern.DOTALL);
+		final Matcher matcher = pattern.matcher(template);
+		while (matcher.find()) {
+			final String key = matcher.group(1);
+			final String replacement = values.get(key);
+			if (replacement == null) {
+				throw new IllegalArgumentException("Template contains unmapped key: " + key);
+			}
+			matcher.appendReplacement(sb, replacement);
+		}
+		matcher.appendTail(sb);
+		return sb.toString();
+	}
+	
+	public static boolean hasOnlyCharacters(String name) {
+		if (isEmpty(name)) {
+			return false;
+		}
+		return name.matches("[A-Za-z\\s]*");
 	}
 }

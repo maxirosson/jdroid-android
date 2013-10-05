@@ -96,7 +96,7 @@ public class DateUtilsTest {
 		int month = Calendar.JANUARY;
 		int date = 1;
 		calendar.set(year, month, date);
-		calendar = org.apache.commons.lang.time.DateUtils.truncate(calendar, Calendar.DATE);
+		DateUtils.truncate(calendar);
 		Date createdDate = DateUtils.getDate(year, month, date);
 		Assert.assertEquals(createdDate, calendar.getTime());
 	}

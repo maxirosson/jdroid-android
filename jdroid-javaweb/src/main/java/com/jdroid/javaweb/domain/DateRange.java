@@ -5,7 +5,6 @@ import java.util.Date;
 import javax.persistence.Embeddable;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import org.apache.commons.lang.Validate;
 import com.jdroid.java.exception.UnexpectedException;
 import com.jdroid.java.utils.DateUtils;
 
@@ -154,7 +153,10 @@ public class DateRange implements Serializable, Comparable<DateRange> {
 	 * @throws IllegalArgumentException If this {@link DateRange} doesn't overlap with the other.
 	 */
 	public DateRange intersection(DateRange dateRange) {
-		Validate.isTrue(overlaps(dateRange));
+		if (!overlaps(dateRange)) {
+			throw new IllegalArgumentException();
+		}
+		;
 		return new DateRange(startDate.after(dateRange.getStartDate()) ? startDate : dateRange.getStartDate(),
 				endDate.before(dateRange.getEndDate()) ? endDate : dateRange.getEndDate());
 	}

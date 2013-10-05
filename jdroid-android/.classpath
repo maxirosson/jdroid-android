@@ -9,7 +9,6 @@
 	<classpathentry exported="true" kind="var" path="M2_REPO/android/google-play-services/r12/google-play-services-r12.jar"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/android/ads/google-admob-ads-sdk/6.4.1/google-admob-ads-sdk-6.4.1.jar"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/org/apache/james/apache-mime4j/0.6/apache-mime4j-0.6.jar" sourcepath="M2_REPO/org/apache/james/apache-mime4j/0.6/apache-mime4j-0.6-sources.jar"/>
-	<classpathentry exported="true" kind="var" path="M2_REPO/commons-lang/commons-lang/2.6/commons-lang-2.6.jar" sourcepath="M2_REPO/commons-lang/commons-lang/2.6/commons-lang-2.6-sources.jar"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/org/apache/httpcomponents/httpmime/4.0.1/httpmime-4.0.1.jar" sourcepath="M2_REPO/org/apache/httpcomponents/httpmime/4.0.1/httpmime-4.0.1-sources.jar"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/android/commonsware/mergeadapter/0.3.0/mergeadapter-0.3.0.jar"/>
 	<classpathentry exported="true" kind="var" path="M2_REPO/net/sf/opencsv/opencsv/2.3/opencsv-2.3.jar" sourcepath="M2_REPO/net/sf/opencsv/opencsv/2.3/opencsv-2.3-sources.jar"/>
