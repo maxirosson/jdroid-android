@@ -19,7 +19,9 @@ package com.jdroid.android.dex;
 import java.util.Arrays;
 
 public class MethodRef {
-    private String mDeclClass, mReturnType, mMethodName;
+    private String mDeclClass;
+    private String mReturnType;
+    private String mMethodName;
     private String[] mArgTypes;
 
     /**

@@ -538,12 +538,18 @@ public class DexData {
         public int fileSize;
         public int headerSize;
         public int endianTag;
-        public int stringIdsSize, stringIdsOff;
-        public int typeIdsSize, typeIdsOff;
-        public int protoIdsSize, protoIdsOff;
-        public int fieldIdsSize, fieldIdsOff;
-        public int methodIdsSize, methodIdsOff;
-        public int classDefsSize, classDefsOff;
+        public int stringIdsSize;
+        public int stringIdsOff;
+        public int typeIdsSize;
+        public int typeIdsOff;
+        public int protoIdsSize;
+        public int protoIdsOff;
+        public int fieldIdsSize;
+        public int fieldIdsOff;
+        public int methodIdsSize;
+        public int methodIdsOff;
+        public int classDefsSize;
+        public int classDefsOff;
 
         /* expected magic values */
         public static final byte[] DEX_FILE_MAGIC = {

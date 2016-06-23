@@ -14,7 +14,7 @@ public class SamplePaginatedUseCase extends PaginatedUseCase<String> {
 
 	public SamplePaginatedUseCase() {
 		for (int i = 1; i < 300; i++) {
-			results.add(i + "");
+			results.add(Integer.toString(i));
 		}
 	}
 
