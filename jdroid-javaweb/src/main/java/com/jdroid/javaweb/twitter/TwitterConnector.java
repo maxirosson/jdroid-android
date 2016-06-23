@@ -19,8 +19,8 @@ public class TwitterConnector {
 	
 	private static final Logger LOGGER = LoggerUtils.getLogger(TwitterConnector.class);
 	
-	public static Integer CHARACTERS_LIMIT = 140;
-	public static Integer URL_CHARACTERS_COUNT = 22;
+	public static final Integer CHARACTERS_LIMIT = 140;
+	public static final Integer URL_CHARACTERS_COUNT = 22;
 	
 	private TwitterFactory twitterFactory;
 	

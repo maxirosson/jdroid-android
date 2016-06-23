@@ -28,7 +28,7 @@ public class NotificationBuilder {
 	
 	public static final String NOTIFICATION_NAME = "notificationName";
 
-	public static String NOTIFICATION_URI = "notification://";
+	public static final String NOTIFICATION_URI = "notification://";
 	
 	private String notificationName;
 	private NotificationCompat.Builder builder;
