@@ -160,7 +160,7 @@ public enum DataType {
 			if (cursor.isNull(columnIndex)) {
 				return null;
 			}
-			return (cursor.getInt(columnIndex) == 0 ? Boolean.FALSE : Boolean.TRUE);
+			return cursor.getInt(columnIndex) == 0 ? Boolean.FALSE : Boolean.TRUE;
 		}
 	},
 	DATE("TEXT") {

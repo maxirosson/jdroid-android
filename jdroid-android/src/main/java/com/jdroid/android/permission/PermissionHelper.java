@@ -266,7 +266,7 @@ public class PermissionHelper {
 	 * @see #setRequestPermissionOnStart(boolean)
 	 */
 	public void onCreate(Bundle savedInstanceState) {
-		firstTime = (savedInstanceState==null);
+		firstTime = savedInstanceState==null;
 	}
 
 	/**

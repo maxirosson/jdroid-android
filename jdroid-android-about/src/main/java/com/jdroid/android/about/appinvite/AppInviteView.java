@@ -47,8 +47,8 @@ public class AppInviteView extends RelativeLayout {
 	private void init(Context context) {
 		LayoutInflater.from(context).inflate(R.layout.app_invite_view, this, true);
 
-		titleTextView = ((TextView)findViewById(R.id.title));
-		subtitleTextView = ((TextView)findViewById(R.id.subTitle));
+		titleTextView = (TextView)findViewById(R.id.title);
+		subtitleTextView = (TextView)findViewById(R.id.subTitle);
 	}
 
 	public void configure(final Activity activity) {

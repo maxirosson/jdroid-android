@@ -37,7 +37,7 @@ public class NavDrawerHeader {
 
 	public void setBackground(String imageUrl, Long ttl) {
 		AbstractApplication.get().getImageLoaderHelper().displayImage(imageUrl,
-				((ImageView)navDrawerHeader.findViewById(R.id.cover)), null, null, ttl);
+				(ImageView)navDrawerHeader.findViewById(R.id.cover), null, null, ttl);
 	}
 
 	public void setMainImage(@DrawableRes Integer imageResId) {
@@ -46,7 +46,7 @@ public class NavDrawerHeader {
 
 	public void setMainImage(String imageUrl, Long ttl) {
 		AbstractApplication.get().getImageLoaderHelper().displayImage(imageUrl,
-				((ImageView)navDrawerHeader.findViewById(R.id.photo)), R.drawable.profile_default, null,
+				(ImageView)navDrawerHeader.findViewById(R.id.photo), R.drawable.profile_default, null,
 				ttl);
 	}
 }

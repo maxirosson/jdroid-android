@@ -69,7 +69,7 @@ public class GZIPResponseWrapper extends HttpServletResponseWrapper {
 	@Override
 	public PrintWriter getWriter() throws IOException {
 		if (writer != null) {
-			return (writer);
+			return writer;
 		}
 		
 		if (stream != null) {
@@ -89,6 +89,6 @@ public class GZIPResponseWrapper extends HttpServletResponseWrapper {
 	}
 	
 	private ServletOutputStream createOutputStream() throws IOException {
-		return (new GZIPResponseStream(wrappedResponse));
+		return new GZIPResponseStream(wrappedResponse);
 	}
 }

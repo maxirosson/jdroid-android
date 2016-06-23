@@ -341,13 +341,13 @@ public class SystemBarTintManager {
 		
 		private SystemBarConfig(Activity activity, boolean translucentStatusBar, boolean trasnlucentNavBar) {
 			Resources res = activity.getResources();
-			mInPortrait = (res.getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT);
+			mInPortrait = res.getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
 			mSmallestWidthDp = getSmallestWidthDp(activity);
 			mStatusBarHeight = getInternalDimensionSize(res, STATUS_BAR_HEIGHT_RES_NAME);
 			mActionBarHeight = getActionBarHeight(activity);
 			mNavigationBarHeight = getNavigationBarHeight(activity);
 			mNavigationBarWidth = getNavigationBarWidth(activity);
-			mHasNavigationBar = (mNavigationBarHeight > 0);
+			mHasNavigationBar = mNavigationBarHeight > 0;
 			mTranslucentStatusBar = translucentStatusBar;
 			mTranslucentNavBar = trasnlucentNavBar;
 		}
@@ -417,7 +417,7 @@ public class SystemBarTintManager {
 		 * @return True if navigation should appear at the bottom of the screen, False otherwise.
 		 */
 		public boolean isNavigationAtBottom() {
-			return ((mSmallestWidthDp >= 600) || mInPortrait);
+			return (mSmallestWidthDp >= 600) || mInPortrait;
 		}
 		
 		/**

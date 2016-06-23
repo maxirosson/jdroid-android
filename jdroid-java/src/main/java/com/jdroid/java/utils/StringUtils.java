@@ -69,7 +69,7 @@ public abstract class StringUtils {
 			return true;
 		}
 		for (int i = 0; i < strLen; i++) {
-			if ((!Character.isWhitespace(str.charAt(i)))) {
+			if (!Character.isWhitespace(str.charAt(i))) {
 				return false;
 			}
 		}
@@ -177,7 +177,7 @@ public abstract class StringUtils {
 	 * @return capitalized String, <code>null</code> if null String input
 	 */
 	public static String capitalizeWords(String str, char[] delimiters) {
-		int delimLen = (delimiters == null ? -1 : delimiters.length);
+		int delimLen = delimiters == null ? -1 : delimiters.length;
 		if ((str == null) || (str.length() == 0) || (delimLen == 0)) {
 			return str;
 		}
