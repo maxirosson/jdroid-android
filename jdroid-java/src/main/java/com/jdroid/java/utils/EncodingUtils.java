@@ -40,7 +40,11 @@ public class EncodingUtils {
 			while ((nextToEncode < oldLength) && isAllowed(s.charAt(nextToEncode), null)) {
 				nextToEncode++;
 			}
-			
+
+			if (encoded == null) {
+				encoded = new StringBuilder();
+			}
+
 			// If there's nothing more to encode...
 			if (nextToEncode == oldLength) {
 				if (current == 0) {
@@ -51,10 +55,6 @@ public class EncodingUtils {
 					encoded.append(s, current, oldLength);
 					return encoded.toString();
 				}
-			}
-			
-			if (encoded == null) {
-				encoded = new StringBuilder();
 			}
 			
 			if (nextToEncode > current) {

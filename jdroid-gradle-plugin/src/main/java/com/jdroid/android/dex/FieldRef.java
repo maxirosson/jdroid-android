@@ -17,7 +17,9 @@
 package com.jdroid.android.dex;
 
 public class FieldRef {
-    private String mDeclClass, mFieldType, mFieldName;
+    private String mDeclClass;
+    private String mFieldType;
+    private String mFieldName;
 
     /**
      * Initializes a new field reference.

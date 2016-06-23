@@ -66,8 +66,8 @@ public class LoadingLayout extends FrameLayout {
 			LayoutInflater inflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			inflater.inflate(R.layout.retry, this, true);
 			retryButton = (Button)this.findViewById(R.id.retry);
+			retryButton.setVisibility(View.VISIBLE);
 		}
-		retryButton.setVisibility(View.VISIBLE);
 	}
 	
 	public void showLoading(FragmentIf fragmentIf) {
