@@ -175,7 +175,7 @@ public abstract class AbstractUseCase implements Runnable, Serializable {
 	 * @return If the use case has finished, regardless of the success or failure of its execution.
 	 */
 	public Boolean isFinish() {
-		return (isFinishFailed() || isFinishSuccessful());
+		return isFinishFailed() || isFinishSuccessful();
 	}
 	
 	public void markAsNotified() {

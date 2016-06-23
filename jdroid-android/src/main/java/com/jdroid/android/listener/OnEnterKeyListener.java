@@ -28,7 +28,7 @@ public abstract class OnEnterKeyListener implements OnKeyListener {
 	@Override
 	public boolean onKey(final View v, int keyCode, KeyEvent event) {
 		
-		if ((matchKeyCode(keyCode) && (event.getAction() == KeyEvent.ACTION_UP))) {
+		if (matchKeyCode(keyCode) && (event.getAction() == KeyEvent.ACTION_UP)) {
 			Runnable runnable = new Runnable() {
 				
 				@Override

@@ -20,7 +20,7 @@ public abstract class CollectionUtils {
 	 * @return true if empty or null
 	 */
 	public static boolean isEmpty(Collection<?> coll) {
-		return ((coll == null) || coll.isEmpty());
+		return (coll == null) || coll.isEmpty();
 	}
 	
 	public static boolean isEmptyCollection(Object object) {

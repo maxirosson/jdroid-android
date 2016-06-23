@@ -20,7 +20,7 @@ public class EqualsPropertyPredicate<T> implements Predicate<T>, Serializable {
 	 * @param equalsValue The value to compare with the value of the propertyNames
 	 */
 	public EqualsPropertyPredicate(String propertyName, Object equalsValue) {
-		this.propertyFunction = new PropertyFunction<T, Object>(propertyName);
+		this.propertyFunction = new PropertyFunction<>(propertyName);
 		this.equalsValue = equalsValue;
 	}
 	

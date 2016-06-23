@@ -35,12 +35,12 @@ public interface IInAppBillingService extends android.os.IInterface {
 		}
 		
 		public static com.android.vending.billing.IInAppBillingService asInterface(android.os.IBinder obj) {
-			if ((obj == null)) {
+			if (obj == null) {
 				return null;
 			}
 			android.os.IInterface iin = obj.queryLocalInterface(DESCRIPTOR);
-			if (((iin != null) && (iin instanceof com.android.vending.billing.IInAppBillingService))) {
-				return ((com.android.vending.billing.IInAppBillingService)iin);
+			if ((iin != null) && (iin instanceof com.android.vending.billing.IInAppBillingService)) {
+				return (com.android.vending.billing.IInAppBillingService)iin;
 			}
 			return new com.android.vending.billing.IInAppBillingService.Stub.Proxy(obj);
 		}
@@ -80,14 +80,14 @@ public interface IInAppBillingService extends android.os.IInterface {
 					java.lang.String _arg2;
 					_arg2 = data.readString();
 					android.os.Bundle _arg3;
-					if ((0 != data.readInt())) {
+					if (0 != data.readInt()) {
 						_arg3 = android.os.Bundle.CREATOR.createFromParcel(data);
 					} else {
 						_arg3 = null;
 					}
 					android.os.Bundle _result = this.getSkuDetails(_arg0, _arg1, _arg2, _arg3);
 					reply.writeNoException();
-					if ((_result != null)) {
+					if (_result != null) {
 						reply.writeInt(1);
 						_result.writeToParcel(reply, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
 					} else {
@@ -109,7 +109,7 @@ public interface IInAppBillingService extends android.os.IInterface {
 					_arg4 = data.readString();
 					android.os.Bundle _result = this.getBuyIntent(_arg0, _arg1, _arg2, _arg3, _arg4);
 					reply.writeNoException();
-					if ((_result != null)) {
+					if (_result != null) {
 						reply.writeInt(1);
 						_result.writeToParcel(reply, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
 					} else {
@@ -129,7 +129,7 @@ public interface IInAppBillingService extends android.os.IInterface {
 					_arg3 = data.readString();
 					android.os.Bundle _result = this.getPurchases(_arg0, _arg1, _arg2, _arg3);
 					reply.writeNoException();
-					if ((_result != null)) {
+					if (_result != null) {
 						reply.writeInt(1);
 						_result.writeToParcel(reply, android.os.Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
 					} else {
@@ -228,7 +228,7 @@ public interface IInAppBillingService extends android.os.IInterface {
 					_data.writeInt(apiVersion);
 					_data.writeString(packageName);
 					_data.writeString(type);
-					if ((skusBundle != null)) {
+					if (skusBundle != null) {
 						_data.writeInt(1);
 						skusBundle.writeToParcel(_data, 0);
 					} else {
@@ -236,7 +236,7 @@ public interface IInAppBillingService extends android.os.IInterface {
 					}
 					mRemote.transact(Stub.TRANSACTION_getSkuDetails, _data, _reply, 0);
 					_reply.readException();
-					if ((0 != _reply.readInt())) {
+					if (0 != _reply.readInt()) {
 						_result = android.os.Bundle.CREATOR.createFromParcel(_reply);
 					} else {
 						_result = null;
@@ -286,7 +286,7 @@ public interface IInAppBillingService extends android.os.IInterface {
 					_data.writeString(developerPayload);
 					mRemote.transact(Stub.TRANSACTION_getBuyIntent, _data, _reply, 0);
 					_reply.readException();
-					if ((0 != _reply.readInt())) {
+					if (0 != _reply.readInt()) {
 						_result = android.os.Bundle.CREATOR.createFromParcel(_reply);
 					} else {
 						_result = null;
@@ -332,7 +332,7 @@ public interface IInAppBillingService extends android.os.IInterface {
 					_data.writeString(continuationToken);
 					mRemote.transact(Stub.TRANSACTION_getPurchases, _data, _reply, 0);
 					_reply.readException();
-					if ((0 != _reply.readInt())) {
+					if (0 != _reply.readInt()) {
 						_result = android.os.Bundle.CREATOR.createFromParcel(_reply);
 					} else {
 						_result = null;
@@ -375,11 +375,11 @@ public interface IInAppBillingService extends android.os.IInterface {
 			}
 		}
 		
-		static final int TRANSACTION_isBillingSupported = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
-		static final int TRANSACTION_getSkuDetails = (android.os.IBinder.FIRST_CALL_TRANSACTION + 1);
-		static final int TRANSACTION_getBuyIntent = (android.os.IBinder.FIRST_CALL_TRANSACTION + 2);
-		static final int TRANSACTION_getPurchases = (android.os.IBinder.FIRST_CALL_TRANSACTION + 3);
-		static final int TRANSACTION_consumePurchase = (android.os.IBinder.FIRST_CALL_TRANSACTION + 4);
+		static final int TRANSACTION_isBillingSupported = android.os.IBinder.FIRST_CALL_TRANSACTION + 0;
+		static final int TRANSACTION_getSkuDetails = android.os.IBinder.FIRST_CALL_TRANSACTION + 1;
+		static final int TRANSACTION_getBuyIntent = android.os.IBinder.FIRST_CALL_TRANSACTION + 2;
+		static final int TRANSACTION_getPurchases = android.os.IBinder.FIRST_CALL_TRANSACTION + 3;
+		static final int TRANSACTION_consumePurchase = android.os.IBinder.FIRST_CALL_TRANSACTION + 4;
 	}
 	
 	/**

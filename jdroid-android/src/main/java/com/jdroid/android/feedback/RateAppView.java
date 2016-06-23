@@ -40,9 +40,9 @@ public class RateAppView extends RelativeLayout {
 		
 		LayoutInflater.from(context).inflate(R.layout.rate_app_view, this, true);
 		
-		rateAppTitle = ((TextView)findViewById(R.id.rateAppTitle));
-		positiveButton = ((Button)findViewById(R.id.positive));
-		negativeButton = ((Button)findViewById(R.id.negative));
+		rateAppTitle = (TextView)findViewById(R.id.rateAppTitle);
+		positiveButton = (Button)findViewById(R.id.positive);
+		negativeButton = (Button)findViewById(R.id.negative);
 
 		enjoyingAppView(context);
 	}

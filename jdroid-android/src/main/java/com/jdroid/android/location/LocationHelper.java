@@ -49,14 +49,14 @@ public class LocationHelper implements LocationListener {
 		// Acquire a reference to the system Location Manager
 		locationManager = (LocationManager)AbstractApplication.get().getSystemService(Context.LOCATION_SERVICE);
 		
-		BroadcastReceiver stopLocalizationBroadcastReceiver = (new BroadcastReceiver() {
+		BroadcastReceiver stopLocalizationBroadcastReceiver = new BroadcastReceiver() {
 			
 			@Override
 			@RequiresPermission(anyOf = { Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION})
 			public void onReceive(Context context, Intent intent) {
 				stopLocalization();
 			}
-		});
+		};
 		AbstractApplication.get().registerReceiver(stopLocalizationBroadcastReceiver,
 			new IntentFilter(GPS_TIMEOUT_ACTION));
 	}

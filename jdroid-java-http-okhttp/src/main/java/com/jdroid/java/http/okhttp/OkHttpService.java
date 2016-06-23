@@ -85,7 +85,7 @@ public abstract class OkHttpService extends AbstractHttpService {
 	@Override
 	protected void doFinally() {
 		try {
-			OkHttpResponseWrapper okHttpResponseWrapper = ((OkHttpResponseWrapper)getHttpResponseWrapper());
+			OkHttpResponseWrapper okHttpResponseWrapper = (OkHttpResponseWrapper)getHttpResponseWrapper();
 			if (okHttpResponseWrapper != null) {
 				ResponseBody body = okHttpResponseWrapper.getResponse().body();
 				if (body != null) {
