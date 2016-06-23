@@ -158,7 +158,7 @@ public enum DataType {
 		public Boolean readValue(Cursor cursor, String columnName) {
 			int columnIndex = cursor.getColumnIndex(columnName);
 			if (cursor.isNull(columnIndex)) {
-				return null;
+				return false;
 			}
 			return (cursor.getInt(columnIndex) == 0 ? Boolean.FALSE : Boolean.TRUE);
 		}
