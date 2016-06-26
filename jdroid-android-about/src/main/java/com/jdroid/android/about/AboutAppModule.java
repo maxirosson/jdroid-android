@@ -18,15 +18,15 @@ public class AboutAppModule extends AbstractAppModule {
 
 	public static final String MODULE_NAME = AboutAppModule.class.getName();
 
-	public static AboutAppModule get() {
-		return (AboutAppModule)AbstractApplication.get().getAppModule(MODULE_NAME);
-	}
-
 	private AboutContext aboutContext;
 	private AboutDebugContext aboutDebugContext;
 
 	public AboutAppModule() {
 		aboutContext = createAboutContext();
+	}
+
+	public static AboutAppModule get() {
+		return (AboutAppModule)AbstractApplication.get().getAppModule(MODULE_NAME);
 	}
 
 	protected AboutContext createAboutContext() {

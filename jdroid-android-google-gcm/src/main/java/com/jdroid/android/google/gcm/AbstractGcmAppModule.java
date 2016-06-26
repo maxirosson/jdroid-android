@@ -14,10 +14,6 @@ public abstract class AbstractGcmAppModule extends AbstractAppModule {
 
 	public static final String MODULE_NAME = AbstractGcmAppModule.class.getName();
 
-	public static AbstractGcmAppModule get() {
-		return (AbstractGcmAppModule)AbstractApplication.get().getAppModule(MODULE_NAME);
-	}
-
 	private GcmDebugContext gcmDebugContext;
 	private GcmMessageResolver gcmMessageResolver;
 	private GcmListenerResolver gcmListenerResolver;
@@ -26,6 +22,10 @@ public abstract class AbstractGcmAppModule extends AbstractAppModule {
 	public AbstractGcmAppModule() {
 		gcmMessageResolver = createGcmMessageResolver();
 		gcmListenerResolver = createGcmListenerResolver();
+	}
+
+	public static AbstractGcmAppModule get() {
+		return (AbstractGcmAppModule)AbstractApplication.get().getAppModule(MODULE_NAME);
 	}
 
 	protected GcmDebugContext createGcmDebugContext() {
