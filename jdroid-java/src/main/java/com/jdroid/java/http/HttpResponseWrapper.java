@@ -8,7 +8,7 @@ import java.io.InputStream;
 
 public abstract class HttpResponseWrapper {
 	
-	private final static Logger LOGGER = LoggerUtils.getLogger(HttpResponseWrapper.class);
+	private static final Logger LOGGER = LoggerUtils.getLogger(HttpResponseWrapper.class);
 	
 	public abstract int getStatusCode();
 	

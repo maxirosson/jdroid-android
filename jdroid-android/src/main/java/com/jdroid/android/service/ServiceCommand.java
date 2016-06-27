@@ -16,7 +16,7 @@ import java.io.Serializable;
 
 public abstract class ServiceCommand implements Serializable {
 
-	private final static Logger LOGGER = LoggerUtils.getLogger(ServiceCommand.class);
+	private static final Logger LOGGER = LoggerUtils.getLogger(ServiceCommand.class);
 
 	public void start() {
 		start(null);

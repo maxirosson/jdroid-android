@@ -38,7 +38,7 @@ public class CSVUtils {
 	
 	public static class StringConverter implements ValueConverter<String> {
 		
-		private final static StringConverter INSTANCE = new StringConverter();
+		private static final StringConverter INSTANCE = new StringConverter();
 		
 		public static StringConverter get() {
 			return INSTANCE;
@@ -63,7 +63,7 @@ public class CSVUtils {
 	
 	public static class LongConverter implements ValueConverter<Long> {
 		
-		private final static LongConverter INSTANCE = new LongConverter();
+		private static final LongConverter INSTANCE = new LongConverter();
 		
 		public static LongConverter get() {
 			return INSTANCE;

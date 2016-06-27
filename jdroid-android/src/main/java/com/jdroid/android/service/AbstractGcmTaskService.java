@@ -11,7 +11,7 @@ import org.slf4j.Logger;
 
 public abstract class AbstractGcmTaskService extends GcmTaskService {
 
-	private final static Logger LOGGER = LoggerUtils.getLogger(GcmTaskService.class);
+	private static final Logger LOGGER = LoggerUtils.getLogger(GcmTaskService.class);
 
 	@Override
 	public void onInitializeTasks() {

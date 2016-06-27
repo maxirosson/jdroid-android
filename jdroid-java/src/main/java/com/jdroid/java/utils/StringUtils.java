@@ -16,20 +16,20 @@ import java.util.regex.Pattern;
  */
 public abstract class StringUtils {
 	
-	public final static String EMPTY = "";
-	public final static String ELLIPSIS = "...";
-	public final static String COMMA = ",";
-	public final static String SPACE = " ";
-	public final static String DASH = "-";
-	public final static String SLASH = "/";
-	public final static String DOT = ".";
-	public final static String NEW_LINE = "\n";
-	public final static String UNDERSCORE = "_";
-	public final static String BANG = "!";
-	public final static String PIPE = "|";
+	public static final String EMPTY = "";
+	public static final String ELLIPSIS = "...";
+	public static final String COMMA = ",";
+	public static final String SPACE = " ";
+	public static final String DASH = "-";
+	public static final String SLASH = "/";
+	public static final String DOT = ".";
+	public static final String NEW_LINE = "\n";
+	public static final String UNDERSCORE = "_";
+	public static final String BANG = "!";
+	public static final String PIPE = "|";
 	
-	private final static String PLACEHOLDER_PATTERN = "\\$\\{(.*?)\\}";
-	private final static String ALPHANUMERIC_PATTERN = "([^\\w\\s])*";
+	private static final String PLACEHOLDER_PATTERN = "\\$\\{(.*?)\\}";
+	private static final String ALPHANUMERIC_PATTERN = "([^\\w\\s])*";
 	
 	public static String getNotEmptyString(String text) {
 		return StringUtils.isEmpty(text) ? null : text;

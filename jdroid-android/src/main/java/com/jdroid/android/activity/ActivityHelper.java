@@ -47,7 +47,7 @@ import java.util.Map;
 
 public class ActivityHelper implements ActivityIf {
 	
-	private final static Logger LOGGER = LoggerUtils.getLogger(ActivityHelper.class);
+	private static final Logger LOGGER = LoggerUtils.getLogger(ActivityHelper.class);
 	
 	private static final int LOCATION_UPDATE_TIMER_CODE = IdGenerator.getIntId();
 	private static final String TITLE_KEY = "title";

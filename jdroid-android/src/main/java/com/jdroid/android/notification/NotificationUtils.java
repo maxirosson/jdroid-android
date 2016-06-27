@@ -8,7 +8,7 @@ import com.jdroid.android.utils.ScreenUtils;
 
 public class NotificationUtils {
 	
-	private final static NotificationManager NOTIFICATION_MANAGER = (NotificationManager)AbstractApplication.get().getSystemService(
+	private static final NotificationManager NOTIFICATION_MANAGER = (NotificationManager)AbstractApplication.get().getSystemService(
 		Context.NOTIFICATION_SERVICE);
 	
 	public static void sendNotification(int id, NotificationBuilder notificationBuilder) {

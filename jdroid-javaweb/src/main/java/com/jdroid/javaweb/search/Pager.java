@@ -4,8 +4,8 @@ import com.jdroid.java.exception.UnexpectedException;
 
 public class Pager {
 	
-	private final static Integer DEFAULT_PAGE = 1;
-	private final static Integer DEFAULT_PAGE_SIZE = 25;
+	private static final Integer DEFAULT_PAGE = 1;
+	private static final Integer DEFAULT_PAGE_SIZE = 25;
 	
 	private Integer size;
 	private Integer page;

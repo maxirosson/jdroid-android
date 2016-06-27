@@ -9,7 +9,7 @@ import org.slf4j.Logger;
 
 public class InstanceIdService extends InstanceIDListenerService {
 
-	private final static Logger LOGGER = LoggerUtils.getLogger(InstanceIdService.class);
+	private static final Logger LOGGER = LoggerUtils.getLogger(InstanceIdService.class);
 
 	/**
 	 * Called if InstanceID token is updated. This may occur if the security of

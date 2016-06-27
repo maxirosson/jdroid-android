@@ -12,7 +12,7 @@ import java.util.Locale;
 
 public class LocaleChangedReceiver extends BroadcastReceiver {
 
-	private final static Logger LOGGER = LoggerUtils.getLogger(LocaleChangedReceiver.class);
+	private static final Logger LOGGER = LoggerUtils.getLogger(LocaleChangedReceiver.class);
 
 	@Override
 	public void onReceive(Context context, Intent intent) {

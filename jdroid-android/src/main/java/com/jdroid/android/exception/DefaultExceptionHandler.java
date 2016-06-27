@@ -19,7 +19,7 @@ import java.util.List;
 
 public class DefaultExceptionHandler implements ExceptionHandler {
 	
-	private final static Logger LOGGER = LoggerUtils.getLogger(DefaultExceptionHandler.class);
+	private static final Logger LOGGER = LoggerUtils.getLogger(DefaultExceptionHandler.class);
 	
 	private static final String MAIN_THREAD_NAME = "main";
 

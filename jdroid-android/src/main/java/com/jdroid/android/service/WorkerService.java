@@ -12,7 +12,7 @@ import org.slf4j.Logger;
 
 public abstract class WorkerService extends IntentService {
 
-	private final static Logger LOGGER = LoggerUtils.getLogger(WorkerService.class);
+	private static final Logger LOGGER = LoggerUtils.getLogger(WorkerService.class);
 
 	private static String TAG = WorkerService.class.getSimpleName();
 

@@ -9,7 +9,7 @@ public class EncodingUtils {
 	public static final String UTF8 = "UTF-8";
 	private static final char[] HEX_DIGITS = "0123456789ABCDEF".toCharArray();
 	/** Index of a component which was not found. */
-	private final static int NOT_FOUND = -1;
+	private static final int NOT_FOUND = -1;
 	
 	/**
 	 * Encodes characters in the given string as '%'-escaped octets using the UTF-8 scheme. Leaves letters ("A-Z",

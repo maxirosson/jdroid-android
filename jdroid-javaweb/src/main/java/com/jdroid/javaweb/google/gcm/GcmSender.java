@@ -25,7 +25,7 @@ public class GcmSender implements PushMessageSender {
 	// Maximum delay before a retry.
 	protected static final int MAX_BACKOFF_DELAY = 1024000;
 	
-	private final static PushMessageSender INSTANCE = new GcmSender();
+	private static final PushMessageSender INSTANCE = new GcmSender();
 
 	private GcmApiService gcmApiService = new GcmApiService();
 	
