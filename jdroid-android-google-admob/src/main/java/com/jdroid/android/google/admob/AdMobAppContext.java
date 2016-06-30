@@ -21,18 +21,15 @@ public class AdMobAppContext {
 	public AdMobAppContext() {
 		adsEnabled = areAdsEnabledByDefault();
 		if (AbstractApplication.get().getAppContext().displayDebugSettings()) {
-			ExecutorUtils.execute(new Runnable() {
-				@Override
-				public void run() {
-					// This is required to initialize the prefs to display on the debug settings
-					SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(AbstractApplication.get());
-					if (!sharedPreferences.contains(ADS_ENABLED)) {
-						SharedPreferences.Editor editor = sharedPreferences.edit();
-						editor.putBoolean(ADS_ENABLED, adsEnabled);
-						editor.apply();
-					}
-				}
-			});
+			ExecutorUtils.execute(() -> {
+                // This is required to initialize the prefs to display on the debug settings
+                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(AbstractApplication.get());
+                if (!sharedPreferences.contains(ADS_ENABLED)) {
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putBoolean(ADS_ENABLED, adsEnabled);
+                    editor.apply();
+                }
+            });
 		}
 	}
 
