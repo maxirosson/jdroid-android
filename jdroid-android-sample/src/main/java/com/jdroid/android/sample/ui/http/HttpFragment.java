@@ -31,66 +31,24 @@ public class HttpFragment extends AbstractFragment {
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
-		findView(R.id.httpGet).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				ExecutorUtils.execute(new Runnable() {
-					@Override
-					public void run() {
+		findView(R.id.httpGet).setOnClickListener(v ->
+				ExecutorUtils.execute(() -> {
 						SampleResponse sampleResponse = new SampleApiService().httpGetSample();
 						LOGGER.debug("Sample response key: " + sampleResponse.getSampleKey());
-					}
-				});
-			}
-		});
+					})
+		);
 
-		findView(R.id.httpPost).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				ExecutorUtils.execute(new Runnable() {
-					@Override
-					public void run() {
-						new SampleApiService().httpPostSample();
-					}
-				});
-			}
-		});
+		findView(R.id.httpPost).setOnClickListener(v ->
+				ExecutorUtils.execute(() -> new SampleApiService().httpPostSample()));
 
-		findView(R.id.httpPut).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				ExecutorUtils.execute(new Runnable() {
-					@Override
-					public void run() {
-						new SampleApiService().httpPutSample();
-					}
-				});
-			}
-		});
+		findView(R.id.httpPut).setOnClickListener(v ->
+				ExecutorUtils.execute(() -> new SampleApiService().httpPutSample()));
 
-		findView(R.id.httpDelete).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				ExecutorUtils.execute(new Runnable() {
-					@Override
-					public void run() {
-						new SampleApiService().httpDeleteSample();
-					}
-				});
-			}
-		});
+		findView(R.id.httpDelete).setOnClickListener(v ->
+				ExecutorUtils.execute(() -> new SampleApiService().httpDeleteSample()));
 
-		findView(R.id.httpPatch).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				ExecutorUtils.execute(new Runnable() {
-					@Override
-					public void run() {
-						new SampleApiService().httpPatchSample();
-					}
-				});
-			}
-		});
+		findView(R.id.httpPatch).setOnClickListener(v ->
+				ExecutorUtils.execute(() -> new SampleApiService().httpPatchSample()));
 
 	}
 
