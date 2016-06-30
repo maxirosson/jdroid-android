@@ -124,34 +124,28 @@ public class AnalyticsSender<T extends AnalyticsTracker> extends BaseAnalyticsSe
 
 	@Override
 	public void trackFatalException(final Throwable throwable, final List<String> tags) {
-		ExecutorUtils.execute(new Runnable() {
-			@Override
-			public void run() {
-				for (T tracker : getTrackers()) {
-					if (tracker.isEnabled()) {
-						tracker.trackFatalException(throwable, tags);
-					}
-				}
-			}
-		});
+		ExecutorUtils.execute(() -> {
+            for (T tracker : getTrackers()) {
+                if (tracker.isEnabled()) {
+                    tracker.trackFatalException(throwable, tags);
+                }
+            }
+        });
 	}
 	
 	@Override
 	public void trackHandledException(final Throwable throwable, final List<String> tags) {
-		ExecutorUtils.execute(new Runnable() {
-			@Override
-			public void run() {
-				for (T tracker : getTrackers()) {
-					try {
-						if (tracker.isEnabled()) {
-							tracker.trackHandledException(throwable, tags);
-						}
-					} catch (Exception e) {
-						LOGGER.error("Error when trying to track the exception.", e);
-					}
-				}
-			}
-		});
+		ExecutorUtils.execute(() -> {
+            for (T tracker : getTrackers()) {
+                try {
+                    if (tracker.isEnabled()) {
+                        tracker.trackHandledException(throwable, tags);
+                    }
+                } catch (Exception e) {
+                    LOGGER.error("Error when trying to track the exception.", e);
+                }
+            }
+        });
 	}
 	
 	@Override

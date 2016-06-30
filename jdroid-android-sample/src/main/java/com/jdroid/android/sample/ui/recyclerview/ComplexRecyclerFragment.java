@@ -44,15 +44,12 @@ public class ComplexRecyclerFragment extends AbstractRecyclerFragment {
 
 	@Override
 	public void onFinishUseCase() {
-		executeOnUIThread(new Runnable() {
-			@Override
-			public void run() {
-				List<RecyclerViewType> recyclerViewTypes = Lists.<RecyclerViewType>newArrayList(new StringRecyclerViewType(), new IntegerRecyclerViewType(), new BooleanRecyclerViewType());
-				adapter = new RecyclerViewAdapter(recyclerViewTypes, sampleItemsUseCase.getComplexItems());
-				setAdapter(adapter);
-				dismissLoading();
-			}
-		});
+		executeOnUIThread(() -> {
+            List<RecyclerViewType> recyclerViewTypes = Lists.<RecyclerViewType>newArrayList(new StringRecyclerViewType(), new IntegerRecyclerViewType(), new BooleanRecyclerViewType());
+            adapter = new RecyclerViewAdapter(recyclerViewTypes, sampleItemsUseCase.getComplexItems());
+            setAdapter(adapter);
+            dismissLoading();
+        });
 	}
 
 	@Override

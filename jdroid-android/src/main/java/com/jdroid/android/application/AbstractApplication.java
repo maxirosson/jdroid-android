@@ -147,21 +147,17 @@ public abstract class AbstractApplication extends Application {
 		imageLoaderHelper = createImageLoaderHelper();
 		initRepositories();
 
-		ExecutorUtils.execute(new Runnable() {
+		ExecutorUtils.execute(() -> {
+            verifyAppLaunchStatus();
 
-			@Override
-			public void run() {
-				verifyAppLaunchStatus();
+            if (getCacheManager() != null) {
+                getCacheManager().initFileSystemCache();
+            }
 
-				if (getCacheManager() != null) {
-					getCacheManager().initFileSystemCache();
-				}
-
-				if (imageLoaderHelper != null) {
-					imageLoaderHelper.init();
-				}
-			}
-		});
+            if (imageLoaderHelper != null) {
+                imageLoaderHelper.init();
+            }
+        });
 
 		activityLifecycleHandler = new ActivityLifecycleHandler();
 		registerActivityLifecycleCallbacks(activityLifecycleHandler);
