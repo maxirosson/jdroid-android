@@ -68,17 +68,13 @@ public class AdMobAdHelper implements AdHelper {
 								adView.setVisibility(View.VISIBLE);
 								customView.setVisibility(View.GONE);
 							} else {
-								adView.postDelayed(new Runnable() {
-
-									@Override
-									public void run() {
-										displayAds = true;
-										if ((adView != null) && (customView != null)) {
-											adView.setVisibility(View.VISIBLE);
-											customView.setVisibility(View.GONE);
-										}
-									}
-								}, DateUtils.SECOND_IN_MILLIS * 10);
+								adView.postDelayed((Runnable) () -> {
+                                    displayAds = true;
+                                    if ((adView != null) && (customView != null)) {
+                                        adView.setVisibility(View.VISIBLE);
+                                        customView.setVisibility(View.GONE);
+                                    }
+                                }, DateUtils.SECOND_IN_MILLIS * 10);
 							}
 						}
 

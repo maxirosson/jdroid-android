@@ -14,6 +14,8 @@ import org.slf4j.Logger;
 
 import java.util.List;
 
+import static javafx.scene.input.KeyCode.R;
+
 public class FirebaseFragment extends AbstractFragment {
 
 	private static final Logger LOGGER = LoggerUtils.getLogger(FirebaseFragment.class);
@@ -33,66 +35,37 @@ public class FirebaseFragment extends AbstractFragment {
 
 		repository = new SampleFirebaseRepository();
 
-		findView(R.id.firebaseCreate).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				ExecutorUtils.execute(new Runnable() {
-					@Override
-					public void run() {
-						SampleFirebaseEntity entity = new SampleFirebaseEntity();
-						lastId = RandomUtils.getLong().toString();
-						entity.setId(lastId);
-						entity.setField(RandomUtils.getLong().toString());
-						repository.add(entity);
-					}
-				});
-			}
-		});
+		findView(R.id.firebaseCreate).setOnClickListener(v ->
+				ExecutorUtils.execute(() -> {
+					SampleFirebaseEntity entity = new SampleFirebaseEntity();
+					lastId = RandomUtils.getLong().toString();
+					entity.setId(lastId);
+					entity.setField(RandomUtils.getLong().toString());
+					repository.add(entity);
+				}
+			));
 
-		findView(R.id.firebaseUpdate).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				ExecutorUtils.execute(new Runnable() {
-					@Override
-					public void run() {
+		findView(R.id.firebaseUpdate).setOnClickListener(v ->
+				ExecutorUtils.execute(() -> {
 						SampleFirebaseEntity entity = new SampleFirebaseEntity();
 						entity.setId(lastId);
 						entity.setField(RandomUtils.getLong().toString());
 						repository.update(entity);
 					}
-				});
-			}
-		});
+			));
 
-		findView(R.id.firebaseGetAll).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				ExecutorUtils.execute(new Runnable() {
-					@Override
-					public void run() {
-						final List<SampleFirebaseEntity> results = repository.getAll();
-						executeOnUIThread(new Runnable() {
-							@Override
-							public void run() {
-								((TextView)findView(R.id.results)).setText(results.toString());
-							}
-						});
-					}
-				});
-			}
-		});
+		findView(R.id.firebaseGetAll).setOnClickListener(v ->
+				ExecutorUtils.execute(() -> {
+					final List<SampleFirebaseEntity> results = repository.getAll();
+					executeOnUIThread(() -> ((TextView)findView(R.id.results)).setText(results.toString()));
+				}
+			));
 
-		findView(R.id.firebaseRemove).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				ExecutorUtils.execute(new Runnable() {
-					@Override
-					public void run() {
-						repository.remove(lastId);
-						lastId = null;
-					}
-				});
-			}
-		});
+		findView(R.id.firebaseRemove).setOnClickListener(v ->
+				ExecutorUtils.execute(() -> {
+					repository.remove(lastId);
+					lastId = null;
+				}
+			));
 	}
 }

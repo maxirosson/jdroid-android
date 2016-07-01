@@ -223,46 +223,38 @@ public class InAppBillingClient {
 			final List<ProductType> subscriptionsProductTypes) {
 		final Handler handler = new Handler();
 		if (flagStartAsync("queryInventory")) {
-			ExecutorUtils.execute(new Runnable() {
-				
-				@Override
-				public void run() {
+			ExecutorUtils.execute(() -> {
+				try {
+					ErrorCodeException errorCodeException = null;
+					Inventory inventory = null;
 					try {
-						ErrorCodeException errorCodeException = null;
-						Inventory inventory = null;
-						try {
-							inventory = queryInventoryInner(managedProductTypes, subscriptionsProductTypes);
-							InAppBillingAppModule.get().getInAppBillingContext().setPurchasedProductTypes(inventory);
-						} catch (ErrorCodeException e) {
-							errorCodeException = e;
-						}
-						
-						flagEndAsync();
-						
-						final ErrorCodeException errorCodeExceptionFinal = errorCodeException;
-						final Inventory inventoryFinal = inventory;
-						if (!disposed) {
-							handler.post(new Runnable() {
-								
-								@Override
-								public void run() {
-									if (listener != null) {
-										if (errorCodeExceptionFinal == null) {
-											listener.onQueryInventoryFinished(inventoryFinal);
-										} else {
-											listener.onQueryInventoryFailed(errorCodeExceptionFinal);
-										}
-									}
+						inventory = queryInventoryInner(managedProductTypes, subscriptionsProductTypes);
+						InAppBillingAppModule.get().getInAppBillingContext().setPurchasedProductTypes(inventory);
+					} catch (ErrorCodeException e) {
+						errorCodeException = e;
+					}
+
+					flagEndAsync();
+
+					final ErrorCodeException errorCodeExceptionFinal = errorCodeException;
+					final Inventory inventoryFinal = inventory;
+					if (!disposed) {
+						handler.post(() -> {
+							if (listener != null) {
+								if (errorCodeExceptionFinal == null) {
+									listener.onQueryInventoryFinished(inventoryFinal);
+								} else {
+									listener.onQueryInventoryFailed(errorCodeExceptionFinal);
 								}
-							});
-						}
-					} catch (Exception e) {
-						if (listener != null) {
-							listener.onQueryInventoryFailed(InAppBillingErrorCode.UNEXPECTED_ERROR.newErrorCodeException(e));
-						}
+							}
+						});
+					}
+				} catch (Exception e) {
+					if (listener != null) {
+						listener.onQueryInventoryFailed(InAppBillingErrorCode.UNEXPECTED_ERROR.newErrorCodeException(e));
 					}
 				}
-			});
+            });
 		}
 	}
 	
@@ -598,43 +590,35 @@ public class InAppBillingClient {
 	public void consume(final Product product) {
 		final Handler handler = new Handler();
 		if (flagStartAsync("consume")) {
-			ExecutorUtils.execute(new Runnable() {
-				
-				@Override
-				public void run() {
-					try {
-						ErrorCodeException errorCodeException = null;
-						try {
-							consumeInner(product);
-						} catch (ErrorCodeException e) {
-							errorCodeException = e;
-						}
-						
-						flagEndAsync();
-						
-						final ErrorCodeException errorCodeExceptionFinal = errorCodeException;
-						if (!disposed) {
-							handler.post(new Runnable() {
-								
-								@Override
-								public void run() {
-									if (listener != null) {
-										if (errorCodeExceptionFinal == null) {
-											listener.onConsumeFinished(product);
-										} else {
-											listener.onConsumeFailed(errorCodeExceptionFinal);
-										}
-									}
-								}
-							});
-						}
-					} catch (Exception e) {
-						if (listener != null) {
-							listener.onQueryInventoryFailed(InAppBillingErrorCode.UNEXPECTED_ERROR.newErrorCodeException(e));
-						}
-					}
-				}
-			});
+			ExecutorUtils.execute(() -> {
+                try {
+                    ErrorCodeException errorCodeException = null;
+                    try {
+                        consumeInner(product);
+                    } catch (ErrorCodeException e) {
+                        errorCodeException = e;
+                    }
+
+                    flagEndAsync();
+
+                    final ErrorCodeException errorCodeExceptionFinal = errorCodeException;
+                    if (!disposed) {
+                        handler.post(() -> {
+                            if (listener != null) {
+                                if (errorCodeExceptionFinal == null) {
+                                    listener.onConsumeFinished(product);
+                                } else {
+                                    listener.onConsumeFailed(errorCodeExceptionFinal);
+                                }
+                            }
+                        });
+                    }
+                } catch (Exception e) {
+                    if (listener != null) {
+                        listener.onQueryInventoryFailed(InAppBillingErrorCode.UNEXPECTED_ERROR.newErrorCodeException(e));
+                    }
+                }
+            });
 		}
 	}
 	
