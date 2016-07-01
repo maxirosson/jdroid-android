@@ -12,6 +12,8 @@ import java.util.List;
 
 public class AppInviteStats {
 
+	private AppInviteStats(){}
+
 	private static final String APP_INVITE_STATS = "appInviteStats";
 
 	private static final String LAST_INVITE_SENT_TIMESTAMP = "lastInviteSentTimestamp";

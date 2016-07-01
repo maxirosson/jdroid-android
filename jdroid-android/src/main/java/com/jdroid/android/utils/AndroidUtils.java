@@ -13,6 +13,8 @@ import com.jdroid.java.utils.ValidationUtils;
 import java.util.List;
 
 public class AndroidUtils {
+
+	private AndroidUtils(){}
 	
 	public static Integer getApiLevel() {
 		return android.os.Build.VERSION.SDK_INT;

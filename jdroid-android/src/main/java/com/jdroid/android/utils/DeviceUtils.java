@@ -20,6 +20,8 @@ import com.jdroid.java.utils.StringUtils;
 
 public class DeviceUtils {
 
+	private DeviceUtils(){}
+
 	private static final String DEVICE_YEAR_CLASS = "DeviceYearClass";
 
 	private static Integer deviceYearClass = YearClass.CLASS_UNKNOWN;

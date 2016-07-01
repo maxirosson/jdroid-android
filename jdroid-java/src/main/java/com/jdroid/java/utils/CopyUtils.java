@@ -11,6 +11,8 @@ import java.io.Serializable;
 
 public class CopyUtils {
 
+	private CopyUtils(){}
+
 	@SuppressWarnings("unchecked")
 	public static <T extends Serializable> T cloneSerializable(T object) {
 		T cloneObject;

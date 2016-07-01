@@ -3,6 +3,8 @@ package com.jdroid.java.utils;
 import java.text.Normalizer;
 
 public class Sanitizer {
+
+	private Sanitizer(){}
 	
 	public static String plainString(String text) {
 		String plain = null;

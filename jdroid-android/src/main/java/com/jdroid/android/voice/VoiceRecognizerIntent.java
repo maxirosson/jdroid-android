@@ -24,6 +24,8 @@ import java.util.List;
  * </p>
  */
 public class VoiceRecognizerIntent {
+
+	private VoiceRecognizerIntent(){}
 	
 	private static final int REQUEST_CODE = RandomUtils.get16BitsInt();
 	private static final String PACKAGE = "com.google.android.voicesearch";

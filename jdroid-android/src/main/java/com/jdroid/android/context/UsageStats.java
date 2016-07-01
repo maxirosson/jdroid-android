@@ -5,6 +5,8 @@ import com.jdroid.java.date.DateUtils;
 
 public class UsageStats {
 
+	private UsageStats(){}
+
 	private static final String USAGE_STATS = "usageStats";
 	private static final String APP_LOADS = "appLoads";
 	private static final String FIRST_APP_LOAD_TIMESTAMP = "firstAppLoadTimestamp";

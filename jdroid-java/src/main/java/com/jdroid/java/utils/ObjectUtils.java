@@ -6,6 +6,8 @@ package com.jdroid.java.utils;
  * </p>
  */
 public class ObjectUtils {
+
+	private ObjectUtils(){}
 	
 	/**
 	 * <p>

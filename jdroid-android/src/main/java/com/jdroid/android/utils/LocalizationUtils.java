@@ -4,6 +4,8 @@ import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.java.exception.ErrorCode;
 
 public final class LocalizationUtils {
+
+	private LocalizationUtils(){}
 	
 	/**
 	 * Returns a formatted string, using the localized resource as format and the supplied arguments

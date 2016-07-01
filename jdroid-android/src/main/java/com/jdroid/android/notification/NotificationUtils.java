@@ -7,6 +7,8 @@ import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.utils.ScreenUtils;
 
 public class NotificationUtils {
+
+	private NotificationUtils(){}
 	
 	private final static NotificationManager NOTIFICATION_MANAGER = (NotificationManager)AbstractApplication.get().getSystemService(
 		Context.NOTIFICATION_SERVICE);

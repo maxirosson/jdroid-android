@@ -3,6 +3,8 @@ package com.jdroid.java.collections;
 import java.util.Iterator;
 
 public class Iterators {
+
+	private Iterators(){}
 	
 	/**
 	 * Returns the number of elements remaining in {@code iterator}. The iterator will be left exhausted: its

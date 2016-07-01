@@ -8,6 +8,8 @@ import java.util.LinkedHashSet;
 import java.util.TreeSet;
 
 public class Sets {
+
+	private Sets(){}
 	
 	// HashSet
 	

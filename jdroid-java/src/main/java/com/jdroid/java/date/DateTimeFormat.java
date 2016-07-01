@@ -2,6 +2,8 @@ package com.jdroid.java.date;
 
 public class DateTimeFormat {
 
+	private DateTimeFormat(){}
+
 	/** Date format like 2013-01-11T20:30:00.000 */
 	public static final String YYYYMMDDTHHMMSSSSS = "yyyy-MM-dd'T'HH:mm:ss.SSS";
 

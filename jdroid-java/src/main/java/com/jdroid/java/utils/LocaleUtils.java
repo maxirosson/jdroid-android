@@ -4,6 +4,8 @@ import java.util.Locale;
 
 public class LocaleUtils {
 
+	private LocaleUtils(){}
+
 	public static String getAcceptLanguage() {
 		String language = Locale.getDefault().getLanguage();
 		String country = Locale.getDefault().getCountry();

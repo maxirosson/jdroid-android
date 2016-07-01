@@ -5,6 +5,8 @@ import java.util.LinkedHashMap;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Maps {
+
+	private Maps(){}
 	
 	/**
 	 * Creates a <i>mutable</i>, empty {@code HashMap} instance.

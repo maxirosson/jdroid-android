@@ -3,6 +3,8 @@ package com.jdroid.java.collections;
 import java.lang.reflect.Array;
 
 public class ObjectArrays {
+
+	private ObjectArrays(){}
 	
 	/**
 	 * Returns a new array of the given length with the specified component type.

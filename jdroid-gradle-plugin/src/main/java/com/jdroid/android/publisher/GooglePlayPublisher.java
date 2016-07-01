@@ -48,6 +48,8 @@ import java.util.List;
  */
 public class GooglePlayPublisher {
 
+	private GooglePlayPublisher(){}
+
 	private static final Logger LOGGER = LoggerUtils.getLogger(GooglePlayPublisher.class);
 
 	public static final String MIME_TYPE_APK = "application/vnd.android.package-archive";

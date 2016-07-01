@@ -16,6 +16,8 @@ import com.jdroid.android.google.GooglePlayUtils;
 import com.jdroid.android.intent.IntentUtils;
 
 public class ExternalAppsUtils {
+
+	private ExternalAppsUtils(){}
 	
 	public static final String TWITTER_PACKAGE_NAME = "com.twitter.android";
 	public static final String FACEBOOK_PACKAGE_NAME = "com.facebook.katana";

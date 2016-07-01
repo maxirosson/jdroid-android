@@ -8,6 +8,8 @@ import com.jdroid.android.social.AccountType;
 import com.jdroid.android.social.SocialAction;
 
 public class TwitterConnector {
+
+	private TwitterConnector(){}
 	
 	public static Integer CHARACTERS_LIMIT = 140;
 	public static Integer URL_CHARACTERS_COUNT = 22;

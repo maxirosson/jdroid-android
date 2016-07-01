@@ -6,6 +6,8 @@ import com.jdroid.java.date.DateUtils;
 
 public class RateAppStats {
 
+	private RateAppStats(){}
+
 	private static final String RATE_APP_STATS = "rateAppStats";
 	private static final String LAST_RESPONSE_TIMESTAMP = "lastResponseTimestamp";
 	private static final String ENJOYING = "enjoying";

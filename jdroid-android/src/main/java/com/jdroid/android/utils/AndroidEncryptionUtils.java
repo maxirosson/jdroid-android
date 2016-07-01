@@ -19,6 +19,8 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
 public class AndroidEncryptionUtils {
+
+	private AndroidEncryptionUtils(){}
 	
 	private static final String BASE64_KEY = "base64Key";
 	

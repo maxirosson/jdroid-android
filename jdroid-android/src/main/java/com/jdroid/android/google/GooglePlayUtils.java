@@ -12,6 +12,8 @@ import com.jdroid.android.intent.IntentUtils;
 import com.jdroid.android.utils.AppUtils;
 
 public class GooglePlayUtils {
+
+	private GooglePlayUtils(){}
 	
 	private static final String GOOGLE_PLAY_DETAILS_LINK = "http://play.google.com/store/apps/details?id=";
 	

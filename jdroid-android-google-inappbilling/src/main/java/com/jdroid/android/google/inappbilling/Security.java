@@ -27,6 +27,8 @@ import android.util.Log;
  * code to make it harder for an attacker to replace the code with stubs that treat all purchases as verified.
  */
 public class Security {
+
+	private Security(){}
 	
 	private static final String TAG = "IABUtil/Security";
 	

@@ -7,6 +7,8 @@ import com.jdroid.android.application.AbstractApplication;
 
 public class InAppBillingHelper {
 
+	private InAppBillingHelper(){}
+
 	private static Boolean inAppBillingLoaded = false;
 
 	public static void onCreate(FragmentActivity activity, Bundle savedInstanceState) {

@@ -22,6 +22,9 @@ import java.io.PrintStream;
  * Generate fancy output.
  */
 public class Output {
+
+    private Output(){}
+
     private static final String IN0 = "";
     private static final String IN1 = "  ";
     private static final String IN2 = "    ";

@@ -13,6 +13,8 @@ import java.util.UUID;
 
 public class InstanceIdHelper {
 
+	private InstanceIdHelper(){}
+
 	private final static Logger LOGGER = LoggerUtils.getLogger(InstanceIdHelper.class);
 
 	private static final String INSTANCE_ID_PREFERENCES = "usageStats";

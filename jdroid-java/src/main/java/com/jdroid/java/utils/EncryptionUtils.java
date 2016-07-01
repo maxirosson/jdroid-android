@@ -15,6 +15,8 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
 public class EncryptionUtils {
+
+	private EncryptionUtils(){}
 	
 	private static final String AES = "AES";
 	

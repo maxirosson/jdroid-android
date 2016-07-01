@@ -14,6 +14,8 @@ import com.jdroid.android.application.AbstractApplication;
  * Launcher for all the activities of the application
  */
 public class ActivityLauncher {
+
+	private ActivityLauncher(){}
 	
 	/**
 	 * Launches the {@link AbstractApplication#getHomeActivityClass()}

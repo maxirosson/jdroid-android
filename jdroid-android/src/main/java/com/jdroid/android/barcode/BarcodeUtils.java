@@ -22,6 +22,8 @@ import com.jdroid.java.utils.RandomUtils;
  * 
  */
 public final class BarcodeUtils {
+
+	private BarcodeUtils(){}
 	
 	private static final int REQUEST_CODE = RandomUtils.get16BitsInt();
 	

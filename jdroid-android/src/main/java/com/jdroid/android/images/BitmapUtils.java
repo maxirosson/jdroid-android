@@ -12,6 +12,8 @@ import android.util.Log;
 import com.jdroid.android.application.AbstractApplication;
 
 public class BitmapUtils {
+
+	private BitmapUtils(){}
 	
 	public static Bitmap toBitmap(int resId, Integer maxWidth, Integer maxHeight) {
 		Bitmap bitmap = BitmapFactory.decodeResource(AbstractApplication.get().getResources(), resId);

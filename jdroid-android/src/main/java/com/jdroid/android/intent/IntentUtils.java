@@ -9,6 +9,8 @@ import android.net.Uri;
 import com.jdroid.android.application.AbstractApplication;
 
 public class IntentUtils {
+
+	private IntentUtils(){}
 	
 	/**
 	 * Indicates whether the specified action can be used as an intent. This method queries the package manager for

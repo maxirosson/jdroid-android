@@ -28,6 +28,8 @@ import au.com.bytecode.opencsv.CSVWriter;
  * Utilities for CSV
  */
 public class CSVUtils {
+
+	private CSVUtils(){}
 	
 	public static interface ValueConverter<T> {
 		

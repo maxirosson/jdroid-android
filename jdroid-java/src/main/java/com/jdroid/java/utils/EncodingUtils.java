@@ -5,6 +5,8 @@ import com.jdroid.java.exception.UnexpectedException;
 import java.io.UnsupportedEncodingException;
 
 public class EncodingUtils {
+
+	private EncodingUtils(){}
 	
 	public static final String UTF8 = "UTF-8";
 	private static final char[] HEX_DIGITS = "0123456789ABCDEF".toCharArray();

@@ -16,6 +16,8 @@ import java.util.concurrent.TimeUnit;
  * Utilities for Dates and Calendars
  */
 public abstract class DateUtils {
+
+	private DateUtils(){}
 	
 	/** Seconds in a minute */
 	public static final int SECONDS_PER_MINUTE = 60;

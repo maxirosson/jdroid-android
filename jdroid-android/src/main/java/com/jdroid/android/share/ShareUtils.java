@@ -13,6 +13,8 @@ import com.jdroid.java.http.MimeType;
 import com.jdroid.java.utils.EncodingUtils;
 
 public class ShareUtils {
+
+	public ShareUtils(){}
 	
 	public static void shareTextContent(String shareKey, int shareTitle, int shareSubject, int shareText) {
 		Activity activity = AbstractApplication.get().getCurrentActivity();

@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 public class LoggerUtils {
+
+	private LoggerUtils(){}
 	
 	private static boolean enabled = false;
 	private static ExceptionLogger exceptionLogger;

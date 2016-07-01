@@ -3,6 +3,8 @@ package com.jdroid.java.utils;
 import java.text.DecimalFormat;
 
 public class NumberUtils {
+
+	private NumberUtils(){}
 	
 	public static Float getFloat(String value) {
 		return getFloat(value, null);

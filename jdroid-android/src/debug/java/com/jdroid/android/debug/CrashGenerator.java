@@ -5,6 +5,8 @@ import com.jdroid.java.concurrent.ExecutorUtils;
 import com.jdroid.java.exception.AbstractException;
 
 public class CrashGenerator {
+
+	private CrashGenerator(){}
 	
 	public static void crash(final ExceptionType exceptionType, Boolean executeOnNewThread) {
 		Runnable runnable = new Runnable() {

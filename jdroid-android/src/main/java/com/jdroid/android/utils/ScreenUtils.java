@@ -14,6 +14,8 @@ import com.jdroid.android.R;
 import com.jdroid.java.utils.StringUtils;
 
 public class ScreenUtils {
+
+	private ScreenUtils(){}
 	
 	public static final String LDPI_DENSITY_NAME = "ldpi";
 	public static final String MDPI_DENSITY_NAME = "mdpi";

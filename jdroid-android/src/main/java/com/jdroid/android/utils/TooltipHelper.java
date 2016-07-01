@@ -18,6 +18,8 @@ import android.widget.Toast;
  * > ActionMenuItemView.java</a>.
  */
 public class TooltipHelper {
+
+	private TooltipHelper(){}
 	
 	/**
 	 * The estimated height of a toast, in dps (density-independent pixels). This is used to determine whether or not

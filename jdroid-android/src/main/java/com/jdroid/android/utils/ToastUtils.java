@@ -8,6 +8,8 @@ import com.jdroid.android.application.AbstractApplication;
 import java.lang.ref.WeakReference;
 
 public final class ToastUtils {
+
+	private ToastUtils(){}
 	
 	private static final int DEFAULT_DURATION = Toast.LENGTH_LONG;
 	

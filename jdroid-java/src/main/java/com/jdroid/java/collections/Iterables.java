@@ -3,6 +3,8 @@ package com.jdroid.java.collections;
 import java.util.Collection;
 
 public class Iterables {
+
+	private Iterables(){}
 	
 	/**
 	 * Returns the number of elements in {@code iterable}.

@@ -1,6 +1,8 @@
 package com.jdroid.java.utils;
 
 public class IdGenerator {
+
+	private IdGenerator(){}
 	
 	private static Integer ID = 10000;
 	

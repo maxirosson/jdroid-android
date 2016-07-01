@@ -14,6 +14,8 @@ import com.jdroid.android.application.AbstractApplication;
 
 public class AppUtils {
 
+	private AppUtils(){}
+
 	/**
 	 * @return The version name of the application
 	 */

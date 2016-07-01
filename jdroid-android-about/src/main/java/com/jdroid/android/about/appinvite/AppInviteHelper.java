@@ -10,6 +10,8 @@ import com.jdroid.java.collections.Lists;
 
 public class AppInviteHelper {
 
+	private AppInviteHelper(){}
+
 	public static void onActivityResult(int appInviteRequestCode, int requestCode, int resultCode, Intent data) {
 
 		if (requestCode == appInviteRequestCode) {

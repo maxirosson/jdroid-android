@@ -1,6 +1,8 @@
 package com.jdroid.java.http;
 
 public class MimeType {
+
+	private MimeType(){}
 	
 	public static final String TEXT = "text/plain";
 	public static final String HTML = "text/html";

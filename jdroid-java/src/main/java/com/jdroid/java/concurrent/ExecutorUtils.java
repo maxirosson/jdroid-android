@@ -9,6 +9,8 @@ import org.slf4j.Logger;
 import com.jdroid.java.utils.LoggerUtils;
 
 public final class ExecutorUtils {
+
+	private ExecutorUtils(){}
 	
 	private static final Logger LOGGER = LoggerUtils.getLogger(ExecutorUtils.class);
 	

@@ -10,6 +10,8 @@ import com.jdroid.android.social.SocialAction;
 
 public class FacebookHelper {
 
+	private FacebookHelper(){}
+
 	public static void openPage(String pageId) {
 		try {
 			Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("fb://page/" + pageId));

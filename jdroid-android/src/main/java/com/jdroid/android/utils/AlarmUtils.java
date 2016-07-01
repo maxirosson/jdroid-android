@@ -9,6 +9,8 @@ import com.jdroid.java.date.DateUtils;
 import com.jdroid.java.utils.LoggerUtils;
 
 public class AlarmUtils {
+
+	private AlarmUtils(){}
 	
 	private final static Logger LOGGER = LoggerUtils.getLogger(AlarmUtils.class);
 	
