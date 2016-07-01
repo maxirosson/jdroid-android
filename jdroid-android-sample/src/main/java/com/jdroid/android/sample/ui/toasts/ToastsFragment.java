@@ -23,24 +23,9 @@ public class ToastsFragment extends AbstractFragment {
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 		
-		findView(R.id.displayToastFromUIThread).setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				ToastUtils.showToast(R.string.toastFromUIThread);
-			}
-		});
-		findView(R.id.displayToastFromWorkerThread).setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				ExecutorUtils.execute(new Runnable() {
-					@Override
-					public void run() {
-						ToastUtils.showToastOnUIThread(R.string.toastFromWorkerThread);
-					}
-				});
-			}
-		});
+		findView(R.id.displayToastFromUIThread).setOnClickListener(v -> ToastUtils.showToast(R.string.toastFromUIThread));
+
+		findView(R.id.displayToastFromWorkerThread).setOnClickListener(v ->
+				ExecutorUtils.execute(() -> ToastUtils.showToastOnUIThread(R.string.toastFromWorkerThread)));
 	}
 }

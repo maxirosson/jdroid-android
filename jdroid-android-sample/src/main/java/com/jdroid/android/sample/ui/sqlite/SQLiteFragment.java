@@ -30,30 +30,19 @@ public class SQLiteFragment extends AbstractFragment {
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 		
-		findView(R.id.sqliteAdd).setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				ExecutorUtils.execute(new Runnable() {
-					@Override
-					public void run() {
-						Repository<SampleSQLiteEntity> repository = AndroidApplication.get().getRepositoryInstance(SampleSQLiteEntity.class);
-						SampleSQLiteEntity entity = new SampleSQLiteEntity();
-						lastId = RandomUtils.getLong().toString();
-						entity.setId(lastId);
-						entity.setField(RandomUtils.getLong().toString());
-						repository.add(entity);
-					}
-				});
-			}
-		});
-		findView(R.id.sqliteUpdate).setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				ExecutorUtils.execute(new Runnable() {
-					@Override
-					public void run() {
+		findView(R.id.sqliteAdd).setOnClickListener(v ->
+				ExecutorUtils.execute(() -> {
+					Repository<SampleSQLiteEntity> repository = AndroidApplication.get().getRepositoryInstance(SampleSQLiteEntity.class);
+					SampleSQLiteEntity entity = new SampleSQLiteEntity();
+					lastId = RandomUtils.getLong().toString();
+					entity.setId(lastId);
+					entity.setField(RandomUtils.getLong().toString());
+					repository.add(entity);
+				}
+			));
+
+		findView(R.id.sqliteUpdate).setOnClickListener(v ->
+				ExecutorUtils.execute(() -> {
 						if (lastId != null) {
 							Repository<SampleSQLiteEntity> repository = AndroidApplication.get().getRepositoryInstance(SampleSQLiteEntity.class);
 							SampleSQLiteEntity entity = repository.get(lastId);
@@ -63,56 +52,32 @@ public class SQLiteFragment extends AbstractFragment {
 							}
 						}
 					}
-				});
-			}
-		});
-		findView(R.id.sqliteRemove).setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				ExecutorUtils.execute(new Runnable() {
-					@Override
-					public void run() {
-						if (lastId != null) {
-							Repository<SampleSQLiteEntity> repository = AndroidApplication.get().getRepositoryInstance(SampleSQLiteEntity.class);
-							repository.remove(lastId);
-							lastId = null;
-						}
-					}
-				});
-			}
-		});
-		findView(R.id.sqliteRemoveAll).setOnClickListener(new OnClickListener() {
+				)
+			);
 
-			@Override
-			public void onClick(View v) {
-				ExecutorUtils.execute(new Runnable() {
-					@Override
-					public void run() {
+		findView(R.id.sqliteRemove).setOnClickListener(v ->
+				ExecutorUtils.execute(() -> {
+					if (lastId != null) {
 						Repository<SampleSQLiteEntity> repository = AndroidApplication.get().getRepositoryInstance(SampleSQLiteEntity.class);
-						repository.removeAll();
+						repository.remove(lastId);
+						lastId = null;
 					}
-				});
-			}
-		});
-		findView(R.id.sqliteGetAll).setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				ExecutorUtils.execute(new Runnable() {
-					@Override
-					public void run() {
-						final Repository<SampleSQLiteEntity> repository = AndroidApplication.get().getRepositoryInstance(SampleSQLiteEntity.class);
-						final List<SampleSQLiteEntity> results = repository.getAll();
-						executeOnUIThread(new Runnable() {
-							@Override
-							public void run() {
-								((TextView)findView(R.id.results)).setText(results.toString());
-							}
-						});
-					}
-				});
-			}
-		});
+				}
+			));
+
+		findView(R.id.sqliteRemoveAll).setOnClickListener(v ->
+				ExecutorUtils.execute(() -> {
+					Repository<SampleSQLiteEntity> repository = AndroidApplication.get().getRepositoryInstance(SampleSQLiteEntity.class);
+					repository.removeAll();
+				}
+			));
+
+		findView(R.id.sqliteGetAll).setOnClickListener(v ->
+				ExecutorUtils.execute(() -> {
+					final Repository<SampleSQLiteEntity> repository = AndroidApplication.get().getRepositoryInstance(SampleSQLiteEntity.class);
+					final List<SampleSQLiteEntity> results = repository.getAll();
+					executeOnUIThread(() -> ((TextView)findView(R.id.results)).setText(results.toString()));
+				}
+			));
 	}
 }

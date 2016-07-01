@@ -20,19 +20,15 @@ public class LogsDebugPrefsAppender implements PreferencesAppender {
 	private static final Logger LOGGER_UTILS = LoggerUtils.getLogger(LogsDebugPrefsAppender.class);
 	
 	public static void clean() {
-		ExecutorUtils.execute(new Runnable() {
+		ExecutorUtils.execute(() -> {
 
-			@Override
-			public void run() {
-
-				try {
-					Repository<DatabaseLog> repository = AbstractApplication.get().getRepositoryInstance(DatabaseLog.class);
-					repository.removeAll();
-				} catch (Exception e) {
-					AbstractApplication.get().getExceptionHandler().logHandledException(e);
-				}
-			}
-		});
+            try {
+                Repository<DatabaseLog> repository = AbstractApplication.get().getRepositoryInstance(DatabaseLog.class);
+                repository.removeAll();
+            } catch (Exception e) {
+                AbstractApplication.get().getExceptionHandler().logHandledException(e);
+            }
+        });
 	}
 
 	/**

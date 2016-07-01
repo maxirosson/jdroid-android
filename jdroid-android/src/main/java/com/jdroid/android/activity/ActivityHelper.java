@@ -200,16 +200,12 @@ public class ActivityHelper implements ActivityIf {
 		LOGGER.debug("Executing onStart on " + activity);
 		AbstractApplication.get().setCurrentActivity(activity);
 
-		ExecutorUtils.execute(new Runnable() {
-
-			@Override
-			public void run() {
-				AbstractApplication.get().saveInstallationSource();
-				AppLoadingSource appLoadingSource = AppLoadingSource.getAppLoadingSource(activity.getIntent());
-				AbstractApplication.get().getAnalyticsSender().onActivityStart(activity.getClass(), appLoadingSource,
-						getOnActivityStartData());
-			}
-		});
+		ExecutorUtils.execute(() -> {
+            AbstractApplication.get().saveInstallationSource();
+            AppLoadingSource appLoadingSource = AppLoadingSource.getAppLoadingSource(activity.getIntent());
+            AbstractApplication.get().getAnalyticsSender().onActivityStart(activity.getClass(), appLoadingSource,
+                    getOnActivityStartData());
+        });
 
 		final Long locationFrequency = getActivityIf().getLocationFrequency();
 		if (locationFrequency != null) {
@@ -442,29 +438,21 @@ public class ActivityHelper implements ActivityIf {
 
 	@Override
 	public void showLoading() {
-		executeOnUIThread(new Runnable() {
-
-			@Override
-			public void run() {
-				if (loading == null) {
-					loading = getActivityIf().getDefaultLoading();
-				}
-				loading.show(getActivityIf());
-			}
-		});
+		executeOnUIThread(() -> {
+            if (loading == null) {
+                loading = getActivityIf().getDefaultLoading();
+            }
+            loading.show(getActivityIf());
+        });
 	}
 
 	@Override
 	public void dismissLoading() {
-		executeOnUIThread(new Runnable() {
-
-			@Override
-			public void run() {
-				if (loading != null) {
-					loading.dismiss(getActivityIf());
-				}
-			}
-		});
+		executeOnUIThread(() -> {
+            if (loading != null) {
+                loading.dismiss(getActivityIf());
+            }
+        });
 	}
 
 	@NonNull
