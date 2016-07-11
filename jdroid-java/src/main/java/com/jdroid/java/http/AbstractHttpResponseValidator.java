@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 
 public abstract class AbstractHttpResponseValidator extends BasicHttpResponseValidator {
 
-	private final static Logger LOGGER = LoggerUtils.getLogger(AbstractHttpResponseValidator.class);
+	private static final Logger LOGGER = LoggerUtils.getLogger(AbstractHttpResponseValidator.class);
 
 	private static final String STATUS_CODE_HEADER = "status-code";
 	private static final String SUCCESSFUL_STATUS_CODE = "200";

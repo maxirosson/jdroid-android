@@ -410,7 +410,7 @@ public class PermissionHelper {
 	}
 
 
-	protected static abstract class PermissionDelegate {
+	protected abstract static class PermissionDelegate {
 
 		public abstract FragmentActivity getActivity();
 

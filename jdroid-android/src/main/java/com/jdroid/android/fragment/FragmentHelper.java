@@ -32,7 +32,7 @@ import java.util.Map;
 
 public class FragmentHelper implements FragmentIf {
 	
-	private final static Logger LOGGER = LoggerUtils.getLogger(FragmentHelper.class);
+	private static final Logger LOGGER = LoggerUtils.getLogger(FragmentHelper.class);
 
 	private Fragment fragment;
 

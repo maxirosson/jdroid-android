@@ -23,9 +23,9 @@ import java.util.List;
 
 public class GcmRegistrationCommand extends ServiceCommand {
 	
-	private final static Logger LOGGER = LoggerUtils.getLogger(GcmRegistrationCommand.class);
+	private static final Logger LOGGER = LoggerUtils.getLogger(GcmRegistrationCommand.class);
 
-	private final static String UPDATE_LAST_ACTIVE_TIMESTAMP_EXTRA = "updateLastActiveTimestamp";
+	private static final String UPDATE_LAST_ACTIVE_TIMESTAMP_EXTRA = "updateLastActiveTimestamp";
 
 	public void start(Boolean updateLastActiveTimestamp) {
 		Intent intent = new Intent();

@@ -17,8 +17,8 @@ import java.util.Set;
 
 public class SQLiteHelper extends SQLiteOpenHelper {
 	
-	private final static Logger LOGGER = LoggerUtils.getLogger(SQLiteHelper.class);
-	private final static String DB_NAME = "application.db";
+	private static final Logger LOGGER = LoggerUtils.getLogger(SQLiteHelper.class);
+	private static final String DB_NAME = "application.db";
 	
 	private Set<String> createSQLs = Sets.newHashSet();
 	private List<SQLiteUpgradeStep> upgradeSteps = Lists.newArrayList();

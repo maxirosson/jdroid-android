@@ -17,7 +17,7 @@ public abstract class AbstractUseCase implements Runnable, Serializable {
 	
 	private static final long serialVersionUID = 3732327346852606739L;
 	
-	private final static Logger LOGGER = LoggerUtils.getLogger(AbstractUseCase.class);
+	private static final Logger LOGGER = LoggerUtils.getLogger(AbstractUseCase.class);
 	
 	public enum UseCaseStatus {
 		NOT_INVOKED,

@@ -2,8 +2,8 @@ package com.jdroid.java.http.mock;
 
 public abstract class XmlMockHttpService extends AbstractMockHttpService {
 	
-	private final static String MOCKS_BASE_PATH = "mocks/xml/";
-	private final static String MOCKS_EXTENSION = ".xml";
+	private static final String MOCKS_BASE_PATH = "mocks/xml/";
+	private static final String MOCKS_EXTENSION = ".xml";
 	
 	public XmlMockHttpService(Object... urlSegments) {
 		super(urlSegments);

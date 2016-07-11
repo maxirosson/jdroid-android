@@ -11,9 +11,9 @@ import org.slf4j.Logger;
 
 public class CommandWorkerService extends WorkerService {
 
-	private final static Logger LOGGER = LoggerUtils.getLogger(CommandWorkerService.class);
+	private static final Logger LOGGER = LoggerUtils.getLogger(CommandWorkerService.class);
 
-	public final static String COMMAND_EXTRA = "command";
+	public static final String COMMAND_EXTRA = "command";
 
 	@Override
 	protected String getTrackingLabel(Intent intent) {

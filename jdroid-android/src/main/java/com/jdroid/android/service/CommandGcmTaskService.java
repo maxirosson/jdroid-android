@@ -7,7 +7,7 @@ import com.jdroid.java.utils.ReflectionUtils;
 
 public class CommandGcmTaskService extends AbstractGcmTaskService {
 
-	public final static String COMMAND_EXTRA = "command";
+	public static final String COMMAND_EXTRA = "command";
 
 	@Override
 	public void onInitializeTasks() {

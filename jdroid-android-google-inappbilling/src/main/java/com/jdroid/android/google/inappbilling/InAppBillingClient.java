@@ -57,7 +57,7 @@ import java.util.Map;
  */
 public class InAppBillingClient {
 	
-	private final static Logger LOGGER = LoggerUtils.getLogger(InAppBillingClient.class);
+	private static final Logger LOGGER = LoggerUtils.getLogger(InAppBillingClient.class);
 	
 	private static final int IN_APP_BILLING_API_VERSION = 3;
 	

@@ -14,7 +14,7 @@ import java.util.List;
 
 public abstract class AbstractGcmMessageResolver implements GcmMessageResolver {
 	
-	private final static Logger LOGGER = LoggerUtils.getLogger(AbstractGcmMessageResolver.class);
+	private static final Logger LOGGER = LoggerUtils.getLogger(AbstractGcmMessageResolver.class);
 	
 	private static final String MESSAGE_KEY_EXTRA = "messageKey";
 	private static final String USER_ID_KEY = "userIdKey";

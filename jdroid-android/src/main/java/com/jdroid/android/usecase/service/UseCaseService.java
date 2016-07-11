@@ -12,8 +12,8 @@ import com.jdroid.java.concurrent.ExecutorUtils;
 @SuppressLint("Registered")
 public class UseCaseService extends WorkerService {
 	
-	private final static String USE_CASE = "useCase";
-	private final static String NOTIFICATION_TO_CANCEL_ID = "notificationToCancelId";
+	private static final String USE_CASE = "useCase";
+	private static final String NOTIFICATION_TO_CANCEL_ID = "notificationToCancelId";
 	
 	@Override
 	protected void doExecute(Intent intent) {

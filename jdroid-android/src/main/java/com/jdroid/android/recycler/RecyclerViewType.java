@@ -13,7 +13,7 @@ import org.slf4j.Logger;
 
 public abstract class RecyclerViewType<ITEM, VIEWHOLDER extends RecyclerView.ViewHolder> implements View.OnClickListener {
 
-	private final static Logger LOGGER = LoggerUtils.getLogger(RecyclerViewType.class);
+	private static final Logger LOGGER = LoggerUtils.getLogger(RecyclerViewType.class);
 
 	public View inflateView(LayoutInflater inflater, ViewGroup parent) {
 		View view = inflater.inflate(getLayoutResourceId(), parent, false);

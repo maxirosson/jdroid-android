@@ -8,7 +8,7 @@ import java.lang.Thread.UncaughtExceptionHandler;
 
 public class DefaultExceptionHandler implements UncaughtExceptionHandler {
 	
-	private final static Logger LOGGER = LoggerUtils.getLogger(DefaultExceptionHandler.class);
+	private static final Logger LOGGER = LoggerUtils.getLogger(DefaultExceptionHandler.class);
 	
 	private UncaughtExceptionHandler wrappedExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
 

@@ -22,7 +22,7 @@ public abstract class PaginatedUseCase<T> extends AbstractUseCase {
 		SORTING;
 	}
 	
-	private final static Logger LOGGER = LoggerUtils.getLogger(PaginatedUseCase.class);
+	private static final Logger LOGGER = LoggerUtils.getLogger(PaginatedUseCase.class);
 	
 	private PaginatedUseCaseMode paginatedUseCaseMode = PaginatedUseCaseMode.INITIAL_LOAD;
 	private int page = 1;

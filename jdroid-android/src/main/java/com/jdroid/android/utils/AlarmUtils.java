@@ -10,7 +10,7 @@ import com.jdroid.java.utils.LoggerUtils;
 
 public class AlarmUtils {
 	
-	private final static Logger LOGGER = LoggerUtils.getLogger(AlarmUtils.class);
+	private static final Logger LOGGER = LoggerUtils.getLogger(AlarmUtils.class);
 	
 	public static void scheduleRtcWakeUpAlarm(long triggerAtTime, PendingIntent operation) {
 		getAlarmManager().set(AlarmManager.RTC_WAKEUP, triggerAtTime, operation);
