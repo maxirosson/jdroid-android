@@ -16,11 +16,11 @@ public class CrashlyticsAppModule extends AbstractAppModule {
 
 	public static final String MODULE_NAME = CrashlyticsAppModule.class.getName();
 
+	private CrashlyticsAppContext crashlyticsAppContext;
+
 	public static CrashlyticsAppModule get() {
 		return (CrashlyticsAppModule)AbstractApplication.get().getAppModule(MODULE_NAME);
 	}
-
-	private CrashlyticsAppContext crashlyticsAppContext;
 
 	public CrashlyticsAppModule() {
 		crashlyticsAppContext = createCrashlyticsAppContext();

@@ -22,15 +22,15 @@ public class AdMobAppModule extends AbstractAppModule {
 
 	public static final String MODULE_NAME = AdMobAppModule.class.getName();
 
-	public static AdMobAppModule get() {
-		return (AdMobAppModule)AbstractApplication.get().getAppModule(MODULE_NAME);
-	}
-
 	private AdMobAppContext adMobAppContext;
 	private AdMobDebugContext adMobDebugContext;
 
 	public AdMobAppModule() {
 		adMobAppContext = createAdMobAppContext();
+	}
+
+	public static AdMobAppModule get() {
+		return (AdMobAppModule)AbstractApplication.get().getAppModule(MODULE_NAME);
 	}
 
 	protected AdMobAppContext createAdMobAppContext() {
