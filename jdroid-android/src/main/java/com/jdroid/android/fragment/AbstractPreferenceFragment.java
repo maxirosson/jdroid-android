@@ -220,7 +220,7 @@ public abstract class AbstractPreferenceFragment extends PreferenceFragment impl
 
 	@Override
 	public Boolean isSecondaryFragment() {
-		return null;
+		return false;
 	}
 
 	@Override
