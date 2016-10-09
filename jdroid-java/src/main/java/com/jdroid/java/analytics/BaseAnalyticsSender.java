@@ -28,7 +28,7 @@ public class BaseAnalyticsSender<T extends BaseAnalyticsTracker> implements Base
 
 	@Override
 	public Boolean isEnabled() {
-		return null;
+		return false;
 	}
 
 	protected List<T> getTrackers() {

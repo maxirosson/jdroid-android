@@ -26,7 +26,7 @@ public class TestAppContext extends AppContext {
 
 	@Override
 	public Boolean isGoogleAnalyticsDebugEnabled() {
-		return null;
+		return false;
 	}
 
 	@Override
