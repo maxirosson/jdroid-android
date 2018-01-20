@@ -123,7 +123,38 @@ jobs:
       - store_artifacts:
           path: ./jdroid-android-twitter/build/reports/tests/testDebugUnitTest
           destination: jdroid-android-twitter/tests
-          
+
+
+  testUI:
+    <<: *defaults
+    steps:
+      - checkout
+
+      - restore_cache:
+          key: app-{{ .Branch }}-{{ checksum "build.gradle" }}
+
+      - run:
+          name: Assembling automation & android test APKs
+          command: |
+            ./gradlew :jdroid-android-sample:assembleAutomation :jdroid-android-sample:assembleAndroidTest
+            for file in "./jdroid-android-sample/build/outputs/apk/automation"/*.apk; do mv ${file} ./jdroid-android-sample/build/outputs/apk/automation/jdroid-automation.apk; done
+
+      - run:
+          name: Authenticating on gcloud
+          command: |
+            echo "$GOOGLE_SERVICE_ACCOUNT" > /tmp/service-account.json
+            gcloud auth activate-service-account --key-file=/tmp/service-account.json --project=jdroid-staging
+
+      - run:
+          name: Running Robo tests
+          command: gcloud firebase test android run firebase_test_lab.yml:robo-tests-virtual --app ./jdroid-android-sample/build/outputs/apk/automation/jdroid-automation.apk
+
+      - run:
+          name: Running Instrumentation tests
+          command: |
+            gcloud firebase test android run firebase_test_lab.yml:instrumentation-tests-physical  --async --app ./jdroid-android-sample/build/outputs/apk/automation/jdroid-automation.apk --test ./jdroid-android-sample/build/outputs/apk/androidTest/automation/jdroid-android-sample-automation-androidTest.apk
+            gcloud firebase test android run firebase_test_lab.yml:instrumentation-tests-virtual --async --app ./jdroid-android-sample/build/outputs/apk/automation/jdroid-automation.apk --test ./jdroid-android-sample/build/outputs/apk/androidTest/automation/jdroid-android-sample-automation-androidTest.apk
+
   verify:
     <<: *defaults
     steps:
@@ -225,3 +256,13 @@ workflows:
           requires:
             - test
             - verify
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - testUI:

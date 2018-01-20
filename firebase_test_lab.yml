@@ -1,0 +1,76 @@
+# gcloud firebase test android models list
+
+instrumentation-tests-physical:
+  type: instrumentation
+  timeout: 30m
+  device:
+    - model: sailfish # Google Pixel
+      version: 25
+      locale: en
+      orientation: portrait
+    - model: herolte # Samsung Galaxy S7
+      version: 24
+      locale: en
+      orientation: portrait
+    - model: athene_f # Motorola Moto G4
+      version: 23
+      locale: en
+      orientation: portrait
+    - model: j1acevelte # Samsung Galaxy J1 ace SM-J111M
+      version: 22
+      locale: en
+      orientation: portrait
+    - model: m0 # Samsung Galaxy S3
+      version: 18
+      locale: en
+      orientation: portrait
+
+instrumentation-tests-virtual:
+  type: instrumentation
+  timeout: 1h
+  device:
+    - model: Nexus6P
+      version: 27
+      locale: en
+      orientation: portrait
+    - model: NexusLowRes
+      version: 27
+      locale: en
+      orientation: portrait
+    - model: Nexus5X
+      version: 26
+      locale: es
+      orientation: landscape
+    - model: Nexus4
+      version: 21
+      locale: en
+      orientation: portrait
+    - model: Nexus6
+      version: 19
+      locale: en
+      orientation: portrait
+
+robo-tests-virtual:
+  type: robo
+  timeout: 1h
+  device:
+    - model: Nexus6P
+      version: 27
+      locale: en
+      orientation: portrait
+    - model: NexusLowRes
+      version: 26
+      locale: es
+      orientation: landscape
+    - model: Nexus5X
+      version: 25
+      locale: en
+      orientation: portrait
+    - model: Nexus6
+      version: 24
+      locale: en
+      orientation: portrait
+    - model: Nexus5
+      version: 23
+      locale: en
+      orientation: portrait
