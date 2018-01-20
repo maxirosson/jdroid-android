@@ -265,4 +265,4 @@ workflows:
               only:
                 - master
     jobs:
-      - testUI:
+      - testUI
