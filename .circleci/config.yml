@@ -147,12 +147,12 @@ jobs:
 
       - run:
           name: Running Robo tests
-          command: gcloud firebase test android run firebase_test_lab.yml:robo-tests-virtual --app ./jdroid-android-sample/build/outputs/apk/automation/jdroid-automation.apk
+          command: gcloud firebase test android run firebase_test_lab.yml:robo-tests-virtual --async --app ./jdroid-android-sample/build/outputs/apk/automation/jdroid-automation.apk
 
       - run:
           name: Running Instrumentation tests
           command: |
-            gcloud firebase test android run firebase_test_lab.yml:instrumentation-tests-physical  --async --app ./jdroid-android-sample/build/outputs/apk/automation/jdroid-automation.apk --test ./jdroid-android-sample/build/outputs/apk/androidTest/automation/jdroid-android-sample-automation-androidTest.apk
+            gcloud firebase test android run firebase_test_lab.yml:instrumentation-tests-physical --async --app ./jdroid-android-sample/build/outputs/apk/automation/jdroid-automation.apk --test ./jdroid-android-sample/build/outputs/apk/androidTest/automation/jdroid-android-sample-automation-androidTest.apk
             gcloud firebase test android run firebase_test_lab.yml:instrumentation-tests-virtual --async --app ./jdroid-android-sample/build/outputs/apk/automation/jdroid-automation.apk --test ./jdroid-android-sample/build/outputs/apk/androidTest/automation/jdroid-android-sample-automation-androidTest.apk
 
   verify:
