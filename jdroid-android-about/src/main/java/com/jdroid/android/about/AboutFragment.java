@@ -144,7 +144,7 @@ public class AboutFragment extends AbstractRecyclerFragment {
 			holder.appIcon.setImageResource(AbstractApplication.get().getLauncherIconResId());
 			holder.appName.setText(AbstractApplication.get().getAppName());
 			holder.version.setText(getString(R.string.jdroid_version, AppUtils.getVersionName()));
-			if (AbstractApplication.get().getAppContext().displayDebugSettings()) {
+			if (AbstractApplication.get().getAppContext().isDebugSettingsEnabled()) {
 				holder.appIcon.setOnClickListener(new OnClickListener() {
 
 					@Override

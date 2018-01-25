@@ -27,7 +27,7 @@ public class AppContext extends AbstractAppContext {
 	
 	@SuppressWarnings("unchecked")
 	protected <T extends Server> T getServer(Server defaultServer) {
-		if (AppUtils.isReleaseBuildType() || !displayDebugSettings()) {
+		if (AppUtils.isReleaseBuildType() || !isDebugSettingsEnabled()) {
 			return (T)defaultServer;
 		} else {
 			Class<?> clazz = defaultServer.getClass().getEnclosingClass() != null ? defaultServer.getClass().getEnclosingClass()
@@ -44,8 +44,8 @@ public class AppContext extends AbstractAppContext {
 	/**
 	 * @return Whether the application should display the debug settings
 	 */
-	public Boolean displayDebugSettings() {
-		return !AppUtils.isReleaseBuildType();
+	public Boolean isDebugSettingsEnabled() {
+		return getBuildConfigBoolean("DEBUG_SETTINGS_ENABLED",  !AppUtils.isReleaseBuildType());
 	}
 
 	public String getLocalIp() {
