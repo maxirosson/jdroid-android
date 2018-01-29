@@ -5,12 +5,6 @@
 	<Button android:id="@+id/fragmentBanner" android:layout_width="wrap_content" android:layout_height="wrap_content"
 			android:text="@string/fragmentBanner" />
 
-	<Button android:id="@+id/nativeAdExpress" android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:text="@string/nativeAdExpress" />
-
-	<Button android:id="@+id/largeNativeAdExpress" android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:text="@string/largeNativeAdExpress" />
-
 	<Button android:id="@+id/adReycler" android:layout_width="wrap_content" android:layout_height="wrap_content"
 			android:text="@string/adReycler" />
 

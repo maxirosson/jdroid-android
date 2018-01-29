@@ -82,7 +82,7 @@ Libray for Android apps. Support for Android 4.0 (api level 15) and higher versi
 ## [jdroid-android-firebase-admob](https://github.com/maxirosson/jdroid/wiki/jdroid-Android)
 
 * [Firebase AdMob integration](https://firebase.google.com/docs/admob/)
- * Banners, interstitials & Native Ads Express support
+ * Banners & interstitials support
 * House ads support
 
 ## [jdroid-android-firebase-crash](https://github.com/maxirosson/jdroid/wiki/jdroid-Android)

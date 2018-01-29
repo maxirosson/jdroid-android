@@ -63,12 +63,6 @@
 		<activity android:name="com.jdroid.android.sample.ui.google.admob.FragmentBannerActivity" android:label="@string/fragmentBanner"
 				  android:parentActivityName="com.jdroid.android.sample.ui.google.admob.AdsActivity" tools:ignore="UnusedAttribute"/>
 
-		<activity android:name="com.jdroid.android.sample.ui.google.admob.FragmentNativeAdExpressActivity" android:label="@string/nativeAdExpress"
-				  android:parentActivityName="com.jdroid.android.sample.ui.google.admob.AdsActivity" tools:ignore="UnusedAttribute"/>
-
-		<activity android:name="com.jdroid.android.sample.ui.google.admob.LargeNativeAdExpressActivity" android:label="@string/largeNativeAdExpress"
-				  android:parentActivityName="com.jdroid.android.sample.ui.google.admob.AdsActivity" tools:ignore="UnusedAttribute"/>
-
 		<activity android:name="com.jdroid.android.sample.ui.google.admob.AdRecyclerActivity" android:label="@string/adReycler"
 				  android:parentActivityName="com.jdroid.android.sample.ui.google.admob.AdsActivity" tools:ignore="UnusedAttribute"/>
 

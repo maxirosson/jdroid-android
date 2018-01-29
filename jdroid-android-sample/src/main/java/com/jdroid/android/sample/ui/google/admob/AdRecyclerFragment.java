@@ -6,8 +6,8 @@ import android.view.View;
 
 import com.google.android.gms.ads.AdSize;
 import com.jdroid.android.firebase.admob.AdViewType;
+import com.jdroid.android.firebase.admob.helpers.AdViewHelper;
 import com.jdroid.android.firebase.admob.helpers.BaseAdViewHelper;
-import com.jdroid.android.firebase.admob.helpers.NativeExpressAdViewHelper;
 import com.jdroid.android.recycler.AbstractRecyclerFragment;
 import com.jdroid.android.recycler.RecyclerViewAdapter;
 import com.jdroid.android.recycler.RecyclerViewType;
@@ -52,9 +52,9 @@ public class AdRecyclerFragment extends AbstractRecyclerFragment {
 		for(String each : sampleItemsUseCase.getItems()) {
 			items.add(each);
 			if (each.equals("three")) {
-				BaseAdViewHelper baseAdViewHelper = new NativeExpressAdViewHelper();
+				BaseAdViewHelper baseAdViewHelper = new AdViewHelper();
 				baseAdViewHelper.setAdSize(new AdSize(AdSize.FULL_WIDTH, 80));
-				baseAdViewHelper.setAdUnitId(AndroidAppContext.SAMPLE_SMALL_NATIVE_AD_EXPRESS_AD_UNIT_ID);
+				baseAdViewHelper.setAdUnitId(AndroidAppContext.SAMPLE_BANNER_AD_UNIT_ID);
 				items.add(baseAdViewHelper);
 			}
 		}
@@ -101,7 +101,7 @@ public class AdRecyclerFragment extends AbstractRecyclerFragment {
 
 		@Override
 		protected Integer getLayoutResourceId() {
-			return R.layout.native_ad_express;
+			return R.layout.ad;
 		}
 
 		@Override

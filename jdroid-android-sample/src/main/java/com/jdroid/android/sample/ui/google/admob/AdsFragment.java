@@ -29,22 +29,6 @@ public class AdsFragment extends AbstractFragment {
 			}
 		});
 
-		findView(R.id.nativeAdExpress).setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				ActivityLauncher.launchActivity(FragmentNativeAdExpressActivity.class);
-			}
-		});
-
-		findView(R.id.largeNativeAdExpress).setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				ActivityLauncher.launchActivity(LargeNativeAdExpressActivity.class);
-			}
-		});
-
 		findView(R.id.adReycler).setOnClickListener(new OnClickListener() {
 
 			@Override

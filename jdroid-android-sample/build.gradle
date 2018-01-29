@@ -154,7 +154,6 @@ android {
 			debuggable true
 			matchingFallbacks = ['debug']
 
-			jdroid.setBuildConfigBoolean(buildTypes.uat, "DEBUG_SETTINGS_ENABLED", false)
 			jdroid.setBuildConfigString(buildTypes.uat, "SERVER_NAME", "UAT")
 		}
 
@@ -165,6 +164,7 @@ android {
 			matchingFallbacks = ['debug']
 
 			jdroid.setBuildConfigString(buildTypes.automation, "SERVER_NAME", "UAT")
+			jdroid.setBuildConfigBoolean(buildTypes.automation, "DEBUG_SETTINGS_ENABLED", false)
 		}
 
 		if (jdroid.isReleaseBuildTypeEnabled()) {

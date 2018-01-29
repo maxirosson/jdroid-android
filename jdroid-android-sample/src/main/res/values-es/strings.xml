@@ -7,8 +7,6 @@
 	<!-- Google AdMob -->
 	<string name="adMob">Google AdMob</string>
 	<string name="fragmentBanner">Fragment Banner</string>
-	<string name="nativeAdExpress">Native Ad Express</string>
-	<string name="largeNativeAdExpress">Large Native Ad Express</string>
 	<string name="adReycler">Ad Recycler</string>
 	<string name="activityBanner">Activity Banner</string>
 	<string name="displayInterstitial">Display Interstitial</string>
