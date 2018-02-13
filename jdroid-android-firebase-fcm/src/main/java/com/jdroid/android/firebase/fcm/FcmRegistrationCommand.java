@@ -6,7 +6,6 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.firebase.jobdispatcher.ServiceCommand;
 import com.jdroid.android.google.GooglePlayServicesUtils;
-import com.jdroid.java.exception.UnexpectedException;
 import com.jdroid.java.utils.LoggerUtils;
 
 import org.slf4j.Logger;
@@ -58,11 +57,14 @@ public class FcmRegistrationCommand extends ServiceCommand {
 
 	public static String getRegistrationToken(String senderId) throws IOException {
 		if (GooglePlayServicesUtils.isGooglePlayServicesAvailable(AbstractApplication.get())) {
-			if (senderId == null) {
-				throw new UnexpectedException("Missing FCM Sender Id");
+			String registrationToken;
+			if (senderId != null) {
+				registrationToken = FirebaseInstanceId.getInstance().getToken(senderId, "FCM");
+				LOGGER.info("Registration token for sender id [" + senderId + "]: " + registrationToken);
+			} else {
+				registrationToken = FirebaseInstanceId.getInstance().getToken();
+				LOGGER.info("Registration token for default sender id: " + registrationToken);
 			}
-			String registrationToken = FirebaseInstanceId.getInstance().getToken(senderId, "FCM");
-			LOGGER.info("Registration token for sender id [" + senderId + "]: " + registrationToken);
 			return registrationToken;
 		}
 		return null;

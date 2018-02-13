@@ -3,18 +3,12 @@ package com.jdroid.android.sample.api;
 import com.jdroid.android.api.AndroidApiService;
 import com.jdroid.android.firebase.fcm.AbstractFcmMessageResolver;
 import com.jdroid.android.firebase.fcm.device.Device;
-import com.jdroid.android.firebase.fcm.device.DeviceMarshaller;
 import com.jdroid.java.http.HttpService;
 import com.jdroid.java.http.post.BodyEnclosingHttpService;
-import com.jdroid.java.marshaller.MarshallerProvider;
 
 import java.util.Map;
 
 public class SampleApiService extends AndroidApiService {
-
-	static {
-		MarshallerProvider.get().addMarshaller(Device.class, new DeviceMarshaller());
-	}
 
 	public SampleResponse httpGetSample() {
 		HttpService httpService = newGetService("sample", "get");
@@ -78,7 +72,7 @@ public class SampleApiService extends AndroidApiService {
 	public void addDevice(Device device, Boolean updateLastActiveTimestamp) {
 		BodyEnclosingHttpService httpService = newPostService("fcm", "device");
 		httpService.addQueryParameter("updateLastActiveTimestamp", updateLastActiveTimestamp);
-		marshall(httpService, device);
+		autoMarshall(httpService, device);
 		httpService.execute();
 	}
 
