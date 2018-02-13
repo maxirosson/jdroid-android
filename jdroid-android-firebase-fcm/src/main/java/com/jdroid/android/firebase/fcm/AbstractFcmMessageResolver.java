@@ -25,6 +25,10 @@ public abstract class AbstractFcmMessageResolver implements FcmMessageResolver {
 
 	private List<FcmMessage> fcmMessages;
 	
+	public AbstractFcmMessageResolver() {
+		this(Lists.newArrayList());
+	}
+	
 	public AbstractFcmMessageResolver(List<FcmMessage> fcmMessages) {
 		this.fcmMessages = fcmMessages;
 		if (includeNotificationFcmMessage()) {
