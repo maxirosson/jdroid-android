@@ -11,6 +11,6 @@ public class FirebaseAppShortcutsAnalyticsTracker extends AbstractFirebaseAnalyt
 	public void trackPinShortcut(String shortcutName) {
 		Bundle bundle = new Bundle();
 		bundle.putString(FirebaseAnalytics.Param.ITEM_ID, shortcutName);
-		getFirebaseAnalyticsHelper().sendEvent("pinShortcut", bundle);
+		getFirebaseAnalyticsHelper().sendEvent("pin_shortcut", bundle);
 	}
 }

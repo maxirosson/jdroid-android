@@ -96,58 +96,58 @@ public class FirebaseCoreAnalyticsTracker extends AbstractFirebaseAnalyticsTrack
 	@Override
 	public void trackNotificationDisplayed(String notificationName) {
 		Bundle bundle = new Bundle();
-		bundle.putString("notificationName", notificationName);
-		getFirebaseAnalyticsHelper().sendEvent("DisplayNotification", bundle);
+		bundle.putString("notification_name", notificationName);
+		getFirebaseAnalyticsHelper().sendEvent("display_notification", bundle);
 	}
 
 	@Override
 	public void trackNotificationOpened(String notificationName) {
 		Bundle bundle = new Bundle();
-		bundle.putString("notificationName", notificationName);
-		getFirebaseAnalyticsHelper().sendEvent("OpenNotification", bundle);
+		bundle.putString("notification_name", notificationName);
+		getFirebaseAnalyticsHelper().sendEvent("open_notification", bundle);
 	}
 
 	@Override
 	public void trackEnjoyingApp(Boolean enjoying) {
 		Bundle bundle = new Bundle();
 		bundle.putString("enjoying", enjoying.toString());
-		getFirebaseAnalyticsHelper().sendEvent("EnjoyingApp", bundle);
+		getFirebaseAnalyticsHelper().sendEvent("enjoying_app", bundle);
 	}
 
 	@Override
 	public void trackRateOnGooglePlay(Boolean rate) {
 		Bundle bundle = new Bundle();
 		bundle.putString("rate", rate.toString());
-		getFirebaseAnalyticsHelper().sendEvent("RateOnGooglePlay", bundle);
+		getFirebaseAnalyticsHelper().sendEvent("rate_on_google_play", bundle);
 	}
 
 	@Override
 	public void trackGiveFeedback(Boolean feedback) {
 		Bundle bundle = new Bundle();
 		bundle.putString("feedback", feedback.toString());
-		getFirebaseAnalyticsHelper().sendEvent("GiveFeedback", bundle);
+		getFirebaseAnalyticsHelper().sendEvent("give_feedback", bundle);
 	}
 
 	@Override
 	public void trackWidgetAdded(String widgetName) {
 		Bundle bundle = new Bundle();
-		bundle.putString("widgetName", widgetName);
-		getFirebaseAnalyticsHelper().sendEvent("AddWidget", bundle);
+		bundle.putString("widget_name", widgetName);
+		getFirebaseAnalyticsHelper().sendEvent("add_widget", bundle);
 	}
 
 	@Override
 	public void trackWidgetRemoved(String widgetName) {
 		Bundle bundle = new Bundle();
-		bundle.putString("widgetName", widgetName);
-		getFirebaseAnalyticsHelper().sendEvent("RemoveWidget", bundle);
+		bundle.putString("widget_name", widgetName);
+		getFirebaseAnalyticsHelper().sendEvent("remove_widget", bundle);
 	}
 
 	@Override
 	public void trackUriOpened(String screenName, Uri uri, String referrer) {
 		Bundle bundle = new Bundle();
-		bundle.putString("screenName", screenName);
+		bundle.putString("screen_name", screenName);
 		bundle.putString("referrer", referrer);
-		getFirebaseAnalyticsHelper().sendEvent("OpenUri", bundle);
+		getFirebaseAnalyticsHelper().sendEvent("open_uri", bundle);
 	}
 
 	@Override
@@ -156,7 +156,7 @@ public class FirebaseCoreAnalyticsTracker extends AbstractFirebaseAnalyticsTrack
 		if (network != null) {
 			bundle.putString("network", network);
 		}
-		bundle.putString("socialTarget", socialTarget);
+		bundle.putString("social_target", socialTarget);
 		getFirebaseAnalyticsHelper().sendEvent(socialAction.getName(), bundle);
 	}
 
@@ -164,6 +164,6 @@ public class FirebaseCoreAnalyticsTracker extends AbstractFirebaseAnalyticsTrack
 	public void trackSendAppInvitation(String invitationId) {
 		Bundle bundle = new Bundle();
 		bundle.putString(FirebaseAnalytics.Param.ITEM_ID, invitationId);
-		getFirebaseAnalyticsHelper().sendEvent("sendAppInvitation", bundle);
+		getFirebaseAnalyticsHelper().sendEvent("send_app_invitation", bundle);
 	}
 }

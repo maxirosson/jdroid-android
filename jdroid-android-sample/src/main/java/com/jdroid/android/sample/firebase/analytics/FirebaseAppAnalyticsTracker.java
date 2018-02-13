@@ -10,8 +10,8 @@ public class FirebaseAppAnalyticsTracker extends AbstractFirebaseAnalyticsTracke
 	@Override
 	public void trackExampleEvent() {
 		Bundle bundle = new Bundle();
-		bundle.putString("exampleParam", "exampleValue");
-		getFirebaseAnalyticsHelper().sendEvent("ExampleAction", bundle);
+		bundle.putString("example_param", "example_value");
+		getFirebaseAnalyticsHelper().sendEvent("example_action", bundle);
 	}
 
 	@Override
