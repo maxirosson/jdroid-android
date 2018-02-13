@@ -6,10 +6,12 @@ import android.support.annotation.NonNull;
 
 import com.crashlytics.android.Crashlytics;
 import com.jdroid.android.analytics.AbstractCoreAnalyticsTracker;
+import com.jdroid.android.context.BuildConfigUtils;
 import com.jdroid.android.exception.DefaultExceptionHandler;
 import com.jdroid.android.uri.ReferrerUtils;
 
 import java.util.List;
+
 
 public class FirebaseCrashlyticsTracker extends AbstractCoreAnalyticsTracker {
 	
@@ -47,7 +49,6 @@ public class FirebaseCrashlyticsTracker extends AbstractCoreAnalyticsTracker {
 	
 	@Override
 	public void onActivityCreate(Activity activity, Bundle savedInstanceState) {
-		super.onActivityCreate(activity, savedInstanceState);
 		Crashlytics.log(activity.getClass().getSimpleName() + " created. SavedInstanceState " + (savedInstanceState != null ? "not null" : "null"));
 	}
 
@@ -60,6 +61,7 @@ public class FirebaseCrashlyticsTracker extends AbstractCoreAnalyticsTracker {
 			messageBuilder.append(". Referrer: ");
 			messageBuilder.append(referrer);
 		}
+		Crashlytics.log(messageBuilder.toString());
 	}
 
 	@Override
@@ -80,5 +82,10 @@ public class FirebaseCrashlyticsTracker extends AbstractCoreAnalyticsTracker {
 	@Override
 	public void onActivityDestroy(Activity activity) {
 		Crashlytics.log(activity.getClass().getSimpleName() + " destroyed");
+	}
+	
+	@Override
+	public Boolean isEnabled() {
+		return BuildConfigUtils.getBuildConfigValue("FIREBASE_CRASHLYTICS_ENABLED", true);
 	}
 }

@@ -102,6 +102,8 @@ android {
 		jdroid.setBuildConfigBoolean(defaultConfig, "LEAK_CANARY_ENABLED", false)
 		jdroid.setBuildConfigBoolean(defaultConfig, "FIREBASE_ANALYTICS_ENABLED", true)
 
+		jdroid.setBuildConfigBoolean(defaultConfig, "FIREBASE_CRASHLYTICS_ENABLED", true)
+
 		jdroid.setBuildConfigBoolean(defaultConfig, "GOOGLE_ANALYTICS_ENABLED", true)
 		jdroid.setBuildConfigString(defaultConfig, "GOOGLE_ANALYTICS_TRACKING_ID", "UA-84573310-1")
 
@@ -144,6 +146,8 @@ android {
 			signingConfig signingConfigs.debug
 
 			applicationIdSuffix ".debug"
+
+			jdroid.setBuildConfigBoolean(buildTypes.debug, "FIREBASE_CRASHLYTICS_ENABLED", false)
 
 			jdroid.setBuildConfigString(buildTypes.debug, "SERVER_NAME", "DEV")
 		}
