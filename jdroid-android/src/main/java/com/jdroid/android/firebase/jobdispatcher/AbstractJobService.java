@@ -28,24 +28,24 @@ public abstract class AbstractJobService extends JobService {
 			public void run() {
 				Boolean needsReschedule = false;
 				Trace trace = null;
+				String trackingVariable = null;
+				String trackingLabel = null;
 				try {
-					String trackingVariable = getTrackingVariable(jobParameters);
-					String trackingLabel = getTrackingLabel(jobParameters);
+					trackingVariable = getTrackingVariable(jobParameters);
+					trackingLabel = getTrackingLabel(jobParameters);
 					
 					if (timingTrackingEnabled()) {
 						trace = TraceHelper.startTrace(trackingLabel);
 					}
-					LOGGER.info("Starting service. Variable: " + trackingVariable + " - Label: " + trackingLabel);
+					LOGGER.info("Starting Firebase Job. Variable: " + trackingVariable + " - Label: " + trackingLabel);
 					long startTime = DateUtils.nowMillis();
 					needsReschedule = onRunJob(jobParameters);
 					long executionTime = DateUtils.nowMillis() - startTime;
-					LOGGER.debug("Finished service. Variable: " + trackingVariable + " - Label: " + trackingLabel + ". Execution time: " + DateUtils.formatDuration(executionTime));
-				} catch (ConnectionException e) {
-					AbstractApplication.get().getExceptionHandler().logHandledException(e);
-					needsReschedule = true;
+					LOGGER.debug("Firebase Job finished successfully. NeedsReschedule: " + needsReschedule + " - Variable: " + trackingVariable + " - Label: " + trackingLabel + " - Execution time: " + DateUtils.formatDuration(executionTime));
 				} catch (Exception e) {
+					needsReschedule = needsReschedule(e);
+					LOGGER.error("Firebase Job finished with error. NeedsReschedule: " + needsReschedule + " - Variable: " + trackingVariable + " - Label: " + trackingLabel);
 					AbstractApplication.get().getExceptionHandler().logHandledException(e);
-					needsReschedule = false;
 				} finally {
 					if (trace != null) {
 						trace.stop();
@@ -63,6 +63,10 @@ public abstract class AbstractJobService extends JobService {
 	
 	@WorkerThread
 	public abstract boolean onRunJob(JobParameters jobParameters);
+	
+	protected Boolean needsReschedule(Throwable throwable) {
+		return throwable instanceof ConnectionException;
+	}
 	
 	protected String getTrackingVariable(JobParameters jobParameters) {
 		return getClass().getSimpleName();
