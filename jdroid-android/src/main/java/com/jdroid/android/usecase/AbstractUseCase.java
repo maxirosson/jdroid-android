@@ -71,7 +71,7 @@ public abstract class AbstractUseCase implements Runnable, Serializable {
 		
 		Trace trace = null;
 		if (timingTrackingEnabled()) {
-			trace = TraceHelper.newTrace(getClass());
+			trace = TraceHelper.startTrace(getClass());
 		}
 
 		try {
