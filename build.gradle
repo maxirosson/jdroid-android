@@ -24,7 +24,7 @@ buildscript {
 	dependencies {
 
 		// https://github.com/maxirosson/jdroid-component-builder/blob/master/CHANGELOG.md
-		classpath 'com.jdroidframework:jdroid-component-builder:0.4.0'
+		classpath 'com.jdroidframework:jdroid-component-builder:0.5.0-SNAPSHOT'
 
 		// https://github.com/maxirosson/jdroid-gradle-plugin/blob/master/CHANGELOG.md
 		classpath 'com.jdroidframework:jdroid-gradle-root-plugin:0.19.0-SNAPSHOT'
