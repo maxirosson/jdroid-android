@@ -11,6 +11,8 @@ import com.jdroid.android.recycler.RecyclerViewType;
 import com.jdroid.java.collections.Lists;
 import com.jdroid.java.utils.ReflectionUtils;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class LibrariesFragment extends AbstractRecyclerFragment {
@@ -36,6 +38,13 @@ public class LibrariesFragment extends AbstractRecyclerFragment {
 			libraries.add(library);
 		}
 		libraries.addAll(getCustomLibraries());
+		
+		Collections.sort(libraries, new Comparator<Library>() {
+			@Override
+			public int compare(Library lib1, Library lib2) {
+				return lib1.getName().compareTo(lib2.getName());
+			}
+		});
 	}
 	
 	@Override
