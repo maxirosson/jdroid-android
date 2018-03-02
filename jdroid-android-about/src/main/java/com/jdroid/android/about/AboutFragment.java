@@ -49,7 +49,7 @@ public class AboutFragment extends AbstractRecyclerFragment {
 
 				@Override
 				public void onSelected(Activity activity) {
-					if (ExternalAppsUtils.openEmail(activity, contactUsEmailAddress, AbstractApplication.get().getAppName())) {
+					if (ExternalAppsUtils.openEmail(activity, contactUsEmailAddress)) {
 						AboutAppModule.get().getModuleAnalyticsSender().trackContactUs();
 					} else {
 						// TODO Improve this adding a toast or something
