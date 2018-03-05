@@ -12,7 +12,7 @@ ext.JDROID_JAVA_HTTP_VERSION = '0.15.0'
 ext.GOOGLE_PLAY_SERVICES_VERSION = '11.8.0'
 
 // https://developer.android.com/topic/libraries/support-library/revisions.html
-ext.ANDROID_SUPPORT_VERSION = '27.0.2'
+ext.ANDROID_SUPPORT_VERSION = '27.1.0'
 
 // https://github.com/bumptech/glide/releases
 ext.GLIDE_VERSION = '4.5.0'
