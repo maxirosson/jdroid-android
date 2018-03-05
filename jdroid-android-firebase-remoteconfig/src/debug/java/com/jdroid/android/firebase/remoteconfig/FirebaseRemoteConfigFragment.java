@@ -141,6 +141,7 @@ public class FirebaseRemoteConfigFragment extends AbstractRecyclerFragment {
 			RemoteConfigParameterItemHolder holder = new RemoteConfigParameterItemHolder(view);
 			holder.key = findView(view, R.id.key);
 			holder.specs = findView(view, R.id.specs);
+			holder.source = findView(view, R.id.source);
 			holder.value = findView(view, R.id.value);
 			holder.save = findView(view, R.id.save);
 			return holder;
@@ -150,8 +151,10 @@ public class FirebaseRemoteConfigFragment extends AbstractRecyclerFragment {
 		public void fillHolderFromItem(final RemoteConfigParameter item, final RemoteConfigParameterItemHolder holder) {
 			holder.key.setText(item.getKey());
 			holder.specs.setText(getString(R.string.jdroid_firebaseRemoteConfigSpec, item.isUserProperty().toString(), item.getDefaultValue()));
+			holder.source.setText(getString(R.string.jdroid_firebaseRemoteConfigSource, FirebaseRemoteConfigHelper.getSourceName(item)));
 			holder.value.setText(FirebaseRemoteConfigHelper.getString(item));
 			holder.value.setEnabled(FirebaseRemoteConfigHelper.isMocksEnabled());
+			holder.source.setVisibility(FirebaseRemoteConfigHelper.isMocksEnabled() ? View.GONE : View.VISIBLE);
 			holder.save.setVisibility(FirebaseRemoteConfigHelper.isMocksEnabled() ? View.VISIBLE : View.GONE);
 			holder.save.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -176,6 +179,7 @@ public class FirebaseRemoteConfigFragment extends AbstractRecyclerFragment {
 
 		protected TextView key;
 		protected TextView specs;
+		protected TextView source;
 		protected EditText value;
 		protected Button save;
 

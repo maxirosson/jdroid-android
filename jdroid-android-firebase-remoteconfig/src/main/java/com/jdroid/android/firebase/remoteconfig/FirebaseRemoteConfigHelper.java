@@ -38,7 +38,7 @@ public class FirebaseRemoteConfigHelper {
 
 	private static FirebaseRemoteConfig firebaseRemoteConfig;
 
-	private static final long DEFAULT_FETCH_EXPIRATION = DateUtils.SECONDS_PER_HOUR * 12;
+	private static long DEFAULT_FETCH_EXPIRATION = DateUtils.SECONDS_PER_HOUR * 12;
 
 	private static int retryCount = 0;
 
@@ -85,6 +85,10 @@ public class FirebaseRemoteConfigHelper {
 		} catch (Exception e) {
 			AbstractApplication.get().getExceptionHandler().logHandledException("Error initializing Firebase Remote Config", e);
 		}
+	}
+	
+	public static void setDefaultFetchExpiration(long defaultFetchExpiration) {
+		DEFAULT_FETCH_EXPIRATION = defaultFetchExpiration;
 	}
 	
 	@RestrictTo(LIBRARY)
@@ -224,19 +228,28 @@ public class FirebaseRemoteConfigHelper {
 		log(remoteConfigParameter, firebaseRemoteConfigValue, value);
 		return (Long)value;
 	}
+	
+	public static String getSourceName(RemoteConfigParameter remoteConfigParameter) {
+		return getSourceName(getFirebaseRemoteConfigValue(remoteConfigParameter));
+	}
+	
+	private static String getSourceName(FirebaseRemoteConfigValue firebaseRemoteConfigValue) {
+		String source = null;
+		if (firebaseRemoteConfigValue.getSource() == FirebaseRemoteConfig.VALUE_SOURCE_STATIC) {
+			source = "Static";
+		} else if (firebaseRemoteConfigValue.getSource() == FirebaseRemoteConfig.VALUE_SOURCE_REMOTE) {
+			source = "Remote";
+		} else if (firebaseRemoteConfigValue.getSource() == FirebaseRemoteConfig.VALUE_SOURCE_DEFAULT) {
+			source = "Default";
+		} else if (firebaseRemoteConfigValue.getSource() == -1) {
+			source = "Mock";
+		}
+		return source;
+	}
 
 	private static void log(RemoteConfigParameter remoteConfigParameter, FirebaseRemoteConfigValue firebaseRemoteConfigValue, Object value) {
 		if (LoggerUtils.isEnabled()) {
-			String source = null;
-			if (firebaseRemoteConfigValue.getSource() == FirebaseRemoteConfig.VALUE_SOURCE_STATIC) {
-				source = "Static";
-			} else if (firebaseRemoteConfigValue.getSource() == FirebaseRemoteConfig.VALUE_SOURCE_REMOTE) {
-				source = "Remote";
-			} else if (firebaseRemoteConfigValue.getSource() == FirebaseRemoteConfig.VALUE_SOURCE_DEFAULT) {
-				source = "Default";
-			} else if (firebaseRemoteConfigValue.getSource() == -1) {
-				source = "Mock";
-			}
+			String source = getSourceName(firebaseRemoteConfigValue);
 			LOGGER.info("Loaded Firebase Remote Config. Source [" + source + "] Key [" + remoteConfigParameter.getKey() + "] Value [" + value + "]");
 		}
 	}

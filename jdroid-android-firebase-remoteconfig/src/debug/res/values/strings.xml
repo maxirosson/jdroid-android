@@ -9,5 +9,6 @@
 	<string name="jdroid_firebaseRemoteConfigFetchDate">Fetch Date: %1$s</string>
 	<string name="jdroid_firebaseRemoteConfigLastFetchStatus">Fetch Date: %1$s</string>
 	<string name="jdroid_firebaseRemoteConfigSpec">User property: %1$s | Default value: %2$s</string>
+	<string name="jdroid_firebaseRemoteConfigSource">Source: %1$s</string>
 
 </resources>
