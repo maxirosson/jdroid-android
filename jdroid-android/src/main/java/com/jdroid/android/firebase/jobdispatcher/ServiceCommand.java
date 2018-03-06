@@ -12,7 +12,9 @@ import com.firebase.jobdispatcher.Trigger;
 import java.io.Serializable;
 
 public abstract class ServiceCommand implements Serializable {
-
+	
+	final static String COMMAND_EXTRA = "com.jdroid.android.firebase.jobdispatcher.command";
+	
 	private Boolean isInstantExecutionRequired = true;
 	
 	public void start() {
@@ -20,10 +22,10 @@ public abstract class ServiceCommand implements Serializable {
 	}
 
 	public final void start(Bundle bundle) {
-		CommandWorkerService.runService(bundle, this, isInstantExecutionRequired);
+		JobUtils.runService(bundle, this, isInstantExecutionRequired);
 	}
 
-	protected Job.Builder createRetryJobBuilder(FirebaseJobDispatcher dispatcher) {
+	protected Job.Builder createJobBuilder(FirebaseJobDispatcher dispatcher, Bundle bundle) {
 		Job.Builder builder = dispatcher.newJobBuilder();
 		builder.setRecurring(false); // one-off job
 		builder.setLifetime(Lifetime.FOREVER);
@@ -31,17 +33,13 @@ public abstract class ServiceCommand implements Serializable {
 		builder.setTrigger(Trigger.NOW);
 		builder.setReplaceCurrent(false); // don't overwrite an existing job with the same tag
 		builder.setRetryStrategy(RetryStrategy.DEFAULT_EXPONENTIAL); // retry with exponential backoff
+		builder.setExtras(bundle);
 		return builder;
 	}
 
 	@WorkerThread
 	protected abstract boolean execute(Bundle bundle);
 
-	@WorkerThread
-	protected boolean executeRetry(Bundle bundle) {
-		return execute(bundle);
-	}
-	
 	public void setInstantExecutionRequired(Boolean isInstantExecutionRequired) {
 		this.isInstantExecutionRequired = isInstantExecutionRequired;
 	}

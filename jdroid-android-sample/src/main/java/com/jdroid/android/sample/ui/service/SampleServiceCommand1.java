@@ -3,12 +3,10 @@ package com.jdroid.android.sample.ui.service;
 import android.os.Bundle;
 
 import com.jdroid.android.application.AbstractApplication;
-import com.jdroid.android.notification.NotificationBuilder;
-import com.jdroid.android.notification.NotificationUtils;
-import com.jdroid.android.sample.application.AndroidNotificationChannelType;
 import com.jdroid.android.firebase.jobdispatcher.ServiceCommand;
 import com.jdroid.android.notification.NotificationBuilder;
 import com.jdroid.android.notification.NotificationUtils;
+import com.jdroid.android.sample.application.AndroidNotificationChannelType;
 import com.jdroid.java.exception.UnexpectedException;
 import com.jdroid.java.utils.IdGenerator;
 
@@ -16,11 +14,6 @@ public class SampleServiceCommand1 extends ServiceCommand {
 
 	@Override
 	protected boolean execute(Bundle bundle) {
-		return true;
-	}
-
-	@Override
-	protected boolean executeRetry(Bundle bundle) {
 		Boolean fail = bundle.getBoolean("fail");
 		if (fail) {
 			throw new UnexpectedException("Failing service");

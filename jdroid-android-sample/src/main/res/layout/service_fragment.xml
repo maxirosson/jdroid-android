@@ -5,6 +5,8 @@
 
 		<CheckBox android:id="@+id/fail" android:layout_width="wrap_content" android:layout_height="wrap_content"
 				  android:text="@string/fail" />
+		<CheckBox android:id="@+id/tryInstantExecution" android:layout_width="wrap_content" android:layout_height="wrap_content"
+				  android:text="@string/tryInstantExecution" />
 
 		<Button android:id="@+id/workerService" android:layout_width="wrap_content" android:layout_height="wrap_content"
 			android:text="@string/workerService" />
@@ -15,25 +17,17 @@
 		<Button android:id="@+id/firebaseJobService" android:layout_width="wrap_content" android:layout_height="wrap_content"
 			android:text="@string/firebaseJobService" />
 
-		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Fail first try. Success on retry or UnexpectedException" android:layout_marginTop="8dp"/>
+		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Success or UnexpectedException" android:layout_marginTop="8dp"/>
 		<Button android:id="@+id/commandService1" android:layout_width="wrap_content" android:layout_height="wrap_content"
 			android:text="@string/commandService1" />
 
-		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Fail first try. Success on retry or ConnectionException" android:layout_marginTop="8dp"/>
+		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Success or ConnectionException" android:layout_marginTop="8dp"/>
 		<Button android:id="@+id/commandService2" android:layout_width="wrap_content" android:layout_height="wrap_content"
 			android:text="@string/commandService2" />
 
-		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Success on first try or ConnectionException. Success on retry" android:layout_marginTop="8dp"/>
+		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Success after 30 seconds" android:layout_marginTop="8dp"/>
 		<Button android:id="@+id/commandService3" android:layout_width="wrap_content" android:layout_height="wrap_content"
 			android:text="@string/commandService3" />
-
-		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Fail first try or UnexpectedException. Success on retry" android:layout_marginTop="8dp"/>
-		<Button android:id="@+id/commandService4" android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:text="@string/commandService4" />
-
-		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Fail first try. Success on retry after 30 seconds" android:layout_marginTop="8dp"/>
-		<Button android:id="@+id/commandService5" android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:text="@string/commandService5" />
 
 		<Button android:id="@+id/cancelAllJobs" android:layout_width="wrap_content" android:layout_height="wrap_content"
 			android:text="@string/cancelAllJobs" />

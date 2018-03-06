@@ -8,6 +8,7 @@ import android.widget.CheckBox;
 
 import com.firebase.jobdispatcher.FirebaseJobDispatcher;
 import com.firebase.jobdispatcher.GooglePlayDriver;
+import com.jdroid.android.firebase.jobdispatcher.ServiceCommand;
 import com.jdroid.android.fragment.AbstractFragment;
 import com.jdroid.android.sample.R;
 import com.jdroid.android.sample.ui.usecases.SampleUseCase;
@@ -16,6 +17,7 @@ import com.jdroid.android.usecase.service.UseCaseService;
 public class ServiceFragment extends AbstractFragment {
 
 	private CheckBox failCheckBox;
+	private CheckBox tryInstantExecutionCheckBox;
 
 	@Override
 	public Integer getContentFragmentLayout() {
@@ -27,6 +29,7 @@ public class ServiceFragment extends AbstractFragment {
 		super.onViewCreated(view, savedInstanceState);
 
 		failCheckBox = findView(R.id.fail);
+		tryInstantExecutionCheckBox = findView(R.id.tryInstantExecution);
 		
 		findView(R.id.workerService).setOnClickListener(new OnClickListener() {
 			
@@ -64,7 +67,9 @@ public class ServiceFragment extends AbstractFragment {
 				Bundle bundle = new Bundle();
 				bundle.putString("a", "3");
 				bundle.putBoolean("fail", failCheckBox.isChecked());
-				new SampleServiceCommand1().start(bundle);
+				ServiceCommand serviceCommand = new SampleServiceCommand1();
+				serviceCommand.setInstantExecutionRequired(tryInstantExecutionCheckBox.isChecked());
+				serviceCommand.start(bundle);
 			}
 		});
 		findView(R.id.commandService2).setOnClickListener(new OnClickListener() {
@@ -74,7 +79,9 @@ public class ServiceFragment extends AbstractFragment {
 				Bundle bundle = new Bundle();
 				bundle.putString("a", "4");
 				bundle.putBoolean("fail", failCheckBox.isChecked());
-				new SampleServiceCommand2().start(bundle);
+				ServiceCommand serviceCommand = new SampleServiceCommand2();
+				serviceCommand.setInstantExecutionRequired(tryInstantExecutionCheckBox.isChecked());
+				serviceCommand.start(bundle);
 			}
 		});
 		findView(R.id.commandService3).setOnClickListener(new OnClickListener() {
@@ -84,24 +91,9 @@ public class ServiceFragment extends AbstractFragment {
 				Bundle bundle = new Bundle();
 				bundle.putString("a", "5");
 				bundle.putBoolean("fail", failCheckBox.isChecked());
-				new SampleServiceCommand3().start(bundle);
-			}
-		});
-		findView(R.id.commandService4).setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Bundle bundle = new Bundle();
-				bundle.putString("a", "6");
-				bundle.putBoolean("fail", failCheckBox.isChecked());
-				new SampleServiceCommand4().start(bundle);
-			}
-		});
-		findView(R.id.commandService5).setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				new SampleServiceCommand5().start();
+				ServiceCommand serviceCommand = new SampleServiceCommand3();
+				serviceCommand.setInstantExecutionRequired(tryInstantExecutionCheckBox.isChecked());
+				serviceCommand.start(bundle);
 			}
 		});
 		findView(R.id.cancelAllJobs).setOnClickListener(new OnClickListener() {

@@ -14,11 +14,6 @@ public class SampleServiceCommand2 extends ServiceCommand {
 
 	@Override
 	protected boolean execute(Bundle bundle) {
-		return true;
-	}
-
-	@Override
-	protected boolean executeRetry(Bundle bundle) {
 		Boolean fail = bundle.getBoolean("fail");
 		if (fail) {
 			throw new ConnectionException("Failing service");

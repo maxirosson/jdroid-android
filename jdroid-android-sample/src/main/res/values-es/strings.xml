@@ -208,6 +208,7 @@
 	<string name="nonBlockingLoading">Non Blocking Loading</string>
 	<string name="swipeRefresLoading">Swipe Refresh Loading</string>
 	<string name="fail">Fail</string>
+	<string name="tryInstantExecution">Try Instant Execution</string>
 
 	<!-- Hero -->
 	<string name="hero">Hero &amp; Parallax</string>
@@ -257,8 +258,6 @@
 	<string name="commandService1">Command Service 1</string>
 	<string name="commandService2">Command Service 2</string>
 	<string name="commandService3">Command Service 3</string>
-	<string name="commandService4">Command Service 4</string>
-	<string name="commandService5">Command Service 5</string>
 	<string name="cancelAllJobs">Cancel All Jobs</string>
 
 	<!-- StrictMode -->

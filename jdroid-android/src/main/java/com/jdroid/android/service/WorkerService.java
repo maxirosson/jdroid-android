@@ -78,21 +78,21 @@ public abstract class WorkerService extends IntentService {
 
 	protected abstract void doExecute(Intent intent);
 	
-	protected static void runIntentInService(Context context, Bundle bundle, Class<? extends WorkerService> serviceClass) {
+	public static void runIntentInService(Context context, Bundle bundle, Class<? extends WorkerService> serviceClass) {
 		Intent intent = new Intent();
 		intent.putExtras(bundle);
 		runIntentInService(context, intent, serviceClass);
 	}
-
-	protected static void runIntentInService(Context context, Intent intent, Class<? extends WorkerService> serviceClass) {
+	
+	public static void runIntentInService(Context context, Intent intent, Class<? extends WorkerService> serviceClass) {
 		try {
 			context.startService(getServiceIntent(context, intent, serviceClass));
 		} catch (Exception e) {
 			AbstractApplication.get().getExceptionHandler().logHandledException(e);
 		}
 	}
-
-	protected static Intent getServiceIntent(Context context, Intent intent, Class<? extends WorkerService> serviceClass) {
+	
+	public static Intent getServiceIntent(Context context, Intent intent, Class<? extends WorkerService> serviceClass) {
 		intent.setClass(context, serviceClass);
 		return intent;
 	}
