@@ -1,5 +1,6 @@
 package com.jdroid.android.firebase.jobdispatcher;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.WorkerThread;
 
@@ -38,7 +39,7 @@ public abstract class ServiceCommand implements Serializable {
 	}
 
 	@WorkerThread
-	protected abstract boolean execute(Bundle bundle);
+	protected abstract boolean execute(Context context, Bundle bundle);
 
 	public void setInstantExecutionRequired(Boolean isInstantExecutionRequired) {
 		this.isInstantExecutionRequired = isInstantExecutionRequired;

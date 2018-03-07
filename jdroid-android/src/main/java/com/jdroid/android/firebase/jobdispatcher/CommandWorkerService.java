@@ -27,7 +27,7 @@ public class CommandWorkerService extends WorkerService {
 			ServiceCommand serviceCommand = ReflectionUtils.newInstance(serviceCommandExtra);
 			Boolean needsReschedule;
 			try {
-				needsReschedule = serviceCommand.execute(intent.getExtras());
+				needsReschedule = serviceCommand.execute(this, intent.getExtras());
 				LOGGER.info(serviceCommand.getClass().getSimpleName() + " executed. NeedsReschedule: " + needsReschedule);
 			} catch (Exception e) {
 				needsReschedule = needsReschedule(e);

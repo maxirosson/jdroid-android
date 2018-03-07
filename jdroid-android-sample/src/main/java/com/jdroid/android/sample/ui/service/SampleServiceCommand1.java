@@ -1,5 +1,6 @@
 package com.jdroid.android.sample.ui.service;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import com.jdroid.android.application.AbstractApplication;
@@ -13,7 +14,7 @@ import com.jdroid.java.utils.IdGenerator;
 public class SampleServiceCommand1 extends ServiceCommand {
 
 	@Override
-	protected boolean execute(Bundle bundle) {
+	protected boolean execute(Context context, Bundle bundle) {
 		Boolean fail = bundle.getBoolean("fail");
 		if (fail) {
 			throw new UnexpectedException("Failing service");

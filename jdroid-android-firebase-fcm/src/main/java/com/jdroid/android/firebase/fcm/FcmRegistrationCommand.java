@@ -1,5 +1,6 @@
 package com.jdroid.android.firebase.fcm;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -25,8 +26,8 @@ public class FcmRegistrationCommand extends ServiceCommand {
 	}
 
 	@Override
-	protected boolean execute(Bundle bundle) {
-		if (GooglePlayServicesUtils.isGooglePlayServicesAvailable(AbstractApplication.get())) {
+	protected boolean execute(Context context, Bundle bundle) {
+		if (GooglePlayServicesUtils.isGooglePlayServicesAvailable(context)) {
 			for (FcmSender fcmSender : AbstractFcmAppModule.get().getFcmSenders()) {
 				String registrationToken;
 				try {

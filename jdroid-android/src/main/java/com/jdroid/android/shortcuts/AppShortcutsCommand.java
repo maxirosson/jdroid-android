@@ -1,5 +1,6 @@
 package com.jdroid.android.shortcuts;
 
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -18,7 +19,7 @@ public class AppShortcutsCommand extends ServiceCommand {
 
 	@RequiresApi(api = Build.VERSION_CODES.N_MR1)
 	@Override
-	protected boolean execute(Bundle bundle) {
+	protected boolean execute(Context context, Bundle bundle) {
 		AppShortcutsHelper.setDynamicShortcuts(AppShortcutsHelper.getInitialShortcutInfos());
 		return false;
 	}
