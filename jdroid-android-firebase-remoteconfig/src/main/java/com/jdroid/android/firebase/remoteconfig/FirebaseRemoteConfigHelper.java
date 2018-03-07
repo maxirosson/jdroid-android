@@ -210,6 +210,9 @@ public class FirebaseRemoteConfigHelper {
 		Object value;
 		if (firebaseRemoteConfigValue.getSource() == FirebaseRemoteConfig.VALUE_SOURCE_STATIC) {
 			value = remoteConfigParameter.getDefaultValue();
+			if (value instanceof Float) {
+				value = ((Float)value).doubleValue();
+			}
 		} else {
 			value = firebaseRemoteConfigValue.asDouble();
 		}
@@ -222,6 +225,9 @@ public class FirebaseRemoteConfigHelper {
 		Object value;
 		if (firebaseRemoteConfigValue.getSource() == FirebaseRemoteConfig.VALUE_SOURCE_STATIC) {
 			value = remoteConfigParameter.getDefaultValue();
+			if (value instanceof Integer) {
+				value = ((Integer)value).longValue();
+			}
 		} else {
 			value = firebaseRemoteConfigValue.asLong();
 		}
