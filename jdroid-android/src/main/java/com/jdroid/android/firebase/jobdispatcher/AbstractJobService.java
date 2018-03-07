@@ -14,11 +14,7 @@ import com.jdroid.java.date.DateUtils;
 import com.jdroid.java.http.exception.ConnectionException;
 import com.jdroid.java.utils.LoggerUtils;
 
-import org.slf4j.Logger;
-
 public abstract class AbstractJobService extends JobService {
-	
-	private final static Logger LOGGER = LoggerUtils.getLogger(AbstractJobService.class);
 	
 	@MainThread
 	@Override
@@ -28,23 +24,20 @@ public abstract class AbstractJobService extends JobService {
 			public void run() {
 				Boolean needsReschedule = false;
 				Trace trace = null;
-				String trackingVariable = null;
-				String trackingLabel = null;
+				String tag = getClass().getSimpleName();
 				try {
-					trackingVariable = getTrackingVariable(jobParameters);
-					trackingLabel = getTrackingLabel(jobParameters);
-					
+					tag = getTag(jobParameters);
 					if (timingTrackingEnabled()) {
-						trace = TraceHelper.startTrace(trackingLabel);
+						trace = TraceHelper.startTrace(tag);
 					}
-					LOGGER.info("Starting Firebase Job. Variable: " + trackingVariable + " - Label: " + trackingLabel);
+					LoggerUtils.getLogger(tag).info("Executing Firebase Job.");
 					long startTime = DateUtils.nowMillis();
 					needsReschedule = onRunJob(jobParameters);
 					long executionTime = DateUtils.nowMillis() - startTime;
-					LOGGER.debug("Firebase Job finished successfully. NeedsReschedule: " + needsReschedule + " - Variable: " + trackingVariable + " - Label: " + trackingLabel + " - Execution time: " + DateUtils.formatDuration(executionTime));
+					LoggerUtils.getLogger(tag).info("Firebase Job finished successfully. NeedsReschedule: " + needsReschedule + " - Execution time: " + DateUtils.formatDuration(executionTime));
 				} catch (Exception e) {
 					needsReschedule = needsReschedule(e);
-					LOGGER.error("Firebase Job finished with error. NeedsReschedule: " + needsReschedule + " - Variable: " + trackingVariable + " - Label: " + trackingLabel);
+					LoggerUtils.getLogger(tag).error("Firebase Job finished with error. NeedsReschedule: " + needsReschedule);
 					AbstractApplication.get().getExceptionHandler().logHandledException(e);
 				} finally {
 					if (trace != null) {
@@ -68,11 +61,7 @@ public abstract class AbstractJobService extends JobService {
 		return throwable instanceof ConnectionException;
 	}
 	
-	protected String getTrackingVariable(JobParameters jobParameters) {
-		return getClass().getSimpleName();
-	}
-	
-	protected String getTrackingLabel(JobParameters jobParameters) {
+	protected String getTag(JobParameters jobParameters) {
 		return getClass().getSimpleName();
 	}
 	

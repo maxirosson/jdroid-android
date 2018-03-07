@@ -13,11 +13,11 @@ import org.slf4j.Logger;
 public class CommandWorkerService extends WorkerService {
 
 	private final static Logger LOGGER = LoggerUtils.getLogger(CommandWorkerService.class);
-
+	
 	@Override
-	protected String getTrackingLabel(Intent intent) {
+	protected String getTag(Intent intent) {
 		String serviceCommandExtra = intent.getStringExtra(ServiceCommand.COMMAND_EXTRA);
-		return serviceCommandExtra == null ? getTrackingVariable(intent) : serviceCommandExtra.substring(serviceCommandExtra.lastIndexOf(".") + 1);
+		return serviceCommandExtra == null ? super.getTag(intent) : serviceCommandExtra.substring(serviceCommandExtra.lastIndexOf(".") + 1);
 	}
 
 	@Override
@@ -28,14 +28,14 @@ public class CommandWorkerService extends WorkerService {
 			Boolean needsReschedule;
 			try {
 				needsReschedule = serviceCommand.execute(this, intent.getExtras());
-				LOGGER.info(serviceCommand.getClass().getSimpleName() + " executed. NeedsReschedule: " + needsReschedule);
+				LoggerUtils.getLogger(serviceCommand.getClass()).info("Service command finished successfully. NeedsReschedule: " + needsReschedule);
 			} catch (Exception e) {
 				needsReschedule = needsReschedule(e);
-				LOGGER.error(serviceCommand.getClass().getSimpleName() + " finished with error. NeedsReschedule: " + needsReschedule);
+				LoggerUtils.getLogger(serviceCommand.getClass()).error("Service command finished with error. NeedsReschedule: " + needsReschedule);
 				AbstractApplication.get().getExceptionHandler().logHandledException(e);
 			}
 			if (needsReschedule) {
-				JobUtils.startJobService(intent.getExtras(), serviceCommand);
+				JobUtils.startFirebaseJobService(intent.getExtras(), serviceCommand);
 			}
 		} else {
 			AbstractApplication.get().getExceptionHandler().logWarningException("Service command not found on " + getClass().getSimpleName());

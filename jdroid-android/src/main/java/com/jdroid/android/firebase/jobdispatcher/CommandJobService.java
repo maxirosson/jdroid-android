@@ -9,12 +9,6 @@ import com.jdroid.java.utils.ReflectionUtils;
 
 public class CommandJobService extends AbstractJobService {
 	
-	@Override
-	protected String getTrackingLabel(JobParameters jobParameters) {
-		String serviceCommandExtra = getServiceCommand(jobParameters);
-		return serviceCommandExtra == null ? getTrackingVariable(jobParameters) : serviceCommandExtra.substring(serviceCommandExtra.lastIndexOf(".") + 1);
-	}
-	
 	@WorkerThread
 	@Override
 	public boolean onRunJob(JobParameters jobParameters) {
@@ -26,6 +20,12 @@ public class CommandJobService extends AbstractJobService {
 			AbstractApplication.get().getExceptionHandler().logWarningException("Service command not found on " + getClass().getSimpleName());
 			return false;
 		}
+	}
+	
+	@Override
+	protected String getTag(JobParameters jobParameters) {
+		String serviceCommandExtra = getServiceCommand(jobParameters);
+		return serviceCommandExtra == null ? super.getTag(jobParameters) : serviceCommandExtra.substring(serviceCommandExtra.lastIndexOf(".") + 1);
 	}
 	
 	private String getServiceCommand(JobParameters jobParameters) {

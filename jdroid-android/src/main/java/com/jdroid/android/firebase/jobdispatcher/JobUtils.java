@@ -10,23 +10,18 @@ import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.service.WorkerService;
 import com.jdroid.java.utils.LoggerUtils;
 
-import org.slf4j.Logger;
-
 public class JobUtils {
 	
-	private final static Logger LOGGER = LoggerUtils.getLogger(JobUtils.class);
-	
-	
-	public static void runService(Bundle bundle, ServiceCommand serviceCommand, Boolean tryInstantExecution) {
+	public static void startService(Bundle bundle, ServiceCommand serviceCommand, Boolean tryInstantExecution) {
 		if (tryInstantExecution && !AbstractApplication.get().isInBackground()) {
 			startWorkerService(bundle, serviceCommand);
 		} else {
-			startJobService(bundle, serviceCommand);
+			startFirebaseJobService(bundle, serviceCommand);
 		}
 	}
 	
 	public static void startWorkerService(Bundle bundle, ServiceCommand serviceCommand) {
-		LOGGER.info("Starting Worker Service for " + serviceCommand.getClass().getSimpleName());
+		LoggerUtils.getLogger(serviceCommand.getClass()).info("Starting Worker Service");
 		Intent intent = new Intent();
 		if (bundle != null) {
 			intent.putExtras(bundle);
@@ -35,8 +30,8 @@ public class JobUtils {
 		WorkerService.runIntentInService(AbstractApplication.get(), intent, CommandWorkerService.class);
 	}
 	
-	public static void startJobService(Bundle bundle, ServiceCommand serviceCommand) {
-		LOGGER.info("Scheduling Job Service for " + serviceCommand.getClass().getSimpleName());
+	public static void startFirebaseJobService(Bundle bundle, ServiceCommand serviceCommand) {
+		LoggerUtils.getLogger(serviceCommand.getClass()).info("Scheduling Firebase Job Service");
 		
 		if (bundle == null) {
 			bundle = new Bundle();

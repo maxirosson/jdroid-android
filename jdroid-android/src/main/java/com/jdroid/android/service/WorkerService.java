@@ -11,11 +11,7 @@ import com.jdroid.android.firebase.performance.TraceHelper;
 import com.jdroid.java.date.DateUtils;
 import com.jdroid.java.utils.LoggerUtils;
 
-import org.slf4j.Logger;
-
 public abstract class WorkerService extends IntentService {
-
-	private final static Logger LOGGER = LoggerUtils.getLogger(WorkerService.class);
 
 	private static String TAG = WorkerService.class.getSimpleName();
 
@@ -29,22 +25,19 @@ public abstract class WorkerService extends IntentService {
 	
 	@Override
 	protected final void onHandleIntent(Intent intent) {
+		String tag = getClass().getSimpleName();
 		if (intent != null) {
-			
-			String trackingVariable = getTrackingVariable(intent);
-			String trackingLabel = getTrackingLabel(intent);
-			
 			Trace trace = null;
-			if (timingTrackingEnabled()) {
-				trace = TraceHelper.startTrace(trackingLabel);
-			}
-			
 			try {
-				LOGGER.info("Starting service. Variable: " + trackingVariable + " - Label: " + trackingLabel);
+				tag = getTag(intent);
+				if (timingTrackingEnabled()) {
+					trace = TraceHelper.startTrace(tag);
+				}
+				LoggerUtils.getLogger(tag).info("Executing service.");
 				long startTime = DateUtils.nowMillis();
 				doExecute(intent);
 				long executionTime = DateUtils.nowMillis() - startTime;
-				LOGGER.debug("Finished service. Variable: " + trackingVariable + " - Label: " + trackingLabel + ". Execution time: " + DateUtils.formatDuration(executionTime));
+				LoggerUtils.getLogger(tag).info("Service finished. Execution time: " + DateUtils.formatDuration(executionTime));
 				
 				if (trace != null) {
 					trace.incrementCounter("success");
@@ -60,19 +53,15 @@ public abstract class WorkerService extends IntentService {
 				}
 			}
 		} else {
-			LOGGER.warn("Null intent when starting the service: " + getClass().getName());
+			LoggerUtils.getLogger(tag).warn("Null intent when starting the service: " + getClass().getName());
 		}
 	}
 
 	protected Boolean timingTrackingEnabled() {
 		return true;
 	}
-
-	protected String getTrackingVariable(Intent intent) {
-		return getClass().getSimpleName();
-	}
-
-	protected String getTrackingLabel(Intent intent) {
+	
+	protected String getTag(Intent intent) {
 		return getClass().getSimpleName();
 	}
 

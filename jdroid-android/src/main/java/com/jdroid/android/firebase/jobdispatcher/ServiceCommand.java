@@ -23,7 +23,7 @@ public abstract class ServiceCommand implements Serializable {
 	}
 
 	public final void start(Bundle bundle) {
-		JobUtils.runService(bundle, this, isInstantExecutionRequired);
+		JobUtils.startService(bundle, this, isInstantExecutionRequired);
 	}
 
 	protected Job.Builder createJobBuilder(FirebaseJobDispatcher dispatcher, Bundle bundle) {
