@@ -35,7 +35,7 @@ public class CommandWorkerService extends WorkerService {
 				AbstractApplication.get().getExceptionHandler().logHandledException(e);
 			}
 			if (needsReschedule) {
-				JobUtils.startFirebaseJobService(intent.getExtras(), serviceCommand);
+				serviceCommand.startFirebaseJobService(intent.getExtras());
 			}
 		} else {
 			AbstractApplication.get().getExceptionHandler().logWarningException("Service command not found on " + getClass().getSimpleName());
