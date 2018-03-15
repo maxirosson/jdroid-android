@@ -34,8 +34,8 @@ public abstract class AbstractUseCase implements Runnable, Serializable {
 		FINISHED_FAILED;
 	}
 	
-	private volatile List<UseCaseListener> listeners = Lists.newArrayList();
-	private Handler handler;
+	private transient volatile List<UseCaseListener> listeners = Lists.newArrayList();
+	private transient Handler handler;
 
 	private volatile UseCaseStatus useCaseStatus = UseCaseStatus.NOT_INVOKED;
 	private AbstractException abstractException;

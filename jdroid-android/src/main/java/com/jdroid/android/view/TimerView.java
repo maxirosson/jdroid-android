@@ -27,11 +27,6 @@ public class TimerView extends AppCompatTextView implements Handler.Callback {
 	
 	private static final Logger LOGGER = LoggerUtils.getLogger(TimerView.class);
 	
-	private static final String DURATION_BEFORE_PAUSE = "durationBeforePause";
-	private static final String START_TIME = "startTime";
-	private static final String STOP_TIME = "stopTime";
-	private static final String STATUS = "status";
-	
 	private Handler handler;
 	private Boolean visible = false;
 	
