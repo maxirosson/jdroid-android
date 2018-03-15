@@ -1,6 +1,7 @@
 package com.jdroid.android.usecase;
 
 import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.support.annotation.RestrictTo;
 import android.support.annotation.WorkerThread;
 
@@ -34,7 +35,7 @@ public abstract class AbstractUseCase implements Runnable, Serializable {
 		FINISHED_FAILED;
 	}
 	
-	private transient volatile List<UseCaseListener> listeners = Lists.newArrayList();
+	private transient volatile List<UseCaseListener> listeners;
 	private transient Handler handler;
 
 	private volatile UseCaseStatus useCaseStatus = UseCaseStatus.NOT_INVOKED;
@@ -225,6 +226,7 @@ public abstract class AbstractUseCase implements Runnable, Serializable {
 	/**
 	 * @return the listeners
 	 */
+	@Nullable
 	protected List<UseCaseListener> getListeners() {
 		return listeners;
 	}
@@ -233,8 +235,13 @@ public abstract class AbstractUseCase implements Runnable, Serializable {
 	 * @param listener the listener to add
 	 */
 	public void addListener(UseCaseListener listener) {
-		if (listener != null && !listeners.contains(listener)) {
-			this.listeners.add(listener);
+		if (listener != null) {
+			if (listeners == null) {
+				listeners = Lists.newArrayList();
+			}
+			if (!listeners.contains(listener)) {
+				this.listeners.add(listener);
+			}
 		}
 	}
 	
@@ -242,8 +249,8 @@ public abstract class AbstractUseCase implements Runnable, Serializable {
 	 * @param listener the listener to remove
 	 */
 	public void removeListener(UseCaseListener listener) {
-		if (listener != null) {
-			this.listeners.remove(listener);
+		if (listener != null && listeners != null) {
+			listeners.remove(listener);
 		}
 	}
 	
@@ -266,7 +273,7 @@ public abstract class AbstractUseCase implements Runnable, Serializable {
 	/**
 	 * @return If the use case has finished, regardless of the success or failure of its execution.
 	 */
-	public Boolean isFinish() {
+	public Boolean isFinished() {
 		return isFinishFailed() || isFinishSuccessful();
 	}
 	

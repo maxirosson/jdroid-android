@@ -51,7 +51,7 @@ public class UseCaseHelper {
 	}
 
 	@MainThread
-	public static void unregisterUseCase(final AbstractUseCase userCase, final UseCaseListener listener) {
+	public static void unregisterUseCase(AbstractUseCase userCase, UseCaseListener listener) {
 		if (userCase != null) {
 			userCase.removeListener(listener);
 		}
