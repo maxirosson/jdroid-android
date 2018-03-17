@@ -47,8 +47,9 @@ public class AppInviteStats {
 		}
 		return sharedPreferencesHelper;
 	}
-
-	@WorkerThread
+	
+	// FIXME Find a way to call this method from UI thread
+	//@WorkerThread
 	public static Boolean displayAppInviteView(Context context) {
 		Boolean enoughDaysSinceLastInvite = DateUtils.millisecondsToDays(AppInviteStats.getLastInviteSentTimestamp()) >= 21;
 		Boolean enoughDaysSinceFirstAppLoad = DateUtils.millisecondsToDays(UsageStats.getFirstAppLoadTimestamp()) >= 7;
