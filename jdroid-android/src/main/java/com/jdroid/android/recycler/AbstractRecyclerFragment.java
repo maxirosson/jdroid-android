@@ -1,6 +1,7 @@
 package com.jdroid.android.recycler;
 
 import android.os.Bundle;
+import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,12 +25,14 @@ public abstract class AbstractRecyclerFragment extends AbstractFragment {
 	private RecyclerView.AdapterDataObserver adapterDataObserver;
 	private RecyclerView.LayoutManager layoutManager;
 	private Integer selectedItemPosition;
-
+	
+	@MainThread
 	@Override
 	public Integer getContentFragmentLayout() {
 		return isCardViewDecorationEnabled() ? R.layout.jdroid_cardview_vertical_recycler_fragment : R.layout.jdroid_vertical_recycler_fragment;
 	}
-
+	
+	@MainThread
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
@@ -66,30 +69,35 @@ public abstract class AbstractRecyclerFragment extends AbstractFragment {
 			selectedItemPosition = savedInstanceState.getInt(SELECTED_ITEM_POSITION_EXTRA, RecyclerView.NO_POSITION);
 		}
 	}
-
-	protected RecyclerView.ItemDecoration createDividerItemDecoration(){
+	
+	@MainThread
+	protected RecyclerView.ItemDecoration createDividerItemDecoration() {
 		return new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
 	}
-
+	
+	@MainThread
 	protected Boolean isDividerItemDecorationEnabled() {
 		return false;
 	}
 	
+	@MainThread
 	protected Boolean isCardViewDecorationEnabled() {
 		return false;
 	}
 
 	// use this setting to improve performance if you know that changes
 	// in content do not change the layout size of the RecyclerView
+	@MainThread
 	protected Boolean hasRecyclerViewFixedSize() {
 		return true;
 	}
-
+	
 	@NonNull
 	protected RecyclerView.LayoutManager createLayoutManager() {
 		return new LinearLayoutManager(getActivity());
 	}
-
+	
+	@MainThread
 	public void setAdapter(RecyclerViewAdapter adapter) {
 		this.adapter = adapter;
 
@@ -103,7 +111,8 @@ public abstract class AbstractRecyclerFragment extends AbstractFragment {
 			selectedItemPosition = null;
 		}
 	}
-
+	
+	@MainThread
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
@@ -131,17 +140,18 @@ public abstract class AbstractRecyclerFragment extends AbstractFragment {
 			emptyViewContainer.setVisibility(emptyViewContainerVisibility);
 		}
 	}
-
+	
+	@MainThread
 	protected View createEmptyView() {
 		TextView emptyTextView = (TextView)inflate(R.layout.jdroid_empty_view);
 		emptyTextView.setText(getNoResultsResId());
 		return emptyTextView;
 	}
-
+	
 	protected int getNoResultsResId() {
 		return R.string.jdroid_noResults;
 	}
-
+	
 	public RecyclerViewAdapter getAdapter() {
 		return adapter;
 	}
@@ -159,6 +169,7 @@ public abstract class AbstractRecyclerFragment extends AbstractFragment {
 		return new NonBlockingLoading();
 	}
 	
+	@MainThread
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);

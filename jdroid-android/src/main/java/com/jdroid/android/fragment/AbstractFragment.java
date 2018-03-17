@@ -33,12 +33,14 @@ public abstract class AbstractFragment extends Fragment implements FragmentIf {
 	
 	private FragmentHelper fragmentHelper;
 	private int actionBarAlpha = 0;
-
+	
+	@MainThread
 	@Override
 	public Boolean shouldRetainInstance() {
 		return fragmentHelper.shouldRetainInstance();
 	}
 	
+	@MainThread
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -46,32 +48,38 @@ public abstract class AbstractFragment extends Fragment implements FragmentIf {
 		fragmentHelper = AbstractApplication.get().createFragmentHelper(this);
 		fragmentHelper.onCreate(savedInstanceState);
 	}
-
+	
+	@MainThread
 	@Override
 	public void onNewIntent(Intent intent) {
 		fragmentHelper.onNewIntent(intent);
 	}
 	
+	@MainThread
 	protected Boolean isHeroImageEnabled() {
 		return false;
 	}
-
+	
+	@MainThread
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = fragmentHelper.onCreateView(inflater, container, savedInstanceState);
 		return view != null ? view : super.onCreateView(inflater, container, savedInstanceState);
 	}
-
+	
+	@MainThread
 	@Override
 	public Integer getBaseFragmentLayout() {
 		return isHeroImageEnabled() ? R.layout.jdroid_base_hero_fragment : fragmentHelper.getBaseFragmentLayout();
 	}
-
+	
+	@MainThread
 	@Override
 	public Integer getContentFragmentLayout() {
 		return fragmentHelper.getContentFragmentLayout();
 	}
-
+	
+	@MainThread
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
@@ -107,43 +115,51 @@ public abstract class AbstractFragment extends Fragment implements FragmentIf {
 			}
 		}
 	}
-
+	
+	@MainThread
 	protected Integer getParallaxScrollViewId() {
 		return null;
 	}
 	
+	@MainThread
 	protected Integer getHeroImageContainerId() {
 		return null;
 	}
 	
+	@MainThread
 	protected Integer getHeroImageId() {
 		return null;
 	}
 	
+	@MainThread
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putInt(ACTION_BAR_ALPHA, actionBarAlpha);
 	}
 	
+	@MainThread
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		fragmentHelper.onActivityCreated(savedInstanceState);
 	}
 	
+	@MainThread
 	@Override
 	public void onStart() {
 		super.onStart();
 		fragmentHelper.onStart();
 	}
 	
+	@MainThread
 	@Override
 	public void onResume() {
 		super.onResume();
 		fragmentHelper.onResume();
 	}
 	
+	@MainThread
 	@Override
 	public void onPause() {
 		fragmentHelper.onBeforePause();
@@ -151,18 +167,21 @@ public abstract class AbstractFragment extends Fragment implements FragmentIf {
 		fragmentHelper.onPause();
 	}
 	
+	@MainThread
 	@Override
 	public void onStop() {
 		super.onStop();
 		fragmentHelper.onStop();
 	}
 	
+	@MainThread
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
 		fragmentHelper.onDestroyView();
 	}
 	
+	@MainThread
 	@Override
 	public void onDestroy() {
 		fragmentHelper.onBeforeDestroy();
@@ -170,16 +189,19 @@ public abstract class AbstractFragment extends Fragment implements FragmentIf {
 		fragmentHelper.onDestroy();
 	}
 	
+	@MainThread
 	@Override
 	public <V extends View> V findView(int id) {
 		return fragmentHelper.findView(id);
 	}
 	
+	@MainThread
 	@Override
 	public <V extends View> V findViewOnActivity(int id) {
 		return fragmentHelper.findViewOnActivity(id);
 	}
 	
+	@MainThread
 	@Override
 	public View inflate(int resource) {
 		return fragmentHelper.inflate(resource);
@@ -256,9 +278,6 @@ public abstract class AbstractFragment extends Fragment implements FragmentIf {
 	
 	// //////////////////////// Analytics //////////////////////// //
 	
-	/**
-	 * @see com.jdroid.android.fragment.FragmentIf#shouldTrackOnFragmentStart()
-	 */
 	@Override
 	public Boolean shouldTrackOnFragmentStart() {
 		return fragmentHelper.shouldTrackOnFragmentStart();

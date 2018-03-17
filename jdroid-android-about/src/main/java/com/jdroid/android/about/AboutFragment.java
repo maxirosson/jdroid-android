@@ -2,15 +2,16 @@ package com.jdroid.android.about;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.annotation.MainThread;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.jdroid.android.about.feedback.RateAppStats;
 import com.jdroid.android.activity.ActivityLauncher;
 import com.jdroid.android.application.AbstractApplication;
-import com.jdroid.android.about.feedback.RateAppStats;
 import com.jdroid.android.intent.IntentUtils;
 import com.jdroid.android.recycler.AbstractRecyclerFragment;
 import com.jdroid.android.recycler.FooterRecyclerViewType;
@@ -89,7 +90,6 @@ public class AboutFragment extends AbstractRecyclerFragment {
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-
 		RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(Lists.newArrayList(new HeaderRecyclerViewType(), new AboutRecyclerViewType()), aboutItems);
 		if (rateAppViewEnabled()) {
 			recyclerViewAdapter.setFooter(new AboutFooterRecyclerViewType());
@@ -108,7 +108,8 @@ public class AboutFragment extends AbstractRecyclerFragment {
 	protected List<AboutItem> getCustomAboutItems() {
 		return Lists.newArrayList();
 	}
-
+	
+	@MainThread
 	protected Boolean rateAppViewEnabled() {
 		return RateAppStats.displayRateAppView();
 	}
