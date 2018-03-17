@@ -64,7 +64,8 @@ public class RateAppStats {
 		return sharedPreferencesHelper;
 	}
 
-	@WorkerThread
+	// FIXME Find a way to call this method from UI thread
+	//@WorkerThread
 	public static Boolean displayRateAppView() {
 		Boolean alreadyRated = getRateOnGooglePlay();
 		Boolean enoughDaysSinceLastResponse =  DateUtils.millisecondsToDays(RateAppStats.getLastResponseTimestamp()) >= FirebaseRemoteConfigHelper.getLong(AboutRemoteConfigParameter.RATE_APP_MIN_DAYS_SINCE_LAST_RESPONSE);

@@ -34,8 +34,9 @@ public class UsageStats {
 		appLoads = getSharedPreferencesHelper().loadPreferenceAsLong(APP_LOADS, 0L);
 		getSharedPreferencesHelper().savePreferenceAsync(APP_LOADS, appLoads + 1);
 	}
-
-	@WorkerThread
+	
+	// FIXME Find a way to call this method from UI thread
+	//@WorkerThread
 	public static Long getAppLoads() {
 		if (appLoads == null) {
 			appLoads = getSharedPreferencesHelper().loadPreferenceAsLong(APP_LOADS, 0L);
