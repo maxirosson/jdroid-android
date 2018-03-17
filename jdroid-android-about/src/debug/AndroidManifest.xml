@@ -3,7 +3,7 @@
 
 	<application>
 
-		<meta-data android:name="com.jdroid.android.about.AboutAppLifecycleCallback" android:value="ApplicationLifecycleCallback" />
+		<meta-data android:name="com.jdroid.android.about.AboutDebugAppLifecycleCallback" android:value="ApplicationLifecycleCallback" />
 
 	</application>
 

@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.jdroid.android.activity.ActivityLauncher;
 import com.jdroid.android.application.AbstractApplication;
-import com.jdroid.android.feedback.RateAppStats;
+import com.jdroid.android.about.feedback.RateAppStats;
 import com.jdroid.android.intent.IntentUtils;
 import com.jdroid.android.recycler.AbstractRecyclerFragment;
 import com.jdroid.android.recycler.FooterRecyclerViewType;
@@ -90,8 +90,8 @@ public class AboutFragment extends AbstractRecyclerFragment {
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
-		RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(Lists.<RecyclerViewType>newArrayList(new HeaderRecyclerViewType(), new AboutRecyclerViewType()), aboutItems);
-		if (rateAppViewEnabled() && RateAppStats.displayRateAppView()) {
+		RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(Lists.newArrayList(new HeaderRecyclerViewType(), new AboutRecyclerViewType()), aboutItems);
+		if (rateAppViewEnabled()) {
 			recyclerViewAdapter.setFooter(new AboutFooterRecyclerViewType());
 		}
 		setAdapter(recyclerViewAdapter);
@@ -110,7 +110,7 @@ public class AboutFragment extends AbstractRecyclerFragment {
 	}
 
 	protected Boolean rateAppViewEnabled() {
-		return true;
+		return RateAppStats.displayRateAppView();
 	}
 
 	@Override

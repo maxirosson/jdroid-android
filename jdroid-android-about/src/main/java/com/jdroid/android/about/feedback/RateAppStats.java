@@ -1,8 +1,10 @@
-package com.jdroid.android.feedback;
+package com.jdroid.android.about.feedback;
 
 import android.support.annotation.WorkerThread;
 
+import com.jdroid.android.about.AboutRemoteConfigParameter;
 import com.jdroid.android.context.UsageStats;
+import com.jdroid.android.firebase.remoteconfig.FirebaseRemoteConfigHelper;
 import com.jdroid.android.utils.SharedPreferencesHelper;
 import com.jdroid.java.date.DateUtils;
 
@@ -18,7 +20,6 @@ public class RateAppStats {
 
 	public static void setEnjoyingApp(Boolean enjoying) {
 		getSharedPreferencesHelper().savePreferenceAsync(ENJOYING, enjoying);
-		getSharedPreferencesHelper().savePreferenceAsync(LAST_RESPONSE_TIMESTAMP, DateUtils.nowMillis());
 	}
 
 	@WorkerThread
@@ -66,10 +67,10 @@ public class RateAppStats {
 	@WorkerThread
 	public static Boolean displayRateAppView() {
 		Boolean alreadyRated = getRateOnGooglePlay();
-		Boolean enoughDaysSinceLastResponse =  DateUtils.millisecondsToDays(RateAppStats.getLastResponseTimestamp()) >= 90;
-		Boolean enoughDaysSinceFirstAppLoad = DateUtils.millisecondsToDays(UsageStats.getFirstAppLoadTimestamp()) >= 7;
-		Boolean enoughAppLoads = UsageStats.getAppLoads() >= 10;
-		Boolean enoughDaysSinceLastCrash = DateUtils.millisecondsToDays(UsageStats.getLastCrashTimestamp()) >= 21;
+		Boolean enoughDaysSinceLastResponse =  DateUtils.millisecondsToDays(RateAppStats.getLastResponseTimestamp()) >= FirebaseRemoteConfigHelper.getLong(AboutRemoteConfigParameter.RATE_APP_MIN_DAYS_SINCE_LAST_RESPONSE);
+		Boolean enoughDaysSinceFirstAppLoad = DateUtils.millisecondsToDays(UsageStats.getFirstAppLoadTimestamp()) >= FirebaseRemoteConfigHelper.getLong(AboutRemoteConfigParameter.RATE_APP_MIN_DAYS_SINCE_FIRST_APP_LOAD);
+		Boolean enoughAppLoads = UsageStats.getAppLoads() >= FirebaseRemoteConfigHelper.getLong(AboutRemoteConfigParameter.RATE_APP_MIN_APP_LOADS);
+		Boolean enoughDaysSinceLastCrash = DateUtils.millisecondsToDays(UsageStats.getLastCrashTimestamp()) >= FirebaseRemoteConfigHelper.getLong(AboutRemoteConfigParameter.RATE_APP_MIN_DAYS_SINCE_LAST_CRASH);
 		return (alreadyRated == null || !alreadyRated) && enoughDaysSinceLastResponse && enoughDaysSinceFirstAppLoad && enoughAppLoads && enoughDaysSinceLastCrash;
 	}
 }

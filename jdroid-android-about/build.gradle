@@ -17,6 +17,7 @@ buildscript {
 dependencies {
 
 	api project(":jdroid-android")
+	api project(":jdroid-android-firebase-remoteconfig")
 	api project(":jdroid-android-google-plus")
 
 	testImplementation "junit:junit:${JUNIT_VERSION}"

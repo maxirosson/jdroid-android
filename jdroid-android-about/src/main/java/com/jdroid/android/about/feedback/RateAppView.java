@@ -1,4 +1,4 @@
-package com.jdroid.android.feedback;
+package com.jdroid.android.about.feedback;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -38,9 +38,9 @@ public class RateAppView extends RelativeLayout {
 		
 		LayoutInflater.from(context).inflate(R.layout.jdroid_rate_app_view, this, true);
 		
-		rateAppTitle = (TextView)findViewById(R.id.rateAppTitle);
-		positiveButton = (Button)findViewById(R.id.positive);
-		negativeButton = (Button)findViewById(R.id.negative);
+		rateAppTitle = findViewById(R.id.rateAppTitle);
+		positiveButton = findViewById(R.id.positive);
+		negativeButton = findViewById(R.id.negative);
 
 		enjoyingAppView(context);
 	}

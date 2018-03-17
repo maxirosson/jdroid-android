@@ -12,7 +12,6 @@ import com.jdroid.android.debug.appenders.InfoDebugPrefsAppender;
 import com.jdroid.android.debug.appenders.LogsDebugPrefsAppender;
 import com.jdroid.android.debug.appenders.NavDrawerDebugPrefsAppender;
 import com.jdroid.android.debug.appenders.NotificationsDebugPrefsAppender;
-import com.jdroid.android.debug.appenders.RateAppDebugPrefsAppender;
 import com.jdroid.android.debug.appenders.ServersDebugPrefsAppender;
 import com.jdroid.android.debug.appenders.UriMapperPrefsAppender;
 import com.jdroid.android.debug.appenders.UsageStatsDebugPrefsAppender;
@@ -86,10 +85,6 @@ public class DebugContext {
 	
 	public InfoDebugPrefsAppender createInfoDebugPrefsAppender() {
 		return new InfoDebugPrefsAppender();
-	}
-
-	public RateAppDebugPrefsAppender createRateAppDebugPrefsAppender() {
-		return new RateAppDebugPrefsAppender();
 	}
 
 	public UsageStatsDebugPrefsAppender createUsageStatsDebugPrefsAppender() {

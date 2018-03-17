@@ -1,4 +1,4 @@
-package com.jdroid.android.debug.appenders;
+package com.jdroid.android.about;
 
 import android.app.Activity;
 import android.preference.Preference;
@@ -6,8 +6,8 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceGroup;
 
 import com.jdroid.android.R;
+import com.jdroid.android.about.feedback.RateAppStats;
 import com.jdroid.android.debug.PreferencesAppender;
-import com.jdroid.android.feedback.RateAppStats;
 
 public class RateAppDebugPrefsAppender extends PreferencesAppender {
 
