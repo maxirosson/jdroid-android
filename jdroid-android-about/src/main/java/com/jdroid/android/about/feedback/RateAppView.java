@@ -34,9 +34,13 @@ public class RateAppView extends RelativeLayout {
 		init(context);
 	}
 	
+	protected int getLayoutResId() {
+		return R.layout.jdroid_rate_app_view;
+	}
+	
 	private void init(final Context context) {
 		
-		LayoutInflater.from(context).inflate(R.layout.jdroid_rate_app_view, this, true);
+		LayoutInflater.from(context).inflate(getLayoutResId(), this, true);
 		
 		rateAppTitle = findViewById(R.id.rateAppTitle);
 		positiveButton = findViewById(R.id.positive);
