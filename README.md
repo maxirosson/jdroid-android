@@ -6,11 +6,11 @@ Jdroid provides a set of tools for modern Java-based enterprise and android appl
 Continuous Integration
 -----------
 
-|Branch|Status|
-| ------------- | ------------- |
-|Master|[![Build Status](https://api.travis-ci.org/maxirosson/jdroid.svg?branch=master)](https://travis-ci.org/maxirosson/jdroid)|
-|Staging|[![Build Status](https://api.travis-ci.org/maxirosson/jdroid.svg?branch=staging)](https://travis-ci.org/maxirosson/jdroid)|
-|Production|[![Build Status](https://api.travis-ci.org/maxirosson/jdroid.svg?branch=production)](https://travis-ci.org/maxirosson/jdroid)|
+|Branch|Status|Workflows|Insights|
+| ------------- | ------------- | ------------- | ------------- |
+|master|[![CircleCI](https://circleci.com/gh/maxirosson/jdroid/tree/master.svg?style=svg)](https://circleci.com/gh/maxirosson/jdroid/tree/master)|[Workflows](https://circleci.com/gh/maxirosson/workflows/jdroid/tree/master)|[Insights](https://circleci.com/build-insights/gh/maxirosson/jdroid/master)|
+|staging|[![CircleCI](https://circleci.com/gh/maxirosson/jdroid/tree/staging.svg?style=svg)](https://circleci.com/gh/maxirosson/jdroid/tree/staging)|[Workflows](https://circleci.com/gh/maxirosson/workflows/jdroid/tree/staging)|[Insights](https://circleci.com/build-insights/gh/maxirosson/jdroid/staging)|
+|production|[![CircleCI](https://circleci.com/gh/maxirosson/jdroid/tree/production.svg?style=svg)](https://circleci.com/gh/maxirosson/jdroid/tree/production)|[Workflows](https://circleci.com/gh/maxirosson/workflows/jdroid/tree/production)|[Insights](https://circleci.com/build-insights/gh/maxirosson/jdroid/production)|
 
 Components
 --------------
