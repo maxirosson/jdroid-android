@@ -30,7 +30,7 @@ buildscript {
 }
 
 dependencies {
-	implementation 'com.android.support:multidex:1.0.2'
+	implementation 'com.android.support:multidex:1.0.3'
 	implementation project(':jdroid-android')
 	implementation project(':jdroid-android-about')
 	implementation project(':jdroid-android-facebook')
@@ -78,6 +78,7 @@ dependencies {
 			exclude module: 'jdroid-java-core'
 		}
 	}
+
 	testImplementation "junit:junit:${JUNIT_VERSION}"
 	testImplementation "org.robolectric:robolectric:${ROBOLECTRIC_VERSION}"
 	androidTestImplementation 'com.android.support.test.espresso:espresso-core:2.2.2', {
