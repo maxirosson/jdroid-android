@@ -2,16 +2,18 @@ package com.jdroid.android.sqlite;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.java.collections.Sets;
+import com.jdroid.java.utils.LoggerUtils;
+
+import org.slf4j.Logger;
 
 import java.util.Set;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 	
-	private static final String TAG = DatabaseHelper.class.getSimpleName();
+	private static final Logger LOGGER = LoggerUtils.getLogger(DatabaseHelper.class);
 	
 	private static final int DATABASE_VERSION = 1;
 	private static final String DATABASE_NAME = "database";
@@ -45,8 +47,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		Log.w(TAG, "Upgrading database from version " + oldVersion + " to " + newVersion
-				+ ", which will destroy all old data");
+		LOGGER.warn("Upgrading database from version " + oldVersion + " to " + newVersion + ", which will destroy all old data");
 		for (String dropSQL : dropSQLs) {
 			db.execSQL(dropSQL);
 		}

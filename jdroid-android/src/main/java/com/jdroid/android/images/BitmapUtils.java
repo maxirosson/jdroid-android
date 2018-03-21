@@ -6,15 +6,19 @@ import android.graphics.BitmapFactory;
 import android.graphics.BitmapFactory.Options;
 import android.net.Uri;
 import android.support.annotation.DrawableRes;
-import android.util.Log;
 
 import com.jdroid.android.application.AbstractApplication;
+import com.jdroid.java.utils.LoggerUtils;
+
+import org.slf4j.Logger;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
 public class BitmapUtils {
+	
+	private static final Logger LOGGER = LoggerUtils.getLogger(BitmapUtils.class);
 	
 	public static Bitmap toBitmap(@DrawableRes int resId) {
 		return BitmapFactory.decodeResource(AbstractApplication.get().getResources(), resId);
@@ -72,7 +76,7 @@ public class BitmapUtils {
 			openInputStream.close();
 			return result;
 		} catch (Exception e) {
-			Log.e(BitmapUtils.class.getSimpleName(), e.getMessage());
+			LOGGER.error(e.getMessage(), e);
 			return null;
 		}
 	}
