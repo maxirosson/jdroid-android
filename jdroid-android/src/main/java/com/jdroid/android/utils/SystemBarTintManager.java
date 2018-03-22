@@ -395,12 +395,7 @@ public class SystemBarTintManager {
 		@SuppressLint("NewApi")
 		private float getSmallestWidthDp(Activity activity) {
 			DisplayMetrics metrics = new DisplayMetrics();
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-				activity.getWindowManager().getDefaultDisplay().getRealMetrics(metrics);
-			} else {
-				// TODO this is not correct, but we don't really care pre-kitkat
-				activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
-			}
+			activity.getWindowManager().getDefaultDisplay().getRealMetrics(metrics);
 			float widthDp = metrics.widthPixels / metrics.density;
 			float heightDp = metrics.heightPixels / metrics.density;
 			return Math.min(widthDp, heightDp);

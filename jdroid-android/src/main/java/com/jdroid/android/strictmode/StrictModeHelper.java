@@ -1,6 +1,5 @@
 package com.jdroid.android.strictmode;
 
-import android.os.Build;
 import android.os.Handler;
 import android.os.StrictMode;
 
@@ -19,15 +18,13 @@ public class StrictModeHelper {
 		if (isStrictModeEnabled()) {
 			LOGGER.debug("Initializing strict mode");
 			innerInitStrictMode();
-			if (Build.VERSION.SDK_INT >= 16) {
-				//restore strict mode after onCreate() returns.
-				new Handler().postAtFrontOfQueue(new Runnable() {
-					@Override
-					public void run() {
-						innerInitStrictMode();
-					}
-				});
-			}
+			//restore strict mode after onCreate() returns.
+			new Handler().postAtFrontOfQueue(new Runnable() {
+				@Override
+				public void run() {
+					innerInitStrictMode();
+				}
+			});
 		}
 	}
 	
@@ -48,9 +45,7 @@ public class StrictModeHelper {
 		
 		StrictMode.VmPolicy.Builder vmPolicyBuilder = new StrictMode.VmPolicy.Builder();
 		vmPolicyBuilder.detectActivityLeaks();
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
-			vmPolicyBuilder.detectFileUriExposure();
-		}
+		vmPolicyBuilder.detectFileUriExposure();
 		vmPolicyBuilder.detectLeakedRegistrationObjects();
 		vmPolicyBuilder.detectLeakedSqlLiteObjects();
 		vmPolicyBuilder.penaltyLog();

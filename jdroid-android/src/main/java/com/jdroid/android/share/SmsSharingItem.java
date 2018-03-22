@@ -2,7 +2,6 @@ package com.jdroid.android.share;
 
 import android.support.annotation.NonNull;
 
-import com.jdroid.android.utils.AndroidUtils;
 import com.jdroid.android.utils.ExternalAppsUtils;
 
 public class SmsSharingItem extends AppSharingItem {
@@ -19,7 +18,6 @@ public class SmsSharingItem extends AppSharingItem {
 	
 	@Override
 	public Boolean isEnabled() {
-		return !AndroidUtils.isPreKitkat() && super.isEnabled()
-				&& !getPackageName().equals(ExternalAppsUtils.HANGOUTS_PACKAGE_NAME);
+		return super.isEnabled() && !getPackageName().equals(ExternalAppsUtils.HANGOUTS_PACKAGE_NAME);
 	}
 }

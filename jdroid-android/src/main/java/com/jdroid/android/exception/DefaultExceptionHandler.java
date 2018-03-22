@@ -18,6 +18,7 @@ import org.slf4j.Logger;
 
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.List;
+import java.util.Locale;
 
 public class DefaultExceptionHandler implements ExceptionHandler {
 	
@@ -132,7 +133,7 @@ public class DefaultExceptionHandler implements ExceptionHandler {
 	protected List<String> getThrowableTags(Throwable throwable, Integer priorityLevel) {
 		List<String> tags = Lists.newArrayList();
 		if (priorityLevel != null) {
-			tags.add("level" + String.format("%02d", priorityLevel));
+			tags.add("level" + String.format(Locale.getDefault(), "%02d", priorityLevel));
 		}
 		return tags;
 	}
