@@ -5,6 +5,8 @@ import com.jdroid.java.utils.Hasher;
 
 import org.json.JSONException;
 
+import java.util.Locale;
+
 public class Product {
 	
 	private ProductType productType;
@@ -32,7 +34,7 @@ public class Product {
 	 * @return the Formatted price of the item, including its currency sign. The price does not include tax.
 	 */
 	public String getFormattedPrice() {
-		return currencyCode + " " + String.format("%.2f", price);
+		return currencyCode + " " + String.format(Locale.getDefault(),"%.2f", price);
 	}
 	
 	public Double getPrice() {
