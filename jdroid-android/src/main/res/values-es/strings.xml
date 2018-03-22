@@ -60,7 +60,6 @@
 
 	<!-- External Apps -->
 	<string name="jdroid_barcodeScanner">Barcode Scanner</string>
-	<string name="jdroid_voiceSearch">Voice Search</string>
 
 	<!-- Sharing -->
 	<string name="jdroid_share">Compartir</string>
