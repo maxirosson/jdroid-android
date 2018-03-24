@@ -342,4 +342,18 @@ public abstract class AbstractFragmentActivity extends AppCompatActivity impleme
 	public GoogleApiClient getGoogleApiClient() {
 		return activityHelper.getGoogleApiClient();
 	}
+	
+	@Override
+	public void setRequestedOrientation(int requestedOrientation) {
+		try {
+			super.setRequestedOrientation(requestedOrientation);
+		} catch(IllegalStateException e) {
+			// This is to catch a validation added on android 8.0 (and removed on android 8.1)
+			if ("Only fullscreen activities can request orientation".equals(e.getMessage())) {
+				AbstractApplication.get().getExceptionHandler().logHandledException(e);
+			} else {
+				throw e;
+			}
+		}
+	}
 }
