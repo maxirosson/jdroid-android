@@ -76,7 +76,7 @@ public class FirebaseRemoteConfigHelper {
 			}
 
 			if (!AppUtils.isReleaseBuildType()) {
-				sharedPreferencesHelper = SharedPreferencesHelper.get(FirebaseRemoteConfigHelper.class.getSimpleName());
+				sharedPreferencesHelper = SharedPreferencesHelper.get(FirebaseRemoteConfigHelper.class);
 				mocks  = (Map<String, String>)sharedPreferencesHelper.loadAllPreferences();
 				mocksEnabled = sharedPreferencesHelper.loadPreferenceAsBoolean(MOCKS_ENABLED, false);
 			}
