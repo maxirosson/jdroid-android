@@ -8,8 +8,11 @@ import com.jdroid.android.lifecycle.ApplicationLifecycleCallback;
 public class FirebaseAnalyticsAppLifecycleCallback extends ApplicationLifecycleCallback {
 	@Override
 	public void onProviderInit(Context context) {
-		if (FirebaseAnalyticsAppContext.isFirebaseAnalyticsEnabled()) {
-			AbstractApplication.get().addCoreAnalyticsTracker(new FirebaseCoreAnalyticsTracker());
-		}
+		AbstractApplication.get().addCoreAnalyticsTracker(new FirebaseCoreAnalyticsTracker());
+	}
+	
+	@Override
+	public Boolean isEnabled() {
+		return FirebaseAnalyticsAppContext.isFirebaseAnalyticsEnabled();
 	}
 }

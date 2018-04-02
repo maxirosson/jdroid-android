@@ -46,7 +46,7 @@ public class ApplicationLifecycleHelper {
 		init(context);
 		for (ApplicationLifecycleCallback callback : applicationLifecycleCallbacks) {
 			if (callback.isEnabled()) {
-				LOGGER.debug("Executing attachBaseContext for callback " + callback.getClass().getName());
+				LOGGER.debug("Executing attachBaseContext for " + callback.getClass().getName());
 				callback.attachBaseContext(context);
 			}
 		}
@@ -60,7 +60,7 @@ public class ApplicationLifecycleHelper {
 		init(context);
 		for (ApplicationLifecycleCallback callback : applicationLifecycleCallbacks) {
 			if (callback.isEnabled()) {
-				LOGGER.debug("Executing onCreate for callback " + callback.getClass().getName());
+				LOGGER.debug("Executing onCreate for " + callback.getClass().getName());
 				callback.onCreate(context);
 			}
 		}
@@ -74,7 +74,7 @@ public class ApplicationLifecycleHelper {
 		init(context);
 		for (ApplicationLifecycleCallback callback : applicationLifecycleCallbacks) {
 			if (callback.isEnabled()) {
-				LOGGER.debug("Executing onConfigurationChanged for callback " + callback.getClass().getName());
+				LOGGER.debug("Executing onConfigurationChanged for " + callback.getClass().getName());
 				callback.onConfigurationChanged(context, newConfig);
 			}
 		}
@@ -88,7 +88,7 @@ public class ApplicationLifecycleHelper {
 		init(context);
 		for (ApplicationLifecycleCallback callback : applicationLifecycleCallbacks) {
 			if (callback.isEnabled()) {
-				LOGGER.debug("Executing onLowMemory for callback " + callback.getClass().getName());
+				LOGGER.debug("Executing onLowMemory for " + callback.getClass().getName());
 				callback.onLowMemory(context);
 			}
 		}
@@ -102,7 +102,7 @@ public class ApplicationLifecycleHelper {
 		init(context);
 		for (ApplicationLifecycleCallback callback : applicationLifecycleCallbacks) {
 			if (callback.isEnabled()) {
-				LOGGER.debug("Executing onLocaleChanged for callback " + callback.getClass().getName());
+				LOGGER.debug("Executing onLocaleChanged for " + callback.getClass().getName());
 				callback.onLocaleChanged(context);
 			}
 		}

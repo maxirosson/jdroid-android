@@ -43,7 +43,7 @@ public abstract class ApplicationLifecycleCallback implements Comparable<Applica
 	
 	/*
 	 * The order in which the application listener should be invoked, relative to other application listeners.
-	 * When there are dependencies among application listener, setting this attribute for each of them ensures that they are created in the order required by those dependencies.
+	 * When there are dependencies among callbacks, setting this attribute for each of them ensures that they are created in the order required by those dependencies.
 	 * The value is a simple integer, with higher numbers being invoked first. Zero is the default value and negative numbers are accepted.
 	 */
 	@NonNull
