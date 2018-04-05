@@ -16,12 +16,14 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfigValue;
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.firebase.analytics.FirebaseAnalyticsFactory;
 import com.jdroid.android.utils.AppUtils;
-import com.jdroid.android.utils.SharedPreferencesHelper;
 import com.jdroid.java.collections.Lists;
 import com.jdroid.java.collections.Maps;
 import com.jdroid.java.concurrent.ExecutorUtils;
 import com.jdroid.java.date.DateUtils;
+import com.jdroid.java.remoteconfig.RemoteConfigLoader;
+import com.jdroid.java.remoteconfig.RemoteConfigParameter;
 import com.jdroid.java.utils.LoggerUtils;
+import com.jdroid.java.utils.StringUtils;
 
 import org.slf4j.Logger;
 
@@ -30,26 +32,24 @@ import java.util.Map;
 
 import static android.support.annotation.RestrictTo.Scope.LIBRARY;
 
-public class FirebaseRemoteConfigHelper {
+public class FirebaseRemoteConfigHelper implements RemoteConfigLoader {
 
 	private static final Logger LOGGER = LoggerUtils.getLogger(FirebaseRemoteConfigHelper.class);
 
-	private static final String MOCKS_ENABLED = "firebase.remote.config.mocks.enabled";
+	private FirebaseRemoteConfig firebaseRemoteConfig;
+	
+	private int retryCount = 0;
+	private long defaultFetchExpiration = DateUtils.SECONDS_PER_HOUR * 12;
 
-	private static FirebaseRemoteConfig firebaseRemoteConfig;
-
-	private static long DEFAULT_FETCH_EXPIRATION = DateUtils.SECONDS_PER_HOUR * 12;
-
-	private static int retryCount = 0;
-
-	private static Boolean mocksEnabled = false;
-	private static Map<String, String> mocks;
-	private static SharedPreferencesHelper sharedPreferencesHelper;
-	private static List<RemoteConfigParameter> remoteConfigParameters = Lists.newArrayList();
+	private List<FirebaseRemoteConfigParameter> firebaseRemoteConfigParameters = Lists.newArrayList();
+	
+	public static FirebaseRemoteConfigHelper get() {
+		return ((FirebaseRemoteConfigHelper)AbstractApplication.get().getRemoteConfigLoader());
+	}
 	
 	@WorkerThread
 	@RestrictTo(LIBRARY)
-	static void init() {
+	void init() {
 
 		try {
 			
@@ -64,9 +64,9 @@ public class FirebaseRemoteConfigHelper {
 
 			firebaseRemoteConfig.setConfigSettings(configSettingsBuilder.build());
 
-			if (!Lists.isNullOrEmpty(remoteConfigParameters)) {
+			if (!Lists.isNullOrEmpty(firebaseRemoteConfigParameters)) {
 				Map<String, Object> defaults = Maps.newHashMap();
-				for (RemoteConfigParameter each : remoteConfigParameters) {
+				for (RemoteConfigParameter each : firebaseRemoteConfigParameters) {
 					Object defaultValue = each.getDefaultValue();
 					if (defaultValue != null) {
 						defaults.put(each.getKey(), defaultValue);
@@ -74,40 +74,32 @@ public class FirebaseRemoteConfigHelper {
 				}
 				firebaseRemoteConfig.setDefaults(defaults);
 			}
-
-			if (!AppUtils.isReleaseBuildType()) {
-				sharedPreferencesHelper = SharedPreferencesHelper.get(FirebaseRemoteConfigHelper.class);
-				mocks  = (Map<String, String>)sharedPreferencesHelper.loadAllPreferences();
-				mocksEnabled = sharedPreferencesHelper.loadPreferenceAsBoolean(MOCKS_ENABLED, false);
-			}
-
-			fetch(DEFAULT_FETCH_EXPIRATION, true);
+			fetch(defaultFetchExpiration, true);
 		} catch (Exception e) {
 			AbstractApplication.get().getExceptionHandler().logHandledException("Error initializing Firebase Remote Config", e);
 		}
 	}
 	
-	public static void setDefaultFetchExpiration(long defaultFetchExpiration) {
-		DEFAULT_FETCH_EXPIRATION = defaultFetchExpiration;
+	public void setDefaultFetchExpiration(long defaultFetchExpiration) {
+		this.defaultFetchExpiration = defaultFetchExpiration;
 	}
 	
-	@RestrictTo(LIBRARY)
-	public static void fetchNow() {
-		fetchNow(null);
+	@Override
+	public void fetch() {
+		fetch(null);
 	}
 	
-	@RestrictTo(LIBRARY)
-	public static void fetchNow(OnSuccessListener<Void> onSuccessListener) {
+	public void fetch(OnSuccessListener<Void> onSuccessListener) {
 		fetch(0, false, onSuccessListener);
 	}
 	
 	@RestrictTo(LIBRARY)
-	public static void fetch(long cacheExpirationSeconds, Boolean setExperimentUserProperty) {
+	public void fetch(long cacheExpirationSeconds, Boolean setExperimentUserProperty) {
 		fetch(cacheExpirationSeconds, setExperimentUserProperty, null);
 	}
 	
 	@RestrictTo(LIBRARY)
-	public static void fetch(final long cacheExpirationSeconds, final Boolean setExperimentUserProperty, final OnSuccessListener<Void> onSuccessListener) {
+	public void fetch(final long cacheExpirationSeconds, final Boolean setExperimentUserProperty, final OnSuccessListener<Void> onSuccessListener) {
 		if (firebaseRemoteConfig != null) {
 			Task<Void> task = firebaseRemoteConfig.fetch(cacheExpirationSeconds);
 			task.addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -123,11 +115,11 @@ public class FirebaseRemoteConfigHelper {
 					// true if there was a Fetched Config, and it was activated. false if no Fetched Config was found, or the Fetched Config was already activated.
 					LOGGER.debug("Firebase Remote Config activate fetched result: " + result);
 
-					if (setExperimentUserProperty && !Lists.isNullOrEmpty(remoteConfigParameters)) {
+					if (setExperimentUserProperty && !Lists.isNullOrEmpty(firebaseRemoteConfigParameters)) {
 						ExecutorUtils.execute(new Runnable() {
 							@Override
 							public void run() {
-								for (RemoteConfigParameter each : remoteConfigParameters) {
+								for (FirebaseRemoteConfigParameter each : firebaseRemoteConfigParameters) {
 									if (each.isUserProperty()) {
 										String experimentVariant = FirebaseRemoteConfig.getInstance().getString(each.getKey());
 										FirebaseAnalyticsFactory.getFirebaseAnalyticsHelper().setUserProperty(each.getKey(), experimentVariant);
@@ -167,21 +159,20 @@ public class FirebaseRemoteConfigHelper {
 	}
 
 	@Nullable
-	public static FirebaseRemoteConfig getFirebaseRemoteConfig() {
+	public FirebaseRemoteConfig getFirebaseRemoteConfig() {
 		return firebaseRemoteConfig;
 	}
 
-	private static FirebaseRemoteConfigValue getFirebaseRemoteConfigValue(RemoteConfigParameter remoteConfigParameter) {
-		if (mocksEnabled && !AppUtils.isReleaseBuildType()) {
-			return new MockFirebaseRemoteConfigValue(remoteConfigParameter, mocks);
-		} else if (firebaseRemoteConfig == null) {
+	private FirebaseRemoteConfigValue getFirebaseRemoteConfigValue(RemoteConfigParameter remoteConfigParameter) {
+		if (firebaseRemoteConfig == null) {
 			return new StaticFirebaseRemoteConfigValue(remoteConfigParameter);
 		} else {
 			return firebaseRemoteConfig.getValue(remoteConfigParameter.getKey());
 		}
 	}
 
-	public static String getString(RemoteConfigParameter remoteConfigParameter) {
+	@Override
+	public String getString(RemoteConfigParameter remoteConfigParameter) {
 		FirebaseRemoteConfigValue firebaseRemoteConfigValue = getFirebaseRemoteConfigValue(remoteConfigParameter);
 		Object value;
 		if (firebaseRemoteConfigValue.getSource() == FirebaseRemoteConfig.VALUE_SOURCE_STATIC) {
@@ -192,8 +183,14 @@ public class FirebaseRemoteConfigHelper {
 		log(remoteConfigParameter, firebaseRemoteConfigValue, value);
 		return value != null ? value.toString() : null;
 	}
-
-	public static Boolean getBoolean(RemoteConfigParameter remoteConfigParameter) {
+	
+	@Override
+	public List<String> getStringList(RemoteConfigParameter remoteConfigParameter) {
+		return StringUtils.splitWithCommaSeparator(getString(remoteConfigParameter));
+	}
+	
+	@Override
+	public Boolean getBoolean(RemoteConfigParameter remoteConfigParameter) {
 		FirebaseRemoteConfigValue firebaseRemoteConfigValue = getFirebaseRemoteConfigValue(remoteConfigParameter);
 		Object value;
 		if (firebaseRemoteConfigValue.getSource() == FirebaseRemoteConfig.VALUE_SOURCE_STATIC) {
@@ -205,7 +202,8 @@ public class FirebaseRemoteConfigHelper {
 		return (Boolean)value;
 	}
 
-	public static Double getDouble(RemoteConfigParameter remoteConfigParameter) {
+	@Override
+	public Double getDouble(RemoteConfigParameter remoteConfigParameter) {
 		FirebaseRemoteConfigValue firebaseRemoteConfigValue = getFirebaseRemoteConfigValue(remoteConfigParameter);
 		Object value;
 		if (firebaseRemoteConfigValue.getSource() == FirebaseRemoteConfig.VALUE_SOURCE_STATIC) {
@@ -220,7 +218,8 @@ public class FirebaseRemoteConfigHelper {
 		return (Double)value;
 	}
 
-	public static Long getLong(RemoteConfigParameter remoteConfigParameter) {
+	@Override
+	public Long getLong(RemoteConfigParameter remoteConfigParameter) {
 		FirebaseRemoteConfigValue firebaseRemoteConfigValue = getFirebaseRemoteConfigValue(remoteConfigParameter);
 		Object value;
 		if (firebaseRemoteConfigValue.getSource() == FirebaseRemoteConfig.VALUE_SOURCE_STATIC) {
@@ -235,11 +234,24 @@ public class FirebaseRemoteConfigHelper {
 		return (Long)value;
 	}
 	
-	public static String getSourceName(RemoteConfigParameter remoteConfigParameter) {
+	@Override
+	public Object getObject(RemoteConfigParameter remoteConfigParameter) {
+		FirebaseRemoteConfigValue firebaseRemoteConfigValue = getFirebaseRemoteConfigValue(remoteConfigParameter);
+		Object value;
+		if (firebaseRemoteConfigValue.getSource() == FirebaseRemoteConfig.VALUE_SOURCE_STATIC) {
+			value = remoteConfigParameter.getDefaultValue();
+		} else {
+			value = firebaseRemoteConfigValue.asString();
+		}
+		log(remoteConfigParameter, firebaseRemoteConfigValue, value);
+		return value;
+	}
+	
+	public String getSourceName(RemoteConfigParameter remoteConfigParameter) {
 		return getSourceName(getFirebaseRemoteConfigValue(remoteConfigParameter));
 	}
 	
-	private static String getSourceName(FirebaseRemoteConfigValue firebaseRemoteConfigValue) {
+	private String getSourceName(FirebaseRemoteConfigValue firebaseRemoteConfigValue) {
 		String source = null;
 		if (firebaseRemoteConfigValue.getSource() == FirebaseRemoteConfig.VALUE_SOURCE_STATIC) {
 			source = "Static";
@@ -247,56 +259,30 @@ public class FirebaseRemoteConfigHelper {
 			source = "Remote";
 		} else if (firebaseRemoteConfigValue.getSource() == FirebaseRemoteConfig.VALUE_SOURCE_DEFAULT) {
 			source = "Default";
-		} else if (firebaseRemoteConfigValue.getSource() == -1) {
-			source = "Mock";
 		}
 		return source;
 	}
 
-	private static void log(RemoteConfigParameter remoteConfigParameter, FirebaseRemoteConfigValue firebaseRemoteConfigValue, Object value) {
+	private void log(RemoteConfigParameter remoteConfigParameter, FirebaseRemoteConfigValue firebaseRemoteConfigValue, Object value) {
 		if (LoggerUtils.isEnabled()) {
 			String source = getSourceName(firebaseRemoteConfigValue);
 			LOGGER.info("Loaded Firebase Remote Config. Source [" + source + "] Key [" + remoteConfigParameter.getKey() + "] Value [" + value + "]");
 		}
 	}
 	
-	@RestrictTo(LIBRARY)
-	public static Boolean isMocksEnabled() {
-		return mocksEnabled;
+	public  void addRemoteConfigParameter(FirebaseRemoteConfigParameter firebaseRemoteConfigParameter) {
+		firebaseRemoteConfigParameters.add(firebaseRemoteConfigParameter);
 	}
 	
-	@RestrictTo(LIBRARY)
-	public static void setMocksEnabled(Boolean mocksEnabled) {
-		if (mocksEnabled) {
-			for (RemoteConfigParameter each : remoteConfigParameters) {
-				String value = getString(each);
-				sharedPreferencesHelper.savePreference(each.getKey(), value);
-				mocks.put(each.getKey(), value);
-			}
-		}
-		FirebaseRemoteConfigHelper.mocksEnabled = mocksEnabled;
-		sharedPreferencesHelper.savePreference(MOCKS_ENABLED, mocksEnabled);
+	public void addRemoteConfigParameters(List<FirebaseRemoteConfigParameter> params) {
+		firebaseRemoteConfigParameters.addAll(params);
 	}
 	
-	@RestrictTo(LIBRARY)
-	public static void setParameterMock(RemoteConfigParameter remoteConfigParameter, String value) {
-		sharedPreferencesHelper.savePreferenceAsync(remoteConfigParameter.getKey(), value);
-		mocks.put(remoteConfigParameter.getKey(), value);
+	public void addRemoteConfigParameters(FirebaseRemoteConfigParameter... firebaseRemoteConfigParameters) {
+		addRemoteConfigParameters(Lists.newArrayList(firebaseRemoteConfigParameters));
 	}
 	
-	public static void addRemoteConfigParameter(RemoteConfigParameter remoteConfigParameter) {
-		remoteConfigParameters.add(remoteConfigParameter);
-	}
-	
-	public static void addRemoteConfigParameters(List<RemoteConfigParameter> params) {
-		remoteConfigParameters.addAll(params);
-	}
-	
-	public static void addRemoteConfigParameters(RemoteConfigParameter... remoteConfigParameters) {
-		addRemoteConfigParameters(Lists.newArrayList(remoteConfigParameters));
-	}
-	
-	public static List<RemoteConfigParameter> getRemoteConfigParameters() {
-		return remoteConfigParameters;
+	public List<FirebaseRemoteConfigParameter> getRemoteConfigParameters() {
+		return firebaseRemoteConfigParameters;
 	}
 }

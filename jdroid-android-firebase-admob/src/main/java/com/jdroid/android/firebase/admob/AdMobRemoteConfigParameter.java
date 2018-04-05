@@ -1,8 +1,8 @@
 package com.jdroid.android.firebase.admob;
 
-import com.jdroid.android.firebase.remoteconfig.RemoteConfigParameter;
+import com.jdroid.android.firebase.remoteconfig.FirebaseRemoteConfigParameter;
 
-public enum AdMobRemoteConfigParameter implements RemoteConfigParameter {
+public enum AdMobRemoteConfigParameter implements FirebaseRemoteConfigParameter {
 
 	ADS_ENABLED(false),
 	MIN_APP_LOADS_TO_DISPLAY_ADS(5L),

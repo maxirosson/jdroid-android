@@ -10,7 +10,6 @@ public class AboutAppLifecycleCallback extends ApplicationLifecycleCallback {
 	
 	@Override
 	public void onProviderInit(Context context) {
-		
-		FirebaseRemoteConfigHelper.addRemoteConfigParameters(AboutRemoteConfigParameter.values());
+		FirebaseRemoteConfigHelper.get().addRemoteConfigParameters(AboutRemoteConfigParameter.values());
 	}
 }

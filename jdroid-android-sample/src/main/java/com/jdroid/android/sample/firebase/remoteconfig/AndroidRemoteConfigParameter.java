@@ -1,8 +1,8 @@
 package com.jdroid.android.sample.firebase.remoteconfig;
 
-import com.jdroid.android.firebase.remoteconfig.RemoteConfigParameter;
+import com.jdroid.android.firebase.remoteconfig.FirebaseRemoteConfigParameter;
 
-public enum AndroidRemoteConfigParameter implements RemoteConfigParameter {
+public enum AndroidRemoteConfigParameter implements FirebaseRemoteConfigParameter {
 
 	SAMPLE_CONFIG_1("defaultConfigValue1"),
 	SAMPLE_CONFIG_2("default", true),

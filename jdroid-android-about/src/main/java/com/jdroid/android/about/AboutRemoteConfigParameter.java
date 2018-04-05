@@ -1,8 +1,8 @@
 package com.jdroid.android.about;
 
-import com.jdroid.android.firebase.remoteconfig.RemoteConfigParameter;
+import com.jdroid.android.firebase.remoteconfig.FirebaseRemoteConfigParameter;
 
-public enum AboutRemoteConfigParameter implements RemoteConfigParameter {
+public enum AboutRemoteConfigParameter implements FirebaseRemoteConfigParameter {
 	
 	RATE_APP_MIN_DAYS_SINCE_LAST_RESPONSE(90),
 	RATE_APP_MIN_DAYS_SINCE_FIRST_APP_LOAD(7),

@@ -54,8 +54,10 @@ dependencies {
 
 	if (jdroid.propertyResolver.getBooleanProp("JDROID_JAVA_AS_PROJECT_DEPENDENCY", false)) {
 		api project(":jdroid-java-core")
+		api project(":jdroid-java-remote-config")
 	} else {
 		api ("com.jdroidframework:jdroid-java-core:${JDROID_JAVA_VERSION}")
+		api ("com.jdroidframework:jdroid-java-remote-config:${JDROID_JAVA_VERSION}")
 	}
 
 	if (jdroid.propertyResolver.getBooleanProp("JDROID_JAVA_HTTP_AS_PROJECT_DEPENDENCY", false)) {

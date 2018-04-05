@@ -10,7 +10,6 @@ public class AdMobAppLifecycleCallback extends ApplicationLifecycleCallback {
 	
 	@Override
 	public void onProviderInit(Context context) {
-		
-		FirebaseRemoteConfigHelper.addRemoteConfigParameters(AdMobRemoteConfigParameter.values());
+		FirebaseRemoteConfigHelper.get().addRemoteConfigParameters(AdMobRemoteConfigParameter.values());
 	}
 }

@@ -1,6 +1,7 @@
 package com.jdroid.android.firebase.remoteconfig;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
+import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.recycler.AbstractRecyclerFragment;
 import com.jdroid.android.recycler.RecyclerViewAdapter;
 import com.jdroid.android.recycler.RecyclerViewType;
@@ -29,7 +31,7 @@ public class FirebaseRemoteConfigFragment extends AbstractRecyclerFragment {
 
 		List<Object> items = Lists.newArrayList();
 		items.add("");
-		items.addAll(FirebaseRemoteConfigHelper.getRemoteConfigParameters());
+		items.addAll(FirebaseRemoteConfigHelper.get().getRemoteConfigParameters());
 		List<RecyclerViewType> recyclerViewTypes = Lists.<RecyclerViewType>newArrayList(new HeaderRecyclerViewType(), new RemoteConfigParameterRecyclerViewType());
 		setAdapter(new RecyclerViewAdapter(recyclerViewTypes, items));
 	}
@@ -59,11 +61,11 @@ public class FirebaseRemoteConfigFragment extends AbstractRecyclerFragment {
 
 		@Override
 		public void fillHolderFromItem(String item, HeaderViewHolder holder) {
-			holder.fetch.setEnabled(!FirebaseRemoteConfigHelper.isMocksEnabled());
+			holder.fetch.setEnabled(!MockRemoteConfigLoader.isMocksEnabled());
 			holder.fetch.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					FirebaseRemoteConfigHelper.fetchNow(new OnSuccessListener<Void>() {
+					FirebaseRemoteConfigHelper.get().fetch(new OnSuccessListener<Void>() {
 						@Override
 						public void onSuccess(Void aVoid) {
 							executeOnUIThread(new Runnable() {
@@ -77,16 +79,16 @@ public class FirebaseRemoteConfigFragment extends AbstractRecyclerFragment {
 				}
 			});
 
-			holder.mocksEnabled.setChecked(FirebaseRemoteConfigHelper.isMocksEnabled());
+			holder.mocksEnabled.setChecked(MockRemoteConfigLoader.isMocksEnabled());
 			holder.mocksEnabled.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 				@Override
 				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-					FirebaseRemoteConfigHelper.setMocksEnabled(isChecked);
+					MockRemoteConfigLoader.setMocksEnabled(isChecked);
 					getAdapter().notifyDataSetChanged();
 				}
 			});
 
-			FirebaseRemoteConfig firebaseRemoteConfig = FirebaseRemoteConfigHelper.getFirebaseRemoteConfig();
+			FirebaseRemoteConfig firebaseRemoteConfig = FirebaseRemoteConfigHelper.get().getFirebaseRemoteConfig();
 			if (firebaseRemoteConfig != null) {
 				String fetchDate = DateUtils.formatDateTime(new Date(firebaseRemoteConfig.getInfo().getFetchTimeMillis()));
 				holder.fetchTimeMillis.setText(getString(R.string.jdroid_firebaseRemoteConfigFetchDate, fetchDate));
@@ -105,6 +107,7 @@ public class FirebaseRemoteConfigFragment extends AbstractRecyclerFragment {
 			}
 		}
 
+		@NonNull
 		@Override
 		public AbstractRecyclerFragment getAbstractRecyclerFragment() {
 			return FirebaseRemoteConfigFragment.this;
@@ -119,16 +122,16 @@ public class FirebaseRemoteConfigFragment extends AbstractRecyclerFragment {
 		public Button save;
 		public CheckBox mocksEnabled;
 
-		public HeaderViewHolder(View itemView) {
+		private HeaderViewHolder(View itemView) {
 			super(itemView);
 		}
 	}
 
-	public class RemoteConfigParameterRecyclerViewType extends RecyclerViewType<RemoteConfigParameter, RemoteConfigParameterItemHolder> {
+	public class RemoteConfigParameterRecyclerViewType extends RecyclerViewType<FirebaseRemoteConfigParameter, RemoteConfigParameterItemHolder> {
 
 		@Override
-		protected Class<RemoteConfigParameter> getItemClass() {
-			return RemoteConfigParameter.class;
+		protected Class<FirebaseRemoteConfigParameter> getItemClass() {
+			return FirebaseRemoteConfigParameter.class;
 		}
 
 		@Override
@@ -148,27 +151,28 @@ public class FirebaseRemoteConfigFragment extends AbstractRecyclerFragment {
 		}
 
 		@Override
-		public void fillHolderFromItem(final RemoteConfigParameter item, final RemoteConfigParameterItemHolder holder) {
+		public void fillHolderFromItem(final FirebaseRemoteConfigParameter item, final RemoteConfigParameterItemHolder holder) {
 			holder.key.setText(item.getKey());
 			holder.specs.setText(getString(R.string.jdroid_firebaseRemoteConfigSpec, item.isUserProperty().toString(), item.getDefaultValue()));
-			holder.source.setText(getString(R.string.jdroid_firebaseRemoteConfigSource, FirebaseRemoteConfigHelper.getSourceName(item)));
-			holder.value.setText(FirebaseRemoteConfigHelper.getString(item));
-			holder.value.setEnabled(FirebaseRemoteConfigHelper.isMocksEnabled());
-			holder.source.setVisibility(FirebaseRemoteConfigHelper.isMocksEnabled() ? View.GONE : View.VISIBLE);
-			holder.save.setVisibility(FirebaseRemoteConfigHelper.isMocksEnabled() ? View.VISIBLE : View.GONE);
+			holder.source.setText(getString(R.string.jdroid_firebaseRemoteConfigSource, FirebaseRemoteConfigHelper.get().getSourceName(item)));
+			holder.value.setText(AbstractApplication.get().getRemoteConfigLoader().getString(item));
+			holder.value.setEnabled(MockRemoteConfigLoader.isMocksEnabled());
+			holder.source.setVisibility(MockRemoteConfigLoader.isMocksEnabled() ? View.GONE : View.VISIBLE);
+			holder.save.setVisibility(MockRemoteConfigLoader.isMocksEnabled() ? View.VISIBLE : View.GONE);
 			holder.save.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					FirebaseRemoteConfigHelper.setParameterMock(item, StringUtils.getNotEmptyString(holder.value.getText().toString()));
+					MockRemoteConfigLoader.get().saveRemoteConfigParameter(item, StringUtils.getNotEmptyString(holder.value.getText().toString()));
 				}
 			});
 		}
 
 		@Override
 		public Boolean matchViewType(Object item) {
-			return item instanceof RemoteConfigParameter;
+			return item instanceof FirebaseRemoteConfigParameter;
 		}
 
+		@NonNull
 		@Override
 		public AbstractRecyclerFragment getAbstractRecyclerFragment() {
 			return FirebaseRemoteConfigFragment.this;
@@ -183,7 +187,7 @@ public class FirebaseRemoteConfigFragment extends AbstractRecyclerFragment {
 		protected EditText value;
 		protected Button save;
 
-		public RemoteConfigParameterItemHolder(View itemView) {
+		private RemoteConfigParameterItemHolder(View itemView) {
 			super(itemView);
 		}
 	}

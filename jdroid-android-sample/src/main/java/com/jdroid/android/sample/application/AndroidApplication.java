@@ -70,7 +70,7 @@ public class AndroidApplication extends AbstractApplication {
 	public void onProviderInit() {
 		super.onProviderInit();
 		
-		FirebaseRemoteConfigHelper.addRemoteConfigParameters(AndroidRemoteConfigParameter.values());
+		FirebaseRemoteConfigHelper.get().addRemoteConfigParameters(AndroidRemoteConfigParameter.values());
 		AdMobAppModule.setAdMobAppContext(new SampleAdMobAppContext());
 	}
 	
