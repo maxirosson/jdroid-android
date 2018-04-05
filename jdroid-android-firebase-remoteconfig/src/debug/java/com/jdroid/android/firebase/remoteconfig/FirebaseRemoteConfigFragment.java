@@ -31,7 +31,7 @@ public class FirebaseRemoteConfigFragment extends AbstractRecyclerFragment {
 
 		List<Object> items = Lists.newArrayList();
 		items.add("");
-		items.addAll(FirebaseRemoteConfigHelper.get().getRemoteConfigParameters());
+		items.addAll(FirebaseRemoteConfigLoader.get().getRemoteConfigParameters());
 		List<RecyclerViewType> recyclerViewTypes = Lists.<RecyclerViewType>newArrayList(new HeaderRecyclerViewType(), new RemoteConfigParameterRecyclerViewType());
 		setAdapter(new RecyclerViewAdapter(recyclerViewTypes, items));
 	}
@@ -65,7 +65,7 @@ public class FirebaseRemoteConfigFragment extends AbstractRecyclerFragment {
 			holder.fetch.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					FirebaseRemoteConfigHelper.get().fetch(new OnSuccessListener<Void>() {
+					FirebaseRemoteConfigLoader.get().fetch(new OnSuccessListener<Void>() {
 						@Override
 						public void onSuccess(Void aVoid) {
 							executeOnUIThread(new Runnable() {
@@ -88,7 +88,7 @@ public class FirebaseRemoteConfigFragment extends AbstractRecyclerFragment {
 				}
 			});
 
-			FirebaseRemoteConfig firebaseRemoteConfig = FirebaseRemoteConfigHelper.get().getFirebaseRemoteConfig();
+			FirebaseRemoteConfig firebaseRemoteConfig = FirebaseRemoteConfigLoader.get().getFirebaseRemoteConfig();
 			if (firebaseRemoteConfig != null) {
 				String fetchDate = DateUtils.formatDateTime(new Date(firebaseRemoteConfig.getInfo().getFetchTimeMillis()));
 				holder.fetchTimeMillis.setText(getString(R.string.jdroid_firebaseRemoteConfigFetchDate, fetchDate));
@@ -154,7 +154,7 @@ public class FirebaseRemoteConfigFragment extends AbstractRecyclerFragment {
 		public void fillHolderFromItem(final FirebaseRemoteConfigParameter item, final RemoteConfigParameterItemHolder holder) {
 			holder.key.setText(item.getKey());
 			holder.specs.setText(getString(R.string.jdroid_firebaseRemoteConfigSpec, item.isUserProperty().toString(), item.getDefaultValue()));
-			holder.source.setText(getString(R.string.jdroid_firebaseRemoteConfigSource, FirebaseRemoteConfigHelper.get().getSourceName(item)));
+			holder.source.setText(getString(R.string.jdroid_firebaseRemoteConfigSource, FirebaseRemoteConfigLoader.get().getSourceName(item)));
 			holder.value.setText(AbstractApplication.get().getRemoteConfigLoader().getString(item));
 			holder.value.setEnabled(MockRemoteConfigLoader.isMocksEnabled());
 			holder.source.setVisibility(MockRemoteConfigLoader.isMocksEnabled() ? View.GONE : View.VISIBLE);

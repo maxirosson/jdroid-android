@@ -91,7 +91,7 @@ public class MockRemoteConfigLoader implements RemoteConfigLoader {
 	
 	@RestrictTo(LIBRARY)
 	public static void setMocksEnabled(Boolean mocksEnabled) {
-		AbstractApplication.get().setRemoteConfigLoader(mocksEnabled ? new MockRemoteConfigLoader(false) : new FirebaseRemoteConfigHelper());
+		AbstractApplication.get().setRemoteConfigLoader(mocksEnabled ? new MockRemoteConfigLoader(false) : new FirebaseRemoteConfigLoader());
 		SharedPreferencesHelper.get(MockRemoteConfigLoader.class).savePreference(MOCKS_ENABLED, mocksEnabled);
 	}
 	

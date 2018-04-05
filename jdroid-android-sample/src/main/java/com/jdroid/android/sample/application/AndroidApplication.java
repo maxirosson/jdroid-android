@@ -19,7 +19,7 @@ import com.jdroid.android.context.AppContext;
 import com.jdroid.android.debug.DebugContext;
 import com.jdroid.android.firebase.admob.AdMobAppModule;
 import com.jdroid.android.firebase.fcm.AbstractFcmAppModule;
-import com.jdroid.android.firebase.remoteconfig.FirebaseRemoteConfigHelper;
+import com.jdroid.android.firebase.remoteconfig.FirebaseRemoteConfigLoader;
 import com.jdroid.android.fragment.FragmentHelper;
 import com.jdroid.android.google.analytics.GoogleAnalyticsAppContext;
 import com.jdroid.android.google.analytics.GoogleAnalyticsFactory;
@@ -70,7 +70,7 @@ public class AndroidApplication extends AbstractApplication {
 	public void onProviderInit() {
 		super.onProviderInit();
 		
-		FirebaseRemoteConfigHelper.get().addRemoteConfigParameters(AndroidRemoteConfigParameter.values());
+		FirebaseRemoteConfigLoader.get().addRemoteConfigParameters(AndroidRemoteConfigParameter.values());
 		AdMobAppModule.setAdMobAppContext(new SampleAdMobAppContext());
 	}
 	

@@ -11,7 +11,7 @@ public class FirebaseRemoteConfigAppLifecycleCallback extends ApplicationLifecyc
 	@Override
 	public void onProviderInit(Context context) {
 		
-		AbstractApplication.get().setRemoteConfigLoader(new FirebaseRemoteConfigHelper());
+		AbstractApplication.get().setRemoteConfigLoader(new FirebaseRemoteConfigLoader());
 		
 		AbstractApplication.get().addCoreAnalyticsTracker(new FirebaseRemoteConfigTracker());
 	}

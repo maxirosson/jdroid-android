@@ -32,9 +32,9 @@ import java.util.Map;
 
 import static android.support.annotation.RestrictTo.Scope.LIBRARY;
 
-public class FirebaseRemoteConfigHelper implements RemoteConfigLoader {
+public class FirebaseRemoteConfigLoader implements RemoteConfigLoader {
 
-	private static final Logger LOGGER = LoggerUtils.getLogger(FirebaseRemoteConfigHelper.class);
+	private static final Logger LOGGER = LoggerUtils.getLogger(FirebaseRemoteConfigLoader.class);
 
 	private FirebaseRemoteConfig firebaseRemoteConfig;
 	
@@ -43,8 +43,8 @@ public class FirebaseRemoteConfigHelper implements RemoteConfigLoader {
 
 	private List<FirebaseRemoteConfigParameter> firebaseRemoteConfigParameters = Lists.newArrayList();
 	
-	public static FirebaseRemoteConfigHelper get() {
-		return ((FirebaseRemoteConfigHelper)AbstractApplication.get().getRemoteConfigLoader());
+	public static FirebaseRemoteConfigLoader get() {
+		return ((FirebaseRemoteConfigLoader)AbstractApplication.get().getRemoteConfigLoader());
 	}
 	
 	@WorkerThread
