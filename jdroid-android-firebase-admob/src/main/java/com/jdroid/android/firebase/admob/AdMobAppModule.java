@@ -14,7 +14,9 @@ import com.jdroid.android.firebase.admob.analytics.GoogleAdMobAnalyticsTracker;
 import com.jdroid.java.analytics.AnalyticsSender;
 import com.jdroid.java.analytics.AnalyticsTracker;
 import com.jdroid.java.collections.Lists;
+import com.jdroid.java.remoteconfig.RemoteConfigParameter;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class AdMobAppModule extends AbstractAppModule {
@@ -60,5 +62,11 @@ public class AdMobAppModule extends AbstractAppModule {
 	@Override
 	public AdMobAnalyticsSender getModuleAnalyticsSender() {
 		return (AdMobAnalyticsSender)super.getModuleAnalyticsSender();
+	}
+	
+	@NonNull
+	@Override
+	public List<RemoteConfigParameter> getRemoteConfigParameters() {
+		return Arrays.asList(AdMobRemoteConfigParameter.values());
 	}
 }

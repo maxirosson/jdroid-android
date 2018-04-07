@@ -11,6 +11,7 @@ import com.jdroid.android.fragment.FragmentDelegate;
 import com.jdroid.java.analytics.AnalyticsSender;
 import com.jdroid.java.analytics.AnalyticsTracker;
 import com.jdroid.java.collections.Lists;
+import com.jdroid.java.remoteconfig.RemoteConfigParameter;
 
 import java.util.List;
 
@@ -59,5 +60,11 @@ public abstract class AbstractAppModule implements AppModule {
 	@Override
 	public FragmentDelegate createFragmentDelegate(Fragment fragment) {
 		return null;
+	}
+	
+	@NonNull
+	@Override
+	public List<RemoteConfigParameter> getRemoteConfigParameters() {
+		return Lists.newArrayList();
 	}
 }

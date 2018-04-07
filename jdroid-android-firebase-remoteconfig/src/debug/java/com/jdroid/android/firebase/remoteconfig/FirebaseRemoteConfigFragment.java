@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.jdroid.android.application.AbstractApplication;
+import com.jdroid.android.application.AppModule;
 import com.jdroid.android.recycler.AbstractRecyclerFragment;
 import com.jdroid.android.recycler.RecyclerViewAdapter;
 import com.jdroid.android.recycler.RecyclerViewType;
@@ -32,6 +33,9 @@ public class FirebaseRemoteConfigFragment extends AbstractRecyclerFragment {
 
 		List<Object> items = Lists.newArrayList();
 		items.add("");
+		for (AppModule appModule : AbstractApplication.get().getAppModules()) {
+			items.addAll(appModule.getRemoteConfigParameters());
+		}
 		items.addAll(AbstractApplication.get().getDebugContext().getRemoteConfigParameters());
 		List<RecyclerViewType> recyclerViewTypes = Lists.newArrayList(new HeaderRecyclerViewType(), new RemoteConfigParameterRecyclerViewType());
 		setAdapter(new RecyclerViewAdapter(recyclerViewTypes, items));

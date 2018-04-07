@@ -2,9 +2,7 @@ package com.jdroid.android.sample.debug;
 
 import android.support.v4.util.Pair;
 
-import com.jdroid.android.about.AboutRemoteConfigParameter;
 import com.jdroid.android.debug.DebugContext;
-import com.jdroid.android.firebase.admob.AdMobRemoteConfigParameter;
 import com.jdroid.android.sample.api.ApiServer;
 import com.jdroid.android.sample.firebase.remoteconfig.AndroidRemoteConfigParameter;
 import com.jdroid.java.collections.Lists;
@@ -48,10 +46,6 @@ public class AndroidDebugContext extends DebugContext {
 	
 	@Override
 	public List<RemoteConfigParameter> getRemoteConfigParameters() {
-		List<RemoteConfigParameter> remoteConfigParameters = Lists.newArrayList();
-		remoteConfigParameters.addAll(Arrays.asList(AdMobRemoteConfigParameter.values()));
-		remoteConfigParameters.addAll(Arrays.asList(AboutRemoteConfigParameter.values()));
-		remoteConfigParameters.addAll(Arrays.asList(AndroidRemoteConfigParameter.values()));
-		return remoteConfigParameters;
+		return Arrays.asList(AndroidRemoteConfigParameter.values());
 	}
 }

@@ -11,7 +11,9 @@ import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.java.analytics.AnalyticsSender;
 import com.jdroid.java.analytics.AnalyticsTracker;
 import com.jdroid.java.collections.Lists;
+import com.jdroid.java.remoteconfig.RemoteConfigParameter;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class AboutAppModule extends AbstractAppModule {
@@ -51,5 +53,11 @@ public class AboutAppModule extends AbstractAppModule {
 	@Override
 	public AboutAnalyticsSender getModuleAnalyticsSender() {
 		return (AboutAnalyticsSender)super.getModuleAnalyticsSender();
+	}
+	
+	@NonNull
+	@Override
+	public List<RemoteConfigParameter> getRemoteConfigParameters() {
+		return Arrays.asList(AboutRemoteConfigParameter.values());
 	}
 }
