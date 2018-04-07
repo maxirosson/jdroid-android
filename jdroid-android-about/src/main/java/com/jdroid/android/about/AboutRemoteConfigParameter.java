@@ -1,8 +1,8 @@
 package com.jdroid.android.about;
 
-import com.jdroid.android.firebase.remoteconfig.FirebaseRemoteConfigParameter;
+import com.jdroid.java.remoteconfig.RemoteConfigParameter;
 
-public enum AboutRemoteConfigParameter implements FirebaseRemoteConfigParameter {
+public enum AboutRemoteConfigParameter implements RemoteConfigParameter {
 	
 	RATE_APP_MIN_DAYS_SINCE_LAST_RESPONSE(90),
 	RATE_APP_MIN_DAYS_SINCE_FIRST_APP_LOAD(7),
@@ -27,10 +27,5 @@ public enum AboutRemoteConfigParameter implements FirebaseRemoteConfigParameter 
 	@Override
 	public Object getDefaultValue() {
 		return AboutAppModule.get().getAboutContext().getBuildConfigValue(name(), defaultValue);
-	}
-
-	@Override
-	public Boolean isUserProperty() {
-		return false;
 	}
 }

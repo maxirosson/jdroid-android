@@ -50,32 +50,33 @@ public class MockRemoteConfigLoader implements RemoteConfigLoader {
 	
 	@Override
 	public String getString(RemoteConfigParameter remoteConfigParameter) {
-		return getValue(remoteConfigParameter, cache.get(remoteConfigParameter.getKey()));
+		Object value = getValue(remoteConfigParameter, cache.get(remoteConfigParameter.getKey()));
+		return value != null ? value.toString() : null;
 	}
 	
 	@Override
 	public List<String> getStringList(RemoteConfigParameter remoteConfigParameter) {
-		return getValue(remoteConfigParameter, StringUtils.splitWithCommaSeparator(getString(remoteConfigParameter)));
+		return (List<String>)getValue(remoteConfigParameter, StringUtils.splitWithCommaSeparator(getString(remoteConfigParameter)));
 	}
 	
 	@Override
 	public Boolean getBoolean(RemoteConfigParameter remoteConfigParameter) {
-		return getValue(remoteConfigParameter, TypeUtils.getBoolean(cache.get(remoteConfigParameter.getKey()), false));
+		return (Boolean)getValue(remoteConfigParameter, TypeUtils.getBoolean(cache.get(remoteConfigParameter.getKey()), false));
 	}
 	
 	@Override
 	public Long getLong(RemoteConfigParameter remoteConfigParameter) {
-		return getValue(remoteConfigParameter, TypeUtils.getLong(cache.get(remoteConfigParameter.getKey()), 0L));
+		return (Long)getValue(remoteConfigParameter, TypeUtils.getLong(cache.get(remoteConfigParameter.getKey()), 0L));
 	}
 	
 	@Override
 	public Double getDouble(RemoteConfigParameter remoteConfigParameter) {
-		return getValue(remoteConfigParameter, TypeUtils.getDouble(cache.get(remoteConfigParameter.getKey()), 0D));
+		return (Double)getValue(remoteConfigParameter, TypeUtils.getDouble(cache.get(remoteConfigParameter.getKey()), 0D));
 	}
 	
-	private <T> T getValue(RemoteConfigParameter remoteConfigParameter, T value) {
+	private Object getValue(RemoteConfigParameter remoteConfigParameter, Object value) {
 		if (value == null) {
-			value = (T)remoteConfigParameter.getDefaultValue();
+			value = remoteConfigParameter.getDefaultValue();
 		}
 		if (LoggerUtils.isEnabled()) {
 			LOGGER.info("Loaded Mock Remote Config. Key [" + remoteConfigParameter.getKey() + "] Value [" + value + "]");
@@ -91,6 +92,7 @@ public class MockRemoteConfigLoader implements RemoteConfigLoader {
 	
 	@RestrictTo(LIBRARY)
 	public static void setMocksEnabled(Boolean mocksEnabled) {
+		MockRemoteConfigLoader.mocksEnabled = mocksEnabled;
 		AbstractApplication.get().setRemoteConfigLoader(mocksEnabled ? new MockRemoteConfigLoader(false) : new FirebaseRemoteConfigLoader());
 		SharedPreferencesHelper.get(MockRemoteConfigLoader.class).savePreference(MOCKS_ENABLED, mocksEnabled);
 	}

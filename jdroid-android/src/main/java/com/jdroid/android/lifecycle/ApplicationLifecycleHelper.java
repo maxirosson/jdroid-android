@@ -30,7 +30,7 @@ public class ApplicationLifecycleHelper {
 		init(context);
 		for (ApplicationLifecycleCallback callback : applicationLifecycleCallbacks) {
 			if (callback.isEnabled()) {
-				LOGGER.debug("Executing onProviderInit for callback " + callback.getClass().getName());
+				LOGGER.debug("Executing onProviderInit for " + callback.getClass().getName());
 				callback.onProviderInit(context);
 			}
 		}

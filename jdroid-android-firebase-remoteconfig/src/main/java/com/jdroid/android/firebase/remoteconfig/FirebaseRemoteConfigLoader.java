@@ -17,7 +17,6 @@ import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.firebase.analytics.FirebaseAnalyticsFactory;
 import com.jdroid.android.utils.AppUtils;
 import com.jdroid.java.collections.Lists;
-import com.jdroid.java.collections.Maps;
 import com.jdroid.java.concurrent.ExecutorUtils;
 import com.jdroid.java.date.DateUtils;
 import com.jdroid.java.remoteconfig.RemoteConfigLoader;
@@ -28,7 +27,6 @@ import com.jdroid.java.utils.StringUtils;
 import org.slf4j.Logger;
 
 import java.util.List;
-import java.util.Map;
 
 import static android.support.annotation.RestrictTo.Scope.LIBRARY;
 
@@ -41,7 +39,7 @@ public class FirebaseRemoteConfigLoader implements RemoteConfigLoader {
 	private int retryCount = 0;
 	private long defaultFetchExpiration = DateUtils.SECONDS_PER_HOUR * 12;
 
-	private List<FirebaseRemoteConfigParameter> firebaseRemoteConfigParameters = Lists.newArrayList();
+	private List<RemoteConfigParameter> remoteConfigParametersAsUserProperties = Lists.newArrayList();
 	
 	public static FirebaseRemoteConfigLoader get() {
 		return ((FirebaseRemoteConfigLoader)AbstractApplication.get().getRemoteConfigLoader());
@@ -64,16 +62,6 @@ public class FirebaseRemoteConfigLoader implements RemoteConfigLoader {
 
 			firebaseRemoteConfig.setConfigSettings(configSettingsBuilder.build());
 
-			if (!Lists.isNullOrEmpty(firebaseRemoteConfigParameters)) {
-				Map<String, Object> defaults = Maps.newHashMap();
-				for (RemoteConfigParameter each : firebaseRemoteConfigParameters) {
-					Object defaultValue = each.getDefaultValue();
-					if (defaultValue != null) {
-						defaults.put(each.getKey(), defaultValue);
-					}
-				}
-				firebaseRemoteConfig.setDefaults(defaults);
-			}
 			fetch(defaultFetchExpiration, true);
 		} catch (Exception e) {
 			AbstractApplication.get().getExceptionHandler().logHandledException("Error initializing Firebase Remote Config", e);
@@ -115,15 +103,13 @@ public class FirebaseRemoteConfigLoader implements RemoteConfigLoader {
 					// true if there was a Fetched Config, and it was activated. false if no Fetched Config was found, or the Fetched Config was already activated.
 					LOGGER.debug("Firebase Remote Config activate fetched result: " + result);
 
-					if (setExperimentUserProperty && !Lists.isNullOrEmpty(firebaseRemoteConfigParameters)) {
+					if (setExperimentUserProperty && !Lists.isNullOrEmpty(remoteConfigParametersAsUserProperties)) {
 						ExecutorUtils.execute(new Runnable() {
 							@Override
 							public void run() {
-								for (FirebaseRemoteConfigParameter each : firebaseRemoteConfigParameters) {
-									if (each.isUserProperty()) {
-										String experimentVariant = FirebaseRemoteConfig.getInstance().getString(each.getKey());
-										FirebaseAnalyticsFactory.getFirebaseAnalyticsHelper().setUserProperty(each.getKey(), experimentVariant);
-									}
+								for (RemoteConfigParameter each : remoteConfigParametersAsUserProperties) {
+									String experimentVariant = FirebaseRemoteConfig.getInstance().getString(each.getKey());
+									FirebaseAnalyticsFactory.getFirebaseAnalyticsHelper().setUserProperty(each.getKey(), experimentVariant);
 								}
 							}
 						});
@@ -270,19 +256,11 @@ public class FirebaseRemoteConfigLoader implements RemoteConfigLoader {
 		}
 	}
 	
-	public  void addRemoteConfigParameter(FirebaseRemoteConfigParameter firebaseRemoteConfigParameter) {
-		firebaseRemoteConfigParameters.add(firebaseRemoteConfigParameter);
+	public void addRemoteConfigParametersAsUserProperties(List<RemoteConfigParameter> remoteConfigParametersAsUserProperties) {
+		this.remoteConfigParametersAsUserProperties.addAll(remoteConfigParametersAsUserProperties);
 	}
 	
-	public void addRemoteConfigParameters(List<FirebaseRemoteConfigParameter> params) {
-		firebaseRemoteConfigParameters.addAll(params);
-	}
-	
-	public void addRemoteConfigParameters(FirebaseRemoteConfigParameter... firebaseRemoteConfigParameters) {
-		addRemoteConfigParameters(Lists.newArrayList(firebaseRemoteConfigParameters));
-	}
-	
-	public List<FirebaseRemoteConfigParameter> getRemoteConfigParameters() {
-		return firebaseRemoteConfigParameters;
+	public List<RemoteConfigParameter> getRemoteConfigParametersAsUserProperties() {
+		return remoteConfigParametersAsUserProperties;
 	}
 }

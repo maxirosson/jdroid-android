@@ -18,6 +18,7 @@ import com.jdroid.android.recycler.RecyclerViewAdapter;
 import com.jdroid.android.recycler.RecyclerViewType;
 import com.jdroid.java.collections.Lists;
 import com.jdroid.java.date.DateUtils;
+import com.jdroid.java.remoteconfig.RemoteConfigParameter;
 import com.jdroid.java.utils.StringUtils;
 
 import java.util.Date;
@@ -31,8 +32,8 @@ public class FirebaseRemoteConfigFragment extends AbstractRecyclerFragment {
 
 		List<Object> items = Lists.newArrayList();
 		items.add("");
-		items.addAll(FirebaseRemoteConfigLoader.get().getRemoteConfigParameters());
-		List<RecyclerViewType> recyclerViewTypes = Lists.<RecyclerViewType>newArrayList(new HeaderRecyclerViewType(), new RemoteConfigParameterRecyclerViewType());
+		items.addAll(AbstractApplication.get().getDebugContext().getRemoteConfigParameters());
+		List<RecyclerViewType> recyclerViewTypes = Lists.newArrayList(new HeaderRecyclerViewType(), new RemoteConfigParameterRecyclerViewType());
 		setAdapter(new RecyclerViewAdapter(recyclerViewTypes, items));
 	}
 
@@ -78,7 +79,8 @@ public class FirebaseRemoteConfigFragment extends AbstractRecyclerFragment {
 					});
 				}
 			});
-
+			
+			holder.mocksEnabled.setOnCheckedChangeListener(null);
 			holder.mocksEnabled.setChecked(MockRemoteConfigLoader.isMocksEnabled());
 			holder.mocksEnabled.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 				@Override
@@ -88,22 +90,24 @@ public class FirebaseRemoteConfigFragment extends AbstractRecyclerFragment {
 				}
 			});
 
-			FirebaseRemoteConfig firebaseRemoteConfig = FirebaseRemoteConfigLoader.get().getFirebaseRemoteConfig();
-			if (firebaseRemoteConfig != null) {
-				String fetchDate = DateUtils.formatDateTime(new Date(firebaseRemoteConfig.getInfo().getFetchTimeMillis()));
-				holder.fetchTimeMillis.setText(getString(R.string.jdroid_firebaseRemoteConfigFetchDate, fetchDate));
-				int status = firebaseRemoteConfig.getInfo().getLastFetchStatus();
-				String statusValue = "Unknown";
-				if (status == -1) {
-					statusValue = "Success";
-				} else if (status == 0) {
-					statusValue = "No fetch yet";
-				} else if (status == 1) {
-					statusValue = "Failure";
-				} else if (status == 2) {
-					statusValue = "Throttled";
+			if (!MockRemoteConfigLoader.isMocksEnabled()) {
+				FirebaseRemoteConfig firebaseRemoteConfig = FirebaseRemoteConfigLoader.get().getFirebaseRemoteConfig();
+				if (firebaseRemoteConfig != null) {
+					String fetchDate = DateUtils.formatDateTime(new Date(firebaseRemoteConfig.getInfo().getFetchTimeMillis()));
+					holder.fetchTimeMillis.setText(getString(R.string.jdroid_firebaseRemoteConfigFetchDate, fetchDate));
+					int status = firebaseRemoteConfig.getInfo().getLastFetchStatus();
+					String statusValue = "Unknown";
+					if (status == -1) {
+						statusValue = "Success";
+					} else if (status == 0) {
+						statusValue = "No fetch yet";
+					} else if (status == 1) {
+						statusValue = "Failure";
+					} else if (status == 2) {
+						statusValue = "Throttled";
+					}
+					holder.lastFetchStatus.setText(getString(R.string.jdroid_firebaseRemoteConfigLastFetchStatus, statusValue));
 				}
-				holder.lastFetchStatus.setText(getString(R.string.jdroid_firebaseRemoteConfigLastFetchStatus, statusValue));
 			}
 		}
 
@@ -127,11 +131,11 @@ public class FirebaseRemoteConfigFragment extends AbstractRecyclerFragment {
 		}
 	}
 
-	public class RemoteConfigParameterRecyclerViewType extends RecyclerViewType<FirebaseRemoteConfigParameter, RemoteConfigParameterItemHolder> {
+	public class RemoteConfigParameterRecyclerViewType extends RecyclerViewType<RemoteConfigParameter, RemoteConfigParameterItemHolder> {
 
 		@Override
-		protected Class<FirebaseRemoteConfigParameter> getItemClass() {
-			return FirebaseRemoteConfigParameter.class;
+		protected Class<RemoteConfigParameter> getItemClass() {
+			return RemoteConfigParameter.class;
 		}
 
 		@Override
@@ -151,13 +155,20 @@ public class FirebaseRemoteConfigFragment extends AbstractRecyclerFragment {
 		}
 
 		@Override
-		public void fillHolderFromItem(final FirebaseRemoteConfigParameter item, final RemoteConfigParameterItemHolder holder) {
+		public void fillHolderFromItem(final RemoteConfigParameter item, final RemoteConfigParameterItemHolder holder) {
 			holder.key.setText(item.getKey());
-			holder.specs.setText(getString(R.string.jdroid_firebaseRemoteConfigSpec, item.isUserProperty().toString(), item.getDefaultValue()));
-			holder.source.setText(getString(R.string.jdroid_firebaseRemoteConfigSource, FirebaseRemoteConfigLoader.get().getSourceName(item)));
+			holder.specs.setText(getString(R.string.jdroid_firebaseRemoteConfigSpec, item.getDefaultValue()));
+			
+			if (MockRemoteConfigLoader.isMocksEnabled()) {
+				holder.source.setVisibility(View.GONE);
+			} else {
+				holder.source.setText(getString(R.string.jdroid_firebaseRemoteConfigSource, FirebaseRemoteConfigLoader.get().getSourceName(item)));
+				holder.source.setVisibility(View.VISIBLE);
+			}
+			
 			holder.value.setText(AbstractApplication.get().getRemoteConfigLoader().getString(item));
 			holder.value.setEnabled(MockRemoteConfigLoader.isMocksEnabled());
-			holder.source.setVisibility(MockRemoteConfigLoader.isMocksEnabled() ? View.GONE : View.VISIBLE);
+			
 			holder.save.setVisibility(MockRemoteConfigLoader.isMocksEnabled() ? View.VISIBLE : View.GONE);
 			holder.save.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -169,7 +180,7 @@ public class FirebaseRemoteConfigFragment extends AbstractRecyclerFragment {
 
 		@Override
 		public Boolean matchViewType(Object item) {
-			return item instanceof FirebaseRemoteConfigParameter;
+			return item instanceof RemoteConfigParameter;
 		}
 
 		@NonNull
