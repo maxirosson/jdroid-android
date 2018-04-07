@@ -1,8 +1,8 @@
 package com.jdroid.android.firebase.admob;
 
+import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.context.AbstractAppContext;
 import com.jdroid.android.context.UsageStats;
-import com.jdroid.android.firebase.remoteconfig.FirebaseRemoteConfigHelper;
 import com.jdroid.android.utils.SharedPreferencesHelper;
 import com.jdroid.java.collections.Sets;
 import com.jdroid.java.date.DateUtils;
@@ -15,7 +15,7 @@ public class AdMobAppContext extends AbstractAppContext {
 	public static final String TEST_AD_UNIT_ID_ENABLED = "TEST_AD_UNIT_ID_ENABLED";
 
 	public Boolean areAdsEnabledByDefault() {
-		return FirebaseRemoteConfigHelper.getBoolean(AdMobRemoteConfigParameter.ADS_ENABLED);
+		return AbstractApplication.get().getRemoteConfigLoader().getBoolean(AdMobRemoteConfigParameter.ADS_ENABLED);
 	}
 
 	/**
@@ -29,11 +29,11 @@ public class AdMobAppContext extends AbstractAppContext {
 	}
 
 	protected Long getMinAppLoadsToDisplayAds() {
-		return FirebaseRemoteConfigHelper.getLong(AdMobRemoteConfigParameter.MIN_APP_LOADS_TO_DISPLAY_ADS);
+		return AbstractApplication.get().getRemoteConfigLoader().getLong(AdMobRemoteConfigParameter.MIN_APP_LOADS_TO_DISPLAY_ADS);
 	}
 
 	protected Long getMinDaysSinceFirstAppLoad() {
-		return FirebaseRemoteConfigHelper.getLong(AdMobRemoteConfigParameter.MIN_DAYS_TO_DISPLAY_ADS);
+		return AbstractApplication.get().getRemoteConfigLoader().getLong(AdMobRemoteConfigParameter.MIN_DAYS_TO_DISPLAY_ADS);
 	}
 
 	public Boolean isTestAdUnitIdEnabled() {
@@ -52,10 +52,10 @@ public class AdMobAppContext extends AbstractAppContext {
 	 * @return The AdMob Publisher ID
 	 */
 	public String getDefaultAdUnitId() {
-		return FirebaseRemoteConfigHelper.getString(AdMobRemoteConfigParameter.DEFAULT_AD_UNIT_ID);
+		return AbstractApplication.get().getRemoteConfigLoader().getString(AdMobRemoteConfigParameter.DEFAULT_AD_UNIT_ID);
 	}
 
 	public String getAdMobAppId() {
-		return FirebaseRemoteConfigHelper.getString(AdMobRemoteConfigParameter.ADMOB_APP_ID);
+		return AbstractApplication.get().getRemoteConfigLoader().getString(AdMobRemoteConfigParameter.ADMOB_APP_ID);
 	}
 }

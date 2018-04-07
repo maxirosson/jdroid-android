@@ -2,12 +2,17 @@ package com.jdroid.android.sample.debug;
 
 import android.support.v4.util.Pair;
 
+import com.jdroid.android.about.AboutRemoteConfigParameter;
 import com.jdroid.android.debug.DebugContext;
+import com.jdroid.android.firebase.admob.AdMobRemoteConfigParameter;
 import com.jdroid.android.sample.api.ApiServer;
+import com.jdroid.android.sample.firebase.remoteconfig.AndroidRemoteConfigParameter;
 import com.jdroid.java.collections.Lists;
 import com.jdroid.java.collections.Maps;
 import com.jdroid.java.http.Server;
+import com.jdroid.java.remoteconfig.RemoteConfigParameter;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -39,5 +44,14 @@ public class AndroidDebugContext extends DebugContext {
 		urls.add("http://jdroidtools.com/uri/noflags");
 		urls.add("http://jdroidtools.com/uri/invalid");
 		return urls;
+	}
+	
+	@Override
+	public List<RemoteConfigParameter> getRemoteConfigParameters() {
+		List<RemoteConfigParameter> remoteConfigParameters = Lists.newArrayList();
+		remoteConfigParameters.addAll(Arrays.asList(AdMobRemoteConfigParameter.values()));
+		remoteConfigParameters.addAll(Arrays.asList(AboutRemoteConfigParameter.values()));
+		remoteConfigParameters.addAll(Arrays.asList(AndroidRemoteConfigParameter.values()));
+		return remoteConfigParameters;
 	}
 }

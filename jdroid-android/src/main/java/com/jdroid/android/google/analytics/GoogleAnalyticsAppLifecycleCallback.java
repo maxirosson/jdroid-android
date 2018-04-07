@@ -8,8 +8,11 @@ import com.jdroid.android.lifecycle.ApplicationLifecycleCallback;
 public class GoogleAnalyticsAppLifecycleCallback extends ApplicationLifecycleCallback {
 	@Override
 	public void onProviderInit(Context context) {
-		if (GoogleAnalyticsAppContext.isGoogleAnalyticsEnabled()) {
-			AbstractApplication.get().addCoreAnalyticsTracker(new GoogleCoreAnalyticsTracker());
-		}
+		AbstractApplication.get().addCoreAnalyticsTracker(new GoogleCoreAnalyticsTracker());
+	}
+	
+	@Override
+	public Boolean isEnabled() {
+		return GoogleAnalyticsAppContext.isGoogleAnalyticsEnabled();
 	}
 }

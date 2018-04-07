@@ -1,5 +1,6 @@
 package com.jdroid.android.firebase.testlab;
 
+import android.annotation.SuppressLint;
 import android.provider.Settings;
 import android.util.Log;
 
@@ -12,6 +13,7 @@ public class FirebaseTestLab {
 
 	private static Boolean isRunningInstrumentedTests;
 
+	@SuppressLint("LogCall")
 	public static Boolean isRunningInstrumentedTests() {
 		if (isRunningInstrumentedTests == null) {
 			try {

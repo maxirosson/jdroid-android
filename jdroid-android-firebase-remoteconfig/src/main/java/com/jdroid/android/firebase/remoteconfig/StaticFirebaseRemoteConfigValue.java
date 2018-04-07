@@ -2,6 +2,7 @@ package com.jdroid.android.firebase.remoteconfig;
 
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigValue;
+import com.jdroid.java.remoteconfig.RemoteConfigParameter;
 
 public class StaticFirebaseRemoteConfigValue implements FirebaseRemoteConfigValue {
 

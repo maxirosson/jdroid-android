@@ -1,6 +1,6 @@
 package com.jdroid.android.firebase.admob;
 
-import com.jdroid.android.firebase.remoteconfig.RemoteConfigParameter;
+import com.jdroid.java.remoteconfig.RemoteConfigParameter;
 
 public enum AdMobRemoteConfigParameter implements RemoteConfigParameter {
 
@@ -28,10 +28,5 @@ public enum AdMobRemoteConfigParameter implements RemoteConfigParameter {
 	@Override
 	public Object getDefaultValue() {
 		return AdMobAppModule.getAdMobAppContext().getBuildConfigValue(name(), defaultValue);
-	}
-
-	@Override
-	public Boolean isUserProperty() {
-		return false;
 	}
 }

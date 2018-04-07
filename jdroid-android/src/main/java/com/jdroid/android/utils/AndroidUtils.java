@@ -19,10 +19,6 @@ public class AndroidUtils {
 		return android.os.Build.VERSION.SDK_INT;
 	}
 	
-	public static Boolean isPreKitkat() {
-		return android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT;
-	}
-
 	public static Boolean isPreLollipop() {
 		return android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP;
 	}
@@ -45,5 +41,4 @@ public class AndroidUtils {
 	public static Boolean isMainThread() {
 		return Looper.getMainLooper().getThread() == Thread.currentThread();
 	}
-
 }

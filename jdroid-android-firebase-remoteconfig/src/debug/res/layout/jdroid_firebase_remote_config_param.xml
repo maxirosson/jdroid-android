@@ -12,10 +12,10 @@
 			<EditText android:id="@+id/value" android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:inputType="text" tools:text="value" />
 
 			<TextView android:id="@+id/source" android:layout_width="wrap_content" android:layout_height="wrap_content" tools:text="Source: aaa"
-					android:layout_marginLeft="8dp" />
+					android:layout_marginStart="8dp" />
 
 			<Button android:id="@+id/save" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/jdroid_firebaseRemoteConfigSave"
-					android:layout_marginLeft="8dp" tools:visibility="gone"/>
+					android:layout_marginStart="8dp" tools:visibility="gone"/>
 
 		</LinearLayout>
 

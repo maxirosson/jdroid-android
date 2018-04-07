@@ -3,8 +3,6 @@
 
 	<application>
 
-		<meta-data android:name="com.jdroid.android.about.AboutAppLifecycleCallback" android:value="ApplicationLifecycleCallback" />
-
 		<activity android:name="com.jdroid.android.about.AboutActivity" android:label="@string/jdroid_about" />
 
 		<activity android:name="com.jdroid.android.about.SpreadTheLoveActivity" android:label="@string/jdroid_spreadTheLove"

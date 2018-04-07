@@ -4,19 +4,19 @@
 	<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="8dp">
 
 		<android.support.design.widget.TextInputLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="20dp">
-			<EditText android:id="@+id/notificationName" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="@string/notificationName" />
+			<EditText android:id="@+id/notificationName" android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="text" android:hint="@string/notificationName" />
 		</android.support.design.widget.TextInputLayout>
 
 		<android.support.design.widget.TextInputLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="20dp">
-			<EditText android:id="@+id/notificationChannel" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="@string/notificationChannel" />
+			<EditText android:id="@+id/notificationChannel" android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="text" android:hint="@string/notificationChannel" />
 		</android.support.design.widget.TextInputLayout>
 
 		<android.support.design.widget.TextInputLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="20dp">
-			<EditText android:id="@+id/contentTitle" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="@string/contentTitle" />
+			<EditText android:id="@+id/contentTitle" android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="text" android:hint="@string/contentTitle" />
 		</android.support.design.widget.TextInputLayout>
 
 		<android.support.design.widget.TextInputLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="20dp">
-			<EditText android:id="@+id/contentText" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="@string/contentText" />
+			<EditText android:id="@+id/contentText" android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="text" android:hint="@string/contentText" />
 		</android.support.design.widget.TextInputLayout>
 
 		<android.support.design.widget.TextInputLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="20dp">

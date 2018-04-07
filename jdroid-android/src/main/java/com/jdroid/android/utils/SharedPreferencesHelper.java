@@ -27,6 +27,10 @@ public class SharedPreferencesHelper {
 	private String name;
 	private SharedPreferences sharedPreferences;
 	
+	public static SharedPreferencesHelper get(Class<?> clazz) {
+		return get(clazz.getSimpleName());
+	}
+	
 	public static SharedPreferencesHelper get(String name) {
 		return new SharedPreferencesHelper(name);
 	}

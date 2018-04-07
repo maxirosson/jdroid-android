@@ -1,6 +1,7 @@
 package com.jdroid.android.firebase.remoteconfig;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
@@ -11,11 +12,13 @@ import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
+import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.recycler.AbstractRecyclerFragment;
 import com.jdroid.android.recycler.RecyclerViewAdapter;
 import com.jdroid.android.recycler.RecyclerViewType;
 import com.jdroid.java.collections.Lists;
 import com.jdroid.java.date.DateUtils;
+import com.jdroid.java.remoteconfig.RemoteConfigParameter;
 import com.jdroid.java.utils.StringUtils;
 
 import java.util.Date;
@@ -29,8 +32,8 @@ public class FirebaseRemoteConfigFragment extends AbstractRecyclerFragment {
 
 		List<Object> items = Lists.newArrayList();
 		items.add("");
-		items.addAll(FirebaseRemoteConfigHelper.getRemoteConfigParameters());
-		List<RecyclerViewType> recyclerViewTypes = Lists.<RecyclerViewType>newArrayList(new HeaderRecyclerViewType(), new RemoteConfigParameterRecyclerViewType());
+		items.addAll(AbstractApplication.get().getDebugContext().getRemoteConfigParameters());
+		List<RecyclerViewType> recyclerViewTypes = Lists.newArrayList(new HeaderRecyclerViewType(), new RemoteConfigParameterRecyclerViewType());
 		setAdapter(new RecyclerViewAdapter(recyclerViewTypes, items));
 	}
 
@@ -59,11 +62,11 @@ public class FirebaseRemoteConfigFragment extends AbstractRecyclerFragment {
 
 		@Override
 		public void fillHolderFromItem(String item, HeaderViewHolder holder) {
-			holder.fetch.setEnabled(!FirebaseRemoteConfigHelper.isMocksEnabled());
+			holder.fetch.setEnabled(!MockRemoteConfigLoader.isMocksEnabled());
 			holder.fetch.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					FirebaseRemoteConfigHelper.fetchNow(new OnSuccessListener<Void>() {
+					FirebaseRemoteConfigLoader.get().fetch(new OnSuccessListener<Void>() {
 						@Override
 						public void onSuccess(Void aVoid) {
 							executeOnUIThread(new Runnable() {
@@ -76,35 +79,39 @@ public class FirebaseRemoteConfigFragment extends AbstractRecyclerFragment {
 					});
 				}
 			});
-
-			holder.mocksEnabled.setChecked(FirebaseRemoteConfigHelper.isMocksEnabled());
+			
+			holder.mocksEnabled.setOnCheckedChangeListener(null);
+			holder.mocksEnabled.setChecked(MockRemoteConfigLoader.isMocksEnabled());
 			holder.mocksEnabled.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 				@Override
 				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-					FirebaseRemoteConfigHelper.setMocksEnabled(isChecked);
+					MockRemoteConfigLoader.setMocksEnabled(isChecked);
 					getAdapter().notifyDataSetChanged();
 				}
 			});
 
-			FirebaseRemoteConfig firebaseRemoteConfig = FirebaseRemoteConfigHelper.getFirebaseRemoteConfig();
-			if (firebaseRemoteConfig != null) {
-				String fetchDate = DateUtils.formatDateTime(new Date(firebaseRemoteConfig.getInfo().getFetchTimeMillis()));
-				holder.fetchTimeMillis.setText(getString(R.string.jdroid_firebaseRemoteConfigFetchDate, fetchDate));
-				int status = firebaseRemoteConfig.getInfo().getLastFetchStatus();
-				String statusValue = "Unknown";
-				if (status == -1) {
-					statusValue = "Success";
-				} else if (status == 0) {
-					statusValue = "No fetch yet";
-				} else if (status == 1) {
-					statusValue = "Failure";
-				} else if (status == 2) {
-					statusValue = "Throttled";
+			if (!MockRemoteConfigLoader.isMocksEnabled()) {
+				FirebaseRemoteConfig firebaseRemoteConfig = FirebaseRemoteConfigLoader.get().getFirebaseRemoteConfig();
+				if (firebaseRemoteConfig != null) {
+					String fetchDate = DateUtils.formatDateTime(new Date(firebaseRemoteConfig.getInfo().getFetchTimeMillis()));
+					holder.fetchTimeMillis.setText(getString(R.string.jdroid_firebaseRemoteConfigFetchDate, fetchDate));
+					int status = firebaseRemoteConfig.getInfo().getLastFetchStatus();
+					String statusValue = "Unknown";
+					if (status == -1) {
+						statusValue = "Success";
+					} else if (status == 0) {
+						statusValue = "No fetch yet";
+					} else if (status == 1) {
+						statusValue = "Failure";
+					} else if (status == 2) {
+						statusValue = "Throttled";
+					}
+					holder.lastFetchStatus.setText(getString(R.string.jdroid_firebaseRemoteConfigLastFetchStatus, statusValue));
 				}
-				holder.lastFetchStatus.setText(getString(R.string.jdroid_firebaseRemoteConfigLastFetchStatus, statusValue));
 			}
 		}
 
+		@NonNull
 		@Override
 		public AbstractRecyclerFragment getAbstractRecyclerFragment() {
 			return FirebaseRemoteConfigFragment.this;
@@ -119,7 +126,7 @@ public class FirebaseRemoteConfigFragment extends AbstractRecyclerFragment {
 		public Button save;
 		public CheckBox mocksEnabled;
 
-		public HeaderViewHolder(View itemView) {
+		private HeaderViewHolder(View itemView) {
 			super(itemView);
 		}
 	}
@@ -150,16 +157,23 @@ public class FirebaseRemoteConfigFragment extends AbstractRecyclerFragment {
 		@Override
 		public void fillHolderFromItem(final RemoteConfigParameter item, final RemoteConfigParameterItemHolder holder) {
 			holder.key.setText(item.getKey());
-			holder.specs.setText(getString(R.string.jdroid_firebaseRemoteConfigSpec, item.isUserProperty().toString(), item.getDefaultValue()));
-			holder.source.setText(getString(R.string.jdroid_firebaseRemoteConfigSource, FirebaseRemoteConfigHelper.getSourceName(item)));
-			holder.value.setText(FirebaseRemoteConfigHelper.getString(item));
-			holder.value.setEnabled(FirebaseRemoteConfigHelper.isMocksEnabled());
-			holder.source.setVisibility(FirebaseRemoteConfigHelper.isMocksEnabled() ? View.GONE : View.VISIBLE);
-			holder.save.setVisibility(FirebaseRemoteConfigHelper.isMocksEnabled() ? View.VISIBLE : View.GONE);
+			holder.specs.setText(getString(R.string.jdroid_firebaseRemoteConfigSpec, item.getDefaultValue()));
+			
+			if (MockRemoteConfigLoader.isMocksEnabled()) {
+				holder.source.setVisibility(View.GONE);
+			} else {
+				holder.source.setText(getString(R.string.jdroid_firebaseRemoteConfigSource, FirebaseRemoteConfigLoader.get().getSourceName(item)));
+				holder.source.setVisibility(View.VISIBLE);
+			}
+			
+			holder.value.setText(AbstractApplication.get().getRemoteConfigLoader().getString(item));
+			holder.value.setEnabled(MockRemoteConfigLoader.isMocksEnabled());
+			
+			holder.save.setVisibility(MockRemoteConfigLoader.isMocksEnabled() ? View.VISIBLE : View.GONE);
 			holder.save.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					FirebaseRemoteConfigHelper.setParameterMock(item, StringUtils.getNotEmptyString(holder.value.getText().toString()));
+					MockRemoteConfigLoader.get().saveRemoteConfigParameter(item, StringUtils.getNotEmptyString(holder.value.getText().toString()));
 				}
 			});
 		}
@@ -169,6 +183,7 @@ public class FirebaseRemoteConfigFragment extends AbstractRecyclerFragment {
 			return item instanceof RemoteConfigParameter;
 		}
 
+		@NonNull
 		@Override
 		public AbstractRecyclerFragment getAbstractRecyclerFragment() {
 			return FirebaseRemoteConfigFragment.this;
@@ -183,7 +198,7 @@ public class FirebaseRemoteConfigFragment extends AbstractRecyclerFragment {
 		protected EditText value;
 		protected Button save;
 
-		public RemoteConfigParameterItemHolder(View itemView) {
+		private RemoteConfigParameterItemHolder(View itemView) {
 			super(itemView);
 		}
 	}

@@ -15,7 +15,7 @@ public class LeakCanaryAppLifecycleCallback extends ApplicationLifecycleCallback
 	@NonNull
 	@Override
 	public Integer getInitOrder() {
-		return Integer.MAX_VALUE;
+		return Integer.MAX_VALUE - 1;
 	}
 	
 	@Override

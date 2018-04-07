@@ -2,7 +2,6 @@ package com.jdroid.android.glide;
 
 import android.app.Activity;
 import android.content.Context;
-import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -53,7 +52,7 @@ public class GlideHelper {
 	
 	private static RequestManager with(@Nullable Activity activity) {
 		if(activity != null) {
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1 && activity.isDestroyed()) {
+			if (activity.isDestroyed()) {
 				// We do this to avoid an IllegalArgumentException("You cannot start a load for a destroyed activity")
 				LOGGER.warn("Activity " + activity.getClass().getSimpleName() + " is destroyed when starting a Glide load.");
 				return Glide.with(AbstractApplication.get());

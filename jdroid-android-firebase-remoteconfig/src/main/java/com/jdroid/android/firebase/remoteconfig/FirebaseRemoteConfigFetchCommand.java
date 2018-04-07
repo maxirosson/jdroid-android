@@ -18,7 +18,7 @@ public class FirebaseRemoteConfigFetchCommand extends ServiceCommand {
 	protected boolean execute(Context context, Bundle bundle) {
 		Long cacheExpirationSeconds = bundle.getLong(CACHE_EXPIRATION_SECONDS);
 		Boolean setExperimentUserProperty = bundle.getBoolean(SET_EXPERIMENT_USER_PROPERTY);
-		FirebaseRemoteConfigHelper.fetch(cacheExpirationSeconds, setExperimentUserProperty);
+		FirebaseRemoteConfigLoader.get().fetch(cacheExpirationSeconds, setExperimentUserProperty);
 		return false;
 	}
 }

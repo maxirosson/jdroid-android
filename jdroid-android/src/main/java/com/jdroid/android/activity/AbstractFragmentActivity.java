@@ -342,4 +342,13 @@ public abstract class AbstractFragmentActivity extends AppCompatActivity impleme
 	public GoogleApiClient getGoogleApiClient() {
 		return activityHelper.getGoogleApiClient();
 	}
+	
+	@Override
+	public void setRequestedOrientation(int requestedOrientation) {
+		try {
+			super.setRequestedOrientation(requestedOrientation);
+		} catch(IllegalStateException e) {
+			activityHelper.catchRequestedOrientationIllegalStateException(e);
+		}
+	}
 }

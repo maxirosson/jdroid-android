@@ -3,8 +3,8 @@ package com.jdroid.android.about.feedback;
 import android.support.annotation.WorkerThread;
 
 import com.jdroid.android.about.AboutRemoteConfigParameter;
+import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.context.UsageStats;
-import com.jdroid.android.firebase.remoteconfig.FirebaseRemoteConfigHelper;
 import com.jdroid.android.utils.SharedPreferencesHelper;
 import com.jdroid.java.date.DateUtils;
 
@@ -68,10 +68,10 @@ public class RateAppStats {
 	//@WorkerThread
 	public static Boolean displayRateAppView() {
 		Boolean alreadyRated = getRateOnGooglePlay();
-		Boolean enoughDaysSinceLastResponse =  DateUtils.millisecondsToDays(RateAppStats.getLastResponseTimestamp()) >= FirebaseRemoteConfigHelper.getLong(AboutRemoteConfigParameter.RATE_APP_MIN_DAYS_SINCE_LAST_RESPONSE);
-		Boolean enoughDaysSinceFirstAppLoad = DateUtils.millisecondsToDays(UsageStats.getFirstAppLoadTimestamp()) >= FirebaseRemoteConfigHelper.getLong(AboutRemoteConfigParameter.RATE_APP_MIN_DAYS_SINCE_FIRST_APP_LOAD);
-		Boolean enoughAppLoads = UsageStats.getAppLoads() >= FirebaseRemoteConfigHelper.getLong(AboutRemoteConfigParameter.RATE_APP_MIN_APP_LOADS);
-		Boolean enoughDaysSinceLastCrash = DateUtils.millisecondsToDays(UsageStats.getLastCrashTimestamp()) >= FirebaseRemoteConfigHelper.getLong(AboutRemoteConfigParameter.RATE_APP_MIN_DAYS_SINCE_LAST_CRASH);
+		Boolean enoughDaysSinceLastResponse =  DateUtils.millisecondsToDays(RateAppStats.getLastResponseTimestamp()) >= AbstractApplication.get().getRemoteConfigLoader().getLong(AboutRemoteConfigParameter.RATE_APP_MIN_DAYS_SINCE_LAST_RESPONSE);
+		Boolean enoughDaysSinceFirstAppLoad = DateUtils.millisecondsToDays(UsageStats.getFirstAppLoadTimestamp()) >= AbstractApplication.get().getRemoteConfigLoader().getLong(AboutRemoteConfigParameter.RATE_APP_MIN_DAYS_SINCE_FIRST_APP_LOAD);
+		Boolean enoughAppLoads = UsageStats.getAppLoads() >= AbstractApplication.get().getRemoteConfigLoader().getLong(AboutRemoteConfigParameter.RATE_APP_MIN_APP_LOADS);
+		Boolean enoughDaysSinceLastCrash = DateUtils.millisecondsToDays(UsageStats.getLastCrashTimestamp()) >= AbstractApplication.get().getRemoteConfigLoader().getLong(AboutRemoteConfigParameter.RATE_APP_MIN_DAYS_SINCE_LAST_CRASH);
 		return (alreadyRated == null || !alreadyRated) && enoughDaysSinceLastResponse && enoughDaysSinceFirstAppLoad && enoughAppLoads && enoughDaysSinceLastCrash;
 	}
 }

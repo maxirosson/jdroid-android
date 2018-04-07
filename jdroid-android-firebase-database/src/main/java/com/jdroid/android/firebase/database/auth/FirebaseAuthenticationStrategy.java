@@ -45,11 +45,11 @@ public abstract class FirebaseAuthenticationStrategy implements FirebaseAuth.Aut
 	@Override
 	public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
 		if (firebaseAuth.getCurrentUser() != null) {
-			LOGGER.debug("AuthStateChanged", "User is signed in with uid: " + firebaseAuth.getCurrentUser().getUid());
+			LOGGER.debug("AuthStateChanged: User is signed in with uid: " + firebaseAuth.getCurrentUser().getUid());
 			getCountDownLatch().countDown();
 			doOnAuthenticated(firebaseAuth);
 		} else {
-			Log.i("AuthStateChanged", "No user is signed in.");
+			LOGGER.info("AuthStateChanged: No user is signed in.");
 		}
 	}
 

@@ -1,6 +1,6 @@
 package com.jdroid.android.about;
 
-import com.jdroid.android.firebase.remoteconfig.RemoteConfigParameter;
+import com.jdroid.java.remoteconfig.RemoteConfigParameter;
 
 public enum AboutRemoteConfigParameter implements RemoteConfigParameter {
 	
@@ -27,10 +27,5 @@ public enum AboutRemoteConfigParameter implements RemoteConfigParameter {
 	@Override
 	public Object getDefaultValue() {
 		return AboutAppModule.get().getAboutContext().getBuildConfigValue(name(), defaultValue);
-	}
-
-	@Override
-	public Boolean isUserProperty() {
-		return false;
 	}
 }

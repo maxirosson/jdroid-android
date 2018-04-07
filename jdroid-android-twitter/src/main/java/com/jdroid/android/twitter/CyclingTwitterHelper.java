@@ -5,17 +5,12 @@ import android.view.View;
 
 import com.jdroid.android.concurrent.SafeRunnable;
 import com.jdroid.android.fragment.AbstractFragment;
-import com.jdroid.java.utils.LoggerUtils;
 import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.tweetui.CompactTweetView;
-
-import org.slf4j.Logger;
 
 import java.util.List;
 
 public abstract class CyclingTwitterHelper extends TwitterHelper {
-	
-	private final static Logger LOGGER = LoggerUtils.getLogger(CyclingTwitterHelper.class);
 	
 	private final static int TWEET_CYCLE_FREQUENCY = 10000;
 	

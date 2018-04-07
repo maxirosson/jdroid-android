@@ -14,6 +14,7 @@ import com.jdroid.java.date.DateUtils;
 import com.jdroid.java.http.exception.ConnectionException;
 import com.jdroid.java.utils.LoggerUtils;
 
+// TODO See if we should extend SimpleJobService
 public abstract class AbstractJobService extends JobService {
 	
 	@MainThread

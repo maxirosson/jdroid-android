@@ -48,6 +48,7 @@ import com.jdroid.java.concurrent.ExecutorUtils;
 import com.jdroid.java.context.GitContext;
 import com.jdroid.java.date.DateUtils;
 import com.jdroid.java.domain.Identifiable;
+import com.jdroid.java.remoteconfig.RemoteConfigLoader;
 import com.jdroid.java.repository.Repository;
 import com.jdroid.java.utils.LoggerUtils;
 import com.jdroid.java.utils.ReflectionUtils;
@@ -98,6 +99,8 @@ public abstract class AbstractApplication extends Application {
 	private UncaughtExceptionHandler defaultAndroidExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
 
 	private ActivityLifecycleHandler activityLifecycleHandler;
+	
+	private RemoteConfigLoader remoteConfigLoader;
 
 	public AbstractApplication() {
 		INSTANCE = this;
@@ -577,5 +580,13 @@ public abstract class AbstractApplication extends Application {
 	
 	public List<NotificationChannelType> getNotificationChannelTypes() {
 		return Lists.newArrayList();
+	}
+	
+	public RemoteConfigLoader getRemoteConfigLoader() {
+		return remoteConfigLoader;
+	}
+	
+	public void setRemoteConfigLoader(RemoteConfigLoader remoteConfigLoader) {
+		this.remoteConfigLoader = remoteConfigLoader;
 	}
 }

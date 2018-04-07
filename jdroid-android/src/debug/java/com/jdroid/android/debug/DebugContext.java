@@ -23,6 +23,7 @@ import com.jdroid.java.collections.Lists;
 import com.jdroid.java.collections.Maps;
 import com.jdroid.java.domain.Identifiable;
 import com.jdroid.java.http.Server;
+import com.jdroid.java.remoteconfig.RemoteConfigParameter;
 import com.jdroid.java.repository.Repository;
 
 import java.util.List;
@@ -104,6 +105,10 @@ public class DebugContext {
 	}
 
 	public List<String> getUrlsToTest() {
+		return Lists.newArrayList();
+	}
+	
+	public List<RemoteConfigParameter> getRemoteConfigParameters() {
 		return Lists.newArrayList();
 	}
 }
