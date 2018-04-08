@@ -125,18 +125,6 @@ Libray for Android apps. Support for Android 4.0 (api level 15) and higher versi
  
  * [Glide integration](https://github.com/bumptech/glide)
 
-
-More Jdroid Components
---------------
-* [jdroid-gradle-plugin](https://github.com/maxirosson/jdroid-gradle-plugin)
-* [jdroid-java-webapp](https://github.com/maxirosson/jdroid-java-webapp)
-* [jdroid-java](https://github.com/maxirosson/jdroid-java)
-* [jdroid-java-http](https://github.com/maxirosson/jdroid-java-http)
-* [jdroid-java-github](https://github.com/maxirosson/jdroid-java-github)
-* [jdroid-java-google-drive](https://github.com/maxirosson/jdroid-java-google-drive)
-* [jdroid-googleplay-publisher](https://github.com/maxirosson/jdroid-googleplay-publisher)
-* [jdroid-gradle-timer-plugin](https://github.com/maxirosson/jdroid-gradle-timer-plugin)
-
 ## Donations
 Help us to continue with this project:
 
