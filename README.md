@@ -1,7 +1,4 @@
-[![JDROID](https://jdroidtools.com/images/logoDark.png)](http://jdroidtools.com/)
------------
-
-Jdroid provides a set of tools for modern Java-based enterprise and android applications.
+# Jdroid Android
 
 Continuous Integration
 -----------
