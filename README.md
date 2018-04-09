@@ -5,9 +5,9 @@ Continuous Integration
 
 |Branch|Status|Workflows|Insights|
 | ------------- | ------------- | ------------- | ------------- |
-|master|[![CircleCI](https://circleci.com/gh/maxirosson/jdroid/tree/master.svg?style=svg)](https://circleci.com/gh/maxirosson/jdroid/tree/master)|[Workflows](https://circleci.com/gh/maxirosson/workflows/jdroid/tree/master)|[Insights](https://circleci.com/build-insights/gh/maxirosson/jdroid/master)|
-|staging|[![CircleCI](https://circleci.com/gh/maxirosson/jdroid/tree/staging.svg?style=svg)](https://circleci.com/gh/maxirosson/jdroid/tree/staging)|[Workflows](https://circleci.com/gh/maxirosson/workflows/jdroid/tree/staging)|[Insights](https://circleci.com/build-insights/gh/maxirosson/jdroid/staging)|
-|production|[![CircleCI](https://circleci.com/gh/maxirosson/jdroid/tree/production.svg?style=svg)](https://circleci.com/gh/maxirosson/jdroid/tree/production)|[Workflows](https://circleci.com/gh/maxirosson/workflows/jdroid/tree/production)|[Insights](https://circleci.com/build-insights/gh/maxirosson/jdroid/production)|
+|master|[![CircleCI](https://circleci.com/gh/maxirosson/jdroid-android/tree/master.svg?style=svg)](https://circleci.com/gh/maxirosson/jdroid-android/tree/master)|[Workflows](https://circleci.com/gh/maxirosson/workflows/jdroid-android/tree/master)|[Insights](https://circleci.com/build-insights/gh/maxirosson/jdroid-android/master)|
+|staging|[![CircleCI](https://circleci.com/gh/maxirosson/jdroid-android/tree/staging.svg?style=svg)](https://circleci.com/gh/maxirosson/jdroid-android/tree/staging)|[Workflows](https://circleci.com/gh/maxirosson/workflows/jdroid-android/tree/staging)|[Insights](https://circleci.com/build-insights/gh/maxirosson/jdroid-android/staging)|
+|production|[![CircleCI](https://circleci.com/gh/maxirosson/jdroid-android/tree/production.svg?style=svg)](https://circleci.com/gh/maxirosson/jdroid-android/tree/production)|[Workflows](https://circleci.com/gh/maxirosson/workflows/jdroid-android/tree/production)|[Insights](https://circleci.com/build-insights/gh/maxirosson/jdroid-android/production)|
 
 Components
 --------------
