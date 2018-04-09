@@ -16,7 +16,7 @@ buildscript {
 
 dependencies {
 
-	api project(":jdroid-android")
+	api project(":jdroid-android-core")
 
 	// https://docs.fabric.io/android/changelog.html#crashlytics
 	api('com.crashlytics.sdk.android:crashlytics:2.9.1@aar') {

@@ -1,6 +1,6 @@
-version = '0.15.0'
+version = '1.0.0'
 
-ext.JDROID_GITHUB_REPOSITORY_NAME = 'jdroid'
+ext.JDROID_GITHUB_REPOSITORY_NAME = 'jdroid-android'
 
 apply from: rootProject.file('libraryVersions.gradle')
 

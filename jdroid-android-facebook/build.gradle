@@ -16,7 +16,7 @@ buildscript {
 
 dependencies {
 
-	api project(":jdroid-android")
+	api project(":jdroid-android-core")
 
 	// https://developers.facebook.com/docs/android
 	api ('com.facebook.android:facebook-android-sdk:4.27.0') {

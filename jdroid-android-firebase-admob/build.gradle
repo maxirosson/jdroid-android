@@ -16,7 +16,7 @@ buildscript {
 
 dependencies {
 
-	api project(":jdroid-android")
+	api project(":jdroid-android-core")
 
 	api "com.google.firebase:firebase-ads:${GOOGLE_PLAY_SERVICES_VERSION}"
 

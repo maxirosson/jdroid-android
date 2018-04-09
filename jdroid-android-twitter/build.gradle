@@ -16,7 +16,7 @@ buildscript {
 
 dependencies {
 
-	api project(":jdroid-android")
+	api project(":jdroid-android-core")
 
 	// https://dev.twitter.com/twitterkit/android/changelog
 	api('com.twitter.sdk.android:tweet-ui:3.1.1@aar') {

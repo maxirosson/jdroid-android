@@ -1,4 +1,4 @@
-include ':jdroid-android'
+include ':jdroid-android-core'
 include ':jdroid-android-about'
 include ':jdroid-android-firebase-instanceid'
 include ':jdroid-android-firebase-admob'

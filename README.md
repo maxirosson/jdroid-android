@@ -12,7 +12,7 @@ Continuous Integration
 Components
 --------------
 
-## [jdroid-android](https://github.com/maxirosson/jdroid/wiki/jdroid-Android)
+## [jdroid-android-core](https://github.com/maxirosson/jdroid/wiki/jdroid-Android)
 
 Libray for Android apps. Support for Android 4.0 (api level 15) and higher versions
 * Languages supported: english & spanish
