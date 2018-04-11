@@ -26,7 +26,7 @@ configurations {
 
 buildscript {
 	dependencies {
-		classpath "com.jdroidframework:jdroid-gradle-android-plugin:${JDROID_GRADLE_PLUGIN_VERSION}"
+		classpath "com.jdroidtools:jdroid-gradle-android-plugin:${JDROID_GRADLE_PLUGIN_VERSION}"
 	}
 }
 
@@ -57,7 +57,7 @@ dependencies {
 			exclude module: 'jdroid-java-core'
 		}
 	} else {
-		implementation("com.jdroidframework:jdroid-java-firebase-database:${JDROID_JAVA_VERSION}") {
+		implementation("com.jdroidtools:jdroid-java-firebase-database:${JDROID_JAVA_VERSION}") {
 			exclude module: 'slf4j-api'
 			exclude group: 'com.firebase', module: 'firebase-client-jvm'
 			exclude module: 'jdroid-java-core'
@@ -66,7 +66,7 @@ dependencies {
 	if (jdroid.propertyResolver.getBooleanProp("JDROID_JAVA_HTTP_AS_PROJECT_DEPENDENCY", false)) {
 		implementation project(":jdroid-java-http-okhttp")
 	} else {
-		implementation("com.jdroidframework:jdroid-java-http-okhttp:${JDROID_JAVA_HTTP_VERSION}") {
+		implementation("com.jdroidtools:jdroid-java-http-okhttp:${JDROID_JAVA_HTTP_VERSION}") {
 			exclude module: 'slf4j-api'
 			exclude module: 'jdroid-java-core'
 		}
@@ -74,7 +74,7 @@ dependencies {
 	if (jdroid.propertyResolver.getBooleanProp("JDROID_JAVA_FIREBASE_DYNAMICLINKS_AS_PROJECT_DEPENDENCY", false)) {
 		implementation project(":jdroid-java-firebase-dynamiclink")
 	} else {
-		implementation("com.jdroidframework:jdroid-java-firebase-dynamiclinks:0.1.0") {
+		implementation("com.jdroidtools:jdroid-java-firebase-dynamiclinks:1.0.0") {
 			exclude module: 'slf4j-api'
 			exclude module: 'jdroid-java-core'
 		}

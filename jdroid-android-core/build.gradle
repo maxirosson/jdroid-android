@@ -15,7 +15,7 @@ configurations.all {
 
 buildscript {
 	dependencies {
-		classpath "com.jdroidframework:jdroid-gradle-android-plugin:${JDROID_GRADLE_PLUGIN_VERSION}"
+		classpath "com.jdroidtools:jdroid-gradle-android-plugin:${JDROID_GRADLE_PLUGIN_VERSION}"
 	}
 }
 
@@ -56,14 +56,14 @@ dependencies {
 		api project(":jdroid-java-core")
 		api project(":jdroid-java-remote-config")
 	} else {
-		api ("com.jdroidframework:jdroid-java-core:${JDROID_JAVA_VERSION}")
-		api ("com.jdroidframework:jdroid-java-remote-config:${JDROID_JAVA_VERSION}")
+		api ("com.jdroidtools:jdroid-java-core:${JDROID_JAVA_VERSION}")
+		api ("com.jdroidtools:jdroid-java-remote-config:${JDROID_JAVA_VERSION}")
 	}
 
 	if (jdroid.propertyResolver.getBooleanProp("JDROID_JAVA_HTTP_AS_PROJECT_DEPENDENCY", false)) {
 		api project(":jdroid-java-http-core")
 	} else {
-		api ("com.jdroidframework:jdroid-java-http-core:${JDROID_JAVA_HTTP_VERSION}") {
+		api ("com.jdroidtools:jdroid-java-http-core:${JDROID_JAVA_HTTP_VERSION}") {
 			exclude module: 'jdroid-java-core'
 		}
 	}
