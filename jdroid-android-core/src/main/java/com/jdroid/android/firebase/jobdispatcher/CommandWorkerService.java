@@ -1,6 +1,8 @@
 package com.jdroid.android.firebase.jobdispatcher;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.service.WorkerService;
@@ -8,21 +10,21 @@ import com.jdroid.java.http.exception.ConnectionException;
 import com.jdroid.java.utils.LoggerUtils;
 import com.jdroid.java.utils.ReflectionUtils;
 
-import org.slf4j.Logger;
-
 public class CommandWorkerService extends WorkerService {
-
-	private final static Logger LOGGER = LoggerUtils.getLogger(CommandWorkerService.class);
 	
+	public CommandWorkerService() {
+		super(CommandWorkerService.class.getSimpleName());
+	}
+
 	@Override
-	protected String getTag(Intent intent) {
-		String serviceCommandExtra = intent.getStringExtra(ServiceCommand.COMMAND_EXTRA);
+	protected String getTag(@Nullable Intent intent) {
+		String serviceCommandExtra = getServiceCommand(intent);
 		return serviceCommandExtra == null ? super.getTag(intent) : serviceCommandExtra.substring(serviceCommandExtra.lastIndexOf(".") + 1);
 	}
 
 	@Override
-	protected void doExecute(Intent intent) {
-		String serviceCommandExtra = intent.getStringExtra(ServiceCommand.COMMAND_EXTRA);
+	protected void doExecute(@NonNull Intent intent) {
+		String serviceCommandExtra = getServiceCommand(intent);
 		if (serviceCommandExtra != null) {
 			ServiceCommand serviceCommand = ReflectionUtils.newInstance(serviceCommandExtra);
 			Boolean needsReschedule;
@@ -40,6 +42,10 @@ public class CommandWorkerService extends WorkerService {
 		} else {
 			AbstractApplication.get().getExceptionHandler().logWarningException("Service command not found on " + getClass().getSimpleName());
 		}
+	}
+	
+	private String getServiceCommand(@Nullable Intent intent) {
+		return intent != null ? intent.getStringExtra(ServiceCommand.COMMAND_EXTRA) : null;
 	}
 	
 	protected Boolean needsReschedule(Throwable throwable) {

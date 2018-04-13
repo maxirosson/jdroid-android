@@ -4,6 +4,8 @@ import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.google.firebase.perf.metrics.Trace;
 import com.jdroid.android.application.AbstractApplication;
@@ -11,6 +13,9 @@ import com.jdroid.android.firebase.performance.TraceHelper;
 import com.jdroid.java.date.DateUtils;
 import com.jdroid.java.utils.LoggerUtils;
 
+import org.slf4j.Logger;
+
+@Deprecated
 public abstract class WorkerService extends IntentService {
 
 	private static String TAG = WorkerService.class.getSimpleName();
@@ -25,19 +30,19 @@ public abstract class WorkerService extends IntentService {
 	
 	@Override
 	protected final void onHandleIntent(Intent intent) {
-		String tag = getClass().getSimpleName();
+		String tag = getTag(intent);
+		Logger logger = LoggerUtils.getLogger(tag);
 		if (intent != null) {
 			Trace trace = null;
 			try {
-				tag = getTag(intent);
 				if (timingTrackingEnabled()) {
 					trace = TraceHelper.startTrace(tag);
 				}
-				LoggerUtils.getLogger(tag).info("Executing service.");
+				logger.info("Executing service.");
 				long startTime = DateUtils.nowMillis();
 				doExecute(intent);
 				long executionTime = DateUtils.nowMillis() - startTime;
-				LoggerUtils.getLogger(tag).info("Service finished. Execution time: " + DateUtils.formatDuration(executionTime));
+				logger.info("Service finished. Execution time: " + DateUtils.formatDuration(executionTime));
 				
 				if (trace != null) {
 					trace.incrementCounter("success");
@@ -53,7 +58,7 @@ public abstract class WorkerService extends IntentService {
 				}
 			}
 		} else {
-			LoggerUtils.getLogger(tag).warn("Null intent when starting the service: " + getClass().getName());
+			logger.warn("Null intent when starting the service: " + getClass().getName());
 		}
 	}
 
@@ -61,11 +66,11 @@ public abstract class WorkerService extends IntentService {
 		return true;
 	}
 	
-	protected String getTag(Intent intent) {
+	protected String getTag(@Nullable Intent intent) {
 		return getClass().getSimpleName();
 	}
 
-	protected abstract void doExecute(Intent intent);
+	protected abstract void doExecute(@NonNull Intent intent);
 	
 	public static void runIntentInService(Context context, Bundle bundle, Class<? extends WorkerService> serviceClass) {
 		Intent intent = new Intent();

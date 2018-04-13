@@ -1,6 +1,7 @@
 package com.jdroid.android.sample.ui.service;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.notification.NotificationBuilder;
@@ -13,7 +14,7 @@ import com.jdroid.java.utils.IdGenerator;
 public class SampleWorkerService extends WorkerService {
 
 	@Override
-	protected void doExecute(Intent intent) {
+	protected void doExecute(@NonNull Intent intent) {
 
 		Boolean fail = intent.getExtras().getBoolean("fail");
 

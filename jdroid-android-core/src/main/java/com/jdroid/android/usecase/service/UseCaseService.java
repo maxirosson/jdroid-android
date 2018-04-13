@@ -2,6 +2,7 @@ package com.jdroid.android.usecase.service;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.notification.NotificationUtils;
@@ -16,7 +17,7 @@ public class UseCaseService extends WorkerService {
 	private final static String NOTIFICATION_TO_CANCEL_ID = "notificationToCancelId";
 	
 	@Override
-	protected void doExecute(Intent intent) {
+	protected void doExecute(@NonNull Intent intent) {
 		
 		int notificationToCancelId = intent.getIntExtra(NOTIFICATION_TO_CANCEL_ID, 0);
 		if (notificationToCancelId != 0) {
