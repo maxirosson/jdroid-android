@@ -7,6 +7,8 @@ import android.support.annotation.MainThread;
 import com.jdroid.android.usecase.listener.UseCaseListener;
 import com.jdroid.java.concurrent.ExecutorUtils;
 
+import java.util.concurrent.TimeUnit;
+
 public class UseCaseHelper {
 
 	@MainThread
@@ -61,6 +63,11 @@ public class UseCaseHelper {
 		ExecutorUtils.execute(useCase);
 	}
 
+	public static void executeUseCase(AbstractUseCase useCase, Long delay, TimeUnit timeUnit) {
+		ExecutorUtils.schedule(useCase, delay, timeUnit);
+	}
+	
+	@Deprecated
 	public static void executeUseCase(AbstractUseCase useCase, Long delaySeconds) {
 		ExecutorUtils.schedule(useCase, delaySeconds);
 	}
