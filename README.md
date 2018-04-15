@@ -128,6 +128,5 @@ Help us to continue with this project:
 [![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=2UEBTRTSCYA9L)
 
 --------------
-For more information, visit the [GitHub Wiki](https://github.com/maxirosson/jdroid/wiki) or our [Site](http://jdroidtools.com/).
 
-Follow us on [@jdroidtools](https://twitter.com/jdroidtools)
+[Website](https://jdroidtools.com) | [Twitter](https://twitter.com/jdroidtools)
