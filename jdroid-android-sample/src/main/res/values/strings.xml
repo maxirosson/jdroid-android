@@ -208,7 +208,6 @@
 	<string name="nonBlockingLoading">Non Blocking Loading</string>
 	<string name="swipeRefresLoading">Swipe Refresh Loading</string>
 	<string name="fail">Fail</string>
-	<string name="tryInstantExecution">Try Instant Execution</string>
 
 	<!-- Hero -->
 	<string name="hero">Hero &amp; Parallax</string>

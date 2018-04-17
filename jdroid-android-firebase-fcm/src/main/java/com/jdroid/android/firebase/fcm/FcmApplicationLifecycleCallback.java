@@ -8,6 +8,6 @@ public class FcmApplicationLifecycleCallback extends ApplicationLifecycleCallbac
 	
 	@Override
 	public void onLocaleChanged(Context context) {
-		AbstractFcmAppModule.get().startFcmRegistration(false, false);
+		AbstractFcmAppModule.get().startFcmRegistration(false);
 	}
 }

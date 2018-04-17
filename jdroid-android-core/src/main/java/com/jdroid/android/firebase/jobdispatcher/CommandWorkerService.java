@@ -5,12 +5,12 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.jdroid.android.application.AbstractApplication;
-import com.jdroid.android.service.WorkerService;
+import com.jdroid.android.service.AbstractWorkerService;
 import com.jdroid.java.http.exception.ConnectionException;
 import com.jdroid.java.utils.LoggerUtils;
 import com.jdroid.java.utils.ReflectionUtils;
 
-public class CommandWorkerService extends WorkerService {
+public class CommandWorkerService extends AbstractWorkerService {
 	
 	public CommandWorkerService() {
 		super(CommandWorkerService.class.getSimpleName());

@@ -5,8 +5,6 @@
 
 		<CheckBox android:id="@+id/fail" android:layout_width="wrap_content" android:layout_height="wrap_content"
 				  android:text="@string/fail" />
-		<CheckBox android:id="@+id/tryInstantExecution" android:layout_width="wrap_content" android:layout_height="wrap_content"
-				  android:text="@string/tryInstantExecution" />
 
 		<Button android:id="@+id/workerService" android:layout_width="wrap_content" android:layout_height="wrap_content"
 			android:text="@string/workerService" />

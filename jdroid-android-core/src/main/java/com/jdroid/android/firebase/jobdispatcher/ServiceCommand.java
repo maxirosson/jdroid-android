@@ -12,7 +12,7 @@ import com.firebase.jobdispatcher.Lifetime;
 import com.firebase.jobdispatcher.RetryStrategy;
 import com.firebase.jobdispatcher.Trigger;
 import com.jdroid.android.application.AbstractApplication;
-import com.jdroid.android.service.WorkerService;
+import com.jdroid.android.service.AbstractWorkerService;
 import com.jdroid.java.utils.LoggerUtils;
 
 import java.io.Serializable;
@@ -21,20 +21,15 @@ public abstract class ServiceCommand implements Serializable {
 	
 	final static String COMMAND_EXTRA = "com.jdroid.android.firebase.jobdispatcher.command";
 	
-	private Boolean isInstantExecutionRequired = true;
-	
 	public void start() {
 		start(null);
 	}
 
 	public final void start(Bundle bundle) {
-		if (isInstantExecutionRequired && !AbstractApplication.get().isInBackground()) {
-			startWorkerService(bundle);
-		} else {
-			startFirebaseJobService(bundle);
-		}
+		startFirebaseJobService(bundle);
 	}
 	
+	@Deprecated
 	public void startWorkerService(Bundle bundle) {
 		LoggerUtils.getLogger(getClass()).info("Starting Worker Service");
 		Intent intent = new Intent();
@@ -42,7 +37,7 @@ public abstract class ServiceCommand implements Serializable {
 			intent.putExtras(bundle);
 		}
 		intent.putExtra(ServiceCommand.COMMAND_EXTRA, getClass().getName());
-		WorkerService.runIntentInService(AbstractApplication.get(), intent, CommandWorkerService.class);
+		AbstractWorkerService.runIntentInService(AbstractApplication.get(), intent, CommandWorkerService.class);
 	}
 	
 	public void startFirebaseJobService(Bundle bundle) {
@@ -74,7 +69,7 @@ public abstract class ServiceCommand implements Serializable {
 	@WorkerThread
 	protected abstract boolean execute(Context context, Bundle bundle);
 
+	@Deprecated
 	public void setInstantExecutionRequired(Boolean isInstantExecutionRequired) {
-		this.isInstantExecutionRequired = isInstantExecutionRequired;
 	}
 }

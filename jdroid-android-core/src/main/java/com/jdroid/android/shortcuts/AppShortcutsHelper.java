@@ -77,7 +77,6 @@ public class AppShortcutsHelper {
 	
 	public static void registerDynamicShortcuts() {
 		ServiceCommand serviceCommand = new AppShortcutsCommand();
-		serviceCommand.setInstantExecutionRequired(false);
 		serviceCommand.start();
 	}
 	

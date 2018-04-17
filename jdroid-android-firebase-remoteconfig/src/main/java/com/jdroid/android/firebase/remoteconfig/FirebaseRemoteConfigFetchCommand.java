@@ -10,10 +10,6 @@ public class FirebaseRemoteConfigFetchCommand extends ServiceCommand {
 	public static final String CACHE_EXPIRATION_SECONDS = "cacheExpirationSeconds";
 	public static final String SET_EXPERIMENT_USER_PROPERTY = "setExperimentUserProperty";
 	
-	public FirebaseRemoteConfigFetchCommand() {
-		setInstantExecutionRequired(false);
-	}
-
 	@Override
 	protected boolean execute(Context context, Bundle bundle) {
 		Long cacheExpirationSeconds = bundle.getLong(CACHE_EXPIRATION_SECONDS);
