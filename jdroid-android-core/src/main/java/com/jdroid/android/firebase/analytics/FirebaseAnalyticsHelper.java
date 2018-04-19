@@ -10,6 +10,7 @@ import com.jdroid.java.utils.LoggerUtils;
 
 import org.slf4j.Logger;
 
+import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -26,14 +27,25 @@ public class FirebaseAnalyticsHelper {
 		firebaseAnalytics = FirebaseAnalytics.getInstance(AbstractApplication.get());
 	}
 
+	public void sendEvent(String eventName, Map<String, String> params) {
+		Bundle bundle = new Bundle();
+		if (params != null) {
+			for (Map.Entry<String, String> entry : params.entrySet()) {
+				bundle.putString(entry.getKey(), entry.getValue());
+			}
+		}
+		firebaseAnalytics.logEvent(eventName, bundle);
+		LOGGER.debug("Event [" + eventName + "] sent. " + bundle);
+	}
+	
+	@Deprecated
 	public void sendEvent(String eventName, Bundle params) {
 		firebaseAnalytics.logEvent(eventName, params);
 		LOGGER.debug("Event [" + eventName + "] sent. " + params);
 	}
 
 	public void sendEvent(String eventName) {
-		firebaseAnalytics.logEvent(eventName, null);
-		LOGGER.debug("Event [" + eventName + "] sent. ");
+		sendEvent(eventName, (Map<String, String>)null);
 	}
 
 	public void setUserProperty(String name, String value) {
