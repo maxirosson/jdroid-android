@@ -257,11 +257,13 @@
 	<string name="commandService1">Command Service 1</string>
 	<string name="commandService2">Command Service 2</string>
 	<string name="commandService3">Command Service 3</string>
+	<string name="commandService4">Command Service 4</string>
 	<string name="cancelAllJobs">Cancel All Jobs</string>
 	<string name="firebaseJobServiceDescription">Success or UnexpectedException.</string>
 	<string name="commandService1Description">Success or UnexpectedException</string>
 	<string name="commandService2Description">Success or ConnectionException</string>
 	<string name="commandService3Description">Success after 30 seconds</string>
+	<string name="commandService4Description">Minimum time between executions: 1 minute</string>
 
 	<!-- StrictMode -->
 	<string name="strictMode">Strict Mode</string>

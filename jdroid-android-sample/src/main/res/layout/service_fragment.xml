@@ -27,6 +27,10 @@
 		<Button android:id="@+id/commandService3" android:layout_width="wrap_content" android:layout_height="wrap_content"
 			android:text="@string/commandService3" />
 
+		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/commandService4Description" android:layout_marginTop="8dp"/>
+		<Button android:id="@+id/commandService4" android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:text="@string/commandService4" />
+
 		<Button android:id="@+id/cancelAllJobs" android:layout_width="wrap_content" android:layout_height="wrap_content"
 			android:text="@string/cancelAllJobs" />
 

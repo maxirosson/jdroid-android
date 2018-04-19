@@ -91,6 +91,14 @@ public class ServiceFragment extends AbstractFragment {
 				serviceCommand.start(bundle);
 			}
 		});
+		findView(R.id.commandService4).setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				ServiceCommand serviceCommand = new SampleServiceCommand4();
+				serviceCommand.start();
+			}
+		});
 		findView(R.id.cancelAllJobs).setOnClickListener(new OnClickListener() {
 
 			@Override

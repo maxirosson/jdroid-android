@@ -3,6 +3,8 @@ package com.jdroid.android.firebase.jobdispatcher;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.WorkerThread;
 
 import com.firebase.jobdispatcher.FirebaseJobDispatcher;
@@ -16,17 +18,28 @@ import com.jdroid.android.service.AbstractWorkerService;
 import com.jdroid.java.utils.LoggerUtils;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 public abstract class ServiceCommand implements Serializable {
 	
 	final static String COMMAND_EXTRA = "com.jdroid.android.firebase.jobdispatcher.command";
 	
+	private final static Map<Class<? extends ServiceCommand>, Long> LAST_EXECUTION_MAP = new HashMap<>();
+	
 	public void start() {
 		start(null);
 	}
-
+	
 	public final void start(Bundle bundle) {
-		startFirebaseJobService(bundle);
+		Long lastExecution = LAST_EXECUTION_MAP.get(getClass());
+		Long minimumTimeBetweenExecutions = getMinimumTimeBetweenExecutions();
+		if (lastExecution == null || minimumTimeBetweenExecutions == null || System.currentTimeMillis() - lastExecution > minimumTimeBetweenExecutions) {
+			LAST_EXECUTION_MAP.put(getClass(), System.currentTimeMillis());
+			startFirebaseJobService(bundle);
+		} else {
+			LoggerUtils.getLogger(getClass()).info("Firebase Job Service schedule skipped");
+		}
 	}
 	
 	@Deprecated
@@ -48,12 +61,22 @@ public abstract class ServiceCommand implements Serializable {
 		}
 		bundle.putSerializable(ServiceCommand.COMMAND_EXTRA, getClass().getName());
 		
-		FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(new GooglePlayDriver(AbstractApplication.get()));
-		Job.Builder builder = createJobBuilder(dispatcher, bundle);
-		builder.setService(CommandJobService.class);
-		dispatcher.mustSchedule(builder.build());
+		try {
+			FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(new GooglePlayDriver(AbstractApplication.get()));
+			Job.Builder builder = createJobBuilder(dispatcher, bundle);
+			builder.setService(CommandJobService.class);
+			dispatcher.mustSchedule(builder.build());
+		} catch (Exception e) {
+			AbstractApplication.get().getExceptionHandler().logHandledException(e);
+		}
 	}
-
+	
+	@Nullable
+	protected Long getMinimumTimeBetweenExecutions() {
+		return null;
+	}
+	
+	@NonNull
 	protected Job.Builder createJobBuilder(FirebaseJobDispatcher dispatcher, Bundle bundle) {
 		Job.Builder builder = dispatcher.newJobBuilder();
 		builder.setRecurring(false); // one-off job
@@ -65,10 +88,10 @@ public abstract class ServiceCommand implements Serializable {
 		builder.setExtras(bundle);
 		return builder;
 	}
-
+	
 	@WorkerThread
 	protected abstract boolean execute(Context context, Bundle bundle);
-
+	
 	@Deprecated
 	public void setInstantExecutionRequired(Boolean isInstantExecutionRequired) {
 	}
