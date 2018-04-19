@@ -13,6 +13,6 @@ public class FirebaseAnalyticsAppLifecycleCallback extends ApplicationLifecycleC
 	
 	@Override
 	public Boolean isEnabled() {
-		return FirebaseAnalyticsAppContext.isFirebaseAnalyticsEnabled();
+		return FirebaseAnalyticsFactory.getFirebaseAnalyticsHelper().isFirebaseAnalyticsEnabled();
 	}
 }

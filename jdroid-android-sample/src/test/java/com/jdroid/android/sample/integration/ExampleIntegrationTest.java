@@ -2,7 +2,7 @@ package com.jdroid.android.sample.integration;
 
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.debug.http.HttpDebugConfiguration;
-import com.jdroid.android.firebase.analytics.FirebaseAnalyticsAppContext;
+import com.jdroid.android.firebase.analytics.FirebaseAnalyticsFactory;
 import com.jdroid.android.google.analytics.GoogleAnalyticsAppContext;
 import com.jdroid.android.leakcanary.LeakCanaryHelper;
 import com.jdroid.android.sample.AbstractIntegrationTest;
@@ -40,7 +40,7 @@ public class ExampleIntegrationTest extends AbstractIntegrationTest {
 		assertFalse(StrictModeHelper.isStrictModeEnabled());
 		assertFalse(AppUtils.isReleaseBuildType());
 		assertFalse(GoogleAnalyticsAppContext.isGoogleAnalyticsEnabled());
-		assertFalse(FirebaseAnalyticsAppContext.isFirebaseAnalyticsEnabled());
+		assertFalse(FirebaseAnalyticsFactory.getFirebaseAnalyticsHelper().isFirebaseAnalyticsEnabled());
 		assertEquals(TestExceptionHandler.class, AbstractApplication.get().getExceptionHandler().getClass());
 	}
 }

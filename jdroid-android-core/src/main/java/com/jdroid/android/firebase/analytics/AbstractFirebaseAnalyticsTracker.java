@@ -10,7 +10,7 @@ public class AbstractFirebaseAnalyticsTracker implements AnalyticsTracker {
 
 	@Override
 	public Boolean isEnabled() {
-		return FirebaseAnalyticsAppContext.isFirebaseAnalyticsEnabled();
+		return getFirebaseAnalyticsHelper().isFirebaseAnalyticsEnabled();
 	}
 
 	@WorkerThread
