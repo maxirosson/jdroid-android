@@ -66,10 +66,8 @@ public class ServiceFragment extends AbstractFragment {
 			
 			@Override
 			public void onClick(View v) {
-				Bundle bundle = new Bundle();
+				Bundle bundle = createServiceCommandBundle();
 				bundle.putString("a", "3");
-				bundle.putBoolean("fail", failCheckBox.isChecked());
-				bundle.putInt("delay", TypeUtils.getInteger(delayEditText.getText()));
 				ServiceCommand serviceCommand = new SampleServiceCommand1();
 				serviceCommand.start(bundle);
 			}
@@ -78,10 +76,8 @@ public class ServiceFragment extends AbstractFragment {
 
 			@Override
 			public void onClick(View v) {
-				Bundle bundle = new Bundle();
+				Bundle bundle = createServiceCommandBundle();
 				bundle.putString("a", "4");
-				bundle.putBoolean("fail", failCheckBox.isChecked());
-				bundle.putInt("delay", TypeUtils.getInteger(delayEditText.getText()));
 				ServiceCommand serviceCommand = new SampleServiceCommand2();
 				serviceCommand.start(bundle);
 			}
@@ -90,10 +86,8 @@ public class ServiceFragment extends AbstractFragment {
 
 			@Override
 			public void onClick(View v) {
-				Bundle bundle = new Bundle();
+				Bundle bundle = createServiceCommandBundle();
 				bundle.putString("a", "5");
-				bundle.putBoolean("fail", failCheckBox.isChecked());
-				bundle.putInt("delay", TypeUtils.getInteger(delayEditText.getText()));
 				ServiceCommand serviceCommand = new SampleServiceCommand3();
 				serviceCommand.start(bundle);
 			}
@@ -102,9 +96,7 @@ public class ServiceFragment extends AbstractFragment {
 
 			@Override
 			public void onClick(View v) {
-				Bundle bundle = new Bundle();
-				bundle.putBoolean("fail", failCheckBox.isChecked());
-				bundle.putInt("delay", TypeUtils.getInteger(delayEditText.getText()));
+				Bundle bundle = createServiceCommandBundle();
 				ServiceCommand serviceCommand = new SampleServiceCommand4();
 				serviceCommand.start(bundle);
 			}
@@ -117,5 +109,15 @@ public class ServiceFragment extends AbstractFragment {
 				dispatcher.cancelAll();
 			}
 		});
+	}
+	
+	private Bundle createServiceCommandBundle() {
+		Bundle bundle = new Bundle();
+		bundle.putBoolean("fail", failCheckBox.isChecked());
+		Integer delay = TypeUtils.getInteger(delayEditText.getText());
+		if (delay != null) {
+			bundle.putInt("delay", delay);
+		}
+		return bundle;
 	}
 }
