@@ -1,10 +1,10 @@
 package com.jdroid.android.domain;
 
-import com.jdroid.java.date.DateUtils;
+import java.util.concurrent.TimeUnit;
 
 public interface User {
 	
-	public static final long PROFILE_PICTURE_TTL = DateUtils.MILLIS_PER_DAY;
+	public static final long PROFILE_PICTURE_TTL = TimeUnit.DAYS.toMillis(1);
 	
 	public Long getId();
 	

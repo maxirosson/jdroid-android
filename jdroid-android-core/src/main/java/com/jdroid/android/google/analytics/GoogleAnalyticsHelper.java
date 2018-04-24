@@ -15,13 +15,13 @@ import org.slf4j.Logger;
 import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class GoogleAnalyticsHelper {
 
 	private static final Logger LOGGER = LoggerUtils.getLogger(GoogleAnalyticsHelper.class);
 
-	// 30 minutes
-	private static final int SESSION_TIMEOUT = 1800;
+	private static final long SESSION_TIMEOUT = TimeUnit.MINUTES.toSeconds(30);
 
 	private Tracker tracker;
 
@@ -225,7 +225,7 @@ public class GoogleAnalyticsHelper {
 	}
 
 	public Boolean isSessionExpired() {
-		return (DateUtils.nowMillis() - UsageStats.getLastStopTime()) > (4 * SESSION_TIMEOUT * DateUtils.MILLIS_PER_SECOND);
+		return (DateUtils.nowMillis() - UsageStats.getLastStopTime()) > TimeUnit.SECONDS.toMillis(4 * SESSION_TIMEOUT);
 	}
 
 	public void dispatchLocalHits() {

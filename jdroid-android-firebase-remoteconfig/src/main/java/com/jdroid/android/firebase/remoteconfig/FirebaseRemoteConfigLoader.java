@@ -18,7 +18,6 @@ import com.jdroid.android.firebase.analytics.FirebaseAnalyticsFactory;
 import com.jdroid.android.utils.AppUtils;
 import com.jdroid.java.collections.Lists;
 import com.jdroid.java.concurrent.ExecutorUtils;
-import com.jdroid.java.date.DateUtils;
 import com.jdroid.java.remoteconfig.RemoteConfigLoader;
 import com.jdroid.java.remoteconfig.RemoteConfigParameter;
 import com.jdroid.java.utils.LoggerUtils;
@@ -27,6 +26,7 @@ import com.jdroid.java.utils.StringUtils;
 import org.slf4j.Logger;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import static android.support.annotation.RestrictTo.Scope.LIBRARY;
 
@@ -37,7 +37,7 @@ public class FirebaseRemoteConfigLoader implements RemoteConfigLoader {
 	private FirebaseRemoteConfig firebaseRemoteConfig;
 	
 	private int retryCount = 0;
-	private long defaultFetchExpiration = DateUtils.SECONDS_PER_HOUR * 12;
+	private long defaultFetchExpiration = TimeUnit.HOURS.toSeconds(12);
 
 	private List<RemoteConfigParameter> remoteConfigParametersAsUserProperties = Lists.newArrayList();
 	
