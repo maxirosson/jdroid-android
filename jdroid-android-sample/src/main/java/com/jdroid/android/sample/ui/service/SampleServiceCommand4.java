@@ -4,12 +4,11 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.jdroid.android.firebase.jobdispatcher.ServiceCommand;
 import com.jdroid.java.concurrent.ExecutorUtils;
 
 import java.util.concurrent.TimeUnit;
 
-public class SampleServiceCommand4 extends ServiceCommand {
+public class SampleServiceCommand4 extends AbstractSampleServiceCommand {
 
 	@Override
 	protected boolean execute(Context context, Bundle bundle) {

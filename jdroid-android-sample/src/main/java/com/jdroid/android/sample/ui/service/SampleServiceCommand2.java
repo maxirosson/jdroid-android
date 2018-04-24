@@ -4,14 +4,13 @@ import android.content.Context;
 import android.os.Bundle;
 
 import com.jdroid.android.application.AbstractApplication;
-import com.jdroid.android.firebase.jobdispatcher.ServiceCommand;
 import com.jdroid.android.notification.NotificationBuilder;
 import com.jdroid.android.notification.NotificationUtils;
 import com.jdroid.android.sample.application.AndroidNotificationChannelType;
 import com.jdroid.java.http.exception.ConnectionException;
 import com.jdroid.java.utils.IdGenerator;
 
-public class SampleServiceCommand2 extends ServiceCommand {
+public class SampleServiceCommand2 extends AbstractSampleServiceCommand {
 
 	@Override
 	protected boolean execute(Context context, Bundle bundle) {

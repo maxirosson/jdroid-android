@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.CheckBox;
+import android.widget.EditText;
 
 import com.firebase.jobdispatcher.FirebaseJobDispatcher;
 import com.firebase.jobdispatcher.GooglePlayDriver;
@@ -13,10 +14,12 @@ import com.jdroid.android.fragment.AbstractFragment;
 import com.jdroid.android.sample.R;
 import com.jdroid.android.sample.ui.usecases.SampleUseCase;
 import com.jdroid.android.usecase.service.UseCaseService;
+import com.jdroid.java.utils.TypeUtils;
 
 public class ServiceFragment extends AbstractFragment {
 
 	private CheckBox failCheckBox;
+	private EditText delayEditText;
 
 	@Override
 	public Integer getContentFragmentLayout() {
@@ -28,6 +31,7 @@ public class ServiceFragment extends AbstractFragment {
 		super.onViewCreated(view, savedInstanceState);
 
 		failCheckBox = findView(R.id.fail);
+		delayEditText = findView(R.id.delay);
 		
 		findView(R.id.workerService).setOnClickListener(new OnClickListener() {
 			
@@ -65,6 +69,7 @@ public class ServiceFragment extends AbstractFragment {
 				Bundle bundle = new Bundle();
 				bundle.putString("a", "3");
 				bundle.putBoolean("fail", failCheckBox.isChecked());
+				bundle.putInt("delay", TypeUtils.getInteger(delayEditText.getText()));
 				ServiceCommand serviceCommand = new SampleServiceCommand1();
 				serviceCommand.start(bundle);
 			}
@@ -76,6 +81,7 @@ public class ServiceFragment extends AbstractFragment {
 				Bundle bundle = new Bundle();
 				bundle.putString("a", "4");
 				bundle.putBoolean("fail", failCheckBox.isChecked());
+				bundle.putInt("delay", TypeUtils.getInteger(delayEditText.getText()));
 				ServiceCommand serviceCommand = new SampleServiceCommand2();
 				serviceCommand.start(bundle);
 			}
@@ -87,6 +93,7 @@ public class ServiceFragment extends AbstractFragment {
 				Bundle bundle = new Bundle();
 				bundle.putString("a", "5");
 				bundle.putBoolean("fail", failCheckBox.isChecked());
+				bundle.putInt("delay", TypeUtils.getInteger(delayEditText.getText()));
 				ServiceCommand serviceCommand = new SampleServiceCommand3();
 				serviceCommand.start(bundle);
 			}
@@ -95,8 +102,11 @@ public class ServiceFragment extends AbstractFragment {
 
 			@Override
 			public void onClick(View v) {
+				Bundle bundle = new Bundle();
+				bundle.putBoolean("fail", failCheckBox.isChecked());
+				bundle.putInt("delay", TypeUtils.getInteger(delayEditText.getText()));
 				ServiceCommand serviceCommand = new SampleServiceCommand4();
-				serviceCommand.start();
+				serviceCommand.start(bundle);
 			}
 		});
 		findView(R.id.cancelAllJobs).setOnClickListener(new OnClickListener() {
