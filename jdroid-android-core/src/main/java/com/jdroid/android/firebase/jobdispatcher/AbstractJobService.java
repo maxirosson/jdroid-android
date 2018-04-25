@@ -15,6 +15,7 @@ import com.jdroid.java.http.exception.ConnectionException;
 import com.jdroid.java.utils.LoggerUtils;
 
 // TODO See if we should extend SimpleJobService
+// TODO Rename to AbstractFirebaseJobService
 public abstract class AbstractJobService extends JobService {
 	
 	@MainThread

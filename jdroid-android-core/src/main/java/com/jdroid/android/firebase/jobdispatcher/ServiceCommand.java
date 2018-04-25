@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.WorkerThread;
 
+import com.firebase.jobdispatcher.Constraint;
 import com.firebase.jobdispatcher.FirebaseJobDispatcher;
 import com.firebase.jobdispatcher.GooglePlayDriver;
 import com.firebase.jobdispatcher.Job;
@@ -85,6 +86,7 @@ public abstract class ServiceCommand implements Serializable {
 		builder.setTrigger(Trigger.NOW);
 		builder.setReplaceCurrent(false); // don't overwrite an existing job with the same tag
 		builder.setRetryStrategy(RetryStrategy.DEFAULT_EXPONENTIAL); // retry with exponential backoff
+		builder.setConstraints(Constraint.ON_ANY_NETWORK);
 		builder.setExtras(bundle);
 		return builder;
 	}

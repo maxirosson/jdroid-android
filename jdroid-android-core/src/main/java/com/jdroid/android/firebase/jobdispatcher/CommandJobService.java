@@ -7,6 +7,7 @@ import com.firebase.jobdispatcher.JobParameters;
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.java.utils.ReflectionUtils;
 
+// TODO Rename to CommandFirebaseJobService
 public class CommandJobService extends AbstractJobService {
 	
 	@WorkerThread
