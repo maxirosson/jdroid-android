@@ -19,11 +19,12 @@ dependencies {
 	api project(":jdroid-android-core")
 
 	// https://developers.facebook.com/docs/android
-	api ('com.facebook.android:facebook-android-sdk:4.27.0') {
+	api 'com.facebook.android:facebook-core:4.32.0'
+	api ('com.facebook.android:facebook-login:4.32.0') {
 		exclude group: 'com.android.support',  module: 'customtabs'
 	}
 
-	implementation "com.android.support:customtabs:${ANDROID_SUPPORT_VERSION}"
+	api "com.android.support:customtabs:${ANDROID_SUPPORT_VERSION}"
 
 	testImplementation "junit:junit:${JUNIT_VERSION}"
 	testImplementation "org.robolectric:robolectric:${ROBOLECTRIC_VERSION}"
