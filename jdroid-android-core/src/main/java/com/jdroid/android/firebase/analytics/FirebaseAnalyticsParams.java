@@ -17,23 +17,33 @@ public class FirebaseAnalyticsParams {
 	}
 	
 	public void put(@NonNull String key, @Nullable String value) {
-		bundle.putString(key, value);
+		if (value != null) {
+			bundle.putString(key, value);
+		}
 	}
 	
 	public void put(@NonNull String key, @Nullable Integer value) {
-		bundle.putLong(key, value);
+		if (value != null) {
+			bundle.putLong(key, value);
+		}
 	}
 	
 	public void put(@NonNull String key, @Nullable Long value) {
-		bundle.putLong(key, value);
+		if (value != null) {
+			bundle.putLong(key, value);
+		}
 	}
 	
 	public void put(@NonNull String key, @Nullable Float value) {
-		bundle.putDouble(key, value);
+		if (value != null) {
+			bundle.putDouble(key, value);
+		}
 	}
 	
 	public void put(@NonNull String key, @Nullable Double value) {
-		bundle.putDouble(key, value);
+		if (value != null) {
+			bundle.putDouble(key, value);
+		}
 	}
 	
 	public void put(@NonNull String key, @Nullable Boolean value) {

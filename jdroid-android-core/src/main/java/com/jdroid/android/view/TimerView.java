@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit;
 public class TimerView extends AppCompatTextView implements Handler.Callback {
 	
 	private static final int MESSAGE_CODE = IdGenerator.getIntId();
-	private static final int HANDLER_DELAY = 1000;
+	private static final long HANDLER_DELAY = TimeUnit.SECONDS.toMillis(1);
 	
 	private static final Logger LOGGER = LoggerUtils.getLogger(TimerView.class);
 	
