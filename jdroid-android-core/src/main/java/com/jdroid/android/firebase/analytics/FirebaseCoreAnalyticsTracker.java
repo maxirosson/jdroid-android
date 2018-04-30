@@ -11,10 +11,8 @@ import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.social.SocialAction;
 import com.jdroid.android.utils.DeviceUtils;
 import com.jdroid.android.utils.ScreenUtils;
-import com.jdroid.java.collections.Maps;
 
 import java.util.List;
-import java.util.Map;
 
 public class FirebaseCoreAnalyticsTracker extends AbstractFirebaseAnalyticsTracker implements CoreAnalyticsTracker {
 
@@ -97,75 +95,75 @@ public class FirebaseCoreAnalyticsTracker extends AbstractFirebaseAnalyticsTrack
 
 	@Override
 	public void trackNotificationDisplayed(String notificationName) {
-		Map<String, String> params = Maps.newHashMap();
-		params.put("notification_name", notificationName);
+		Bundle params = new Bundle();
+		params.putString("notification_name", notificationName);
 		getFirebaseAnalyticsHelper().sendEvent("display_notification", params);
 	}
 
 	@Override
 	public void trackNotificationOpened(String notificationName) {
-		Map<String, String> params = Maps.newHashMap();
-		params.put("notification_name", notificationName);
+		Bundle params = new Bundle();
+		params.putString("notification_name", notificationName);
 		getFirebaseAnalyticsHelper().sendEvent("open_notification", params);
 	}
 
 	@Override
 	public void trackEnjoyingApp(Boolean enjoying) {
-		Map<String, String> params = Maps.newHashMap();
-		params.put("enjoying", enjoying.toString());
+		Bundle params = new Bundle();
+		params.putString("enjoying", enjoying.toString());
 		getFirebaseAnalyticsHelper().sendEvent("enjoying_app", params);
 	}
 
 	@Override
 	public void trackRateOnGooglePlay(Boolean rate) {
-		Map<String, String> params = Maps.newHashMap();
-		params.put("rate", rate.toString());
+		Bundle params = new Bundle();
+		params.putString("rate", rate.toString());
 		getFirebaseAnalyticsHelper().sendEvent("rate_on_google_play", params);
 	}
 
 	@Override
 	public void trackGiveFeedback(Boolean feedback) {
-		Map<String, String> params = Maps.newHashMap();
-		params.put("feedback", feedback.toString());
+		Bundle params = new Bundle();
+		params.putString("feedback", feedback.toString());
 		getFirebaseAnalyticsHelper().sendEvent("give_feedback", params);
 	}
 
 	@Override
 	public void trackWidgetAdded(String widgetName) {
-		Map<String, String> params = Maps.newHashMap();
-		params.put("widget_name", widgetName);
+		Bundle params = new Bundle();
+		params.putString("widget_name", widgetName);
 		getFirebaseAnalyticsHelper().sendEvent("add_widget", params);
 	}
 
 	@Override
 	public void trackWidgetRemoved(String widgetName) {
-		Map<String, String> params = Maps.newHashMap();
-		params.put("widget_name", widgetName);
+		Bundle params = new Bundle();
+		params.putString("widget_name", widgetName);
 		getFirebaseAnalyticsHelper().sendEvent("remove_widget", params);
 	}
 
 	@Override
 	public void trackUriOpened(String screenName, Uri uri, String referrer) {
-		Map<String, String> params = Maps.newHashMap();
-		params.put("screen_name", screenName);
-		params.put("referrer", referrer);
+		Bundle params = new Bundle();
+		params.putString("screen_name", screenName);
+		params.putString("referrer", referrer);
 		getFirebaseAnalyticsHelper().sendEvent("open_uri", params);
 	}
 
 	@Override
 	public void trackSocialInteraction(String network, SocialAction socialAction, String socialTarget) {
-		Map<String, String> params = Maps.newHashMap();
+		Bundle params = new Bundle();
 		if (network != null) {
-			params.put("network", network);
+			params.putString("network", network);
 		}
-		params.put("social_target", socialTarget);
+		params.putString("social_target", socialTarget);
 		getFirebaseAnalyticsHelper().sendEvent(socialAction.getName(), params);
 	}
 
 	@Override
 	public void trackSendAppInvitation(String invitationId) {
-		Map<String, String> params = Maps.newHashMap();
-		params.put(FirebaseAnalytics.Param.ITEM_ID, invitationId);
+		Bundle params = new Bundle();
+		params.putString(FirebaseAnalytics.Param.ITEM_ID, invitationId);
 		getFirebaseAnalyticsHelper().sendEvent("send_app_invitation", params);
 	}
 }

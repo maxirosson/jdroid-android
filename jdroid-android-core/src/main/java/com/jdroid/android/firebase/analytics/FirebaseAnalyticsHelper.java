@@ -14,7 +14,6 @@ import com.jdroid.java.utils.LoggerUtils;
 
 import org.slf4j.Logger;
 
-import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -24,23 +23,7 @@ public class FirebaseAnalyticsHelper {
 	
 	private Executor executor = Executors.newSingleThreadExecutor(new LowPriorityThreadFactory("firebase-analytics"));
 	
-	public void sendEvent(@NonNull String eventName, @Nullable Map<String, String> params) {
-		Bundle bundle = new Bundle();
-		if (params != null) {
-			for (Map.Entry<String, String> entry : params.entrySet()) {
-				bundle.putString(entry.getKey(), entry.getValue());
-			}
-		}
-		if (isFirebaseAnalyticsEnabled()) {
-			getFirebaseAnalytics().logEvent(eventName, bundle);
-			LOGGER.debug("Event [" + eventName + "] sent. " + bundle);
-		} else {
-			LOGGER.debug("SKIPPED: Event [" + eventName + "] sent. " + bundle);
-		}
-	}
-	
-	@Deprecated
-	public void sendEvent(String eventName, Bundle params) {
+	public void sendEvent(@NonNull String eventName, @Nullable Bundle params) {
 		if (isFirebaseAnalyticsEnabled()) {
 			getFirebaseAnalytics().logEvent(eventName, params);
 			LOGGER.debug("Event [" + eventName + "] sent. " + params);
@@ -50,7 +33,7 @@ public class FirebaseAnalyticsHelper {
 	}
 	
 	public void sendEvent(@NonNull String eventName) {
-		sendEvent(eventName, (Map<String, String>)null);
+		sendEvent(eventName, null);
 	}
 	
 	public void setUserProperty(@NonNull String name, @Nullable String value) {
