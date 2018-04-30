@@ -42,7 +42,8 @@ public abstract class AbstractUseCase implements Runnable, Serializable {
 	private AbstractException abstractException;
 	private volatile Boolean notified = false;
 	
-	private Long executionTime = 0L;
+	private Long startTime;
+	private Long executionTime;
 	private int exceptionPriorityLevel = AbstractException.NORMAL_PRIORITY;
 
 	/**
@@ -78,7 +79,8 @@ public abstract class AbstractUseCase implements Runnable, Serializable {
 		try {
 			
 			LOGGER.debug("Started " + getClass().getSimpleName());
-			long startTime = DateUtils.nowMillis();
+			executionTime = null;
+			startTime = DateUtils.nowMillis();
 			doExecute();
 			executionTime = DateUtils.nowMillis() - startTime;
 			LOGGER.debug("Finished " + getClass().getSimpleName() + ". Execution time: " + DateUtils.formatDuration(executionTime));
@@ -156,9 +158,14 @@ public abstract class AbstractUseCase implements Runnable, Serializable {
 		AbstractApplication.get().getExceptionHandler().logHandledException(abstractException);
 	}
 	
+	public Long getStartTime() {
+		return startTime;
+	}
+	
 	/**
 	 * @return the executionTime
 	 */
+	@Nullable
 	public Long getExecutionTime() {
 		return executionTime;
 	}
