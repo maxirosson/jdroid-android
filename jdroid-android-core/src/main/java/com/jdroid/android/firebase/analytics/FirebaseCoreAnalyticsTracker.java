@@ -95,75 +95,75 @@ public class FirebaseCoreAnalyticsTracker extends AbstractFirebaseAnalyticsTrack
 
 	@Override
 	public void trackNotificationDisplayed(String notificationName) {
-		Bundle params = new Bundle();
-		params.putString("notification_name", notificationName);
+		FirebaseAnalyticsParams params = new FirebaseAnalyticsParams();
+		params.put("notification_name", notificationName);
 		getFirebaseAnalyticsHelper().sendEvent("display_notification", params);
 	}
 
 	@Override
 	public void trackNotificationOpened(String notificationName) {
-		Bundle params = new Bundle();
-		params.putString("notification_name", notificationName);
+		FirebaseAnalyticsParams params = new FirebaseAnalyticsParams();
+		params.put("notification_name", notificationName);
 		getFirebaseAnalyticsHelper().sendEvent("open_notification", params);
 	}
 
 	@Override
 	public void trackEnjoyingApp(Boolean enjoying) {
-		Bundle params = new Bundle();
-		params.putString("enjoying", enjoying.toString());
+		FirebaseAnalyticsParams params = new FirebaseAnalyticsParams();
+		params.put("enjoying", enjoying);
 		getFirebaseAnalyticsHelper().sendEvent("enjoying_app", params);
 	}
 
 	@Override
 	public void trackRateOnGooglePlay(Boolean rate) {
-		Bundle params = new Bundle();
-		params.putString("rate", rate.toString());
+		FirebaseAnalyticsParams params = new FirebaseAnalyticsParams();
+		params.put("rate", rate);
 		getFirebaseAnalyticsHelper().sendEvent("rate_on_google_play", params);
 	}
 
 	@Override
 	public void trackGiveFeedback(Boolean feedback) {
-		Bundle params = new Bundle();
-		params.putString("feedback", feedback.toString());
+		FirebaseAnalyticsParams params = new FirebaseAnalyticsParams();
+		params.put("feedback", feedback);
 		getFirebaseAnalyticsHelper().sendEvent("give_feedback", params);
 	}
 
 	@Override
 	public void trackWidgetAdded(String widgetName) {
-		Bundle params = new Bundle();
-		params.putString("widget_name", widgetName);
+		FirebaseAnalyticsParams params = new FirebaseAnalyticsParams();
+		params.put("widget_name", widgetName);
 		getFirebaseAnalyticsHelper().sendEvent("add_widget", params);
 	}
 
 	@Override
 	public void trackWidgetRemoved(String widgetName) {
-		Bundle params = new Bundle();
-		params.putString("widget_name", widgetName);
+		FirebaseAnalyticsParams params = new FirebaseAnalyticsParams();
+		params.put("widget_name", widgetName);
 		getFirebaseAnalyticsHelper().sendEvent("remove_widget", params);
 	}
 
 	@Override
 	public void trackUriOpened(String screenName, Uri uri, String referrer) {
-		Bundle params = new Bundle();
-		params.putString("screen_name", screenName);
-		params.putString("referrer", referrer);
+		FirebaseAnalyticsParams params = new FirebaseAnalyticsParams();
+		params.put("screen_name", screenName);
+		params.put("referrer", referrer);
 		getFirebaseAnalyticsHelper().sendEvent("open_uri", params);
 	}
 
 	@Override
 	public void trackSocialInteraction(String network, SocialAction socialAction, String socialTarget) {
-		Bundle params = new Bundle();
+		FirebaseAnalyticsParams params = new FirebaseAnalyticsParams();
 		if (network != null) {
-			params.putString("network", network);
+			params.put("network", network);
 		}
-		params.putString("social_target", socialTarget);
+		params.put("social_target", socialTarget);
 		getFirebaseAnalyticsHelper().sendEvent(socialAction.getName(), params);
 	}
 
 	@Override
 	public void trackSendAppInvitation(String invitationId) {
-		Bundle params = new Bundle();
-		params.putString(FirebaseAnalytics.Param.ITEM_ID, invitationId);
+		FirebaseAnalyticsParams params = new FirebaseAnalyticsParams();
+		params.put(FirebaseAnalytics.Param.ITEM_ID, invitationId);
 		getFirebaseAnalyticsHelper().sendEvent("send_app_invitation", params);
 	}
 }

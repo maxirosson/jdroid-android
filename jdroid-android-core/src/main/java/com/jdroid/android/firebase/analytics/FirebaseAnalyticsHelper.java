@@ -23,17 +23,22 @@ public class FirebaseAnalyticsHelper {
 	
 	private Executor executor = Executors.newSingleThreadExecutor(new LowPriorityThreadFactory("firebase-analytics"));
 	
-	public void sendEvent(@NonNull String eventName, @Nullable Bundle params) {
+	public void sendEvent(@NonNull String eventName, @Nullable FirebaseAnalyticsParams params) {
 		if (isFirebaseAnalyticsEnabled()) {
-			getFirebaseAnalytics().logEvent(eventName, params);
+			getFirebaseAnalytics().logEvent(eventName, params != null ? params.getBundle() : null);
 			LOGGER.debug("Event [" + eventName + "] sent. " + params);
 		} else {
 			LOGGER.debug("SKIPPED: Event [" + eventName + "] sent. " + params);
 		}
 	}
 	
+	@Deprecated
+	public void sendEvent(@NonNull String eventName, @Nullable Bundle params) {
+		sendEvent(eventName, new FirebaseAnalyticsParams(params));
+	}
+	
 	public void sendEvent(@NonNull String eventName) {
-		sendEvent(eventName, null);
+		sendEvent(eventName, (FirebaseAnalyticsParams)null);
 	}
 	
 	public void setUserProperty(@NonNull String name, @Nullable String value) {
