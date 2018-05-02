@@ -8,7 +8,7 @@ public class FirebaseAnalyticsParams {
 	
 	private Bundle bundle;
 	
-	public FirebaseAnalyticsParams(Bundle bundle) {
+	public FirebaseAnalyticsParams(@NonNull Bundle bundle) {
 		this.bundle = bundle;
 	}
 	
@@ -54,5 +54,10 @@ public class FirebaseAnalyticsParams {
 	
 	public Bundle getBundle() {
 		return bundle;
+	}
+	
+	@Override
+	public String toString() {
+		return bundle.toString();
 	}
 }
