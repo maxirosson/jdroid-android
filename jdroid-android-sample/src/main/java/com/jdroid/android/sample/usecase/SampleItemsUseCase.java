@@ -30,4 +30,9 @@ public class SampleItemsUseCase extends AbstractUseCase {
 	public List<Object> getComplexItems() {
 		return complexItems;
 	}
+	
+	@Override
+	protected Boolean timingTrackingEnabled() {
+		return false;
+	}
 }
