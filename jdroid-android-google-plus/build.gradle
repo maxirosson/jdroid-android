@@ -18,7 +18,7 @@ dependencies {
 
 	api project(":jdroid-android-core")
 
-	api "com.google.android.gms:play-services-plus:${GOOGLE_PLAY_SERVICES_VERSION}"
+	api "com.google.android.gms:play-services-plus:15.0.1"
 
 	testImplementation "junit:junit:${JUNIT_VERSION}"
 	testImplementation "org.robolectric:robolectric:${ROBOLECTRIC_VERSION}"
