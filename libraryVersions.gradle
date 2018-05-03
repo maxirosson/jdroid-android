@@ -1,5 +1,5 @@
 // https://github.com/maxirosson/jdroid-gradle-plugin/blob/master/CHANGELOG.md
-ext.JDROID_GRADLE_PLUGIN_VERSION = '1.1.0-SNAPSHOT'
+ext.JDROID_GRADLE_PLUGIN_VERSION = '1.1.0-android_p-SNAPSHOT'
 
 // https://github.com/maxirosson/jdroid-java/blob/master/CHANGELOG.md
 ext.JDROID_JAVA_VERSION = '1.1.0-SNAPSHOT'
