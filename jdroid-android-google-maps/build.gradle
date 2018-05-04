@@ -18,7 +18,7 @@ dependencies {
 
 	api project(":jdroid-android-core")
 
-	api "com.google.android.gms:play-services-maps:${GOOGLE_PLAY_SERVICES_VERSION}"
+	api "com.google.android.gms:play-services-maps:15.0.1"
 
 	if (jdroid.propertyResolver.getBooleanProp("JDROID_JAVA_HTTP_AS_PROJECT_DEPENDENCY", false)) {
 		testImplementation project(":jdroid-java-http-okhttp")

@@ -18,8 +18,8 @@ dependencies {
 
 	api project(":jdroid-android-core")
 
-	api "com.google.firebase:firebase-database:${GOOGLE_PLAY_SERVICES_VERSION}"
-	api "com.google.firebase:firebase-auth:${GOOGLE_PLAY_SERVICES_VERSION}"
+	api "com.google.firebase:firebase-database:15.0.1"
+	api "com.google.firebase:firebase-auth:15.1.0"
 
 	testImplementation "junit:junit:${JUNIT_VERSION}"
 	testImplementation "org.robolectric:robolectric:${ROBOLECTRIC_VERSION}"

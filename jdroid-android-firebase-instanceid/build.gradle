@@ -18,7 +18,7 @@ dependencies {
 
 	api project(":jdroid-android-core")
 
-	api "com.google.firebase:firebase-iid:${GOOGLE_PLAY_SERVICES_VERSION}"
+	api "com.google.firebase:firebase-iid:15.1.0"
 
 	testImplementation "junit:junit:${JUNIT_VERSION}"
 	testImplementation "org.robolectric:robolectric:${ROBOLECTRIC_VERSION}"

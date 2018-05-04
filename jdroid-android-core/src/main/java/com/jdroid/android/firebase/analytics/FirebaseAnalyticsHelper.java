@@ -19,11 +19,19 @@ import java.util.concurrent.Executors;
 
 public class FirebaseAnalyticsHelper {
 	
-	private static final Logger LOGGER = LoggerUtils.getLogger(FirebaseAnalyticsHelper.class);
+	static final Logger LOGGER = LoggerUtils.getLogger(FirebaseAnalyticsHelper.class);
 	
 	private Executor executor = Executors.newSingleThreadExecutor(new LowPriorityThreadFactory("firebase-analytics"));
 	
+	private static final int EVENT_NAME_MAX_CHARS_LONG = 40;
+	
 	public void sendEvent(@NonNull String eventName, @Nullable FirebaseAnalyticsParams params) {
+		
+		if (eventName.length() > EVENT_NAME_MAX_CHARS_LONG) {
+			LOGGER.warn("Event name [" + eventName + "] must be " + EVENT_NAME_MAX_CHARS_LONG + " chars long as maximum.");
+			eventName = eventName.substring(0, EVENT_NAME_MAX_CHARS_LONG - 1);
+		}
+		
 		if (isFirebaseAnalyticsEnabled()) {
 			getFirebaseAnalytics().logEvent(eventName, params != null ? params.getBundle() : null);
 			LOGGER.debug("Event [" + eventName + "] sent. " + params);
