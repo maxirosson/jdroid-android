@@ -34,7 +34,12 @@ public class LibrariesFragment extends AbstractRecyclerFragment {
 		}
 		if (ReflectionUtils.getSafeClass("com.jdroid.android.glide.GlideHelper") != null) {
 			Library library = new Library("glide", "Glide",
-					"Bump Technologies", "https://github.com/bumptech/glide");
+					"Bump Technologies", "https://bumptech.github.io/glide/");
+			libraries.add(library);
+		}
+		if (ReflectionUtils.getSafeClass("com.jdroid.java.http.okhttp.OkHttpServiceFactory") != null) {
+			Library library = new Library("okHttp", "OkHttp",
+					"Square", "http://square.github.io/okhttp/");
 			libraries.add(library);
 		}
 		libraries.addAll(getCustomLibraries());
