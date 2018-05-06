@@ -3,6 +3,7 @@ package com.jdroid.android.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
@@ -58,10 +59,12 @@ public abstract class FragmentContainerActivity extends AbstractFragmentActivity
 		return null;
 	}
 	
+	@Nullable
 	public Fragment getFragment() {
 		return getSupportFragmentManager().findFragmentById(getFragmentContainerId());
 	}
 
+	@Nullable
 	public FragmentIf getFragmentIf() {
 		Fragment fragment = getFragment();
 		if (fragment != null && fragment instanceof FragmentIf) {
@@ -84,13 +87,17 @@ public abstract class FragmentContainerActivity extends AbstractFragmentActivity
 	
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
-		getFragment().onPrepareOptionsMenu(menu);
+		Fragment fragment = getFragment();
+		if (fragment != null) {
+			fragment.onPrepareOptionsMenu(menu);
+		}
 		return super.onPrepareOptionsMenu(menu);
 	}
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		return super.onOptionsItemSelected(item) || getFragment().onOptionsItemSelected(item);
+		Fragment fragment = getFragment();
+		return super.onOptionsItemSelected(item) || (fragment != null && fragment.onOptionsItemSelected(item));
 	}
 
 	@Override
