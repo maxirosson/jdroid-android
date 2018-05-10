@@ -8,6 +8,8 @@ public class FirebaseRemoteConfigTracker extends AbstractCoreAnalyticsTracker {
 
 	@Override
 	public void onFirstActivityCreate(Activity activity) {
-		FirebaseRemoteConfigLoader.get().init();
+		if (!MockRemoteConfigLoader.isMocksEnabled()) {
+			FirebaseRemoteConfigLoader.get().init();
+		}
 	}
 }
