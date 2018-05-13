@@ -11,23 +11,26 @@ import com.jdroid.android.location.LocationHelper;
 import com.jdroid.android.utils.AppUtils;
 import com.jdroid.java.exception.UnexpectedException;
 
+import java.util.List;
+
 public class InterstitialAdHelper implements AdHelper {
 
-	private static final String TEST_AD_UNIT_ID = "ca-app-pub-3940256099942544/6300978111";
+	private static final String TEST_AD_UNIT_ID = "ca-app-pub-3940256099942544/1033173712";
 
 	private InterstitialAd interstitial;
 	private Boolean displayInterstitial = false;
 	private String interstitialAdUnitId;
+	private List<AdListener> adListeners;
 
 	public InterstitialAdHelper() {
-		interstitialAdUnitId = AdMobAppModule.get().getAdMobAppContext().getDefaultAdUnitId();
+		interstitialAdUnitId = AdMobAppModule.getAdMobAppContext().getDefaultAdUnitId();
 	}
 
 	private AdRequest.Builder createBuilder() {
 		final AdRequest.Builder builder = new AdRequest.Builder();
 		if (!AppUtils.isReleaseBuildType()) {
 			builder.addTestDevice(AdRequest.DEVICE_ID_EMULATOR);
-			for (String deviceId : AdMobAppModule.get().getAdMobAppContext().getTestDevicesIds()) {
+			for (String deviceId : AdMobAppModule.getAdMobAppContext().getTestDevicesIds()) {
 				builder.addTestDevice(deviceId);
 			}
 		}
@@ -37,14 +40,14 @@ public class InterstitialAdHelper implements AdHelper {
 
 	@Override
 	public void loadAd(Activity activity, ViewGroup adViewContainer) {
-		if (AdMobAppModule.get().getAdMobAppContext().areAdsEnabled()) {
+		if (AdMobAppModule.getAdMobAppContext().areAdsEnabled()) {
 			interstitial = new InterstitialAd(activity);
 
 			if (interstitialAdUnitId == null) {
 				throw new UnexpectedException("Missing interstitial ad unit ID");
 			}
 
-			if (!AppUtils.isReleaseBuildType() && AdMobAppModule.get().getAdMobAppContext().isTestAdUnitIdEnabled()) {
+			if (!AppUtils.isReleaseBuildType() && AdMobAppModule.getAdMobAppContext().isTestAdUnitIdEnabled()) {
 				interstitial.setAdUnitId(TEST_AD_UNIT_ID);
 			} else {
 				interstitial.setAdUnitId(interstitialAdUnitId);
@@ -52,30 +55,45 @@ public class InterstitialAdHelper implements AdHelper {
 
 			AdRequest.Builder builder = createBuilder();
 			interstitial.loadAd(builder.build());
-			interstitial.setAdListener(new AdListener() {
-
+			
+			AdListenerWrapper adListenerWrapper = new AdListenerWrapper();
+			adListenerWrapper.addAdListener(new AdListener() {
+				
 				@Override
 				public void onAdLoaded() {
-					super.onAdLoaded();
 					if (displayInterstitial) {
 						displayInterstitial(false);
 					}
 				}
 			});
+			if (adListeners != null) {
+				for (AdListener adListener : adListeners) {
+					adListenerWrapper.addAdListener(adListener);
+				}
+			}
+			interstitial.setAdListener(adListenerWrapper);
 		}
 	}
 
-	public void displayInterstitial(Boolean retryIfNotLoaded) {
+	public Boolean displayInterstitial(Boolean retryIfNotLoaded) {
 		displayInterstitial = retryIfNotLoaded;
 		if ((interstitial != null) && interstitial.isLoaded()) {
 			interstitial.show();
 			displayInterstitial = false;
+			return true;
 		}
+		return false;
 	}
 
 	@Override
 	public AdHelper setAdUnitId(String adUnitId) {
 		this.interstitialAdUnitId = adUnitId;
+		return this;
+	}
+	
+	@Override
+	public AdHelper setAdListeners(List<AdListener> adListeners) {
+		this.adListeners = adListeners;
 		return this;
 	}
 }

@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.jdroid.android.firebase.admob.helpers.AdViewHelper;
 import com.jdroid.android.firebase.admob.helpers.BaseAdViewHelper;
@@ -24,7 +23,7 @@ public class AdMobFragmentDelegate extends FragmentDelegate {
 			baseAdViewHelper = createBaseAdViewHelper();
 			if (baseAdViewHelper != null) {
 				initBaseAdViewHelper(baseAdViewHelper);
-				baseAdViewHelper.loadAd(getFragment().getActivity(), (ViewGroup)(view.findViewById(getAdViewContainerId())));
+				baseAdViewHelper.loadAd(getFragment().getActivity(), view.findViewById(getAdViewContainerId()));
 			}
 		}
 	}

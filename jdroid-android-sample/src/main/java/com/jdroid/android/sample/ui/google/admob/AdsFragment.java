@@ -9,6 +9,7 @@ import com.jdroid.android.fragment.AbstractFragment;
 import com.jdroid.android.firebase.admob.AdMobActivityDelegate;
 import com.jdroid.android.firebase.admob.AdMobAppModule;
 import com.jdroid.android.sample.R;
+import com.jdroid.android.utils.ToastUtils;
 
 public class AdsFragment extends AbstractFragment {
 	
@@ -49,7 +50,10 @@ public class AdsFragment extends AbstractFragment {
 			
 			@Override
 			public void onClick(View v) {
-				((AdMobActivityDelegate)getActivityIf().getActivityDelegate(AdMobAppModule.get())).getInterstitialAdHelper().displayInterstitial(false);
+				Boolean adDisplayed = ((AdMobActivityDelegate)getActivityIf().getActivityDelegate(AdMobAppModule.get())).getInterstitialAdHelper().displayInterstitial(false);
+				if (!adDisplayed) {
+					ToastUtils.showToast(R.string.interstitialNotLoaded);
+				}
 			}
 		});
 

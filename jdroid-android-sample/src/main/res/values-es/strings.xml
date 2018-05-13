@@ -4,12 +4,13 @@
 	<string name="home">Home</string>
 	<string name="add">Add</string>
 
-	<!-- Google AdMob -->
-	<string name="adMob">Google AdMob</string>
+	<!-- Firebase AdMob -->
+	<string name="adMob">Firebase AdMob</string>
 	<string name="fragmentBanner">Fragment Banner</string>
 	<string name="adReycler">Ad Recycler</string>
 	<string name="activityBanner">Activity Banner</string>
 	<string name="displayInterstitial">Display Interstitial</string>
+	<string name="interstitialNotLoaded">Interstitial not loaded</string>
 	<string name="houseAds">House Ads</string>
 	<string name="houseAd">House ad</string>
 
