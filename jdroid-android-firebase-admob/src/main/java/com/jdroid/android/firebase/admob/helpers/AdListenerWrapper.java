@@ -13,6 +13,7 @@ public class AdListenerWrapper extends AdListener {
 	private Logger LOGGER = LoggerUtils.getLogger(AdListenerWrapper.class);
 	
 	private List<AdListener> wrappedAdListeners = Lists.newArrayList();
+	private List<AdListener> transientAdListeners = Lists.newArrayList();
 	
 	@Override
 	public void onAdLoaded() {
@@ -59,6 +60,7 @@ public class AdListenerWrapper extends AdListener {
 		LOGGER.info("Ad closed");
 		for (AdListener adListener : wrappedAdListeners) {
 			adListener.onAdClosed();
+			transientAdListeners.remove(adListener);
 		}
 	}
 	
@@ -72,5 +74,10 @@ public class AdListenerWrapper extends AdListener {
 	
 	public void addAdListener(AdListener adListener) {
 		this.wrappedAdListeners.add(adListener);
+	}
+	
+	public void addTransientAdListener(AdListener adListener) {
+		this.wrappedAdListeners.add(adListener);
+		this.transientAdListeners.add(adListener);
 	}
 }

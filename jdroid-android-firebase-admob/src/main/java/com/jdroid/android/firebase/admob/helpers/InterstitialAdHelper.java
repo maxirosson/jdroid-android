@@ -75,7 +75,18 @@ public class InterstitialAdHelper implements AdHelper {
 		}
 	}
 
+	public Boolean displayInterstitial() {
+		return displayInterstitial(false);
+	}
+	
 	public Boolean displayInterstitial(Boolean retryIfNotLoaded) {
+		return displayInterstitial(retryIfNotLoaded, null);
+	}
+	
+	public Boolean displayInterstitial(Boolean retryIfNotLoaded, AdListener adListener) {
+		if (adListener != null) {
+			((AdListenerWrapper)interstitial.getAdListener()).addAdListener(adListener);
+		}
 		displayInterstitial = retryIfNotLoaded;
 		if ((interstitial != null) && interstitial.isLoaded()) {
 			interstitial.show();
