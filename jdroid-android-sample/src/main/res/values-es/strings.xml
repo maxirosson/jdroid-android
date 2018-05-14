@@ -10,9 +10,7 @@
 	<string name="adReycler">Ad Recycler</string>
 	<string name="activityBanner">Activity Banner</string>
 	<string name="displayInterstitial">Display Interstitial</string>
-	<string name="interstitialNotLoaded">Interstitial not loaded</string>
-	<string name="interstitialClosed">Interstitial closed</string>
-	<string name="adsNotEnabled">Ads not enabled</string>
+	<string name="interstitialAction">Interstitial action</string>
 	<string name="houseAds">House Ads</string>
 	<string name="houseAd">House ad</string>
 

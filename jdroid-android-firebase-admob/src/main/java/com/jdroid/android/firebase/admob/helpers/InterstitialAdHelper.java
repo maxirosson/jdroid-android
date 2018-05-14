@@ -7,6 +7,7 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import com.jdroid.android.firebase.admob.AdMobAppModule;
+import com.jdroid.android.firebase.admob.AdsStats;
 import com.jdroid.android.location.LocationHelper;
 import com.jdroid.android.utils.AppUtils;
 import com.jdroid.java.exception.UnexpectedException;
@@ -40,7 +41,7 @@ public class InterstitialAdHelper implements AdHelper {
 
 	@Override
 	public void loadAd(Activity activity, ViewGroup adViewContainer) {
-		if (AdMobAppModule.getAdMobAppContext().areAdsEnabled()) {
+		if (AdMobAppModule.getAdMobAppContext().isInterstitialEnabled()) {
 			interstitial = new InterstitialAd(activity);
 
 			if (interstitialAdUnitId == null) {
@@ -65,6 +66,11 @@ public class InterstitialAdHelper implements AdHelper {
 						displayInterstitial(false);
 					}
 				}
+				
+				@Override
+				public void onAdOpened() {
+					AdsStats.onInterstitialOpened();
+				}
 			});
 			if (adListeners != null) {
 				for (AdListener adListener : adListeners) {
@@ -84,11 +90,11 @@ public class InterstitialAdHelper implements AdHelper {
 	}
 	
 	public Boolean displayInterstitial(Boolean retryIfNotLoaded, AdListener adListener) {
-		if (adListener != null) {
-			((AdListenerWrapper)interstitial.getAdListener()).addAdListener(adListener);
-		}
 		displayInterstitial = retryIfNotLoaded;
 		if ((interstitial != null) && interstitial.isLoaded()) {
+			if (adListener != null) {
+				((AdListenerWrapper)interstitial.getAdListener()).addAdListener(adListener);
+			}
 			interstitial.show();
 			displayInterstitial = false;
 			return true;

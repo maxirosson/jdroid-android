@@ -9,6 +9,7 @@ import com.jdroid.java.date.DateUtils;
 import com.jdroid.java.utils.StringUtils;
 
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 public class AdMobAppContext extends AbstractAppContext {
 
@@ -23,9 +24,13 @@ public class AdMobAppContext extends AbstractAppContext {
 	 */
 	public Boolean areAdsEnabled() {
 		Boolean prefEnabled = SharedPreferencesHelper.get().loadPreferenceAsBoolean(AdMobRemoteConfigParameter.ADS_ENABLED.getKey(), areAdsEnabledByDefault());
-		Boolean enoughDaysSinceFirstAppLoad = DateUtils.millisecondsToDays(UsageStats.getFirstAppLoadTimestamp()) >= getMinDaysSinceFirstAppLoad();
+		Boolean enoughDaysSinceFirstAppLoad = TimeUnit.MILLISECONDS.toDays(DateUtils.nowMillis() - UsageStats.getFirstAppLoadTimestamp()) >= getMinDaysSinceFirstAppLoad();
 		Boolean enoughAppLoads = UsageStats.getAppLoads() >= getMinAppLoadsToDisplayAds();
 		return prefEnabled && enoughDaysSinceFirstAppLoad && enoughAppLoads;
+	}
+	
+	public Boolean isInterstitialEnabled() {
+		return areAdsEnabled() && TimeUnit.MILLISECONDS.toSeconds(DateUtils.nowMillis() - AdsStats.getLastInterstitialOpenedTimestamp()) > getMinSecondsBetweenInterstitials();
 	}
 
 	protected Long getMinAppLoadsToDisplayAds() {
@@ -34,6 +39,10 @@ public class AdMobAppContext extends AbstractAppContext {
 
 	protected Long getMinDaysSinceFirstAppLoad() {
 		return AbstractApplication.get().getRemoteConfigLoader().getLong(AdMobRemoteConfigParameter.MIN_DAYS_TO_DISPLAY_ADS);
+	}
+	
+	protected Long getMinSecondsBetweenInterstitials() {
+		return AbstractApplication.get().getRemoteConfigLoader().getLong(AdMobRemoteConfigParameter.MIN_SECONDS_BETWEEN_INTERSTITIALS);
 	}
 
 	public Boolean isTestAdUnitIdEnabled() {
