@@ -4,10 +4,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import com.jdroid.android.activity.ActivityIf;
 import com.jdroid.android.activity.ActivityLauncher;
-import com.jdroid.android.fragment.AbstractFragment;
 import com.jdroid.android.firebase.admob.AdMobActivityDelegate;
 import com.jdroid.android.firebase.admob.AdMobAppModule;
+import com.jdroid.android.firebase.admob.helpers.InterstitialAdHelper;
+import com.jdroid.android.fragment.AbstractFragment;
 import com.jdroid.android.sample.R;
 import com.jdroid.android.utils.ToastUtils;
 
@@ -50,9 +52,12 @@ public class AdsFragment extends AbstractFragment {
 			
 			@Override
 			public void onClick(View v) {
-				Boolean adDisplayed = ((AdMobActivityDelegate)getActivityIf().getActivityDelegate(AdMobAppModule.get())).getInterstitialAdHelper().displayInterstitial(false);
-				if (!adDisplayed) {
-					ToastUtils.showToast(R.string.interstitialNotLoaded);
+				InterstitialAdHelper interstitialAdHelper = ((AdMobActivityDelegate)getActivityIf().getActivityDelegate(AdMobAppModule.get())).getInterstitialAdHelper();
+				if (interstitialAdHelper != null) {
+					Boolean adDisplayed = interstitialAdHelper.displayInterstitial(false);
+					if (!adDisplayed) {
+						ToastUtils.showToast(R.string.interstitialNotLoaded);
+					}
 				}
 			}
 		});
