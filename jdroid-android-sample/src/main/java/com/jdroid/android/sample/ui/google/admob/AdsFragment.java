@@ -1,6 +1,7 @@
 package com.jdroid.android.sample.ui.google.admob;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.View.OnClickListener;
 
@@ -8,7 +9,9 @@ import com.jdroid.android.activity.ActivityLauncher;
 import com.jdroid.android.firebase.admob.interstitial.InterstitialAction;
 import com.jdroid.android.fragment.AbstractFragment;
 import com.jdroid.android.sample.R;
+import com.jdroid.android.sample.firebase.remoteconfig.AndroidRemoteConfigParameter;
 import com.jdroid.android.utils.ToastUtils;
+import com.jdroid.java.remoteconfig.RemoteConfigParameter;
 
 public class AdsFragment extends AbstractFragment {
 	
@@ -53,6 +56,12 @@ public class AdsFragment extends AbstractFragment {
 					@Override
 					protected void onAction() {
 						ToastUtils.showToast(R.string.interstitialAction);
+					}
+					
+					@NonNull
+					@Override
+					protected RemoteConfigParameter getEnabledRemoteConfigParameter() {
+						return AndroidRemoteConfigParameter.INTERSTITIAL_ENABLED;
 					}
 				}.start(getActivityIf());
 			}
