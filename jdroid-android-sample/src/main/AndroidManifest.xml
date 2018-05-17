@@ -16,7 +16,7 @@
 	<uses-feature android:name="android.hardware.location.NETWORK" android:required="false" />
 	<uses-feature android:name="android.hardware.location.GPS" android:required="false" />
 
-	<application android:icon="@mipmap/ic_launcher" android:roundIcon="@mipmap/ic_launcher" android:logo="@mipmap/ic_launcher" android:label="@string/jdroid_appName"
+	<application android:icon="@mipmap/ic_launcher" android:logo="@mipmap/ic_launcher" android:label="@string/jdroid_appName"
 		android:allowBackup="false" android:name="com.jdroid.android.sample.application.AndroidApplication" android:hardwareAccelerated="true"
 		android:theme="@style/App.Theme">
 
