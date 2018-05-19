@@ -45,11 +45,13 @@ public abstract class WorkerService extends IntentService {
 				logger.info("Service finished. Execution time: " + DateUtils.formatDuration(executionTime));
 				
 				if (trace != null) {
-					trace.incrementCounter("success");
+					trace.putAttribute("result", "success");
+					trace.incrementMetric("successes", 1);
 				}
 			} catch (Exception e) {
 				if (trace != null) {
-					trace.incrementCounter("failure");
+					trace.putAttribute("result", "failure");
+					trace.incrementMetric("failures", 1);
 				}
 				AbstractApplication.get().getExceptionHandler().logHandledException(e);
 			} finally {

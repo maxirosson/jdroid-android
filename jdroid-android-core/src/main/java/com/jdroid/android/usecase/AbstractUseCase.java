@@ -86,7 +86,8 @@ public abstract class AbstractUseCase implements Runnable, Serializable {
 			LOGGER.debug("Finished " + getClass().getSimpleName() + ". Execution time: " + DateUtils.formatDuration(executionTime));
 			
 			if (trace != null) {
-				trace.incrementCounter("success");
+				trace.putAttribute("result", "success");
+				trace.incrementMetric("successes", 1);
 			}
 			
 			markAsSuccessful();
@@ -110,7 +111,8 @@ public abstract class AbstractUseCase implements Runnable, Serializable {
 
 		} catch (RuntimeException e) {
 			if (trace != null) {
-				trace.incrementCounter("failure");
+				trace.putAttribute("result", "failure");
+				trace.incrementMetric("failures", 1);
 			}
 			final AbstractException abstractException = wrapException(e);
 			markAsFailed(abstractException);
