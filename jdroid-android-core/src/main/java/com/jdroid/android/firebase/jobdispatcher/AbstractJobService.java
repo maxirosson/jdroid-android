@@ -37,12 +37,30 @@ public abstract class AbstractJobService extends JobService {
 					needsReschedule = onRunJob(jobParameters);
 					long executionTime = DateUtils.nowMillis() - startTime;
 					LoggerUtils.getLogger(tag).info("Firebase Job finished successfully. NeedsReschedule: " + needsReschedule + " - Execution time: " + DateUtils.formatDuration(executionTime));
+					
+					if (trace != null) {
+						if (!needsReschedule) {
+							trace.putAttribute("result", "success");
+							trace.incrementMetric("successes", 1);
+						}
+					}
+					
 				} catch (Exception e) {
 					needsReschedule = needsReschedule(e);
 					LoggerUtils.getLogger(tag).error("Firebase Job finished with error. NeedsReschedule: " + needsReschedule);
 					AbstractApplication.get().getExceptionHandler().logHandledException(e);
+					
+					if (trace != null) {
+						if (!needsReschedule) {
+							trace.putAttribute("result", "failure");
+							trace.incrementMetric("failures", 1);
+						}
+					}
 				} finally {
 					if (trace != null) {
+						if (needsReschedule) {
+							trace.incrementMetric("reschedules", 1);
+						}
 						trace.stop();
 					}
 					jobFinished(jobParameters, needsReschedule);
