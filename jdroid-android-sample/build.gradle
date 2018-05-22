@@ -104,6 +104,7 @@ android {
 		jdroid.setBuildConfigBoolean(defaultConfig, "LEAK_CANARY_ENABLED", false)
 		jdroid.setBuildConfigBoolean(defaultConfig, "FIREBASE_ANALYTICS_ENABLED", true)
 
+		jdroid.setBuildConfigBoolean(defaultConfig, "FIREBASE_PERFORMANCE_MONITORING_ENABLED", true)
 		jdroid.setBuildConfigBoolean(defaultConfig, "FIREBASE_CRASHLYTICS_ENABLED", true)
 
 		jdroid.setBuildConfigBoolean(defaultConfig, "GOOGLE_ANALYTICS_ENABLED", true)
@@ -121,7 +122,6 @@ android {
 
 		jdroid.setBuildConfigString(defaultConfig, "GOOGLE_PLAY_PUBLIC_KEY")
 
-		jdroid.setBuildConfigString(defaultConfig, "FIREBASE_URL")
 		jdroid.setBuildConfigString(defaultConfig, "FIREBASE_AUTH_TOKEN")
 
 		jdroid.setBuildConfigString(defaultConfig, "TWITTER_OAUTH_CONSUMER_KEY")
