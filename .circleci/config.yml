@@ -69,8 +69,8 @@ jobs:
           destination: jdroid-android-about/tests
 
       - store_artifacts:
-          path: ./jdroid-android-facebook/build/reports/tests/testDebugUnitTest
-          destination: jdroid-android-facebook/tests
+          path: ./jdroid-android-facebook-login/build/reports/tests/testDebugUnitTest
+          destination: jdroid-android-facebook-login/tests
 
       - store_artifacts:
           path: ./jdroid-android-firebase-admob/build/reports/tests/testDebugUnitTest
@@ -176,8 +176,8 @@ jobs:
           destination: jdroid-android-about/lint
 
       - store_artifacts:
-          path: ./jdroid-android-facebook/build/reports/lint-results-debug.html
-          destination: jdroid-android-facebook/lint
+          path: ./jdroid-android-facebook-login/build/reports/lint-results-debug.html
+          destination: jdroid-android-facebook-login/lint
 
       - store_artifacts:
           path: ./jdroid-android-firebase-admob/build/reports/lint-results-debug.html

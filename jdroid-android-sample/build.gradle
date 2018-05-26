@@ -34,7 +34,7 @@ dependencies {
 	implementation 'com.android.support:multidex:1.0.3'
 	implementation project(':jdroid-android-core')
 	implementation project(':jdroid-android-about')
-	implementation project(':jdroid-android-facebook')
+	implementation project(':jdroid-android-facebook-login')
 	implementation project(':jdroid-android-firebase-instanceid')
 	implementation project(':jdroid-android-firebase-admob')
 	implementation project(':jdroid-android-firebase-crashlytics')
