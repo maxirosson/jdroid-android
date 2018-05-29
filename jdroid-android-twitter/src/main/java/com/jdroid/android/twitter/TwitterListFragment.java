@@ -37,6 +37,12 @@ public abstract class TwitterListFragment extends AbstractFragment implements Sw
 	}
 	
 	@Override
+	public void onResume() {
+		super.onResume();
+		twitterHelper.onResume();
+	}
+	
+	@Override
 	public void onRefresh() {
 		twitterHelper.loadTweets();
 	}
