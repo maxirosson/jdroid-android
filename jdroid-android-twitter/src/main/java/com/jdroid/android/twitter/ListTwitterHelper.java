@@ -1,6 +1,7 @@
 package com.jdroid.android.twitter;
 
 import android.content.Context;
+import android.support.annotation.MainThread;
 
 import com.jdroid.android.fragment.AbstractFragment;
 import com.twitter.sdk.android.core.models.Tweet;
@@ -18,7 +19,8 @@ public abstract class ListTwitterHelper extends TwitterHelper {
 			fragment.showLoading();
 		}
 	}
-
+	
+	@MainThread
 	@Override
 	protected void onSuccess(List<Tweet> tweets) {
 		AbstractFragment fragment = getAbstractFragment();
@@ -34,7 +36,8 @@ public abstract class ListTwitterHelper extends TwitterHelper {
 	protected BaseTweetView createTweetView(Context context, Tweet tweet) {
 		return new CompactTweetView(context, tweet);
 	}
-
+	
+	@MainThread
 	@Override
 	protected void onFailure() {
 		AbstractFragment fragment = getAbstractFragment();

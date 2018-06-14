@@ -17,6 +17,9 @@
 
 	<application>
 
+		<!-- Remove this comment to enable Firebase Performance logs-->
+		<!--<meta-data android:name="firebase_performance_logcat_enabled" android:value="true" />-->
+
 		<meta-data android:name="com.jdroid.android.application.AppLifecycleCallback" android:value="ApplicationLifecycleCallback" />
 		<meta-data android:name="com.jdroid.android.google.analytics.GoogleAnalyticsAppLifecycleCallback" android:value="ApplicationLifecycleCallback" />
 		<meta-data android:name="com.jdroid.android.firebase.analytics.FirebaseAnalyticsAppLifecycleCallback" android:value="ApplicationLifecycleCallback" />

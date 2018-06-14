@@ -34,6 +34,9 @@ public abstract class TwitterHelper {
 	
 	private TwitterQuery twitterQuery;
 	
+	private Boolean pendingSuccessNotification = false;
+	private Boolean pendingFailureNotification = false;
+	
 	protected SearchTimeline createSearchTimeline() {
 		if (twitterQuery != null) {
 			searchTimelineBuilder = new SearchTimeline.Builder();
@@ -59,7 +62,7 @@ public abstract class TwitterHelper {
 								tweets.add(each);
 							}
 						}
-						TwitterHelper.this.onSuccess(tweets);
+						notifySuccess();
 					} catch (Exception e) {
 						AbstractApplication.get().getExceptionHandler().logHandledException(e);
 					}
@@ -106,12 +109,30 @@ public abstract class TwitterHelper {
 					} else {
 						AbstractApplication.get().getExceptionHandler().logHandledException(e);
 					}
-					TwitterHelper.this.onFailure();
+					notifyFailure();
 				}
 			});
 		} catch (Exception e) {
-			TwitterHelper.this.onFailure();
+			notifyFailure();
 			AbstractApplication.get().getExceptionHandler().logHandledException(e);
+		}
+	}
+	
+	private void notifySuccess() {
+		if (getAbstractFragment() != null && getAbstractFragment().isResumed()) {
+			pendingSuccessNotification = false;
+			TwitterHelper.this.onSuccess(tweets);
+		} else {
+			pendingSuccessNotification = true;
+		}
+	}
+	
+	private void notifyFailure() {
+		if (getAbstractFragment() != null && getAbstractFragment().isResumed()) {
+			pendingFailureNotification = false;
+			TwitterHelper.this.onFailure();
+		} else {
+			pendingFailureNotification = true;
 		}
 	}
 
@@ -152,5 +173,16 @@ public abstract class TwitterHelper {
 	
 	public void setTwitterQuery(TwitterQuery twitterQuery) {
 		this.twitterQuery = twitterQuery;
+	}
+	
+	public void onResume() {
+		
+		if (pendingSuccessNotification) {
+			notifySuccess();
+		}
+		
+		if (pendingFailureNotification) {
+			notifyFailure();
+		}
 	}
 }

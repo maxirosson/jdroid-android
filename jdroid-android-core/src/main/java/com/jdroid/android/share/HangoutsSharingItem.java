@@ -16,6 +16,6 @@ public class HangoutsSharingItem extends AppSharingItem {
 	
 	@Override
 	public Integer getMinimumVersionCode() {
-		return 23142355;
+		return 23370799;
 	}
 }

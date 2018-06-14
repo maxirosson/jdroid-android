@@ -9,6 +9,7 @@ import com.jdroid.android.fragment.AbstractFragment;
 import com.jdroid.android.loading.FragmentLoading;
 import com.jdroid.android.loading.SwipeRefreshLoading;
 
+// TODO Add no results (or error) support
 public abstract class TwitterListFragment extends AbstractFragment implements SwipeRefreshLayout.OnRefreshListener {
 	
 	private TwitterHelper twitterHelper;
@@ -33,6 +34,12 @@ public abstract class TwitterListFragment extends AbstractFragment implements Sw
 		if (loadTweetsOnViewCreated()) {
 			twitterHelper.loadTweets();
 		}
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		twitterHelper.onResume();
 	}
 	
 	@Override
