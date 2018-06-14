@@ -28,13 +28,12 @@
 				android:paddingTop="@dimen/jdroid_navdrawerHeaderTopPadding"
 				android:id="@+id/chosen_account_content_view">
 
-				<com.jdroid.android.navdrawer.NavDrawerHeaderImageView
+				<ImageView
 					android:id="@+id/photo"
 					android:layout_width="@dimen/jdroid_navdrawerHeaderImageSize"
 					android:layout_height="@dimen/jdroid_navdrawerHeaderImageSize"
 					app:srcCompat="@drawable/jdroid_person_default"
-					android:scaleType="centerCrop"
-					app:jdroid_circleImage="@bool/jdroid_navDrawerHeaderCircleImage" />
+					android:scaleType="centerCrop"/>
 
 				<ImageView
 					android:id="@+id/expand_account_box_indicator"
