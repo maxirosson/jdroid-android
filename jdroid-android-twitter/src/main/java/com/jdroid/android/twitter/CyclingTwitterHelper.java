@@ -3,6 +3,7 @@ package com.jdroid.android.twitter;
 import android.support.annotation.MainThread;
 import android.view.View;
 
+import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.concurrent.SafeRunnable;
 import com.jdroid.android.fragment.AbstractFragment;
 import com.twitter.sdk.android.core.models.Tweet;
@@ -43,10 +44,15 @@ public abstract class CyclingTwitterHelper extends TwitterHelper {
 			AbstractFragment abstractFragment = getAbstractFragment();
 			if (abstractFragment != null) {
 				getTweetContainer().removeAllViews();
-				getTweetContainer().addView(new CompactTweetView(abstractFragment.getContext(), tweet));
-				getTweetContainer().setVisibility(View.VISIBLE);
-				getTweetContainer().removeCallbacks(displayTweetRunnable);
-				getTweetContainer().postDelayed(displayTweetRunnable, TWEET_CYCLE_FREQUENCY);
+				try {
+					getTweetContainer().addView(new CompactTweetView(abstractFragment.getContext(), tweet));
+					getTweetContainer().setVisibility(View.VISIBLE);
+					getTweetContainer().removeCallbacks(displayTweetRunnable);
+					getTweetContainer().postDelayed(displayTweetRunnable, TWEET_CYCLE_FREQUENCY);
+				} catch (Exception e) {
+					AbstractApplication.get().getExceptionHandler().logWarningException(e);
+					getTweetContainer().removeCallbacks(displayTweetRunnable);
+				}
 			}
 			
 		}
