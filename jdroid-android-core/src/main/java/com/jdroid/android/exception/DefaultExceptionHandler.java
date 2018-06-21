@@ -169,7 +169,12 @@ public class DefaultExceptionHandler implements ExceptionHandler {
 	public void logWarningException(String errorMessage) {
 		logHandledException(new WarningException(errorMessage));
 	}
-
+	
+	@Override
+	public void logWarningException(Throwable throwable) {
+		logHandledException(throwable.getMessage(), throwable);
+	}
+	
 	@Override
 	public void logIgnoreStackTraceWarningException(String errorMessage) {
 		logHandledException(new WarningException(errorMessage, true));
