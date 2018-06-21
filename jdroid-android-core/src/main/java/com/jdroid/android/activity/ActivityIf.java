@@ -1,5 +1,6 @@
 package com.jdroid.android.activity;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
@@ -68,9 +69,7 @@ public interface ActivityIf extends ComponentIf {
 	@Nullable
 	public UriHandler createUriHandler();
 
-	public Boolean isAppInviteEnabled();
-
-	public void onAppInvite(String deepLink, String invitationId);
+	public void onAppInvite(Uri deepLink, String invitationId);
 
 	// //////////////////////// Others //////////////////////// //
 

@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresPermission;
@@ -22,21 +23,21 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.google.android.gms.appinvite.AppInvite;
-import com.google.android.gms.appinvite.AppInviteInvitationResult;
-import com.google.android.gms.appinvite.AppInviteReferral;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.Api;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.appindexing.Action;
 import com.google.firebase.appindexing.FirebaseUserActions;
+import com.google.firebase.appinvite.FirebaseAppInvite;
+import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
+import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.application.AppModule;
 import com.jdroid.android.context.UsageStats;
 import com.jdroid.android.google.GooglePlayServicesUtils;
-import com.jdroid.android.google.SafeResultCallback;
 import com.jdroid.android.loading.ActivityLoading;
 import com.jdroid.android.loading.DefaultBlockingLoading;
 import com.jdroid.android.location.LocationHelper;
@@ -168,37 +169,49 @@ public class ActivityHelper implements ActivityIf {
 			uriHandler = getActivityIf().createUriHandler();
 			uriHandled = AbstractApplication.get().getUriMapper().handleUri(activity, activity.getIntent(), uriHandler, true);
 			referrer = ReferrerUtils.getReferrerCategory(activity);
-			if (googleApiClient != null && getActivityIf().isAppInviteEnabled() && ((uriHandled && !UriUtils.isInternalReferrerCategory(referrer)) || isHomeActivity())) {
-				PendingResult<AppInviteInvitationResult> pendingResult = AppInvite.AppInviteApi.getInvitation(googleApiClient, getActivity(), false);
-				pendingResult.setResultCallback(new SafeResultCallback<AppInviteInvitationResult>() {
+			if ((uriHandled && !UriUtils.isInternalReferrerCategory(referrer)) || isHomeActivity()) {
+				
+				FirebaseDynamicLinks.getInstance().getDynamicLink(activity.getIntent()).addOnSuccessListener(getActivity(), new OnSuccessListener<PendingDynamicLinkData>() {
 
+					@MainThread
 					@Override
-					public void onSuccessResult(@NonNull AppInviteInvitationResult result) {
-						String deepLink = AppInviteReferral.getDeepLink(result.getInvitationIntent());
-						LOGGER.debug("AppInvite invitation deep link: " + deepLink);
-
-						String invitationId = AppInviteReferral.getInvitationId(result.getInvitationIntent());
-						LOGGER.debug("AppInvite invitation id: " + invitationId);
-
-						getActivityIf().onAppInvite(deepLink, invitationId);
-
-						if (!uriHandled && isHomeActivity()) {
-							if (uriHandler != null && deepLink.equals(uriHandler.getUrl(activity))) {
-								LOGGER.debug("Skipping reopening invitation deepLink");
-							} else {
-								Intent targetIntent = new Intent();
-								targetIntent.setData(Uri.parse(deepLink));
-								targetIntent.setPackage(AppUtils.getApplicationId());
-								ReferrerUtils.setReferrer(targetIntent, ActivityCompat.getReferrer(activity));
-								activity.finish();
-								activity.startActivity(targetIntent);
+					public void onSuccess(PendingDynamicLinkData pendingDynamicLinkData) {
+						try {
+							// Get deep link from result (may be null if no link is found)
+							Uri deepLink = pendingDynamicLinkData != null ? pendingDynamicLinkData.getLink() : null;
+							if (deepLink != null) {
+								LOGGER.debug("Pending dynamic link: " + deepLink);
+								
+								// Extract invite
+								FirebaseAppInvite invite = FirebaseAppInvite.getInvitation(pendingDynamicLinkData);
+								if (invite != null) {
+									String invitationId = invite.getInvitationId();
+									LOGGER.debug("AppInvite invitation id: " + invitationId);
+									getActivityIf().onAppInvite(deepLink, invitationId);
+								}
+								
+								if (!uriHandled && isHomeActivity()) {
+									if (uriHandler != null && deepLink.toString().equals(uriHandler.getUrl(activity))) {
+										LOGGER.debug("Skipping reopening invitation deepLink");
+									} else {
+										Intent targetIntent = new Intent();
+										targetIntent.setData(deepLink);
+										targetIntent.setPackage(AppUtils.getApplicationId());
+										ReferrerUtils.setReferrer(targetIntent, ActivityCompat.getReferrer(activity));
+										activity.finish();
+										activity.startActivity(targetIntent);
+									}
+								}
 							}
+						} catch (Exception e) {
+							AbstractApplication.get().getExceptionHandler().logHandledException(e);
 						}
+						
 					}
-
+				}).addOnFailureListener(getActivity(), new OnFailureListener() {
 					@Override
-					public void onFailedResult(@NonNull AppInviteInvitationResult result) {
-						LOGGER.debug("AppInvite invitation not found. Status code: " + result.getStatus().getStatusCode());
+					public void onFailure(@NonNull Exception e) {
+						AbstractApplication.get().getExceptionHandler().logHandledException(e);
 					}
 				});
 			}
@@ -221,11 +234,6 @@ public class ActivityHelper implements ActivityIf {
 		}
 	}
 
-	@Override
-	public Boolean isAppInviteEnabled() {
-		return true;
-	}
-
 	private Boolean isHomeActivity() {
 		return AbstractApplication.get().getHomeActivityClass().equals(getActivity().getClass());
 	}
@@ -233,9 +241,6 @@ public class ActivityHelper implements ActivityIf {
 	private void initGoogleApiClient() {
 		if (isGooglePlayServicesAvailable) {
 			Set<Api<? extends Api.ApiOptions.NotRequiredOptions>> googleApis = Sets.newHashSet();
-			if (getActivityIf().isAppInviteEnabled()) {
-				googleApis.add(AppInvite.API);
-			}
 			if (getActivityIf().isLocationServicesEnabled()) {
 				googleApis.add(LocationServices.API);
 			}
@@ -266,7 +271,7 @@ public class ActivityHelper implements ActivityIf {
 	}
 
 	@Override
-	public void onAppInvite(String deepLink, String invitationId) {
+	public void onAppInvite(Uri deepLink, String invitationId) {
 		// Do Nothing
 	}
 
