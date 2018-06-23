@@ -18,7 +18,7 @@ import java.util.List;
 
 public class NotificationsDebugPrefsAppender extends PreferencesAppender {
 
-	private List<String> urlsToTest = Lists.newArrayList();
+	private List<String> urlsToTest;
 
 	public NotificationsDebugPrefsAppender() {
 		this.urlsToTest = AbstractApplication.get().getDebugContext().getUrlsToTest();
@@ -39,7 +39,7 @@ public class NotificationsDebugPrefsAppender extends PreferencesAppender {
 
 				@Override
 				public boolean onPreferenceClick(Preference preference) {
-					NotificationBuilder builder = new NotificationBuilder("notificationFromBundle", AbstractApplication.get().getNotificationChannelTypes().get(0).getChannelId());
+					NotificationBuilder builder = new NotificationBuilder("notificationFromBundle", AbstractApplication.get().getNotificationChannelTypes().get(0));
 					builder.setTicker("Sample Ticker");
 					builder.setContentTitle("Sample Content Title");
 					builder.setContentText(url);
