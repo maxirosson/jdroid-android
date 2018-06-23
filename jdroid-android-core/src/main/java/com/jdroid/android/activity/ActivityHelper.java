@@ -190,18 +190,9 @@ public class ActivityHelper implements ActivityIf {
 									getActivityIf().onAppInvite(deepLink, invitationId);
 								}
 								
-								if (!uriHandled && isHomeActivity()) {
-									if (uriHandler != null && deepLink.toString().equals(uriHandler.getUrl(activity))) {
-										LOGGER.debug("Skipping reopening invitation deepLink");
-									} else {
-										Intent targetIntent = new Intent();
-										targetIntent.setData(deepLink);
-										targetIntent.setPackage(AppUtils.getApplicationId());
-										ReferrerUtils.setReferrer(targetIntent, ActivityCompat.getReferrer(activity));
-										activity.finish();
-										activity.startActivity(targetIntent);
-									}
-								}
+								redirect(deepLink.toString());
+							} else {
+								redirect(activity.getIntent().getStringExtra("url"));
 							}
 						} catch (Exception e) {
 							AbstractApplication.get().getExceptionHandler().logHandledException(e);
@@ -231,6 +222,21 @@ public class ActivityHelper implements ActivityIf {
 
 		if (savedInstanceState == null) {
 			trackNotificationOpened(activity.getIntent());
+		}
+	}
+	
+	private void redirect(String uri) {
+		if (uri != null && !uriHandled && isHomeActivity()) {
+			if (uriHandler != null && uri.equals(uriHandler.getUrl(activity))) {
+				LOGGER.debug("Skipping reopening uri: " + uri);
+			} else {
+				Intent targetIntent = new Intent();
+				targetIntent.setData(Uri.parse(uri));
+				targetIntent.setPackage(AppUtils.getApplicationId());
+				ReferrerUtils.setReferrer(targetIntent, ActivityCompat.getReferrer(activity));
+				activity.finish();
+				activity.startActivity(targetIntent);
+			}
 		}
 	}
 
