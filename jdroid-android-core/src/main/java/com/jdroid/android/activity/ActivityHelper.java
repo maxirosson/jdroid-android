@@ -3,6 +3,7 @@ package com.jdroid.android.activity;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
@@ -234,8 +235,12 @@ public class ActivityHelper implements ActivityIf {
 				targetIntent.setData(Uri.parse(uri));
 				targetIntent.setPackage(AppUtils.getApplicationId());
 				ReferrerUtils.setReferrer(targetIntent, ActivityCompat.getReferrer(activity));
-				activity.finish();
-				activity.startActivity(targetIntent);
+				try {
+					activity.startActivity(targetIntent);
+					activity.finish();
+				} catch (ActivityNotFoundException e) {
+					AbstractApplication.get().getExceptionHandler().logHandledException(e);
+				}
 			}
 		}
 	}
