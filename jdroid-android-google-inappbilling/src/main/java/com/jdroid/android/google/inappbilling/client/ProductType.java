@@ -4,7 +4,7 @@ package com.jdroid.android.google.inappbilling.client;
 public interface ProductType {
 	
 	/*
-	 * @return The product ID for the product
+	 * @return A unique, human readable ID for your product. Product IDs are also called SKUs
 	 */
 	public String getProductId();
 	

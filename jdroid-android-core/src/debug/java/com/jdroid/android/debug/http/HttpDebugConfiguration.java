@@ -1,5 +1,7 @@
 package com.jdroid.android.debug.http;
 
+import android.support.annotation.WorkerThread;
+
 import com.jdroid.android.debug.mocks.AndroidJsonMockHttpService;
 import com.jdroid.android.utils.SharedPreferencesHelper;
 import com.jdroid.java.http.mock.AbstractMockHttpService;
@@ -28,6 +30,7 @@ public class HttpDebugConfiguration {
 		return cachedHttpMockEnabled;
 	}
 	
+	@WorkerThread
 	public static void setHttpMockEnabled(boolean enabled) {
 		// Workaround for a random NullPointerException in unit tests using Robolectric 3.0 when calling setHttpMockEnabled(...)
 		// in a method annotated with @Before. This NPE exception occurs randomly, at this point, when trying to access SharedPreferences.

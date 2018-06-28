@@ -53,6 +53,7 @@ public class InAppBillingBroadcastReceiver extends BroadcastReceiver {
 	public IntentFilter createIntentFilter() {
 		return new IntentFilter(InAppBillingBroadcastReceiver.ACTION);
 	}
+	
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		LOGGER.debug("Received PURCHASES_UPDATED broadcast");
