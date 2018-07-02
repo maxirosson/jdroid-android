@@ -188,6 +188,6 @@ public class AndroidApplication extends AbstractApplication {
 	
 	@Override
 	public List<NotificationChannelType> getNotificationChannelTypes() {
-		return Lists.<NotificationChannelType>newArrayList(AndroidNotificationChannelType.values());
+		return Lists.newArrayList(AndroidNotificationChannelType.values());
 	}
 }

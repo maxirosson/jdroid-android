@@ -14,6 +14,8 @@ public interface ExceptionHandler extends UncaughtExceptionHandler, ExceptionLog
 
 	public void logWarningException(String errorMessage, Throwable throwable);
 	
+	public void logWarningException(Throwable throwable);
+	
 	public void logWarningException(String errorMessage);
 
 	public void logIgnoreStackTraceWarningException(String errorMessage);

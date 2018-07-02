@@ -4,7 +4,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import com.jdroid.java.collections.Lists;
 import com.jdroid.java.utils.LoggerUtils;
 
 import org.slf4j.Logger;
@@ -17,15 +16,12 @@ public class InstallReferrerReceiver extends BroadcastReceiver {
 	
 	private static final String INSTALL_ACTION = "com.android.vending.INSTALL_REFERRER";
 	
-	private List<BroadcastReceiver> receivers = Lists.newArrayList();
+	private List<BroadcastReceiver> receivers;
 	
 	public InstallReferrerReceiver(List<BroadcastReceiver> receivers) {
 		this.receivers = receivers;
 	}
 	
-	/**
-	 * @see android.content.BroadcastReceiver#onReceive(android.content.Context, android.content.Intent)
-	 */
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		try {

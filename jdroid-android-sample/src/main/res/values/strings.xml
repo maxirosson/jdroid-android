@@ -276,6 +276,9 @@
 	<!-- Widgets -->
 	<string name="sampleWidget">Sample Widget</string>
 
+	<!-- WebView -->
+	<string name="webView">WebView</string>
+
 	<!-- About -->
 	<string name="shareMessage">Jdroid - Tools for Android and Java apps. Download the sample app on your Android.
 		%1$s</string>

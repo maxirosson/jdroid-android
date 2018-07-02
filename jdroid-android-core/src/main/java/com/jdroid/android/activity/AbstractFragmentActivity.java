@@ -3,6 +3,7 @@ package com.jdroid.android.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -329,12 +330,7 @@ public abstract class AbstractFragmentActivity extends AppCompatActivity impleme
 	}
 
 	@Override
-	public Boolean isAppInviteEnabled() {
-		return activityHelper.isAppInviteEnabled();
-	}
-
-	@Override
-	public void onAppInvite(String deepLink, String invitationId) {
+	public void onAppInvite(Uri deepLink, String invitationId) {
 		activityHelper.onAppInvite(deepLink, invitationId);
 	}
 

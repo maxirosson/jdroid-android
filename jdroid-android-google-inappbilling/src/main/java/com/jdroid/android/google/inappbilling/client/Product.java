@@ -37,19 +37,22 @@ public class Product {
 		return currencyCode + " " + String.format(Locale.getDefault(),"%.2f", price);
 	}
 	
+	/**
+	 * @return The amount the user will pay for the in-app product.
+	 */
 	public Double getPrice() {
 		return price;
 	}
 	
 	/**
-	 * @return the title of the product
+	 * @return A short description of the in-app product
 	 */
 	public String getTitle() {
 		return title;
 	}
 	
 	/**
-	 * @return the description of the product
+	 * @return  A longer description of the in-app product
 	 */
 	public String getDescription() {
 		return description;

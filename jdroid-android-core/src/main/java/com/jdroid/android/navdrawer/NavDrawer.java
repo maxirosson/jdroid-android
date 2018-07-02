@@ -15,6 +15,8 @@ import com.jdroid.android.activity.AbstractFragmentActivity;
 import com.jdroid.android.utils.SharedPreferencesHelper;
 import com.jdroid.java.concurrent.ExecutorUtils;
 
+import java.util.concurrent.TimeUnit;
+
 public abstract class NavDrawer {
 
 	public static final String NAV_DRAWER_MANUALLY_USED = "navDrawerManuallyUsed";
@@ -121,7 +123,7 @@ public abstract class NavDrawer {
 						}
 					});
 				}
-			}, 1L);
+			}, 1L, TimeUnit.SECONDS);
 		}
 	}
 

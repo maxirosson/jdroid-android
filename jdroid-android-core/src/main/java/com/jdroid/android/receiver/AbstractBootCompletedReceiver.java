@@ -3,6 +3,8 @@ package com.jdroid.android.receiver;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.MainThread;
+
 import com.jdroid.android.application.AbstractApplication;
 
 public abstract class AbstractBootCompletedReceiver extends BroadcastReceiver {
@@ -18,6 +20,7 @@ public abstract class AbstractBootCompletedReceiver extends BroadcastReceiver {
 		}
 	}
 	
+	@MainThread
 	protected abstract void onBootCompleted();
 	
 }

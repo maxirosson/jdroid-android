@@ -29,7 +29,7 @@ import com.jdroid.java.utils.RandomUtils;
 import com.jdroid.java.utils.StringUtils;
 
 public class NotificationBuilder {
-
+	
 	public static final String NOTIFICATION_NAME = "notificationName";
 	public static String NOTIFICATION_SCHEME = "notification";
 
@@ -42,9 +42,12 @@ public class NotificationBuilder {
 	}
 	
 	public NotificationBuilder(@NonNull String notificationName, @NonNull String channelId) {
+		if (NotificationUtils.findNotificationChannelType(channelId) == null) {
+			AbstractApplication.get().getExceptionHandler().logHandledException("Channel id not found: " + channelId);
+		}
+		
 		this.notificationName = notificationName;
-		Context context = AbstractApplication.get();
-		builder = new NotificationCompat.Builder(context, channelId);
+		builder = new NotificationCompat.Builder(AbstractApplication.get(), channelId);
 		builder.setAutoCancel(true);
 		setColor(R.color.jdroid_colorPrimary);
 	}
