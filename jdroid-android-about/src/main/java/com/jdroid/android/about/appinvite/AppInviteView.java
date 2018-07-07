@@ -2,6 +2,7 @@ package com.jdroid.android.about.appinvite;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.jdroid.android.about.R;
 import com.jdroid.android.firebase.invites.AppInviteSender;
+import com.jdroid.android.utils.LocalizationUtils;
 
 public class AppInviteView extends RelativeLayout {
 
@@ -39,19 +41,19 @@ public class AppInviteView extends RelativeLayout {
 	private void init(Context context) {
 		LayoutInflater.from(context).inflate(R.layout.jdroid_app_invite_view, this, true);
 
-		titleTextView = (TextView)findViewById(R.id.title);
-		subtitleTextView = (TextView)findViewById(R.id.subTitle);
+		titleTextView = findViewById(R.id.title);
+		subtitleTextView = findViewById(R.id.subTitle);
 	}
 
-	public void configure(final Activity activity) {
+	public void configure(@Nullable Activity activity) {
 
 		if (title == null) {
-			title = activity.getString(R.string.jdroid_appInviteButtonTitle);
+			title = LocalizationUtils.getString(R.string.jdroid_appInviteButtonTitle);
 		}
 		titleTextView.setText(title);
 
 		if (subtitle == null) {
-			subtitle = activity.getString(R.string.jdroid_appInviteButtonSubtitle, activity.getString(R.string.jdroid_appName));
+			subtitle = LocalizationUtils.getString(R.string.jdroid_appInviteButtonSubtitle, activity.getString(R.string.jdroid_appName));
 		}
 		subtitleTextView.setText(subtitle);
 

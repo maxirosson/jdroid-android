@@ -1,9 +1,7 @@
 package com.jdroid.android.exception;
 
-import android.app.Activity;
 import android.support.v4.app.FragmentActivity;
 
-import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.java.exception.AbstractException;
 
 public class DialogErrorDisplayer extends AbstractErrorDisplayer {
@@ -22,8 +20,7 @@ public class DialogErrorDisplayer extends AbstractErrorDisplayer {
 	}
 
 	@Override
-	public void onDisplayError(String title, String description, Throwable throwable) {
-		Activity activity = AbstractApplication.get().getCurrentActivity();
+	public void onDisplayError(FragmentActivity activity, String title, String description, Throwable throwable) {
 		if (activity != null) {
 			ErrorDialogFragment.show((FragmentActivity)activity, title, description, getErrorDialogStrategy(throwable));
 		}

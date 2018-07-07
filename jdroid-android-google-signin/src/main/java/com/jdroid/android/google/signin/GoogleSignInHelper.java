@@ -10,6 +10,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
+import com.jdroid.android.activity.ActivityLauncher;
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.fragment.AbstractFragment;
 import com.jdroid.java.utils.LoggerUtils;
@@ -95,7 +96,7 @@ public class GoogleSignInHelper {
 
 	public void signIn() {
 		Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
-		abstractFragment.getActivity().startActivityForResult(signInIntent, RC_SIGN_IN);
+		ActivityLauncher.startActivityForResult(abstractFragment.getActivity(), signInIntent, RC_SIGN_IN);
 	}
 
 	public void signOut() {

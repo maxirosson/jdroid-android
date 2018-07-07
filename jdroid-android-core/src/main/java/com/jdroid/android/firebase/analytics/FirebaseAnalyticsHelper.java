@@ -1,7 +1,6 @@
 package com.jdroid.android.firebase.analytics;
 
 import android.annotation.SuppressLint;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -38,11 +37,6 @@ public class FirebaseAnalyticsHelper {
 		} else {
 			LOGGER.debug("SKIPPED: Event [" + eventName + "] sent. " + params);
 		}
-	}
-	
-	@Deprecated
-	public void sendEvent(@NonNull String eventName, @Nullable Bundle params) {
-		sendEvent(eventName, new FirebaseAnalyticsParams(params));
 	}
 	
 	public void sendEvent(@NonNull String eventName) {

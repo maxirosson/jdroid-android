@@ -97,7 +97,8 @@ public class ActivityHelper implements ActivityIf {
 		return activity;
 	}
 
-	protected AbstractFragmentActivity getActivity() {
+	@Override
+	public AbstractFragmentActivity getActivity() {
 		return activity;
 	}
 	
@@ -138,7 +139,6 @@ public class ActivityHelper implements ActivityIf {
 
 	public void onCreate(final Bundle savedInstanceState) {
 		LOGGER.debug("Executing onCreate on " + activity);
-		AbstractApplication.get().setCurrentActivity(activity);
 
 		AbstractApplication.get().getCoreAnalyticsSender().onActivityCreate(activity, savedInstanceState);
 
@@ -323,7 +323,6 @@ public class ActivityHelper implements ActivityIf {
 	@SuppressLint("HandlerLeak")
 	public void onStart() {
 		LOGGER.debug("Executing onStart on " + activity);
-		AbstractApplication.get().setCurrentActivity(activity);
 
 		AbstractApplication.get().getCoreAnalyticsSender().onActivityStart(activity, referrer, getOnActivityStartData());
 
@@ -364,7 +363,6 @@ public class ActivityHelper implements ActivityIf {
 	public void onResume() {
 
 		LOGGER.debug("Executing onResume on " + activity);
-		AbstractApplication.get().setCurrentActivity(activity);
 		
 		AbstractApplication.get().getCoreAnalyticsSender().onActivityResume(activity);
 		
@@ -455,7 +453,6 @@ public class ActivityHelper implements ActivityIf {
 	}
 
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		AbstractApplication.get().setCurrentActivity(activity);
 	}
 
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -666,7 +663,7 @@ public class ActivityHelper implements ActivityIf {
 
 	@Override
 	public void executeOnUIThread(Runnable runnable) {
-		if (activity.equals(AbstractApplication.get().getCurrentActivity())) {
+		if (!activity.isDestroyed()) {
 			activity.runOnUiThread(runnable);
 		}
 	}

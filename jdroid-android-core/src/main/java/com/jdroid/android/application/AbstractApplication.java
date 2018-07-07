@@ -82,9 +82,6 @@ public abstract class AbstractApplication extends Application {
 	private CoreAnalyticsSender<? extends CoreAnalyticsTracker> coreAnalyticsSender;
 	private UriMapper uriMapper;
 	
-	/** Current activity in the top stack. */
-	private Activity currentActivity;
-	
 	private AppLaunchStatus appLaunchStatus;
 	
 	private Map<Class<? extends Identifiable>, Repository<? extends Identifiable>> repositories;
@@ -478,14 +475,6 @@ public abstract class AbstractApplication extends Application {
 
 	public FragmentHelper createFragmentHelper(Fragment fragment) {
 		return new FragmentHelper(fragment);
-	}
-	
-	public void setCurrentActivity(Activity activity) {
-		currentActivity = activity;
-	}
-	
-	public Activity getCurrentActivity() {
-		return currentActivity;
 	}
 	
 	/**

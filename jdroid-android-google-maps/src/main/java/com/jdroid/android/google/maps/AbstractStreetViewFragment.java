@@ -100,7 +100,7 @@ public class AbstractStreetViewFragment extends AbstractFragment implements OnSt
 			
 			@Override
 			public void onClick(View v) {
-				GooglePlayServicesUtils.launchGooglePlayServicesUpdate(getActivity());
+				GooglePlayServicesUtils.launchGooglePlayServicesUpdate();
 			}
 		});
 	}

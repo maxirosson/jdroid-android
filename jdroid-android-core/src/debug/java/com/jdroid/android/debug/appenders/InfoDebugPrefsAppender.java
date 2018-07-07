@@ -26,7 +26,7 @@ public class InfoDebugPrefsAppender extends PreferencesAppender {
 
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
-				ActivityLauncher.launchActivity(DebugInfoActivity.class);
+				ActivityLauncher.startActivity(activity, DebugInfoActivity.class);
 				return true;
 			}
 		});

@@ -1,5 +1,6 @@
 package com.jdroid.android.debug;
 
+import android.app.Activity;
 import android.support.v4.util.Pair;
 
 import com.jdroid.android.sqlite.SQLiteHelper;
@@ -12,7 +13,7 @@ import java.util.Map;
 
 public class DebugContext {
 
-	public void launchActivityDebugSettingsActivity() {
+	public void launchActivityDebugSettingsActivity(Activity activity) {
 		// Do nothing
 	}
 

@@ -57,7 +57,7 @@ public abstract class SpreadTheLoveFragment extends AbstractFragment {
 
 				@Override
 				public void onClick(View v) {
-					FacebookHelper.openPage(getActivity(), getFacebookPageId());
+					FacebookHelper.openPage(getFacebookPageId());
 				}
 			});
 			followUsVisible = true;
@@ -71,7 +71,7 @@ public abstract class SpreadTheLoveFragment extends AbstractFragment {
 
 				@Override
 				public void onClick(View v) {
-					GooglePlusHelperFragment.openCommunity(getGooglePlusCommunityId());
+					GooglePlusHelperFragment.openCommunity(getActivity(), getGooglePlusCommunityId());
 				}
 			});
 			followUsVisible = true;
@@ -99,7 +99,7 @@ public abstract class SpreadTheLoveFragment extends AbstractFragment {
 
 				@Override
 				public void onClick(View v) {
-					InstagramHelper.openProfile(getActivity(),getInstagramAccount());
+					InstagramHelper.openProfile(getInstagramAccount());
 				}
 			});
 			followUsVisible = true;
@@ -113,7 +113,7 @@ public abstract class SpreadTheLoveFragment extends AbstractFragment {
 
 				@Override
 				public void onClick(View v) {
-					LinkedInHelper.openCompanyPage(getActivity(), getLinkedInCompanyPageId());
+					LinkedInHelper.openCompanyPage(getLinkedInCompanyPageId());
 				}
 			});
 			followUsVisible = true;

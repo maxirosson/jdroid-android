@@ -3,9 +3,11 @@ package com.jdroid.android.firebase.invites;
 import android.accounts.Account;
 import android.app.Activity;
 import android.net.Uri;
+import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 
 import com.google.android.gms.appinvite.AppInviteInvitation;
+import com.jdroid.android.activity.ActivityLauncher;
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.google.analytics.GoogleAnalyticsAppContext;
 import com.jdroid.android.utils.LocalizationUtils;
@@ -95,11 +97,7 @@ public class AppInviteSender {
 
 			onInitIntentBuilder(intentBuilder);
 
-			if (activity == null) {
-				activity = AbstractApplication.get().getCurrentActivity();
-			}
-
-			activity.startActivityForResult(intentBuilder.build(), requestCode);
+			ActivityLauncher.startActivityForResult(activity, intentBuilder.build(), requestCode);
 		} catch (Exception e) {
 			AbstractApplication.get().getExceptionHandler().logHandledException(e);
 		}
@@ -177,7 +175,7 @@ public class AppInviteSender {
 		this.googleAnalyticsTrackingId = googleAnalyticsTrackingId;
 	}
 
-	public void setActivity(Activity activity) {
+	public void setActivity(@Nullable Activity activity) {
 		this.activity = activity;
 	}
 

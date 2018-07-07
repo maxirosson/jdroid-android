@@ -9,6 +9,7 @@ import android.preference.PreferenceGroup;
 import android.support.v4.app.ShareCompat;
 
 import com.jdroid.android.R;
+import com.jdroid.android.activity.ActivityLauncher;
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.debug.PreferencesAppender;
 import com.jdroid.android.permission.PermissionHelper;
@@ -63,7 +64,7 @@ public class UriMapperPrefsAppender extends PreferencesAppender {
 					FileUtils.copyStream(openInputStream, file);
 					openInputStream.close();
 
-					ExternalAppsUtils.openOnBrowser(activity, file);
+					ExternalAppsUtils.openOnBrowser(file);
 				} catch (IOException e) {
 					throw new UnexpectedException(e);
 				}
@@ -96,7 +97,7 @@ public class UriMapperPrefsAppender extends PreferencesAppender {
 						.setHtmlText(builder.toString())
 						.getIntent();
 				if (shareIntent.resolveActivity(activity.getPackageManager()) != null) {
-					activity.startActivity(shareIntent);
+					ActivityLauncher.startActivity(activity, shareIntent);
 				}
 
 				return true;

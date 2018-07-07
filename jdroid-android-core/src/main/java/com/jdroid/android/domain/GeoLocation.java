@@ -1,6 +1,7 @@
 package com.jdroid.android.domain;
 
 import android.location.Location;
+import android.support.annotation.NonNull;
 
 import java.io.Serializable;
 
@@ -11,7 +12,7 @@ public class GeoLocation implements Serializable {
 	private Double longitude;
 	private Double latitude;
 	
-	public GeoLocation(Double latitude, Double longitude) {
+	public GeoLocation(@NonNull Double latitude, @NonNull Double longitude) {
 		this.latitude = latitude;
 		this.longitude = longitude;
 	}
@@ -64,5 +65,24 @@ public class GeoLocation implements Serializable {
 		float[] results = new float[1];
 		Location.distanceBetween(srcLat, srcLong, destLat, destLong, results);
 		return results[0] / 1000;
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		GeoLocation that = (GeoLocation)o;
+		return (longitude != null ? longitude.equals(that.longitude) : that.longitude == null) && (latitude != null ? latitude.equals(that.latitude) : that.latitude == null);
+	}
+	
+	@Override
+	public int hashCode() {
+		int result = longitude != null ? longitude.hashCode() : 0;
+		result = 31 * result + (latitude != null ? latitude.hashCode() : 0);
+		return result;
 	}
 }

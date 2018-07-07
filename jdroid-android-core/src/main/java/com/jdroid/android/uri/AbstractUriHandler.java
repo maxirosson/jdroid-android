@@ -1,9 +1,9 @@
 package com.jdroid.android.uri;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 
 import com.google.firebase.appindexing.Action;
 import com.jdroid.android.application.AbstractApplication;
@@ -26,13 +26,13 @@ public abstract class AbstractUriHandler<T extends Activity> implements UriHandl
 	}
 
 	@Override
-	public Intent createMainIntent(Context context, Uri uri) {
+	public Intent createMainIntent(@NonNull Activity activity, Uri uri) {
 		return null;
 	}
 
 	@Override
-	public Intent createDefaultIntent(Context context, Uri uri) {
-		return new Intent(context, AbstractApplication.get().getHomeActivityClass());
+	public Intent createDefaultIntent(@NonNull Activity activity, Uri uri) {
+		return new Intent(activity, AbstractApplication.get().getHomeActivityClass());
 	}
 
 	@Override

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import com.jdroid.android.activity.ActivityLauncher;
 import com.jdroid.android.fragment.AbstractFragment;
 import com.jdroid.android.sample.R;
 
@@ -23,28 +24,28 @@ public class LoadingFragment extends AbstractFragment {
 			
 			@Override
 			public void onClick(View v) {
-				getActivity().startActivity(new Intent(getActivity(), BlockingLoadingActivity.class));
+				ActivityLauncher.startActivity(getActivity(), new Intent(getActivity(), BlockingLoadingActivity.class));
 			}
 		});
 		findView(R.id.customBlockingLoading).setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				getActivity().startActivity(new Intent(getActivity(), CustomActivityLoadingActivity.class));
+				ActivityLauncher.startActivity(getActivity(), new Intent(getActivity(), CustomActivityLoadingActivity.class));
 			}
 		});
 		findView(R.id.nonBlockingLoading).setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				getActivity().startActivity(new Intent(getActivity(), NonBlockingLoadingActivity.class));
+				ActivityLauncher.startActivity(getActivity(), new Intent(getActivity(), NonBlockingLoadingActivity.class));
 			}
 		});
 		findView(R.id.swipeRefresLoading).setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				getActivity().startActivity(new Intent(getActivity(), SwipeRefreshLoadingActivity.class));
+				ActivityLauncher.startActivity(getActivity(), new Intent(getActivity(), SwipeRefreshLoadingActivity.class));
 			}
 		});
 	}

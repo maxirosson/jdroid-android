@@ -3,6 +3,7 @@ package com.jdroid.android.google;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.support.annotation.WorkerThread;
 
 import com.google.android.gms.ads.identifier.AdvertisingIdClient;
 import com.google.android.gms.common.ConnectionResult;
@@ -19,8 +20,6 @@ public class GooglePlayServicesUtils {
 	private static final String GOOGLE_PLAY_SERVICES = "com.google.android.gms";
 
 	private static final int GOOGLE_PLAY_SERVICES_RESOLUTION_REQUEST = 1;
-
-	private static String advertisingId;
 
 	public static GooglePlayServicesResponse verifyGooglePlayServices(Activity activity) {
 		GoogleApiAvailability googleApiAvailability = GoogleApiAvailability.getInstance();
@@ -57,19 +56,18 @@ public class GooglePlayServicesUtils {
 		return resultCode == ConnectionResult.SUCCESS;
 	}
 
-	public static void launchGooglePlayServicesUpdate(Activity c) {
-		GooglePlayUtils.launchAppDetails(c, GOOGLE_PLAY_SERVICES);
+	public static void launchGooglePlayServicesUpdate() {
+		GooglePlayUtils.launchAppDetails(GOOGLE_PLAY_SERVICES);
 	}
 
-	public static String getAdvertisingId(Context context) {
-		if (advertisingId == null) {
-			try {
-				advertisingId = AdvertisingIdClient.getAdvertisingIdInfo(context).getId();
-			} catch (Exception e) {
-				LOGGER.warn("Error getting the advertising id " + e.getMessage());
-			}
+	@WorkerThread
+	public static String getAdvertisingId() {
+		try {
+			return AdvertisingIdClient.getAdvertisingIdInfo(AbstractApplication.get()).getId();
+		} catch (Exception e) {
+			LOGGER.warn("Error getting the advertising id " + e.getMessage());
+			return null;
 		}
-		return advertisingId;
 	}
 
 	public static class GooglePlayServicesResponse {

@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.google.android.gms.plus.PlusOneButton;
 import com.google.android.gms.plus.PlusOneButton.OnPlusOneClickListener;
+import com.jdroid.android.activity.ActivityLauncher;
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.google.GooglePlayServicesUtils;
 import com.jdroid.android.social.SocialNetwork;
@@ -42,9 +43,9 @@ public class GooglePlusOneButtonHelper {
 				public void onPlusOneClick(Intent intent) {
 					if (intent != null) {
 						if (intent.getAction().toLowerCase(Locale.US).contains("undo")) {
-							context.startActivityForResult(intent, PLUS_ONE_UNDO_REQUEST_CODE);
+							ActivityLauncher.startActivityForResult(context.getActivity(), intent, PLUS_ONE_UNDO_REQUEST_CODE);
 						} else {
-							context.startActivityForResult(intent, PLUS_ONE_REQUEST_CODE);
+							ActivityLauncher.startActivityForResult(context.getActivity(), intent, PLUS_ONE_REQUEST_CODE);
 						}
 					}
 				}

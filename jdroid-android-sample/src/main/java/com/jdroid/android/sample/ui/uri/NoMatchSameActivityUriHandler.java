@@ -1,8 +1,9 @@
 package com.jdroid.android.sample.ui.uri;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 
 import com.jdroid.android.uri.AbstractUriHandler;
 
@@ -13,7 +14,7 @@ public class NoMatchSameActivityUriHandler extends AbstractUriHandler<NoMatchSam
 	}
 
 	@Override
-	public Intent createDefaultIntent(Context context, Uri uri) {
-		return new Intent(context, NoMatchSameActivity.class);
+	public Intent createDefaultIntent(@NonNull Activity activity, Uri uri) {
+		return new Intent(activity, NoMatchSameActivity.class);
 	}
 }

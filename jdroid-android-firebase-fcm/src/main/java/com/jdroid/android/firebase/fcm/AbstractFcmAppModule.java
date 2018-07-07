@@ -77,11 +77,6 @@ public abstract class AbstractFcmAppModule extends AbstractAppModule {
 		fcmRegistrationCommand.start(updateLastActiveTimestamp);
 	}
 	
-	@Deprecated
-	public void startFcmRegistration(Boolean updateLastActiveTimestamp, Boolean isInstantExecutionRequired) {
-		startFcmRegistration(updateLastActiveTimestamp);
-	}
-
 	protected FcmRegistrationCommand createFcmRegistrationCommand() {
 		return new FcmRegistrationCommand();
 	}

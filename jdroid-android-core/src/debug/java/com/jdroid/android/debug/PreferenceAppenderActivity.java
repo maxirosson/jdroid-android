@@ -1,12 +1,14 @@
 package com.jdroid.android.debug;
 
+import android.app.Activity;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 
 import com.jdroid.android.R;
 import com.jdroid.android.activity.AbstractFragmentActivity;
+import com.jdroid.android.activity.ActivityLauncher;
 import com.jdroid.android.fragment.AbstractPreferenceFragment;
 import com.jdroid.java.exception.UnexpectedException;
 
@@ -14,10 +16,10 @@ public class PreferenceAppenderActivity extends AbstractFragmentActivity {
 
 	public static final String APPENDER_EXTRA = "prefAppender";
 
-	public static void startActivity(Context context, PreferencesAppender preferencesAppender) {
-		Intent intent = new Intent(context, PreferenceAppenderActivity.class);
+	public static void startActivity(@Nullable Activity activity, PreferencesAppender preferencesAppender) {
+		Intent intent = new Intent(activity, PreferenceAppenderActivity.class);
 		intent.putExtra(APPENDER_EXTRA, preferencesAppender);
-		context.startActivity(intent);
+		ActivityLauncher.startActivity(activity, intent);
 	}
 
 	@Override

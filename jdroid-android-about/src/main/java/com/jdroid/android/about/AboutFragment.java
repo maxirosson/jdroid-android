@@ -3,6 +3,7 @@ package com.jdroid.android.about;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.MainThread;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -12,7 +13,6 @@ import android.widget.TextView;
 import com.jdroid.android.about.feedback.RateAppStats;
 import com.jdroid.android.activity.ActivityLauncher;
 import com.jdroid.android.application.AbstractApplication;
-import com.jdroid.android.intent.IntentUtils;
 import com.jdroid.android.recycler.AbstractRecyclerFragment;
 import com.jdroid.android.recycler.FooterRecyclerViewType;
 import com.jdroid.android.recycler.RecyclerViewAdapter;
@@ -39,7 +39,7 @@ public class AboutFragment extends AbstractRecyclerFragment {
 			aboutItems.add(new AboutItem(R.drawable.jdroid_ic_website_black_24dp, R.string.jdroid_website) {
 				@Override
 				public void onSelected(Activity activity) {
-					IntentUtils.startUrl(activity, website);
+					ExternalAppsUtils.openUrl(website);
 				}
 			});
 		}
@@ -50,7 +50,7 @@ public class AboutFragment extends AbstractRecyclerFragment {
 
 				@Override
 				public void onSelected(Activity activity) {
-					if (ExternalAppsUtils.openEmail(activity, contactUsEmailAddress)) {
+					if (ExternalAppsUtils.openEmail(contactUsEmailAddress)) {
 						AboutAppModule.get().getModuleAnalyticsSender().trackContactUs();
 					} else {
 						// TODO Improve this adding a toast or something
@@ -64,7 +64,7 @@ public class AboutFragment extends AbstractRecyclerFragment {
 
 				@Override
 				public void onSelected(Activity activity) {
-					ActivityLauncher.launchActivity(SpreadTheLoveActivity.class);
+					ActivityLauncher.startActivity(activity, SpreadTheLoveActivity.class);
 				}
 			});
 		}
@@ -72,7 +72,7 @@ public class AboutFragment extends AbstractRecyclerFragment {
 			
 			@Override
 			public void onSelected(Activity activity) {
-				ActivityLauncher.launchActivity(LibrariesActivity.class);
+				ActivityLauncher.startActivity(activity, LibrariesActivity.class);
 			}
 		});
 		if (AboutAppModule.get().getAboutContext().isBetaTestingEnabled()) {
@@ -80,7 +80,7 @@ public class AboutFragment extends AbstractRecyclerFragment {
 
 				@Override
 				public void onSelected(Activity activity) {
-					IntentUtils.startUrl(activity, AboutAppModule.get().getAboutContext().getBetaTestingUrl());
+					ExternalAppsUtils.openUrl(AboutAppModule.get().getAboutContext().getBetaTestingUrl());
 				}
 			});
 		}
@@ -150,12 +150,13 @@ public class AboutFragment extends AbstractRecyclerFragment {
 
 					@Override
 					public void onClick(View v) {
-						AbstractApplication.get().getDebugContext().launchActivityDebugSettingsActivity();
+						AbstractApplication.get().getDebugContext().launchActivityDebugSettingsActivity(getActivity());
 					}
 				});
 			}
 		}
 
+		@NonNull
 		@Override
 		public AbstractRecyclerFragment getAbstractRecyclerFragment() {
 			return AboutFragment.this;
@@ -180,6 +181,7 @@ public class AboutFragment extends AbstractRecyclerFragment {
 			return R.layout.jdroid_about_footer_view;
 		}
 
+		@NonNull
 		@Override
 		public AbstractRecyclerFragment getAbstractRecyclerFragment() {
 			return AboutFragment.this;
@@ -217,6 +219,7 @@ public class AboutFragment extends AbstractRecyclerFragment {
 			item.onSelected(getActivity());
 		}
 
+		@NonNull
 		@Override
 		public AbstractRecyclerFragment getAbstractRecyclerFragment() {
 			return AboutFragment.this;

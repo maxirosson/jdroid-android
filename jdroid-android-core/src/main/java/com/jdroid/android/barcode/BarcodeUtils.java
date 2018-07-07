@@ -3,9 +3,11 @@ package com.jdroid.android.barcode;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentActivity;
 
 import com.jdroid.android.R;
-import com.jdroid.android.application.AbstractApplication;
+import com.jdroid.android.activity.ActivityLauncher;
 import com.jdroid.android.google.GooglePlayUtils;
 import com.jdroid.java.utils.RandomUtils;
 
@@ -16,7 +18,7 @@ import com.jdroid.java.utils.RandomUtils;
  * </p>
  * 
  * <p>
- * It does require that the Barcode Scanner application is installed. The {@link #initiateScan()} method will prompt the
+ * It does require that the Barcode Scanner application is installed. The {@link #initiateScan(FragmentActivity)} method will prompt the
  * user to download the application, if needed.
  * </p>
  * 
@@ -30,17 +32,15 @@ public final class BarcodeUtils {
 	private static final String SCAN_RESULT = "SCAN_RESULT";
 	private static final String SCAN_RESULT_FORMAT = "SCAN_RESULT_FORMAT";
 	
-	public static void initiateScan() {
-		Activity activity = AbstractApplication.get().getCurrentActivity();
-		
+	public static void initiateScan(@Nullable FragmentActivity activity) {
 		Intent intentScan = new Intent(PACKAGE + ".SCAN");
 		intentScan.setPackage(PACKAGE);
 		intentScan.addCategory(Intent.CATEGORY_DEFAULT);
 		
 		try {
-			activity.startActivityForResult(intentScan, REQUEST_CODE);
+			ActivityLauncher.startActivityForResult(activity, intentScan, REQUEST_CODE);
 		} catch (ActivityNotFoundException e) {
-			GooglePlayUtils.showDownloadDialog(R.string.jdroid_barcodeScanner, PACKAGE);
+			GooglePlayUtils.showDownloadDialog(activity, R.string.jdroid_barcodeScanner, PACKAGE);
 		}
 	}
 	

@@ -35,7 +35,7 @@ public class LeftTabletFragment extends AbstractFragment {
 			openDetail.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					ActivityLauncher.launchActivity(RightTabletActivity.class);
+					ActivityLauncher.startActivity(getActivity(), RightTabletActivity.class);
 				}
 			});
 		}

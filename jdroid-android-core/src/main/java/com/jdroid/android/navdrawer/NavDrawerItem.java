@@ -1,6 +1,7 @@
 package com.jdroid.android.navdrawer;
 
 import android.app.Activity;
+import android.support.annotation.Nullable;
 
 import com.jdroid.android.activity.AbstractFragmentActivity;
 
@@ -8,7 +9,7 @@ public interface NavDrawerItem {
 
 	public Integer getItemId();
 
-	public void startActivity(AbstractFragmentActivity currentActivity);
+	public void startActivity(@Nullable AbstractFragmentActivity currentActivity);
 
 	public Boolean matchesActivity(Activity activity);
 

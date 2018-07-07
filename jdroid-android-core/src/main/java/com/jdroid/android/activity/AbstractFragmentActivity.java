@@ -347,4 +347,9 @@ public abstract class AbstractFragmentActivity extends AppCompatActivity impleme
 			activityHelper.catchRequestedOrientationIllegalStateException(e);
 		}
 	}
+	
+	@Override
+	public AbstractFragmentActivity getActivity() {
+		return this;
+	}
 }
