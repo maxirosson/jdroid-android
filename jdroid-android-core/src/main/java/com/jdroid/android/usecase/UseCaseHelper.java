@@ -66,9 +66,4 @@ public class UseCaseHelper {
 	public static void executeUseCase(AbstractUseCase useCase, Long delay, TimeUnit timeUnit) {
 		ExecutorUtils.schedule(useCase, delay, timeUnit);
 	}
-	
-	@Deprecated
-	public static void executeUseCase(AbstractUseCase useCase, Long delaySeconds) {
-		ExecutorUtils.schedule(useCase, delaySeconds);
-	}
 }
