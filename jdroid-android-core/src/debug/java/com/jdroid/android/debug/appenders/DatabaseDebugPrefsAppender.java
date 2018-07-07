@@ -9,6 +9,7 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceGroup;
 
 import com.jdroid.android.R;
+import com.jdroid.android.activity.ActivityLauncher;
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.debug.PreferencesAppender;
 import com.jdroid.android.sqlite.SQLiteHelper;
@@ -48,7 +49,7 @@ public class DatabaseDebugPrefsAppender extends PreferencesAppender {
 					Intent intent = new Intent(Intent.ACTION_SEND);
 					intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
 					intent.setType(MimeType.OCTET_STREAM);
-					activity.startActivity(intent);
+					ActivityLauncher.startActivity(activity, intent);
 				} catch (FileNotFoundException e) {
 					throw new UnexpectedException(e);
 				}

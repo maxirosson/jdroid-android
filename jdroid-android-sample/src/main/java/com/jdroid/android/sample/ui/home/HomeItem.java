@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 
 import com.jdroid.android.ActionItem;
+import com.jdroid.android.activity.ActivityLauncher;
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.sample.R;
 import com.jdroid.android.sample.ui.analytics.AnalyticsActivity;
@@ -104,7 +105,7 @@ public enum HomeItem implements ActionItem {
 	
 	@Override
 	public void startActivity(FragmentActivity fragmentActivity) {
-		fragmentActivity.startActivity(getIntent());
+		ActivityLauncher.startActivity(fragmentActivity, getIntent());
 	}
 
 	@Override

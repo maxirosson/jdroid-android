@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.jdroid.android.activity.ActivityLauncher;
 import com.jdroid.android.fragment.AbstractFragment;
 import com.jdroid.android.sample.R;
 
@@ -22,42 +23,42 @@ public class RecyclerViewFragment extends AbstractFragment {
 
 			@Override
 			public void onClick(View v) {
-				getActivity().startActivity(new Intent(getActivity(), SimpleRecyclerActivity.class));
+				ActivityLauncher.startActivity(getActivity(), new Intent(getActivity(), SimpleRecyclerActivity.class));
 			}
 		});
 		findView(R.id.complexRecycler).setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				getActivity().startActivity(new Intent(getActivity(), ComplexRecyclerActivity.class));
+				ActivityLauncher.startActivity(getActivity(), new Intent(getActivity(), ComplexRecyclerActivity.class));
 			}
 		});
 		findView(R.id.paginatedRecycler).setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				getActivity().startActivity(new Intent(getActivity(), PaginatedRecyclerActivity.class));
+				ActivityLauncher.startActivity(getActivity(), new Intent(getActivity(), PaginatedRecyclerActivity.class));
 			}
 		});
 		findView(R.id.paginatedGridRecycler).setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				getActivity().startActivity(new Intent(getActivity(), PaginatedGridRecyclerActivity.class));
+				ActivityLauncher.startActivity(getActivity(), new Intent(getActivity(), PaginatedGridRecyclerActivity.class));
 			}
 		});
 		findView(R.id.searchPaginatedRecycler).setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				getActivity().startActivity(new Intent(getActivity(), SearchPaginatedRecyclerActivity.class));
+				ActivityLauncher.startActivity(getActivity(), new Intent(getActivity(), SearchPaginatedRecyclerActivity.class));
 			}
 		});
 		findView(R.id.autofitGridLayoutRecycler).setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				getActivity().startActivity(new Intent(getActivity(), AutofitGridLayoutRecyclerActivity.class));
+				ActivityLauncher.startActivity(getActivity(), new Intent(getActivity(), AutofitGridLayoutRecyclerActivity.class));
 			}
 		});
 	}
