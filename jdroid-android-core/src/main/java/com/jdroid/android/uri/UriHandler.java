@@ -1,9 +1,9 @@
 package com.jdroid.android.uri;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 
 import com.google.firebase.appindexing.Action;
 
@@ -20,13 +20,13 @@ public interface UriHandler<T extends Activity> {
 	/**
 	 * Create the intent for the proper activity based on the uri.
 	 *
-	 * @param context the context.
+	 * @param activity the {@link Activity}.
 	 * @param uri the uri to handle.
 	 * @return the Intent.
 	 */
-	public Intent createMainIntent(Context context, Uri uri);
+	public Intent createMainIntent(@NonNull Activity activity, Uri uri);
 
-	public Intent createDefaultIntent(Context context, Uri uri);
+	public Intent createDefaultIntent(@NonNull Activity activity, Uri uri);
 
 	public void logUriNotMatch(Uri uri);
 

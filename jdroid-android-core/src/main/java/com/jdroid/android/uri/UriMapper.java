@@ -88,7 +88,7 @@ public class UriMapper {
 		}
 	}
 
-	private void handleDefaultIntent(Activity activity, UriHandler uriHandler, Uri uri, String referrerCategory, Boolean onActivityCreation) {
+	private void handleDefaultIntent(@NonNull Activity activity, UriHandler uriHandler, Uri uri, String referrerCategory, Boolean onActivityCreation) {
 		Intent intent = uriHandler.createDefaultIntent(activity, uri);
 		handleIntent(intent, activity, uri, referrerCategory, onActivityCreation);
 	}

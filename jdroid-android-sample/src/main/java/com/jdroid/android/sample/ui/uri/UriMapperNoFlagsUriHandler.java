@@ -1,8 +1,9 @@
 package com.jdroid.android.sample.ui.uri;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 
 import com.jdroid.android.sample.ui.home.HomeActivity;
 import com.jdroid.android.uri.AbstractUriHandler;
@@ -15,8 +16,8 @@ public class UriMapperNoFlagsUriHandler extends AbstractUriHandler<UriMapperNoFl
 	}
 
 	@Override
-	public Intent createDefaultIntent(Context context, Uri uri) {
-		return new Intent(context, HomeActivity.class);
+	public Intent createDefaultIntent(@NonNull Activity activity, Uri uri) {
+		return new Intent(activity, HomeActivity.class);
 	}
 
 	@Override
