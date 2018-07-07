@@ -5,6 +5,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.text.Html;
 
+import com.jdroid.android.activity.ActivityLauncher;
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.social.SocialAction;
 import com.jdroid.android.utils.ExternalAppsUtils;
@@ -12,40 +13,37 @@ import com.jdroid.java.http.MimeType;
 
 public class ShareUtils {
 	
-	public static void shareTextContent(String shareKey, int shareTitle, int shareSubject, int shareText) {
-		Activity activity = AbstractApplication.get().getCurrentActivity();
-		shareTextContent(shareKey, activity.getString(shareTitle), activity.getString(shareSubject),
+	public static void shareTextContent(Activity activity, String shareKey, int shareTitle, int shareSubject, int shareText) {
+		shareTextContent(activity, shareKey, activity.getString(shareTitle), activity.getString(shareSubject),
 				activity.getString(shareText));
 		
 		AbstractApplication.get().getCoreAnalyticsSender().trackSocialInteraction(null, SocialAction.SHARE, shareKey);
 	}
 	
-	public static void shareTextContent(String shareKey, String shareTitle, String shareSubject, String shareText) {
-		Activity activity = AbstractApplication.get().getCurrentActivity();
+	public static void shareTextContent(Activity activity, String shareKey, String shareTitle, String shareSubject, String shareText) {
 		Intent intent = createShareTextContentIntent(shareSubject, shareText);
 		activity.startActivity(Intent.createChooser(intent, shareTitle));
 		
 		AbstractApplication.get().getCoreAnalyticsSender().trackSocialInteraction(null, SocialAction.SHARE, shareKey);
 	}
 	
-	public static void shareHtmlContent(String shareKey, String shareTitle, String shareSubject, String shareText) {
-		Activity activity = AbstractApplication.get().getCurrentActivity();
+	public static void shareHtmlContent(Activity activity, String shareKey, String shareTitle, String shareSubject, String shareText) {
 		Intent intent = createShareHtmlContentIntent(shareSubject, shareText);
-		activity.startActivity(Intent.createChooser(intent, shareTitle));
+		ActivityLauncher.startActivity(activity, Intent.createChooser(intent, shareTitle));
 		
 		AbstractApplication.get().getCoreAnalyticsSender().trackSocialInteraction(null, SocialAction.SHARE, shareKey);
 	}
 	
-	public static void share(SharingMedium sharingMedium, String shareKey, String shareText) {
+	public static void share(Activity activity, SharingMedium sharingMedium, String shareKey, String shareText) {
 		String packageName = sharingMedium.getPackageName();
 		
 		Intent intent = createShareTextContentIntent(null, shareText);
 		intent.setPackage(packageName);
 		try {
-			AbstractApplication.get().getCurrentActivity().startActivity(intent);
+			ActivityLauncher.startActivity(activity, intent);
 			AbstractApplication.get().getCoreAnalyticsSender().trackSocialInteraction(sharingMedium.getName(), SocialAction.SHARE, shareKey);
 		} catch (ActivityNotFoundException e) {
-			Integer installedAppVersionCode = ExternalAppsUtils.getInstalledAppVersionCode(AbstractApplication.get(), packageName);
+			Integer installedAppVersionCode = ExternalAppsUtils.getInstalledAppVersionCode(packageName);
 			String message = "ACTION_SEND not supported by " + packageName;
 			if (installedAppVersionCode != null) {
 				message += " version " + installedAppVersionCode;

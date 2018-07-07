@@ -373,7 +373,7 @@ public class FragmentHelper implements FragmentIf {
 	@Override
 	public void executeOnUIThread(Runnable runnable) {
 		Activity activity = fragment.getActivity();
-		if ((activity != null) && activity.equals(AbstractApplication.get().getCurrentActivity())) {
+		if (activity != null && !activity.isDestroyed()) {
 			activity.runOnUiThread(new SafeExecuteWrapperRunnable(fragment, runnable));
 		}
 	}

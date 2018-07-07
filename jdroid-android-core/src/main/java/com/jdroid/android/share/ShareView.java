@@ -30,15 +30,15 @@ public class ShareView extends FrameLayout {
 		super(context);
 	}
 	
-	public void init(Context context, final SharingItem sharingItem) {
-		LayoutInflater.from(context).inflate(R.layout.jdroid_share_view, this, true);
+	public void init(Activity activity, final SharingItem sharingItem) {
+		LayoutInflater.from(activity).inflate(R.layout.jdroid_share_view, this, true);
 		((ImageView)findViewById(R.id.shareAppIcon)).setImageDrawable(sharingItem.getAppIcon());
 		
 		setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				sharingItem.share();
+				sharingItem.share(activity);
 			}
 		});
 	}
@@ -62,7 +62,7 @@ public class ShareView extends FrameLayout {
 		activity.findViewById(R.id.shareMore).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				ShareUtils.shareTextContent(sharingData.getShareKey(), AbstractApplication.get().getString(R.string.jdroid_share),
+				ShareUtils.shareTextContent(activity, sharingData.getShareKey(), AbstractApplication.get().getString(R.string.jdroid_share),
 						sharingData.getDefaultSharingDataItem().getSubject(), sharingData.getDefaultSharingDataItem().getText());
 			}
 		});

@@ -4,18 +4,20 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 
 import com.google.android.gms.plus.PlusShare;
 import com.jdroid.android.activity.AbstractFragmentActivity;
+import com.jdroid.android.activity.ActivityLauncher;
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.fragment.AbstractFragment;
 import com.jdroid.android.google.GooglePlayUtils;
 import com.jdroid.android.intent.IntentUtils;
-import com.jdroid.android.social.SocialNetwork;
 import com.jdroid.android.social.SocialAction;
+import com.jdroid.android.social.SocialNetwork;
 import com.jdroid.android.utils.ExternalAppsUtils;
 import com.jdroid.java.http.MimeType;
 
@@ -101,9 +103,9 @@ public class GooglePlusHelperFragment extends AbstractFragment {
 		Intent intent = builder.getIntent();
 		shareLink = link;
 		if (IntentUtils.isIntentAvailable(intent)) {
-			getActivity().startActivityForResult(intent, SHARE_REQUEST_CODE);
+			ActivityLauncher.startActivityForResult(getActivity(), intent, SHARE_REQUEST_CODE);
 		} else {
-			GooglePlayUtils.showDownloadDialog(R.string.jdroid_googlePlus, ExternalAppsUtils.GOOGLE_PLUS_PACKAGE_NAME);
+			GooglePlayUtils.showDownloadDialog(getActivity(), R.string.jdroid_googlePlus, ExternalAppsUtils.GOOGLE_PLUS_PACKAGE_NAME);
 		}
 	}
 	
@@ -116,14 +118,14 @@ public class GooglePlusHelperFragment extends AbstractFragment {
 		Intent intent = builder.getIntent();
 		shareLink = link;
 		if (IntentUtils.isIntentAvailable(intent)) {
-			getActivity().startActivityForResult(intent, SHARE_REQUEST_CODE);
+			ActivityLauncher.startActivityForResult(getActivity(), intent, SHARE_REQUEST_CODE);
 		} else {
-			GooglePlayUtils.showDownloadDialog(R.string.jdroid_googlePlus, ExternalAppsUtils.GOOGLE_PLUS_PACKAGE_NAME);
+			GooglePlayUtils.showDownloadDialog(getActivity(), R.string.jdroid_googlePlus, ExternalAppsUtils.GOOGLE_PLUS_PACKAGE_NAME);
 		}
 	}
 	
-	public static void openCommunity(String community) {
-		AbstractApplication.get().getCurrentActivity().startActivity(
+	public static void openCommunity(@Nullable Activity activity, String community) {
+		ActivityLauncher.startActivity(activity,
 			new Intent(Intent.ACTION_VIEW, Uri.parse("https://plus.google.com/u/0/communities/" + community)));
 		AbstractApplication.get().getCoreAnalyticsSender().trackSocialInteraction(SocialNetwork.GOOGLE_PLUS.getName(),
 			SocialAction.OPEN_PROFILE, community);

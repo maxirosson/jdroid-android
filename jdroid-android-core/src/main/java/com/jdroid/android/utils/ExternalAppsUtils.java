@@ -1,6 +1,6 @@
 package com.jdroid.android.utils;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -8,7 +8,9 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.Settings;
+import android.support.annotation.Nullable;
 
+import com.jdroid.android.activity.ActivityLauncher;
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.google.GooglePlayUtils;
 import com.jdroid.android.intent.IntentUtils;
@@ -31,13 +33,13 @@ public class ExternalAppsUtils {
 	public static final String GOOGLE_PLUS_PACKAGE_NAME = "com.google.android.apps.plus";
 	public static final String GOOGLE_MAPS_PACKAGE_NAME = "com.google.android.apps.maps";
 	
-	public static boolean isAppInstalled(Context context, String packageName) {
-		return isAppInstalled(context, packageName, null);
+	public static boolean isAppInstalled(String packageName) {
+		return isAppInstalled(packageName, null);
 	}
 	
-	public static boolean isAppInstalled(Context context, String packageName, Integer minimumVersionCode) {
+	public static boolean isAppInstalled(String packageName, Integer minimumVersionCode) {
 		boolean installed = false;
-		Integer installedAppVersionCode = getInstalledAppVersionCode(context, packageName);
+		Integer installedAppVersionCode = getInstalledAppVersionCode(packageName);
 		if (installedAppVersionCode != null) {
 			if ((minimumVersionCode == null) || (installedAppVersionCode >= minimumVersionCode)) {
 				installed = true;
@@ -46,8 +48,8 @@ public class ExternalAppsUtils {
 		return installed;
 	}
 
-	public static Integer getInstalledAppVersionCode(Context context, String packageName) {
-		PackageManager pm = context.getPackageManager();
+	public static Integer getInstalledAppVersionCode(String packageName) {
+		PackageManager pm = AbstractApplication.get().getPackageManager();
 		try {
 			PackageInfo packageInfo = pm.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES);
 			return packageInfo.versionCode;
@@ -68,31 +70,33 @@ public class ExternalAppsUtils {
 	/**
 	 * Launch packageName app or open Google Play to download.
 	 * 
-	 * @param context
 	 * @param packageName
 	 * @return true if app is installed, false otherwise.
 	 */
-	public static boolean launchOrDownloadApp(Context context, String packageName) {
-		boolean isAppInstalled = isAppInstalled(context, packageName);
+	public static boolean launchOrDownloadApp(String packageName) {
+		boolean isAppInstalled = isAppInstalled(packageName);
 		if (isAppInstalled) {
-			launchExternalApp(context, packageName);
+			launchExternalApp(packageName);
 		} else {
-			GooglePlayUtils.launchAppDetails(context, packageName);
+			GooglePlayUtils.launchAppDetails(packageName);
 		}
 		return isAppInstalled;
 	}
 	
-	public static void launchExternalApp(Context context, String packageName) {
-		Intent launchIntent = context.getPackageManager().getLaunchIntentForPackage(packageName);
-		context.startActivity(launchIntent);
+	public static void launchExternalApp(String packageName) {
+		Intent launchIntent = AbstractApplication.get().getPackageManager().getLaunchIntentForPackage(packageName);
+		if (launchIntent != null) {
+			ActivityLauncher.startActivityNewTask(launchIntent);
+		} else {
+			LOGGER.info("Could not open launch intent for package: " + packageName);
+		}
 	}
 	
-	public static Boolean startSkypeCall(Context context, String username) {
+	public static Boolean startSkypeCall(String username) {
 		Intent intent = new Intent(Intent.ACTION_VIEW);
 		intent.setData(Uri.parse("skype:" + username + "?call"));
-		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		if (IntentUtils.isIntentAvailable(intent)) {
-			context.startActivity(intent);
+			ActivityLauncher.startActivityNewTask(intent);
 			return true;
 		} else {
 			LOGGER.info("Skype call intent not supported");
@@ -100,24 +104,24 @@ public class ExternalAppsUtils {
 		}
 	}
 
-	public static void openCustomMapOnBrowser(Context context, String mapId) {
-		IntentUtils.startUrl(context, getCustomMapUrl(mapId));
+	public static void openCustomMapOnBrowser(String mapId) {
+		ExternalAppsUtils.openUrl(getCustomMapUrl(mapId));
 	}
 
-	public static void openCustomMap(Context context, String mapId) {
-		boolean isAppInstalled = isAppInstalled(context, GOOGLE_MAPS_PACKAGE_NAME);
+	public static void openCustomMap(@Nullable Activity activity, String mapId) {
+		boolean isAppInstalled = isAppInstalled(GOOGLE_MAPS_PACKAGE_NAME);
 		if (isAppInstalled) {
 			String mapUrl = getCustomMapUrl(mapId);
 			Intent intent = new Intent(Intent.ACTION_VIEW);
 			intent.setPackage(GOOGLE_MAPS_PACKAGE_NAME);
 			intent.setData(Uri.parse(mapUrl));
 			if (IntentUtils.isIntentAvailable(intent)) {
-				context.startActivity(intent);
+				ActivityLauncher.startActivity(activity, intent);
 			} else {
 				openUrl(mapUrl);
 			}
 		} else {
-			GooglePlayUtils.launchAppDetails(context, GOOGLE_MAPS_PACKAGE_NAME);
+			GooglePlayUtils.launchAppDetails(GOOGLE_MAPS_PACKAGE_NAME);
 		}
 	}
 
@@ -128,9 +132,7 @@ public class ExternalAppsUtils {
 	public static void openUrl(String url) {
 		Intent intent = new Intent(Intent.ACTION_VIEW);
 		intent.setData(Uri.parse(url));
-		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		
-		AbstractApplication.get().startActivity(intent);
+		ActivityLauncher.startActivityNewTask(intent);
 	}
 	
 	public static Drawable getAppIcon(String packageName) {
@@ -141,44 +143,42 @@ public class ExternalAppsUtils {
 		}
 	}
 
-	public static void openAppInfo(Context context) {
+	public static void openAppInfo() {
 		Uri packageURI = Uri.parse("package:" + AppUtils.getApplicationId());
 		Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, packageURI);
-		context.startActivity(intent);
+		ActivityLauncher.startActivityNewTask(intent);
 	}
 
-	public static void openOnBrowser(Context context, File file) {
+	public static void openOnBrowser(File file) {
 		Intent intent = new Intent(Intent.ACTION_VIEW);
-		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		intent.setData(Uri.fromFile(file));
 		intent.setClassName("com.android.chrome", "com.google.android.apps.chrome.Main");
 		if (IntentUtils.isIntentAvailable(intent)) {
-			context.startActivity(intent);
+			ActivityLauncher.startActivityNewTask(intent);
 		} else {
 			intent = new Intent(Intent.ACTION_VIEW);
-			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			intent.setData(Uri.fromFile(file));
 			intent.setClassName("com.android.browser", "com.android.browser.BrowserActivity");
-			context.startActivity(intent);
+			ActivityLauncher.startActivityNewTask(intent);
 		}
 	}
 	
-	public static Boolean openYoutubeVideo(Context context, String videoUrl) {
+	public static Boolean openYoutubeVideo(String videoUrl) {
 		Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(videoUrl));
 		if (IntentUtils.isIntentAvailable(intent)) {
-			context.startActivity(intent);
+			ActivityLauncher.startActivityNewTask(intent);
 			return true;
 		} else {
-			LOGGER.info("Dial phone intent not supported");
+			LOGGER.info("Youtube video intent not supported");
 			return false;
 		}
 	}
 	
-	public static Boolean dialPhoneNumber(Context context, String phoneNumber) {
+	public static Boolean dialPhoneNumber(String phoneNumber) {
 		Intent intent = new Intent(Intent.ACTION_DIAL);
 		intent.setData(Uri.fromParts("tel", phoneNumber, null));
 		if (IntentUtils.isIntentAvailable(intent)) {
-			context.startActivity(intent);
+			ActivityLauncher.startActivityNewTask(intent);
 			return true;
 		} else {
 			LOGGER.info("Dial phone intent not supported");
@@ -186,15 +186,15 @@ public class ExternalAppsUtils {
 		}
 	}
 	
-	public static Boolean openEmail(Context context, String mailto) {
-		return openEmail(context, mailto, null);
+	public static Boolean openEmail(String mailto) {
+		return openEmail(mailto, null);
 	}
 	
-	public static Boolean openEmail(Context context, String mailto, String subject) {
+	public static Boolean openEmail(String mailto, String subject) {
 		Intent intent = new Intent(Intent.ACTION_SENDTO);
 		intent.setData(Uri.parse("mailto:" + mailto  + (subject != null ? "?subject=" + EncodingUtils.encodeURL(subject) : "")));
 		if (IntentUtils.isIntentAvailable(intent)) {
-			context.startActivity(intent);
+			ActivityLauncher.startActivityNewTask(intent);
 			return true;
 		} else {
 			LOGGER.info("Open email intent not supported");

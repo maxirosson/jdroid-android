@@ -1,5 +1,6 @@
 package com.jdroid.android.share;
 
+import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v4.graphics.drawable.DrawableCompat;
@@ -16,8 +17,8 @@ public class MoreSharingItem extends SharingItem {
 	}
 	
 	@Override
-	public void share() {
-		ShareUtils.shareTextContent(sharingData.getShareKey(), AbstractApplication.get().getString(R.string.jdroid_share),
+	public void share(Activity activity) {
+		ShareUtils.shareTextContent(activity, sharingData.getShareKey(), activity.getString(R.string.jdroid_share),
 				sharingData.getDefaultSharingDataItem().getSubject(), sharingData.getDefaultSharingDataItem().getText());
 	}
 	

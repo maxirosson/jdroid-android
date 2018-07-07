@@ -21,25 +21,25 @@ public class NavDrawerFragment extends AbstractFragment {
 		findView(R.id.leftCustomNavDrawer).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ActivityLauncher.launchActivity(LeftCustomNavDrawerActivity.class);
+				ActivityLauncher.startActivity(getActivity(), LeftCustomNavDrawerActivity.class);
 			}
 		});
 		findView(R.id.rightCustomNavDrawer).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ActivityLauncher.launchActivity(RightCustomNavDrawerActivity.class);
+				ActivityLauncher.startActivity(getActivity(), RightCustomNavDrawerActivity.class);
 			}
 		});
 		findView(R.id.userNavDrawer).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ActivityLauncher.launchActivity(UserNavDrawerActivity.class);
+				ActivityLauncher.startActivity(getActivity(), UserNavDrawerActivity.class);
 			}
 		});
 		findView(R.id.noNavDrawer).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ActivityLauncher.launchActivity(NoNavDrawerActivity.class);
+				ActivityLauncher.startActivity(getActivity(), NoNavDrawerActivity.class);
 			}
 		});
 	}

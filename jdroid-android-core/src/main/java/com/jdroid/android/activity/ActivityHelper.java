@@ -666,7 +666,7 @@ public class ActivityHelper implements ActivityIf {
 
 	@Override
 	public void executeOnUIThread(Runnable runnable) {
-		if (activity.equals(AbstractApplication.get().getCurrentActivity())) {
+		if (!activity.isDestroyed()) {
 			activity.runOnUiThread(runnable);
 		}
 	}

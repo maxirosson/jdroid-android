@@ -1,5 +1,6 @@
 package com.jdroid.android.share;
 
+import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.support.v4.graphics.drawable.DrawableCompat;
 
@@ -25,7 +26,7 @@ public class AppInviteSharingItem extends SharingItem {
 	}
 
 	@Override
-	public void share() {
+	public void share(Activity activity) {
 		createAppInviteSender().sendInvitation();
 	}
 

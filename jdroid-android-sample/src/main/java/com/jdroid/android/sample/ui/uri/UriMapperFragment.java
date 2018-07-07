@@ -21,7 +21,7 @@ public class UriMapperFragment extends AbstractFragment {
 		findView(R.id.singleTop).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				ActivityLauncher.launchActivity(UriMapperSingleTopActivity.class);
+				ActivityLauncher.startActivity(getActivity(), UriMapperSingleTopActivity.class);
 
 			}
 		});
@@ -29,7 +29,7 @@ public class UriMapperFragment extends AbstractFragment {
 		findView(R.id.noFlags).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				ActivityLauncher.launchActivity(UriMapperNoFlagsActivity.class);
+				ActivityLauncher.startActivity(getActivity(), UriMapperNoFlagsActivity.class);
 
 			}
 		});
@@ -37,7 +37,7 @@ public class UriMapperFragment extends AbstractFragment {
 		findView(R.id.matchError).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				ActivityLauncher.launchActivity(MatchErrorActivity.class);
+				ActivityLauncher.startActivity(getActivity(), MatchErrorActivity.class);
 
 			}
 		});
@@ -45,7 +45,7 @@ public class UriMapperFragment extends AbstractFragment {
 		findView(R.id.mainIntentError).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				ActivityLauncher.launchActivity(MainIntentErrorActivity.class);
+				ActivityLauncher.startActivity(getActivity(), MainIntentErrorActivity.class);
 
 			}
 		});
@@ -53,7 +53,7 @@ public class UriMapperFragment extends AbstractFragment {
 		findView(R.id.defaultIntentError).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				ActivityLauncher.launchActivity(DefaulItntentErrorActivity.class);
+				ActivityLauncher.startActivity(getActivity(), DefaulItntentErrorActivity.class);
 
 			}
 		});
@@ -61,7 +61,7 @@ public class UriMapperFragment extends AbstractFragment {
 		findView(R.id.matchNewActivity).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				ActivityLauncher.launchActivity(MatchNewActivity.class);
+				ActivityLauncher.startActivity(getActivity(), MatchNewActivity.class);
 
 			}
 		});
@@ -69,7 +69,7 @@ public class UriMapperFragment extends AbstractFragment {
 		findView(R.id.noMatchNewActivity).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				ActivityLauncher.launchActivity(NoMatchNewActivity.class);
+				ActivityLauncher.startActivity(getActivity(), NoMatchNewActivity.class);
 
 			}
 		});
@@ -77,7 +77,7 @@ public class UriMapperFragment extends AbstractFragment {
 		findView(R.id.matchSameActivity).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				ActivityLauncher.launchActivity(MatchSameActivity.class);
+				ActivityLauncher.startActivity(getActivity(), MatchSameActivity.class);
 
 			}
 		});
@@ -85,7 +85,7 @@ public class UriMapperFragment extends AbstractFragment {
 		findView(R.id.noMatchSameActivity).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				ActivityLauncher.launchActivity(NoMatchSameActivity.class);
+				ActivityLauncher.startActivity(getActivity(), NoMatchSameActivity.class);
 
 			}
 		});
@@ -93,7 +93,7 @@ public class UriMapperFragment extends AbstractFragment {
 		findView(R.id.matchNullIntent).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				ActivityLauncher.launchActivity(MatchNullIntentActivity.class);
+				ActivityLauncher.startActivity(getActivity(), MatchNullIntentActivity.class);
 
 			}
 		});
@@ -101,7 +101,7 @@ public class UriMapperFragment extends AbstractFragment {
 		findView(R.id.noMatchNullIntent).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				ActivityLauncher.launchActivity(NoMatchNullIntentActivity.class);
+				ActivityLauncher.startActivity(getActivity(), NoMatchNullIntentActivity.class);
 
 			}
 		});

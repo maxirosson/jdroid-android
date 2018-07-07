@@ -1,5 +1,6 @@
 package com.jdroid.android.debug;
 
+import android.app.Activity;
 import android.support.v4.util.Pair;
 
 import com.jdroid.android.activity.ActivityLauncher;
@@ -33,8 +34,8 @@ public class DebugContext {
 
 	private List<Pair<String, Object>> customDebugInfoProperties = Lists.newArrayList();
 
-	public void launchActivityDebugSettingsActivity() {
-		ActivityLauncher.launchActivity(DebugSettingsActivity.class);
+	public void launchActivityDebugSettingsActivity(Activity activity) {
+		ActivityLauncher.startActivity(activity, DebugSettingsActivity.class);
 	}
 
 	public void initDebugRepositories(

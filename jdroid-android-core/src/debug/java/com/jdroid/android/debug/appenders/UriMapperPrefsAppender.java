@@ -63,7 +63,7 @@ public class UriMapperPrefsAppender extends PreferencesAppender {
 					FileUtils.copyStream(openInputStream, file);
 					openInputStream.close();
 
-					ExternalAppsUtils.openOnBrowser(activity, file);
+					ExternalAppsUtils.openOnBrowser(file);
 				} catch (IOException e) {
 					throw new UnexpectedException(e);
 				}

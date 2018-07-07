@@ -21,14 +21,14 @@ public class TwitterFragment extends AbstractFragment {
 		findView(R.id.listTweetHelper).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ActivityLauncher.launchActivity(SampleListTwitterActivity.class);
+				ActivityLauncher.startActivity(getActivity(), SampleListTwitterActivity.class);
 			}
 		});
 		
 		findView(R.id.cyclingTweetHelper).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ActivityLauncher.launchActivity(CyclingTwitterActivity.class);
+				ActivityLauncher.startActivity(getActivity(), CyclingTwitterActivity.class);
 			}
 		});
 		

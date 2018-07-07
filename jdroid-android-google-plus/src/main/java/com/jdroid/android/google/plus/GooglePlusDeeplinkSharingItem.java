@@ -1,5 +1,6 @@
 package com.jdroid.android.google.plus;
 
+import android.app.Activity;
 import android.support.v4.app.FragmentActivity;
 
 import com.jdroid.android.application.AbstractApplication;
@@ -14,8 +15,8 @@ public abstract class GooglePlusDeeplinkSharingItem extends SharingItem {
 	}
 	
 	@Override
-	public void share() {
-		GooglePlusHelperFragment googlePlusHelperFragment = GooglePlusHelperFragment.get((FragmentActivity)AbstractApplication.get().getCurrentActivity());
+	public void share(Activity activity) {
+		GooglePlusHelperFragment googlePlusHelperFragment = GooglePlusHelperFragment.get((FragmentActivity)activity);
 		if (googlePlusHelperFragment != null) {
 			googlePlusHelperFragment.shareDeeplink(getContent(), getLink());
 		} else {

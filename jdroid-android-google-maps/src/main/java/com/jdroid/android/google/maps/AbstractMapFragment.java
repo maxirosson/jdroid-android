@@ -260,7 +260,7 @@ public abstract class AbstractMapFragment extends SupportMapFragment implements 
 
 			@Override
 			public void onClick(View v) {
-				GooglePlayServicesUtils.launchGooglePlayServicesUpdate(getActivity());
+				GooglePlayServicesUtils.launchGooglePlayServicesUpdate();
 			}
 		});
 	}

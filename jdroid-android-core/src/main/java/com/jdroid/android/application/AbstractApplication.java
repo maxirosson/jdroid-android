@@ -480,10 +480,12 @@ public abstract class AbstractApplication extends Application {
 		return new FragmentHelper(fragment);
 	}
 	
-	public void setCurrentActivity(Activity activity) {
+	public void setCurrentActivity(@Nullable Activity activity) {
 		currentActivity = activity;
 	}
 	
+	@Nullable
+	@Deprecated
 	public Activity getCurrentActivity() {
 		return currentActivity;
 	}

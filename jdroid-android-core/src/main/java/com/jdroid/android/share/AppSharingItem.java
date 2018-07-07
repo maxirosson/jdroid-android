@@ -1,5 +1,6 @@
 package com.jdroid.android.share;
 
+import android.app.Activity;
 import android.support.annotation.NonNull;
 
 public abstract class AppSharingItem extends SharingItem {
@@ -11,7 +12,7 @@ public abstract class AppSharingItem extends SharingItem {
 	}
 	
 	@Override
-	public void share() {
+	public void share(Activity activity) {
 		SharingDataItem sharingDataItem = sharingData.getShareInfoItemMap().get(getSharingMedium().getName());
 		if (sharingDataItem == null) {
 			sharingDataItem = sharingData.getDefaultSharingDataItem();
@@ -22,7 +23,7 @@ public abstract class AppSharingItem extends SharingItem {
 		if (link != null) {
 			text = text.replace("${link}", link);
 		}
-		ShareUtils.share(getSharingMedium(), sharingData.getShareKey(), text);
+		ShareUtils.share(activity, getSharingMedium(), sharingData.getShareKey(), text);
 	}
 	
 	@NonNull

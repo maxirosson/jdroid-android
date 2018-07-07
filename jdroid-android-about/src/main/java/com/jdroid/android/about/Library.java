@@ -1,7 +1,8 @@
 package com.jdroid.android.about;
 
 import android.app.Activity;
-import com.jdroid.android.intent.IntentUtils;
+
+import com.jdroid.android.utils.ExternalAppsUtils;
 
 public class Library {
 	
@@ -26,7 +27,7 @@ public class Library {
 	}
 	
 	public void onSelected(Activity activity) {
-		IntentUtils.startUrl(activity, url);
+		ExternalAppsUtils.openUrl(url);
 	}
 	
 	public String getLibraryKey() {
