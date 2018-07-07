@@ -102,7 +102,7 @@ public class InAppBillingHelperFragment extends AbstractFragment implements InAp
 	public void onSetupFailed(ErrorCodeException errorCodeException) {
 		AbstractApplication.get().getExceptionHandler().logHandledException(errorCodeException);
 		if (!silentMode) {
-			createErrorDisplayer(errorCodeException).displayError(errorCodeException);
+			createErrorDisplayer(errorCodeException).displayError(getActivity(), errorCodeException);
 		}
 	}
 	
@@ -119,7 +119,7 @@ public class InAppBillingHelperFragment extends AbstractFragment implements InAp
 		AbstractApplication.get().getExceptionHandler().logHandledException(errorCodeException);
 		if (!silentMode) {
 			errorCodeException.setDescription(getString(R.string.jdroid_failedToLoadPurchases));
-			createErrorDisplayer(errorCodeException).displayError(errorCodeException);
+			createErrorDisplayer(errorCodeException).displayError(getActivity(), errorCodeException);
 		}
 	}
 	
@@ -146,7 +146,7 @@ public class InAppBillingHelperFragment extends AbstractFragment implements InAp
 		} else {
 			DialogErrorDisplayer.markAsNotGoBackOnError(errorCodeException);
 			AbstractApplication.get().getExceptionHandler().logHandledException(errorCodeException);
-			createErrorDisplayer(errorCodeException).displayError(errorCodeException);
+			createErrorDisplayer(errorCodeException).displayError(getActivity(), errorCodeException);
 		}
 	}
 	
@@ -162,7 +162,7 @@ public class InAppBillingHelperFragment extends AbstractFragment implements InAp
 	public void onConsumeFailed(ErrorCodeException errorCodeException) {
 		AbstractApplication.get().getExceptionHandler().logHandledException(errorCodeException);
 		if (!silentMode) {
-			createErrorDisplayer(errorCodeException).displayError(errorCodeException);
+			createErrorDisplayer(errorCodeException).displayError(getActivity(), errorCodeException);
 		}
 	}
 	

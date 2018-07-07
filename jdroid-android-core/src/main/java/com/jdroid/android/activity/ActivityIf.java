@@ -76,4 +76,6 @@ public interface ActivityIf extends ComponentIf {
 	public Boolean isGooglePlayServicesVerificationEnabled();
 
 	public GoogleApiClient getGoogleApiClient();
+	
+	public AbstractFragmentActivity getActivity();
 }

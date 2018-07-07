@@ -20,7 +20,7 @@ public abstract class FragmentUseCaseListener implements UseCaseListener {
 	public void onFinishFailedUseCase(AbstractException abstractException) {
 		getFragmentIf().dismissLoading();
 		// TODO This line shouldn't be executed outside the onStart/onStop cycle, to avoid IllegalStateException: Can not perform this action after onSaveInstanceState
-		createErrorDisplayer(abstractException).displayError(abstractException);
+		createErrorDisplayer(abstractException).displayError(getFragmentIf().getActivityIf().getActivity(), abstractException);
 	}
 
 	protected ErrorDisplayer createErrorDisplayer(AbstractException abstractException) {

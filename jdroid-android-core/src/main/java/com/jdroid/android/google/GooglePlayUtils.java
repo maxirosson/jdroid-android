@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentActivity;
 
 import com.jdroid.android.R;
 import com.jdroid.android.activity.ActivityLauncher;
-import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.dialog.AlertDialogFragment;
 import com.jdroid.android.intent.IntentUtils;
 import com.jdroid.android.utils.AppUtils;
@@ -39,8 +38,7 @@ public class GooglePlayUtils {
 		}
 	}
 	
-	public static void showUpdateDialog() {
-		FragmentActivity fragmentActivity = (FragmentActivity)AbstractApplication.get().getCurrentActivity();
+	public static void showUpdateDialog(@Nullable FragmentActivity fragmentActivity) {
 		if (fragmentActivity != null) {
 			String title = fragmentActivity.getString(R.string.jdroid_updateAppTitle);
 			String message = fragmentActivity.getString(R.string.jdroid_updateAppMessage);

@@ -1,5 +1,7 @@
 package com.jdroid.android.exception;
 
+import android.support.v4.app.FragmentActivity;
+
 import com.jdroid.android.R;
 import com.jdroid.android.google.GooglePlayUtils;
 import com.jdroid.android.utils.AppUtils;
@@ -13,10 +15,10 @@ public abstract class AbstractErrorDisplayer implements ErrorDisplayer {
 	private static final String ERROR_DISPLAYER = "errorDisplayer";
 
 	@Override
-	public final void displayError(Throwable throwable) {
+	public final void displayError(FragmentActivity activity, Throwable throwable) {
 
 		if (DefaultExceptionHandler.matchAnyErrorCode(throwable, CommonErrorCode.INVALID_API_VERSION)) {
-			handleInvalidApiVersionError();
+			handleInvalidApiVersionError(activity);
 		} else {
 			String title = null;
 			String description = null;
@@ -52,15 +54,15 @@ public abstract class AbstractErrorDisplayer implements ErrorDisplayer {
 				description = LocalizationUtils.getString(R.string.jdroid_defaultErrorDescription);
 			}
 
-			onDisplayError(title, description, throwable);
+			onDisplayError(activity, title, description, throwable);
 		}
 	}
 
-	protected void handleInvalidApiVersionError() {
-		GooglePlayUtils.showUpdateDialog();
+	protected void handleInvalidApiVersionError(FragmentActivity activity) {
+		GooglePlayUtils.showUpdateDialog(activity);
 	}
 
-	protected abstract void onDisplayError(String title, String description, Throwable throwable);
+	protected abstract void onDisplayError(FragmentActivity activity, String title, String description, Throwable throwable);
 
 	public static void setErrorDisplayer(AbstractException abstractException, ErrorDisplayer errorDisplayer) {
 		abstractException.addParameter(ERROR_DISPLAYER, errorDisplayer);
