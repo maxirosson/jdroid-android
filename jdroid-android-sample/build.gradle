@@ -161,6 +161,9 @@ android {
 			matchingFallbacks = ['debug']
 
 			jdroid.setBuildConfigString(buildTypes.uat, "SERVER_NAME", "UAT")
+
+			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+			minifyEnabled true
 		}
 
 		automation {
@@ -171,6 +174,9 @@ android {
 
 			jdroid.setBuildConfigString(buildTypes.automation, "SERVER_NAME", "UAT")
 			jdroid.setBuildConfigBoolean(buildTypes.automation, "DEBUG_SETTINGS_ENABLED", false)
+
+			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+			minifyEnabled true
 		}
 
 		if (jdroid.isReleaseBuildTypeEnabled()) {
@@ -197,6 +203,9 @@ android {
 							facebookAppId: jdroid.propertyResolver.getStringProp("FACEBOOK_APP_ID", "")
 					]
 				}
+
+				proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+				minifyEnabled true
 			}
 		}
 	}
