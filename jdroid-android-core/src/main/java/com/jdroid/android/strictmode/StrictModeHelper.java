@@ -1,5 +1,6 @@
 package com.jdroid.android.strictmode;
 
+import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Handler;
 import android.os.StrictMode;
@@ -40,6 +41,7 @@ public class StrictModeHelper {
 		}
 	}
 	
+	@SuppressLint("NewApi")
 	private static void innerInitStrictMode() {
 		StrictMode.ThreadPolicy.Builder threadPolicyBuilder = new StrictMode.ThreadPolicy.Builder();
 		threadPolicyBuilder.detectAll();
