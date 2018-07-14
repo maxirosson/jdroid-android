@@ -18,6 +18,7 @@ import com.jdroid.android.google.inappbilling.client.InAppBillingErrorCode;
 import com.jdroid.android.google.inappbilling.client.Inventory;
 import com.jdroid.android.google.inappbilling.client.Product;
 import com.jdroid.android.google.inappbilling.client.ProductType;
+import com.jdroid.java.exception.AbstractException;
 import com.jdroid.java.exception.ErrorCodeException;
 import com.jdroid.java.utils.LoggerUtils;
 
@@ -78,7 +79,7 @@ public class InAppBillingHelperFragment extends AbstractFragment implements InAp
 		subscriptionsProductTypes = getArgument(SUBSCRIPTIONS_PRODUCT_TYPES);
 		silentMode = getArgument(SILENT_MODE);
 		
-		inAppBillingClient = new InAppBillingClient(getContext());
+		inAppBillingClient = new InAppBillingClient();
 		inAppBillingClient.startSetup(this);
 		
 		// TODO To support promotion codes, your app must call the getPurchases() method whenever the app starts or resumes.
@@ -95,10 +96,10 @@ public class InAppBillingHelperFragment extends AbstractFragment implements InAp
 	}
 	
 	@Override
-	public void onSetupFailed(ErrorCodeException errorCodeException) {
-		AbstractApplication.get().getExceptionHandler().logHandledException(errorCodeException);
+	public void onSetupFailed(AbstractException abstractException) {
 		if (!silentMode) {
-			createErrorDisplayer(errorCodeException).displayError(getActivity(), errorCodeException);
+			// TODO
+			//createErrorDisplayer(errorCodeException).displayError(getActivity(), errorCodeException);
 		}
 	}
 	

@@ -2,6 +2,7 @@ package com.jdroid.android.google.inappbilling.client;
 
 import android.support.annotation.MainThread;
 
+import com.jdroid.java.exception.AbstractException;
 import com.jdroid.java.exception.ErrorCodeException;
 
 public interface InAppBillingClientListener {
@@ -15,10 +16,10 @@ public interface InAppBillingClientListener {
 	/**
 	 * Called to notify that setup failed.
 	 * 
-	 * @param errorCodeException The result of the setup process.
+	 * @param abstractException The result of the setup process.
 	 */
 	@MainThread
-	public void onSetupFailed(ErrorCodeException errorCodeException);
+	public void onSetupFailed(AbstractException abstractException);
 	
 	/**
 	 * Called to notify that an inventory query operation completed.

@@ -1,10 +1,8 @@
 package com.jdroid.android.google.inappbilling.client;
 
 import android.app.Activity;
-import android.content.Context;
-import android.os.Handler;
 import android.support.annotation.MainThread;
-import android.support.annotation.WorkerThread;
+import android.support.annotation.UiThread;
 
 import com.android.billingclient.api.BillingClient;
 import com.android.billingclient.api.BillingClientStateListener;
@@ -18,9 +16,11 @@ import com.android.billingclient.api.SkuDetailsResponseListener;
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.google.inappbilling.InAppBillingAppModule;
 import com.jdroid.android.google.inappbilling.InAppBillingContext;
+import com.jdroid.android.utils.LocalizationUtils;
 import com.jdroid.java.collections.Lists;
 import com.jdroid.java.collections.Maps;
 import com.jdroid.java.exception.ErrorCodeException;
+import com.jdroid.java.exception.UnexpectedException;
 import com.jdroid.java.utils.LoggerUtils;
 import com.jdroid.java.utils.StringUtils;
 
@@ -64,20 +64,13 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 	
 	private Set<String> tokensToBeConsumed;
 	
-	///////
-	
 	// Are subscriptions supported?
 	private Boolean subscriptionsSupported;
-	
-	// Context we were passed during initialization
-	private Context context;
 	
 	// Public key for verifying signature, in base64 encoding
 	private String signatureBase64;
 	
-	// The product id used to launch the purchase flow
-	private String productId;
-	
+	// TODO Maybe we should have a register/unregister logic like usecases. What happen if the listener is invoked when the app is on background?
 	private InAppBillingClientListener listener;
 	
 	private Inventory inventory;
@@ -86,51 +79,53 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 	 * Creates an instance. After creation, it will not yet be ready to use. You must perform setup by calling
 	 * {@link #startSetup} and wait for setup to complete. This constructor does not block and is safe to call from a UI
 	 * thread.
-	 * 
-	 * @param context Your application or Activity context. Needed to bind to the in-app billing service.
 	 */
-	public InAppBillingClient(Context context) {
-		this.context = context.getApplicationContext();
+	public InAppBillingClient() {
 		signatureBase64 = InAppBillingAppModule.get().getInAppBillingContext().getGooglePlayPublicKey();
-		LOGGER.debug("InAppBillingClient created.");
 	}
 	
 	/**
 	 * Starts the setup process. This will start up the setup process asynchronously. You will be notified through the
 	 * listener when the setup process is complete.
 	 */
-	@MainThread
-	public void startSetup(final InAppBillingClientListener listener) {
+	@UiThread
+	public void startSetup(InAppBillingClientListener listener) {
 		this.listener = listener;
 		try {
 			LOGGER.debug("Starting in-app billing setup.");
 			
-			billingClient = BillingClient.newBuilder(context).setListener(this).build();
+			billingClient = BillingClient.newBuilder(AbstractApplication.get()).setListener(this).build();
 			startServiceConnection(new Runnable() {
 				@Override
 				public void run() {
-					listener.onSetupFinished();
+					LOGGER.debug("In-app billing setup successful.");
+					if (listener != null) {
+						listener.onSetupFinished();
+					}
 				}
 			});
 			
 		} catch (Exception e) {
+			AbstractApplication.get().getExceptionHandler().logHandledException(e);
 			if (listener != null) {
-				listener.onSetupFailed(InAppBillingErrorCode.UNEXPECTED_ERROR.newErrorCodeException(e));
+				listener.onSetupFailed(new UnexpectedException(e));
 			}
 		}
 	}
 	
-	public void startServiceConnection(final Runnable executeOnSuccess) {
+	private void startServiceConnection(final Runnable executeOnSuccess) {
 		billingClient.startConnection(new BillingClientStateListener() {
 			@Override
 			public void onBillingSetupFinished(@BillingClient.BillingResponse int billingResponseCode) {
-				LOGGER.debug("Setup finished. Response code: " + billingResponseCode);
 				
 				if (billingResponseCode == BillingClient.BillingResponse.OK) {
 					isServiceConnected = true;
 					if (executeOnSuccess != null) {
 						executeOnSuccess.run();
 					}
+				} else {
+					LOGGER.debug("Start connection failed. Response code: " + billingResponseCode);
+					// TODO ???
 				}
 				billingClientResponseCode = billingResponseCode;
 			}
@@ -140,27 +135,6 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 				isServiceConnected = false;
 			}
 		});
-	}
-	
-	/**
-	 * Checks if subscriptions are supported for current client
-	 * <p>Note: This method does not automatically retry for RESULT_SERVICE_DISCONNECTED.
-	 * It is only used in unit tests and after queryPurchases execution, which already has
-	 * a retry-mechanism implemented.
-	 * </p>
-	 */
-	public boolean areSubscriptionsSupported() {
-		int responseCode = billingClient.isFeatureSupported(BillingClient.FeatureType.SUBSCRIPTIONS);
-		if (responseCode != BillingClient.BillingResponse.OK) {
-			LOGGER.debug("In-app billing subscriptions supported");
-			subscriptionsSupported = true;
-			return true;
-		} else {
-			InAppBillingErrorCode inAppBillingErrorCode = InAppBillingErrorCode.findByErrorResponseCode(responseCode);
-			LOGGER.warn("Subscriptions NOT AVAILABLE. InAppBillingErrorCode: " + inAppBillingErrorCode);
-			subscriptionsSupported = false;
-			return false;
-		}
 	}
 	
 	private void executeServiceRequest(Runnable runnable) {
@@ -197,9 +171,8 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 	 * @param managedProductTypes the managed {@link ProductType}s supported by the app
 	 * @param subscriptionsProductTypes the subscriptions {@link ProductType}s supported by the app
 	 */
-	@MainThread
-	public void queryInventory(final List<ProductType> managedProductTypes, final List<ProductType> subscriptionsProductTypes) {
-		final Handler handler = new Handler();
+	@UiThread
+	public void queryInventory(List<ProductType> managedProductTypes, List<ProductType> subscriptionsProductTypes) {
 		executeServiceRequest(new Runnable() {
 			
 			@Override
@@ -212,7 +185,7 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 					}
 					
 					// if subscriptions are supported, then also query for subscriptions
-					if (subscriptionsSupported && !subscriptionsProductTypes.isEmpty()) {
+					if (isSubscriptionsSupported() && !subscriptionsProductTypes.isEmpty()) {
 						queryProductsDetails(inventory, ItemType.SUBSCRIPTION, subscriptionsProductTypes);
 						queryPurchases(inventory, ItemType.SUBSCRIPTION);
 					}
@@ -221,74 +194,65 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 					
 					InAppBillingAppModule.get().getInAppBillingContext().setPurchasedProductTypes(inventory);
 					
-					handler.post(new Runnable() {
-						@Override
-						public void run() {
-							if (listener != null) {
-								listener.onQueryInventoryFinished(inventory);
-							}
-							for (Product each : inventory.getProductsWaitingToConsume()) {
-								consume(each);
-							}
-						}
-					});
-				} catch (final Exception e) {
 					if (listener != null) {
-						handler.post(new Runnable() {
-							@Override
-							public void run() {
-								listener.onQueryInventoryFailed(e instanceof ErrorCodeException ? (ErrorCodeException)e : InAppBillingErrorCode.UNEXPECTED_ERROR.newErrorCodeException(e));
-							}
-						});
+						listener.onQueryInventoryFinished(inventory);
+					}
+					for (Product each : inventory.getProductsWaitingToConsume()) {
+						consume(each);
+					}
+				} catch (Exception e) {
+					if (listener != null) {
+						listener.onQueryInventoryFailed(e instanceof ErrorCodeException ? (ErrorCodeException)e : InAppBillingErrorCode.UNEXPECTED_ERROR.newErrorCodeException(e));
 					}
 				}
 			}
 		});
 	}
 	
+	@UiThread
 	private void queryPurchases(Inventory inventory, ItemType itemType) throws ErrorCodeException {
-		
-		LOGGER.debug("Querying owned items, item type: " + itemType);
-		String continueToken = null;
-		
-		try {
-			LOGGER.debug("Calling getPurchases with continuation token: " + continueToken);
-			Purchase.PurchasesResult purchasesResult = billingClient.queryPurchases(BillingClient.SkuType.INAPP);
-			
-			InAppBillingErrorCode inAppBillingErrorCode = InAppBillingErrorCode.findByErrorResponseCode(purchasesResult.getResponseCode());
-			if (inAppBillingErrorCode != null) {
-				throw inAppBillingErrorCode.newErrorCodeException("getPurchases() failed querying " + itemType);
-			}
-			
-			for (Purchase purchase : purchasesResult.getPurchasesList()) {
-				String purchaseJson = purchase.getOriginalJson();
-				String signature = purchase.getSignature();
-				String productId = purchase.getSku();
-				
-				Product product = null;
-				if (InAppBillingAppModule.get().getInAppBillingContext().isStaticResponsesEnabled()) {
-					product = inventory.getProductByTestProductId(productId);
-				} else {
-					product = inventory.getProduct(productId);
-				}
-				if (product != null) {
-					try {
-						LOGGER.debug("Setting purchase to product: " + productId + ". " + purchaseJson);
-						product.setPurchase(signatureBase64, purchaseJson, signature, InAppBillingAppModule.get().getDeveloperPayloadVerificationStrategy());
-					} catch (ErrorCodeException e) {
-						AbstractApplication.get().getExceptionHandler().logHandledException(e);
+		executeServiceRequest(new Runnable() {
+			@Override
+			public void run() {
+				LOGGER.debug("Querying owned items, item type: " + itemType);
+				try {
+					Purchase.PurchasesResult purchasesResult = billingClient.queryPurchases(BillingClient.SkuType.INAPP);
+					InAppBillingErrorCode inAppBillingErrorCode = InAppBillingErrorCode.findByErrorResponseCode(purchasesResult.getResponseCode());
+					if (inAppBillingErrorCode != null) {
+						throw inAppBillingErrorCode.newErrorCodeException("getPurchases() failed querying " + itemType);
 					}
-				} else {
-					AbstractApplication.get().getExceptionHandler().logWarningException(
-							"The purchased product [" + productId + "] is not supported by the app, so it is ignored");
+					
+					for (Purchase purchase : purchasesResult.getPurchasesList()) {
+						String purchaseJson = purchase.getOriginalJson();
+						String signature = purchase.getSignature();
+						String productId = purchase.getSku();
+						
+						Product product = null;
+						if (InAppBillingAppModule.get().getInAppBillingContext().isStaticResponsesEnabled()) {
+							product = inventory.getProductByTestProductId(productId);
+						} else {
+							product = inventory.getProduct(productId);
+						}
+						if (product != null) {
+							try {
+								LOGGER.debug("Setting purchase to product: " + productId + ". " + purchaseJson);
+								product.setPurchase(signatureBase64, purchaseJson, signature, InAppBillingAppModule.get().getDeveloperPayloadVerificationStrategy());
+							} catch (ErrorCodeException e) {
+								AbstractApplication.get().getExceptionHandler().logHandledException(e);
+							}
+						} else {
+							AbstractApplication.get().getExceptionHandler().logWarningException(
+									"The purchased product [" + productId + "] is not supported by the app, so it is ignored");
+						}
+					}
+				} catch (JSONException e) {
+					throw InAppBillingErrorCode.BAD_PURCHASE_DATA.newErrorCodeException(e);
 				}
 			}
-		} catch (JSONException e) {
-			throw InAppBillingErrorCode.BAD_PURCHASE_DATA.newErrorCodeException(e);
-		}
+		});
 	}
 	
-	@WorkerThread
+	@MainThread
 	private void queryProductsDetails(Inventory inventory, ItemType itemType, List<ProductType> productTypes)
 			throws ErrorCodeException {
 		
@@ -322,8 +286,8 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 								for (ProductType each : productTypes) {
 									SkuDetails skuDetails = map.get(inAppBillingContext.isStaticResponsesEnabled() ? each.getTestProductId() : each.getProductId());
 									if (skuDetails != null) {
-										String title = each.getTitleId() != null ? context.getString(each.getTitleId()) : skuDetails.getTitle();
-										String description = each.getDescriptionId() != null ? context.getString(each.getDescriptionId()) : skuDetails.getDescription();
+										String title = each.getTitleId() != null ? LocalizationUtils.getString(each.getTitleId()) : skuDetails.getTitle();
+										String description = each.getDescriptionId() != null ? LocalizationUtils.getString(each.getDescriptionId()) : skuDetails.getDescription();
 										Product product = new Product(each, skuDetails.getPrice(),
 												(double)skuDetails.getPriceAmountMicros() / 1000000, skuDetails.getPriceCurrencyCode(), title, description);
 										LOGGER.debug("Adding to inventory: " + product);
@@ -364,7 +328,7 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 	 * @param oldProductId The SKU which the new SKU is replacing or null if there is none
 	 */
 	private void launchPurchaseFlow(Activity activity, Product product, ItemType itemType, String oldProductId) {
-		if (itemType.equals(ItemType.SUBSCRIPTION) && !subscriptionsSupported) {
+		if (itemType.equals(ItemType.SUBSCRIPTION) && !isSubscriptionsSupported()) {
 			if (listener != null) {
 				listener.onPurchaseFailed(InAppBillingErrorCode.SUBSCRIPTIONS_NOT_AVAILABLE.newErrorCodeException());
 			}
@@ -378,7 +342,6 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 						product.getProductType().getTestProductId() : product.getId();
 				BillingFlowParams purchaseParams = BillingFlowParams.newBuilder()
 						.setSku(productIdToBuy).setType(itemType.getType()).setOldSku(oldProductId).build();
-				InAppBillingClient.this.productId = product.getId();
 				int responseCode = billingClient.launchBillingFlow(activity, purchaseParams);
 				if (responseCode != BillingClient.BillingResponse.OK) {
 					InAppBillingErrorCode inAppBillingErrorCode = InAppBillingErrorCode.findByErrorResponseCode(responseCode);
@@ -400,7 +363,7 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 	public void onPurchasesUpdated(int resultCode, List<Purchase> purchases) {
 		if (resultCode == BillingClient.BillingResponse.OK) {
 			for (Purchase purchase : purchases) {
-				Product product = inventory.getProduct(productId);
+				Product product = inventory.getProduct(purchase.getSku());
 				try {
 					product.setPurchase(signatureBase64, purchase.getOriginalJson(), purchase.getSignature(), InAppBillingAppModule.get().getDeveloperPayloadVerificationStrategy());
 					LOGGER.debug("Purchase signature successfully verified.");
@@ -426,13 +389,13 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 			}
 		} else if (resultCode == BillingClient.BillingResponse.USER_CANCELED) {
 			if (listener != null) {
-				LOGGER.warn("User cancelled the purchase flow. Product id: " + productId);
-				listener.onPurchaseFailed(InAppBillingErrorCode.USER_CANCELED.newErrorCodeException("User cancelled the purchase flow. Product id: " + productId));
+				LOGGER.warn("User cancelled the purchase flow.");
+				listener.onPurchaseFailed(InAppBillingErrorCode.USER_CANCELED.newErrorCodeException("User cancelled the purchase flow."));
 			}
 		} else {
 			InAppBillingErrorCode inAppBillingErrorCode = InAppBillingErrorCode.findByErrorResponseCode(resultCode);
-			LOGGER.error("Purchase failed. Result code: " + resultCode + ". Product id: " + productId);
-			listener.onPurchaseFailed(inAppBillingErrorCode.newErrorCodeException("Purchase failed. Result code: " + resultCode + ". Product id: " + productId));
+			LOGGER.error("Purchase failed. Result code: " + resultCode);
+			listener.onPurchaseFailed(inAppBillingErrorCode.newErrorCodeException("Purchase failed. Result code: " + resultCode));
 			
 		}
 	}
@@ -503,6 +466,17 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 	 * @return whether subscriptions are supported.
 	 */
 	public boolean isSubscriptionsSupported() {
+		if (subscriptionsSupported == null) {
+			int responseCode = billingClient.isFeatureSupported(BillingClient.FeatureType.SUBSCRIPTIONS);
+			if (responseCode == BillingClient.BillingResponse.OK) {
+				LOGGER.debug("In-app billing subscriptions supported");
+				subscriptionsSupported = true;
+			} else {
+				InAppBillingErrorCode inAppBillingErrorCode = InAppBillingErrorCode.findByErrorResponseCode(responseCode);
+				LOGGER.warn("Subscriptions NOT AVAILABLE. InAppBillingErrorCode: " + inAppBillingErrorCode);
+				subscriptionsSupported = false;
+			}
+		}
 		return subscriptionsSupported;
 	}
 }
