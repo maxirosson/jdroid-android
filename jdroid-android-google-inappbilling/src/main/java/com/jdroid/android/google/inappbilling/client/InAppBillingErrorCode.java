@@ -50,9 +50,6 @@ public enum InAppBillingErrorCode implements ErrorCode {
 	// Send intent failed
 	SEND_INTENT_FAILED(null),
 	
-	// Unknown purchase response
-	UNKNOWN_PURCHASE_RESPONSE(null),
-	
 	// Missing token
 	MISSING_TOKEN(null),
 	

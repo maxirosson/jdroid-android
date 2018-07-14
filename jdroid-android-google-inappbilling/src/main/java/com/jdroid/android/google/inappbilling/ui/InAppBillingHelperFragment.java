@@ -1,24 +1,23 @@
 package com.jdroid.android.google.inappbilling.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 
-import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.activity.AbstractFragmentActivity;
+import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.exception.DefaultExceptionHandler;
 import com.jdroid.android.exception.DialogErrorDisplayer;
 import com.jdroid.android.fragment.AbstractFragment;
 import com.jdroid.android.google.inappbilling.InAppBillingAppModule;
+import com.jdroid.android.google.inappbilling.R;
 import com.jdroid.android.google.inappbilling.client.InAppBillingClient;
 import com.jdroid.android.google.inappbilling.client.InAppBillingClientListener;
 import com.jdroid.android.google.inappbilling.client.InAppBillingErrorCode;
 import com.jdroid.android.google.inappbilling.client.Inventory;
 import com.jdroid.android.google.inappbilling.client.Product;
 import com.jdroid.android.google.inappbilling.client.ProductType;
-import com.jdroid.android.google.inappbilling.R;
 import com.jdroid.java.exception.ErrorCodeException;
 import com.jdroid.java.utils.LoggerUtils;
 
@@ -79,10 +78,7 @@ public class InAppBillingHelperFragment extends AbstractFragment implements InAp
 		subscriptionsProductTypes = getArgument(SUBSCRIPTIONS_PRODUCT_TYPES);
 		silentMode = getArgument(SILENT_MODE);
 		
-		inAppBillingClient = new InAppBillingClient(getActivity());
-		
-		// TODO The use cases logic should be replicated here. With the current approach, if an error happens on while
-		// the app is on the background, when the fragment is resumed, the error dialog is not displayed to the user
+		inAppBillingClient = new InAppBillingClient(getContext());
 		inAppBillingClient.startSetup(this);
 		
 		// TODO To support promotion codes, your app must call the getPurchases() method whenever the app starts or resumes.
@@ -175,25 +171,11 @@ public class InAppBillingHelperFragment extends AbstractFragment implements InAp
 	}
 	
 	@Override
-	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (inAppBillingClient != null) {
-			// Pass on the activity result to the helper for handling
-			if (!inAppBillingClient.handleActivityResult(requestCode, resultCode, data)) {
-				// not handled, so handle it ourselves (here's where you'd perform any handling of activity results not
-				// related to in-app billing...
-				super.onActivityResult(requestCode, resultCode, data);
-			}
-		} else {
-			super.onActivityResult(requestCode, resultCode, data);
-		}
-	}
-	
-	@Override
 	public void onDestroy() {
 		super.onDestroy();
 		
 		if (inAppBillingClient != null) {
-			inAppBillingClient.disposeWhenFinished();
+			inAppBillingClient.onDestroy();
 			inAppBillingClient = null;
 		}
 	}
