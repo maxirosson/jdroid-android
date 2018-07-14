@@ -6,7 +6,6 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 
 import com.jdroid.android.activity.AbstractFragmentActivity;
-import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.exception.DefaultExceptionHandler;
 import com.jdroid.android.exception.DialogErrorDisplayer;
 import com.jdroid.android.fragment.AbstractFragment;
@@ -113,7 +112,6 @@ public class InAppBillingHelperFragment extends AbstractFragment implements InAp
 	
 	@Override
 	public void onQueryInventoryFailed(ErrorCodeException errorCodeException) {
-		AbstractApplication.get().getExceptionHandler().logHandledException(errorCodeException);
 		if (!silentMode) {
 			errorCodeException.setDescription(getString(R.string.jdroid_failedToLoadPurchases));
 			createErrorDisplayer(errorCodeException).displayError(getActivity(), errorCodeException);
@@ -135,14 +133,13 @@ public class InAppBillingHelperFragment extends AbstractFragment implements InAp
 	
 	@Override
 	public void onPurchaseFailed(ErrorCodeException errorCodeException) {
+		// TODO
 		if (DefaultExceptionHandler.matchAnyErrorCode(errorCodeException, InAppBillingErrorCode.USER_CANCELED)) {
-			LOGGER.warn(errorCodeException.getMessage());
-		} else if (DefaultExceptionHandler.matchAnyErrorCode(errorCodeException, InAppBillingErrorCode.DEVELOPER_ERROR,
-			InAppBillingErrorCode.ITEM_UNAVAILABLE)) {
-			AbstractApplication.get().getExceptionHandler().logHandledException(errorCodeException);
+		
+		} else if (DefaultExceptionHandler.matchAnyErrorCode(errorCodeException, InAppBillingErrorCode.DEVELOPER_ERROR, InAppBillingErrorCode.ITEM_UNAVAILABLE)) {
+		
 		} else {
 			DialogErrorDisplayer.markAsNotGoBackOnError(errorCodeException);
-			AbstractApplication.get().getExceptionHandler().logHandledException(errorCodeException);
 			createErrorDisplayer(errorCodeException).displayError(getActivity(), errorCodeException);
 		}
 	}
@@ -157,7 +154,6 @@ public class InAppBillingHelperFragment extends AbstractFragment implements InAp
 	
 	@Override
 	public void onConsumeFailed(ErrorCodeException errorCodeException) {
-		AbstractApplication.get().getExceptionHandler().logHandledException(errorCodeException);
 		if (!silentMode) {
 			createErrorDisplayer(errorCodeException).displayError(getActivity(), errorCodeException);
 		}
