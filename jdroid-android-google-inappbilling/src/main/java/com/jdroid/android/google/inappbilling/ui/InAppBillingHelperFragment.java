@@ -103,6 +103,26 @@ public class InAppBillingHelperFragment extends AbstractFragment implements InAp
 	}
 	
 	@Override
+	public void onQueryProductDetailsFinished(Inventory inventory) {
+	
+	}
+	
+	@Override
+	public void onQueryProductDetailsFailed(ErrorCodeException errorCodeException) {
+	
+	}
+	
+	@Override
+	public void onQueryPurchasesFinished(Inventory inventory) {
+	
+	}
+	
+	@Override
+	public void onQueryPurchasesFailed(ErrorCodeException errorCodeException) {
+	
+	}
+	
+	@Override
 	public void onQueryInventoryFinished(Inventory inventory) {
 		InAppBillingListener inAppBillingListener = getInAppBillingListener();
 		if (inAppBillingListener != null) {

@@ -22,19 +22,53 @@ public interface InAppBillingClientListener {
 	public void onSetupFailed(AbstractException abstractException);
 	
 	/**
-	 * Called to notify that an inventory query operation completed.
+	 * Called to notify that a product details query operation completed.
 	 * 
 	 * @param inventory The inventory.
 	 */
 	@MainThread
-	public void onQueryInventoryFinished(Inventory inventory);
+	public void onQueryProductDetailsFinished(Inventory inventory);
 	
 	/**
-	 * Called to notify that an inventory query operation failed.
+	 * Called to notify that a product details query operation failed.
 	 * 
 	 * @param errorCodeException The result of the operation.
 	 */
 	@MainThread
+	public void onQueryProductDetailsFailed(ErrorCodeException errorCodeException);
+	
+	/**
+	 * Called to notify that a purchases query operation completed.
+	 *
+	 * @param inventory The inventory.
+	 */
+	@MainThread
+	public void onQueryPurchasesFinished(Inventory inventory);
+	
+	/**
+	 * Called to notify that a purchases query operation failed.
+	 *
+	 * @param errorCodeException The result of the operation.
+	 */
+	@MainThread
+	public void onQueryPurchasesFailed(ErrorCodeException errorCodeException);
+	
+	/**
+	 * Called to notify that an inventory query operation completed.
+	 *
+	 * @param inventory The inventory.
+	 */
+	@MainThread
+	@Deprecated
+	public void onQueryInventoryFinished(Inventory inventory);
+	
+	/**
+	 * Called to notify that an inventory query operation failed.
+	 *
+	 * @param errorCodeException The result of the operation.
+	 */
+	@MainThread
+	@Deprecated
 	public void onQueryInventoryFailed(ErrorCodeException errorCodeException);
 	
 	/**

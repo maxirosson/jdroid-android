@@ -56,10 +56,14 @@ public class Inventory {
 	}
 	
 	public Product getProduct(String productId) {
-		return productsMap.get(productId);
+		if (InAppBillingAppModule.get().getInAppBillingContext().isStaticResponsesEnabled()) {
+			return getProductByTestProductId(productId);
+		} else {
+			return productsMap.get(productId);
+		}
 	}
 	
-	public Product getProductByTestProductId(String testProductId) {
+	private Product getProductByTestProductId(String testProductId) {
 		for (Product each : productsMap.values()) {
 			if (testProductId.equals(each.getProductType().getTestProductId())){
 				return each;

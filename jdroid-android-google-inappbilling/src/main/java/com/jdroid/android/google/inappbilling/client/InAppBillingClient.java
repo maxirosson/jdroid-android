@@ -2,6 +2,7 @@ package com.jdroid.android.google.inappbilling.client;
 
 import android.app.Activity;
 import android.support.annotation.MainThread;
+import android.support.annotation.Nullable;
 
 import com.android.billingclient.api.BillingClient;
 import com.android.billingclient.api.BillingClientStateListener;
@@ -72,7 +73,7 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 	// TODO Maybe we should have a register/unregister logic like usecases. What happen if the listener is invoked when the app is on background?
 	private InAppBillingClientListener listener;
 	
-	private Inventory inventory;
+	private Inventory inventory = new Inventory();
 	
 	/**
 	 * Creates an instance. After creation, it will not yet be ready to use. You must perform setup by calling
@@ -154,6 +155,7 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 	}
 	
 	public void onDestroy() {
+		LOGGER.debug("Destroying billing client.");
 		if (billingClient != null && billingClient.isReady()) {
 			billingClient.endConnection();
 			billingClient = null;
@@ -168,33 +170,30 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 	 * @param subscriptionsProductTypes the subscriptions {@link ProductType}s supported by the app
 	 */
 	@MainThread
+	@Deprecated
 	public void queryInventory(List<ProductType> managedProductTypes, List<ProductType> subscriptionsProductTypes) {
 		executeServiceRequest(new Runnable() {
 			
 			@Override
 			public void run() {
 				try {
-					inventory = new Inventory();
 					if (!managedProductTypes.isEmpty()) {
-						queryProductsDetails(inventory, ItemType.MANAGED, managedProductTypes);
-						queryPurchases(inventory, ItemType.MANAGED);
+						queryProductsDetailsInternal(ItemType.MANAGED, managedProductTypes);
+						queryPurchasesInternal(ItemType.MANAGED);
 					}
 					
 					// if subscriptions are supported, then also query for subscriptions
-					if (!subscriptionsProductTypes.isEmpty() && isSubscriptionsSupported()) {
-						queryProductsDetails(inventory, ItemType.SUBSCRIPTION, subscriptionsProductTypes);
-						queryPurchases(inventory, ItemType.SUBSCRIPTION);
+					if (!subscriptionsProductTypes.isEmpty()) {
+						queryProductsDetailsInternal(ItemType.SUBSCRIPTION, subscriptionsProductTypes);
+						queryPurchasesInternal(ItemType.SUBSCRIPTION);
 					}
+					
+					// TODO Threads issue here
 					
 					LOGGER.debug("Query inventory was successful.");
 					
-					InAppBillingAppModule.get().getInAppBillingContext().setPurchasedProductTypes(inventory);
-					
 					if (listener != null) {
 						listener.onQueryInventoryFinished(inventory);
-					}
-					for (Product each : inventory.getProductsWaitingToConsume()) {
-						consume(each);
 					}
 				} catch (Exception e) {
 					AbstractApplication.get().getExceptionHandler().logHandledException(e);
@@ -207,10 +206,153 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 	}
 	
 	@MainThread
-	private void queryPurchases(Inventory inventory, ItemType itemType) throws ErrorCodeException {
+	public void queryPurchases() {
+		queryPurchases(null);
+	}
+	
+	@MainThread
+	public void queryPurchases(@Nullable ItemType itemType) {
+		executeServiceRequest(new Runnable() {
+			@Override
+			public void run() {
+				
+				if (ItemType.SUBSCRIPTION.equals(itemType) && !isSubscriptionsSupported()) {
+					LOGGER.debug("Query product details failed. Subscriptions not supported.");
+					if (listener != null) {
+						listener.onPurchaseFailed(InAppBillingErrorCode.SUBSCRIPTIONS_NOT_AVAILABLE.newErrorCodeException());
+					}
+					return;
+				}
+				
+				LOGGER.debug("Querying owned items." + (itemType != null ? (" Item type + " + itemType) : ""));
+				try {
+					List<Purchase> purchases = Lists.newArrayList();
+					if (itemType == null) {
+						purchases.addAll(getPurchases(ItemType.MANAGED));
+						if (isSubscriptionsSupported()) {
+							purchases.addAll(getPurchases(ItemType.SUBSCRIPTION));
+						}
+					} else {
+						purchases.addAll(getPurchases(itemType));
+					}
+					
+					for (Purchase purchase : purchases) {
+						String purchaseJson = purchase.getOriginalJson();
+						String signature = purchase.getSignature();
+						String productId = purchase.getSku();
+						
+						Product product = inventory.getProduct(productId);
+						
+						// TODO Call to onPurchasesUpdated ?. See duplicated logic
+						
+						if (product != null) {
+							try {
+								LOGGER.debug("Setting purchase to product: " + productId + ". " + purchaseJson);
+								product.setPurchase(signatureBase64, purchaseJson, signature, InAppBillingAppModule.get().getDeveloperPayloadVerificationStrategy());
+							} catch (ErrorCodeException e) {
+								AbstractApplication.get().getExceptionHandler().logHandledException(e);
+							}
+						} else {
+							AbstractApplication.get().getExceptionHandler().logWarningException(
+									"The purchased product [" + productId + "] is not supported by the app, so it is ignored");
+						}
+					}
+					
+					for (Product each : inventory.getProductsWaitingToConsume()) {
+						consume(each);
+					}
+					
+					InAppBillingAppModule.get().getInAppBillingContext().setPurchasedProductTypes(inventory);
+					if (listener != null) {
+						listener.onQueryPurchasesFinished(inventory);
+					}
+				} catch (JSONException e) {
+					AbstractApplication.get().getExceptionHandler().logHandledException(e);
+					if (listener != null) {
+						listener.onQueryPurchasesFailed(InAppBillingErrorCode.BAD_PURCHASE_DATA.newErrorCodeException(e));
+					}
+				}
+			}
+		});
+	}
+	
+	private List<Purchase> getPurchases(ItemType itemType) {
+		Purchase.PurchasesResult purchasesResult = billingClient.queryPurchases(itemType.getType());
+		InAppBillingErrorCode inAppBillingErrorCode = InAppBillingErrorCode.findByErrorResponseCode(purchasesResult.getResponseCode());
+		if (inAppBillingErrorCode != null) {
+			ErrorCodeException errorCodeException = inAppBillingErrorCode.newErrorCodeException("getPurchases() failed querying " + itemType);
+			AbstractApplication.get().getExceptionHandler().logHandledException(errorCodeException);
+			if (listener != null) {
+				listener.onQueryPurchasesFailed(errorCodeException);
+			}
+		}
+		return purchasesResult.getPurchasesList();
+	}
+	
+	/**
+	 * Handle a callback that purchases were updated from the Billing library
+	 */
+	@Override
+	public void onPurchasesUpdated(int resultCode, List<Purchase> purchases) {
+		InAppBillingErrorCode inAppBillingErrorCode = InAppBillingErrorCode.findByErrorResponseCode(resultCode);
+		if (inAppBillingErrorCode == null) {
+			for (Purchase purchase : purchases) {
+				String productId = purchase.getSku();
+				Product product = inventory.getProduct(productId);
+				try {
+					if (product != null) {
+						product.setPurchase(signatureBase64, purchase.getOriginalJson(), purchase.getSignature(), InAppBillingAppModule.get().getDeveloperPayloadVerificationStrategy());
+						InAppBillingAppModule.get().getInAppBillingContext().addPurchasedProductType(product.getProductType());
+						InAppBillingAppModule.get().getModuleAnalyticsSender().trackInAppBillingPurchase(product);
+						if (listener != null) {
+							listener.onPurchaseFinished(product);
+						}
+						if (product.isWaitingToConsume()) {
+							consume(product);
+						} else if (listener != null) {
+							listener.onProvideProduct(product);
+						}
+					} else {
+						AbstractApplication.get().getExceptionHandler().logWarningException(
+								"The purchased product [" + productId + "] is not supported by the app, so it is ignored");
+					}
+				} catch (ErrorCodeException e) {
+					AbstractApplication.get().getExceptionHandler().logHandledException(e);
+					if (listener != null) {
+						listener.onPurchaseFailed(e);
+					}
+				} catch (JSONException e) {
+					AbstractApplication.get().getExceptionHandler().logHandledException(e);
+					if (listener != null) {
+						listener.onPurchaseFailed(InAppBillingErrorCode.BAD_PURCHASE_DATA.newErrorCodeException(e));
+					}
+				}
+			}
+		} else if (inAppBillingErrorCode.equals(InAppBillingErrorCode.USER_CANCELED)) {
+			LOGGER.warn("User cancelled the purchase flow.");
+			if (listener != null) {
+				listener.onPurchaseFailed(InAppBillingErrorCode.USER_CANCELED.newErrorCodeException("User cancelled the purchase flow."));
+			}
+		} else {
+			AbstractApplication.get().getExceptionHandler().logHandledException(inAppBillingErrorCode.newErrorCodeException());
+			if (listener != null) {
+				listener.onPurchaseFailed(inAppBillingErrorCode.newErrorCodeException("Purchase failed. Result code: " + resultCode));
+			}
+			
+		}
+	}
+	
+	@MainThread
+	@Deprecated
+	private void queryPurchasesInternal(ItemType itemType) throws ErrorCodeException {
+		
+		if (itemType == ItemType.SUBSCRIPTION && !isSubscriptionsSupported()) {
+			return;
+		}
+		
 		LOGGER.debug("Querying owned items, item type: " + itemType);
 		try {
-			Purchase.PurchasesResult purchasesResult = billingClient.queryPurchases(BillingClient.SkuType.INAPP);
+			Purchase.PurchasesResult purchasesResult = billingClient.queryPurchases(itemType.getType());
 			InAppBillingErrorCode inAppBillingErrorCode = InAppBillingErrorCode.findByErrorResponseCode(purchasesResult.getResponseCode());
 			if (inAppBillingErrorCode != null) {
 				throw inAppBillingErrorCode.newErrorCodeException("getPurchases() failed querying " + itemType);
@@ -221,12 +363,7 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 				String signature = purchase.getSignature();
 				String productId = purchase.getSku();
 				
-				Product product = null;
-				if (InAppBillingAppModule.get().getInAppBillingContext().isStaticResponsesEnabled()) {
-					product = inventory.getProductByTestProductId(productId);
-				} else {
-					product = inventory.getProduct(productId);
-				}
+				Product product = inventory.getProduct(productId);
 				if (product != null) {
 					try {
 						LOGGER.debug("Setting purchase to product: " + productId + ". " + purchaseJson);
@@ -239,13 +376,93 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 							"The purchased product [" + productId + "] is not supported by the app, so it is ignored");
 				}
 			}
+			
+			for (Product each : inventory.getProductsWaitingToConsume()) {
+				consume(each);
+			}
+			
+			InAppBillingAppModule.get().getInAppBillingContext().setPurchasedProductTypes(inventory);
 		} catch (JSONException e) {
 			throw InAppBillingErrorCode.BAD_PURCHASE_DATA.newErrorCodeException(e);
 		}
 	}
 	
 	@MainThread
-	private void queryProductsDetails(Inventory inventory, ItemType itemType, List<ProductType> productTypes) throws ErrorCodeException {
+	private void queryProductsDetails(ItemType itemType, List<ProductType> productTypes) {
+		executeServiceRequest(new Runnable() {
+			@Override
+			public void run() {
+				
+				if (itemType == ItemType.SUBSCRIPTION && !isSubscriptionsSupported()) {
+					LOGGER.debug("Query product details failed. Subscriptions not supported.");
+					if (listener != null) {
+						listener.onPurchaseFailed(InAppBillingErrorCode.SUBSCRIPTIONS_NOT_AVAILABLE.newErrorCodeException());
+					}
+					return;
+				}
+				
+				InAppBillingContext inAppBillingContext = InAppBillingAppModule.get().getInAppBillingContext();
+				
+				LOGGER.debug("Querying products details, item type: " + itemType);
+				List<String> productsIdsToQuery = Lists.newArrayList();
+				for (ProductType each : productTypes) {
+					String productId = inAppBillingContext.isStaticResponsesEnabled() ? each.getTestProductId() : each.getProductId();
+					if (!productsIdsToQuery.contains(productId)) {
+						productsIdsToQuery.add(productId);
+					}
+				}
+				
+				if (!productsIdsToQuery.isEmpty()) {
+					
+					SkuDetailsParams.Builder params = SkuDetailsParams.newBuilder();
+					params.setSkusList(productsIdsToQuery).setType(itemType.getType());
+					billingClient.querySkuDetailsAsync(params.build(), new SkuDetailsResponseListener() {
+						@Override
+						public void onSkuDetailsResponse(int responseCode, List<SkuDetails> skuDetailsList) {
+							InAppBillingErrorCode inAppBillingErrorCode = InAppBillingErrorCode.findByErrorResponseCode(responseCode);
+							if (inAppBillingErrorCode == null) {
+								Map<String, SkuDetails> map = Maps.newHashMap();
+								for (SkuDetails skuDetails : skuDetailsList) {
+									map.put(skuDetails.getSku(), skuDetails);
+								}
+								
+								for (ProductType each : productTypes) {
+									SkuDetails skuDetails = map.get(inAppBillingContext.isStaticResponsesEnabled() ? each.getTestProductId() : each.getProductId());
+									if (skuDetails != null) {
+										String title = each.getTitleId() != null ? LocalizationUtils.getString(each.getTitleId()) : skuDetails.getTitle();
+										String description = each.getDescriptionId() != null ? LocalizationUtils.getString(each.getDescriptionId()) : skuDetails.getDescription();
+										Product product = new Product(each, skuDetails.getPrice(),
+												(double)skuDetails.getPriceAmountMicros() / 1000000, skuDetails.getPriceCurrencyCode(), title, description);
+										LOGGER.debug("Adding to inventory: " + product);
+										inventory.addProduct(product);
+									}
+								}
+								
+								if (listener != null) {
+									listener.onQueryProductDetailsFinished(inventory);
+								}
+								
+							} else {
+								ErrorCodeException errorCodeException = inAppBillingErrorCode.newErrorCodeException("Failed querying " + itemType);
+								AbstractApplication.get().getExceptionHandler().logHandledException(errorCodeException);
+								if (listener != null) {
+									listener.onQueryProductDetailsFailed(errorCodeException);
+								}
+							}
+						}
+					});
+				}
+			}
+		});
+	}
+	
+	@MainThread
+	@Deprecated
+	private void queryProductsDetailsInternal(ItemType itemType, List<ProductType> productTypes) throws ErrorCodeException {
+		
+		if (itemType == ItemType.SUBSCRIPTION && !isSubscriptionsSupported()) {
+			return;
+		}
 		
 		InAppBillingContext inAppBillingContext = InAppBillingAppModule.get().getInAppBillingContext();
 		
@@ -260,7 +477,7 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 		
 		if (!productsIdsToQuery.isEmpty()) {
 			
-			Runnable queryRequest = new Runnable() {
+			executeServiceRequest(new Runnable() {
 				@Override
 				public void run() {
 					SkuDetailsParams.Builder params = SkuDetailsParams.newBuilder();
@@ -292,8 +509,7 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 						}
 					});
 				}
-			};
-			executeServiceRequest(queryRequest);
+			});
 		}
 	}
 	
@@ -352,54 +568,6 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 	}
 	
 	/**
-	 * Handle a callback that purchases were updated from the Billing library
-	 */
-	@Override
-	public void onPurchasesUpdated(int resultCode, List<Purchase> purchases) {
-		InAppBillingErrorCode inAppBillingErrorCode = InAppBillingErrorCode.findByErrorResponseCode(resultCode);
-		if (inAppBillingErrorCode == null) {
-			for (Purchase purchase : purchases) {
-				Product product = inventory.getProduct(purchase.getSku());
-				try {
-					product.setPurchase(signatureBase64, purchase.getOriginalJson(), purchase.getSignature(), InAppBillingAppModule.get().getDeveloperPayloadVerificationStrategy());
-					LOGGER.debug("Purchase signature successfully verified.");
-					InAppBillingAppModule.get().getInAppBillingContext().addPurchasedProductType(product.getProductType());
-					InAppBillingAppModule.get().getModuleAnalyticsSender().trackInAppBillingPurchase(product);
-					if (listener != null) {
-						listener.onPurchaseFinished(product);
-					}
-					if (product.isWaitingToConsume()) {
-						consume(product);
-					} else if (listener != null) {
-						listener.onProvideProduct(product);
-					}
-				} catch (ErrorCodeException e) {
-					AbstractApplication.get().getExceptionHandler().logHandledException(e);
-					if (listener != null) {
-						listener.onPurchaseFailed(e);
-					}
-				} catch (JSONException e) {
-					AbstractApplication.get().getExceptionHandler().logHandledException(e);
-					if (listener != null) {
-						listener.onPurchaseFailed(InAppBillingErrorCode.BAD_PURCHASE_DATA.newErrorCodeException(e));
-					}
-				}
-			}
-		} else if (inAppBillingErrorCode.equals(InAppBillingErrorCode.USER_CANCELED)) {
-			LOGGER.warn("User cancelled the purchase flow.");
-			if (listener != null) {
-				listener.onPurchaseFailed(InAppBillingErrorCode.USER_CANCELED.newErrorCodeException("User cancelled the purchase flow."));
-			}
-		} else {
-			AbstractApplication.get().getExceptionHandler().logHandledException(inAppBillingErrorCode.newErrorCodeException());
-			if (listener != null) {
-				listener.onPurchaseFailed(inAppBillingErrorCode.newErrorCodeException("Purchase failed. Result code: " + resultCode));
-			}
-			
-		}
-	}
-	
-	/**
 	 * Consumes a given in-app product. Consuming can only be done on an item that's owned, and as a result of
 	 * consumption, the user will no longer own it.
 	 * 
@@ -432,7 +600,7 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 			LOGGER.debug("Consuming productId: " + productId + ", token: " + token);
 			
 			// Generating Consume Response listener
-			final ConsumeResponseListener onConsumeListener = new ConsumeResponseListener() {
+			ConsumeResponseListener onConsumeListener = new ConsumeResponseListener() {
 				@Override
 				public void onConsumeResponse(@BillingClient.BillingResponse int responseCode, String purchaseToken) {
 					InAppBillingErrorCode inAppBillingErrorCode = InAppBillingErrorCode.findByErrorResponseCode(responseCode);
