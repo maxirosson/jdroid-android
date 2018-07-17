@@ -46,7 +46,7 @@ public class AppUtils {
 				applicationId = applicationId.replace(".debug", "");
 			}
 		}
-		return  applicationId;
+		return applicationId;
 	}
 	
 	public static String getBuildType() {

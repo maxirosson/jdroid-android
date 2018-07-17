@@ -10,7 +10,7 @@ import com.jdroid.android.utils.ExternalAppsUtils;
 public abstract class GooglePlusDeeplinkSharingItem extends SharingItem {
 	
 	@Override
-	public String getPackageName() {
+	public String getApplicationId() {
 		return ExternalAppsUtils.GOOGLE_PLUS_PACKAGE_NAME;
 	}
 	

@@ -18,6 +18,6 @@ public class SmsSharingItem extends AppSharingItem {
 	
 	@Override
 	public Boolean isEnabled() {
-		return super.isEnabled() && !getPackageName().equals(ExternalAppsUtils.HANGOUTS_PACKAGE_NAME);
+		return super.isEnabled() && !getApplicationId().equals(ExternalAppsUtils.HANGOUTS_PACKAGE_NAME);
 	}
 }

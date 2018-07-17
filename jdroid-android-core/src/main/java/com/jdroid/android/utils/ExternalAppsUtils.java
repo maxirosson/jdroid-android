@@ -33,13 +33,13 @@ public class ExternalAppsUtils {
 	public static final String GOOGLE_PLUS_PACKAGE_NAME = "com.google.android.apps.plus";
 	public static final String GOOGLE_MAPS_PACKAGE_NAME = "com.google.android.apps.maps";
 	
-	public static boolean isAppInstalled(String packageName) {
-		return isAppInstalled(packageName, null);
+	public static boolean isAppInstalled(String applicationId) {
+		return isAppInstalled(applicationId, null);
 	}
 	
-	public static boolean isAppInstalled(String packageName, Integer minimumVersionCode) {
+	public static boolean isAppInstalled(String applicationId, Integer minimumVersionCode) {
 		boolean installed = false;
-		Integer installedAppVersionCode = getInstalledAppVersionCode(packageName);
+		Integer installedAppVersionCode = getInstalledAppVersionCode(applicationId);
 		if (installedAppVersionCode != null) {
 			if ((minimumVersionCode == null) || (installedAppVersionCode >= minimumVersionCode)) {
 				installed = true;
@@ -48,10 +48,10 @@ public class ExternalAppsUtils {
 		return installed;
 	}
 
-	public static Integer getInstalledAppVersionCode(String packageName) {
+	public static Integer getInstalledAppVersionCode(String applicationId) {
 		PackageManager pm = AbstractApplication.get().getPackageManager();
 		try {
-			PackageInfo packageInfo = pm.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES);
+			PackageInfo packageInfo = pm.getPackageInfo(applicationId, PackageManager.GET_ACTIVITIES);
 			return packageInfo.versionCode;
 		} catch (PackageManager.NameNotFoundException e) {
 			return null;
@@ -68,27 +68,27 @@ public class ExternalAppsUtils {
 	}
 	
 	/**
-	 * Launch packageName app or open Google Play to download.
+	 * Launch applicationId app or open Google Play to download.
 	 * 
-	 * @param packageName
+	 * @param applicationId
 	 * @return true if app is installed, false otherwise.
 	 */
-	public static boolean launchOrDownloadApp(String packageName) {
-		boolean isAppInstalled = isAppInstalled(packageName);
+	public static boolean launchOrDownloadApp(String applicationId) {
+		boolean isAppInstalled = isAppInstalled(applicationId);
 		if (isAppInstalled) {
-			launchExternalApp(packageName);
+			launchExternalApp(applicationId);
 		} else {
-			GooglePlayUtils.launchAppDetails(packageName);
+			GooglePlayUtils.launchAppDetails(applicationId);
 		}
 		return isAppInstalled;
 	}
 	
-	public static void launchExternalApp(String packageName) {
-		Intent launchIntent = AbstractApplication.get().getPackageManager().getLaunchIntentForPackage(packageName);
+	public static void launchExternalApp(String applicationId) {
+		Intent launchIntent = AbstractApplication.get().getPackageManager().getLaunchIntentForPackage(applicationId);
 		if (launchIntent != null) {
 			ActivityLauncher.startActivityNewTask(launchIntent);
 		} else {
-			LOGGER.info("Could not open launch intent for package: " + packageName);
+			LOGGER.info("Could not open launch intent for applicationId: " + applicationId);
 		}
 	}
 	
@@ -135,9 +135,9 @@ public class ExternalAppsUtils {
 		ActivityLauncher.startActivityNewTask(intent);
 	}
 	
-	public static Drawable getAppIcon(String packageName) {
+	public static Drawable getAppIcon(String applicationId) {
 		try {
-			return AbstractApplication.get().getPackageManager().getApplicationIcon(packageName);
+			return AbstractApplication.get().getPackageManager().getApplicationIcon(applicationId);
 		} catch (NameNotFoundException e) {
 			return null;
 		}
