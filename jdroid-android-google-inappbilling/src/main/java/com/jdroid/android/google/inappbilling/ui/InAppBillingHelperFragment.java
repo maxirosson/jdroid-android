@@ -86,20 +86,20 @@ public class InAppBillingHelperFragment extends AbstractFragment implements InAp
 		// The simplest approach is to call getPurchases() in your activity's onResume() method, since that callback fires when the activity is created, as well as when the activity is unpaused.
 	}
 	
-	@Override
-	public void onSetupFinished() {
-		inAppBillingClient.queryProductsDetails(ItemType.MANAGED, managedProductTypes);
-	}
-	
 	public InAppBillingListener getInAppBillingListener() {
 		return (InAppBillingListener)getTargetFragment();
 	}
 	
 	@Override
+	public void onSetupFinished() {
+		inAppBillingClient.queryProductsDetails(ItemType.MANAGED, managedProductTypes);
+	}
+	
+	@Override
 	public void onSetupFailed(AbstractException abstractException) {
 		if (!silentMode) {
-			// TODO
-			//createErrorDisplayer(errorCodeException).displayError(getActivity(), errorCodeException);
+			abstractException.setDescription(getString(R.string.jdroid_failedToLoadPurchases));
+			createErrorDisplayer(abstractException).displayError(getActivity(), abstractException);
 		}
 	}
 	
@@ -126,7 +126,10 @@ public class InAppBillingHelperFragment extends AbstractFragment implements InAp
 	
 	@Override
 	public void onQueryPurchasesFailed(ErrorCodeException errorCodeException) {
-	
+		if (!silentMode) {
+			errorCodeException.setDescription(getString(R.string.jdroid_failedToLoadPurchases));
+			createErrorDisplayer(errorCodeException).displayError(getActivity(), errorCodeException);
+		}
 	}
 	
 	public void launchPurchaseFlow(Product product) {

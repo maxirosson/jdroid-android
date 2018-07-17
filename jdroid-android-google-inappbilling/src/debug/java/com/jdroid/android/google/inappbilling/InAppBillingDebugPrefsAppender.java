@@ -3,10 +3,12 @@ package com.jdroid.android.google.inappbilling;
 import android.app.Activity;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
+import android.preference.Preference;
 import android.preference.PreferenceGroup;
 
 import com.jdroid.android.debug.PreferencesAppender;
 import com.jdroid.android.google.inappbilling.client.ProductType;
+import com.jdroid.android.google.inappbilling.client.SimpleDeveloperPayloadVerificationStrategy;
 import com.jdroid.java.collections.Lists;
 
 import java.util.List;
@@ -25,6 +27,23 @@ public class InAppBillingDebugPrefsAppender extends PreferencesAppender {
 		checkBoxPreference.setKey(InAppBillingContext.STATIC_RESPONSES_ENABLED);
 		checkBoxPreference.setTitle(R.string.jdroid_inAppBillingStaticResponsesTitle);
 		checkBoxPreference.setSummary(R.string.jdroid_inAppBillingStaticResponsesDescription);
+		preferenceGroup.addPreference(checkBoxPreference);
+		
+		checkBoxPreference = new CheckBoxPreference(activity);
+		checkBoxPreference.setKey(TestDeveloperPayloadVerificationStrategy.VALID_TEST_VERIFICATION_ENABLED);
+		checkBoxPreference.setTitle(R.string.jdroid_inAppBillingTestVerificationTitle);
+		checkBoxPreference.setSummary(R.string.jdroid_inAppBillingTestVerificationDescription);
+		checkBoxPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+			@Override
+			public boolean onPreferenceChange(Preference preference, Object newValue) {
+				if ((Boolean)newValue) {
+					InAppBillingAppModule.get().setDeveloperPayloadVerificationStrategy(new TestDeveloperPayloadVerificationStrategy());
+				} else {
+					InAppBillingAppModule.get().setDeveloperPayloadVerificationStrategy(new SimpleDeveloperPayloadVerificationStrategy());
+				}
+				return true;
+			}
+		});
 		preferenceGroup.addPreference(checkBoxPreference);
 		
 		// Purchased products

@@ -408,12 +408,7 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 					InAppBillingErrorCode inAppBillingErrorCode = InAppBillingErrorCode.findByErrorResponseCode(responseCode);
 					if (inAppBillingErrorCode != null) {
 						if (listener != null) {
-							// TODO It this possible to get this error?
-							if (inAppBillingErrorCode != InAppBillingErrorCode.USER_CANCELED) {
-								AbstractApplication.get().getExceptionHandler().logHandledException(inAppBillingErrorCode.newErrorCodeException());
-							} else {
-								LOGGER.warn("In-app purchase flow cancelled by the user");
-							}
+							AbstractApplication.get().getExceptionHandler().logHandledException(inAppBillingErrorCode.newErrorCodeException());
 							listener.onPurchaseFailed(inAppBillingErrorCode.newErrorCodeException());
 						}
 					}

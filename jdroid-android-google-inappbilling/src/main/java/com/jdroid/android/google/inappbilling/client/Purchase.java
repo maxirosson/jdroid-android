@@ -121,12 +121,10 @@ public class Purchase {
 		// TODO Perform signature verification tasks on a server
 		if (productId.startsWith("android.test") || Security.verifyPurchase(signatureBase64, purchaseJson, signature)) {
 			if (!developerPayloadVerificationStrategy.verify(product)) {
-				throw InAppBillingErrorCode.VERIFICATION_FAILED.newErrorCodeException("Purchase developer payload verification FAILED. "
-						+ purchaseJson);
+				throw InAppBillingErrorCode.VERIFICATION_FAILED.newErrorCodeException("Purchase developer payload verification FAILED. " + purchaseJson);
 			}
 		} else {
-			throw InAppBillingErrorCode.VERIFICATION_FAILED.newErrorCodeException("Purchase signature verification FAILED. "
-					+ purchaseJson);
+			throw InAppBillingErrorCode.VERIFICATION_FAILED.newErrorCodeException("Purchase signature verification FAILED. " + purchaseJson);
 		}
 		
 		verified = true;
