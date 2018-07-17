@@ -162,49 +162,6 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 		}
 	}
 	
-	/**
-	 * This will query all supported items from the server. This will do so asynchronously and call back the specified
-	 * listener upon completion.
-	 * 
-	 * @param managedProductTypes the managed {@link ProductType}s supported by the app
-	 * @param subscriptionsProductTypes the subscriptions {@link ProductType}s supported by the app
-	 */
-	@MainThread
-	@Deprecated
-	public void queryInventory(List<ProductType> managedProductTypes, List<ProductType> subscriptionsProductTypes) {
-		executeServiceRequest(new Runnable() {
-			
-			@Override
-			public void run() {
-				try {
-					if (!managedProductTypes.isEmpty()) {
-						queryProductsDetailsInternal(ItemType.MANAGED, managedProductTypes);
-						queryPurchasesInternal(ItemType.MANAGED);
-					}
-					
-					// if subscriptions are supported, then also query for subscriptions
-					if (!subscriptionsProductTypes.isEmpty()) {
-						queryProductsDetailsInternal(ItemType.SUBSCRIPTION, subscriptionsProductTypes);
-						queryPurchasesInternal(ItemType.SUBSCRIPTION);
-					}
-					
-					// TODO Threads issue here
-					
-					LOGGER.debug("Query inventory was successful.");
-					
-					if (listener != null) {
-						listener.onQueryInventoryFinished(inventory);
-					}
-				} catch (Exception e) {
-					AbstractApplication.get().getExceptionHandler().logHandledException(e);
-					if (listener != null) {
-						listener.onQueryInventoryFailed(e instanceof ErrorCodeException ? (ErrorCodeException)e : InAppBillingErrorCode.UNEXPECTED_ERROR.newErrorCodeException(e));
-					}
-				}
-			}
-		});
-	}
-	
 	@MainThread
 	public void queryPurchases() {
 		queryPurchases(null);
@@ -343,52 +300,7 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 	}
 	
 	@MainThread
-	@Deprecated
-	private void queryPurchasesInternal(ItemType itemType) throws ErrorCodeException {
-		
-		if (itemType == ItemType.SUBSCRIPTION && !isSubscriptionsSupported()) {
-			return;
-		}
-		
-		LOGGER.debug("Querying owned items, item type: " + itemType);
-		try {
-			Purchase.PurchasesResult purchasesResult = billingClient.queryPurchases(itemType.getType());
-			InAppBillingErrorCode inAppBillingErrorCode = InAppBillingErrorCode.findByErrorResponseCode(purchasesResult.getResponseCode());
-			if (inAppBillingErrorCode != null) {
-				throw inAppBillingErrorCode.newErrorCodeException("getPurchases() failed querying " + itemType);
-			}
-			
-			for (Purchase purchase : purchasesResult.getPurchasesList()) {
-				String purchaseJson = purchase.getOriginalJson();
-				String signature = purchase.getSignature();
-				String productId = purchase.getSku();
-				
-				Product product = inventory.getProduct(productId);
-				if (product != null) {
-					try {
-						LOGGER.debug("Setting purchase to product: " + productId + ". " + purchaseJson);
-						product.setPurchase(signatureBase64, purchaseJson, signature, InAppBillingAppModule.get().getDeveloperPayloadVerificationStrategy());
-					} catch (ErrorCodeException e) {
-						AbstractApplication.get().getExceptionHandler().logHandledException(e);
-					}
-				} else {
-					AbstractApplication.get().getExceptionHandler().logWarningException(
-							"The purchased product [" + productId + "] is not supported by the app, so it is ignored");
-				}
-			}
-			
-			for (Product each : inventory.getProductsWaitingToConsume()) {
-				consume(each);
-			}
-			
-			InAppBillingAppModule.get().getInAppBillingContext().setPurchasedProductTypes(inventory);
-		} catch (JSONException e) {
-			throw InAppBillingErrorCode.BAD_PURCHASE_DATA.newErrorCodeException(e);
-		}
-	}
-	
-	@MainThread
-	private void queryProductsDetails(ItemType itemType, List<ProductType> productTypes) {
+	public void queryProductsDetails(ItemType itemType, List<ProductType> productTypes) {
 		executeServiceRequest(new Runnable() {
 			@Override
 			public void run() {
@@ -454,63 +366,6 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 				}
 			}
 		});
-	}
-	
-	@MainThread
-	@Deprecated
-	private void queryProductsDetailsInternal(ItemType itemType, List<ProductType> productTypes) throws ErrorCodeException {
-		
-		if (itemType == ItemType.SUBSCRIPTION && !isSubscriptionsSupported()) {
-			return;
-		}
-		
-		InAppBillingContext inAppBillingContext = InAppBillingAppModule.get().getInAppBillingContext();
-		
-		LOGGER.debug("Querying products details, item type: " + itemType);
-		ArrayList<String> productsIdsToQuery = Lists.newArrayList();
-		for (ProductType each : productTypes) {
-			String productId = inAppBillingContext.isStaticResponsesEnabled() ? each.getTestProductId() : each.getProductId();
-			if (!productsIdsToQuery.contains(productId)) {
-				productsIdsToQuery.add(productId);
-			}
-		}
-		
-		if (!productsIdsToQuery.isEmpty()) {
-			
-			executeServiceRequest(new Runnable() {
-				@Override
-				public void run() {
-					SkuDetailsParams.Builder params = SkuDetailsParams.newBuilder();
-					params.setSkusList(productsIdsToQuery).setType(itemType.getType());
-					billingClient.querySkuDetailsAsync(params.build(), new SkuDetailsResponseListener() {
-						@Override
-						public void onSkuDetailsResponse(int responseCode, List<SkuDetails> skuDetailsList) {
-							InAppBillingErrorCode inAppBillingErrorCode = InAppBillingErrorCode.findByErrorResponseCode(responseCode);
-							if (inAppBillingErrorCode == null) {
-								Map<String, SkuDetails> map = Maps.newHashMap();
-								for (SkuDetails skuDetails : skuDetailsList) {
-									map.put(skuDetails.getSku(), skuDetails);
-								}
-								
-								for (ProductType each : productTypes) {
-									SkuDetails skuDetails = map.get(inAppBillingContext.isStaticResponsesEnabled() ? each.getTestProductId() : each.getProductId());
-									if (skuDetails != null) {
-										String title = each.getTitleId() != null ? LocalizationUtils.getString(each.getTitleId()) : skuDetails.getTitle();
-										String description = each.getDescriptionId() != null ? LocalizationUtils.getString(each.getDescriptionId()) : skuDetails.getDescription();
-										Product product = new Product(each, skuDetails.getPrice(),
-												(double)skuDetails.getPriceAmountMicros() / 1000000, skuDetails.getPriceCurrencyCode(), title, description);
-										LOGGER.debug("Adding to inventory: " + product);
-										inventory.addProduct(product);
-									}
-								}
-							} else {
-								throw inAppBillingErrorCode.newErrorCodeException("Failed querying " + itemType);
-							}
-						}
-					});
-				}
-			});
-		}
 	}
 	
 	@MainThread

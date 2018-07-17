@@ -9,7 +9,6 @@ public enum SampleProductType implements ProductType {
 	
 	CONSUMABLE_PURCHASED("sample.consumable.purchased.id", TestProductType.PURCHASED, true, null, null),
 	CONSUMABLE_CANCELED("sample.consumable.canceled.id", TestProductType.CANCELED, true, null, null),
-	CONSUMABLE_REFUNDED("sample.consumable.refunded.id", TestProductType.REFUNDED, true, null, null),
 	CONSUMABLE_UNAVAILABLED("sample.consumable.unavailable.id", TestProductType.UNAVAILABLE, true, null, null);
 //	NOT_CONSUMABLE_PURCHASED("sample.not.consumable.purchased.id", TestProductType.PURCHASED, false, null, null),
 //	NOT_CONSUMABLE_CANCELED("sample.not.consumable.canceled.id", TestProductType.CANCELED, false, null, null),

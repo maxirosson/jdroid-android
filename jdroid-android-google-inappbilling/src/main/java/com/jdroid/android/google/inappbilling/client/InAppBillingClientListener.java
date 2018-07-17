@@ -54,24 +54,6 @@ public interface InAppBillingClientListener {
 	public void onQueryPurchasesFailed(ErrorCodeException errorCodeException);
 	
 	/**
-	 * Called to notify that an inventory query operation completed.
-	 *
-	 * @param inventory The inventory.
-	 */
-	@MainThread
-	@Deprecated
-	public void onQueryInventoryFinished(Inventory inventory);
-	
-	/**
-	 * Called to notify that an inventory query operation failed.
-	 *
-	 * @param errorCodeException The result of the operation.
-	 */
-	@MainThread
-	@Deprecated
-	public void onQueryInventoryFailed(ErrorCodeException errorCodeException);
-	
-	/**
 	 * Called to notify that an in-app purchase finished.
 	 * 
 	 * @param product The {@link Product} purchased

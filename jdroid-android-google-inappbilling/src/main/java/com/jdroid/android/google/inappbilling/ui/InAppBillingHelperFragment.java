@@ -15,6 +15,7 @@ import com.jdroid.android.google.inappbilling.client.InAppBillingClient;
 import com.jdroid.android.google.inappbilling.client.InAppBillingClientListener;
 import com.jdroid.android.google.inappbilling.client.InAppBillingErrorCode;
 import com.jdroid.android.google.inappbilling.client.Inventory;
+import com.jdroid.android.google.inappbilling.client.ItemType;
 import com.jdroid.android.google.inappbilling.client.Product;
 import com.jdroid.android.google.inappbilling.client.ProductType;
 import com.jdroid.java.exception.AbstractException;
@@ -87,7 +88,7 @@ public class InAppBillingHelperFragment extends AbstractFragment implements InAp
 	
 	@Override
 	public void onSetupFinished() {
-		inAppBillingClient.queryInventory(managedProductTypes, subscriptionsProductTypes);
+		inAppBillingClient.queryProductsDetails(ItemType.MANAGED, managedProductTypes);
 	}
 	
 	public InAppBillingListener getInAppBillingListener() {
@@ -104,26 +105,19 @@ public class InAppBillingHelperFragment extends AbstractFragment implements InAp
 	
 	@Override
 	public void onQueryProductDetailsFinished(Inventory inventory) {
-	
+		inAppBillingClient.queryPurchases(ItemType.MANAGED);
 	}
 	
 	@Override
 	public void onQueryProductDetailsFailed(ErrorCodeException errorCodeException) {
-	
+		if (!silentMode) {
+			errorCodeException.setDescription(getString(R.string.jdroid_failedToLoadPurchases));
+			createErrorDisplayer(errorCodeException).displayError(getActivity(), errorCodeException);
+		}
 	}
 	
 	@Override
 	public void onQueryPurchasesFinished(Inventory inventory) {
-	
-	}
-	
-	@Override
-	public void onQueryPurchasesFailed(ErrorCodeException errorCodeException) {
-	
-	}
-	
-	@Override
-	public void onQueryInventoryFinished(Inventory inventory) {
 		InAppBillingListener inAppBillingListener = getInAppBillingListener();
 		if (inAppBillingListener != null) {
 			inAppBillingListener.onProductsLoaded(inventory.getProducts());
@@ -131,11 +125,8 @@ public class InAppBillingHelperFragment extends AbstractFragment implements InAp
 	}
 	
 	@Override
-	public void onQueryInventoryFailed(ErrorCodeException errorCodeException) {
-		if (!silentMode) {
-			errorCodeException.setDescription(getString(R.string.jdroid_failedToLoadPurchases));
-			createErrorDisplayer(errorCodeException).displayError(getActivity(), errorCodeException);
-		}
+	public void onQueryPurchasesFailed(ErrorCodeException errorCodeException) {
+	
 	}
 	
 	public void launchPurchaseFlow(Product product) {
