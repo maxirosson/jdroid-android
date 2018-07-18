@@ -44,7 +44,7 @@ public class UriMapperPrefsAppender extends PreferencesAppender {
 	public void initPreferences(final Activity activity, PreferenceGroup preferenceGroup) {
 
 		if (htmlRawId == null) {
-			htmlRawId = activity.getResources().getIdentifier("url_samples", "raw", activity.getPackageName());
+			htmlRawId = activity.getResources().getIdentifier("url_samples", "raw", AppUtils.getApplicationId());
 		}
 
 		Preference preference = new Preference(activity);
