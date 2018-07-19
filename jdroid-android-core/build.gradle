@@ -48,7 +48,7 @@ dependencies {
 	testImplementation ("com.squareup.leakcanary:leakcanary-android-no-op:${LEAK_CANARY_VERSION}") { force = true }
 
 	// https://github.com/facebook/device-year-class/blob/master/CHANGELOG.md
-	api 'com.facebook.device.yearclass:yearclass:2.0.0'
+	api 'com.facebook.device.yearclass:yearclass:2.1.0'
 
 	// Jdroid dependencies
 
