@@ -27,7 +27,6 @@ import android.view.View;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.Api;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.appindexing.Action;
@@ -252,9 +251,6 @@ public class ActivityHelper implements ActivityIf {
 	private void initGoogleApiClient() {
 		if (isGooglePlayServicesAvailable) {
 			Set<Api<? extends Api.ApiOptions.NotRequiredOptions>> googleApis = Sets.newHashSet();
-			if (getActivityIf().isLocationServicesEnabled()) {
-				googleApis.add(LocationServices.API);
-			}
 			googleApis.addAll(getCustomGoogleApis());
 			if (!googleApis.isEmpty()) {
 				GoogleApiClient.Builder builder = new GoogleApiClient.Builder(activity);
@@ -652,11 +648,6 @@ public class ActivityHelper implements ActivityIf {
 	@Override
 	public Long getLocationFrequency() {
 		return null;
-	}
-
-	@Override
-	public Boolean isLocationServicesEnabled() {
-		return false;
 	}
 
 	// //////////////////////// Others //////////////////////// //

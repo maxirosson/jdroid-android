@@ -224,11 +224,6 @@ public abstract class AbstractFragmentActivity extends AppCompatActivity impleme
 	}
 
 	@Override
-	public Boolean isLocationServicesEnabled() {
-		return activityHelper.isLocationServicesEnabled();
-	}
-
-	@Override
 	protected void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
 		activityHelper.onPostCreate(savedInstanceState);
