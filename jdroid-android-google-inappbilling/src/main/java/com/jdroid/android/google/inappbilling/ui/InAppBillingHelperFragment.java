@@ -138,7 +138,7 @@ public class InAppBillingHelperFragment extends AbstractFragment implements InAp
 	}
 	
 	@Override
-	public void onPurchaseFinished(final Product product) {
+	public void onPurchaseFinished(Product product) {
 		InAppBillingListener inAppBillingListener = getInAppBillingListener();
 		if (inAppBillingListener != null) {
 			inAppBillingListener.onPurchased(product);

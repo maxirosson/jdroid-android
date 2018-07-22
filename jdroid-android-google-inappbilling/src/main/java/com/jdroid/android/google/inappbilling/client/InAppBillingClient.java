@@ -94,7 +94,8 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 			LOGGER.debug("Starting in-app billing setup.");
 			
 			billingClient = BillingClient.newBuilder(AbstractApplication.get()).setListener(this).build();
-			startServiceConnection(new Runnable() {
+			
+			Runnable runnable = new Runnable() {
 				@Override
 				public void run() {
 					LOGGER.debug("In-app billing setup successful.");
@@ -102,7 +103,13 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 						listener.onSetupFinished();
 					}
 				}
-			});
+			};
+			
+			if (isServiceConnected) {
+				runnable.run();
+			} else {
+				startServiceConnection(runnable);
+			}
 			
 		} catch (Exception e) {
 			AbstractApplication.get().getExceptionHandler().logHandledException(e);
@@ -259,6 +266,8 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 					try {
 						if (product != null) {
 							product.setPurchase(signatureBase64, purchase.getOriginalJson(), purchase.getSignature(), InAppBillingAppModule.get().getDeveloperPayloadVerificationStrategy());
+							
+							// TODO This is executed for each client connected
 							InAppBillingAppModule.get().getInAppBillingContext().addPurchasedProductType(product.getProductType());
 							InAppBillingAppModule.get().getModuleAnalyticsSender().trackInAppBillingPurchase(product);
 							if (listener != null) {
