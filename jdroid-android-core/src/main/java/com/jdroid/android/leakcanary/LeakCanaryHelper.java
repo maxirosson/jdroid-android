@@ -13,11 +13,13 @@ public class LeakCanaryHelper {
 	private static RefWatcher refWatcher;
 	
 	public static void init(Context context) {
-		Application application = (Application) context.getApplicationContext();
-		refWatcher = LeakCanary.install(application);
+		if (isLeakCanaryEnabled()) {
+			Application application = (Application) context.getApplicationContext();
+			refWatcher = LeakCanary.install(application);
+		}
 	}
 	
-	public static void onFragmentDestroyView(Fragment fragment) {
+	public static void onFragmentDestroy(Fragment fragment) {
 		if (isLeakCanaryEnabled()) {
 			RefWatcher refWatcher = LeakCanaryHelper.getRefWatcher();
 			refWatcher.watch(fragment);

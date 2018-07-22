@@ -22,4 +22,4 @@ ext.JUNIT_VERSION = '4.12'
 ext.ROBOLECTRIC_VERSION = '3.4.2'
 
 // https://github.com/square/leakcanary/blob/master/CHANGELOG.md
-ext.LEAK_CANARY_VERSION = '1.5.1'
+ext.LEAK_CANARY_VERSION = '1.5.4'
