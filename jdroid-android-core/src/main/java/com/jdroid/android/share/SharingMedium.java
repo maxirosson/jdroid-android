@@ -15,25 +15,25 @@ public enum SharingMedium {
 	HANGOUTS("hangouts", ExternalAppsUtils.HANGOUTS_PACKAGE_NAME),
 	SMS("sms", null) {
 		@Override
-		public String getPackageName() {
+		public String getApplicationId() {
 			return Settings.Secure.getString(AbstractApplication.get().getContentResolver(), "sms_default_application");
 		}
 	};
 	
 	private String name;
-	private String packageName;
+	private String applicationId;
 	
-	SharingMedium(String name, String packageName) {
+	SharingMedium(String name, String applicationId) {
 		this.name = name;
-		this.packageName = packageName;
+		this.applicationId = applicationId;
 	}
 	
 	public String getName() {
 		return name;
 	}
 	
-	public String getPackageName() {
-		return packageName;
+	public String getApplicationId() {
+		return applicationId;
 	}
 	
 }

@@ -35,16 +35,16 @@ public class ShareUtils {
 	}
 	
 	public static void share(Activity activity, SharingMedium sharingMedium, String shareKey, String shareText) {
-		String packageName = sharingMedium.getPackageName();
+		String applicationId = sharingMedium.getApplicationId();
 		
 		Intent intent = createShareTextContentIntent(null, shareText);
-		intent.setPackage(packageName);
+		intent.setPackage(applicationId);
 		try {
 			ActivityLauncher.startActivity(activity, intent);
 			AbstractApplication.get().getCoreAnalyticsSender().trackSocialInteraction(sharingMedium.getName(), SocialAction.SHARE, shareKey);
 		} catch (ActivityNotFoundException e) {
-			Integer installedAppVersionCode = ExternalAppsUtils.getInstalledAppVersionCode(packageName);
-			String message = "ACTION_SEND not supported by " + packageName;
+			Integer installedAppVersionCode = ExternalAppsUtils.getInstalledAppVersionCode(applicationId);
+			String message = "ACTION_SEND not supported by " + applicationId;
 			if (installedAppVersionCode != null) {
 				message += " version " + installedAppVersionCode;
 			}

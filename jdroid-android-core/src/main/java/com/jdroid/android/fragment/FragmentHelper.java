@@ -209,8 +209,6 @@ public class FragmentHelper implements FragmentIf {
 
 	public void onDestroyView() {
 		LOGGER.debug("Executing onDestroyView on " + fragment);
-		
-		LeakCanaryHelper.onFragmentDestroyView(getFragment());
 	}
 
 	public void onBeforeDestroy() {
@@ -221,6 +219,8 @@ public class FragmentHelper implements FragmentIf {
 
 	public void onDestroy() {
 		LOGGER.debug("Executing onDestroy on " + fragment);
+		
+		LeakCanaryHelper.onFragmentDestroy(getFragment());
 	}
 
 	@Override

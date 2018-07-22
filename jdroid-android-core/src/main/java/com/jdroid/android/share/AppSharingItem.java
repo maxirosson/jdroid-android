@@ -30,8 +30,8 @@ public abstract class AppSharingItem extends SharingItem {
 	public abstract SharingMedium getSharingMedium();
 	
 	@Override
-	public String getPackageName() {
-		return getSharingMedium().getPackageName();
+	public String getApplicationId() {
+		return getSharingMedium().getApplicationId();
 	}
 	
 }

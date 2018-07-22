@@ -43,6 +43,7 @@ public class DebugInfoFragment extends AbstractRecyclerFragment {
 		properties.add(new Pair<String, Object>("Git Sha", AbstractApplication.get().getGitContext().getSha()));
 
 		properties.add(new Pair<String, Object>("Application Id", AppUtils.getApplicationId()));
+		properties.add(new Pair<String, Object>("Package Name", AbstractApplication.get().getManifestPackageName()));
 		properties.add(new Pair<String, Object>("Version Name", AppUtils.getVersionName()));
 		properties.add(new Pair<String, Object>("Version Code", AppUtils.getVersionCode()));
 		properties.add(new Pair<String, Object>("SO API Level", AndroidUtils.getApiLevel()));

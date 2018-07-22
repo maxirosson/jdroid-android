@@ -10,7 +10,7 @@ import com.jdroid.android.utils.AppUtils;
  * 
  * <pre>
  * &lt;provider android:name=".android.common.search.TwoLinesSuggestionsProvider"
- * 	android:authorities="[PackageName].TwoLinesSuggestionsProvider" />
+ * 	android:authorities="[applicationId].TwoLinesSuggestionsProvider" />
  * </pre>
  * 
  */

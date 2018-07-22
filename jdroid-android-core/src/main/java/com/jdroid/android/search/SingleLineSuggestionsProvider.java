@@ -10,7 +10,7 @@ import com.jdroid.android.utils.AppUtils;
  * 
  * <pre>
  * &lt;provider android:name=".android.common.search.SingleLineSuggestionsProvider"
- * 	android:authorities="[PackageName].SingleLineSuggestionsProvider" />
+ * 	android:authorities="[applicationId].SingleLineSuggestionsProvider" />
  * </pre>
  * 
  */

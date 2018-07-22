@@ -62,8 +62,6 @@ public interface ActivityIf extends ComponentIf {
 	@Nullable
 	public Long getLocationFrequency();
 
-	public Boolean isLocationServicesEnabled();
-
 	// //////////////////////// Uri, Dynamic Links & App Invites //////////////////////// //
 
 	@Nullable

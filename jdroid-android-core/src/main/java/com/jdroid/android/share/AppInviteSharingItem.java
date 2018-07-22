@@ -21,7 +21,7 @@ public class AppInviteSharingItem extends SharingItem {
 	}
 
 	@Override
-	public String getPackageName() {
+	public String getApplicationId() {
 		return null;
 	}
 

@@ -33,7 +33,7 @@ public class FirebaseAnalyticsHelper {
 		
 		if (isFirebaseAnalyticsEnabled()) {
 			getFirebaseAnalytics().logEvent(eventName, params != null ? params.getBundle() : null);
-			LOGGER.debug("Event [" + eventName + "] sent. " + params);
+			LOGGER.debug("Event [" + eventName + "] sent. " + (params != null ? params : ""));
 		} else {
 			LOGGER.debug("SKIPPED: Event [" + eventName + "] sent. " + params);
 		}

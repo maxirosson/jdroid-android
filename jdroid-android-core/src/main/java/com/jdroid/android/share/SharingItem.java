@@ -7,22 +7,22 @@ import com.jdroid.android.utils.ExternalAppsUtils;
 
 public abstract class SharingItem {
 	
-	public abstract String getPackageName();
+	public abstract String getApplicationId();
 	
 	public Integer getMinimumVersionCode() {
 		return null;
 	}
 	
 	public Drawable getAppIcon() {
-		return ExternalAppsUtils.getAppIcon(getPackageName());
+		return ExternalAppsUtils.getAppIcon(getApplicationId());
 	}
 	
 	public abstract void share(Activity activity);
 	
 	public Boolean isEnabled() {
-		String packageName = getPackageName();
-		return (packageName != null)
-				&& ExternalAppsUtils.isAppInstalled(packageName, getMinimumVersionCode());
+		String applicationId = getApplicationId();
+		return (applicationId != null)
+				&& ExternalAppsUtils.isAppInstalled(applicationId, getMinimumVersionCode());
 	}
 	
 }
