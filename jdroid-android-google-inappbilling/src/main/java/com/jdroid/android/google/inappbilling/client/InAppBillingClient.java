@@ -42,7 +42,7 @@ import java.util.Set;
  * (and not before) you may call other methods.
  * 
  * After setup is complete, you will typically want to request an inventory of owned items and subscriptions. See
- * {@link #queryInventory} and related methods.
+ * {@link #queryPurchases()} and related methods.
  * 
  * A note about threading: When using this object from a background thread, you may call the blocking versions of
  * methods; when using from a UI thread, call only the asynchronous versions and handle the results via callbacks. Also,
@@ -256,6 +256,7 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 	 * Handle a callback that purchases were updated from the Billing library
 	 */
 	@Override
+	// TODO This is executed for each client connected. Should we have only one client connected?
 	public void onPurchasesUpdated(@BillingClient.BillingResponse int resultCode, @Nullable List<Purchase> purchases) {
 		InAppBillingErrorCode inAppBillingErrorCode = InAppBillingErrorCode.findByErrorResponseCode(resultCode);
 		if (inAppBillingErrorCode == null) {
@@ -266,10 +267,11 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 					try {
 						if (product != null) {
 							product.setPurchase(signatureBase64, purchase.getOriginalJson(), purchase.getSignature(), InAppBillingAppModule.get().getDeveloperPayloadVerificationStrategy());
-							
-							// TODO This is executed for each client connected
 							InAppBillingAppModule.get().getInAppBillingContext().addPurchasedProductType(product.getProductType());
+							
+							// TODO Add logic here to see if we are replacing the same purchase. If yes, dont track
 							InAppBillingAppModule.get().getModuleAnalyticsSender().trackInAppBillingPurchase(product);
+							
 							if (listener != null) {
 								listener.onPurchaseFinished(product);
 							}
