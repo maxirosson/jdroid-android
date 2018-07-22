@@ -181,7 +181,7 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 					return;
 				}
 				
-				LOGGER.debug("Querying owned items." + (itemType != null ? (" Item type + " + itemType) : ""));
+				LOGGER.debug("Querying owned items." + (itemType != null ? (" Item type: " + itemType) : ""));
 				try {
 					List<Purchase> purchases = Lists.newArrayList();
 					if (itemType == null) {
@@ -293,7 +293,7 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 		} else {
 			AbstractApplication.get().getExceptionHandler().logHandledException(inAppBillingErrorCode.newErrorCodeException());
 			if (listener != null) {
-				listener.onPurchaseFailed(inAppBillingErrorCode.newErrorCodeException("Purchase failed. Result code: " + resultCode));
+				listener.onPurchaseFailed(inAppBillingErrorCode.newErrorCodeException("Purchase failed."));
 			}
 			
 		}
