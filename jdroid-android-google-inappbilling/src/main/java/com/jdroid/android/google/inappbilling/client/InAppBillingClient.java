@@ -27,7 +27,6 @@ import com.jdroid.java.utils.StringUtils;
 import org.json.JSONException;
 import org.slf4j.Logger;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -250,38 +249,40 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 	 * Handle a callback that purchases were updated from the Billing library
 	 */
 	@Override
-	public void onPurchasesUpdated(int resultCode, List<Purchase> purchases) {
+	public void onPurchasesUpdated(@BillingClient.BillingResponse int resultCode, @Nullable List<Purchase> purchases) {
 		InAppBillingErrorCode inAppBillingErrorCode = InAppBillingErrorCode.findByErrorResponseCode(resultCode);
 		if (inAppBillingErrorCode == null) {
-			for (Purchase purchase : purchases) {
-				String productId = purchase.getSku();
-				Product product = inventory.getProduct(productId);
-				try {
-					if (product != null) {
-						product.setPurchase(signatureBase64, purchase.getOriginalJson(), purchase.getSignature(), InAppBillingAppModule.get().getDeveloperPayloadVerificationStrategy());
-						InAppBillingAppModule.get().getInAppBillingContext().addPurchasedProductType(product.getProductType());
-						InAppBillingAppModule.get().getModuleAnalyticsSender().trackInAppBillingPurchase(product);
+			if (purchases != null) {
+				for (Purchase purchase : purchases) {
+					String productId = purchase.getSku();
+					Product product = inventory.getProduct(productId);
+					try {
+						if (product != null) {
+							product.setPurchase(signatureBase64, purchase.getOriginalJson(), purchase.getSignature(), InAppBillingAppModule.get().getDeveloperPayloadVerificationStrategy());
+							InAppBillingAppModule.get().getInAppBillingContext().addPurchasedProductType(product.getProductType());
+							InAppBillingAppModule.get().getModuleAnalyticsSender().trackInAppBillingPurchase(product);
+							if (listener != null) {
+								listener.onPurchaseFinished(product);
+							}
+							if (product.isWaitingToConsume()) {
+								consume(product);
+							} else if (listener != null) {
+								listener.onProvideProduct(product);
+							}
+						} else {
+							AbstractApplication.get().getExceptionHandler().logWarningException(
+									"The purchased product [" + productId + "] is not supported by the app, so it is ignored");
+						}
+					} catch (ErrorCodeException e) {
+						AbstractApplication.get().getExceptionHandler().logHandledException(e);
 						if (listener != null) {
-							listener.onPurchaseFinished(product);
+							listener.onPurchaseFailed(e);
 						}
-						if (product.isWaitingToConsume()) {
-							consume(product);
-						} else if (listener != null) {
-							listener.onProvideProduct(product);
+					} catch (JSONException e) {
+						AbstractApplication.get().getExceptionHandler().logHandledException(e);
+						if (listener != null) {
+							listener.onPurchaseFailed(InAppBillingErrorCode.BAD_PURCHASE_DATA.newErrorCodeException(e));
 						}
-					} else {
-						AbstractApplication.get().getExceptionHandler().logWarningException(
-								"The purchased product [" + productId + "] is not supported by the app, so it is ignored");
-					}
-				} catch (ErrorCodeException e) {
-					AbstractApplication.get().getExceptionHandler().logHandledException(e);
-					if (listener != null) {
-						listener.onPurchaseFailed(e);
-					}
-				} catch (JSONException e) {
-					AbstractApplication.get().getExceptionHandler().logHandledException(e);
-					if (listener != null) {
-						listener.onPurchaseFailed(InAppBillingErrorCode.BAD_PURCHASE_DATA.newErrorCodeException(e));
 					}
 				}
 			}
