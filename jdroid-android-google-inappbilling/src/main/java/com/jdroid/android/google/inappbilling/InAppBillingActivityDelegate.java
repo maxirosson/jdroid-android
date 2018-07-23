@@ -18,7 +18,7 @@ public class InAppBillingActivityDelegate extends ActivityDelegate {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		if ((savedInstanceState == null) && InAppBillingAppModule.get().isInAppBillingEnabled() && !inAppBillingLoaded) {
+		if ((savedInstanceState == null) && !inAppBillingLoaded) {
 			InAppBillingHelperFragment.add(getActivity(), InAppBillingHelperFragment.class, true, null);
 			inAppBillingLoaded = true;
 		}

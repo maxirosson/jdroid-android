@@ -17,50 +17,32 @@ import com.jdroid.android.google.inappbilling.client.InAppBillingErrorCode;
 import com.jdroid.android.google.inappbilling.client.Inventory;
 import com.jdroid.android.google.inappbilling.client.ItemType;
 import com.jdroid.android.google.inappbilling.client.Product;
-import com.jdroid.android.google.inappbilling.client.ProductType;
 import com.jdroid.java.exception.AbstractException;
 import com.jdroid.java.exception.ErrorCodeException;
 import com.jdroid.java.utils.LoggerUtils;
 
 import org.slf4j.Logger;
 
-import java.io.Serializable;
-import java.util.List;
-
 public class InAppBillingHelperFragment extends AbstractFragment implements InAppBillingClientListener {
 	
-	private static final String MANAGED_PRODUCT_TYPES = "managedProductTypes";
-	private static final String SUBSCRIPTIONS_PRODUCT_TYPES = "subscriptionsProductTypes";
 	private static final String SILENT_MODE = "silentMode";
 	
 	private static final Logger LOGGER = LoggerUtils.getLogger(InAppBillingHelperFragment.class);
 	
 	private InAppBillingClient inAppBillingClient;
-	private List<ProductType> managedProductTypes;
-	private List<ProductType> subscriptionsProductTypes;
 	private Boolean silentMode;
 	
 	public static void add(FragmentActivity activity,
 			Class<? extends InAppBillingHelperFragment> inAppBillingHelperFragmentClass, Boolean silentMode,
 			Fragment targetFragment) {
-		add(activity, inAppBillingHelperFragmentClass, InAppBillingAppModule.get().getInAppBillingContext().getManagedProductTypes(),
-				InAppBillingAppModule.get().getInAppBillingContext().getSubscriptionsProductTypes(), silentMode, targetFragment);
-	}
-	
-	public static void add(FragmentActivity activity,
-			Class<? extends InAppBillingHelperFragment> inAppBillingHelperFragmentClass,
-			List<ProductType> managedProductTypes, List<ProductType> subscriptionsProductTypes, Boolean silentMode,
-			Fragment targetFragment) {
 		
-		if (!managedProductTypes.isEmpty() || (!subscriptionsProductTypes.isEmpty() && (get(activity) == null))) {
+		if (get(activity) == null) {
 			AbstractFragmentActivity abstractFragmentActivity = (AbstractFragmentActivity)activity;
 			InAppBillingHelperFragment inAppBillingHelperFragment = abstractFragmentActivity.instanceFragment(
 				inAppBillingHelperFragmentClass, null);
 			inAppBillingHelperFragment.setTargetFragment(targetFragment, 0);
 			
 			Bundle args = new Bundle();
-			args.putSerializable(MANAGED_PRODUCT_TYPES, (Serializable)managedProductTypes);
-			args.putSerializable(SUBSCRIPTIONS_PRODUCT_TYPES, (Serializable)subscriptionsProductTypes);
 			args.putBoolean(SILENT_MODE, silentMode);
 			inAppBillingHelperFragment.setArguments(args);
 			
@@ -75,12 +57,11 @@ public class InAppBillingHelperFragment extends AbstractFragment implements InAp
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		managedProductTypes = getArgument(MANAGED_PRODUCT_TYPES);
-		subscriptionsProductTypes = getArgument(SUBSCRIPTIONS_PRODUCT_TYPES);
 		silentMode = getArgument(SILENT_MODE);
 		
 		inAppBillingClient = new InAppBillingClient();
-		inAppBillingClient.startSetup(this);
+		inAppBillingClient.setListener(this);
+		inAppBillingClient.startSetup();
 		
 		// TODO To support promotion codes, your app must call the getPurchases() method whenever the app starts or resumes.
 		// The simplest approach is to call getPurchases() in your activity's onResume() method, since that callback fires when the activity is created, as well as when the activity is unpaused.
@@ -92,7 +73,7 @@ public class InAppBillingHelperFragment extends AbstractFragment implements InAp
 	
 	@Override
 	public void onSetupFinished() {
-		inAppBillingClient.queryProductsDetails(ItemType.MANAGED, managedProductTypes);
+		inAppBillingClient.queryProductsDetails(ItemType.MANAGED);
 	}
 	
 	@Override
@@ -106,6 +87,7 @@ public class InAppBillingHelperFragment extends AbstractFragment implements InAp
 	@Override
 	public void onQueryProductDetailsFinished(Inventory inventory) {
 		inAppBillingClient.queryPurchases(ItemType.MANAGED);
+		//inAppBillingClient.queryPurchases(ItemType.SUBSCRIPTION, subscriptionsProductTypes);
 	}
 	
 	@Override

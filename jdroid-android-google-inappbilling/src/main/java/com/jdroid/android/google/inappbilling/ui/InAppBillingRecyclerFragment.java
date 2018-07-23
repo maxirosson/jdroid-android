@@ -4,9 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.jdroid.android.google.inappbilling.InAppBillingAppModule;
 import com.jdroid.android.google.inappbilling.client.Product;
-import com.jdroid.android.google.inappbilling.client.ProductType;
 import com.jdroid.android.recycler.AbstractRecyclerFragment;
 import com.jdroid.android.recycler.RecyclerViewAdapter;
 
@@ -19,18 +17,9 @@ public abstract class InAppBillingRecyclerFragment extends AbstractRecyclerFragm
 		super.onViewCreated(view, savedInstanceState);
 		
 		if (savedInstanceState == null) {
-			InAppBillingHelperFragment.add(getActivity(), InAppBillingHelperFragment.class, getManagedProductTypes(),
-				getSubscriptionsProductTypes(), false, this);
+			InAppBillingHelperFragment.add(getActivity(), InAppBillingHelperFragment.class, false, this);
 		}
 		showLoading();
-	}
-	
-	protected List<ProductType> getManagedProductTypes() {
-		return InAppBillingAppModule.get().getInAppBillingContext().getManagedProductTypes();
-	}
-	
-	protected List<ProductType> getSubscriptionsProductTypes() {
-		return InAppBillingAppModule.get().getInAppBillingContext().getSubscriptionsProductTypes();
 	}
 	
 	@Override

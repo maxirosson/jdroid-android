@@ -17,8 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Represents a block of information about in-app items. An Inventory is returned by such methods as
- * {@link InAppBillingClient#queryInventory}.
+ * Represents a block of information about in-app items.
  */
 public class Inventory {
 	
@@ -71,5 +70,16 @@ public class Inventory {
 		}
 		return null;
  	}
+ 	
+ 	public List<String> getAllProductIds() {
+		List<String> productsIds = Lists.newArrayList();
+		for (Product each : productsMap.values()) {
+			String productId = InAppBillingAppModule.get().getInAppBillingContext().isStaticResponsesEnabled() ? each.getProductType().getTestProductId() : each.getProductType().getProductId();
+			if (!productsIds.contains(productId)) {
+				productsIds.add(productId);
+			}
+		}
+		return productsIds;
+	}
 	
 }

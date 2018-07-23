@@ -2,6 +2,7 @@ package com.jdroid.android.google.inappbilling.client;
 
 import android.app.Activity;
 import android.support.annotation.MainThread;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.android.billingclient.api.BillingClient;
@@ -15,10 +16,7 @@ import com.android.billingclient.api.SkuDetailsParams;
 import com.android.billingclient.api.SkuDetailsResponseListener;
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.google.inappbilling.InAppBillingAppModule;
-import com.jdroid.android.google.inappbilling.InAppBillingContext;
 import com.jdroid.android.utils.LocalizationUtils;
-import com.jdroid.java.collections.Lists;
-import com.jdroid.java.collections.Maps;
 import com.jdroid.java.exception.ErrorCodeException;
 import com.jdroid.java.exception.UnexpectedException;
 import com.jdroid.java.utils.LoggerUtils;
@@ -29,7 +27,6 @@ import org.slf4j.Logger;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 /**
@@ -42,7 +39,7 @@ import java.util.Set;
  * (and not before) you may call other methods.
  * 
  * After setup is complete, you will typically want to request an inventory of owned items and subscriptions. See
- * {@link #queryPurchases()} and related methods.
+ * {@link #queryPurchases(ItemType)} and related methods.
  * 
  * A note about threading: When using this object from a background thread, you may call the blocking versions of
  * methods; when using from a UI thread, call only the asynchronous versions and handle the results via callbacks. Also,
@@ -83,13 +80,16 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 		signatureBase64 = InAppBillingAppModule.get().getInAppBillingContext().getGooglePlayPublicKey();
 	}
 	
+	public void setListener(InAppBillingClientListener listener) {
+		this.listener = listener;
+	}
+	
 	/**
 	 * Starts the setup process. This will start up the setup process asynchronously. You will be notified through the
 	 * listener when the setup process is complete.
 	 */
 	@MainThread
-	public void startSetup(InAppBillingClientListener listener) {
-		this.listener = listener;
+	public void startSetup() {
 		try {
 			LOGGER.debug("Starting in-app billing setup.");
 			
@@ -99,6 +99,17 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 				@Override
 				public void run() {
 					LOGGER.debug("In-app billing setup successful.");
+					
+					for (ProductType productType : InAppBillingAppModule.get().getInAppBillingContext().getManagedProductTypes()) {
+						inventory.addProduct(new Product(productType));
+					}
+					
+					if (isSubscriptionsSupported()) {
+						for (ProductType productType : InAppBillingAppModule.get().getInAppBillingContext().getSubscriptionsProductTypes()) {
+							inventory.addProduct(new Product(productType));
+						}
+					}
+					
 					if (listener != null) {
 						listener.onSetupFinished();
 					}
@@ -171,12 +182,7 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 	}
 	
 	@MainThread
-	public void queryPurchases() {
-		queryPurchases(null);
-	}
-	
-	@MainThread
-	public void queryPurchases(@Nullable ItemType itemType) {
+	public void queryPurchases(@NonNull ItemType itemType) {
 		executeServiceRequest(new Runnable() {
 			@Override
 			public void run() {
@@ -189,47 +195,48 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 					return;
 				}
 				
-				LOGGER.debug("Querying owned items." + (itemType != null ? (" Item type: " + itemType) : ""));
+				LOGGER.debug("Querying owned items. Item type: " + itemType);
 				try {
-					List<Purchase> purchases = Lists.newArrayList();
-					if (itemType == null) {
-						purchases.addAll(getPurchases(ItemType.MANAGED));
-						if (isSubscriptionsSupported()) {
-							purchases.addAll(getPurchases(ItemType.SUBSCRIPTION));
+					
+					Purchase.PurchasesResult purchasesResult = billingClient.queryPurchases(itemType.getType());
+					InAppBillingErrorCode inAppBillingErrorCode = InAppBillingErrorCode.findByErrorResponseCode(purchasesResult.getResponseCode());
+					if (inAppBillingErrorCode == null) {
+						for (Purchase purchase : purchasesResult.getPurchasesList()) {
+							String purchaseJson = purchase.getOriginalJson();
+							String signature = purchase.getSignature();
+							String productId = purchase.getSku();
+							
+							Product product = inventory.getProduct(productId);
+							
+							// TODO Call to onPurchasesUpdated ?. See duplicated logic
+							
+							if (product != null) {
+								try {
+									LOGGER.debug("Setting purchase to product: " + productId + ". " + purchaseJson);
+									product.setPurchase(signatureBase64, purchaseJson, signature, InAppBillingAppModule.get().getDeveloperPayloadVerificationStrategy());
+								} catch (ErrorCodeException e) {
+									AbstractApplication.get().getExceptionHandler().logHandledException(e);
+								}
+							} else {
+								AbstractApplication.get().getExceptionHandler().logWarningException(
+										"The purchased product [" + productId + "] is not supported by the app, so it is ignored");
+							}
+						}
+						
+						for (Product each : inventory.getProductsWaitingToConsume()) {
+							consume(each);
+						}
+						
+						InAppBillingAppModule.get().getInAppBillingContext().setPurchasedProductTypes(inventory);
+						if (listener != null) {
+							listener.onQueryPurchasesFinished(inventory);
 						}
 					} else {
-						purchases.addAll(getPurchases(itemType));
-					}
-					
-					for (Purchase purchase : purchases) {
-						String purchaseJson = purchase.getOriginalJson();
-						String signature = purchase.getSignature();
-						String productId = purchase.getSku();
-						
-						Product product = inventory.getProduct(productId);
-						
-						// TODO Call to onPurchasesUpdated ?. See duplicated logic
-						
-						if (product != null) {
-							try {
-								LOGGER.debug("Setting purchase to product: " + productId + ". " + purchaseJson);
-								product.setPurchase(signatureBase64, purchaseJson, signature, InAppBillingAppModule.get().getDeveloperPayloadVerificationStrategy());
-							} catch (ErrorCodeException e) {
-								AbstractApplication.get().getExceptionHandler().logHandledException(e);
-							}
-						} else {
-							AbstractApplication.get().getExceptionHandler().logWarningException(
-									"The purchased product [" + productId + "] is not supported by the app, so it is ignored");
+						ErrorCodeException errorCodeException = inAppBillingErrorCode.newErrorCodeException("getPurchases() failed querying " + itemType);
+						AbstractApplication.get().getExceptionHandler().logHandledException(errorCodeException);
+						if (listener != null) {
+							listener.onQueryPurchasesFailed(errorCodeException);
 						}
-					}
-					
-					for (Product each : inventory.getProductsWaitingToConsume()) {
-						consume(each);
-					}
-					
-					InAppBillingAppModule.get().getInAppBillingContext().setPurchasedProductTypes(inventory);
-					if (listener != null) {
-						listener.onQueryPurchasesFinished(inventory);
 					}
 				} catch (JSONException e) {
 					AbstractApplication.get().getExceptionHandler().logHandledException(e);
@@ -239,19 +246,6 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 				}
 			}
 		});
-	}
-	
-	private List<Purchase> getPurchases(ItemType itemType) {
-		Purchase.PurchasesResult purchasesResult = billingClient.queryPurchases(itemType.getType());
-		InAppBillingErrorCode inAppBillingErrorCode = InAppBillingErrorCode.findByErrorResponseCode(purchasesResult.getResponseCode());
-		if (inAppBillingErrorCode != null) {
-			ErrorCodeException errorCodeException = inAppBillingErrorCode.newErrorCodeException("getPurchases() failed querying " + itemType);
-			AbstractApplication.get().getExceptionHandler().logHandledException(errorCodeException);
-			if (listener != null) {
-				listener.onQueryPurchasesFailed(errorCodeException);
-			}
-		}
-		return purchasesResult.getPurchasesList();
 	}
 	
 	/**
@@ -322,7 +316,7 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 	}
 	
 	@MainThread
-	public void queryProductsDetails(ItemType itemType, List<ProductType> productTypes) {
+	public void queryProductsDetails(ItemType itemType) {
 		executeServiceRequest(new Runnable() {
 			@Override
 			public void run() {
@@ -335,16 +329,8 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 					return;
 				}
 				
-				InAppBillingContext inAppBillingContext = InAppBillingAppModule.get().getInAppBillingContext();
-				
 				LOGGER.debug("Querying products details, item type: " + itemType);
-				List<String> productsIdsToQuery = Lists.newArrayList();
-				for (ProductType each : productTypes) {
-					String productId = inAppBillingContext.isStaticResponsesEnabled() ? each.getTestProductId() : each.getProductId();
-					if (!productsIdsToQuery.contains(productId)) {
-						productsIdsToQuery.add(productId);
-					}
-				}
+				List<String> productsIdsToQuery = inventory.getAllProductIds();
 				
 				if (!productsIdsToQuery.isEmpty()) {
 					
@@ -355,21 +341,15 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 						public void onSkuDetailsResponse(int responseCode, List<SkuDetails> skuDetailsList) {
 							InAppBillingErrorCode inAppBillingErrorCode = InAppBillingErrorCode.findByErrorResponseCode(responseCode);
 							if (inAppBillingErrorCode == null) {
-								Map<String, SkuDetails> map = Maps.newHashMap();
 								for (SkuDetails skuDetails : skuDetailsList) {
-									map.put(skuDetails.getSku(), skuDetails);
-								}
-								
-								for (ProductType each : productTypes) {
-									SkuDetails skuDetails = map.get(inAppBillingContext.isStaticResponsesEnabled() ? each.getTestProductId() : each.getProductId());
-									if (skuDetails != null) {
-										String title = each.getTitleId() != null ? LocalizationUtils.getString(each.getTitleId()) : skuDetails.getTitle();
-										String description = each.getDescriptionId() != null ? LocalizationUtils.getString(each.getDescriptionId()) : skuDetails.getDescription();
-										Product product = new Product(each, skuDetails.getPrice(),
-												(double)skuDetails.getPriceAmountMicros() / 1000000, skuDetails.getPriceCurrencyCode(), title, description);
-										LOGGER.debug("Adding to inventory: " + product);
-										inventory.addProduct(product);
-									}
+									Product product = inventory.getProduct(skuDetails.getSku());
+									ProductType productType = product.getProductType();
+									product.setTitle(productType.getTitleId() != null ? LocalizationUtils.getString(productType.getTitleId()) : skuDetails.getTitle());
+									product.setDescription(productType.getDescriptionId() != null ? LocalizationUtils.getString(productType.getDescriptionId()) : skuDetails.getDescription());
+									product.setCurrencyCode(skuDetails.getPriceCurrencyCode());
+									product.setFormattedPrice(skuDetails.getPrice());
+									product.setPrice((double)skuDetails.getPriceAmountMicros() / 1000000);
+									LOGGER.debug("Added product details to inventory: " + product);
 								}
 								
 								if (listener != null) {
