@@ -89,6 +89,7 @@ public class Product {
 		return productType.getItemType().equals(ItemType.MANAGED) && productType.isConsumable();
 	}
 	
+	// TODO Is this status persistent? What happens if the app crashed before consuming a product?
 	public Boolean isWaitingToConsume() {
 		return isConsumable() && !availableToPurchase && hasVerifiedPurchase();
 	}

@@ -119,7 +119,7 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 		}
 	}
 	
-	private void startServiceConnection(final Runnable executeOnSuccess) {
+	private void startServiceConnection(Runnable executeOnSuccess) {
 		billingClient.startConnection(new BillingClientStateListener() {
 			@Override
 			public void onBillingSetupFinished(@BillingClient.BillingResponse int billingResponseCode) {
@@ -131,7 +131,7 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 					}
 				} else {
 					LOGGER.debug("Start connection failed. Response code: " + billingResponseCode);
-					// TODO ???
+					// TODO Is this possible ???
 				}
 				billingClientResponseCode = billingResponseCode;
 			}
@@ -149,6 +149,8 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 		} else {
 			// If billing service was disconnected, we try to reconnect 1 time.
 			// TODO (feel free to introduce your retry policy here).
+			// For example, the Play Billing Library client may lose its connection if the Play Store service is updating in the
+			// background.
 			startServiceConnection(runnable);
 		}
 	}
@@ -257,6 +259,14 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 	 */
 	@Override
 	// TODO This is executed for each client connected. Should we have only one client connected?
+	// TODO Call queryPurchases() at least twice in your code:
+	// - Every time your app launches so that you can restore any purchases that a user has made since the app last stopped.
+	// - In your onResume() method because a user can make a purchase when your app is in the background (for example, redeeming a promo code in Play Store app).
+	// Calling queryPurchases() on startup and resume guarantees that your app finds out about all purchases and redemptions
+	// the user may have made while the app wasn't running. Furthermore, if a user makes a purchase while the app is running
+	// and your app misses it for any reason, your app still finds out about the purchase the next time the activity resumes and calls queryPurchases().
+	// The simplest approach is to call queryPurchases() in your activity's onResume() method, since that callback fires
+	// when the activity is created, as well as when the activity is unpaused.
 	public void onPurchasesUpdated(@BillingClient.BillingResponse int resultCode, @Nullable List<Purchase> purchases) {
 		InAppBillingErrorCode inAppBillingErrorCode = InAppBillingErrorCode.findByErrorResponseCode(resultCode);
 		if (inAppBillingErrorCode == null) {
@@ -415,7 +425,10 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 					String productIdToBuy = InAppBillingAppModule.get().getInAppBillingContext().isStaticResponsesEnabled() ?
 							product.getProductType().getTestProductId() : product.getId();
 					BillingFlowParams purchaseParams = BillingFlowParams.newBuilder()
-							.setSku(productIdToBuy).setType(itemType.getType()).setOldSku(oldProductId).build();
+							.setSku(productIdToBuy)
+							.setType(itemType.getType())
+							.setOldSku(oldProductId)
+							.build();
 					int responseCode = billingClient.launchBillingFlow(activity, purchaseParams);
 					InAppBillingErrorCode inAppBillingErrorCode = InAppBillingErrorCode.findByErrorResponseCode(responseCode);
 					if (inAppBillingErrorCode != null) {

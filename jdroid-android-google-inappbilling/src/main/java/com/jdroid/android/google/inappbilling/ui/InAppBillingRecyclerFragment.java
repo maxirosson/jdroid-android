@@ -34,7 +34,7 @@ public abstract class InAppBillingRecyclerFragment extends AbstractRecyclerFragm
 	}
 	
 	@Override
-	public void onProductsLoaded(final List<Product> products) {
+	public void onProductsLoaded(List<Product> products) {
 		setAdapter(new RecyclerViewAdapter(new ProductViewType() {
 			
 			@Override
