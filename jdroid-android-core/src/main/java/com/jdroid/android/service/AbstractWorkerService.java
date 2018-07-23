@@ -12,6 +12,7 @@ import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.firebase.performance.TraceHelper;
 import com.jdroid.java.date.DateUtils;
 import com.jdroid.java.utils.LoggerUtils;
+import com.squareup.leakcanary.LeakCanary;
 
 import org.slf4j.Logger;
 
@@ -72,6 +73,13 @@ public abstract class AbstractWorkerService extends IntentService {
 	}
 	
 	protected abstract void doExecute(@NonNull Intent intent);
+	
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		
+		LeakCanary.installedRefWatcher().watch(this);
+	}
 	
 	public static void runIntentInService(Context context, Bundle bundle, Class<? extends AbstractWorkerService> serviceClass) {
 		Intent intent = new Intent();
