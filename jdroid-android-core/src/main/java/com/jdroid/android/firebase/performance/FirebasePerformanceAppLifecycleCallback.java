@@ -10,9 +10,8 @@ public class FirebasePerformanceAppLifecycleCallback extends ApplicationLifecycl
 	
 	@Override
 	public void onProviderInit(Context context) {
-		FirebasePerformanceAppContext firebasePerformanceAppContext = new FirebasePerformanceAppContext();
-		FirebasePerformance.getInstance().setPerformanceCollectionEnabled(firebasePerformanceAppContext.isFirebasePerformanceEnabled());
-		if (firebasePerformanceAppContext.isFirebasePerformanceEnabled()) {
+		FirebasePerformance.getInstance().setPerformanceCollectionEnabled(FirebasePerformanceAppContext.isFirebasePerformanceEnabled());
+		if (FirebasePerformanceAppContext.isFirebasePerformanceEnabled()) {
 			AbstractApplication.get().registerActivityLifecycleCallbacks(FirebasePerformanceLifecycleCallbacks.get());
 		}
 	}
