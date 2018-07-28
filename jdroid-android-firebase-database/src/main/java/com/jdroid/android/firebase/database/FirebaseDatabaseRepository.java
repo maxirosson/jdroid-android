@@ -35,9 +35,19 @@ public abstract class FirebaseDatabaseRepository<T extends Entity> implements Re
 	protected abstract String getPath();
 
 	protected abstract Class<T> getEntityClass();
+	
+	protected String getDatabaseUrl() {
+		return null;
+	}
 
 	protected DatabaseReference createDatabaseReference() {
-		DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+		FirebaseDatabase firebaseDatabase = null;
+		if (getDatabaseUrl() != null) {
+			firebaseDatabase = FirebaseDatabase.getInstance(getDatabaseUrl());
+		} else {
+			firebaseDatabase = FirebaseDatabase.getInstance();
+		}
+		DatabaseReference databaseReference = firebaseDatabase.getReference();
 		if (firebaseAuthenticationStrategy != null) {
 			firebaseAuthenticationStrategy.authenticate(databaseReference);
 		}
