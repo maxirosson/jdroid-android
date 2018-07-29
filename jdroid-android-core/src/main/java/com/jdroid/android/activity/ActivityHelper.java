@@ -37,6 +37,7 @@ import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.application.AppModule;
 import com.jdroid.android.context.UsageStats;
+import com.jdroid.android.firebase.dynamiclink.FirebaseDynamicLinksAppContext;
 import com.jdroid.android.google.GooglePlayServicesUtils;
 import com.jdroid.android.loading.ActivityLoading;
 import com.jdroid.android.loading.DefaultBlockingLoading;
@@ -171,40 +172,44 @@ public class ActivityHelper implements ActivityIf {
 			referrer = ReferrerUtils.getReferrerCategory(activity);
 			if ((uriHandled && !UriUtils.isInternalReferrerCategory(referrer)) || isHomeActivity()) {
 				
-				FirebaseDynamicLinks.getInstance().getDynamicLink(activity.getIntent()).addOnSuccessListener(getActivity(), new OnSuccessListener<PendingDynamicLinkData>() {
-
-					@MainThread
-					@Override
-					public void onSuccess(PendingDynamicLinkData pendingDynamicLinkData) {
-						try {
-							// Get deep link from result (may be null if no link is found)
-							Uri deepLink = pendingDynamicLinkData != null ? pendingDynamicLinkData.getLink() : null;
-							if (deepLink != null) {
-								LOGGER.debug("Pending dynamic link: " + deepLink);
-								
-								// Extract invite
-								FirebaseAppInvite invite = FirebaseAppInvite.getInvitation(pendingDynamicLinkData);
-								if (invite != null) {
-									String invitationId = invite.getInvitationId();
-									LOGGER.debug("AppInvite invitation id: " + invitationId);
-									getActivityIf().onAppInvite(deepLink, invitationId);
+				if (FirebaseDynamicLinksAppContext.isFirebaseDynamicLinksEnabled()) {
+					FirebaseDynamicLinks.getInstance().getDynamicLink(activity.getIntent()).addOnSuccessListener(getActivity(), new OnSuccessListener<PendingDynamicLinkData>() {
+						
+						@MainThread
+						@Override
+						public void onSuccess(PendingDynamicLinkData pendingDynamicLinkData) {
+							try {
+								// Get deep link from result (may be null if no link is found)
+								Uri deepLink = pendingDynamicLinkData != null ? pendingDynamicLinkData.getLink() : null;
+								if (deepLink != null) {
+									LOGGER.debug("Pending dynamic link: " + deepLink);
+									
+									// Extract invite
+									FirebaseAppInvite invite = FirebaseAppInvite.getInvitation(pendingDynamicLinkData);
+									if (invite != null) {
+										String invitationId = invite.getInvitationId();
+										LOGGER.debug("AppInvite invitation id: " + invitationId);
+										getActivityIf().onAppInvite(deepLink, invitationId);
+									}
+									
+									redirect(deepLink.toString());
+								} else {
+									redirect(activity.getIntent().getStringExtra("url"));
 								}
-								
-								redirect(deepLink.toString());
-							} else {
-								redirect(activity.getIntent().getStringExtra("url"));
+							} catch (Exception e) {
+								AbstractApplication.get().getExceptionHandler().logHandledException(e);
 							}
-						} catch (Exception e) {
+							
+						}
+					}).addOnFailureListener(getActivity(), new OnFailureListener() {
+						@Override
+						public void onFailure(@NonNull Exception e) {
 							AbstractApplication.get().getExceptionHandler().logHandledException(e);
 						}
-						
-					}
-				}).addOnFailureListener(getActivity(), new OnFailureListener() {
-					@Override
-					public void onFailure(@NonNull Exception e) {
-						AbstractApplication.get().getExceptionHandler().logHandledException(e);
-					}
-				});
+					});
+				} else {
+					redirect(activity.getIntent().getStringExtra("url"));
+				}
 			}
 		} else {
 			referrer = (String)savedInstanceState.getSerializable(REFERRER);

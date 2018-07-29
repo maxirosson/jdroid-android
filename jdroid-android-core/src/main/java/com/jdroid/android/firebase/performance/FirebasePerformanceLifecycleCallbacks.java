@@ -32,7 +32,9 @@ public class FirebasePerformanceLifecycleCallbacks implements Application.Activi
 	public void onActivityStarted(Activity activity) {
 		String name = activity.getClass().getSimpleName();
 		Trace trace = TraceHelper.startTrace(name);
-		traces.put(activity, trace);
+		if (trace != null) {
+			traces.put(activity, trace);
+		}
 	}
 	
 	@Override
@@ -48,7 +50,9 @@ public class FirebasePerformanceLifecycleCallbacks implements Application.Activi
 	@Override
 	public void onActivityStopped(Activity activity) {
 		Trace trace = traces.remove(activity);
-		trace.stop();
+		if (trace != null) {
+			trace.stop();
+		}
 	}
 	
 	@Override
