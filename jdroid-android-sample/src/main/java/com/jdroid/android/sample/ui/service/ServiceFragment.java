@@ -7,14 +7,20 @@ import android.view.View.OnClickListener;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
-import com.firebase.jobdispatcher.FirebaseJobDispatcher;
-import com.firebase.jobdispatcher.GooglePlayDriver;
-import com.jdroid.android.firebase.jobdispatcher.ServiceCommand;
 import com.jdroid.android.fragment.AbstractFragment;
 import com.jdroid.android.sample.R;
 import com.jdroid.android.sample.ui.usecases.SampleUseCase;
 import com.jdroid.android.usecase.service.UseCaseService;
 import com.jdroid.java.utils.TypeUtils;
+
+import java.util.concurrent.TimeUnit;
+
+import androidx.work.Constraints;
+import androidx.work.Data;
+import androidx.work.NetworkType;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
 
 public class ServiceFragment extends AbstractFragment {
 
@@ -52,63 +58,92 @@ public class ServiceFragment extends AbstractFragment {
 				UseCaseService.execute(sampleUseCase);
 			}
 		});
-		findView(R.id.firebaseJobService).setOnClickListener(new OnClickListener() {
+		findView(R.id.sampleWorker1).setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				Bundle bundle = new Bundle();
-				bundle.putString("a", "2");
-				bundle.putBoolean("fail", failCheckBox.isChecked());
-				SampleFirebaseJobService.runIntentInService(bundle);
+				OneTimeWorkRequest.Builder sampleWorkRequestBuilder = new OneTimeWorkRequest.Builder(SampleWorker1.class);
+				
+				Data.Builder dataBuilder = createCommonDataBuilder();
+				dataBuilder.putString("a", "3");
+				dataBuilder.putBoolean("fail", failCheckBox.isChecked());
+				sampleWorkRequestBuilder.setInputData(dataBuilder.build());
+				
+				Constraints.Builder constrainsBuilder = new Constraints.Builder();
+				constrainsBuilder.setRequiredNetworkType(NetworkType.CONNECTED);
+				sampleWorkRequestBuilder.setConstraints(constrainsBuilder.build());
+				
+				enqueue(sampleWorkRequestBuilder);
 			}
 		});
-		findView(R.id.commandService1).setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				Bundle bundle = createServiceCommandBundle();
-				bundle.putString("a", "3");
-				ServiceCommand serviceCommand = new SampleServiceCommand1();
-				serviceCommand.start(bundle);
-			}
-		});
-		findView(R.id.commandService2).setOnClickListener(new OnClickListener() {
+		findView(R.id.sampleWorker2).setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				Bundle bundle = createServiceCommandBundle();
-				bundle.putString("a", "4");
-				ServiceCommand serviceCommand = new SampleServiceCommand2();
-				serviceCommand.start(bundle);
+				OneTimeWorkRequest.Builder sampleWorkRequestBuilder = new OneTimeWorkRequest.Builder(SampleWorker2.class);
+				
+				Data.Builder dataBuilder = createCommonDataBuilder();
+				dataBuilder.putString("a", "4");
+				sampleWorkRequestBuilder.setInputData(dataBuilder.build());
+				
+				enqueue(sampleWorkRequestBuilder);
 			}
 		});
-		findView(R.id.commandService3).setOnClickListener(new OnClickListener() {
+		findView(R.id.sampleWorker3).setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				Bundle bundle = createServiceCommandBundle();
-				bundle.putString("a", "5");
-				ServiceCommand serviceCommand = new SampleServiceCommand3();
-				serviceCommand.start(bundle);
+				OneTimeWorkRequest.Builder sampleWorkRequestBuilder = new OneTimeWorkRequest.Builder(SampleWorker3.class);
+				
+				Data.Builder dataBuilder = createCommonDataBuilder();
+				dataBuilder.putString("a", "5");
+				sampleWorkRequestBuilder.setInputData(dataBuilder.build());
+				
+				enqueue(sampleWorkRequestBuilder);
 			}
 		});
-		findView(R.id.commandService4).setOnClickListener(new OnClickListener() {
+		findView(R.id.sampleWorker4).setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				Bundle bundle = createServiceCommandBundle();
-				ServiceCommand serviceCommand = new SampleServiceCommand4();
-				serviceCommand.start(bundle);
+				OneTimeWorkRequest.Builder sampleWorkRequestBuilder = new OneTimeWorkRequest.Builder(SampleWorker4.class);
+				
+				Data.Builder dataBuilder = createCommonDataBuilder();
+				sampleWorkRequestBuilder.setInputData(dataBuilder.build());
+				
+				enqueue(sampleWorkRequestBuilder);
 			}
 		});
-		findView(R.id.cancelAllJobs).setOnClickListener(new OnClickListener() {
+		
+		findView(R.id.periodicWorker).setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(new GooglePlayDriver(getActivity()));
-				dispatcher.cancelAll();
+				PeriodicWorkRequest.Builder sampleWorkRequestBuilder = new PeriodicWorkRequest.Builder(SampleWorker1.class, 15, TimeUnit.MINUTES);
+				
+				Data.Builder dataBuilder = createCommonDataBuilder();
+				sampleWorkRequestBuilder.setInputData(dataBuilder.build());
+				
+				WorkManager.getInstance().enqueue(sampleWorkRequestBuilder.build());
 			}
 		});
+		
+		findView(R.id.cancelAllWork).setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				WorkManager.getInstance().cancelAllWork();
+			}
+		});
+	}
+	
+	private void enqueue(OneTimeWorkRequest.Builder sampleWorkRequestBuilder) {
+		Integer delay = TypeUtils.getSafeInteger(delayEditText.getText());
+		if (delay != null) {
+			sampleWorkRequestBuilder.setInitialDelay(delay, TimeUnit.SECONDS);
+		}
+		
+		WorkManager.getInstance().enqueue(sampleWorkRequestBuilder.build());
 	}
 	
 	private Bundle createServiceCommandBundle() {
@@ -119,5 +154,11 @@ public class ServiceFragment extends AbstractFragment {
 			bundle.putInt("delay", delay);
 		}
 		return bundle;
+	}
+	
+	private Data.Builder createCommonDataBuilder() {
+		Data.Builder dataBuilder = new Data.Builder();
+		dataBuilder.putBoolean("fail", failCheckBox.isChecked());
+		return dataBuilder;
 	}
 }

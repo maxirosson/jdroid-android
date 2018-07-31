@@ -1,20 +1,23 @@
 package com.jdroid.android.sample.ui.service;
 
-import android.content.Context;
-import android.os.Bundle;
+import android.support.annotation.NonNull;
 
 import com.jdroid.android.application.AbstractApplication;
+import com.jdroid.android.jetpack.work.AbstractWorker;
 import com.jdroid.android.notification.NotificationBuilder;
 import com.jdroid.android.notification.NotificationUtils;
 import com.jdroid.android.sample.application.AndroidNotificationChannelType;
 import com.jdroid.java.http.exception.ConnectionException;
 import com.jdroid.java.utils.IdGenerator;
 
-public class SampleServiceCommand2 extends AbstractSampleServiceCommand {
+import androidx.work.Worker;
 
+public class SampleWorker2 extends AbstractWorker {
+	
+	@NonNull
 	@Override
-	protected boolean execute(Context context, Bundle bundle) {
-		Boolean fail = bundle.getBoolean("fail");
+	protected Worker.Result onWork() {
+		Boolean fail = getInputData().getBoolean("fail", false);
 		if (fail) {
 			throw new ConnectionException("Failing service");
 		} else {
@@ -22,10 +25,10 @@ public class SampleServiceCommand2 extends AbstractSampleServiceCommand {
 			builder.setSmallIcon(AbstractApplication.get().getNotificationIconResId());
 			builder.setTicker("Sample Ticker");
 			builder.setContentTitle(getClass().getSimpleName());
-			builder.setContentText(bundle.get("a").toString());
-
+			builder.setContentText(getInputData().getString("a"));
+			
 			NotificationUtils.sendNotification(IdGenerator.getIntId(), builder);
-			return false;
+			return Result.SUCCESS;
 		}
 	}
 }

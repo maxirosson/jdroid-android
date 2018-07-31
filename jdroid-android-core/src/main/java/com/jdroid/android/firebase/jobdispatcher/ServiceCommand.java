@@ -52,7 +52,7 @@ public abstract class ServiceCommand implements Serializable {
 		try {
 			FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(new GooglePlayDriver(AbstractApplication.get()));
 			Job.Builder builder = createJobBuilder(dispatcher, bundle);
-			builder.setService(CommandJobService.class);
+			//builder.setService(CommandJobService.class);
 			dispatcher.mustSchedule(builder.build());
 		} catch (Exception e) {
 			AbstractApplication.get().getExceptionHandler().logHandledException(e);

@@ -1,8 +1,8 @@
 package com.jdroid.android.firebase.fcm;
 
-import android.os.Bundle;
-
 import com.jdroid.java.http.Server;
+
+import java.util.Map;
 
 public interface FcmSender extends Server {
 
@@ -13,6 +13,6 @@ public interface FcmSender extends Server {
 	 */
 	String getSenderId();
 
-	void onRegisterOnServer(String registrationToken, Boolean updateLastActiveTimestamp, Bundle bundle);
+	void onRegisterOnServer(String registrationToken, Boolean updateLastActiveTimestamp, Map<String, Object> parameters);
 
 }

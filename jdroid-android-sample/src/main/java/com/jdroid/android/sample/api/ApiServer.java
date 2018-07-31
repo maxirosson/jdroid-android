@@ -1,7 +1,5 @@
 package com.jdroid.android.sample.api;
 
-import android.os.Bundle;
-
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.firebase.fcm.FcmSender;
 import com.jdroid.android.firebase.fcm.device.Device;
@@ -12,6 +10,7 @@ import com.jdroid.java.http.HttpServiceProcessor;
 import com.jdroid.java.http.Server;
 
 import java.util.List;
+import java.util.Map;
 
 public enum ApiServer implements FcmSender {
 	
@@ -88,7 +87,7 @@ public enum ApiServer implements FcmSender {
 	}
 
 	@Override
-	public void onRegisterOnServer(String registrationToken, Boolean updateLastActiveTimestamp, Bundle bundle) {
+	public void onRegisterOnServer(String registrationToken, Boolean updateLastActiveTimestamp, Map<String, Object> parameters) {
 		SampleApiService service = new SampleApiService();
 
 		Device device = new Device(registrationToken, null);

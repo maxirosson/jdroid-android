@@ -73,11 +73,6 @@ public abstract class AbstractFcmAppModule extends AbstractAppModule {
 	}
 
 	public void startFcmRegistration(Boolean updateLastActiveTimestamp) {
-		FcmRegistrationCommand fcmRegistrationCommand = createFcmRegistrationCommand();
-		fcmRegistrationCommand.start(updateLastActiveTimestamp);
-	}
-	
-	protected FcmRegistrationCommand createFcmRegistrationCommand() {
-		return new FcmRegistrationCommand();
+		FcmRegistrationWorker.start(updateLastActiveTimestamp);
 	}
 }

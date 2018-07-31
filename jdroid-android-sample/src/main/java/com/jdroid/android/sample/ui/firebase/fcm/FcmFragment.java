@@ -7,7 +7,7 @@ import android.widget.EditText;
 
 import com.jdroid.android.firebase.fcm.AbstractFcmAppModule;
 import com.jdroid.android.firebase.fcm.AbstractFcmMessageResolver;
-import com.jdroid.android.firebase.fcm.FcmRegistrationCommand;
+import com.jdroid.android.firebase.fcm.FcmRegistrationWorker;
 import com.jdroid.android.firebase.fcm.notification.NotificationFcmMessage;
 import com.jdroid.android.firebase.instanceid.InstanceIdHelper;
 import com.jdroid.android.fragment.AbstractFragment;
@@ -35,13 +35,13 @@ public class FcmFragment extends AbstractFragment {
 		findView(R.id.registerDevice).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				new FcmRegistrationCommand().start(false);
+				AbstractFcmAppModule.get().startFcmRegistration(false);
 			}
 		});
 		findView(R.id.registerDeviceAndUpdateLastActiveTimestamp).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				new FcmRegistrationCommand().start(true);
+				AbstractFcmAppModule.get().startFcmRegistration(true);
 			}
 		});
 
@@ -93,7 +93,7 @@ public class FcmFragment extends AbstractFragment {
 						try {
 
 							String googleServerApiKey = googleServerApiKeyEditText.getText().length() > 0 ? googleServerApiKeyEditText.getText().toString() : null;
-							String registrationToken = FcmRegistrationCommand.getRegistrationToken(senderId.getText().toString());
+							String registrationToken = FcmRegistrationWorker.getRegistrationToken(senderId.getText().toString());
 
 							Map<String, String> params = Maps.newHashMap();
 							if (minAppVersionCode.getText().length() > 0) {

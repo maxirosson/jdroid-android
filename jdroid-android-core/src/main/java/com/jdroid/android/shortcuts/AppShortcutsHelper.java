@@ -9,7 +9,6 @@ import android.os.Build;
 import android.support.annotation.AnyRes;
 
 import com.jdroid.android.application.AbstractApplication;
-import com.jdroid.android.firebase.jobdispatcher.ServiceCommand;
 import com.jdroid.android.utils.AndroidUtils;
 import com.jdroid.java.utils.LoggerUtils;
 
@@ -76,8 +75,7 @@ public class AppShortcutsHelper {
 	}
 	
 	public static void registerDynamicShortcuts() {
-		ServiceCommand serviceCommand = new AppShortcutsCommand();
-		serviceCommand.start();
+		AppShortcutsWorker.start();
 	}
 	
 	public static Boolean isAppShortcutsAvailable() {

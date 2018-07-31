@@ -1,6 +1,5 @@
 package com.jdroid.android.firebase.remoteconfig;
 
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RestrictTo;
@@ -132,10 +131,7 @@ public class FirebaseRemoteConfigLoader implements RemoteConfigLoader {
 					retryCount++;
 
 					if (retryCount <= 3) {
-						Bundle bundle = new Bundle();
-						bundle.putLong(FirebaseRemoteConfigFetchCommand.CACHE_EXPIRATION_SECONDS, cacheExpirationSeconds);
-						bundle.putBoolean(FirebaseRemoteConfigFetchCommand.SET_EXPERIMENT_USER_PROPERTY, setExperimentUserProperty);
-						new FirebaseRemoteConfigFetchCommand().start(bundle);
+						FirebaseRemoteConfigFetchWorker.start(cacheExpirationSeconds, setExperimentUserProperty);
 					}
 				}
 			});
