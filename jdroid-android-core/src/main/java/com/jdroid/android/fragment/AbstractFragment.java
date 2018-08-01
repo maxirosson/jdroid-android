@@ -278,11 +278,6 @@ public abstract class AbstractFragment extends Fragment implements FragmentIf {
 	
 	// //////////////////////// Analytics //////////////////////// //
 	
-	@Override
-	public Boolean shouldTrackOnFragmentStart() {
-		return fragmentHelper.shouldTrackOnFragmentStart();
-	}
-	
 	@NonNull
 	@Override
 	public String getScreenViewName() {

@@ -155,14 +155,6 @@ public abstract class AbstractPreferenceFragment extends PreferenceFragment impl
 	
 	// //////////////////////// Analytics //////////////////////// //
 	
-	/**
-	 * @see com.jdroid.android.fragment.FragmentIf#shouldTrackOnFragmentStart()
-	 */
-	@Override
-	public Boolean shouldTrackOnFragmentStart() {
-		return false;
-	}
-	
 	@NonNull
 	@Override
 	public String getScreenViewName() {
