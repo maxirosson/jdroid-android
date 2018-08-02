@@ -11,15 +11,20 @@ import com.jdroid.java.utils.LoggerUtils;
 import org.slf4j.Logger;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import androidx.work.Constraints;
 import androidx.work.Data;
+import androidx.work.ExistingPeriodicWorkPolicy;
+import androidx.work.ExistingWorkPolicy;
 import androidx.work.NetworkType;
 import androidx.work.OneTimeWorkRequest;
+import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
 
-// TODO By Google recommendation, we should execute this command every 2 weeks, to have always fresh tokens on server side
 public class FcmRegistrationWorker extends AbstractWorker {
+	
+	public static final String WORK_MANAGER_TAG = "fcm";
 	
 	private final static Logger LOGGER = LoggerUtils.getLogger(FcmRegistrationWorker.class);
 
@@ -36,13 +41,33 @@ public class FcmRegistrationWorker extends AbstractWorker {
 		constrainsBuilder.setRequiredNetworkType(NetworkType.CONNECTED);
 		requestBuilder.setConstraints(constrainsBuilder.build());
 		
-		WorkManager.getInstance().enqueue(requestBuilder.build());
+		requestBuilder.addTag(WORK_MANAGER_TAG);
+		
+		WorkManager.getInstance().beginUniqueWork(FcmRegistrationWorker.class.getSimpleName(), ExistingWorkPolicy.KEEP, requestBuilder.build()).enqueue();
+	}
+	
+	// By Google recommendation, we should execute this command every 2 weeks, to have always fresh tokens on server side
+	private void startPeriodic(Boolean updateLastActiveTimestamp) {
+		PeriodicWorkRequest.Builder requestBuilder = new PeriodicWorkRequest.Builder(FcmRegistrationWorker.class, 14, TimeUnit.DAYS, 7, TimeUnit.DAYS);
+		
+		Data.Builder dataBuilder = new Data.Builder();
+		dataBuilder.putBoolean(UPDATE_LAST_ACTIVE_TIMESTAMP_EXTRA, updateLastActiveTimestamp);
+		requestBuilder.setInputData(dataBuilder.build());
+		
+		Constraints.Builder constrainsBuilder = new Constraints.Builder();
+		constrainsBuilder.setRequiredNetworkType(NetworkType.CONNECTED);
+		requestBuilder.setConstraints(constrainsBuilder.build());
+		
+		requestBuilder.addTag(WORK_MANAGER_TAG);
+		
+		WorkManager.getInstance().enqueueUniquePeriodicWork(FcmRegistrationWorker.class.getSimpleName(), ExistingPeriodicWorkPolicy.KEEP, requestBuilder.build());
 	}
 	
 	@NonNull
 	@Override
 	protected Result onWork() {
 		if (GooglePlayServicesUtils.isGooglePlayServicesAvailable(getApplicationContext())) {
+			Boolean updateLastActiveTimestamp = getInputData().getBoolean(UPDATE_LAST_ACTIVE_TIMESTAMP_EXTRA, false);
 			for (FcmSender fcmSender : AbstractFcmAppModule.get().getFcmSenders()) {
 				String registrationToken;
 				try {
@@ -62,13 +87,13 @@ public class FcmRegistrationWorker extends AbstractWorker {
 
 				try {
 					LOGGER.info("Registering FCM token on server");
-					Boolean updateLastActiveTimestamp = getInputData().getBoolean(UPDATE_LAST_ACTIVE_TIMESTAMP_EXTRA, false);
 					fcmSender.onRegisterOnServer(registrationToken, updateLastActiveTimestamp, getInputData().getKeyValueMap());
 				} catch (Exception e) {
 					AbstractApplication.get().getExceptionHandler().logHandledException("Failed to register the device on server. Will retry later.", e);
 					return Result.RETRY;
 				}
 			}
+			startPeriodic(updateLastActiveTimestamp);
 			return Result.SUCCESS;
 		} else {
 			LOGGER.warn("FCM not initialized because Google Play Services is not available");

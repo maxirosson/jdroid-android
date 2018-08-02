@@ -6,11 +6,14 @@ import com.jdroid.android.jetpack.work.AbstractWorker;
 
 import androidx.work.Constraints;
 import androidx.work.Data;
+import androidx.work.ExistingWorkPolicy;
 import androidx.work.NetworkType;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
 public class FirebaseRemoteConfigFetchWorker extends AbstractWorker {
+	
+	public static final String WORK_MANAGER_TAG = "firebase_remote_config";
 	
 	private static final String CACHE_EXPIRATION_SECONDS = "cacheExpirationSeconds";
 	private static final String SET_EXPERIMENT_USER_PROPERTY = "setExperimentUserProperty";
@@ -27,7 +30,9 @@ public class FirebaseRemoteConfigFetchWorker extends AbstractWorker {
 		constrainsBuilder.setRequiredNetworkType(NetworkType.CONNECTED);
 		requestBuilder.setConstraints(constrainsBuilder.build());
 		
-		WorkManager.getInstance().enqueue(requestBuilder.build());
+		requestBuilder.addTag(WORK_MANAGER_TAG);
+		
+		WorkManager.getInstance().beginUniqueWork(FirebaseRemoteConfigFetchWorker.class.getSimpleName(), ExistingWorkPolicy.KEEP, requestBuilder.build()).enqueue();
 	}
 	
 	@NonNull
