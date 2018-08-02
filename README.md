@@ -82,9 +82,9 @@ Libray for Android apps. Support for Android 4.0 (api level 15) and higher versi
   * Banners & interstitials support
 * House ads support
 
-## [jdroid-android-firebase-crash](https://github.com/maxirosson/jdroid/wiki/jdroid-Android)
+## [jdroid-android-firebase-crashlytics](https://github.com/maxirosson/jdroid/wiki/jdroid-Android)
 
-* [Firebase Crash Reporting integration](https://firebase.google.com/docs/crash/)
+* [Firebase Crashlytics integration](https://firebase.google.com/docs/crashlytics/)
 
 ## [jdroid-android-firebase-fcm](https://github.com/maxirosson/jdroid/wiki/jdroid-Android)
 

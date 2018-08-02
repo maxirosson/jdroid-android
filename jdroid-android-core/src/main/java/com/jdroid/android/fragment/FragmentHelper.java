@@ -20,11 +20,11 @@ import com.jdroid.android.application.AppModule;
 import com.jdroid.android.concurrent.SafeExecuteWrapperRunnable;
 import com.jdroid.android.exception.AbstractErrorDisplayer;
 import com.jdroid.android.exception.ErrorDisplayer;
-import com.jdroid.android.leakcanary.LeakCanaryHelper;
 import com.jdroid.android.loading.FragmentLoading;
 import com.jdroid.java.collections.Maps;
 import com.jdroid.java.exception.AbstractException;
 import com.jdroid.java.utils.LoggerUtils;
+import com.squareup.leakcanary.LeakCanary;
 
 import org.slf4j.Logger;
 
@@ -180,9 +180,7 @@ public class FragmentHelper implements FragmentIf {
 	public void onStart() {
 		LOGGER.debug("Executing onStart on " + fragment);
 		FragmentIf fragmentIf = getFragmentIf();
-		if (fragmentIf.shouldTrackOnFragmentStart()) {
-			AbstractApplication.get().getCoreAnalyticsSender().onFragmentStart(fragmentIf.getScreenViewName());
-		}
+		AbstractApplication.get().getCoreAnalyticsSender().onFragmentStart(fragmentIf.getScreenViewName());
 	}
 
 	public void onResume() {
@@ -220,7 +218,7 @@ public class FragmentHelper implements FragmentIf {
 	public void onDestroy() {
 		LOGGER.debug("Executing onDestroy on " + fragment);
 		
-		LeakCanaryHelper.onFragmentDestroy(getFragment());
+		LeakCanary.installedRefWatcher().watch(fragment);
 	}
 
 	@Override
@@ -356,11 +354,6 @@ public class FragmentHelper implements FragmentIf {
 	}
 
 	// //////////////////////// Analytics //////////////////////// //
-
-	@Override
-	public Boolean shouldTrackOnFragmentStart() {
-		return false;
-	}
 
 	@NonNull
 	@Override

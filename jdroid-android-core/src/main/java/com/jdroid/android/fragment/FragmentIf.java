@@ -81,8 +81,6 @@ public interface FragmentIf extends ComponentIf, UseCaseListener {
 
 	// //////////////////////// Analytics //////////////////////// //
 
-	public Boolean shouldTrackOnFragmentStart();
-
 	@NonNull
 	public String getScreenViewName();
 }

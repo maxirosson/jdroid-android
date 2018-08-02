@@ -197,14 +197,9 @@ public class AlertDialogFragment extends AbstractDialogFragment {
 		return null;
 	}
 
-	@Override
-	public Boolean shouldTrackOnFragmentStart() {
-		return screenViewName != null;
-	}
-
 	@NonNull
 	@Override
 	public String getScreenViewName() {
-		return screenViewName;
+		return screenViewName != null ? screenViewName : super.getScreenViewName();
 	}
 }
