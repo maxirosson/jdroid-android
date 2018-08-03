@@ -1,11 +1,14 @@
 package com.jdroid.android.sample.ui.service;
 
+import android.arch.lifecycle.Observer;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.jdroid.android.fragment.AbstractFragment;
 import com.jdroid.android.sample.R;
@@ -13,6 +16,7 @@ import com.jdroid.android.sample.ui.usecases.SampleUseCase;
 import com.jdroid.android.usecase.service.UseCaseService;
 import com.jdroid.java.utils.TypeUtils;
 
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 import androidx.work.Constraints;
@@ -21,11 +25,13 @@ import androidx.work.NetworkType;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
+import androidx.work.WorkStatus;
 
 public class ServiceFragment extends AbstractFragment {
 
 	private CheckBox failCheckBox;
 	private EditText delayEditText;
+	private TextView status;
 
 	@Override
 	public Integer getContentFragmentLayout() {
@@ -38,6 +44,7 @@ public class ServiceFragment extends AbstractFragment {
 
 		failCheckBox = findView(R.id.fail);
 		delayEditText = findView(R.id.delay);
+		status = findView(R.id.status);
 		
 		findView(R.id.workerService).setOnClickListener(new OnClickListener() {
 			
@@ -137,13 +144,31 @@ public class ServiceFragment extends AbstractFragment {
 		});
 	}
 	
-	private void enqueue(OneTimeWorkRequest.Builder sampleWorkRequestBuilder) {
+	private UUID enqueue(OneTimeWorkRequest.Builder sampleWorkRequestBuilder) {
 		Integer delay = TypeUtils.getSafeInteger(delayEditText.getText());
 		if (delay != null) {
 			sampleWorkRequestBuilder.setInitialDelay(delay, TimeUnit.SECONDS);
 		}
 		
-		WorkManager.getInstance().enqueue(sampleWorkRequestBuilder.build());
+		OneTimeWorkRequest oneTimeWorkRequest = sampleWorkRequestBuilder.build();
+		WorkManager.getInstance().enqueue(oneTimeWorkRequest);
+		
+		UUID uuid = oneTimeWorkRequest.getId();
+		
+		WorkManager.getInstance().getStatusById(uuid).observe(ServiceFragment.this, new Observer<WorkStatus>() {
+			@Override
+			public void onChanged(@Nullable final WorkStatus workStatus) {
+				if (workStatus != null) {
+					if (workStatus.getState().isFinished()) {
+						status.setText("Result: " + workStatus.getOutputData().getString("result"));
+					} else {
+						status.setText("Status: " + workStatus.getState());
+					}
+				}
+			}
+		});
+		
+		return uuid;
 	}
 	
 	private Data.Builder createCommonDataBuilder() {
