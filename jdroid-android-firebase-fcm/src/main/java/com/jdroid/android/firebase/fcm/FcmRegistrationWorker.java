@@ -46,7 +46,7 @@ public class FcmRegistrationWorker extends AbstractWorker {
 		WorkManager.getInstance().beginUniqueWork(FcmRegistrationWorker.class.getSimpleName(), ExistingWorkPolicy.KEEP, requestBuilder.build()).enqueue();
 	}
 	
-	// By Google recommendation, we should execute this command every 2 weeks, to have always fresh tokens on server side
+	// By Google recommendation, we should execute this worker every 2 weeks, to have always fresh tokens on server side
 	private void startPeriodic(Boolean updateLastActiveTimestamp) {
 		PeriodicWorkRequest.Builder requestBuilder = new PeriodicWorkRequest.Builder(FcmRegistrationWorker.class, 14, TimeUnit.DAYS, 7, TimeUnit.DAYS);
 		

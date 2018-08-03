@@ -260,11 +260,10 @@
 	<string name="sampleWorker4">Sample Worker 4</string>
 	<string name="periodicWorker">Periodic Worker</string>
 	<string name="cancelAllWork">Cancel All Work</string>
-	<string name="firebaseJobServiceDescription">Success or UnexpectedException.</string>
-	<string name="commandService1Description">Success or UnexpectedException</string>
-	<string name="commandService2Description">Success or ConnectionException</string>
-	<string name="commandService3Description">Success after 30 seconds</string>
-	<string name="commandService4Description">Minimum time between executions: 1 minute</string>
+	<string name="sampleWorker1Description">Success or UnexpectedException</string>
+	<string name="sampleWorker2Description">Success or ConnectionException</string>
+	<string name="sampleWorker3Description">Success after 30 seconds</string>
+	<string name="sampleWorker4Description">Minimum time between executions: 1 minute</string>
 
 	<!-- StrictMode -->
 	<string name="strictMode">Strict Mode</string>

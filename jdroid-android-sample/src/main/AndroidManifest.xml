@@ -429,11 +429,6 @@
 
 		<service android:name="com.jdroid.android.usecase.service.UseCaseService" android:exported="false" />
 		<service android:name="com.jdroid.android.sample.ui.service.SampleWorkerService" android:exported="false" />
-		<service android:name="com.jdroid.android.sample.ui.service.SampleFirebaseJobService" android:exported="false">
-			<intent-filter>
-				<action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE"/>
-			</intent-filter>
-		</service>
 
 		<!-- Widgets -->
 		<receiver android:name="com.jdroid.android.sample.ui.widget.SampleWidgetProvider" android:label="@string/sampleWidget">

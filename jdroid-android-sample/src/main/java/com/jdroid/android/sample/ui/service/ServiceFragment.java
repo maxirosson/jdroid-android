@@ -146,16 +146,6 @@ public class ServiceFragment extends AbstractFragment {
 		WorkManager.getInstance().enqueue(sampleWorkRequestBuilder.build());
 	}
 	
-	private Bundle createServiceCommandBundle() {
-		Bundle bundle = new Bundle();
-		bundle.putBoolean("fail", failCheckBox.isChecked());
-		Integer delay = TypeUtils.getInteger(delayEditText.getText());
-		if (delay != null) {
-			bundle.putInt("delay", delay);
-		}
-		return bundle;
-	}
-	
 	private Data.Builder createCommonDataBuilder() {
 		Data.Builder dataBuilder = new Data.Builder();
 		dataBuilder.putBoolean("fail", failCheckBox.isChecked());

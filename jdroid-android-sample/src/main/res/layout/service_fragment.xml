@@ -14,23 +14,23 @@
 		<Button android:id="@+id/useCaseService" android:layout_width="wrap_content" android:layout_height="wrap_content"
 			android:text="@string/useCaseService" />
 
-		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/commandService1Description" android:layout_marginTop="8dp"/>
+		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/sampleWorker1Description" android:layout_marginTop="8dp"/>
 		<Button android:id="@+id/sampleWorker1" android:layout_width="wrap_content" android:layout_height="wrap_content"
 			android:text="@string/sampleWorker1" />
 
-		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/commandService2Description" android:layout_marginTop="8dp"/>
+		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/sampleWorker2Description" android:layout_marginTop="8dp"/>
 		<Button android:id="@+id/sampleWorker2" android:layout_width="wrap_content" android:layout_height="wrap_content"
 			android:text="@string/sampleWorker2" />
 
-		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/commandService3Description" android:layout_marginTop="8dp"/>
+		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/sampleWorker3Description" android:layout_marginTop="8dp"/>
 		<Button android:id="@+id/sampleWorker3" android:layout_width="wrap_content" android:layout_height="wrap_content"
 			android:text="@string/sampleWorker3" />
 
-		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/commandService4Description" android:layout_marginTop="8dp"/>
+		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/sampleWorker4Description" android:layout_marginTop="8dp"/>
 		<Button android:id="@+id/sampleWorker4" android:layout_width="wrap_content" android:layout_height="wrap_content"
 			android:text="@string/sampleWorker4" />
 
-		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/commandService1Description" android:layout_marginTop="8dp"/>
+		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/sampleWorker1Description" android:layout_marginTop="8dp"/>
 		<Button android:id="@+id/periodicWorker" android:layout_width="wrap_content" android:layout_height="wrap_content"
 			android:text="@string/periodicWorker" />
 
