@@ -436,14 +436,6 @@ public abstract class AbstractMapFragment extends SupportMapFragment implements 
 	
 	// //////////////////////// Analytics //////////////////////// //
 	
-	/**
-	 * @see com.jdroid.android.fragment.FragmentIf#shouldTrackOnFragmentStart()
-	 */
-	@Override
-	public Boolean shouldTrackOnFragmentStart() {
-		return fragmentHelper.shouldTrackOnFragmentStart();
-	}
-	
 	@NonNull
 	@Override
 	public String getScreenViewName() {

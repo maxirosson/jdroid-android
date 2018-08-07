@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 
 import com.crashlytics.android.Crashlytics;
 import com.jdroid.android.analytics.AbstractCoreAnalyticsTracker;
-import com.jdroid.android.context.BuildConfigUtils;
 import com.jdroid.android.exception.DefaultExceptionHandler;
 import com.jdroid.android.uri.ReferrerUtils;
 
@@ -85,7 +84,12 @@ public class FirebaseCrashlyticsTracker extends AbstractCoreAnalyticsTracker {
 	}
 	
 	@Override
+	public void onFragmentStart(String screenViewName) {
+		Crashlytics.log(screenViewName + " started");
+	}
+	
+	@Override
 	public Boolean isEnabled() {
-		return BuildConfigUtils.getBuildConfigValue("FIREBASE_CRASHLYTICS_ENABLED", true);
+		return FirebaseCrashlyticsContext.isFirebaseCrashlyticsEnabled();
 	}
 }

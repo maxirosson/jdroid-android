@@ -193,14 +193,6 @@ public class AbstractDialogFragment extends DialogFragment implements FragmentIf
 	
 	// //////////////////////// Analytics //////////////////////// //
 	
-	/**
-	 * @see com.jdroid.android.fragment.FragmentIf#shouldTrackOnFragmentStart()
-	 */
-	@Override
-	public Boolean shouldTrackOnFragmentStart() {
-		return fragmentHelper.shouldTrackOnFragmentStart();
-	}
-	
 	@NonNull
 	@Override
 	public String getScreenViewName() {

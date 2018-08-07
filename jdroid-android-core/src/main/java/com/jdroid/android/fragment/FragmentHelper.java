@@ -180,9 +180,7 @@ public class FragmentHelper implements FragmentIf {
 	public void onStart() {
 		LOGGER.debug("Executing onStart on " + fragment);
 		FragmentIf fragmentIf = getFragmentIf();
-		if (fragmentIf.shouldTrackOnFragmentStart()) {
-			AbstractApplication.get().getCoreAnalyticsSender().onFragmentStart(fragmentIf.getScreenViewName());
-		}
+		AbstractApplication.get().getCoreAnalyticsSender().onFragmentStart(fragmentIf.getScreenViewName());
 	}
 
 	public void onResume() {
@@ -356,11 +354,6 @@ public class FragmentHelper implements FragmentIf {
 	}
 
 	// //////////////////////// Analytics //////////////////////// //
-
-	@Override
-	public Boolean shouldTrackOnFragmentStart() {
-		return false;
-	}
 
 	@NonNull
 	@Override

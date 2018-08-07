@@ -205,6 +205,7 @@ public class ActivityHelper implements ActivityIf {
 						@Override
 						public void onFailure(@NonNull Exception e) {
 							AbstractApplication.get().getExceptionHandler().logHandledException(e);
+							redirect(activity.getIntent().getStringExtra("url"));
 						}
 					});
 				} else {
