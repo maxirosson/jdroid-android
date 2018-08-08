@@ -29,7 +29,7 @@ public abstract class AbstractWorker extends Worker {
 			result = onWork();
 			long executionTime = DateUtils.nowMillis() - startTime;
 			LoggerUtils.getLogger(trackingTag).info("Worker finished. Result: " + result + ". Run attempt: " + getRunAttemptCount() + ". Execution time: " + DateUtils.formatDuration(executionTime));
-		} catch (Exception e) {
+		} catch (Throwable e) {
 			result = getResult(e);
 			LoggerUtils.getLogger(trackingTag).error("Worker finished with exception. Result: " + result + ". Run attempt: " + getRunAttemptCount());
 			AbstractApplication.get().getExceptionHandler().logHandledException(e);
