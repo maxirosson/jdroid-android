@@ -69,4 +69,14 @@ public abstract class InAppBillingRecyclerFragment extends AbstractRecyclerFragm
 		super.onDestroy();
 		InAppBillingHelperFragment.removeTarget(getActivity());
 	}
+
+	@Override
+	protected Boolean isCardViewDecorationEnabled() {
+		return true;
+	}
+
+	@Override
+	protected Boolean isDividerItemDecorationEnabled() {
+		return true;
+	}
 }
