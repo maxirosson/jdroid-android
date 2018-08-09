@@ -1,6 +1,8 @@
 package com.jdroid.android.google.inappbilling.client;
 
 
+import android.support.annotation.Nullable;
+
 public interface ProductType {
 	
 	/*
@@ -28,5 +30,8 @@ public interface ProductType {
 	public Integer getTitleId();
 	
 	public Integer getDescriptionId();
+	
+	@Nullable
+	public Integer getIconId();
 	
 }
