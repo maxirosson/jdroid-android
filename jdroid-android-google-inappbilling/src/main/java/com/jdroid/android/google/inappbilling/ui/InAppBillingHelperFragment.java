@@ -102,7 +102,7 @@ public class InAppBillingHelperFragment extends AbstractFragment implements InAp
 	public void onQueryPurchasesFinished(Inventory inventory) {
 		InAppBillingListener inAppBillingListener = getInAppBillingListener();
 		if (inAppBillingListener != null) {
-			inAppBillingListener.onProductsLoaded(inventory.getProducts());
+			inAppBillingListener.onProductsLoaded(inventory.getAvailableProducts());
 		}
 	}
 	

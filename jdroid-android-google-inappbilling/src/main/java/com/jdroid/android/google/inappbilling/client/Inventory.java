@@ -26,7 +26,21 @@ public class Inventory {
 	public List<Product> getProducts() {
 		return Lists.newArrayList(productsMap.values());
 	}
-	
+
+	/**
+	 *
+	 * @return The list of products defined locally and also on Google Play
+	 */
+	public List<Product> getAvailableProducts() {
+		List<Product> availableProducts = Lists.newArrayList();
+		for (Product product : productsMap.values()) {
+			if (product.getPrice() != null) {
+				availableProducts.add(product);
+			}
+		}
+		return availableProducts;
+	}
+
 	public void addProduct(Product product) {
 		productsMap.put(product.getId(), product);
 	}
