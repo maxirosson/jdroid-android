@@ -48,7 +48,7 @@ public class AppShortcutsHelper {
 	public static void setDynamicShortcuts(List<ShortcutInfo> shortcutInfos) {
 		if (shortcutInfos != null) {
 			ShortcutManager shortcutManager = AbstractApplication.get().getSystemService(ShortcutManager.class);
-			processShortcutInfos(shortcutInfos);
+			shortcutInfos = processShortcutInfos(shortcutManager, shortcutInfos);
 			shortcutManager.setDynamicShortcuts(shortcutInfos);
 		}
 	}
@@ -56,21 +56,22 @@ public class AppShortcutsHelper {
 	@TargetApi(Build.VERSION_CODES.N_MR1)
 	public static void updateDynamicShortcuts(List<ShortcutInfo> shortcutInfos) {
 		ShortcutManager shortcutManager = AbstractApplication.get().getSystemService(ShortcutManager.class);
-		processShortcutInfos(shortcutInfos);
+		shortcutInfos = processShortcutInfos(shortcutManager, shortcutInfos);
 		shortcutManager.updateShortcuts(shortcutInfos);
 	}
 	
 	@TargetApi(Build.VERSION_CODES.N_MR1)
-	private static List<ShortcutInfo> processShortcutInfos(List<ShortcutInfo> shortcutInfos) {
+	private static List<ShortcutInfo> processShortcutInfos(ShortcutManager shortcutManager, List<ShortcutInfo> shortcutInfos) {
 		Collections.sort(shortcutInfos, new Comparator<ShortcutInfo>() {
 			@Override
 			public int compare(ShortcutInfo o1, ShortcutInfo o2) {
 				return o1.getRank() > o2.getRank() ? 1 : -1;
 			}
 		});
-		if (shortcutInfos.size() > MAX_SHORTCUT_COUNT_PER_ACTIVITY) {
-			shortcutInfos = shortcutInfos.subList(0, MAX_SHORTCUT_COUNT_PER_ACTIVITY - 1);
-			LOGGER.warn("App Shortcuts limit [" + MAX_SHORTCUT_COUNT_PER_ACTIVITY + "] reached. Ignoring some of them");
+		int max = Math.min(MAX_SHORTCUT_COUNT_PER_ACTIVITY, shortcutManager.getMaxShortcutCountPerActivity());
+		if (shortcutInfos.size() > max) {
+			shortcutInfos = shortcutInfos.subList(0, max - 1);
+			LOGGER.warn("App Shortcuts limit [" + max + "] reached. Ignoring some of them");
 		}
 		return shortcutInfos;
 	}
