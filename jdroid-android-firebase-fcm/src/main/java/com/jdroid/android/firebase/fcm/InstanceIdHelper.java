@@ -1,4 +1,4 @@
-package com.jdroid.android.firebase.instanceid;
+package com.jdroid.android.firebase.fcm;
 
 import android.support.annotation.WorkerThread;
 
@@ -53,17 +53,12 @@ public class InstanceIdHelper {
 	}
 
 	@WorkerThread
-	public static void clearInstanceId() {
-		instanceId = null;
-		getSharedPreferencesHelper().removePreferences(INSTANCE_ID);
-	}
-
-	@WorkerThread
 	public static void removeInstanceId() {
 		if (GooglePlayServicesUtils.isGooglePlayServicesAvailable(AbstractApplication.get())) {
 			try {
 				FirebaseInstanceId.getInstance().deleteInstanceId();
-				clearInstanceId();
+				instanceId = null;
+				getSharedPreferencesHelper().removePreferences(INSTANCE_ID);
 			} catch (IOException e) {
 				AbstractApplication.get().getExceptionHandler().logHandledException(e);
 			}

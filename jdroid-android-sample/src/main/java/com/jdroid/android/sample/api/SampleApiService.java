@@ -77,7 +77,7 @@ public class SampleApiService extends AndroidApiService {
 	}
 
 	public void removeDevice() {
-		HttpService httpService = newDeleteService("gcm", "device");
+		HttpService httpService = newDeleteService("fcm", "device");
 		httpService.execute();
 	}
 

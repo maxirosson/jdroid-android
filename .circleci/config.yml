@@ -89,10 +89,6 @@ jobs:
           destination: jdroid-android-firebase-fcm/tests
 
       - store_artifacts:
-          path: ./jdroid-android-firebase-instanceid/build/reports/tests/testDebugUnitTest
-          destination: jdroid-android-firebase-instanceid/tests
-
-      - store_artifacts:
           path: ./jdroid-android-firebase-remoteconfig/build/reports/tests/testDebugUnitTest
           destination: jdroid-android-firebase-remoteconfig/tests
 
@@ -194,10 +190,6 @@ jobs:
       - store_artifacts:
           path: ./jdroid-android-firebase-fcm/build/reports/lint-results-debug.html
           destination: jdroid-android-firebase-fcm/lint
-
-      - store_artifacts:
-          path: ./jdroid-android-firebase-instanceid/build/reports/lint-results-debug.html
-          destination: jdroid-android-firebase-instanceid/lint
 
       - store_artifacts:
           path: ./jdroid-android-firebase-remoteconfig/build/reports/lint-results-debug.html

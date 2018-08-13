@@ -70,4 +70,10 @@ public class FcmListenerResolver {
 	public void onDeletedMessages() {
 		LOGGER.info("Deleted messages");
 	}
+	
+	public void onNewToken(String token) {
+		LOGGER.info("New token: " + token);
+		AbstractFcmAppModule.get().startFcmRegistration(false);
+	}
+	
 }

@@ -19,7 +19,7 @@ dependencies {
 	api project(":jdroid-android-core")
 
 	// https://firebase.google.com/support/release-notes/android
-	api "com.google.firebase:firebase-messaging:17.0.0"
+	api "com.google.firebase:firebase-messaging:17.1.0"
 
 	testImplementation "junit:junit:${JUNIT_VERSION}"
 	testImplementation "org.robolectric:robolectric:${ROBOLECTRIC_VERSION}"

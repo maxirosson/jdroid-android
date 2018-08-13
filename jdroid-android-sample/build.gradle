@@ -1,6 +1,7 @@
 ext.COMPONENTS = ['jdroid-android', 'jdroid-java-okhttp']
 ext.RES_CONFIGS = ['en', 'es']
 ext.PROJECT_NAME = 'Jdroid Android - Sample'
+
 apply plugin: 'com.jdroid.android.application'
 
 description = 'Jdroid Sample Android'
@@ -35,7 +36,6 @@ dependencies {
 	implementation project(':jdroid-android-core')
 	implementation project(':jdroid-android-about')
 	implementation project(':jdroid-android-facebook-login')
-	implementation project(':jdroid-android-firebase-instanceid')
 	implementation project(':jdroid-android-firebase-admob')
 	implementation project(':jdroid-android-firebase-crashlytics')
 	implementation project(':jdroid-android-glide')
@@ -223,3 +223,7 @@ android {
 }
 
 apply plugin: 'com.google.gms.google-services'
+
+
+// TODO Remove this when Firebase release the missing libs
+com.google.gms.googleservices.GoogleServicesPlugin.config.disableVersionCheck = true

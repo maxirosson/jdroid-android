@@ -2,7 +2,6 @@ package com.jdroid.android.application;
 
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
-import android.support.annotation.WorkerThread;
 import android.support.v4.app.Fragment;
 
 import com.jdroid.android.activity.AbstractFragmentActivity;
@@ -15,12 +14,6 @@ import com.jdroid.java.remoteconfig.RemoteConfigParameter;
 import java.util.List;
 
 public interface AppModule {
-
-	/*
-	 * Since Android O, have a guaranteed life cycle limited to 10 seconds for this method execution.
-	 */
-	@WorkerThread
-	public void onInstanceIdTokenRefresh();
 
 	@MainThread
 	public void onGooglePlayServicesUpdated();

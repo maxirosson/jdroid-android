@@ -73,9 +73,6 @@ Libray for Android apps. Support for Android 4.0 (api level 15) and higher versi
 * [Facebook SDK integration](https://developers.facebook.com/docs/android/)
   * Sign in, sign out, share with deep link
 
-## [jdroid-android-firebase-instanceid](https://github.com/maxirosson/jdroid/wiki/jdroid-Android)
-* [Instance ID support](https://developers.google.com/instance-id/)
-
 ## [jdroid-android-firebase-admob](https://github.com/maxirosson/jdroid/wiki/jdroid-Android)
 
 * [Firebase AdMob integration](https://firebase.google.com/docs/admob/)

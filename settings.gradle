@@ -1,6 +1,5 @@
 include ':jdroid-android-core'
 include ':jdroid-android-about'
-include ':jdroid-android-firebase-instanceid'
 include ':jdroid-android-firebase-admob'
 include ':jdroid-android-firebase-crashlytics'
 include ':jdroid-android-firebase-database'

@@ -69,7 +69,7 @@ public class FcmDebugPrefsAppender extends PreferencesAppender {
 
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
-				new FcmRegistrationCommand().start(true);
+				AbstractFcmAppModule.get().startFcmRegistration(true);
 				return true;
 			}
 		});
