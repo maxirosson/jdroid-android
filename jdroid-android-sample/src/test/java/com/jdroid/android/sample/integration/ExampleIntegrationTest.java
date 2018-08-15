@@ -19,6 +19,7 @@ import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertNull;
+import static junit.framework.Assert.assertTrue;
 
 public class ExampleIntegrationTest extends AbstractIntegrationTest {
 
@@ -39,8 +40,8 @@ public class ExampleIntegrationTest extends AbstractIntegrationTest {
 		assertFalse(LeakCanaryHelper.isLeakCanaryEnabled());
 		assertFalse(StrictModeHelper.isStrictModeEnabled());
 		assertFalse(AppUtils.isReleaseBuildType());
-		assertFalse(GoogleAnalyticsAppContext.isGoogleAnalyticsEnabled());
-		assertFalse(FirebaseAnalyticsFactory.getFirebaseAnalyticsHelper().isFirebaseAnalyticsEnabled());
+		assertTrue(GoogleAnalyticsAppContext.isGoogleAnalyticsEnabled());
+		assertTrue(FirebaseAnalyticsFactory.getFirebaseAnalyticsHelper().isFirebaseAnalyticsEnabled());
 		assertEquals(TestExceptionHandler.class, AbstractApplication.get().getExceptionHandler().getClass());
 	}
 }
