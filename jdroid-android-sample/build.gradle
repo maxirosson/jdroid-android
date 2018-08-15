@@ -100,10 +100,11 @@ android {
 
 		applicationId 'com.jdroid.android.sample'
 
+		jdroid.setBuildConfigBoolean(defaultConfig, "DEBUG_SETTINGS_ENABLED", false)
 		jdroid.setBuildConfigBoolean(defaultConfig, "STRICT_MODE_ENABLED", false)
 		jdroid.setBuildConfigBoolean(defaultConfig, "LEAK_CANARY_ENABLED", false)
-		jdroid.setBuildConfigBoolean(defaultConfig, "FIREBASE_ANALYTICS_ENABLED", true)
 
+		jdroid.setBuildConfigBoolean(defaultConfig, "FIREBASE_ANALYTICS_ENABLED", true)
 		jdroid.setBuildConfigBoolean(defaultConfig, "FIREBASE_PERFORMANCE_MONITORING_ENABLED", true)
 		jdroid.setBuildConfigBoolean(defaultConfig, "FIREBASE_CRASHLYTICS_ENABLED", true)
 
@@ -149,8 +150,7 @@ android {
 
 			applicationIdSuffix ".debug"
 
-			jdroid.setBuildConfigBoolean(buildTypes.debug, "FIREBASE_CRASHLYTICS_ENABLED", false)
-
+			jdroid.setBuildConfigBoolean(buildTypes.debug, "DEBUG_SETTINGS_ENABLED", true)
 			jdroid.setBuildConfigString(buildTypes.debug, "SERVER_NAME", "DEV")
 		}
 
@@ -170,20 +170,18 @@ android {
 			matchingFallbacks = ['debug']
 
 			jdroid.setBuildConfigString(buildTypes.automation, "SERVER_NAME", "UAT")
-			jdroid.setBuildConfigBoolean(buildTypes.automation, "DEBUG_SETTINGS_ENABLED", false)
 		}
 
 		if (jdroid.isReleaseBuildTypeEnabled()) {
 			release {
 
-				if (jdroid.propertyResolver.getBooleanProp("RELEASE_FAKE_ENABLED", false)) {
+				if (jdroid.isFakeReleaseBuildTypeEnabled()) {
 					signingConfig signingConfigs.debug
 					debuggable true
 				} else {
 
 					signingConfig signingConfigs.release
-
-					debuggable jdroid.propertyResolver.getBooleanProp('DEBUGGABLE', false)
+					debuggable jdroid.isReleaseBuildTypeDebuggable()
 
 					jdroid.setBuildConfigString(buildTypes.release, "SERVER_NAME", "PROD")
 

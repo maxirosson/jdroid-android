@@ -96,6 +96,6 @@ public class FirebaseAnalyticsHelper {
 	 * @return Whether the application has Firebase Analytics enabled or not
 	 */
 	public Boolean isFirebaseAnalyticsEnabled() {
-		return BuildConfigUtils.getBuildConfigBoolean("FIREBASE_ANALYTICS_ENABLED", false) && !FirebaseTestLab.isRunningInstrumentedTests();
+		return BuildConfigUtils.getBuildConfigBoolean("FIREBASE_ANALYTICS_ENABLED", true) && !FirebaseTestLab.isRunningInstrumentedTests();
 	}
 }

@@ -45,7 +45,7 @@ public class AppContext extends AbstractAppContext {
 	 * @return Whether the application should display the debug settings
 	 */
 	public Boolean isDebugSettingsEnabled() {
-		return getBuildConfigBoolean("DEBUG_SETTINGS_ENABLED",  !AppUtils.isReleaseBuildType());
+		return getBuildConfigBoolean("DEBUG_SETTINGS_ENABLED",  false);
 	}
 
 	public String getLocalIp() {
