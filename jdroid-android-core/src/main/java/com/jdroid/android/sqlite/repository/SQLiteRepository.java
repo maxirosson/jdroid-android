@@ -3,6 +3,7 @@ package com.jdroid.android.sqlite.repository;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.annotation.NonNull;
 
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.sqlite.Column;
@@ -311,7 +312,7 @@ public abstract class SQLiteRepository<T extends Entity> implements Repository<T
 	}
 	
 	@Override
-	public void replaceAll(Collection<T> items) {
+	public void replaceAll(@NonNull Collection<T> items) {
 		@SuppressWarnings("resource")
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
 		boolean endTransaction = beginTransaction(db);
