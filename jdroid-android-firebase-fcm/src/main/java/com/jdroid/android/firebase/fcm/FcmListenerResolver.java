@@ -21,7 +21,7 @@ public class FcmListenerResolver {
 			builder.append("from: ");
 			builder.append(remoteMessage.getFrom());
 
-			if (remoteMessage.getMessageType() != null ) {
+			if (remoteMessage.getMessageType() != null) {
 				builder.append(", ");
 				builder.append("message type: ");
 				builder.append(remoteMessage.getMessageType());
@@ -70,10 +70,10 @@ public class FcmListenerResolver {
 	public void onDeletedMessages() {
 		LOGGER.info("Deleted messages");
 	}
-	
+
 	public void onNewToken(String token) {
 		LOGGER.info("New token: " + token);
 		AbstractFcmAppModule.get().startFcmRegistration(false);
 	}
-	
+
 }

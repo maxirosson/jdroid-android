@@ -1,23 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-									xmlns:tools="http://schemas.android.com/tools" style="@style/jdroid_cardViewStyle">
+									xmlns:tools="http://schemas.android.com/tools"
+									style="@style/jdroid_cardViewStyle">
 
-	<LinearLayout android:orientation="vertical" style="@style/jdroid_cardViewInner">
+	<LinearLayout android:orientation="vertical"
+				  style="@style/jdroid_cardViewInner">
 
-		<RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+		<RelativeLayout android:layout_width="match_parent"
+						android:layout_height="wrap_content"
 						android:layout_marginBottom="8dp">
-			<TextView android:id="@+id/itemTitle" style="@style/jdroid_textMediumBold" android:layout_width="match_parent"
-					  android:layout_height="wrap_content" android:gravity="center_vertical" android:layout_centerVertical="true"
-					  android:layout_toLeftOf="@+id/itemPrice" tools:text="Title" />
 
-			<TextView android:id="@+id/itemPrice" style="@style/jdroid_raisedButton" android:layout_alignParentRight="true"
-					  android:layout_centerVertical="true" android:layout_width="wrap_content"
-					  android:layout_height="wrap_content" android:gravity="center_horizontal|center_vertical"
-					  android:textStyle="bold" tools:text="ARS15.26"/>
+			<TextView android:id="@+id/itemTitle"
+					  style="@style/jdroid_textMediumBold"
+					  android:layout_width="match_parent"
+					  android:layout_height="wrap_content"
+					  android:gravity="center_vertical"
+					  android:layout_centerVertical="true"
+					  android:layout_toLeftOf="@+id/itemPrice"
+					  tools:text="Title" />
+
+			<TextView android:id="@+id/itemPrice"
+					  style="@style/jdroid_raisedButton"
+					  android:layout_alignParentRight="true"
+					  android:layout_centerVertical="true"
+					  android:layout_width="wrap_content"
+					  android:layout_height="wrap_content"
+					  android:gravity="center_horizontal|center_vertical"
+					  android:textStyle="bold"
+					  tools:text="ARS15.26" />
 
 		</RelativeLayout>
 
-		<TextView android:id="@+id/itemDescription" style="@style/jdroid_textSmall" android:layout_marginTop="12dp" tools:text="This is the description" />
+		<TextView android:id="@+id/itemDescription"
+				  style="@style/jdroid_textSmall"
+				  android:layout_marginTop="12dp"
+				  tools:text="This is the description" />
 
 	</LinearLayout>
 

@@ -5,9 +5,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 public class HouseAdBuilder {
-	
+
 	private OnClickListener removeAdsClickListener;
-	
+
 	public View build(Activity activity) {
 		View view = null;
 		if (RemoveAdsView.displayRemoveAdsView() && (removeAdsClickListener != null)) {
@@ -16,7 +16,7 @@ public class HouseAdBuilder {
 		}
 		return view;
 	}
-	
+
 	public void setRemoveAdsClickListener(OnClickListener removeAdsClickListener) {
 		this.removeAdsClickListener = removeAdsClickListener;
 	}

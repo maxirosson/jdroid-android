@@ -9,11 +9,11 @@ public class AppShortcutsAnalyticsSender extends AnalyticsSender<AppShortcutsAna
 	public AppShortcutsAnalyticsSender(List<AppShortcutsAnalyticsTracker> trackers) {
 		super(trackers);
 	}
-	
+
 	@Override
 	public void trackPinShortcut(final String shortcutName) {
 		execute(new TrackingCommand() {
-			
+
 			@Override
 			protected void track(AppShortcutsAnalyticsTracker tracker) {
 				tracker.trackPinShortcut(shortcutName);

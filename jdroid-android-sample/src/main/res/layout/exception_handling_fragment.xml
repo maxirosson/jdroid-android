@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/container" android:layout_width="match_parent"
-	android:layout_height="match_parent" android:orientation="vertical" android:padding="8dp">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  android:id="@+id/container"
+			  android:layout_width="match_parent"
+			  android:layout_height="match_parent"
+			  android:orientation="vertical"
+			  android:padding="8dp">
 
-	<Button android:id="@+id/defaultErrorDisplayer" android:layout_width="wrap_content" android:layout_height="wrap_content"
+	<Button android:id="@+id/defaultErrorDisplayer"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
 			android:text="@string/defaultErrorDisplayer" />
 
-	<Button android:id="@+id/defaultErrorDisplayerNotGoBack" android:layout_width="wrap_content" android:layout_height="wrap_content"
+	<Button android:id="@+id/defaultErrorDisplayerNotGoBack"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
 			android:text="@string/defaultErrorDisplayerNotGoBack" />
 
-	<Button android:id="@+id/snackbarErrorDisplayer" android:layout_width="wrap_content" android:layout_height="wrap_content"
+	<Button android:id="@+id/snackbarErrorDisplayer"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
 			android:text="@string/snackbarErrorDisplayer" />
 
 </LinearLayout>

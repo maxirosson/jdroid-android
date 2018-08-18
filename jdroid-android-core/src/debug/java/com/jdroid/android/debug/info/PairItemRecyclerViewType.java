@@ -34,7 +34,7 @@ public abstract class PairItemRecyclerViewType extends RecyclerViewType<Pair, Pa
 		holder.name.setText(item.first + ": " + item.second);
 		holder.name.setTextIsSelectable(isTextSelectable());
 	}
-	
+
 	protected Boolean isTextSelectable() {
 		return false;
 	}

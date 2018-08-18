@@ -17,13 +17,13 @@ public interface AppModule {
 
 	@MainThread
 	public void onGooglePlayServicesUpdated();
-	
+
 	@MainThread
 	public ActivityDelegate createActivityDelegate(AbstractFragmentActivity abstractFragmentActivity);
 
 	@MainThread
 	public FragmentDelegate createFragmentDelegate(Fragment fragment);
-	
+
 	@NonNull
 	public List<RemoteConfigParameter> getRemoteConfigParameters();
 
@@ -34,5 +34,5 @@ public interface AppModule {
 	public List<? extends AnalyticsTracker> createModuleAnalyticsTrackers();
 
 	public AnalyticsSender<? extends AnalyticsTracker> getModuleAnalyticsSender();
-	
+
 }

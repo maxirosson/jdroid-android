@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android" style="@style/jdroid_cardViewClickableStyle">
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+									style="@style/jdroid_cardViewClickableStyle">
 
-	<LinearLayout style="@style/jdroid_cardViewInner" android:orientation="vertical">
-		<TextView style="@style/jdroid_cardViewTitle" android:text="@string/cardViewClickableTitle" />
-		<TextView style="@style/jdroid_textSmall" android:text="@string/cardViewClickableContent" />
+	<LinearLayout style="@style/jdroid_cardViewInner"
+				  android:orientation="vertical">
+
+		<TextView style="@style/jdroid_cardViewTitle"
+				  android:text="@string/cardViewClickableTitle" />
+
+		<TextView style="@style/jdroid_textSmall"
+				  android:text="@string/cardViewClickableContent" />
 	</LinearLayout>
 
 </android.support.v7.widget.CardView>

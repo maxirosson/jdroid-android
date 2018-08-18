@@ -15,14 +15,14 @@ public class HttpCacheDebugPrefsAppender extends PreferencesAppender {
 	public int getNameResId() {
 		return R.string.jdroid_httpCacheSettings;
 	}
-	
+
 	@Override
 	public void initPreferences(Activity activity, PreferenceGroup preferenceGroup) {
 		Preference preference = new Preference(activity);
 		preference.setTitle(R.string.jdroid_clearHttpCache);
 		preference.setSummary(R.string.jdroid_clearHttpCache);
 		preference.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-			
+
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
 				AbstractApplication.get().getCacheManager().cleanFileSystemCache();

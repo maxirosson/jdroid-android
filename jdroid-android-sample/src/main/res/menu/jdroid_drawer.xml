@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-	<group android:id="@+id/groupId1" android:checkableBehavior="single">
+	<group android:id="@+id/groupId1"
+		   android:checkableBehavior="single">
 		<item
-			android:id="@+id/home"
-			android:icon="@drawable/ic_home"
-			android:title="@string/home"/>
+				android:id="@+id/home"
+				android:icon="@drawable/ic_home"
+				android:title="@string/home" />
 		<item
-			android:id="@+id/about"
-			android:icon="@drawable/jdroid_ic_about_black_24dp"
-			android:title="@string/jdroid_about"/>
+				android:id="@+id/about"
+				android:icon="@drawable/jdroid_ic_about_black_24dp"
+				android:title="@string/jdroid_about" />
 	</group>
-	<group android:id="@+id/groupId2" android:checkableBehavior="single">
+	<group android:id="@+id/groupId2"
+		   android:checkableBehavior="single">
 		<item
-			android:id="@+id/inviteFriends"
-			android:icon="@drawable/jdroid_ic_mail_outline_black_24dp"
-			android:title="@string/jdroid_appInviteButtonTitle"/>
+				android:id="@+id/inviteFriends"
+				android:icon="@drawable/jdroid_ic_mail_outline_black_24dp"
+				android:title="@string/jdroid_appInviteButtonTitle" />
 	</group>
 </menu>

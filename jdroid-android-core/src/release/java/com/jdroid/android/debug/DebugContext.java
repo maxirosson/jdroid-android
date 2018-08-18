@@ -5,7 +5,6 @@ import android.support.v4.util.Pair;
 
 import com.jdroid.android.sqlite.SQLiteHelper;
 import com.jdroid.java.domain.Identifiable;
-import com.jdroid.java.http.mock.AbstractMockHttpService;
 import com.jdroid.java.repository.Repository;
 
 import java.util.List;
@@ -18,7 +17,7 @@ public class DebugContext {
 	}
 
 	public void initDebugRepositories(
-			Map<Class<? extends Identifiable>, Repository<? extends Identifiable>> repositories, SQLiteHelper dbHelper) {
+		Map<Class<? extends Identifiable>, Repository<? extends Identifiable>> repositories, SQLiteHelper dbHelper) {
 		// Do nothing
 	}
 

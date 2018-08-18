@@ -60,7 +60,7 @@ public abstract class AbstractFcmAppModule extends AbstractAppModule {
 	protected List<String> getSubscriptionTopics() {
 		return null;
 	}
-	
+
 	@Override
 	public void onGooglePlayServicesUpdated() {
 		startFcmRegistration(false);
@@ -70,7 +70,7 @@ public abstract class AbstractFcmAppModule extends AbstractAppModule {
 		FcmRegistrationCommand fcmRegistrationCommand = createFcmRegistrationCommand();
 		fcmRegistrationCommand.start(updateLastActiveTimestamp);
 	}
-	
+
 	protected FcmRegistrationCommand createFcmRegistrationCommand() {
 		return new FcmRegistrationCommand();
 	}

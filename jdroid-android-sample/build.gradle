@@ -132,8 +132,8 @@ android {
 		jdroid.setBuildConfigString(defaultConfig, "FIREBASE_WEB_API_KEY", "AIzaSyCcwMZ25CMtubXhcW3I7NVTybckPu0Dwtg")
 
 		manifestPlaceholders = [
-				googleMapsApiKey: "AIzaSyA2UZNjUMaw7kFk9qvHeGLTppXxcgI3l1Y",
-				facebookAppId: "fb1048902711862195"
+			googleMapsApiKey: "AIzaSyA2UZNjUMaw7kFk9qvHeGLTppXxcgI3l1Y",
+			facebookAppId   : "fb1048902711862195"
 		]
 
 		multiDexEnabled true
@@ -191,8 +191,8 @@ android {
 					// TODO Add GOOGLE_SERVER_CLIENT_ID
 
 					manifestPlaceholders = [
-							googleMapsApiKey: jdroid.propertyResolver.getStringProp("GOOGLE_MAPS_API_KEY", ""),
-							facebookAppId: jdroid.propertyResolver.getStringProp("FACEBOOK_APP_ID", "")
+						googleMapsApiKey: jdroid.propertyResolver.getStringProp("GOOGLE_MAPS_API_KEY", ""),
+						facebookAppId   : jdroid.propertyResolver.getStringProp("FACEBOOK_APP_ID", "")
 					]
 				}
 			}
@@ -221,7 +221,6 @@ android {
 }
 
 apply plugin: 'com.google.gms.google-services'
-
 
 // TODO Remove this when Firebase release the missing libs
 com.google.gms.googleservices.GoogleServicesPlugin.config.disableVersionCheck = true

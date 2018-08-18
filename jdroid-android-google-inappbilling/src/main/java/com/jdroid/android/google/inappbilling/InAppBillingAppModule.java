@@ -73,19 +73,19 @@ public class InAppBillingAppModule extends AbstractAppModule {
 	public InAppBillingAnalyticsSender getModuleAnalyticsSender() {
 		return (InAppBillingAnalyticsSender)super.getModuleAnalyticsSender();
 	}
-	
+
 	public void setInAppBillingBroadcastListener(InAppBillingBroadcastListener inAppBillingBroadcastListener) {
 		this.inAppBillingBroadcastListener = inAppBillingBroadcastListener;
 	}
-	
+
 	public InAppBillingBroadcastListener getInAppBillingBroadcastListener() {
 		return inAppBillingBroadcastListener;
 	}
-	
+
 	public DeveloperPayloadVerificationStrategy getDeveloperPayloadVerificationStrategy() {
 		return developerPayloadVerificationStrategy;
 	}
-	
+
 	public void setDeveloperPayloadVerificationStrategy(DeveloperPayloadVerificationStrategy developerPayloadVerificationStrategy) {
 		this.developerPayloadVerificationStrategy = developerPayloadVerificationStrategy;
 	}

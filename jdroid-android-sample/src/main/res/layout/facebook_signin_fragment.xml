@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.jdroid.android.loading.LoadingLayout android:id="@+id/loadingLayout" android:layout_width="match_parent" android:layout_height="match_parent"
+<com.jdroid.android.loading.LoadingLayout android:id="@+id/loadingLayout"
+										  android:layout_width="match_parent"
+										  android:layout_height="match_parent"
 										  xmlns:android="http://schemas.android.com/apk/res/android">
-	<LinearLayout android:id="@+id/container" android:layout_width="match_parent"
-		android:layout_height="match_parent" android:orientation="vertical" android:padding="8dp">
+
+	<LinearLayout android:id="@+id/container"
+				  android:layout_width="match_parent"
+				  android:layout_height="match_parent"
+				  android:orientation="vertical"
+				  android:padding="8dp">
 
 		<com.facebook.login.widget.LoginButton
-			android:id="@+id/signIn"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_gravity="center_horizontal"
-			android:layout_marginTop="30dp"
-			android:layout_marginBottom="30dp" />
+				android:id="@+id/signIn"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_horizontal"
+				android:layout_marginTop="30dp"
+				android:layout_marginBottom="30dp" />
 
-		<TextView android:id="@+id/status" android:layout_width="wrap_content" android:layout_height="wrap_content"
-				  android:layout_gravity="center_horizontal" android:layout_marginTop="20dp"/>
+		<TextView android:id="@+id/status"
+				  android:layout_width="wrap_content"
+				  android:layout_height="wrap_content"
+				  android:layout_gravity="center_horizontal"
+				  android:layout_marginTop="20dp" />
 
 	</LinearLayout>
 </com.jdroid.android.loading.LoadingLayout>

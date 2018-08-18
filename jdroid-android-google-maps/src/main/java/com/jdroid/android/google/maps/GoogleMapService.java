@@ -7,16 +7,16 @@ import com.jdroid.java.http.HttpService;
 import com.jdroid.java.http.Server;
 
 public class GoogleMapService extends AndroidApiService {
-	
+
 	private static final Server GMAPS_API = new DefaultServer("maps.googleapis.com/maps/api");
-	
+
 	private static final Object DIRECTIONS = "directions";
 	private static final String OUTPUT_FORMAT = "json";
 	private static final String ORIGIN = "origin";
 	private static final String DESTINATION = "destination";
 	private static final String SENSOR = "sensor";
 	private static final String MODE = "mode";
-	
+
 	public Route findDirections(GeoLocation source, GeoLocation destination, RouteMode mode) {
 		HttpService httpService = newGetService(DIRECTIONS, OUTPUT_FORMAT);
 		httpService.addQueryParameter(ORIGIN, toHttpParam(source));
@@ -29,11 +29,11 @@ public class GoogleMapService extends AndroidApiService {
 		}
 		return route;
 	}
-	
+
 	private String toHttpParam(GeoLocation geoLocation) {
 		return Double.toString(geoLocation.getLatitude()) + "," + Double.toString(geoLocation.getLongitude());
 	}
-	
+
 	@Override
 	protected Server getServer() {
 		return GMAPS_API;

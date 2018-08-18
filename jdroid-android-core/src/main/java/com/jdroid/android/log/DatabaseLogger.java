@@ -11,10 +11,10 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 public class DatabaseLogger implements Logger {
-	
+
 	private Logger wrappedLogger;
 	private Executor executor = Executors.newFixedThreadPool(1, new LowPriorityThreadFactory());
-	
+
 	public DatabaseLogger(Logger wrappedLogger) {
 		this.wrappedLogger = wrappedLogger;
 	}

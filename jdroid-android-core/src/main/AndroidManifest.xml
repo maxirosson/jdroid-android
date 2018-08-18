@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+		  xmlns:tools="http://schemas.android.com/tools"
 		  package="com.jdroid.android">
 
-	<uses-feature android:name="android.hardware.WIFI" android:required="false" />
+	<uses-feature android:name="android.hardware.WIFI"
+				  android:required="false" />
 
 	<uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,24 +13,32 @@
 	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
 	<!-- Required permission to make the Firebase Job Dispatcher persistence across reboots work -->
-	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
-	<supports-screens android:largeScreens="true" android:xlargeScreens="true" />
+	<supports-screens android:largeScreens="true"
+					  android:xlargeScreens="true" />
 
 	<application>
 
 		<!-- Remove this comment to enable Firebase Performance logs-->
 		<!--<meta-data android:name="firebase_performance_logcat_enabled" android:value="true" />-->
 
-		<meta-data android:name="com.jdroid.android.application.AppLifecycleCallback" android:value="ApplicationLifecycleCallback" />
-		<meta-data android:name="com.jdroid.android.google.analytics.GoogleAnalyticsAppLifecycleCallback" android:value="ApplicationLifecycleCallback" />
-		<meta-data android:name="com.jdroid.android.firebase.analytics.FirebaseAnalyticsAppLifecycleCallback" android:value="ApplicationLifecycleCallback" />
-		<meta-data android:name="com.jdroid.android.firebase.performance.FirebasePerformanceAppLifecycleCallback" android:value="ApplicationLifecycleCallback" />
-		<meta-data android:name="com.jdroid.android.shortcuts.AppShortcutsAppLifecycleCallback" android:value="ApplicationLifecycleCallback" />
+		<meta-data android:name="com.jdroid.android.application.AppLifecycleCallback"
+				   android:value="ApplicationLifecycleCallback" />
+		<meta-data android:name="com.jdroid.android.google.analytics.GoogleAnalyticsAppLifecycleCallback"
+				   android:value="ApplicationLifecycleCallback" />
+		<meta-data android:name="com.jdroid.android.firebase.analytics.FirebaseAnalyticsAppLifecycleCallback"
+				   android:value="ApplicationLifecycleCallback" />
+		<meta-data android:name="com.jdroid.android.firebase.performance.FirebasePerformanceAppLifecycleCallback"
+				   android:value="ApplicationLifecycleCallback" />
+		<meta-data android:name="com.jdroid.android.shortcuts.AppShortcutsAppLifecycleCallback"
+				   android:value="ApplicationLifecycleCallback" />
 
-		<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
+		<meta-data android:name="com.google.android.gms.version"
+				   android:value="@integer/google_play_services_version" />
 
-		<receiver android:name="com.jdroid.android.lifecycle.LocaleChangedReceiver" android:exported="true">
+		<receiver android:name="com.jdroid.android.lifecycle.LocaleChangedReceiver"
+				  android:exported="true">
 			<intent-filter>
 				<action android:name="android.intent.action.LOCALE_CHANGED" />
 			</intent-filter>
@@ -43,28 +53,31 @@
 		</receiver>
 		<service android:name="com.google.android.gms.analytics.AnalyticsService"
 				 android:enabled="true"
-				 android:exported="false"/>
+				 android:exported="false" />
 
 		<!-- Used for install referral measurement -->
-		<receiver android:name="com.google.android.gms.analytics.CampaignTrackingReceiver" android:exported="true"
+		<receiver android:name="com.google.android.gms.analytics.CampaignTrackingReceiver"
+				  android:exported="true"
 				  tools:ignore="ExportedReceiver">
 			<intent-filter>
 				<action android:name="com.android.vending.INSTALL_REFERRER" />
 			</intent-filter>
 		</receiver>
 
-		<service android:name="com.jdroid.android.firebase.jobdispatcher.CommandWorkerService" android:exported="false" />
-		<service android:name="com.jdroid.android.firebase.jobdispatcher.CommandJobService" android:exported="false">
+		<service android:name="com.jdroid.android.firebase.jobdispatcher.CommandWorkerService"
+				 android:exported="false" />
+		<service android:name="com.jdroid.android.firebase.jobdispatcher.CommandJobService"
+				 android:exported="false">
 			<intent-filter>
-				<action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE"/>
+				<action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE" />
 			</intent-filter>
 		</service>
 
 		<provider
-			android:name="com.jdroid.android.lifecycle.ApplicationLifecycleInitProvider"
-			android:authorities="${applicationId}.com.jdroid.android.lifecycle.ApplicationLifecycleInitProvider"
-			android:exported="false"
-			android:initOrder="1" />
+				android:name="com.jdroid.android.lifecycle.ApplicationLifecycleInitProvider"
+				android:authorities="${applicationId}.com.jdroid.android.lifecycle.ApplicationLifecycleInitProvider"
+				android:exported="false"
+				android:initOrder="1" />
 
 	</application>
 </manifest>

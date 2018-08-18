@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.jdroid.android.firebase.remoteconfig">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+		  package="com.jdroid.android.firebase.remoteconfig">
 
 	<application>
 
-		<meta-data android:name="com.jdroid.android.firebase.remoteconfig.FirebaseRemoteConfigDebugAppLifecycleCallback" android:value="ApplicationLifecycleCallback" />
+		<meta-data android:name="com.jdroid.android.firebase.remoteconfig.FirebaseRemoteConfigDebugAppLifecycleCallback"
+				   android:value="ApplicationLifecycleCallback" />
 
 		<activity android:name="com.jdroid.android.firebase.remoteconfig.FirebaseRemoteConfigActivity"
 				  android:parentActivityName="com.jdroid.android.debug.DebugSettingsActivity"

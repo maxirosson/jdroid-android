@@ -11,14 +11,13 @@ import java.util.List;
 
 /**
  * Generic repository to store {@link String} objects.
- * 
  */
 public abstract class StringEntityRepository extends SQLiteRepository<StringEntity> {
-	
+
 	public StringEntityRepository(SQLiteHelper dbHelper) {
 		super(dbHelper);
 	}
-	
+
 	/**
 	 * @see SQLiteRepository#createObjectFromCursor(android.database.Cursor)
 	 */
@@ -32,7 +31,7 @@ public abstract class StringEntityRepository extends SQLiteRepository<StringEnti
 		entity.setValue((String)getColumn(Column.VALUE).readValue(cursor));
 		return entity;
 	}
-	
+
 	@Override
 	protected ContentValues createContentValuesFromObject(StringEntity item) {
 		ContentValues values = new ContentValues();
@@ -43,10 +42,10 @@ public abstract class StringEntityRepository extends SQLiteRepository<StringEnti
 		getColumn(Column.VALUE).addValue(values, item.getValue());
 		return values;
 	}
-	
+
 	/**
 	 * Find for the column associated with the given name.
-	 * 
+	 *
 	 * @param name column name.
 	 * @return return the column if exits, otherwise returns null.
 	 */
@@ -58,11 +57,11 @@ public abstract class StringEntityRepository extends SQLiteRepository<StringEnti
 		}
 		return null;
 	}
-	
+
 	/**
 	 * This method allows to replace all string children of a given parent, it will remove any children which are not in
 	 * the list, add the new ones and update which are in the list.
-	 * 
+	 *
 	 * @param strings string children list to replace.
 	 * @param parentId id of parent entity.
 	 */
@@ -78,11 +77,11 @@ public abstract class StringEntityRepository extends SQLiteRepository<StringEnti
 		}
 		replaceChildren(entities, parentId);
 	}
-	
+
 	/**
 	 * This method allows to replace all string children, it will remove any children which are not in the list, add the
 	 * new ones and update which are in the list.
-	 * 
+	 *
 	 * @param strings string children list to replace.
 	 */
 	public void replaceStringChildren(List<String> strings) {
@@ -94,10 +93,10 @@ public abstract class StringEntityRepository extends SQLiteRepository<StringEnti
 		}
 		replaceAll(entities);
 	}
-	
+
 	/**
 	 * This method returns the list of strings associated with given parent id.
-	 * 
+	 *
 	 * @param parentId of parent entity.
 	 * @return list of strings
 	 */
@@ -109,10 +108,10 @@ public abstract class StringEntityRepository extends SQLiteRepository<StringEnti
 		}
 		return strings;
 	}
-	
+
 	/**
 	 * Returns all strings.
-	 * 
+	 *
 	 * @return list of strings
 	 */
 	public List<String> getAllString() {
@@ -123,5 +122,5 @@ public abstract class StringEntityRepository extends SQLiteRepository<StringEnti
 		}
 		return strings;
 	}
-	
+
 }

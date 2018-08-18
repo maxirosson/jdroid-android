@@ -12,7 +12,7 @@ import com.jdroid.android.firebase.admob.helpers.InterstitialAdHelper;
 import com.jdroid.android.sample.application.AndroidAppContext;
 
 public class AdsActivity extends FragmentContainerActivity {
-	
+
 	@Override
 	protected Class<? extends Fragment> getFragmentClass() {
 		return AdsFragment.class;

@@ -39,7 +39,7 @@ public class DebugContext {
 	}
 
 	public void initDebugRepositories(
-			Map<Class<? extends Identifiable>, Repository<? extends Identifiable>> repositories, SQLiteHelper dbHelper) {
+		Map<Class<? extends Identifiable>, Repository<? extends Identifiable>> repositories, SQLiteHelper dbHelper) {
 		if (AbstractApplication.get().isDebugLogRepositoryEnabled() && !AppUtils.isReleaseBuildType()) {
 			repositories.put(DatabaseLog.class, new DatabaseLogsRepository(dbHelper));
 		}
@@ -60,31 +60,31 @@ public class DebugContext {
 	public Map<Class<? extends Server>, List<? extends Server>> getServersMap() {
 		return Maps.newHashMap();
 	}
-	
+
 	public ExceptionHandlingDebugPrefsAppender createExceptionHandlingDebugPrefsAppender() {
 		return new ExceptionHandlingDebugPrefsAppender();
 	}
-	
+
 	public HttpCacheDebugPrefsAppender createHttpCacheDebugPrefsAppender() {
 		return new HttpCacheDebugPrefsAppender();
 	}
-	
+
 	public DatabaseDebugPrefsAppender createDatabaseDebugPrefsAppender() {
 		return new DatabaseDebugPrefsAppender();
 	}
-	
+
 	public LogsDebugPrefsAppender createLogsDebugPrefsAppender() {
 		return new LogsDebugPrefsAppender();
 	}
-	
+
 	public NavDrawerDebugPrefsAppender createNavDrawerDebugPrefsAppender() {
 		return new NavDrawerDebugPrefsAppender();
 	}
-	
+
 	public HttpMocksDebugPrefsAppender createHttpMocksDebugPrefsAppender() {
 		return new HttpMocksDebugPrefsAppender();
 	}
-	
+
 	public InfoDebugPrefsAppender createInfoDebugPrefsAppender() {
 		return new InfoDebugPrefsAppender();
 	}
@@ -108,7 +108,7 @@ public class DebugContext {
 	public List<String> getUrlsToTest() {
 		return Lists.newArrayList();
 	}
-	
+
 	public List<RemoteConfigParameter> getRemoteConfigParameters() {
 		return Lists.newArrayList();
 	}

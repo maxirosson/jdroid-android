@@ -21,15 +21,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class ServiceCommand implements Serializable {
-	
+
 	final static String COMMAND_EXTRA = "com.jdroid.android.firebase.jobdispatcher.command";
-	
+
 	private final static Map<Class<? extends ServiceCommand>, Long> LAST_EXECUTION_MAP = new HashMap<>();
-	
+
 	public void start() {
 		start(null);
 	}
-	
+
 	public final void start(Bundle bundle) {
 		Long lastExecution = LAST_EXECUTION_MAP.get(getClass());
 		Long minimumTimeBetweenExecutions = getMinimumTimeBetweenExecutions();
@@ -40,15 +40,15 @@ public abstract class ServiceCommand implements Serializable {
 			LoggerUtils.getLogger(getClass()).info("Firebase Job Service schedule skipped");
 		}
 	}
-	
+
 	public void startFirebaseJobService(Bundle bundle) {
 		LoggerUtils.getLogger(getClass()).info("Scheduling Firebase Job Service");
-		
+
 		if (bundle == null) {
 			bundle = new Bundle();
 		}
 		bundle.putSerializable(ServiceCommand.COMMAND_EXTRA, getClass().getName());
-		
+
 		try {
 			FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(new GooglePlayDriver(AbstractApplication.get()));
 			Job.Builder builder = createJobBuilder(dispatcher, bundle);
@@ -58,12 +58,12 @@ public abstract class ServiceCommand implements Serializable {
 			AbstractApplication.get().getExceptionHandler().logHandledException(e);
 		}
 	}
-	
+
 	@Nullable
 	protected Long getMinimumTimeBetweenExecutions() {
 		return null;
 	}
-	
+
 	@NonNull
 	protected Job.Builder createJobBuilder(FirebaseJobDispatcher dispatcher, Bundle bundle) {
 		Job.Builder builder = dispatcher.newJobBuilder();
@@ -77,8 +77,8 @@ public abstract class ServiceCommand implements Serializable {
 		builder.setExtras(bundle);
 		return builder;
 	}
-	
+
 	@WorkerThread
 	protected abstract boolean execute(Context context, Bundle bundle);
-	
+
 }

@@ -34,7 +34,7 @@ public class DefaultFirebaseMessagingService extends FirebaseMessagingService {
 	public void onDeletedMessages() {
 		AbstractFcmAppModule.get().getFcmListenerResolver().onDeletedMessages();
 	}
-	
+
 	// Called when a new token for the default Firebase project is generated.
 	// This may occur if the security of the previous token had been compromised
 	// This is invoked after app install when a token is first generated, and again if the token changes.

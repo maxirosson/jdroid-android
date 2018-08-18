@@ -48,15 +48,15 @@ public class AppUtils {
 		}
 		return applicationId;
 	}
-	
+
 	public static String getBuildType() {
 		return BuildConfigUtils.getBuildConfigValue("BUILD_TYPE");
 	}
-	
+
 	public static boolean isReleaseBuildType() {
 		return getBuildType().equals("release");
 	}
-	
+
 	public static String getBuildTime() {
 		return BuildConfigUtils.getBuildConfigValue("BUILD_TIME", null);
 	}
@@ -83,7 +83,7 @@ public class AppUtils {
 		try {
 			Context context = getContext();
 			info = context.getPackageManager().getApplicationInfo(context.getPackageName(),
-					PackageManager.GET_META_DATA);
+				PackageManager.GET_META_DATA);
 		} catch (PackageManager.NameNotFoundException e) {
 			// Do Nothing
 		}
@@ -96,7 +96,7 @@ public class AppUtils {
 
 	public static void hideSoftInput(View view) {
 		((InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(
-				view.getWindowToken(), 0);
+			view.getWindowToken(), 0);
 	}
 
 	public static void scrollToBottom(final ScrollView scroll) {
@@ -119,7 +119,7 @@ public class AppUtils {
 	public static Boolean isInstalledOnSdCard() {
 		return (getPackageInfo().applicationInfo.flags & ApplicationInfo.FLAG_EXTERNAL_STORAGE) == ApplicationInfo.FLAG_EXTERNAL_STORAGE;
 	}
-	
+
 	private static Context getContext() {
 		return AppContextContainer.getApplicationContext();
 	}

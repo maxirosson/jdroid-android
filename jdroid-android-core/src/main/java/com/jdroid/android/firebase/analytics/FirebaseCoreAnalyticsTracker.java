@@ -39,12 +39,12 @@ public class FirebaseCoreAnalyticsTracker extends AbstractFirebaseAnalyticsTrack
 	public void trackErrorLog(String message) {
 		// Do nothing
 	}
-	
+
 	@Override
 	public void trackErrorCustomKey(@NonNull String key, @NonNull Object value) {
 		// Do nothing
 	}
-	
+
 	@Override
 	public void onFirstActivityCreate(Activity activity) {
 		// Do nothing

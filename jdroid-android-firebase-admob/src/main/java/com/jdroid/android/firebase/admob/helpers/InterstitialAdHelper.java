@@ -56,17 +56,17 @@ public class InterstitialAdHelper implements AdHelper {
 
 			AdRequest.Builder builder = createBuilder();
 			interstitial.loadAd(builder.build());
-			
+
 			AdListenerWrapper adListenerWrapper = new AdListenerWrapper();
 			adListenerWrapper.addAdListener(new AdListener() {
-				
+
 				@Override
 				public void onAdLoaded() {
 					if (displayInterstitial) {
 						displayInterstitial(false);
 					}
 				}
-				
+
 				@Override
 				public void onAdOpened() {
 					AdsStats.onInterstitialOpened();
@@ -84,11 +84,11 @@ public class InterstitialAdHelper implements AdHelper {
 	public Boolean displayInterstitial() {
 		return displayInterstitial(false);
 	}
-	
+
 	public Boolean displayInterstitial(Boolean retryIfNotLoaded) {
 		return displayInterstitial(retryIfNotLoaded, null);
 	}
-	
+
 	public Boolean displayInterstitial(Boolean retryIfNotLoaded, AdListener adListener) {
 		displayInterstitial = retryIfNotLoaded;
 		if ((interstitial != null) && interstitial.isLoaded()) {
@@ -107,7 +107,7 @@ public class InterstitialAdHelper implements AdHelper {
 		this.interstitialAdUnitId = adUnitId;
 		return this;
 	}
-	
+
 	@Override
 	public AdHelper setAdListeners(List<AdListener> adListeners) {
 		this.adListeners = adListeners;

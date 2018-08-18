@@ -59,10 +59,10 @@ public class CacheManager {
 			if ((defaultContent != null) && !defaultContent.isEmpty()) {
 				for (Map.Entry<String, String> entry : defaultContent.entrySet()) {
 					InputStream source = AbstractApplication.class.getClassLoader().getResourceAsStream(
-							"cache/" + entry.getKey());
+						"cache/" + entry.getKey());
 					if (source != null) {
 						File cacheFile = new File(getFileSystemCacheDirectory(cache),
-								CachedHttpService.generateCacheFileName(entry.getValue()));
+							CachedHttpService.generateCacheFileName(entry.getValue()));
 						FileUtils.copyStream(source, cacheFile);
 						LOGGER.debug("Populated " + entry.toString() + " to " + cacheFile.getAbsolutePath());
 						FileUtils.safeClose(source);

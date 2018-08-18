@@ -71,7 +71,7 @@ public abstract class NavDrawer {
 
 		if (isNavDrawerTopLevelView && appBar != null) {
 			drawerToggle = new ActionBarDrawerToggle(activity, drawerLayout, appBar, R.string.jdroid_drawerOpen,
-					R.string.jdroid_drawerClose) {
+				R.string.jdroid_drawerClose) {
 
 				@Override
 				public void onDrawerStateChanged(int newState) {

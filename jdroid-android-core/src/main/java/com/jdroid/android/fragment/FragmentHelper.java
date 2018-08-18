@@ -31,7 +31,7 @@ import org.slf4j.Logger;
 import java.util.Map;
 
 public class FragmentHelper implements FragmentIf {
-	
+
 	private final static Logger LOGGER = LoggerUtils.getLogger(FragmentHelper.class);
 
 	private Fragment fragment;
@@ -41,24 +41,24 @@ public class FragmentHelper implements FragmentIf {
 	private FragmentLoading loading;
 
 	private Toolbar appBar;
-	
+
 	public FragmentHelper(Fragment fragment) {
 		this.fragment = fragment;
 	}
-	
+
 	public FragmentIf getFragmentIf() {
 		return (FragmentIf)fragment;
 	}
-	
+
 	protected Fragment getFragment() {
 		return fragment;
 	}
-	
+
 	@Override
 	public ActivityIf getActivityIf() {
 		return (ActivityIf)fragment.getActivity();
 	}
-	
+
 	// //////////////////////// Layout //////////////////////// //
 
 	@Override
@@ -217,7 +217,7 @@ public class FragmentHelper implements FragmentIf {
 
 	public void onDestroy() {
 		LOGGER.debug("Executing onDestroy on " + fragment);
-		
+
 		LeakCanary.installedRefWatcher().watch(fragment);
 	}
 

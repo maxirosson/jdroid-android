@@ -12,7 +12,7 @@ import com.jdroid.java.collections.Lists;
 import java.util.List;
 
 public class FirebaseAnalyticsDebugAppLifecycleCallback extends ApplicationLifecycleCallback {
-	
+
 	@Override
 	public void onCreate(Context context) {
 		DebugInfoHelper.addDebugInfoAppender(new DebugInfoAppender() {

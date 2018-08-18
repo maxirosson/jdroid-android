@@ -25,13 +25,13 @@ public abstract class AbstractRecyclerFragment extends AbstractFragment {
 	private RecyclerView.AdapterDataObserver adapterDataObserver;
 	private RecyclerView.LayoutManager layoutManager;
 	private Integer selectedItemPosition;
-	
+
 	@MainThread
 	@Override
 	public Integer getContentFragmentLayout() {
 		return isCardViewDecorationEnabled() ? R.layout.jdroid_cardview_vertical_recycler_fragment : R.layout.jdroid_vertical_recycler_fragment;
 	}
-	
+
 	@MainThread
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -64,22 +64,22 @@ public abstract class AbstractRecyclerFragment extends AbstractFragment {
 		if (adapter != null) {
 			setAdapter(adapter);
 		}
-		
+
 		if (savedInstanceState != null) {
 			selectedItemPosition = savedInstanceState.getInt(SELECTED_ITEM_POSITION_EXTRA, RecyclerView.NO_POSITION);
 		}
 	}
-	
+
 	@MainThread
 	protected RecyclerView.ItemDecoration createDividerItemDecoration() {
 		return new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL);
 	}
-	
+
 	@MainThread
 	protected Boolean isDividerItemDecorationEnabled() {
 		return false;
 	}
-	
+
 	@MainThread
 	protected Boolean isCardViewDecorationEnabled() {
 		return false;
@@ -91,12 +91,12 @@ public abstract class AbstractRecyclerFragment extends AbstractFragment {
 	protected Boolean hasRecyclerViewFixedSize() {
 		return true;
 	}
-	
+
 	@NonNull
 	protected RecyclerView.LayoutManager createLayoutManager() {
 		return new LinearLayoutManager(getActivity());
 	}
-	
+
 	@MainThread
 	public void setAdapter(RecyclerViewAdapter adapter) {
 		this.adapter = adapter;
@@ -105,13 +105,13 @@ public abstract class AbstractRecyclerFragment extends AbstractFragment {
 		recyclerView.setAdapter(adapter);
 
 		refreshEmptyView();
-		
+
 		if (selectedItemPosition != null) {
 			this.adapter.setSelectedItemPosition(selectedItemPosition);
 			selectedItemPosition = null;
 		}
 	}
-	
+
 	@MainThread
 	@Override
 	public void onDestroyView() {
@@ -140,18 +140,18 @@ public abstract class AbstractRecyclerFragment extends AbstractFragment {
 			emptyViewContainer.setVisibility(emptyViewContainerVisibility);
 		}
 	}
-	
+
 	@MainThread
 	protected View createEmptyView() {
 		TextView emptyTextView = (TextView)inflate(R.layout.jdroid_empty_view);
 		emptyTextView.setText(getNoResultsResId());
 		return emptyTextView;
 	}
-	
+
 	protected int getNoResultsResId() {
 		return R.string.jdroid_noResults;
 	}
-	
+
 	public RecyclerViewAdapter getAdapter() {
 		return adapter;
 	}
@@ -168,12 +168,12 @@ public abstract class AbstractRecyclerFragment extends AbstractFragment {
 	public FragmentLoading getDefaultLoading() {
 		return new NonBlockingLoading();
 	}
-	
+
 	@MainThread
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		if(adapter != null){
+		if (adapter != null) {
 			outState.putSerializable(SELECTED_ITEM_POSITION_EXTRA, getAdapter().getSelectedItemPosition());
 		}
 	}

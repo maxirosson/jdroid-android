@@ -16,20 +16,20 @@ import java.util.List;
 import java.util.Set;
 
 public class SQLiteHelper extends SQLiteOpenHelper {
-	
+
 	private final static Logger LOGGER = LoggerUtils.getLogger(SQLiteHelper.class);
 	private final static String DB_NAME = "application.db";
-	
+
 	private Set<String> createSQLs = Sets.newHashSet();
 	private List<SQLiteUpgradeStep> upgradeSteps = Lists.newArrayList();
-	
+
 	public SQLiteHelper(Context context) {
 		super(context, DB_NAME, null, AppUtils.getVersionCode());
 	}
-	
+
 	/**
 	 * Add a creation SQL statement to be executed in {@link SQLiteHelper#onCreate(SQLiteDatabase)} method.
-	 * 
+	 *
 	 * @param sql creation statement
 	 */
 	public void addCreateSQL(String sql) {
@@ -37,21 +37,21 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 			createSQLs.add(sql);
 		}
 	}
-	
+
 	/**
 	 * Add a {@link SQLiteUpgradeStep} to be executed in {@link SQLiteHelper#onUpgrade(SQLiteDatabase, int, int)}
 	 * method.
-	 * 
+	 *
 	 * @param upgradeStep upgrade steps to add.
 	 */
 	public void addUpgradeStep(SQLiteUpgradeStep upgradeStep) {
 		upgradeSteps.add(upgradeStep);
 	}
-	
+
 	public void addUpgradeSteps(List<SQLiteUpgradeStep> upgradeSteps) {
 		this.upgradeSteps.addAll(upgradeSteps);
 	}
-	
+
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		for (String createSQL : createSQLs) {
@@ -59,7 +59,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 			db.execSQL(createSQL);
 		}
 	}
-	
+
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		LOGGER.debug("Upgrading DB from version " + oldVersion + " to " + newVersion);
@@ -70,7 +70,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 			}
 		}
 	}
-	
+
 	@Override
 	public void onOpen(SQLiteDatabase db) {
 		super.onOpen(db);
@@ -79,17 +79,17 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 			db.execSQL("PRAGMA foreign_keys=ON;");
 		}
 	}
-	
+
 	/**
 	 * Verify if database file exits.
-	 * 
+	 *
 	 * @param context context
 	 * @return true if the file exits
 	 */
 	public static boolean existDatabase(Context context) {
 		return getDatabaseFile(context).exists();
 	}
-	
+
 	public static File getDatabaseFile(Context context) {
 		return context.getApplicationContext().getDatabasePath(DB_NAME);
 	}

@@ -92,7 +92,7 @@ public class SampleApiService extends AndroidApiService {
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append("[");
 		Boolean firstItem = true;
-		for(Map.Entry<String, String> entry : params.entrySet()) {
+		for (Map.Entry<String, String> entry : params.entrySet()) {
 			if (firstItem) {
 				firstItem = false;
 			} else {

@@ -37,23 +37,23 @@ import org.slf4j.Logger;
  * application is already running in the background when the item is acquired,
  * a message to this BroadcastReceiver will indicate that the an item
  * has been acquired.</p>
- *
+ * <p>
  * Use this command to simulate the broadcast:
  * adb shell am broadcast -a com.android.vending.billing.PURCHASES_UPDATED
  */
 public class InAppBillingBroadcastReceiver extends BroadcastReceiver {
-	
+
 	private final static Logger LOGGER = LoggerUtils.getLogger(InAppBillingBroadcastReceiver.class);
-	
+
 	/**
 	 * The Intent action that this Receiver should filter for.
 	 */
 	public static final String ACTION = "com.android.vending.billing.PURCHASES_UPDATED";
-	
+
 	public IntentFilter createIntentFilter() {
 		return new IntentFilter(InAppBillingBroadcastReceiver.ACTION);
 	}
-	
+
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		LOGGER.debug("Received PURCHASES_UPDATED broadcast");

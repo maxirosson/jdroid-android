@@ -28,21 +28,21 @@ public class DatabaseDebugPrefsAppender extends PreferencesAppender {
 	public int getNameResId() {
 		return R.string.jdroid_database;
 	}
-	
+
 	@Override
 	public void initPreferences(final Activity activity, PreferenceGroup preferenceGroup) {
-		
+
 		Preference preference = new Preference(activity);
 		preference.setTitle(R.string.jdroid_downloadDatabase);
 		preference.setSummary(R.string.jdroid_downloadDatabase);
 		preference.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-			
+
 			@SuppressWarnings("resource")
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
 				File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
 				dir.mkdirs();
-				
+
 				File file = new File(dir, AppUtils.getApplicationName() + ".sqlite");
 				try {
 					FileUtils.copyStream(new FileInputStream(SQLiteHelper.getDatabaseFile(activity)), file);
@@ -58,7 +58,7 @@ public class DatabaseDebugPrefsAppender extends PreferencesAppender {
 		});
 		preferenceGroup.addPreference(preference);
 	}
-	
+
 	@Override
 	public Boolean isEnabled() {
 		return AbstractApplication.get().isDatabaseEnabled();

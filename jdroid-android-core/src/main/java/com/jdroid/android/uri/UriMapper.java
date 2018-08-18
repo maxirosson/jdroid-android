@@ -26,7 +26,7 @@ public class UriMapper {
 	private static final Logger LOGGER = LoggerUtils.getLogger(UriMapper.class);
 
 	private List<UriWatcher> uriWatchers = Lists.newArrayList();
-	
+
 	@RestrictTo(LIBRARY)
 	public Boolean handleUri(@NonNull Activity activity, Intent intent, @Nullable UriHandler uriHandler, Boolean onActivityCreation) {
 		Uri uri = UriUtils.getUri(intent);

@@ -16,13 +16,13 @@ import java.util.Comparator;
 import java.util.List;
 
 public class LibrariesFragment extends AbstractRecyclerFragment {
-	
+
 	private List<Library> libraries = Lists.newArrayList();
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		libraries.add(new Library("jdroid", "Jdroid Tools", "Maxi Rosson", "http://jdroidtools.com"));
 		libraries.add(new Library("androidSupport", "Android Support", "Google", "https://developer.android.com/topic/libraries/support-library/index.html"));
 		libraries.add(new Library("googlePlayServices", "Google Play Services", "Google", "https://developers.google.com/android/guides/overview"));
@@ -34,16 +34,16 @@ public class LibrariesFragment extends AbstractRecyclerFragment {
 		}
 		if (ReflectionUtils.getSafeClass("com.jdroid.android.glide.GlideHelper") != null) {
 			Library library = new Library("glide", "Glide",
-					"Bump Technologies", "https://bumptech.github.io/glide/");
+				"Bump Technologies", "https://bumptech.github.io/glide/");
 			libraries.add(library);
 		}
 		if (ReflectionUtils.getSafeClass("com.jdroid.java.http.okhttp.OkHttpServiceFactory") != null) {
 			Library library = new Library("okHttp", "OkHttp",
-					"Square", "http://square.github.io/okhttp/");
+				"Square", "http://square.github.io/okhttp/");
 			libraries.add(library);
 		}
 		libraries.addAll(getCustomLibraries());
-		
+
 		Collections.sort(libraries, new Comparator<Library>() {
 			@Override
 			public int compare(Library lib1, Library lib2) {
@@ -51,13 +51,13 @@ public class LibrariesFragment extends AbstractRecyclerFragment {
 			}
 		});
 	}
-	
+
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 		setAdapter(new RecyclerViewAdapter(new LibraryRecyclerViewType(), libraries));
 	}
-	
+
 	protected List<Library> getCustomLibraries() {
 		return Lists.newArrayList();
 	}
@@ -109,5 +109,5 @@ public class LibrariesFragment extends AbstractRecyclerFragment {
 			super(itemView);
 		}
 	}
-	
+
 }

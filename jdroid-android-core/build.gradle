@@ -4,8 +4,8 @@ ext.PROJECT_NAME = 'Jdroid Android'
 description = 'Jdroid dependency project for Android apps'
 
 configurations {
-	compile.exclude group: "org.apache.httpcomponents",  module: "httpclient"
-	compile.exclude group: "org.slf4j",  module: "slf4j-api"
+	compile.exclude group: "org.apache.httpcomponents", module: "httpclient"
+	compile.exclude group: "org.slf4j", module: "slf4j-api"
 }
 
 configurations.all {
@@ -44,8 +44,8 @@ dependencies {
 	api 'com.firebase:firebase-jobdispatcher:0.8.5'
 
 	debugApi("com.squareup.leakcanary:leakcanary-android:${LEAK_CANARY_VERSION}") { force = true }
-	releaseApi ("com.squareup.leakcanary:leakcanary-android-no-op:${LEAK_CANARY_VERSION}") { force = true }
-	testImplementation ("com.squareup.leakcanary:leakcanary-android-no-op:${LEAK_CANARY_VERSION}") { force = true }
+	releaseApi("com.squareup.leakcanary:leakcanary-android-no-op:${LEAK_CANARY_VERSION}") { force = true }
+	testImplementation("com.squareup.leakcanary:leakcanary-android-no-op:${LEAK_CANARY_VERSION}") { force = true }
 
 	// https://github.com/facebook/device-year-class/blob/master/CHANGELOG.md
 	api 'com.facebook.device.yearclass:yearclass:2.1.0'
@@ -56,14 +56,14 @@ dependencies {
 		api project(":jdroid-java-core")
 		api project(":jdroid-java-remote-config")
 	} else {
-		api ("com.jdroidtools:jdroid-java-core:${JDROID_JAVA_VERSION}")
-		api ("com.jdroidtools:jdroid-java-remote-config:${JDROID_JAVA_VERSION}")
+		api("com.jdroidtools:jdroid-java-core:${JDROID_JAVA_VERSION}")
+		api("com.jdroidtools:jdroid-java-remote-config:${JDROID_JAVA_VERSION}")
 	}
 
 	if (jdroid.propertyResolver.getBooleanProp("JDROID_JAVA_HTTP_AS_PROJECT_DEPENDENCY", false)) {
 		api project(":jdroid-java-http-core")
 	} else {
-		api ("com.jdroidtools:jdroid-java-http-core:${JDROID_JAVA_HTTP_VERSION}") {
+		api("com.jdroidtools:jdroid-java-http-core:${JDROID_JAVA_HTTP_VERSION}") {
 			exclude module: 'jdroid-java-core'
 		}
 	}

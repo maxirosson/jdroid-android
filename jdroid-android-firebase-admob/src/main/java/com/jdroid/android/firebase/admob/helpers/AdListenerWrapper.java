@@ -9,12 +9,12 @@ import org.slf4j.Logger;
 import java.util.List;
 
 public class AdListenerWrapper extends AdListener {
-	
+
 	private Logger LOGGER = LoggerUtils.getLogger(AdListenerWrapper.class);
-	
+
 	private List<AdListener> wrappedAdListeners = Lists.newArrayList();
 	private List<AdListener> transientAdListeners = Lists.newArrayList();
-	
+
 	@Override
 	public void onAdLoaded() {
 		LOGGER.info("Ad loaded");
@@ -22,7 +22,7 @@ public class AdListenerWrapper extends AdListener {
 			adListener.onAdLoaded();
 		}
 	}
-	
+
 	@Override
 	public void onAdFailedToLoad(int i) {
 		LOGGER.info("Ad failed to load: " + i);
@@ -30,7 +30,7 @@ public class AdListenerWrapper extends AdListener {
 			adListener.onAdFailedToLoad(i);
 		}
 	}
-	
+
 	@Override
 	public void onAdOpened() {
 		LOGGER.info("Ad opened");
@@ -38,7 +38,7 @@ public class AdListenerWrapper extends AdListener {
 			adListener.onAdOpened();
 		}
 	}
-	
+
 	@Override
 	public void onAdImpression() {
 		LOGGER.info("Ad impression");
@@ -46,7 +46,7 @@ public class AdListenerWrapper extends AdListener {
 			adListener.onAdImpression();
 		}
 	}
-	
+
 	@Override
 	public void onAdClicked() {
 		LOGGER.info("Ad clicked");
@@ -54,7 +54,7 @@ public class AdListenerWrapper extends AdListener {
 			adListener.onAdClicked();
 		}
 	}
-	
+
 	@Override
 	public void onAdClosed() {
 		LOGGER.info("Ad closed");
@@ -63,7 +63,7 @@ public class AdListenerWrapper extends AdListener {
 			transientAdListeners.remove(adListener);
 		}
 	}
-	
+
 	@Override
 	public void onAdLeftApplication() {
 		LOGGER.info("Ad left application");
@@ -71,11 +71,11 @@ public class AdListenerWrapper extends AdListener {
 			adListener.onAdLeftApplication();
 		}
 	}
-	
+
 	public void addAdListener(AdListener adListener) {
 		this.wrappedAdListeners.add(adListener);
 	}
-	
+
 	public void addTransientAdListener(AdListener adListener) {
 		this.wrappedAdListeners.add(adListener);
 		this.transientAdListeners.add(adListener);

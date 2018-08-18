@@ -1,41 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android" android:layout_height="match_parent" android:layout_width="match_parent">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+			android:layout_height="match_parent"
+			android:layout_width="match_parent">
+
 	<LinearLayout android:layout_width="match_parent"
-				  android:layout_height="wrap_content" android:orientation="vertical" android:padding="8dp">
+				  android:layout_height="wrap_content"
+				  android:orientation="vertical"
+				  android:padding="8dp">
 
-		<CheckBox android:id="@+id/fail" android:layout_width="wrap_content" android:layout_height="wrap_content"
+		<CheckBox android:id="@+id/fail"
+				  android:layout_width="wrap_content"
+				  android:layout_height="wrap_content"
 				  android:text="@string/fail" />
-		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+
+		<TextView android:layout_width="wrap_content"
+				  android:layout_height="wrap_content"
 				  android:text="@string/delay" />
-		<EditText android:id="@+id/delay" android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="number"/>
 
-		<Button android:id="@+id/workerService" android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:text="@string/workerService" />
-		<Button android:id="@+id/useCaseService" android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:text="@string/useCaseService" />
+		<EditText android:id="@+id/delay"
+				  android:layout_width="match_parent"
+				  android:layout_height="wrap_content"
+				  android:inputType="number" />
 
-		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/firebaseJobServiceDescription" android:layout_marginTop="8dp"/>
-		<Button android:id="@+id/firebaseJobService" android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:text="@string/firebaseJobService" />
+		<Button android:id="@+id/workerService"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/workerService" />
 
-		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/commandService1Description" android:layout_marginTop="8dp"/>
-		<Button android:id="@+id/commandService1" android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:text="@string/commandService1" />
+		<Button android:id="@+id/useCaseService"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/useCaseService" />
 
-		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/commandService2Description" android:layout_marginTop="8dp"/>
-		<Button android:id="@+id/commandService2" android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:text="@string/commandService2" />
+		<TextView android:layout_width="wrap_content"
+				  android:layout_height="wrap_content"
+				  android:text="@string/firebaseJobServiceDescription"
+				  android:layout_marginTop="8dp" />
 
-		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/commandService3Description" android:layout_marginTop="8dp"/>
-		<Button android:id="@+id/commandService3" android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:text="@string/commandService3" />
+		<Button android:id="@+id/firebaseJobService"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/firebaseJobService" />
 
-		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/commandService4Description" android:layout_marginTop="8dp"/>
-		<Button android:id="@+id/commandService4" android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:text="@string/commandService4" />
+		<TextView android:layout_width="wrap_content"
+				  android:layout_height="wrap_content"
+				  android:text="@string/commandService1Description"
+				  android:layout_marginTop="8dp" />
 
-		<Button android:id="@+id/cancelAllJobs" android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:text="@string/cancelAllJobs" />
+		<Button android:id="@+id/commandService1"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/commandService1" />
+
+		<TextView android:layout_width="wrap_content"
+				  android:layout_height="wrap_content"
+				  android:text="@string/commandService2Description"
+				  android:layout_marginTop="8dp" />
+
+		<Button android:id="@+id/commandService2"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/commandService2" />
+
+		<TextView android:layout_width="wrap_content"
+				  android:layout_height="wrap_content"
+				  android:text="@string/commandService3Description"
+				  android:layout_marginTop="8dp" />
+
+		<Button android:id="@+id/commandService3"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/commandService3" />
+
+		<TextView android:layout_width="wrap_content"
+				  android:layout_height="wrap_content"
+				  android:text="@string/commandService4Description"
+				  android:layout_marginTop="8dp" />
+
+		<Button android:id="@+id/commandService4"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/commandService4" />
+
+		<Button android:id="@+id/cancelAllJobs"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/cancelAllJobs" />
 
 	</LinearLayout>
 </ScrollView>

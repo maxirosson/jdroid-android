@@ -10,7 +10,7 @@ import com.bumptech.glide.request.target.Target;
 import com.jdroid.android.application.AbstractApplication;
 
 public class LoggingRequestListener<R> implements RequestListener<R> {
-	
+
 	@Override
 	public boolean onLoadFailed(@Nullable GlideException glideException, Object model, Target target, boolean isFirstResource) {
 		if (glideException != null) {
@@ -29,7 +29,7 @@ public class LoggingRequestListener<R> implements RequestListener<R> {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onResourceReady(Object resource, Object model, Target target, DataSource dataSource, boolean isFirstResource) {
 		return false;

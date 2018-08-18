@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="horizontal"
-	android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingRight="4dp" android:paddingTop="8dp"
-	android:paddingBottom="8dp" android:gravity="center_vertical" android:background="?android:attr/selectableItemBackground"
-	android:minHeight="@dimen/jdroid_itemMinHeight">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  android:orientation="horizontal"
+			  android:layout_width="match_parent"
+			  android:layout_height="wrap_content"
+			  android:paddingRight="4dp"
+			  android:paddingTop="8dp"
+			  android:paddingBottom="8dp"
+			  android:gravity="center_vertical"
+			  android:background="?android:attr/selectableItemBackground"
+			  android:minHeight="@dimen/jdroid_itemMinHeight">
 
-	<ImageView android:id="@+id/image" android:layout_width="@dimen/jdroid_itemIconSize" android:layout_height="@dimen/jdroid_itemIconSize"
-		android:layout_marginLeft="16dp" android:layout_marginRight="16dp"
-		android:duplicateParentState="true" />
+	<ImageView android:id="@+id/image"
+			   android:layout_width="@dimen/jdroid_itemIconSize"
+			   android:layout_height="@dimen/jdroid_itemIconSize"
+			   android:layout_marginLeft="16dp"
+			   android:layout_marginRight="16dp"
+			   android:duplicateParentState="true" />
 
-	<TextView android:id="@+id/name" android:layout_height="wrap_content" android:layout_width="wrap_content" android:textStyle="normal"
-			  android:ellipsize="end" android:duplicateParentState="true" style="@style/jdroid_textMedium"
-			  android:maxLines="1"/>
+	<TextView android:id="@+id/name"
+			  android:layout_height="wrap_content"
+			  android:layout_width="wrap_content"
+			  android:textStyle="normal"
+			  android:ellipsize="end"
+			  android:duplicateParentState="true"
+			  style="@style/jdroid_textMedium"
+			  android:maxLines="1" />
 </LinearLayout>

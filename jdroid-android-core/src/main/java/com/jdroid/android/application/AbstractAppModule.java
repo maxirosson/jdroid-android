@@ -36,7 +36,7 @@ public abstract class AbstractAppModule implements AppModule {
 		}
 		return analyticsSender;
 	}
-	
+
 	@MainThread
 	@Override
 	public void onGooglePlayServicesUpdated() {
@@ -54,7 +54,7 @@ public abstract class AbstractAppModule implements AppModule {
 	public FragmentDelegate createFragmentDelegate(Fragment fragment) {
 		return null;
 	}
-	
+
 	@NonNull
 	@Override
 	public List<RemoteConfigParameter> getRemoteConfigParameters() {

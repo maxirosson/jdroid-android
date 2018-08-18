@@ -6,7 +6,7 @@ import com.jdroid.android.google.inappbilling.client.InAppBillingBroadcastListen
 import com.jdroid.java.utils.LoggerUtils;
 
 public class SampleInAppBillingBroadcastListener implements InAppBillingBroadcastListener {
-	
+
 	@MainThread
 	@Override
 	public void onPurchasesUpdated() {

@@ -10,9 +10,8 @@ import com.jdroid.android.sample.R;
 import com.jdroid.android.utils.LocalizationUtils;
 
 public enum AndroidNotificationChannelType implements NotificationChannelType {
-	
+
 	LOW_IMPORTANCE("lowImportance", R.string.lowImportanceNotificationChannelName, NotificationManagerCompat.IMPORTANCE_LOW) {
-		
 		@Override
 		public void config(NotificationChannel notificationChannel) {
 			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -23,7 +22,6 @@ public enum AndroidNotificationChannelType implements NotificationChannelType {
 	},
 	DEFAULT_IMPORTANCE("defaultImportance", R.string.defaultImportanceNotificationChannelName, NotificationManagerCompat.IMPORTANCE_DEFAULT),
 	HIGH_IMPORTANCE("highImportance", R.string.highImportanceNotificationChannelName, NotificationManagerCompat.IMPORTANCE_HIGH) {
-		
 		@Override
 		public void config(NotificationChannel notificationChannel) {
 			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -31,43 +29,46 @@ public enum AndroidNotificationChannelType implements NotificationChannelType {
 			}
 		}
 	};
-	
+
 	private String channelId;
-	private @StringRes int nameResId;
+
+	@StringRes
+	private int nameResId;
+
 	private int importance;
 	private Boolean isDeprecated;
-	
+
 	AndroidNotificationChannelType(String channelId, @StringRes int nameResId, int importance) {
 		this(channelId, nameResId, importance, false);
 	}
-	
+
 	AndroidNotificationChannelType(String channelId, @StringRes int nameResId, int importance, Boolean isDeprecated) {
 		this.channelId = channelId;
 		this.nameResId = nameResId;
 		this.importance = importance;
 		this.isDeprecated = isDeprecated;
 	}
-	
+
 	@Override
 	public void config(NotificationChannel notificationChannel) {
 		// Do nothing
 	}
-	
+
 	@Override
 	public String getChannelId() {
 		return channelId;
 	}
-	
+
 	@Override
 	public String getName() {
 		return LocalizationUtils.getString(nameResId);
 	}
-	
+
 	@Override
 	public int getImportance() {
 		return importance;
 	}
-	
+
 	@Override
 	public Boolean isDeprecated() {
 		return isDeprecated;

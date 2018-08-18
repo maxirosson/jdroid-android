@@ -3,9 +3,19 @@
 									xmlns:android="http://schemas.android.com/apk/res/android"
 									xmlns:tools="http://schemas.android.com/tools">
 
-	<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" style="@style/jdroid_cardViewInner">
-		<TextView android:id="@+id/name" style="@style/jdroid_cardViewTitle" android:layout_marginBottom="4dp" tools:text="Library Name"/>
-		<TextView android:id="@+id/author" android:layout_width="wrap_content" android:layout_height="wrap_content"
+	<LinearLayout android:layout_width="match_parent"
+				  android:layout_height="wrap_content"
+				  android:orientation="vertical"
+				  style="@style/jdroid_cardViewInner">
+
+		<TextView android:id="@+id/name"
+				  style="@style/jdroid_cardViewTitle"
+				  android:layout_marginBottom="4dp"
+				  tools:text="Library Name" />
+
+		<TextView android:id="@+id/author"
+				  android:layout_width="wrap_content"
+				  android:layout_height="wrap_content"
 				  tools:text="Author Full Name" />
 	</LinearLayout>
 

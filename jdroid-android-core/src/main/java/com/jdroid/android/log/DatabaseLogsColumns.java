@@ -8,26 +8,26 @@ import com.jdroid.android.sqlite.DataType;
 import com.jdroid.android.sqlite.Reference;
 
 public enum DatabaseLogsColumns implements Column {
-	
+
 	ID(Column.ID, DataType.LONG, Column.PRIMARY_KEY_AUTOINCREMENT, Boolean.FALSE, Boolean.TRUE),
 	MESSAGE("message", DataType.TEXT, null, Boolean.FALSE, Boolean.FALSE),
 	DATE_TIME("dateTime", DataType.DATE_MILLISECONDS, null, Boolean.FALSE, Boolean.FALSE);
-	
+
 	private String columnName;
 	private DataType dataType;
 	private String extraQualifier;
 	private Boolean optional;
 	private Boolean unique;
-	
+
 	DatabaseLogsColumns(String columnName, DataType dataType, String extraQualifier, Boolean optional,
-								Boolean unique) {
+						Boolean unique) {
 		this.columnName = columnName;
 		this.dataType = dataType;
 		this.extraQualifier = extraQualifier;
 		this.optional = optional;
 		this.unique = unique;
 	}
-	
+
 	/**
 	 * @see Column#addValue(ContentValues, Object)
 	 */

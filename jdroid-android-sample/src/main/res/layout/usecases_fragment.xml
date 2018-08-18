@@ -1,33 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_height="match_parent" android:layout_width="wrap_content">
-	<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="8dp">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+			android:layout_height="match_parent"
+			android:layout_width="wrap_content">
 
-		<CheckBox android:id="@+id/failExecution" android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:text="@string/failExecution" />
-		<CheckBox android:id="@+id/failStartNotification" android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:text="@string/failStartNotification" />
-		<CheckBox android:id="@+id/failFinishNotification" android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:text="@string/failFinishNotification" />
-		<CheckBox android:id="@+id/failFinishFailedNotification" android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:text="@string/failFinishFailedNotification" />
+	<LinearLayout android:layout_width="match_parent"
+				  android:layout_height="wrap_content"
+				  android:orientation="vertical"
+				  android:padding="8dp">
 
-		<CheckBox android:id="@+id/noListener" android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:text="@string/noListener" />
+		<CheckBox android:id="@+id/failExecution"
+				  android:layout_width="wrap_content"
+				  android:layout_height="wrap_content"
+				  android:text="@string/failExecution" />
 
-		<android.support.design.widget.TextInputLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="20dp">
-			<EditText android:id="@+id/delay" android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="number" android:hint="@string/delay" />
+		<CheckBox android:id="@+id/failStartNotification"
+				  android:layout_width="wrap_content"
+				  android:layout_height="wrap_content"
+				  android:text="@string/failStartNotification" />
+
+		<CheckBox android:id="@+id/failFinishNotification"
+				  android:layout_width="wrap_content"
+				  android:layout_height="wrap_content"
+				  android:text="@string/failFinishNotification" />
+
+		<CheckBox android:id="@+id/failFinishFailedNotification"
+				  android:layout_width="wrap_content"
+				  android:layout_height="wrap_content"
+				  android:text="@string/failFinishFailedNotification" />
+
+		<CheckBox android:id="@+id/noListener"
+				  android:layout_width="wrap_content"
+				  android:layout_height="wrap_content"
+				  android:text="@string/noListener" />
+
+		<android.support.design.widget.TextInputLayout android:layout_width="match_parent"
+													   android:layout_height="wrap_content"
+													   android:layout_marginTop="20dp">
+
+			<EditText android:id="@+id/delay"
+					  android:layout_width="match_parent"
+					  android:layout_height="wrap_content"
+					  android:inputType="number"
+					  android:hint="@string/delay" />
 		</android.support.design.widget.TextInputLayout>
 
-		<TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/useCaseTrigger" android:layout_marginTop="16dp"/>
-		<RadioGroup android:id="@+id/useCaseTrigger" android:layout_width="match_parent" android:layout_height="wrap_content">
-			<RadioButton android:id="@+id/manualUseCaseTrigger" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/manualUseCaseTrigger"/>
-			<RadioButton android:id="@+id/onceUseCaseTrigger" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/onceUseCaseTrigger"/>
-			<RadioButton android:id="@+id/alwaysUseCaseTrigger" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/alwaysUseCaseTrigger"/>
+		<TextView android:layout_width="match_parent"
+				  android:layout_height="wrap_content"
+				  android:text="@string/useCaseTrigger"
+				  android:layout_marginTop="16dp" />
+
+		<RadioGroup android:id="@+id/useCaseTrigger"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content">
+
+			<RadioButton android:id="@+id/manualUseCaseTrigger"
+						 android:layout_width="match_parent"
+						 android:layout_height="wrap_content"
+						 android:text="@string/manualUseCaseTrigger" />
+
+			<RadioButton android:id="@+id/onceUseCaseTrigger"
+						 android:layout_width="match_parent"
+						 android:layout_height="wrap_content"
+						 android:text="@string/onceUseCaseTrigger" />
+
+			<RadioButton android:id="@+id/alwaysUseCaseTrigger"
+						 android:layout_width="match_parent"
+						 android:layout_height="wrap_content"
+						 android:text="@string/alwaysUseCaseTrigger" />
 		</RadioGroup>
 
-		<Button android:id="@+id/execute" android:layout_width="wrap_content" android:layout_height="wrap_content"
-				android:text="@string/execute" android:layout_marginTop="16dp" />
+		<Button android:id="@+id/execute"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/execute"
+				android:layout_marginTop="16dp" />
 
-		<TextView android:id="@+id/useCaseStatus" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+		<TextView android:id="@+id/useCaseStatus"
+				  android:layout_width="match_parent"
+				  android:layout_height="wrap_content" />
 	</LinearLayout>
 </ScrollView>

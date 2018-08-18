@@ -1,6 +1,10 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-									android:id="@+id/shareSection" style="@style/jdroid_cardViewFullMarginStyle" android:visibility="gone">
+									android:id="@+id/shareSection"
+									style="@style/jdroid_cardViewFullMarginStyle"
+									android:visibility="gone">
 
-	<LinearLayout android:id="@+id/shareItemsContainer" android:layout_height="wrap_content"
-		android:layout_width="match_parent" android:orientation="horizontal" />
+	<LinearLayout android:id="@+id/shareItemsContainer"
+				  android:layout_height="wrap_content"
+				  android:layout_width="match_parent"
+				  android:orientation="horizontal" />
 </android.support.v7.widget.CardView>

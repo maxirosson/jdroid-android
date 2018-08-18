@@ -15,18 +15,18 @@ import java.util.Collections;
 import java.util.List;
 
 public class ApplicationLifecycleHelper {
-	
+
 	private static final Logger LOGGER = LoggerUtils.getLogger(ApplicationLifecycleHelper.class);
-	
+
 	private static final String METADATA_VALUE = "ApplicationLifecycleCallback";
-	
+
 	private static List<ApplicationLifecycleCallback> applicationLifecycleCallbacks;
-	
+
 	@MainThread
 	public static void onProviderInit(Context context) {
-		
+
 		LOGGER.debug("Executing init on AbstractInitProvider");
-		
+
 		init(context);
 		for (ApplicationLifecycleCallback callback : applicationLifecycleCallbacks) {
 			if (callback.isEnabled()) {
@@ -35,14 +35,14 @@ public class ApplicationLifecycleHelper {
 			}
 		}
 	}
-	
+
 	@MainThread
 	public static void attachBaseContext(Context context) {
-		
+
 		AppContextContainer.setApplicationContext(context);
-		
+
 		LOGGER.debug("Executing attachBaseContext on application");
-		
+
 		init(context);
 		for (ApplicationLifecycleCallback callback : applicationLifecycleCallbacks) {
 			if (callback.isEnabled()) {
@@ -51,12 +51,12 @@ public class ApplicationLifecycleHelper {
 			}
 		}
 	}
-	
+
 	@MainThread
 	public static void onCreate(Context context) {
-		
+
 		LOGGER.debug("Executing onCreate on application");
-		
+
 		init(context);
 		for (ApplicationLifecycleCallback callback : applicationLifecycleCallbacks) {
 			if (callback.isEnabled()) {
@@ -65,12 +65,12 @@ public class ApplicationLifecycleHelper {
 			}
 		}
 	}
-	
+
 	@MainThread
 	public static void onConfigurationChanged(Context context, Configuration newConfig) {
-		
+
 		LOGGER.debug("Executing onConfigurationChanged on application");
-		
+
 		init(context);
 		for (ApplicationLifecycleCallback callback : applicationLifecycleCallbacks) {
 			if (callback.isEnabled()) {
@@ -79,12 +79,12 @@ public class ApplicationLifecycleHelper {
 			}
 		}
 	}
-	
+
 	@MainThread
 	public static void onLowMemory(Context context) {
-		
+
 		LOGGER.debug("Executing onLowMemory on application");
-		
+
 		init(context);
 		for (ApplicationLifecycleCallback callback : applicationLifecycleCallbacks) {
 			if (callback.isEnabled()) {
@@ -93,12 +93,12 @@ public class ApplicationLifecycleHelper {
 			}
 		}
 	}
-	
+
 	@MainThread
 	public static void onLocaleChanged(Context context) {
-		
+
 		LOGGER.trace("Executing onLocaleChanged on application");
-		
+
 		init(context);
 		for (ApplicationLifecycleCallback callback : applicationLifecycleCallbacks) {
 			if (callback.isEnabled()) {
@@ -107,17 +107,17 @@ public class ApplicationLifecycleHelper {
 			}
 		}
 	}
-	
+
 	private static void init(Context context) {
 		if (applicationLifecycleCallbacks == null) {
 			applicationLifecycleCallbacks = ApplicationLifecycleHelper.parseApplicationLifecycleCallbacks(context);
 		}
 	}
-	
+
 	private static List<ApplicationLifecycleCallback> parseApplicationLifecycleCallbacks(Context context) {
-		
+
 		LOGGER.debug("Loading application lifecycle callbacks");
-		
+
 		List<ApplicationLifecycleCallback> applicationLifecycleCallbacks = new ArrayList<>();
 		try {
 			ApplicationInfo appInfo = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
@@ -125,25 +125,25 @@ public class ApplicationLifecycleHelper {
 				LOGGER.debug("Got null app info metadata");
 				return applicationLifecycleCallbacks;
 			}
-			
+
 			for (String key : appInfo.metaData.keySet()) {
 				if (METADATA_VALUE.equals(appInfo.metaData.get(key))) {
 					applicationLifecycleCallbacks.add(parseApplicationLifecycleCallback(key));
 					LOGGER.debug("Loaded ApplicationLifecycleCallback: " + key);
 				}
 			}
-			
+
 		} catch (PackageManager.NameNotFoundException e) {
 			throw new RuntimeException("Unable to find metadata to parse ApplicationLifecycleCallback", e);
 		}
-		
+
 		LOGGER.debug("Finished loading application lifecycle callbacks");
-		
+
 		Collections.sort(applicationLifecycleCallbacks);
-		
+
 		return applicationLifecycleCallbacks;
 	}
-	
+
 	@SuppressWarnings("TryWithIdenticalCatches")
 	private static ApplicationLifecycleCallback parseApplicationLifecycleCallback(String className) {
 		Class<?> clazz;
@@ -152,7 +152,7 @@ public class ApplicationLifecycleHelper {
 		} catch (ClassNotFoundException e) {
 			throw new IllegalArgumentException(className + " is not a ApplicationLifecycleCallback implementation", e);
 		}
-		
+
 		Object callback;
 		try {
 			callback = clazz.newInstance();
@@ -162,10 +162,10 @@ public class ApplicationLifecycleHelper {
 		} catch (IllegalAccessException e) {
 			throw new RuntimeException("Unable to instantiate ApplicationLifecycleCallback implementation for " + clazz, e);
 		}
-		
+
 		if (!(callback instanceof ApplicationLifecycleCallback)) {
 			throw new RuntimeException("Expected instanceof ApplicationLifecycleCallback, but found: " + callback);
 		}
-		return (ApplicationLifecycleCallback) callback;
+		return (ApplicationLifecycleCallback)callback;
 	}
 }

@@ -14,12 +14,12 @@ import java.util.List;
 import java.util.Map;
 
 public abstract class AbstractFcmDebugAppLifecycleCallback extends ApplicationLifecycleCallback {
-	
+
 	@Override
 	public void onProviderInit(Context context) {
 		DebugSettingsHelper.addPreferencesAppender(new FcmDebugPrefsAppender(getFcmMessagesMap()));
 	}
-	
+
 	@Override
 	public void onCreate(Context context) {
 		DebugInfoHelper.addDebugInfoAppender(new DebugInfoAppender() {
@@ -38,7 +38,7 @@ public abstract class AbstractFcmDebugAppLifecycleCallback extends ApplicationLi
 			}
 		});
 	}
-	
+
 	protected abstract Map<FcmMessage, Map<String, String>> getFcmMessagesMap();
-	
+
 }

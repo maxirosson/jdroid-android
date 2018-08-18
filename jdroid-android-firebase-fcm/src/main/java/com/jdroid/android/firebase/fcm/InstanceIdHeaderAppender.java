@@ -5,11 +5,11 @@ import com.jdroid.java.http.HttpService;
 import com.jdroid.java.http.HttpServiceProcessor;
 
 public class InstanceIdHeaderAppender implements HttpServiceProcessor {
-	
+
 	public static final String INSTANCE_ID_HEADER = "instanceId";
-	
+
 	private static final InstanceIdHeaderAppender INSTANCE = new InstanceIdHeaderAppender();
-	
+
 	public static InstanceIdHeaderAppender get() {
 		return INSTANCE;
 	}
@@ -28,5 +28,5 @@ public class InstanceIdHeaderAppender implements HttpServiceProcessor {
 	public void afterExecute(HttpService httpService, HttpResponseWrapper httpResponse) {
 		// Do Nothing
 	}
-	
+
 }

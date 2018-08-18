@@ -16,9 +16,9 @@ import com.twitter.sdk.android.core.TwitterCore;
 import org.slf4j.Logger;
 
 public class TwitterAppLifecycleCallback extends ApplicationLifecycleCallback {
-	
+
 	private final static Logger LOGGER = LoggerUtils.getLogger(TwitterAppLifecycleCallback.class);
-	
+
 	@Override
 	public void onCreate(final Context context) {
 		ExecutorUtils.execute(new Runnable() {
@@ -36,7 +36,7 @@ public class TwitterAppLifecycleCallback extends ApplicationLifecycleCallback {
 					builder.debug(BuildConfig.DEBUG);
 					builder.build();
 					Twitter.initialize(builder.build());
-					
+
 					// Get TwitterCore instance on the worker thread to avoid reading the shared preferences on UI thread
 					TwitterCore.getInstance();
 				}

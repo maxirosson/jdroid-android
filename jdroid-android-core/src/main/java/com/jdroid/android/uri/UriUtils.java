@@ -53,7 +53,7 @@ public class UriUtils {
 		}
 		if (StringUtils.isEmpty(uri.getQuery())) {
 			builder.append("?");
-		} else{
+		} else {
 			builder.append("&");
 		}
 		builder.append(RANDOM_PARAMETER);

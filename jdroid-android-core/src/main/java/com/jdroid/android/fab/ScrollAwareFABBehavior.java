@@ -21,7 +21,7 @@ public class ScrollAwareFABBehavior extends FloatingActionButton.Behavior {
 									   final View directTargetChild, final View target, final int nestedScrollAxes) {
 		// Ensure we react to vertical scrolling
 		return nestedScrollAxes == ViewCompat.SCROLL_AXIS_VERTICAL
-				|| super.onStartNestedScroll(coordinatorLayout, child, directTargetChild, target, nestedScrollAxes);
+			|| super.onStartNestedScroll(coordinatorLayout, child, directTargetChild, target, nestedScrollAxes);
 	}
 
 	@Override

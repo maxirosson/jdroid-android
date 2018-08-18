@@ -1,41 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
-		android:id="@+id/container" android:layout_width="match_parent" android:layout_height="match_parent" >
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+												 xmlns:app="http://schemas.android.com/apk/res-auto"
+												 android:id="@+id/container"
+												 android:layout_width="match_parent"
+												 android:layout_height="match_parent">
 
-	<android.support.v4.widget.NestedScrollView android:id="@+id/scrollView" android:layout_width="match_parent" android:layout_height="match_parent"
+	<android.support.v4.widget.NestedScrollView android:id="@+id/scrollView"
+												android:layout_width="match_parent"
+												android:layout_height="match_parent"
 												android:layout_margin="8dp">
 
-		<LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent"
-					  android:orientation="vertical" android:layout_marginTop="220dp" android:paddingBottom="4dp">
+		<LinearLayout android:layout_height="wrap_content"
+					  android:layout_width="match_parent"
+					  android:orientation="vertical"
+					  android:layout_marginTop="220dp"
+					  android:paddingBottom="4dp">
+
 			<TextView android:layout_width="match_parent"
-					  android:layout_height="wrap_content" android:layout_marginTop="200dp" android:text="@string/jdroid_share"/>
+					  android:layout_height="wrap_content"
+					  android:layout_marginTop="200dp"
+					  android:text="@string/jdroid_share" />
+
 			<TextView android:layout_width="match_parent"
-					  android:layout_height="wrap_content" android:layout_marginTop="200dp" android:text="@string/jdroid_share"/>
+					  android:layout_height="wrap_content"
+					  android:layout_marginTop="200dp"
+					  android:text="@string/jdroid_share" />
+
 			<TextView android:layout_width="match_parent"
-					  android:layout_height="wrap_content" android:layout_marginTop="200dp" android:text="@string/jdroid_share"/>
+					  android:layout_height="wrap_content"
+					  android:layout_marginTop="200dp"
+					  android:text="@string/jdroid_share" />
+
 			<TextView android:layout_width="match_parent"
-					  android:layout_height="wrap_content" android:layout_marginTop="200dp" android:text="@string/jdroid_share"/>
+					  android:layout_height="wrap_content"
+					  android:layout_marginTop="200dp"
+					  android:text="@string/jdroid_share" />
+
 			<TextView android:layout_width="match_parent"
-					  android:layout_height="wrap_content" android:layout_marginTop="200dp" android:text="@string/jdroid_share"/>
+					  android:layout_height="wrap_content"
+					  android:layout_marginTop="200dp"
+					  android:text="@string/jdroid_share" />
+
 			<TextView android:layout_width="match_parent"
-					  android:layout_height="wrap_content" android:layout_marginTop="200dp" android:text="@string/jdroid_share"/>
+					  android:layout_height="wrap_content"
+					  android:layout_marginTop="200dp"
+					  android:text="@string/jdroid_share" />
+
 			<TextView android:layout_width="match_parent"
-					  android:layout_height="wrap_content" android:layout_marginTop="200dp" android:text="@string/jdroid_share"/>
+					  android:layout_height="wrap_content"
+					  android:layout_marginTop="200dp"
+					  android:text="@string/jdroid_share" />
+
 			<TextView android:layout_width="match_parent"
-					  android:layout_height="wrap_content" android:layout_marginTop="200dp" android:text="@string/jdroid_share"/>
+					  android:layout_height="wrap_content"
+					  android:layout_marginTop="200dp"
+					  android:text="@string/jdroid_share" />
+
 			<TextView android:layout_width="match_parent"
-					  android:layout_height="wrap_content" android:layout_marginTop="200dp" android:text="@string/jdroid_share"/>
+					  android:layout_height="wrap_content"
+					  android:layout_marginTop="200dp"
+					  android:text="@string/jdroid_share" />
 
 		</LinearLayout>
 
 	</android.support.v4.widget.NestedScrollView>
 
 	<android.support.design.widget.FloatingActionButton
-		android:id="@+id/fab"
-		style="@style/jdroid_floatingActionButton"
-		app:srcCompat="@drawable/ic_cardview"
-		app:layout_anchor="@id/scrollView"
-		app:layout_anchorGravity="bottom|right|end"
-		app:layout_behavior="com.jdroid.android.fab.ScrollAwareFABBehavior"/>
+			android:id="@+id/fab"
+			style="@style/jdroid_floatingActionButton"
+			app:srcCompat="@drawable/ic_cardview"
+			app:layout_anchor="@id/scrollView"
+			app:layout_anchorGravity="bottom|right|end"
+			app:layout_behavior="com.jdroid.android.fab.ScrollAwareFABBehavior" />
 
 </android.support.design.widget.CoordinatorLayout>

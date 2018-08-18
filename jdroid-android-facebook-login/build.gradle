@@ -19,8 +19,8 @@ dependencies {
 	api project(":jdroid-android-core")
 
 	api "com.facebook.android:facebook-core:${FACEBOOK_ANDROID}"
-	api ("com.facebook.android:facebook-login:${FACEBOOK_ANDROID}") {
-		exclude group: 'com.android.support',  module: 'customtabs'
+	api("com.facebook.android:facebook-login:${FACEBOOK_ANDROID}") {
+		exclude group: 'com.android.support', module: 'customtabs'
 	}
 
 	api "com.android.support:customtabs:${ANDROID_SUPPORT_VERSION}"

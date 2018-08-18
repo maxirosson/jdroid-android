@@ -11,12 +11,12 @@ import com.jdroid.java.collections.Lists;
 import java.util.List;
 
 public class InAppBillingContext extends AbstractAppContext {
-	
+
 	public static final String SHARED_PREFERENCES_NAME = "InAppBilling";
-	
+
 	public static final String STATIC_RESPONSES_ENABLED = "staticResponsesEnabled";
 	private static final String PURCHASED_PRODUCT_IDS = "purchasedProductIds";
-	
+
 	private String googlePlayPublicKey;
 	private List<ProductType> purchasedProductTypes;
 
@@ -26,22 +26,22 @@ public class InAppBillingContext extends AbstractAppContext {
 		// The key itself is not secret information, but we don't want to make it easy for an attacker to replace the
 		// public key with one of their own and then fake messages from the server.
 		googlePlayPublicKey = getBuildConfigValue("GOOGLE_PLAY_PUBLIC_KEY");
-		
+
 	}
-	
+
 	/**
 	 * @return Your application's public key, encoded in base64. This is used for verification of purchase signatures.
-	 *         You can find your app's base64-encoded public key in your application's page on Google Play Developer
-	 *         Console. Note that this is NOT your "developer public key".
+	 * 	You can find your app's base64-encoded public key in your application's page on Google Play Developer
+	 * 	Console. Note that this is NOT your "developer public key".
 	 */
 	public String getGooglePlayPublicKey() {
 		return googlePlayPublicKey;
 	}
-	
+
 	public Boolean isStaticResponsesEnabledEnabled() {
 		return !AppUtils.isReleaseBuildType() && getSharedPreferencesHelper().loadPreferenceAsBoolean(STATIC_RESPONSES_ENABLED, false);
 	}
-	
+
 	public synchronized void setPurchasedProductTypes(Inventory inventory) {
 		purchasedProductTypes = Lists.newArrayList();
 		List<String> productIds = Lists.newArrayList();
@@ -51,7 +51,7 @@ public class InAppBillingContext extends AbstractAppContext {
 		}
 		getSharedPreferencesHelper().savePreferenceAsync(PURCHASED_PRODUCT_IDS, productIds);
 	}
-	
+
 	public synchronized void addPurchasedProductType(ProductType productType) {
 		if (purchasedProductTypes == null) {
 			purchasedProductTypes = Lists.newArrayList();
@@ -86,7 +86,7 @@ public class InAppBillingContext extends AbstractAppContext {
 	public List<ProductType> getSubscriptionsProductTypes() {
 		return Lists.newArrayList();
 	}
-	
+
 	public SharedPreferencesHelper getSharedPreferencesHelper() {
 		return SharedPreferencesHelper.get(SHARED_PREFERENCES_NAME);
 	}

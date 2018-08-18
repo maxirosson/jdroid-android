@@ -54,7 +54,7 @@ public class AboutAppModule extends AbstractAppModule {
 	public AboutAnalyticsSender getModuleAnalyticsSender() {
 		return (AboutAnalyticsSender)super.getModuleAnalyticsSender();
 	}
-	
+
 	@NonNull
 	@Override
 	public List<RemoteConfigParameter> getRemoteConfigParameters() {

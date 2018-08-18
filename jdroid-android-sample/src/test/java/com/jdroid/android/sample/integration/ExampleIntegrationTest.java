@@ -30,7 +30,7 @@ public class ExampleIntegrationTest extends AbstractIntegrationTest {
 		assertNotNull(sampleItemsUseCase.getItems());
 		assertEquals(16, sampleItemsUseCase.getItems().size());
 	}
-	
+
 	@Test
 	public void example2() {
 		assertFalse(HttpDebugConfiguration.isHttpMockEnabled());

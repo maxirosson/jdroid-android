@@ -22,20 +22,20 @@ import java.util.List;
 
 /**
  * Repository implementation which uses SQLite.
- * 
+ *
  * @param <T> Entity type.
  */
 public abstract class SQLiteRepository<T extends Entity> implements Repository<T> {
-	
+
 	private static final Logger LOGGER = LoggerUtils.getLogger(SQLiteRepository.class);
-	
+
 	protected SQLiteHelper dbHelper;
 
 	private EntityChildrenListener<T> entityChildrenListener;
-	
+
 	/**
 	 * Constructor. It register create SQL statements in {@link SQLiteHelper}.
-	 * 
+	 *
 	 * @param dbHelper {@link SQLiteHelper} to be used be repository.
 	 */
 	public SQLiteRepository(SQLiteHelper dbHelper, EntityChildrenListener<T> entityChildrenListener) {
@@ -50,64 +50,64 @@ public abstract class SQLiteRepository<T extends Entity> implements Repository<T
 
 	/**
 	 * Returns the name of the table which store the entities.
-	 * 
+	 *
 	 * @return the table name.
 	 */
 	protected abstract String getTableName();
-	
+
 	/**
 	 * Returns the column definitions for the table.
-	 * 
+	 *
 	 * @return columns.
 	 */
 	protected abstract Column[] getColumns();
-	
+
 	/**
 	 * Returns the name of the column used as id By default it returns {@link Column#ID}.
-	 * 
+	 *
 	 * @return the id column name.
 	 */
 	protected String getIdColumnName() {
 		return Column.ID;
 	}
-	
+
 	/**
 	 * Returns the name of the column used as parent id. By default it returns {@link Column#PARENT_ID}.
-	 * 
+	 *
 	 * @return the parent id column name.
 	 */
 	protected String getParentIdColumnName() {
 		return Column.PARENT_ID;
 	}
-	
+
 	/**
 	 * Creates and populate an entity instance which data from cursor. It does NOT populate entity children.
-	 * 
+	 *
 	 * @param cursor cursor to get data.
 	 * @return an entity instance.
 	 */
 	protected abstract T createObjectFromCursor(Cursor cursor);
-	
+
 	/**
 	 * Creates and populate an instance of {@link ContentValues} which the entity data.
-	 * 
+	 *
 	 * @param item entity to store.
 	 * @return the {@link ContentValues} instance.
 	 */
 	protected abstract ContentValues createContentValuesFromObject(T item);
-	
+
 	/**
 	 * Default sort to be used in ORDER BY section of queries.
-	 * 
+	 *
 	 * @return default sort.
 	 */
 	protected String getDefaultSort() {
 		return null;
 	}
-	
+
 	/**
 	 * Begins a transaction if there is not a transaction started yet.
-	 * 
+	 *
 	 * @param db Database.
 	 * @return true if a transaction has been started.
 	 */
@@ -120,10 +120,10 @@ public abstract class SQLiteRepository<T extends Entity> implements Repository<T
 		}
 		return endTransaction;
 	}
-	
+
 	/**
 	 * Mark current transaction as successful. Only mark the transaction if endTransaction parameter is true.
-	 * 
+	 *
 	 * @param db Database.
 	 * @param endTransaction Indicates if the transaction should be closed for the current operation.
 	 */
@@ -133,10 +133,10 @@ public abstract class SQLiteRepository<T extends Entity> implements Repository<T
 			LOGGER.trace("Success transaction");
 		}
 	}
-	
+
 	/**
 	 * Ends current transaction if endTransaction parameter is true.
-	 * 
+	 *
 	 * @param db Database.
 	 * @param endTransaction Indicates if the transaction should be closed for the current operation.
 	 */
@@ -146,7 +146,7 @@ public abstract class SQLiteRepository<T extends Entity> implements Repository<T
 			LOGGER.trace("End transaction");
 		}
 	}
-	
+
 	@Override
 	@SuppressWarnings("resource")
 	public T get(String id) {
@@ -170,7 +170,7 @@ public abstract class SQLiteRepository<T extends Entity> implements Repository<T
 			}
 		}
 	}
-	
+
 	@SuppressWarnings("resource")
 	@Override
 	public List<T> getByField(String fieldName, Object... values) {
@@ -204,10 +204,10 @@ public abstract class SQLiteRepository<T extends Entity> implements Repository<T
 				items.add(item);
 			}
 			cursor.close();
-			
+
 			LOGGER.trace("Retrieved objects from database [" + items.size() + "] of type: " + getTableName() + ". Field: " + fieldName
-					+ " | Values: " + values);
-			
+				+ " | Values: " + values);
+
 			return items;
 		} finally {
 			if (cursor != null) {
@@ -215,7 +215,7 @@ public abstract class SQLiteRepository<T extends Entity> implements Repository<T
 			}
 		}
 	}
-	
+
 	@Override
 	public T getItemByField(String fieldName, Object... values) {
 		List<T> items = getByField(fieldName, values);
@@ -225,22 +225,22 @@ public abstract class SQLiteRepository<T extends Entity> implements Repository<T
 			return null;
 		}
 	}
-	
+
 	@Override
 	public List<T> getByIds(List<String> ids) {
 		return getByField(getIdColumnName(), ids);
 	}
-	
+
 	@Override
 	public List<T> getAll() {
 		return getByField(null, (Object[])null);
 	}
-	
+
 	@Override
 	public Boolean isEmpty() {
 		return getSize() == 0;
 	}
-	
+
 	@SuppressWarnings("resource")
 	@Override
 	public Long getSize() {
@@ -255,7 +255,7 @@ public abstract class SQLiteRepository<T extends Entity> implements Repository<T
 			}
 		}
 	}
-	
+
 	@Override
 	public void add(T item) {
 		@SuppressWarnings("resource")
@@ -276,7 +276,7 @@ public abstract class SQLiteRepository<T extends Entity> implements Repository<T
 			endTransaction(db, endTransaction);
 		}
 	}
-	
+
 	@Override
 	public void addAll(Collection<T> items) {
 		@SuppressWarnings("resource")
@@ -292,7 +292,7 @@ public abstract class SQLiteRepository<T extends Entity> implements Repository<T
 			endTransaction(db, endTransaction);
 		}
 	}
-	
+
 	@Override
 	public void update(T item) {
 		@SuppressWarnings("resource")
@@ -300,7 +300,7 @@ public abstract class SQLiteRepository<T extends Entity> implements Repository<T
 		boolean endTransaction = beginTransaction(db);
 		try {
 			ContentValues values = createContentValuesFromObject(item);
-			db.update(getTableName(), values, getIdColumnName() + "=?", new String[]{item.getId()});
+			db.update(getTableName(), values, getIdColumnName() + "=?", new String[] { item.getId() });
 			if (entityChildrenListener != null) {
 				entityChildrenListener.onUpdated(item);
 			}
@@ -310,7 +310,7 @@ public abstract class SQLiteRepository<T extends Entity> implements Repository<T
 			endTransaction(db, endTransaction);
 		}
 	}
-	
+
 	@Override
 	public void replaceAll(@NonNull Collection<T> items) {
 		@SuppressWarnings("resource")
@@ -332,12 +332,12 @@ public abstract class SQLiteRepository<T extends Entity> implements Repository<T
 			endTransaction(db, endTransaction);
 		}
 	}
-	
+
 	@Override
 	public void remove(T item) {
 		remove(item.getId());
 	}
-	
+
 	@Override
 	public void remove(String id) {
 		@SuppressWarnings("resource")
@@ -358,7 +358,7 @@ public abstract class SQLiteRepository<T extends Entity> implements Repository<T
 			endTransaction(db, endTransaction);
 		}
 	}
-	
+
 	@Override
 	public void removeAll() {
 		@SuppressWarnings("resource")
@@ -381,7 +381,7 @@ public abstract class SQLiteRepository<T extends Entity> implements Repository<T
 			endTransaction(db, endTransaction);
 		}
 	}
-	
+
 	@Override
 	public void removeAll(Collection<T> items) {
 		@SuppressWarnings("resource")
@@ -397,7 +397,7 @@ public abstract class SQLiteRepository<T extends Entity> implements Repository<T
 			endTransaction(db, endTransaction);
 		}
 	}
-	
+
 	@Override
 	public T getUniqueInstance() {
 		List<T> all = getAll();
@@ -407,11 +407,11 @@ public abstract class SQLiteRepository<T extends Entity> implements Repository<T
 		LOGGER.trace("Retrieved single instance of type: " + getTableName());
 		return all.get(0);
 	}
-	
+
 	/**
 	 * This method allows to replace all entity children of a given parent, it will remove any children which are not in
 	 * the list, add the new ones and update which are in the list..
-	 * 
+	 *
 	 * @param list of children to replace.
 	 * @param parentId id of parent entity.
 	 */
@@ -431,11 +431,11 @@ public abstract class SQLiteRepository<T extends Entity> implements Repository<T
 			endTransaction(db, endTransaction);
 		}
 	}
-	
+
 	/**
 	 * This method allows to replace all entity children of a given parent, it will remove any children which are not in
 	 * the list, add the new ones and update which are in the list..
-	 * 
+	 *
 	 * @param list of children to replace.
 	 * @param parentId id of parent entity.
 	 * @param clazz entity class.
@@ -444,10 +444,10 @@ public abstract class SQLiteRepository<T extends Entity> implements Repository<T
 		SQLiteRepository<T> repository = (SQLiteRepository<T>)AbstractApplication.get().getRepositoryInstance(clazz);
 		repository.replaceChildren(list, parentId);
 	}
-	
+
 	/**
 	 * Creates the SQL statement to create the table according columns definitions.
-	 * 
+	 *
 	 * @return SQL statement.
 	 */
 	public String getCreateTableSQL() {
@@ -480,10 +480,10 @@ public abstract class SQLiteRepository<T extends Entity> implements Repository<T
 		}
 		return getCreateTableSQL(builder.toString(), referencesBuilder.toString(), uniqueBuilder.toString());
 	}
-	
+
 	/**
 	 * Creates the SQL statement to create the table using given columns definitions.
-	 * 
+	 *
 	 * @param columns columns definitions.
 	 * @param references reference constraints.
 	 * @param uniqueColumns unique constraints.
@@ -498,10 +498,10 @@ public abstract class SQLiteRepository<T extends Entity> implements Repository<T
 		builder.append(");");
 		return builder.toString();
 	}
-	
+
 	/**
 	 * Generate the SQL definition for a column.
-	 * 
+	 *
 	 * @param builder current StringBuilder to add the SQL definition.
 	 * @param column column definition.
 	 */
@@ -519,19 +519,19 @@ public abstract class SQLiteRepository<T extends Entity> implements Repository<T
 			builder.append(extraQualifier);
 		}
 	}
-	
+
 	/**
 	 * Returns a list of statements to upgrade the SQL scheme.
-	 * 
+	 *
 	 * @return a list of statements.
 	 */
 	public String[] getDefaultUpgradeSQL() {
 		return new String[] { getCreateTableSQL() };
 	}
-	
+
 	/**
 	 * Returns the default projection which includes all the columns defined by {@link #getColumns()}
-	 * 
+	 *
 	 * @return the projection.
 	 */
 	protected String[] getProjection() {

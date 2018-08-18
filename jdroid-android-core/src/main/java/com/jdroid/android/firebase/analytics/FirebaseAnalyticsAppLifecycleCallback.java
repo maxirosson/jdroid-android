@@ -10,7 +10,7 @@ public class FirebaseAnalyticsAppLifecycleCallback extends ApplicationLifecycleC
 	public void onProviderInit(Context context) {
 		AbstractApplication.get().addCoreAnalyticsTracker(new FirebaseCoreAnalyticsTracker());
 	}
-	
+
 	@Override
 	public Boolean isEnabled() {
 		return FirebaseAnalyticsFactory.getFirebaseAnalyticsHelper().isFirebaseAnalyticsEnabled();

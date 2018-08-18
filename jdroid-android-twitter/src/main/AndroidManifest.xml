@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.jdroid.android.twitter">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+		  package="com.jdroid.android.twitter">
+
 	<application>
 
-		<meta-data android:name="com.jdroid.android.twitter.TwitterAppLifecycleCallback" android:value="ApplicationLifecycleCallback" />
+		<meta-data android:name="com.jdroid.android.twitter.TwitterAppLifecycleCallback"
+				   android:value="ApplicationLifecycleCallback" />
 
 	</application>
 </manifest>

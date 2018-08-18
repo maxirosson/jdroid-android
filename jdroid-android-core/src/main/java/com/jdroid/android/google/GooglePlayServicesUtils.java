@@ -24,7 +24,7 @@ public class GooglePlayServicesUtils {
 	public static GooglePlayServicesResponse verifyGooglePlayServices(Activity activity) {
 		GoogleApiAvailability googleApiAvailability = GoogleApiAvailability.getInstance();
 		int resultCode = googleApiAvailability.isGooglePlayServicesAvailable(AbstractApplication.get());
-		LOGGER.info("Google Play Services result code: " +  resultCode);
+		LOGGER.info("Google Play Services result code: " + resultCode);
 		if (resultCode == ConnectionResult.SUCCESS) {
 			return new GooglePlayServicesResponse();
 		} else {

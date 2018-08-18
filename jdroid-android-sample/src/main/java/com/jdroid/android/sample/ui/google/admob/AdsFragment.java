@@ -14,12 +14,12 @@ import com.jdroid.android.utils.ToastUtils;
 import com.jdroid.java.remoteconfig.RemoteConfigParameter;
 
 public class AdsFragment extends AbstractFragment {
-	
+
 	@Override
 	public Integer getContentFragmentLayout() {
 		return R.layout.ads_fragment;
 	}
-	
+
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
@@ -49,7 +49,7 @@ public class AdsFragment extends AbstractFragment {
 		});
 
 		findView(R.id.displayInterstitial).setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				new InterstitialAction() {
@@ -57,7 +57,7 @@ public class AdsFragment extends AbstractFragment {
 					protected void onAction() {
 						ToastUtils.showToast(R.string.interstitialAction);
 					}
-					
+
 					@NonNull
 					@Override
 					protected RemoteConfigParameter getEnabledRemoteConfigParameter() {

@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" package="com.jdroid.android.about">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+		  xmlns:tools="http://schemas.android.com/tools"
+		  package="com.jdroid.android.about">
 
 	<application>
 
-		<activity android:name="com.jdroid.android.about.AboutActivity" android:label="@string/jdroid_about" />
+		<activity android:name="com.jdroid.android.about.AboutActivity"
+				  android:label="@string/jdroid_about" />
 
-		<activity android:name="com.jdroid.android.about.SpreadTheLoveActivity" android:label="@string/jdroid_spreadTheLove"
-				  android:parentActivityName="com.jdroid.android.about.AboutActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.about.SpreadTheLoveActivity"
+				  android:label="@string/jdroid_spreadTheLove"
+				  android:parentActivityName="com.jdroid.android.about.AboutActivity"
+				  tools:ignore="UnusedAttribute" />
 
-		<activity android:name="com.jdroid.android.about.LibrariesActivity" android:label="@string/jdroid_libraries"
-				  android:parentActivityName="com.jdroid.android.about.AboutActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.about.LibrariesActivity"
+				  android:label="@string/jdroid_libraries"
+				  android:parentActivityName="com.jdroid.android.about.AboutActivity"
+				  tools:ignore="UnusedAttribute" />
 
 	</application>
 

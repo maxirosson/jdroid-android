@@ -10,10 +10,10 @@ import com.jdroid.android.social.SocialAction;
 import com.jdroid.android.social.SocialNetwork;
 
 public class TwitterHelper {
-	
+
 	public static Integer CHARACTERS_LIMIT = 140;
 	public static Integer URL_CHARACTERS_COUNT = 22;
-	
+
 	public static void openProfile(String account) {
 		try {
 			Intent intent = new Intent();
@@ -22,7 +22,7 @@ public class TwitterHelper {
 			ActivityLauncher.startActivityNewTask(intent);
 		} catch (ActivityNotFoundException e) {
 			Intent intent =
-					new Intent(Intent.ACTION_VIEW, Uri.parse("http://twitter.com/" + account));
+				new Intent(Intent.ACTION_VIEW, Uri.parse("http://twitter.com/" + account));
 			ActivityLauncher.startActivityNewTask(intent);
 		} finally {
 			AbstractApplication.get().getCoreAnalyticsSender().trackSocialInteraction(SocialNetwork.TWITTER.getName(),

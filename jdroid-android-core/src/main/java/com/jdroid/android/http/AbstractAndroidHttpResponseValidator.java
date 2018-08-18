@@ -5,7 +5,7 @@ import com.jdroid.java.exception.ErrorCode;
 import com.jdroid.java.http.AbstractHttpResponseValidator;
 
 public abstract class AbstractAndroidHttpResponseValidator extends AbstractHttpResponseValidator {
-	
+
 	@Override
 	protected ErrorCode findByCommonStatusCode(String statusCode) {
 		return CommonErrorCode.findByStatusCode(statusCode);

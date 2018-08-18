@@ -55,7 +55,7 @@ import java.util.List;
 import java.util.Map;
 
 public class AndroidApplication extends AbstractApplication {
-	
+
 	public static AndroidApplication get() {
 		return (AndroidApplication)AbstractApplication.INSTANCE;
 	}
@@ -63,14 +63,14 @@ public class AndroidApplication extends AbstractApplication {
 	public AndroidApplication() {
 		HttpConfiguration.setHttpServiceFactory(new OkHttpServiceFactory());
 	}
-	
+
 	@Override
 	public void onProviderInit() {
 		super.onProviderInit();
-		
+
 		AdMobAppModule.setAdMobAppContext(new SampleAdMobAppContext());
 	}
-	
+
 	@Override
 	protected void onMainProcessCreate() {
 		if (GoogleAnalyticsAppContext.isGoogleAnalyticsEnabled()) {
@@ -83,19 +83,19 @@ public class AndroidApplication extends AbstractApplication {
 		getUriMapper().addUriWatcher(new SampleUriWatcher());
 
 		Firebase.setAndroidContext(this);
-		
+
 		initAppShortcuts();
 	}
-	
+
 	private void initAppShortcuts() {
 		if (Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N_MR1) {
 			List<ShortcutInfo> shortcutInfos = Lists.newArrayList();
 			int rank = 0;
 			for (HomeItem item : HomeItem.values()) {
-				
+
 				Intent intent = item.getIntent();
 				intent.setAction(Intent.ACTION_VIEW);
-				
+
 				ShortcutInfo.Builder shortcutInfoBuilder = new ShortcutInfo.Builder(AbstractApplication.get(), item.name());
 				shortcutInfoBuilder.setShortLabel(LocalizationUtils.getString(item.getNameResource()));
 				shortcutInfoBuilder.setLongLabel(LocalizationUtils.getString(item.getNameResource()));
@@ -108,7 +108,7 @@ public class AndroidApplication extends AbstractApplication {
 			AppShortcutsHelper.setInitialShortcutInfos(shortcutInfos);
 		}
 	}
-	
+
 	@Override
 	protected void onInitMultiDex() {
 		MultiDex.install(this);
@@ -134,7 +134,7 @@ public class AndroidApplication extends AbstractApplication {
 	public ActivityHelper createActivityHelper(AbstractFragmentActivity activity) {
 		return new AndroidActivityHelper(activity);
 	}
-	
+
 	@Override
 	public FragmentHelper createFragmentHelper(Fragment fragment) {
 		return new AndroidFragmentHelper(fragment);
@@ -167,7 +167,7 @@ public class AndroidApplication extends AbstractApplication {
 		appModulesMap.put(AboutAppModule.MODULE_NAME, new AndroidAboutAppModule());
 		appModulesMap.put(AppShortcutsAppModule.MODULE_NAME, new AppShortcutsAppModule());
 		appModulesMap.put(InAppBillingAppModule.MODULE_NAME, new AndroidInAppBillingAppModule());
-		
+
 		AndroidInAppBillingAppModule.get().setInAppBillingBroadcastListener(new SampleInAppBillingBroadcastListener());
 	}
 
@@ -185,7 +185,7 @@ public class AndroidApplication extends AbstractApplication {
 	public String getManifestPackageName() {
 		return "com.jdroid.android.sample";
 	}
-	
+
 	@Override
 	public List<NotificationChannelType> getNotificationChannelTypes() {
 		return Lists.newArrayList(AndroidNotificationChannelType.values());

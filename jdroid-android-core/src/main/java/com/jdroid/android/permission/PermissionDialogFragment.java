@@ -28,14 +28,14 @@ public class PermissionDialogFragment extends AlertDialogFragment {
 		PermissionDialogFragment fragment = new PermissionDialogFragment();
 		fragment.addParameter(PermissionDialogFragment.PERMISSION_EXTRA, permission);
 		fragment.addParameter(PermissionDialogFragment.PERMISSION_REQUEST_CODE_EXTRA, permissionRequestCode);
-		if(targetFragment!=null) {
-			fragment.setTargetFragment(targetFragment,0);
+		if (targetFragment != null) {
+			fragment.setTargetFragment(targetFragment, 0);
 		}
 
 		String screenViewName = PermissionDialogFragment.class.getSimpleName() + "-" + permission;
 
 		AlertDialogFragment.show(fragmentActivity, fragment, null, title, message, fragmentActivity.getString(R.string.jdroid_cancel), null,
-				fragmentActivity.getString(R.string.jdroid_ok), true, screenViewName, null);
+			fragmentActivity.getString(R.string.jdroid_ok), true, screenViewName, null);
 	}
 
 	@Override
@@ -50,9 +50,9 @@ public class PermissionDialogFragment extends AlertDialogFragment {
 	protected void onPositiveClick() {
 		Fragment targetFragment = this.getTargetFragment();
 		if (targetFragment != null) {
-			targetFragment.requestPermissions(new String[] {permission}, permissionRequestCode);
+			targetFragment.requestPermissions(new String[] { permission }, permissionRequestCode);
 		} else {
-			ActivityCompat.requestPermissions(getActivity(), new String[] {permission}, permissionRequestCode);
+			ActivityCompat.requestPermissions(getActivity(), new String[] { permission }, permissionRequestCode);
 		}
 	}
 }

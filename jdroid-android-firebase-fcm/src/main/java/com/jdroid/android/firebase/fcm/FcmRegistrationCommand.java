@@ -22,7 +22,7 @@ import java.util.concurrent.ExecutionException;
 
 // TODO By Google recommendation, we should execute this command every 2 weeks, to have always fresh tokens on server side
 public class FcmRegistrationCommand extends ServiceCommand {
-	
+
 	private final static Logger LOGGER = LoggerUtils.getLogger(FcmRegistrationCommand.class);
 
 	private final static String UPDATE_LAST_ACTIVE_TIMESTAMP_EXTRA = "updateLastActiveTimestamp";
@@ -44,7 +44,7 @@ public class FcmRegistrationCommand extends ServiceCommand {
 					AbstractApplication.get().getExceptionHandler().logHandledException("Error when getting FCM registration token. Will retry later.", e);
 					return true;
 				}
-				
+
 				if (registrationToken == null) {
 					LOGGER.info("Null registration token. Will retry later.");
 					return true;

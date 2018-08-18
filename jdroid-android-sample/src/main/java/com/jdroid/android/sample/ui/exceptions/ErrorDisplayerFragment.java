@@ -20,7 +20,7 @@ public class ErrorDisplayerFragment extends AbstractFragment {
 
 	private ErrorDisplayer errorDisplayer;
 	private Boolean goBackOnError = true;
-	
+
 	@Override
 	public Integer getContentFragmentLayout() {
 		return R.layout.exception_handling_fragment;

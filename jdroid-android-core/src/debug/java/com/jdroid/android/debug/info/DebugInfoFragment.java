@@ -62,16 +62,16 @@ public class DebugInfoFragment extends AbstractRecyclerFragment {
 		properties.add(new Pair<>("Sim Operator Name", DeviceUtils.getSimOperatorName()));
 
 		properties.add(new Pair<>("App Loads", UsageStats.getAppLoads()));
-		
+
 		properties.add(new Pair<>("Strict Mode Enabled", StrictModeHelper.isStrictModeEnabled()));
 		properties.add(new Pair<>("Leak Canary Enabled", LeakCanaryHelper.isLeakCanaryEnabled()));
-		
+
 		properties.add(new Pair<>("Firebase Performance Enabled", FirebasePerformanceAppContext.isFirebasePerformanceEnabled()));
 
 		for (DebugInfoAppender each : DebugInfoHelper.getDebugInfoAppenders()) {
 			properties.addAll(each.getDebugInfoProperties());
 		}
-		
+
 		properties.addAll(AbstractApplication.get().getDebugContext().getCustomDebugInfoProperties());
 	}
 
@@ -80,26 +80,26 @@ public class DebugInfoFragment extends AbstractRecyclerFragment {
 		super.onViewCreated(view, savedInstanceState);
 
 		List<Pair<String, Object>> filteredProperties = Lists.newArrayList();
-		for(Pair<String, Object> each: properties) {
+		for (Pair<String, Object> each : properties) {
 			if (each.second != null && StringUtils.isNotBlank(each.second.toString())) {
 				filteredProperties.add(each);
 			}
 		}
-		
+
 		Collections.sort(filteredProperties, new Comparator<Pair<String, Object>>() {
 			@Override
 			public int compare(Pair<String, Object> o1, Pair<String, Object> o2) {
 				return o1.first.compareTo(o2.first);
 			}
 		});
-		
+
 		setAdapter(new RecyclerViewAdapter(new PairItemRecyclerViewType() {
-			
+
 			@Override
 			protected Boolean isTextSelectable() {
 				return true;
 			}
-			
+
 			@NonNull
 			@Override
 			public AbstractRecyclerFragment getAbstractRecyclerFragment() {

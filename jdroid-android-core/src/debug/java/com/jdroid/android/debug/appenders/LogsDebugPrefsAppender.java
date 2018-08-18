@@ -23,7 +23,7 @@ public class LogsDebugPrefsAppender extends PreferencesAppender {
 	public int getNameResId() {
 		return R.string.jdroid_debugDatabase;
 	}
-	
+
 	public static void clean() {
 		ExecutorUtils.execute(new Runnable() {
 
@@ -42,12 +42,12 @@ public class LogsDebugPrefsAppender extends PreferencesAppender {
 
 	@Override
 	public void initPreferences(final Activity activity, PreferenceGroup preferenceGroup) {
-		
+
 		Preference preference = new Preference(activity);
 		preference.setTitle(R.string.jdroid_cleanDebugData);
 		preference.setSummary(R.string.jdroid_cleanDebugData);
 		preference.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-			
+
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
 				LogsDebugPrefsAppender.clean();
@@ -56,7 +56,7 @@ public class LogsDebugPrefsAppender extends PreferencesAppender {
 		});
 		preferenceGroup.addPreference(preference);
 	}
-	
+
 	@Override
 	public Boolean isEnabled() {
 		return AbstractApplication.get().isDebugLogRepositoryEnabled();

@@ -3,9 +3,9 @@ package com.jdroid.android.log;
 import android.content.ContentValues;
 import android.database.Cursor;
 
-import com.jdroid.android.sqlite.repository.SQLiteRepository;
 import com.jdroid.android.sqlite.Column;
 import com.jdroid.android.sqlite.SQLiteHelper;
+import com.jdroid.android.sqlite.repository.SQLiteRepository;
 
 import java.util.Date;
 
@@ -51,5 +51,5 @@ public class DatabaseLogsRepository extends SQLiteRepository<DatabaseLog> {
 		DatabaseLogsColumns.DATE_TIME.addValue(values, item.getDateTime());
 		return values;
 	}
-	
+
 }

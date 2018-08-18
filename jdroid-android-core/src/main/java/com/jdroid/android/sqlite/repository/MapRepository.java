@@ -10,17 +10,16 @@ import java.util.Map;
 
 /**
  * Generic repository to store {@link Map} objects.
- * 
  */
 public abstract class MapRepository extends StringEntityRepository {
-	
+
 	public MapRepository(SQLiteHelper dbHelper) {
 		super(dbHelper);
 	}
-	
+
 	/**
 	 * This method returns the map of children associated with given parent id.
-	 * 
+	 *
 	 * @param parentId of parent entity.
 	 * @return map of children
 	 */
@@ -32,11 +31,11 @@ public abstract class MapRepository extends StringEntityRepository {
 		}
 		return map;
 	}
-	
+
 	/**
 	 * This method allows to replace all children of a given parent, it will remove any children which are not in the
 	 * list, add the new ones and update which are in the list.
-	 * 
+	 *
 	 * @param map map of list to replace.
 	 * @param parentId id of parent entity.
 	 */

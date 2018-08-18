@@ -14,22 +14,21 @@ import org.slf4j.Logger;
 import java.util.List;
 
 /**
- * 
  * @param <T>
  */
 public class CoreAnalyticsSender<T extends CoreAnalyticsTracker> extends AnalyticsSender<T> implements CoreAnalyticsTracker {
-	
+
 	private static final Logger LOGGER = LoggerUtils.getLogger(CoreAnalyticsSender.class);
-	
+
 	@SafeVarargs
 	public CoreAnalyticsSender(T... trackers) {
 		super(trackers);
 	}
-	
+
 	public CoreAnalyticsSender(List<T> trackers) {
 		super(trackers);
 	}
-	
+
 	@Override
 	public void trackErrorLog(@NonNull String message) {
 		execute(new TrackingCommand() {
@@ -40,18 +39,18 @@ public class CoreAnalyticsSender<T extends CoreAnalyticsTracker> extends Analyti
 			}
 		});
 	}
-	
+
 	@Override
 	public void trackErrorCustomKey(@NonNull String key, @NonNull Object value) {
 		execute(new TrackingCommand() {
-			
+
 			@Override
 			protected void track(T tracker) {
 				tracker.trackErrorCustomKey(key, value);
 			}
 		});
 	}
-	
+
 	@Override
 	public void onFirstActivityCreate(final Activity activity) {
 		execute(new TrackingCommand() {
@@ -76,16 +75,16 @@ public class CoreAnalyticsSender<T extends CoreAnalyticsTracker> extends Analyti
 
 	@Override
 	public void onActivityStart(final Activity activity, final String referrer,
-			final Object data) {
+								final Object data) {
 		execute(new TrackingCommand() {
-			
+
 			@Override
 			protected void track(T tracker) {
 				tracker.onActivityStart(activity, referrer, data);
 			}
 		});
 	}
-	
+
 	@Override
 	public void onActivityResume(final Activity activity) {
 		execute(new TrackingCommand() {
@@ -99,40 +98,40 @@ public class CoreAnalyticsSender<T extends CoreAnalyticsTracker> extends Analyti
 	@Override
 	public void onActivityPause(final Activity activity) {
 		execute(new TrackingCommand() {
-			
+
 			@Override
 			protected void track(T tracker) {
 				tracker.onActivityPause(activity);
 			}
 		});
 	}
-	
+
 	@Override
 	public void onActivityStop(final Activity activity) {
 		execute(new TrackingCommand() {
-			
+
 			@Override
 			protected void track(T tracker) {
 				tracker.onActivityStop(activity);
 			}
 		});
 	}
-	
+
 	@Override
 	public void onActivityDestroy(final Activity activity) {
 		execute(new TrackingCommand() {
-			
+
 			@Override
 			protected void track(T tracker) {
 				tracker.onActivityDestroy(activity);
 			}
 		});
 	}
-	
+
 	@Override
 	public void onFragmentStart(final String screenViewName) {
 		execute(new TrackingCommand() {
-			
+
 			@Override
 			protected void track(T tracker) {
 				tracker.onFragmentStart(screenViewName);
@@ -150,7 +149,7 @@ public class CoreAnalyticsSender<T extends CoreAnalyticsTracker> extends Analyti
 			}
 		});
 	}
-	
+
 	@Override
 	public void trackHandledException(final Throwable throwable, final List<String> tags) {
 		execute(new TrackingCommand() {
@@ -161,45 +160,45 @@ public class CoreAnalyticsSender<T extends CoreAnalyticsTracker> extends Analyti
 			}
 		}, false);
 	}
-	
+
 	@Override
 	public void trackUriOpened(final String screenName, final Uri uri, final String referrer) {
 		execute(new TrackingCommand() {
-			
+
 			@Override
 			protected void track(T tracker) {
 				tracker.trackUriOpened(screenName, uri, referrer);
 			}
 		});
 	}
-	
+
 	@Override
 	public void trackSocialInteraction(final String network, final SocialAction socialAction,
 									   final String socialTarget) {
 		execute(new TrackingCommand() {
-			
+
 			@Override
 			protected void track(T tracker) {
 				tracker.trackSocialInteraction(network, socialAction, socialTarget);
 			}
 		});
 	}
-	
+
 	@Override
 	public void trackNotificationDisplayed(final String notificationName) {
 		execute(new TrackingCommand() {
-			
+
 			@Override
 			protected void track(T tracker) {
 				tracker.trackNotificationDisplayed(notificationName);
 			}
 		});
 	}
-	
+
 	@Override
 	public void trackNotificationOpened(final String notificationName) {
 		execute(new TrackingCommand() {
-			
+
 			@Override
 			protected void track(T tracker) {
 				tracker.trackNotificationOpened(notificationName);

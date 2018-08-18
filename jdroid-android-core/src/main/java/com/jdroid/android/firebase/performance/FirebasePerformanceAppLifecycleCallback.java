@@ -7,7 +7,7 @@ import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.lifecycle.ApplicationLifecycleCallback;
 
 public class FirebasePerformanceAppLifecycleCallback extends ApplicationLifecycleCallback {
-	
+
 	@Override
 	public void onProviderInit(Context context) {
 		FirebasePerformance.getInstance().setPerformanceCollectionEnabled(FirebasePerformanceAppContext.isFirebasePerformanceEnabled());

@@ -26,17 +26,17 @@ import javax.net.ssl.SSLHandshakeException;
 
 // TODO Add support to rotation. The helper is called on each screen rotation
 public abstract class TwitterHelper {
-	
+
 	private ViewGroup tweetContainer;
-	
+
 	private SearchTimeline.Builder searchTimelineBuilder;
 	private List<Tweet> tweets = Lists.newArrayList();
-	
+
 	private TwitterQuery twitterQuery;
-	
+
 	private Boolean pendingSuccessNotification = false;
 	private Boolean pendingFailureNotification = false;
-	
+
 	protected SearchTimeline createSearchTimeline() {
 		if (twitterQuery != null) {
 			searchTimelineBuilder = new SearchTimeline.Builder();
@@ -46,10 +46,10 @@ public abstract class TwitterHelper {
 		}
 		return searchTimelineBuilder.build();
 	}
-	
+
 	public void loadTweets() {
 		onStartLoadingTweets();
-		
+
 		try {
 			SearchTimeline searchTimeline = createSearchTimeline();
 			searchTimeline.next(null, new Callback<TimelineResult<Tweet>>() {
@@ -57,7 +57,7 @@ public abstract class TwitterHelper {
 				public void success(Result<TimelineResult<Tweet>> result) {
 					try {
 						tweets.clear();
-						for(Tweet each : result.data.items) {
+						for (Tweet each : result.data.items) {
 							if (isValidTweet(each)) {
 								tweets.add(each);
 							}
@@ -67,7 +67,7 @@ public abstract class TwitterHelper {
 						AbstractApplication.get().getExceptionHandler().logHandledException(e);
 					}
 				}
-				
+
 				@Override
 				public void failure(TwitterException e) {
 					Boolean connectionError = false;
@@ -117,7 +117,7 @@ public abstract class TwitterHelper {
 			AbstractApplication.get().getExceptionHandler().logHandledException(e);
 		}
 	}
-	
+
 	private void notifySuccess() {
 		if (getAbstractFragment() != null && getAbstractFragment().isResumed()) {
 			pendingSuccessNotification = false;
@@ -126,7 +126,7 @@ public abstract class TwitterHelper {
 			pendingSuccessNotification = true;
 		}
 	}
-	
+
 	private void notifyFailure() {
 		if (getAbstractFragment() != null && getAbstractFragment().isResumed()) {
 			pendingFailureNotification = false;
@@ -137,7 +137,7 @@ public abstract class TwitterHelper {
 	}
 
 	@MainThread
-	protected  void onStartLoadingTweets() {
+	protected void onStartLoadingTweets() {
 		// Do Nothing
 	}
 
@@ -150,37 +150,37 @@ public abstract class TwitterHelper {
 	}
 
 	protected abstract AbstractFragment getAbstractFragment();
-	
+
 	protected Boolean isValidTweet(Tweet tweet) {
 		return true;
 	}
-	
+
 	public void setSearchTimelineBuilder(SearchTimeline.Builder searchTimelineBuilder) {
 		this.searchTimelineBuilder = searchTimelineBuilder;
 	}
-	
+
 	public List<Tweet> getTweets() {
 		return tweets;
 	}
-	
+
 	public void setTweetContainer(ViewGroup tweetContainer) {
 		this.tweetContainer = tweetContainer;
 	}
-	
+
 	public ViewGroup getTweetContainer() {
 		return tweetContainer;
 	}
-	
+
 	public void setTwitterQuery(TwitterQuery twitterQuery) {
 		this.twitterQuery = twitterQuery;
 	}
-	
+
 	public void onResume() {
-		
+
 		if (pendingSuccessNotification) {
 			notifySuccess();
 		}
-		
+
 		if (pendingFailureNotification) {
 			notifyFailure();
 		}

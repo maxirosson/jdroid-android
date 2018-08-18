@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class BuildConfigUtils {
-	
+
 	private static BuildConfigResolver buildConfigResolver = new BuildConfigResolver();
 	private static Map<String, Object> cache = new ConcurrentHashMap<>();
 
@@ -24,15 +24,15 @@ public class BuildConfigUtils {
 		}
 		return (T)value;
 	}
-	
+
 	public static String getBuildConfigString(String property) {
 		return (String)getBuildConfigValue(property);
 	}
-	
+
 	public static Boolean getBuildConfigBoolean(String property, Boolean defaultValue) {
 		return (Boolean)getBuildConfigValue(property, defaultValue);
 	}
-	
+
 	public static void setBuildConfigResolver(BuildConfigResolver buildConfigResolver) {
 		BuildConfigUtils.buildConfigResolver = buildConfigResolver;
 	}

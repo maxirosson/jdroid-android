@@ -18,7 +18,7 @@ public class UsageStats {
 
 	private static Long lastStopTime = DateUtils.nowMillis();
 	private static Long appLoads;
-	
+
 	@MainThread
 	public static void incrementAppLoadAsync() {
 		ExecutorUtils.execute(new Runnable() {
@@ -34,7 +34,7 @@ public class UsageStats {
 		appLoads = getSharedPreferencesHelper().loadPreferenceAsLong(APP_LOADS, 0L);
 		getSharedPreferencesHelper().savePreferenceAsync(APP_LOADS, appLoads + 1);
 	}
-	
+
 	// FIXME Find a way to call this method from UI thread
 	//@WorkerThread
 	public static Long getAppLoads() {

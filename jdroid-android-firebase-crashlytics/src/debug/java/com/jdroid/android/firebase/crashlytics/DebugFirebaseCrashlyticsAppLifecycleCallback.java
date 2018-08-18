@@ -15,7 +15,7 @@ import java.util.List;
 import io.fabric.sdk.android.Fabric;
 
 public class DebugFirebaseCrashlyticsAppLifecycleCallback extends ApplicationLifecycleCallback {
-	
+
 	@Override
 	public void onProviderInit(Context context) {
 		Fabric.Builder fabricBuilder = new Fabric.Builder(context);
@@ -23,7 +23,7 @@ public class DebugFirebaseCrashlyticsAppLifecycleCallback extends ApplicationLif
 		fabricBuilder.debuggable(true);
 		Fabric.with(fabricBuilder.build());
 	}
-	
+
 	@Override
 	public void onCreate(Context context) {
 		DebugInfoHelper.addDebugInfoAppender(new DebugInfoAppender() {
@@ -35,13 +35,13 @@ public class DebugFirebaseCrashlyticsAppLifecycleCallback extends ApplicationLif
 			}
 		});
 	}
-	
+
 	@NonNull
 	@Override
 	public Integer getInitOrder() {
 		return Integer.MAX_VALUE;
 	}
-	
+
 	@Override
 	public Boolean isEnabled() {
 		return FirebaseCrashlyticsContext.isFirebaseCrashlyticsEnabled();
