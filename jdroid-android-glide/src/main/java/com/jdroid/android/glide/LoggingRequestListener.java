@@ -21,8 +21,10 @@ public class LoggingRequestListener<R> implements RequestListener<R> {
 					break;
 				}
 			}
-			if (mainThrowable == null) {
+			if (mainThrowable == null && !glideException.getRootCauses().isEmpty()) {
 				mainThrowable = glideException.getRootCauses().get(0);
+			} else {
+				mainThrowable = glideException;
 			}
 			AbstractApplication.get().getCoreAnalyticsSender().trackErrorLog("Glide failed to load " + model);
 			AbstractApplication.get().getExceptionHandler().logHandledException(mainThrowable);
