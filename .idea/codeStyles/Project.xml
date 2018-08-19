@@ -32,11 +32,6 @@
     <option name="JD_ALIGN_EXCEPTION_COMMENTS" value="false" />
     <AndroidXmlCodeStyleSettings>
       <option name="USE_CUSTOM_SETTINGS" value="true" />
-      <option name="LAYOUT_SETTINGS">
-        <value>
-          <option name="INSERT_LINE_BREAK_BEFORE_FIRST_ATTRIBUTE" value="false" />
-        </value>
-      </option>
       <option name="MANIFEST_SETTINGS">
         <value>
           <option name="INSERT_LINE_BREAK_BEFORE_FIRST_ATTRIBUTE" value="false" />
@@ -121,7 +116,6 @@
       <option name="XML_LEGACY_SETTINGS_IMPORTED" value="true" />
     </XML>
     <codeStyleSettings language="Groovy">
-      <option name="SPACE_WITHIN_BRACES" value="true" />
       <option name="SPACE_AFTER_TYPE_CAST" value="false" />
       <option name="KEEP_SIMPLE_METHODS_IN_ONE_LINE" value="false" />
       <option name="KEEP_SIMPLE_CLASSES_IN_ONE_LINE" value="false" />
