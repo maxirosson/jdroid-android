@@ -17,7 +17,6 @@ import com.jdroid.java.utils.LoggerUtils;
 
 import org.slf4j.Logger;
 
-import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 public class TimerView extends AppCompatTextView implements Handler.Callback {
@@ -41,6 +40,7 @@ public class TimerView extends AppCompatTextView implements Handler.Callback {
 	private long startTime = 0L;
 	private long stopTime = 0L;
 	private Status status = Status.INITIAL;
+	private TimerViewFormatter timerViewFormatter;
 
 	public TimerView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -60,7 +60,10 @@ public class TimerView extends AppCompatTextView implements Handler.Callback {
 	@SuppressLint("SetTextI18n")
 	private void updateTime() {
 		if (visible != null && visible) {
-			setText(formatDuration(getValue()));
+			if (timerViewFormatter == null) {
+				timerViewFormatter = createTimerViewFormatter();
+			}
+			setText(timerViewFormatter.formatDuration(getValue()));
 			if (status.equals(Status.STARTED)) {
 				handler.sendMessageDelayed(Message.obtain(handler, MESSAGE_CODE), HANDLER_DELAY);
 			} else {
@@ -69,6 +72,11 @@ public class TimerView extends AppCompatTextView implements Handler.Callback {
 		} else {
 			handler.removeMessages(MESSAGE_CODE);
 		}
+	}
+
+	@NonNull
+	protected TimerViewFormatter createTimerViewFormatter() {
+		return new DefaultTimerViewFormatter();
 	}
 
 	@Override
@@ -154,18 +162,6 @@ public class TimerView extends AppCompatTextView implements Handler.Callback {
 		} else {
 			return 0L;
 		}
-	}
-
-	private String formatDuration(long duration) {
-		long hours = TimeUnit.MILLISECONDS.toHours(duration);
-		long minutes = TimeUnit.MILLISECONDS.toMinutes(duration) - (hours * 60);
-		long seconds = TimeUnit.MILLISECONDS.toSeconds(duration) - (hours * 60 * 60) - (minutes * 60);
-
-		StringBuilder builder = new StringBuilder();
-		builder.append(String.format(Locale.getDefault(), "%1$02d", minutes));
-		builder.append(":");
-		builder.append(String.format(Locale.getDefault(), "%1$02d", seconds));
-		return builder.toString();
 	}
 
 	public Status getStatus() {
