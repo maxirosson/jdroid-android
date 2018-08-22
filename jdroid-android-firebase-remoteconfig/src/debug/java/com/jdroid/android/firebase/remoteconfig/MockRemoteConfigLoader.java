@@ -78,6 +78,9 @@ public class MockRemoteConfigLoader implements RemoteConfigLoader {
 		if (value == null) {
 			value = remoteConfigParameter.getDefaultValue();
 		}
+		if (value instanceof Integer) {
+			value = ((Integer)value).longValue();
+		}
 		if (LoggerUtils.isEnabled()) {
 			LOGGER.info("Loaded Mock Remote Config. Key [" + remoteConfigParameter.getKey() + "] Value [" + value + "]");
 		}
