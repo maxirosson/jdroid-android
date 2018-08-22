@@ -61,17 +61,17 @@ public class MockRemoteConfigLoader implements RemoteConfigLoader {
 
 	@Override
 	public Boolean getBoolean(RemoteConfigParameter remoteConfigParameter) {
-		return (Boolean)getValue(remoteConfigParameter, TypeUtils.getBoolean(cache.get(remoteConfigParameter.getKey()), false));
+		return (Boolean)getValue(remoteConfigParameter, TypeUtils.getBoolean(cache.get(remoteConfigParameter.getKey())));
 	}
 
 	@Override
 	public Long getLong(RemoteConfigParameter remoteConfigParameter) {
-		return (Long)getValue(remoteConfigParameter, TypeUtils.getLong(cache.get(remoteConfigParameter.getKey()), 0L));
+		return (Long)getValue(remoteConfigParameter, TypeUtils.getLong(cache.get(remoteConfigParameter.getKey())));
 	}
 
 	@Override
 	public Double getDouble(RemoteConfigParameter remoteConfigParameter) {
-		return (Double)getValue(remoteConfigParameter, TypeUtils.getDouble(cache.get(remoteConfigParameter.getKey()), 0D));
+		return (Double)getValue(remoteConfigParameter, TypeUtils.getDouble(cache.get(remoteConfigParameter.getKey())));
 	}
 
 	private Object getValue(RemoteConfigParameter remoteConfigParameter, Object value) {
