@@ -1,4 +1,4 @@
-package com.jdroid.android.debug.appenders;
+package com.jdroid.android.sqlite.debug;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,7 +10,6 @@ import android.preference.PreferenceGroup;
 
 import com.jdroid.android.R;
 import com.jdroid.android.activity.ActivityLauncher;
-import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.debug.PreferencesAppender;
 import com.jdroid.android.sqlite.SQLiteHelper;
 import com.jdroid.android.utils.AppUtils;
@@ -57,10 +56,5 @@ public class DatabaseDebugPrefsAppender extends PreferencesAppender {
 			}
 		});
 		preferenceGroup.addPreference(preference);
-	}
-
-	@Override
-	public Boolean isEnabled() {
-		return AbstractApplication.get().isDatabaseEnabled();
 	}
 }

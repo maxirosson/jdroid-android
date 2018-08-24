@@ -117,6 +117,10 @@ jobs:
           destination: jdroid-android-sample/tests
 
       - store_artifacts:
+          path: ./jdroid-android-sqlite/build/reports/tests/testDebugUnitTest
+          destination: jdroid-android-sqlite/tests
+
+      - store_artifacts:
           path: ./jdroid-android-twitter/build/reports/tests/testDebugUnitTest
           destination: jdroid-android-twitter/tests
 
@@ -218,6 +222,10 @@ jobs:
       - store_artifacts:
           path: ./jdroid-android-sample/build/reports/lint-results-debug.html
           destination: jdroid-android-sample/lint
+
+      - store_artifacts:
+          path: ./jdroid-android-sqlite/build/reports/lint-results-debug.html
+          destination: jdroid-android-sqlite/lint
 
       - store_artifacts:
           path: ./jdroid-android-twitter/build/reports/lint-results-debug.html

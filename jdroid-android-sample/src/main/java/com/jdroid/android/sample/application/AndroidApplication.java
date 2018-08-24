@@ -47,9 +47,7 @@ import com.jdroid.android.shortcuts.AppShortcutsHelper;
 import com.jdroid.android.sqlite.SQLiteHelper;
 import com.jdroid.android.utils.LocalizationUtils;
 import com.jdroid.java.collections.Lists;
-import com.jdroid.java.domain.Identifiable;
 import com.jdroid.java.http.okhttp.OkHttpServiceFactory;
-import com.jdroid.java.repository.Repository;
 
 import java.util.List;
 import java.util.Map;
@@ -85,6 +83,8 @@ public class AndroidApplication extends AbstractApplication {
 		Firebase.setAndroidContext(this);
 
 		initAppShortcuts();
+
+		addRepository(SampleSQLiteEntity.class, new SampleSQLiteRepository(SQLiteHelper.getDefaultInstance(this)));
 	}
 
 	private void initAppShortcuts() {
@@ -148,16 +148,6 @@ public class AndroidApplication extends AbstractApplication {
 	@Override
 	public UserRepository getUserRepository() {
 		return new UserRepositoryImpl();
-	}
-
-	@Override
-	public Boolean isDatabaseEnabled() {
-		return true;
-	}
-
-	@Override
-	protected void initDatabaseRepositories(Map<Class<? extends Identifiable>, Repository<? extends Identifiable>> repositories, SQLiteHelper dbHelper) {
-		repositories.put(SampleSQLiteEntity.class, new SampleSQLiteRepository(dbHelper));
 	}
 
 	@Override

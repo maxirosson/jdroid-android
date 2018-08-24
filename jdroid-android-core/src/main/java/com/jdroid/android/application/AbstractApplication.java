@@ -33,8 +33,6 @@ import com.jdroid.android.lifecycle.ApplicationLifecycleHelper;
 import com.jdroid.android.notification.NotificationChannelType;
 import com.jdroid.android.notification.NotificationUtils;
 import com.jdroid.android.repository.UserRepository;
-import com.jdroid.android.sqlite.SQLiteHelper;
-import com.jdroid.android.sqlite.SQLiteUpgradeStep;
 import com.jdroid.android.strictmode.StrictModeHelper;
 import com.jdroid.android.uri.UriMapper;
 import com.jdroid.android.utils.AppUtils;
@@ -57,7 +55,6 @@ import com.jdroid.java.utils.StringUtils;
 import org.slf4j.Logger;
 
 import java.lang.Thread.UncaughtExceptionHandler;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -84,7 +81,7 @@ public abstract class AbstractApplication extends Application {
 
 	private AppLaunchStatus appLaunchStatus;
 
-	private Map<Class<? extends Identifiable>, Repository<? extends Identifiable>> repositories;
+	private Map<Class<? extends Identifiable>, Repository<? extends Identifiable>> repositories = Maps.newHashMap();
 
 	private Map<String, AppModule> appModulesMap = Maps.newLinkedHashMap();
 
@@ -184,8 +181,6 @@ public abstract class AbstractApplication extends Application {
 			// This is required to initialize the statics fields of the utils classes.
 			ToastUtils.init();
 			DateUtils.init();
-
-			initRepositories();
 
 			ExecutorUtils.execute(new Runnable() {
 
@@ -496,38 +491,8 @@ public abstract class AbstractApplication extends Application {
 		return null;
 	}
 
-	private void initRepositories() {
-		repositories = new HashMap<>();
-
-		initRepositories(repositories);
-
-		if (isDatabaseEnabled()) {
-			SQLiteHelper dbHelper = new SQLiteHelper(this);
-			getDebugContext().initDebugRepositories(repositories, dbHelper);
-			initDatabaseRepositories(repositories, dbHelper);
-			dbHelper.addUpgradeSteps(getSQLiteUpgradeSteps());
-		}
-	}
-
-	protected void initRepositories(Map<Class<? extends Identifiable>, Repository<? extends Identifiable>> repositories) {
-		// Do nothing
-	}
-
-	protected void initDatabaseRepositories(
-		Map<Class<? extends Identifiable>, Repository<? extends Identifiable>> repositories, SQLiteHelper dbHelper) {
-		// Do nothing
-	}
-
-	public Boolean isDatabaseEnabled() {
-		return false;
-	}
-
-	protected List<SQLiteUpgradeStep> getSQLiteUpgradeSteps() {
-		return Lists.newArrayList();
-	}
-
-	public Boolean isDebugLogRepositoryEnabled() {
-		return false;
+	public void addRepository(Class<? extends Identifiable> repositoryClass, Repository<? extends Identifiable> repository) {
+		repositories.put(repositoryClass, repository);
 	}
 
 	@SuppressWarnings("unchecked")

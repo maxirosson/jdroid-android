@@ -20,8 +20,21 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 	private final static Logger LOGGER = LoggerUtils.getLogger(SQLiteHelper.class);
 	private final static String DB_NAME = "application.db";
 
+	private static SQLiteHelper INSTANCE;
+
 	private Set<String> createSQLs = Sets.newHashSet();
 	private List<SQLiteUpgradeStep> upgradeSteps = Lists.newArrayList();
+
+	public static SQLiteHelper getDefaultInstance(Context context) {
+		if (INSTANCE == null) {
+			synchronized (SQLiteHelper.class) {
+				if (INSTANCE == null) {
+					INSTANCE = new SQLiteHelper(context);
+				}
+			}
+		}
+		return INSTANCE;
+	}
 
 	public SQLiteHelper(Context context) {
 		super(context, DB_NAME, null, AppUtils.getVersionCode());

@@ -45,6 +45,7 @@ dependencies {
 	implementation project(':jdroid-android-firebase-fcm')
 	implementation project(':jdroid-android-firebase-remoteconfig')
 	implementation project(':jdroid-android-google-signin')
+	implementation project(':jdroid-android-sqlite')
 	implementation project(':jdroid-android-twitter')
 	implementation 'com.firebase:firebase-client-android:2.5.0'
 

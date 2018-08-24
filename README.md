@@ -25,7 +25,6 @@ Libray for Android apps. Support for Android 4.0 (api level 15) and higher versi
   * [Firebase Invites](https://firebase.google.com/docs/invites/)
   * [Firebase Performance Monitor](https://firebase.google.com/docs/perf-mon/)
   * [Firebase Job Dispatcher](https://github.com/firebase/firebase-jobdispatcher-android)
-* [Sqlite integration](https://sqlite.org/)
 * [Device year class integration](https://github.com/facebook/device-year-class)
 * [Facebook Stetho Integration](https://github.com/facebook/stetho)
 * [Leak Canary Integration](https://github.com/square/leakcanary)
@@ -118,6 +117,10 @@ Libray for Android apps. Support for Android 4.0 (api level 15) and higher versi
 ## [jdroid-android-glide](https://github.com/maxirosson/jdroid/wiki/jdroid-Android)
  
  * [Glide integration](https://github.com/bumptech/glide)
+
+## [jdroid-android-sqlite](https://github.com/maxirosson/jdroid/wiki/jdroid-Android)
+
+ * [Sqlite integration](https://sqlite.org/)
 
 ## Donations
 Help us to continue with this project:
