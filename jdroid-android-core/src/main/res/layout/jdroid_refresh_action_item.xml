@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ViewSwitcher xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-			  android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto">
+<ViewSwitcher xmlns:android="http://schemas.android.com/apk/res/android"
+			  android:layout_width="match_parent"
+			  android:layout_height="match_parent"
+			  xmlns:app="http://schemas.android.com/apk/res-auto">
 
-	<ImageButton android:id="@+id/refresh_button" android:layout_width="match_parent" android:layout_height="match_parent"
-				 android:padding="10dp" android:contentDescription="@string/jdroid_refresh" app:srcCompat="@drawable/jdroid_ic_refresh_white_24dp" />
+	<ImageButton android:id="@+id/refresh_button"
+				 android:layout_width="match_parent"
+				 android:layout_height="match_parent"
+				 android:padding="10dp"
+				 android:contentDescription="@string/jdroid_refresh"
+				 app:srcCompat="@drawable/jdroid_ic_refresh_white_24dp" />
 
-	<ProgressBar android:id="@+id/progress_bar" style="?android:attr/progressBarStyle" android:layout_width="32dp"
-		android:layout_height="32dp" android:layout_gravity="center" />
+	<ProgressBar android:id="@+id/progress_bar"
+				 style="?android:attr/progressBarStyle"
+				 android:layout_width="32dp"
+				 android:layout_height="32dp"
+				 android:layout_gravity="center" />
 </ViewSwitcher>

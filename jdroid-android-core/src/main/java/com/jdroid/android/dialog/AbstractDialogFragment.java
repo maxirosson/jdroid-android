@@ -22,14 +22,14 @@ import com.jdroid.android.loading.FragmentLoading;
 import com.jdroid.java.exception.AbstractException;
 
 public class AbstractDialogFragment extends DialogFragment implements FragmentIf {
-	
+
 	private FragmentHelper fragmentHelper;
-	
+
 	@Override
 	public Boolean shouldRetainInstance() {
 		return fragmentHelper.shouldRetainInstance();
 	}
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -57,7 +57,7 @@ public class AbstractDialogFragment extends DialogFragment implements FragmentIf
 		super.onViewCreated(view, savedInstanceState);
 		fragmentHelper.onViewCreated(view, savedInstanceState);
 	}
-	
+
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
@@ -68,55 +68,55 @@ public class AbstractDialogFragment extends DialogFragment implements FragmentIf
 	public void onNewIntent(Intent intent) {
 		fragmentHelper.onNewIntent(intent);
 	}
-	
+
 	@Override
 	public void onStart() {
 		super.onStart();
 		fragmentHelper.onStart();
 	}
-	
+
 	@Override
 	public void onResume() {
 		super.onResume();
 		fragmentHelper.onResume();
 	}
-	
+
 	@Override
 	public void onPause() {
 		fragmentHelper.onBeforePause();
 		super.onPause();
 		fragmentHelper.onPause();
 	}
-	
+
 	@Override
 	public void onStop() {
 		super.onStop();
 		fragmentHelper.onStop();
 	}
-	
+
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
 		fragmentHelper.onDestroyView();
 	}
-	
+
 	@Override
 	public void onDestroy() {
 		fragmentHelper.onBeforeDestroy();
 		super.onDestroy();
 		fragmentHelper.onDestroy();
 	}
-	
+
 	@Override
 	public <V extends View> V findView(int id) {
 		return fragmentHelper.findView(id);
 	}
-	
+
 	@Override
 	public <V extends View> V findViewOnActivity(int id) {
 		return fragmentHelper.findViewOnActivity(id);
 	}
-	
+
 	@Override
 	public View inflate(int resource) {
 		return fragmentHelper.inflate(resource);
@@ -150,22 +150,22 @@ public class AbstractDialogFragment extends DialogFragment implements FragmentIf
 	public void onFinishUseCase() {
 		fragmentHelper.onFinishUseCase();
 	}
-	
+
 	@Override
 	public void executeOnUIThread(Runnable runnable) {
 		fragmentHelper.executeOnUIThread(runnable);
 	}
-	
+
 	@Override
 	public <E> E getExtra(String key) {
 		return fragmentHelper.getExtra(key);
 	}
-	
+
 	@Override
 	public <E> E getArgument(String key) {
 		return fragmentHelper.getArgument(key);
 	}
-	
+
 	@Override
 	public <E> E getArgument(String key, E defaultValue) {
 		return fragmentHelper.getArgument(key, defaultValue);
@@ -180,7 +180,7 @@ public class AbstractDialogFragment extends DialogFragment implements FragmentIf
 	public void afterInitAppBar(Toolbar appBar) {
 		fragmentHelper.afterInitAppBar(appBar);
 	}
-	
+
 	@Override
 	public Toolbar getAppBar() {
 		return fragmentHelper.getAppBar();
@@ -190,37 +190,37 @@ public class AbstractDialogFragment extends DialogFragment implements FragmentIf
 	public ActivityIf getActivityIf() {
 		return fragmentHelper.getActivityIf();
 	}
-	
+
 	// //////////////////////// Analytics //////////////////////// //
-	
+
 	@NonNull
 	@Override
 	public String getScreenViewName() {
 		return fragmentHelper.getScreenViewName();
 	}
-	
+
 	// //////////////////////// Loading //////////////////////// //
-	
+
 	@Override
 	public void showLoading() {
 		fragmentHelper.showLoading();
 	}
-	
+
 	@Override
 	public void dismissLoading() {
 		fragmentHelper.dismissLoading();
 	}
-	
+
 	@Override
 	public FragmentLoading getDefaultLoading() {
 		return fragmentHelper.getDefaultLoading();
 	}
-	
+
 	@Override
 	public void setLoading(FragmentLoading loading) {
 		fragmentHelper.setLoading(loading);
 	}
-	
+
 	@Override
 	public Integer getMenuResourceId() {
 		return fragmentHelper.getMenuResourceId();

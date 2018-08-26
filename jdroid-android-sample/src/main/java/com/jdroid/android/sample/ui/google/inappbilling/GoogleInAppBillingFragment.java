@@ -12,7 +12,7 @@ public class GoogleInAppBillingFragment extends InAppBillingRecyclerFragment {
 		getAdapter().notifyDataSetChanged();
 		ToastUtils.showToast(R.string.jdroid_purchaseThanks);
 	}
-	
+
 	@Override
 	public void onProvideProduct(Product product) {
 		// Do nothing

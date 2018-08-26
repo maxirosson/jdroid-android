@@ -19,12 +19,12 @@ import com.jdroid.android.google.maps.AbstractMapFragment;
 import com.jdroid.android.sample.R;
 
 public class LiteModeFragment extends AbstractFragment {
-	
+
 	@Override
 	public Integer getContentFragmentLayout() {
 		return R.layout.lite_mode_map_fragment;
 	}
-	
+
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		AbstractMapFragment.doMapToolbarWorkaround(savedInstanceState);

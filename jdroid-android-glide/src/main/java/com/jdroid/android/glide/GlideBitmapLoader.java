@@ -9,13 +9,13 @@ import com.jdroid.android.images.loader.BitmapLoader;
 import java.util.concurrent.ExecutionException;
 
 public class GlideBitmapLoader implements BitmapLoader {
-	
+
 	private String url;
-	
+
 	public GlideBitmapLoader(String url) {
 		this.url = url;
 	}
-	
+
 	@Override
 	public Bitmap load(int height, int width) {
 		RequestOptions options = new RequestOptions();

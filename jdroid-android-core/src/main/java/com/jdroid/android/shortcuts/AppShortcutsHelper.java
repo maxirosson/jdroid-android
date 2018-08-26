@@ -24,7 +24,7 @@ public class AppShortcutsHelper {
 	private static final Logger LOGGER = LoggerUtils.getLogger(AppShortcutsHelper.class);
 
 	public static final int MAX_SHORTCUT_COUNT_PER_ACTIVITY = 4;
-	
+
 	private static List<ShortcutInfo> initialShortcutInfos;
 
 	public static void reportShortcutUsed(String shortcutId) {
@@ -33,12 +33,12 @@ public class AppShortcutsHelper {
 			shortcutManager.reportShortcutUsed(shortcutId);
 		}
 	}
-	
+
 	@TargetApi(Build.VERSION_CODES.N_MR1)
 	public static void setInitialShortcutInfos(List<ShortcutInfo> initialShortcutInfos) {
 		AppShortcutsHelper.initialShortcutInfos = initialShortcutInfos;
 	}
-	
+
 	@TargetApi(Build.VERSION_CODES.N_MR1)
 	public static List<ShortcutInfo> getInitialShortcutInfos() {
 		return initialShortcutInfos;
@@ -48,42 +48,43 @@ public class AppShortcutsHelper {
 	public static void setDynamicShortcuts(List<ShortcutInfo> shortcutInfos) {
 		if (shortcutInfos != null) {
 			ShortcutManager shortcutManager = AbstractApplication.get().getSystemService(ShortcutManager.class);
-			processShortcutInfos(shortcutInfos);
+			shortcutInfos = processShortcutInfos(shortcutManager, shortcutInfos);
 			shortcutManager.setDynamicShortcuts(shortcutInfos);
 		}
 	}
-	
+
 	@TargetApi(Build.VERSION_CODES.N_MR1)
 	public static void updateDynamicShortcuts(List<ShortcutInfo> shortcutInfos) {
 		ShortcutManager shortcutManager = AbstractApplication.get().getSystemService(ShortcutManager.class);
-		processShortcutInfos(shortcutInfos);
+		shortcutInfos = processShortcutInfos(shortcutManager, shortcutInfos);
 		shortcutManager.updateShortcuts(shortcutInfos);
 	}
-	
+
 	@TargetApi(Build.VERSION_CODES.N_MR1)
-	private static List<ShortcutInfo> processShortcutInfos(List<ShortcutInfo> shortcutInfos) {
+	private static List<ShortcutInfo> processShortcutInfos(ShortcutManager shortcutManager, List<ShortcutInfo> shortcutInfos) {
 		Collections.sort(shortcutInfos, new Comparator<ShortcutInfo>() {
 			@Override
 			public int compare(ShortcutInfo o1, ShortcutInfo o2) {
 				return o1.getRank() > o2.getRank() ? 1 : -1;
 			}
 		});
-		if (shortcutInfos.size() > MAX_SHORTCUT_COUNT_PER_ACTIVITY) {
-			shortcutInfos = shortcutInfos.subList(0, MAX_SHORTCUT_COUNT_PER_ACTIVITY - 1);
-			LOGGER.warn("App Shortcuts limit [" + MAX_SHORTCUT_COUNT_PER_ACTIVITY + "] reached. Ignoring some of them");
+		int max = Math.min(MAX_SHORTCUT_COUNT_PER_ACTIVITY, shortcutManager.getMaxShortcutCountPerActivity());
+		if (shortcutInfos.size() > max) {
+			shortcutInfos = shortcutInfos.subList(0, max - 1);
+			LOGGER.warn("App Shortcuts limit [" + max + "] reached. Ignoring some of them");
 		}
 		return shortcutInfos;
 	}
-	
+
 	public static void registerDynamicShortcuts() {
 		ServiceCommand serviceCommand = new AppShortcutsCommand();
 		serviceCommand.start();
 	}
-	
+
 	public static Boolean isAppShortcutsAvailable() {
 		return AndroidUtils.getApiLevel() >= Build.VERSION_CODES.N_MR1;
 	}
-	
+
 	@TargetApi(Build.VERSION_CODES.O)
 	public static void pinShortcut(ShortcutInfo shortcutInfo) {
 		ShortcutManager shortcutManager = AbstractApplication.get().getSystemService(ShortcutManager.class);
@@ -91,7 +92,7 @@ public class AppShortcutsHelper {
 			shortcutManager.requestPinShortcut(shortcutInfo, null);
 		}
 	}
-	
+
 	@TargetApi(Build.VERSION_CODES.O)
 	public static void pinShortcut(ShortcutInfo shortcutInfo, Intent shortcutResultIntent) {
 		ShortcutManager shortcutManager = AbstractApplication.get().getSystemService(ShortcutManager.class);
@@ -103,7 +104,7 @@ public class AppShortcutsHelper {
 			shortcutManager.requestPinShortcut(shortcutInfo, successCallback.getIntentSender());
 		}
 	}
-	
+
 	public static void pinShortcut(Intent shortcutIntent, String shortcutName, @AnyRes int iconResId) {
 		Intent intent = new Intent();
 		intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
@@ -111,10 +112,10 @@ public class AppShortcutsHelper {
 		intent.putExtra(Intent.EXTRA_SHORTCUT_ICON_RESOURCE, Intent.ShortcutIconResource.fromContext(AbstractApplication.get(), iconResId));
 		intent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
 		AbstractApplication.get().sendBroadcast(intent);
-		
+
 		AppShortcutsAppModule.get().getModuleAnalyticsSender().trackPinShortcut(shortcutName);
 	}
-	
+
 	public static Boolean isPinShortcutAvailable() {
 		return AndroidUtils.getApiLevel() <= Build.VERSION_CODES.N_MR1;
 	}

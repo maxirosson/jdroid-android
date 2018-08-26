@@ -33,7 +33,7 @@ import com.jdroid.android.snackbar.SnackbarBuilder;
 import com.jdroid.java.exception.AbstractException;
 
 public abstract class AbstractMapFragment extends SupportMapFragment implements FragmentIf {
-	
+
 	private FragmentHelper fragmentHelper;
 	private GoogleMap map;
 
@@ -48,10 +48,10 @@ public abstract class AbstractMapFragment extends SupportMapFragment implements 
 	}
 
 	/**
-	 Calling this before super.oncreate() when you try to use a toolbar and the view contains a map
-	 https://code.google.com/p/android/issues/detail?id=175140
+	 * Calling this before super.oncreate() when you try to use a toolbar and the view contains a map
+	 * https://code.google.com/p/android/issues/detail?id=175140
 	 */
-	public static void doMapToolbarWorkaround(Bundle savedInstanceState){
+	public static void doMapToolbarWorkaround(Bundle savedInstanceState) {
 		// FIXME This is just a workaround to the following error: ClassNotFoundException when unmarshalling android.support.v7.widget.Toolbar$SavedState
 		// It seems to be a problem with the SupportMapFragment implementation
 		// https://code.google.com/p/android/issues/detail?id=175140
@@ -78,7 +78,7 @@ public abstract class AbstractMapFragment extends SupportMapFragment implements 
 	public static void setGoogleMapOptions(Bundle bundle, GoogleMapOptions googleMapOptions) {
 		bundle.putParcelable("MapOptions", googleMapOptions);
 	}
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		doMapToolbarWorkaround(savedInstanceState);
@@ -228,11 +228,11 @@ public abstract class AbstractMapFragment extends SupportMapFragment implements 
 		super.onStart();
 		fragmentHelper.onStart();
 	}
-	
+
 	@Override
 	public void onResume() {
 		super.onResume();
-		
+
 		fragmentHelper.onResume();
 
 		if (locationPermissionHelper != null) {
@@ -264,24 +264,24 @@ public abstract class AbstractMapFragment extends SupportMapFragment implements 
 			}
 		});
 	}
-	
+
 	protected InfoWindowAdapter getInfoWindowAdapter() {
 		return null;
 	}
-	
+
 	protected Boolean isLocationEnabled() {
 		return false;
 	}
-	
+
 	public GoogleMap getGoogleMap() {
 		return map;
 	}
-	
+
 	@Override
 	public Boolean shouldRetainInstance() {
 		return fragmentHelper.shouldRetainInstance();
 	}
-	
+
 	/**
 	 * @see android.support.v4.app.Fragment#onActivityCreated(android.os.Bundle)
 	 */
@@ -290,7 +290,7 @@ public abstract class AbstractMapFragment extends SupportMapFragment implements 
 		super.onActivityCreated(savedInstanceState);
 		fragmentHelper.onActivityCreated(savedInstanceState);
 	}
-	
+
 	/**
 	 * @see android.support.v4.app.Fragment#onPause()
 	 */
@@ -300,7 +300,7 @@ public abstract class AbstractMapFragment extends SupportMapFragment implements 
 		super.onPause();
 		fragmentHelper.onPause();
 	}
-	
+
 	/**
 	 * @see android.support.v4.app.Fragment#onStop()
 	 */
@@ -309,7 +309,7 @@ public abstract class AbstractMapFragment extends SupportMapFragment implements 
 		super.onStop();
 		fragmentHelper.onStop();
 	}
-	
+
 	/**
 	 * @see android.support.v4.app.Fragment#onDestroyView()
 	 */
@@ -318,7 +318,7 @@ public abstract class AbstractMapFragment extends SupportMapFragment implements 
 		super.onDestroyView();
 		fragmentHelper.onDestroyView();
 	}
-	
+
 	/**
 	 * @see android.support.v4.app.Fragment#onDestroy()
 	 */
@@ -328,7 +328,7 @@ public abstract class AbstractMapFragment extends SupportMapFragment implements 
 		super.onDestroy();
 		fragmentHelper.onDestroy();
 	}
-	
+
 	/**
 	 * @see com.jdroid.android.fragment.FragmentIf#findView(int)
 	 */
@@ -336,7 +336,7 @@ public abstract class AbstractMapFragment extends SupportMapFragment implements 
 	public <V extends View> V findView(int id) {
 		return fragmentHelper.findView(id);
 	}
-	
+
 	/**
 	 * @see com.jdroid.android.fragment.FragmentIf#findViewOnActivity(int)
 	 */
@@ -344,7 +344,7 @@ public abstract class AbstractMapFragment extends SupportMapFragment implements 
 	public <V extends View> V findViewOnActivity(int id) {
 		return fragmentHelper.findViewOnActivity(id);
 	}
-	
+
 	/**
 	 * @see com.jdroid.android.fragment.FragmentIf#inflate(int)
 	 */
@@ -358,13 +358,13 @@ public abstract class AbstractMapFragment extends SupportMapFragment implements 
 	public void onStartUseCase() {
 		fragmentHelper.onStartUseCase();
 	}
-	
+
 	@MainThread
 	@Override
 	public void onUpdateUseCase() {
 		fragmentHelper.onUpdateUseCase();
 	}
-	
+
 	@MainThread
 	@Override
 	public void onFinishFailedUseCase(AbstractException abstractException) {
@@ -381,12 +381,12 @@ public abstract class AbstractMapFragment extends SupportMapFragment implements 
 	public void onFinishUseCase() {
 		fragmentHelper.onFinishUseCase();
 	}
-	
+
 	@Override
 	public void executeOnUIThread(Runnable runnable) {
 		fragmentHelper.executeOnUIThread(runnable);
 	}
-	
+
 	/**
 	 * @see com.jdroid.android.fragment.FragmentIf#getExtra(java.lang.String)
 	 */
@@ -394,7 +394,7 @@ public abstract class AbstractMapFragment extends SupportMapFragment implements 
 	public <E> E getExtra(String key) {
 		return fragmentHelper.<E>getExtra(key);
 	}
-	
+
 	/**
 	 * @see com.jdroid.android.fragment.FragmentIf#getArgument(java.lang.String)
 	 */
@@ -402,7 +402,7 @@ public abstract class AbstractMapFragment extends SupportMapFragment implements 
 	public <E> E getArgument(String key) {
 		return fragmentHelper.<E>getArgument(key);
 	}
-	
+
 	/**
 	 * @see com.jdroid.android.fragment.FragmentIf#getArgument(java.lang.String, java.lang.Object)
 	 */
@@ -410,7 +410,7 @@ public abstract class AbstractMapFragment extends SupportMapFragment implements 
 	public <E> E getArgument(String key, E defaultValue) {
 		return fragmentHelper.<E>getArgument(key, defaultValue);
 	}
-	
+
 	@Override
 	public void beforeInitAppBar(Toolbar appBar) {
 		fragmentHelper.beforeInitAppBar(appBar);
@@ -433,17 +433,17 @@ public abstract class AbstractMapFragment extends SupportMapFragment implements 
 	public ActivityIf getActivityIf() {
 		return fragmentHelper.getActivityIf();
 	}
-	
+
 	// //////////////////////// Analytics //////////////////////// //
-	
+
 	@NonNull
 	@Override
 	public String getScreenViewName() {
 		return fragmentHelper.getScreenViewName();
 	}
-	
+
 	// //////////////////////// Loading //////////////////////// //
-	
+
 	/**
 	 * @see com.jdroid.android.fragment.FragmentIf#showLoading()
 	 */
@@ -451,7 +451,7 @@ public abstract class AbstractMapFragment extends SupportMapFragment implements 
 	public void showLoading() {
 		fragmentHelper.showLoading();
 	}
-	
+
 	/**
 	 * @see com.jdroid.android.fragment.FragmentIf#dismissLoading()
 	 */
@@ -459,7 +459,7 @@ public abstract class AbstractMapFragment extends SupportMapFragment implements 
 	public void dismissLoading() {
 		fragmentHelper.dismissLoading();
 	}
-	
+
 	/**
 	 * @see com.jdroid.android.fragment.FragmentIf#getDefaultLoading()
 	 */
@@ -467,7 +467,7 @@ public abstract class AbstractMapFragment extends SupportMapFragment implements 
 	public FragmentLoading getDefaultLoading() {
 		return fragmentHelper.getDefaultLoading();
 	}
-	
+
 	/**
 	 * @see com.jdroid.android.fragment.FragmentIf#setLoading(com.jdroid.android.loading.FragmentLoading)
 	 */
@@ -475,7 +475,7 @@ public abstract class AbstractMapFragment extends SupportMapFragment implements 
 	public void setLoading(FragmentLoading loading) {
 		fragmentHelper.setLoading(loading);
 	}
-	
+
 	@Override
 	public Integer getMenuResourceId() {
 		return fragmentHelper.getMenuResourceId();

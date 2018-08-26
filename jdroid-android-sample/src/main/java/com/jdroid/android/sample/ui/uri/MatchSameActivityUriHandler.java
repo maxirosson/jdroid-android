@@ -8,7 +8,7 @@ import android.support.annotation.NonNull;
 import com.jdroid.android.uri.AbstractUriHandler;
 
 public class MatchSameActivityUriHandler extends AbstractUriHandler<MatchSameActivity> {
-	
+
 	@Override
 	public Boolean matches(Uri uri) {
 		return true;

@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 
 import com.jdroid.android.activity.AbstractFragmentActivity;
+import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.exception.DefaultExceptionHandler;
 import com.jdroid.android.exception.DialogErrorDisplayer;
 import com.jdroid.android.fragment.AbstractFragment;
@@ -18,20 +19,21 @@ import com.jdroid.android.google.inappbilling.client.Inventory;
 import com.jdroid.android.google.inappbilling.client.ItemType;
 import com.jdroid.android.google.inappbilling.client.Product;
 import com.jdroid.java.exception.AbstractException;
+import com.jdroid.android.google.inappbilling.client.ProductType;
 import com.jdroid.java.exception.ErrorCodeException;
 import com.jdroid.java.utils.LoggerUtils;
 
 import org.slf4j.Logger;
 
 public class InAppBillingHelperFragment extends AbstractFragment implements InAppBillingClientListener {
-	
+
 	private static final String SILENT_MODE = "silentMode";
-	
+
 	private static final Logger LOGGER = LoggerUtils.getLogger(InAppBillingHelperFragment.class);
-	
+
 	private InAppBillingClient inAppBillingClient;
 	private Boolean silentMode;
-	
+
 	public static void add(FragmentActivity activity,
 			Class<? extends InAppBillingHelperFragment> inAppBillingHelperFragmentClass, Boolean silentMode,
 			Fragment targetFragment) {
@@ -41,22 +43,22 @@ public class InAppBillingHelperFragment extends AbstractFragment implements InAp
 			InAppBillingHelperFragment inAppBillingHelperFragment = abstractFragmentActivity.instanceFragment(
 				inAppBillingHelperFragmentClass, null);
 			inAppBillingHelperFragment.setTargetFragment(targetFragment, 0);
-			
+
 			Bundle args = new Bundle();
 			args.putBoolean(SILENT_MODE, silentMode);
 			inAppBillingHelperFragment.setArguments(args);
-			
+
 			FragmentTransaction fragmentTransaction = abstractFragmentActivity.getSupportFragmentManager().beginTransaction();
 			fragmentTransaction.add(0, inAppBillingHelperFragment, InAppBillingHelperFragment.class.getSimpleName());
 			fragmentTransaction.commit();
 		}
-		
+
 	}
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		silentMode = getArgument(SILENT_MODE);
 		
 		inAppBillingClient = new InAppBillingClient();
@@ -75,7 +77,7 @@ public class InAppBillingHelperFragment extends AbstractFragment implements InAp
 	public void onSetupFinished() {
 		inAppBillingClient.queryProductsDetails(ItemType.MANAGED);
 	}
-	
+
 	@Override
 	public void onSetupFailed(AbstractException abstractException) {
 		if (!silentMode) {
@@ -89,7 +91,7 @@ public class InAppBillingHelperFragment extends AbstractFragment implements InAp
 		inAppBillingClient.queryPurchases(ItemType.MANAGED);
 		//inAppBillingClient.queryPurchases(ItemType.SUBSCRIPTION, subscriptionsProductTypes);
 	}
-	
+
 	@Override
 	public void onQueryProductDetailsFailed(ErrorCodeException errorCodeException) {
 		if (!silentMode) {
@@ -97,7 +99,7 @@ public class InAppBillingHelperFragment extends AbstractFragment implements InAp
 			createErrorDisplayer(errorCodeException).displayError(getActivity(), errorCodeException);
 		}
 	}
-	
+
 	@Override
 	public void onQueryPurchasesFinished(Inventory inventory) {
 		InAppBillingListener inAppBillingListener = getInAppBillingListener();
@@ -105,7 +107,7 @@ public class InAppBillingHelperFragment extends AbstractFragment implements InAp
 			inAppBillingListener.onProductsLoaded(inventory.getAvailableProducts());
 		}
 	}
-	
+
 	@Override
 	public void onQueryPurchasesFailed(ErrorCodeException errorCodeException) {
 		if (!silentMode) {
@@ -113,12 +115,12 @@ public class InAppBillingHelperFragment extends AbstractFragment implements InAp
 			createErrorDisplayer(errorCodeException).displayError(getActivity(), errorCodeException);
 		}
 	}
-	
+
 	public void launchPurchaseFlow(Product product) {
 		inAppBillingClient.launchInAppPurchaseFlow(getActivity(), product);
 		InAppBillingAppModule.get().getModuleAnalyticsSender().trackInAppBillingPurchaseTry(product);
 	}
-	
+
 	@Override
 	public void onPurchaseFinished(Product product) {
 		InAppBillingListener inAppBillingListener = getInAppBillingListener();
@@ -126,7 +128,7 @@ public class InAppBillingHelperFragment extends AbstractFragment implements InAp
 			inAppBillingListener.onPurchased(product);
 		}
 	}
-	
+
 	@Override
 	public void onPurchaseFailed(ErrorCodeException errorCodeException) {
 		if (!silentMode && !DefaultExceptionHandler.matchAnyErrorCode(errorCodeException, InAppBillingErrorCode.USER_CANCELED)) {
@@ -134,7 +136,7 @@ public class InAppBillingHelperFragment extends AbstractFragment implements InAp
 			createErrorDisplayer(errorCodeException).displayError(getActivity(), errorCodeException);
 		}
 	}
-	
+
 	@Override
 	public void onConsumeFinished(Product product) {
 		InAppBillingListener inAppBillingListener = getInAppBillingListener();
@@ -142,14 +144,14 @@ public class InAppBillingHelperFragment extends AbstractFragment implements InAp
 			inAppBillingListener.onConsumed(product);
 		}
 	}
-	
+
 	@Override
 	public void onConsumeFailed(ErrorCodeException errorCodeException) {
 		if (!silentMode) {
 			createErrorDisplayer(errorCodeException).displayError(getActivity(), errorCodeException);
 		}
 	}
-	
+
 	@Override
 	public void onProvideProduct(Product product) {
 		InAppBillingListener inAppBillingListener = getInAppBillingListener();
@@ -157,21 +159,21 @@ public class InAppBillingHelperFragment extends AbstractFragment implements InAp
 			inAppBillingListener.onProvideProduct(product);
 		}
 	}
-	
+
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		
+
 		if (inAppBillingClient != null) {
 			inAppBillingClient.onDestroy();
 			inAppBillingClient = null;
 		}
 	}
-	
+
 	public static InAppBillingHelperFragment get(FragmentActivity activity) {
 		return ((AbstractFragmentActivity)activity).getFragment(InAppBillingHelperFragment.class);
 	}
-	
+
 	public static void removeTarget(FragmentActivity activity) {
 		InAppBillingHelperFragment inAppBillingHelperFragment = InAppBillingHelperFragment.get(activity);
 		if (inAppBillingHelperFragment != null) {

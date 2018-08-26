@@ -25,12 +25,12 @@ public abstract class AbstractCoreAnalyticsTracker implements CoreAnalyticsTrack
 	public void trackErrorLog(@NonNull String message) {
 		// Do Nothing
 	}
-	
+
 	@Override
 	public void trackErrorCustomKey(@NonNull String key, @NonNull Object value) {
 		// Do Nothing
 	}
-	
+
 	@Override
 	public void onFirstActivityCreate(Activity activity) {
 		// Do nothing
@@ -45,27 +45,27 @@ public abstract class AbstractCoreAnalyticsTracker implements CoreAnalyticsTrack
 	public void onActivityStart(Activity activity, String referrer, Object data) {
 		// Do Nothing
 	}
-	
+
 	@Override
 	public void onActivityResume(Activity activity) {
 		// Do Nothing
 	}
-	
+
 	@Override
 	public void onActivityPause(Activity activity) {
 		// Do Nothing
 	}
-	
+
 	@Override
 	public void onActivityStop(Activity activity) {
 		// Do Nothing
 	}
-	
+
 	@Override
 	public void onActivityDestroy(Activity activity) {
 		// Do Nothing
 	}
-	
+
 	@Override
 	public void onFragmentStart(String screenViewName) {
 		// Do Nothing
@@ -80,22 +80,22 @@ public abstract class AbstractCoreAnalyticsTracker implements CoreAnalyticsTrack
 	public void trackHandledException(Throwable throwable, List<String> tags) {
 		// Do Nothing
 	}
-	
+
 	@Override
 	public void trackUriOpened(String screenName, Uri uri, String referrer) {
 		// Do Nothing
 	}
-	
+
 	@Override
 	public void trackSocialInteraction(String network, SocialAction socialAction, String socialTarget) {
 		// Do Nothing
 	}
-	
+
 	@Override
 	public void trackNotificationDisplayed(String notificationName) {
 		// Do Nothing
 	}
-	
+
 	@Override
 	public void trackNotificationOpened(String notificationName) {
 		// Do Nothing
@@ -130,7 +130,7 @@ public abstract class AbstractCoreAnalyticsTracker implements CoreAnalyticsTrack
 	public void trackSendAppInvitation(String invitationId) {
 		// Do Nothing
 	}
-	
+
 	@Override
 	public Boolean isEnabled() {
 		return true;

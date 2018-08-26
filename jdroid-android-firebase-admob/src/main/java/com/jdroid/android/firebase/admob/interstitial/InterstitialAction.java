@@ -12,11 +12,11 @@ import com.jdroid.android.firebase.admob.helpers.InterstitialAdHelper;
 import com.jdroid.java.remoteconfig.RemoteConfigParameter;
 
 public abstract class InterstitialAction {
-	
+
 	public void start(Context context) {
 		start((ActivityIf)context);
 	}
-	
+
 	public void start(ActivityIf activityIf) {
 		Boolean enabled = AbstractApplication.get().getRemoteConfigLoader().getBoolean(getEnabledRemoteConfigParameter());
 		if (enabled) {
@@ -38,9 +38,9 @@ public abstract class InterstitialAction {
 			onAction();
 		}
 	}
-	
+
 	protected abstract void onAction();
-	
+
 	@NonNull
 	protected abstract RemoteConfigParameter getEnabledRemoteConfigParameter();
 }

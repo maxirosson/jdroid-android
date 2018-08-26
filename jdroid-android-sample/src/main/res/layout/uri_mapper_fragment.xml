@@ -1,39 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+			android:layout_width="match_parent"
 			android:layout_height="match_parent">
-	<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="8dp">
 
-		<Button android:id="@+id/singleTop" android:layout_width="wrap_content" android:layout_height="wrap_content"
+	<LinearLayout android:layout_width="match_parent"
+				  android:layout_height="wrap_content"
+				  android:orientation="vertical"
+				  android:padding="8dp">
+
+		<Button android:id="@+id/singleTop"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
 				android:text="@string/uriMapperSingleTop" />
 
-		<Button android:id="@+id/noFlags" android:layout_width="wrap_content" android:layout_height="wrap_content"
+		<Button android:id="@+id/noFlags"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
 				android:text="@string/uriMapperNoFlags" />
 
-		<Button android:id="@+id/matchError" android:layout_width="wrap_content" android:layout_height="wrap_content"
+		<Button android:id="@+id/matchError"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
 				android:text="@string/matchError" />
 
-		<Button android:id="@+id/mainIntentError" android:layout_width="wrap_content" android:layout_height="wrap_content"
+		<Button android:id="@+id/mainIntentError"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
 				android:text="@string/mainIntentError" />
 
-		<Button android:id="@+id/defaultIntentError" android:layout_width="wrap_content" android:layout_height="wrap_content"
+		<Button android:id="@+id/defaultIntentError"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
 				android:text="@string/defaultIntentError" />
 
-		<Button android:id="@+id/matchNewActivity" android:layout_width="wrap_content" android:layout_height="wrap_content"
+		<Button android:id="@+id/matchNewActivity"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
 				android:text="@string/matchNewActivity" />
 
-		<Button android:id="@+id/noMatchNewActivity" android:layout_width="wrap_content" android:layout_height="wrap_content"
+		<Button android:id="@+id/noMatchNewActivity"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
 				android:text="@string/noMatchNewActivity" />
 
-		<Button android:id="@+id/matchSameActivity" android:layout_width="wrap_content" android:layout_height="wrap_content"
+		<Button android:id="@+id/matchSameActivity"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
 				android:text="@string/matchSameActivity" />
 
-		<Button android:id="@+id/noMatchSameActivity" android:layout_width="wrap_content" android:layout_height="wrap_content"
+		<Button android:id="@+id/noMatchSameActivity"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
 				android:text="@string/noMatchSameActivity" />
 
-		<Button android:id="@+id/matchNullIntent" android:layout_width="wrap_content" android:layout_height="wrap_content"
+		<Button android:id="@+id/matchNullIntent"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
 				android:text="@string/matchNullIntent" />
 
-		<Button android:id="@+id/noMatchNullIntent" android:layout_width="wrap_content" android:layout_height="wrap_content"
+		<Button android:id="@+id/noMatchNullIntent"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
 				android:text="@string/noMatchNullIntent" />
 
 	</LinearLayout>

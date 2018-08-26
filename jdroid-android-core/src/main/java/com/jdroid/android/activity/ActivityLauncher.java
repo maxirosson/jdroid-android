@@ -14,9 +14,9 @@ import org.slf4j.Logger;
  * Launcher for all the activities of the application
  */
 public class ActivityLauncher {
-	
+
 	private static final Logger LOGGER = LoggerUtils.getLogger(ActivityLauncher.class);
-	
+
 	/**
 	 * Launches the {@link AbstractApplication#getHomeActivityClass()}
 	 */
@@ -31,7 +31,7 @@ public class ActivityLauncher {
 			LOGGER.warn("Null activity. Ignoring launch of " + AbstractApplication.get().getHomeActivityClass().getSimpleName());
 		}
 	}
-	
+
 	/**
 	 * Launches a new {@link Activity}
 	 *
@@ -51,7 +51,7 @@ public class ActivityLauncher {
 			LOGGER.warn("Null activity. Ignoring launch of " + targetActivityClass.getSimpleName());
 		}
 	}
-	
+
 	/**
 	 * Launches a new {@link Activity}
 	 *
@@ -70,12 +70,12 @@ public class ActivityLauncher {
 			LOGGER.warn("Null activity. Ignoring launch of " + targetActivityClass.getSimpleName());
 		}
 	}
-	
+
 	public static void startActivityNewTask(Intent intent) {
 		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		AbstractApplication.get().startActivity(intent);
 	}
-	
+
 	/**
 	 * Launches a new {@link Activity}
 	 *
@@ -91,7 +91,7 @@ public class ActivityLauncher {
 			LOGGER.warn("Null activity. Ignoring launch of " + targetActivityClass.getSimpleName());
 		}
 	}
-	
+
 	public static void startActivity(@Nullable Activity activity, Intent intent) {
 		if (activity != null) {
 			activity.startActivity(intent);
@@ -99,7 +99,7 @@ public class ActivityLauncher {
 			LOGGER.warn("Null activity. Ignoring starting activity for intent: " + intent);
 		}
 	}
-	
+
 	public static void startActivityForResult(@Nullable Activity activity, Intent intent, int requestCode) {
 		if (activity != null) {
 			activity.startActivityForResult(intent, requestCode);

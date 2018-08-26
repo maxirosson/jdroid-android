@@ -13,36 +13,37 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
+
 import com.jdroid.android.R;
 import com.jdroid.android.fragment.FragmentIf;
 
 public class LoadingLayout extends FrameLayout {
-	
+
 	private ProgressBar progressLoading;
 	private Button retryButton;
 	private Boolean isLoading = false;
-	
+
 	public LoadingLayout(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		init();
 	}
-	
+
 	public LoadingLayout(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		init();
 	}
-	
+
 	public LoadingLayout(Context context) {
 		super(context);
 		init();
 	}
-	
+
 	private void init() {
 		LayoutInflater inflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		inflater.inflate(R.layout.jdroid_non_blocking_loading, this, true);
 		progressLoading = (ProgressBar)this.findViewById(R.id.loadingProgressBar);
 	}
-	
+
 	private void updateViewState() {
 		for (int i = 0; i < getChildCount(); i++) {
 			View child = getChildAt(i);
@@ -53,12 +54,12 @@ public class LoadingLayout extends FrameLayout {
 			}
 		}
 	}
-	
+
 	public void setLoading(boolean loading) {
 		isLoading = loading;
 		updateViewState();
 	}
-	
+
 	// TODO Retry. WIP
 	@SuppressWarnings("unused")
 	private void setRetry() {
@@ -69,7 +70,7 @@ public class LoadingLayout extends FrameLayout {
 			retryButton.setVisibility(View.VISIBLE);
 		}
 	}
-	
+
 	public void showLoading(FragmentIf fragmentIf) {
 		if (isLoading) {
 			return;
@@ -77,7 +78,7 @@ public class LoadingLayout extends FrameLayout {
 		isLoading = true;
 		if (fragmentIf != null) {
 			fragmentIf.executeOnUIThread(new Runnable() {
-				
+
 				@Override
 				public void run() {
 					for (int i = 0; i < getChildCount(); i++) {
@@ -92,14 +93,14 @@ public class LoadingLayout extends FrameLayout {
 			});
 		}
 	}
-	
+
 	public void dismissLoading(FragmentIf fragmentIf) {
 		if (!isLoading) {
 			return;
 		}
 		if (fragmentIf != null) {
 			fragmentIf.executeOnUIThread(new Runnable() {
-				
+
 				@Override
 				public void run() {
 					for (int i = 0; i < getChildCount(); i++) {
@@ -115,11 +116,11 @@ public class LoadingLayout extends FrameLayout {
 		}
 		isLoading = false;
 	}
-	
+
 	public boolean isLoadingVisible() {
 		return progressLoading.getVisibility() == View.VISIBLE;
 	}
-	
+
 	public void animateVisibility(final View view, final int visibility) {
 		if ((visibility == VISIBLE) && (view.getVisibility() != VISIBLE)) {
 			view.clearAnimation();
@@ -135,13 +136,13 @@ public class LoadingLayout extends FrameLayout {
 			view.startAnimation(animation);
 		}
 	}
-	
+
 	@Override
 	public Parcelable onSaveInstanceState() {
 		Parcelable superState = super.onSaveInstanceState();
 		return new SavedState(superState, isLoading);
 	}
-	
+
 	@Override
 	public void onRestoreInstanceState(Parcelable state) {
 		SavedState ss = (SavedState)state;
@@ -149,14 +150,14 @@ public class LoadingLayout extends FrameLayout {
 		isLoading = ss.isLoading;
 		updateViewState();
 	}
-	
+
 	/**
 	 * Class for managing state storing/restoring.
 	 */
 	private static class SavedState extends BaseSavedState {
-		
+
 		private Boolean isLoading;
-		
+
 		/**
 		 * Constructor called from {@link DatePicker#onSaveInstanceState()}
 		 */
@@ -164,7 +165,7 @@ public class LoadingLayout extends FrameLayout {
 			super(superState);
 			this.isLoading = isLoading;
 		}
-		
+
 		/**
 		 * Constructor called from {@link #CREATOR}
 		 */
@@ -172,21 +173,21 @@ public class LoadingLayout extends FrameLayout {
 			super(in);
 			isLoading = in.readInt() == 1;
 		}
-		
+
 		@Override
 		public void writeToParcel(@NonNull Parcel dest, int flags) {
 			super.writeToParcel(dest, flags);
 			dest.writeInt(isLoading ? 1 : 0);
 		}
-		
+
 		@SuppressWarnings({ "hiding", "unused" })
 		public static final Parcelable.Creator<SavedState> CREATOR = new Creator<SavedState>() {
-			
+
 			@Override
 			public SavedState createFromParcel(Parcel in) {
 				return new SavedState(in);
 			}
-			
+
 			@Override
 			public SavedState[] newArray(int size) {
 				return new SavedState[size];

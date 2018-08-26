@@ -1,24 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-			  xmlns:tools="http://schemas.android.com/tools" android:orientation="vertical" android:layout_width="match_parent"
-			  android:layout_height="wrap_content" android:padding="16dp">
+			  xmlns:tools="http://schemas.android.com/tools"
+			  android:orientation="vertical"
+			  android:layout_width="match_parent"
+			  android:layout_height="wrap_content"
+			  android:padding="16dp">
 
-	<RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-					android:layout_marginBottom="8dp">
-		<ImageView android:id="@+id/itemIcon" android:layout_width="wrap_content" android:layout_height="wrap_content"
-				   android:layout_centerVertical="true" tools:src="@drawable/jdroid_ic_mail_outline_black_24dp"
-				   android:layout_marginRight="8dp" android:visibility="gone" tools:visibility="visible"/>
-		<TextView android:id="@+id/itemTitle" style="@style/jdroid_textMediumBold" android:layout_width="match_parent"
-				  android:layout_height="wrap_content" android:gravity="center_vertical" android:layout_centerVertical="true"
-				  android:layout_toLeftOf="@+id/itemPrice" android:layout_toRightOf="@+id/itemIcon" tools:text="Title" />
+	<RelativeLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="8dp">
 
-		<TextView android:id="@+id/itemPrice" style="@style/jdroid_productItemPrice" android:layout_alignParentRight="true"
-				  android:layout_centerVertical="true" android:layout_width="wrap_content"
-				  android:layout_height="wrap_content" android:gravity="center_horizontal|center_vertical"
-				  tools:text="ARS15.26"/>
+		<ImageView
+				android:id="@+id/itemIcon"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_centerVertical="true"
+				tools:src="@drawable/jdroid_ic_mail_outline_black_24dp"
+				android:layout_marginRight="8dp"
+				android:visibility="gone"
+				tools:visibility="visible" />
+
+		<TextView
+				android:id="@+id/itemTitle"
+				style="@style/jdroid_textMediumBold"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:gravity="center_vertical"
+				android:layout_centerVertical="true"
+				android:layout_toLeftOf="@+id/itemPrice"
+				android:layout_toRightOf="@+id/itemIcon"
+				tools:text="Title" />
+
+		<TextView
+				android:id="@+id/itemPrice"
+				style="@style/jdroid_productItemPrice"
+				android:layout_alignParentRight="true"
+				android:layout_centerVertical="true"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:gravity="center_horizontal|center_vertical"
+				tools:text="ARS15.26" />
 
 	</RelativeLayout>
 
-	<TextView android:id="@+id/itemDescription" style="@style/jdroid_textSmall" android:layout_marginTop="12dp" tools:text="This is the description" />
+	<TextView
+			android:id="@+id/itemDescription"
+			style="@style/jdroid_textSmall"
+			android:layout_marginTop="12dp"
+			tools:text="This is the description" />
 
 </LinearLayout>

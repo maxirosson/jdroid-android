@@ -12,7 +12,7 @@ import com.jdroid.android.utils.ScreenUtils;
 import com.jdroid.android.utils.ToastUtils;
 
 public class LeftTabletFragment extends AbstractFragment {
-	
+
 	@Override
 	public Integer getContentFragmentLayout() {
 		return R.layout.left_tablet_fragment;

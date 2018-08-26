@@ -20,9 +20,9 @@ import java.util.Map;
  * Represents a block of information about in-app items.
  */
 public class Inventory {
-	
+
 	private Map<String, Product> productsMap = Maps.newLinkedHashMap();
-	
+
 	public List<Product> getProducts() {
 		return Lists.newArrayList(productsMap.values());
 	}
@@ -44,7 +44,7 @@ public class Inventory {
 	public void addProduct(Product product) {
 		productsMap.put(product.getId(), product);
 	}
-	
+
 	public List<Product> getProductsWaitingToConsume() {
 		List<Product> productsToConsume = Lists.newArrayList();
 		for (Product product : getProducts()) {
@@ -54,7 +54,7 @@ public class Inventory {
 		}
 		return productsToConsume;
 	}
-	
+
 	public List<Product> getSupportedPurchasedProducts() {
 		List<ProductType> supportedProductTypes = Lists.newArrayList();
 		supportedProductTypes.addAll(InAppBillingAppModule.get().getInAppBillingContext().getManagedProductTypes());
@@ -67,7 +67,7 @@ public class Inventory {
 		}
 		return purchasedProducts;
 	}
-	
+
 	public Product getProduct(String productId) {
 		if (InAppBillingAppModule.get().getInAppBillingContext().isStaticResponsesEnabled()) {
 			return getProductByTestProductId(productId);
@@ -75,10 +75,10 @@ public class Inventory {
 			return productsMap.get(productId);
 		}
 	}
-	
+
 	private Product getProductByTestProductId(String testProductId) {
 		for (Product each : productsMap.values()) {
-			if (testProductId.equals(each.getProductType().getTestProductId())){
+			if (testProductId.equals(each.getProductType().getTestProductId())) {
 				return each;
 			}
 		}

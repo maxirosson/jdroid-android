@@ -20,7 +20,7 @@ import com.jdroid.java.collections.Lists;
 import java.util.List;
 
 public class AndroidActivityHelper extends ActivityHelper {
-	
+
 	public AndroidActivityHelper(AbstractFragmentActivity activity) {
 		super(activity);
 	}

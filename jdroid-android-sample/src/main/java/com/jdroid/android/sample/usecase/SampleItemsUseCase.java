@@ -7,7 +7,7 @@ import com.jdroid.java.concurrent.ExecutorUtils;
 import java.util.List;
 
 public class SampleItemsUseCase extends AbstractUseCase {
-	
+
 	private static final long serialVersionUID = -3206803568176386530L;
 
 	private List<String> items;
@@ -30,7 +30,7 @@ public class SampleItemsUseCase extends AbstractUseCase {
 	public List<Object> getComplexItems() {
 		return complexItems;
 	}
-	
+
 	@Override
 	protected Boolean timingTrackingEnabled() {
 		return false;

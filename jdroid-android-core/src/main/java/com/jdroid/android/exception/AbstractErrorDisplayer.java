@@ -31,15 +31,15 @@ public abstract class AbstractErrorDisplayer implements ErrorDisplayer {
 					if (title == null) {
 						title = LocalizationUtils.getTitle(errorCodeException.getErrorCode());
 						if ((title == null)
-								&& errorCodeException.getErrorCode().equals(HttpErrorCode.CONNECTION_ERROR)) {
+							&& errorCodeException.getErrorCode().equals(HttpErrorCode.CONNECTION_ERROR)) {
 							title = LocalizationUtils.getString(R.string.jdroid_connectionErrorTitle);
 						}
 					}
 					if (description == null) {
 						description = LocalizationUtils.getDescription(errorCodeException.getErrorCode(),
-								errorCodeException.getErrorCodeDescriptionArgs());
+							errorCodeException.getErrorCodeDescriptionArgs());
 						if ((description == null)
-								&& errorCodeException.getErrorCode().equals(HttpErrorCode.CONNECTION_ERROR)) {
+							&& errorCodeException.getErrorCode().equals(HttpErrorCode.CONNECTION_ERROR)) {
 							description = LocalizationUtils.getString(R.string.jdroid_connectionErrorDescription);
 						}
 					}

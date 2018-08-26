@@ -43,7 +43,7 @@ public class PreferenceAppenderActivity extends AbstractFragmentActivity {
 	}
 
 	private <E extends AbstractPreferenceFragment> E instanceAbstractPreferenceFragment(Class<E> fragmentClass,
-			Bundle bundle) {
+																						Bundle bundle) {
 		E fragment;
 		try {
 			fragment = fragmentClass.newInstance();

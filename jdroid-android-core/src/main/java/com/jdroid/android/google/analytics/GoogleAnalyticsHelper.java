@@ -31,7 +31,7 @@ public class GoogleAnalyticsHelper {
 	private Map<String, String> commonCustomDimensionsValues = Maps.newHashMap();
 
 	private Executor executor = Executors.newSingleThreadExecutor(new LowPriorityThreadFactory("google-analytics"));
-	
+
 	public synchronized Tracker getTracker() {
 		if (tracker == null) {
 			GoogleAnalytics analytics = GoogleAnalytics.getInstance(AbstractApplication.get());
@@ -77,7 +77,7 @@ public class GoogleAnalyticsHelper {
 
 		getTracker().send(eventBuilder.build());
 		LOGGER.debug("Event sent. Category [" + category + "] Action [" + action + "] Label [" + label + "]"
-				+ (value != null ? " Value" + value + "]" : ""));
+			+ (value != null ? " Value" + value + "]" : ""));
 	}
 
 	public void sendScreenView(String screenName) {
@@ -123,7 +123,7 @@ public class GoogleAnalyticsHelper {
 
 		getTracker().send(timingBuilder.build());
 		LOGGER.debug("Timing sent. Category [" + category + "] Variable [" + variable + "] Label [" + label
-				+ "] Value [" + value + "]");
+			+ "] Value [" + value + "]");
 	}
 
 	protected void addCustomDimension(HitBuilders.ScreenViewBuilder screenViewBuilder, GoogleCoreAnalyticsTracker.CustomDimension customDimension, String dimension) {
@@ -157,6 +157,7 @@ public class GoogleAnalyticsHelper {
 			}
 		}
 	}
+
 	protected void addCustomDimension(HitBuilders.TimingBuilder timingBuilder, Map<String, String> customDimensions) {
 		if (customDimensions != null) {
 			for (Map.Entry<String, String> entry : customDimensions.entrySet()) {
@@ -187,6 +188,7 @@ public class GoogleAnalyticsHelper {
 			timingBuilder.setCustomDimension(index, dimension);
 		}
 	}
+
 	protected void addCustomDimension(HitBuilders.TimingBuilder timingBuilder, String customDimensionKey, String dimension) {
 		Integer index = customDimensionsMap.get(customDimensionKey);
 		addCustomDimension(timingBuilder, index, dimension);

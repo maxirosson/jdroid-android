@@ -19,16 +19,16 @@ public class InAppBillingDebugPrefsAppender extends PreferencesAppender {
 	public int getNameResId() {
 		return R.string.jdroid_inAppBillingSettings;
 	}
-	
+
 	@Override
 	public void initPreferences(Activity activity, PreferenceGroup preferenceGroup) {
-		
+
 		CheckBoxPreference checkBoxPreference = new CheckBoxPreference(activity);
 		checkBoxPreference.setKey(InAppBillingContext.STATIC_RESPONSES_ENABLED);
 		checkBoxPreference.setTitle(R.string.jdroid_inAppBillingStaticResponsesTitle);
 		checkBoxPreference.setSummary(R.string.jdroid_inAppBillingStaticResponsesDescription);
 		preferenceGroup.addPreference(checkBoxPreference);
-		
+
 		checkBoxPreference = new CheckBoxPreference(activity);
 		checkBoxPreference.setKey(TestDeveloperPayloadVerificationStrategy.VALID_TEST_VERIFICATION_ENABLED);
 		checkBoxPreference.setTitle(R.string.jdroid_inAppBillingTestVerificationTitle);
@@ -62,13 +62,13 @@ public class InAppBillingDebugPrefsAppender extends PreferencesAppender {
 			preferenceGroup.addPreference(preference);
 		}
 	}
-	
+
 	@Override
 	public Boolean isEnabled() {
 		return InAppBillingAppModule.get() != null && (!InAppBillingAppModule.get().getInAppBillingContext().getManagedProductTypes().isEmpty()
-				|| !InAppBillingAppModule.get().getInAppBillingContext().getSubscriptionsProductTypes().isEmpty());
+			|| !InAppBillingAppModule.get().getInAppBillingContext().getSubscriptionsProductTypes().isEmpty());
 	}
-	
+
 	@Override
 	public String getSharedPreferencesName() {
 		return InAppBillingContext.SHARED_PREFERENCES_NAME;

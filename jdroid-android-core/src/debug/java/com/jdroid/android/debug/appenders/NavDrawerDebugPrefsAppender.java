@@ -14,7 +14,7 @@ public class NavDrawerDebugPrefsAppender extends PreferencesAppender {
 	public int getNameResId() {
 		return R.string.jdroid_navDrawerSettings;
 	}
-	
+
 	@Override
 	public void initPreferences(Activity activity, PreferenceGroup preferenceGroup) {
 		CheckBoxPreference checkBoxPreference = new CheckBoxPreference(activity);

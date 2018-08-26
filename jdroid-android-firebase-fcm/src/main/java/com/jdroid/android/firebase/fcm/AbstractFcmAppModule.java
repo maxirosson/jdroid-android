@@ -1,7 +1,6 @@
 package com.jdroid.android.firebase.fcm;
 
 import android.os.Bundle;
-import android.support.annotation.WorkerThread;
 
 import com.jdroid.android.activity.AbstractFragmentActivity;
 import com.jdroid.android.activity.ActivityDelegate;
@@ -43,6 +42,7 @@ public abstract class AbstractFcmAppModule extends AbstractAppModule {
 		return fcmListenerResolver;
 	}
 
+	// TODO This FCM registration is not necessary
 	@Override
 	public ActivityDelegate createActivityDelegate(AbstractFragmentActivity abstractFragmentActivity) {
 		return !fcmInitialized ? new ActivityDelegate(abstractFragmentActivity) {
@@ -60,12 +60,6 @@ public abstract class AbstractFcmAppModule extends AbstractAppModule {
 	protected List<String> getSubscriptionTopics() {
 		return null;
 	}
-	
-	@WorkerThread
-	@Override
-	public void onInstanceIdTokenRefresh() {
-		startFcmRegistration(false);
-	}
 
 	@Override
 	public void onGooglePlayServicesUpdated() {
@@ -76,7 +70,7 @@ public abstract class AbstractFcmAppModule extends AbstractAppModule {
 		FcmRegistrationCommand fcmRegistrationCommand = createFcmRegistrationCommand();
 		fcmRegistrationCommand.start(updateLastActiveTimestamp);
 	}
-	
+
 	protected FcmRegistrationCommand createFcmRegistrationCommand() {
 		return new FcmRegistrationCommand();
 	}

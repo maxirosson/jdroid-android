@@ -74,11 +74,11 @@ public class DynamicLinksFragment extends AbstractFragment {
 					@Override
 					public void run() {
 						final DynamicLink dynamicLink = new DynamicLink();
-						
+
 						DynamicLinkInfo dynamicLinkInfo = new DynamicLinkInfo();
 						dynamicLinkInfo.setDynamicLinkDomain(FirebaseDynamicLinksAppContext.getDynamicLinksDomain());
 						dynamicLinkInfo.setLink(linkUrlTextView.getText().toString());
-						
+
 						AndroidInfo androidInfo = new AndroidInfo();
 						androidInfo.setAndroidPackageName(AppUtils.getApplicationId());
 						if (minVersionCodeTextView.getText().length() > 0) {
@@ -87,7 +87,7 @@ public class DynamicLinksFragment extends AbstractFragment {
 						androidInfo.setAndroidFallbackLink(fallbackLinkTextView.getText().toString());
 						androidInfo.setAndroidLink(customAppLocationTextView.getText().toString());
 						dynamicLinkInfo.setAndroidInfo(androidInfo);
-						
+
 						AnalyticsInfo analyticsInfo = new AnalyticsInfo();
 						GooglePlayAnalytics googlePlayAnalytics = new GooglePlayAnalytics();
 						googlePlayAnalytics.setUtmSource(utmSourceTextView.getText().toString());
@@ -97,9 +97,9 @@ public class DynamicLinksFragment extends AbstractFragment {
 						googlePlayAnalytics.setUtmContent(utmContentTextView.getText().toString());
 						analyticsInfo.setGooglePlayAnalytics(googlePlayAnalytics);
 						dynamicLinkInfo.setAnalyticsInfo(analyticsInfo);
-						
+
 						dynamicLink.setDynamicLinkInfo(dynamicLinkInfo);
-						
+
 						executeOnUIThread(new Runnable() {
 							@Override
 							public void run() {
@@ -120,8 +120,8 @@ public class DynamicLinksFragment extends AbstractFragment {
 						@Override
 						public void run() {
 							final DynamicLinkResponse dynamicLinkResponse = new ShortDynamicLinkService().getShortDynamicLink(
-									FirebaseDynamicLinksAppContext.getWebApiKey(), longLink,
-									unguessableCheckBox.isChecked() ? SuffixOption.UNGUESSABLE : SuffixOption.SHORT);
+								FirebaseDynamicLinksAppContext.getWebApiKey(), longLink,
+								unguessableCheckBox.isChecked() ? SuffixOption.UNGUESSABLE : SuffixOption.SHORT);
 							executeOnUIThread(new Runnable() {
 								@Override
 								public void run() {

@@ -1,7 +1,7 @@
 package com.jdroid.android.sample.ui.recyclerview;
 
-import com.jdroid.android.search.SortingType;
 import com.jdroid.android.recycler.pagination.PaginatedUseCase;
+import com.jdroid.android.search.SortingType;
 import com.jdroid.java.collections.Lists;
 import com.jdroid.java.concurrent.ExecutorUtils;
 import com.jdroid.java.search.PagedResult;

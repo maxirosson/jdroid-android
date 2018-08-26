@@ -7,7 +7,7 @@ import com.jdroid.java.exception.ErrorCode;
 import com.jdroid.java.exception.ErrorCodeException;
 
 public enum InAppBillingErrorCode implements ErrorCode {
-	
+
 	FEATURE_NOT_SUPPORTED(null, BillingClient.BillingResponse.FEATURE_NOT_SUPPORTED),
 	
 	SERVICE_DISCONNECTED(null, BillingClient.BillingResponse.SERVICE_DISCONNECTED),
@@ -54,14 +54,14 @@ public enum InAppBillingErrorCode implements ErrorCode {
 	
 	// Subscriptions are not available.
 	SUBSCRIPTIONS_NOT_AVAILABLE(null),
-	
+
 	// Invalid consumption attempt
 	INVALID_CONSUMPTION(null);
-	
+
 	private Integer resourceId;
 	private Integer errorResponseCode;
 	private Boolean trackable = true;
-	
+
 	InAppBillingErrorCode(Integer resourceId, Integer errorResponseCode, Boolean trackable) {
 		this.resourceId = resourceId;
 		this.errorResponseCode = errorResponseCode;
@@ -76,7 +76,7 @@ public enum InAppBillingErrorCode implements ErrorCode {
 	InAppBillingErrorCode(Integer resourceId) {
 		this.resourceId = resourceId;
 	}
-	
+
 	public static InAppBillingErrorCode findByErrorResponseCode(Integer errorResponseCode) {
 		InAppBillingErrorCode errorCode = null;
 		if (errorResponseCode  != BillingClient.BillingResponse.OK) {
@@ -93,37 +93,37 @@ public enum InAppBillingErrorCode implements ErrorCode {
 		}
 		return errorCode;
 	}
-	
+
 	@Override
 	public String getStatusCode() {
 		return null;
 	}
-	
+
 	@Override
 	public ErrorCodeException newErrorCodeException(Object... errorCodeParameters) {
 		return new ErrorCodeException(this, errorCodeParameters).setTrackable(trackable);
 	}
-	
+
 	@Override
 	public ErrorCodeException newErrorCodeException() {
 		return new ErrorCodeException(this).setTrackable(trackable);
 	}
-	
+
 	@Override
 	public ErrorCodeException newErrorCodeException(Throwable throwable) {
 		return new ErrorCodeException(this, throwable).setTrackable(trackable);
 	}
-	
+
 	@Override
 	public ErrorCodeException newErrorCodeException(String message) {
 		return new ErrorCodeException(this, name() + ": " + message).setTrackable(trackable);
 	}
-	
+
 	@Override
 	public Integer getTitleResId() {
 		return null;
 	}
-	
+
 	@Override
 	public Integer getDescriptionResId() {
 		return resourceId;

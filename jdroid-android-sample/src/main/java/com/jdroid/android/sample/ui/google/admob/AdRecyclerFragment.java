@@ -49,7 +49,7 @@ public class AdRecyclerFragment extends AbstractRecyclerFragment {
 		List<RecyclerViewType> recyclerViewTypes = Lists.<RecyclerViewType>newArrayList(new StringRecyclerViewType(), new MyAdViewType());
 
 		List<Object> items = Lists.newArrayList();
-		for(String each : sampleItemsUseCase.getItems()) {
+		for (String each : sampleItemsUseCase.getItems()) {
 			items.add(each);
 			if (each.equals("three")) {
 				BaseAdViewHelper baseAdViewHelper = new AdViewHelper();

@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ViewFlipper xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-	android:layout_height="match_parent">
+<ViewFlipper xmlns:android="http://schemas.android.com/apk/res/android"
+			 android:layout_width="match_parent"
+			 android:layout_height="match_parent">
 
-	<ImageButton android:id="@+id/firstState" android:layout_width="match_parent" android:layout_height="match_parent"
-		android:padding="10dp" android:background="?android:attr/actionBarItemBackground" />
+	<ImageButton android:id="@+id/firstState"
+				 android:layout_width="match_parent"
+				 android:layout_height="match_parent"
+				 android:padding="10dp"
+				 android:background="?android:attr/actionBarItemBackground" />
 
-	<ProgressBar android:id="@+id/progress_bar" style="?android:attr/progressBarStyle" android:layout_width="32dp"
-		android:layout_height="32dp" android:layout_gravity="center" />
+	<ProgressBar android:id="@+id/progress_bar"
+				 style="?android:attr/progressBarStyle"
+				 android:layout_width="32dp"
+				 android:layout_height="32dp"
+				 android:layout_gravity="center" />
 
-	<ImageButton android:id="@+id/secondState" android:layout_width="match_parent" android:layout_height="match_parent"
-		android:padding="10dp" android:background="?android:attr/actionBarItemBackground" android:visibility="gone" />
+	<ImageButton android:id="@+id/secondState"
+				 android:layout_width="match_parent"
+				 android:layout_height="match_parent"
+				 android:padding="10dp"
+				 android:background="?android:attr/actionBarItemBackground"
+				 android:visibility="gone" />
 
 </ViewFlipper>

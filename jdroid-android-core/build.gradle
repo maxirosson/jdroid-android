@@ -4,7 +4,8 @@ ext.PROJECT_NAME = 'Jdroid Android'
 description = 'Jdroid dependency project for Android apps'
 
 configurations {
-	compile.exclude group: "org.apache.httpcomponents",  module: "httpclient"
+	compile.exclude group: "org.apache.httpcomponents", module: "httpclient"
+	compile.exclude group: "org.slf4j", module: "slf4j-api"
 }
 
 configurations.all {
@@ -20,7 +21,7 @@ buildscript {
 
 dependencies {
 
-	api 'org.slf4j:slf4j-android:1.7.25'
+	api 'org.slf4j:slf4j-android:1.6.1-RC1'
 
 	api "com.android.support:support-v4:${ANDROID_SUPPORT_VERSION}"
 	api "com.android.support:support-v13:${ANDROID_SUPPORT_VERSION}"
@@ -37,14 +38,14 @@ dependencies {
 	api "com.google.firebase:firebase-core:16.0.1"
 	api "com.google.firebase:firebase-appindexing:16.0.1"
 	api "com.google.firebase:firebase-invites:16.0.1"
-	api "com.google.firebase:firebase-perf:16.0.0"
+	api "com.google.firebase:firebase-perf:16.1.0"
 
 	// https://github.com/firebase/firebase-jobdispatcher-android/releases
 	api 'com.firebase:firebase-jobdispatcher:0.8.5'
 
 	debugApi("com.squareup.leakcanary:leakcanary-android:${LEAK_CANARY_VERSION}") { force = true }
-	releaseApi ("com.squareup.leakcanary:leakcanary-android-no-op:${LEAK_CANARY_VERSION}") { force = true }
-	testImplementation ("com.squareup.leakcanary:leakcanary-android-no-op:${LEAK_CANARY_VERSION}") { force = true }
+	releaseApi("com.squareup.leakcanary:leakcanary-android-no-op:${LEAK_CANARY_VERSION}") { force = true }
+	testImplementation("com.squareup.leakcanary:leakcanary-android-no-op:${LEAK_CANARY_VERSION}") { force = true }
 
 	// https://github.com/facebook/device-year-class/blob/master/CHANGELOG.md
 	api 'com.facebook.device.yearclass:yearclass:2.1.0'
@@ -55,14 +56,14 @@ dependencies {
 		api project(":jdroid-java-core")
 		api project(":jdroid-java-remote-config")
 	} else {
-		api ("com.jdroidtools:jdroid-java-core:${JDROID_JAVA_VERSION}")
-		api ("com.jdroidtools:jdroid-java-remote-config:${JDROID_JAVA_VERSION}")
+		api("com.jdroidtools:jdroid-java-core:${JDROID_JAVA_VERSION}")
+		api("com.jdroidtools:jdroid-java-remote-config:${JDROID_JAVA_VERSION}")
 	}
 
 	if (jdroid.propertyResolver.getBooleanProp("JDROID_JAVA_HTTP_AS_PROJECT_DEPENDENCY", false)) {
 		api project(":jdroid-java-http-core")
 	} else {
-		api ("com.jdroidtools:jdroid-java-http-core:${JDROID_JAVA_HTTP_VERSION}") {
+		api("com.jdroidtools:jdroid-java-http-core:${JDROID_JAVA_HTTP_VERSION}") {
 			exclude module: 'jdroid-java-core'
 		}
 	}

@@ -9,7 +9,7 @@ import com.firebase.jobdispatcher.Trigger;
 import com.jdroid.android.firebase.jobdispatcher.ServiceCommand;
 
 public abstract class AbstractSampleServiceCommand extends ServiceCommand {
-	
+
 	@NonNull
 	@Override
 	protected Job.Builder createJobBuilder(FirebaseJobDispatcher dispatcher, Bundle bundle) {

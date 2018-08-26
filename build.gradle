@@ -51,7 +51,7 @@ allprojects {
 		}
 	}
 
-    repositories {
+	repositories {
 		jcenter()
 		String localMavenRepo = project.hasProperty('LOCAL_MAVEN_REPO') ? project.ext.get('LOCAL_MAVEN_REPO') : System.getenv('LOCAL_MAVEN_REPO')
 		if (localMavenRepo != null) {
@@ -59,5 +59,5 @@ allprojects {
 		}
 		maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
 		mavenCentral()
-    }
+	}
 }

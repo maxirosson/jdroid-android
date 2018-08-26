@@ -1,26 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
 	  xmlns:app="http://schemas.android.com/apk/res-auto">
-	<item android:id="@+id/addItem" android:icon="@drawable/ic_add_white_24dp" android:title="@string/addItem"
-		app:showAsAction="never" />
-	<item android:id="@+id/addItems" android:icon="@drawable/ic_add_white_24dp" android:title="@string/addItems"
-		app:showAsAction="never" />
-	<item android:id="@+id/addHeader" android:icon="@drawable/ic_add_white_24dp" android:title="@string/addHeader"
-		app:showAsAction="never" />
-	<item android:id="@+id/addClickableHeader" android:icon="@drawable/ic_add_white_24dp" android:title="@string/addClickableHeader"
-		app:showAsAction="never" />
-	<item android:id="@+id/removeHeader" android:icon="@drawable/ic_add_white_24dp" android:title="@string/removeHeader"
-		app:showAsAction="never" />
-	<item android:id="@+id/addFooter" android:icon="@drawable/ic_add_white_24dp" android:title="@string/addFooter"
-		app:showAsAction="never" />
-	<item android:id="@+id/addClickableFooter" android:icon="@drawable/ic_add_white_24dp" android:title="@string/addClickableFooter"
-		app:showAsAction="never" />
-	<item android:id="@+id/removeFooter" android:icon="@drawable/ic_add_white_24dp" android:title="@string/removeFooter"
-		app:showAsAction="never" />
-	<item android:id="@+id/removeFirstItem" android:icon="@drawable/ic_add_white_24dp" android:title="@string/removeFirstItem"
-		app:showAsAction="never" />
-	<item android:id="@+id/removeSecondItem" android:icon="@drawable/ic_add_white_24dp" android:title="@string/removeSecondItem"
-		app:showAsAction="never" />
-	<item android:id="@+id/clearItems" android:icon="@drawable/ic_add_white_24dp" android:title="@string/clearItems"
-		app:showAsAction="never" />
+	<item android:id="@+id/addItem"
+		  android:icon="@drawable/ic_add_white_24dp"
+		  android:title="@string/addItem"
+		  app:showAsAction="never" />
+	<item android:id="@+id/addItems"
+		  android:icon="@drawable/ic_add_white_24dp"
+		  android:title="@string/addItems"
+		  app:showAsAction="never" />
+	<item android:id="@+id/addHeader"
+		  android:icon="@drawable/ic_add_white_24dp"
+		  android:title="@string/addHeader"
+		  app:showAsAction="never" />
+	<item android:id="@+id/addClickableHeader"
+		  android:icon="@drawable/ic_add_white_24dp"
+		  android:title="@string/addClickableHeader"
+		  app:showAsAction="never" />
+	<item android:id="@+id/removeHeader"
+		  android:icon="@drawable/ic_add_white_24dp"
+		  android:title="@string/removeHeader"
+		  app:showAsAction="never" />
+	<item android:id="@+id/addFooter"
+		  android:icon="@drawable/ic_add_white_24dp"
+		  android:title="@string/addFooter"
+		  app:showAsAction="never" />
+	<item android:id="@+id/addClickableFooter"
+		  android:icon="@drawable/ic_add_white_24dp"
+		  android:title="@string/addClickableFooter"
+		  app:showAsAction="never" />
+	<item android:id="@+id/removeFooter"
+		  android:icon="@drawable/ic_add_white_24dp"
+		  android:title="@string/removeFooter"
+		  app:showAsAction="never" />
+	<item android:id="@+id/removeFirstItem"
+		  android:icon="@drawable/ic_add_white_24dp"
+		  android:title="@string/removeFirstItem"
+		  app:showAsAction="never" />
+	<item android:id="@+id/removeSecondItem"
+		  android:icon="@drawable/ic_add_white_24dp"
+		  android:title="@string/removeSecondItem"
+		  app:showAsAction="never" />
+	<item android:id="@+id/clearItems"
+		  android:icon="@drawable/ic_add_white_24dp"
+		  android:title="@string/clearItems"
+		  app:showAsAction="never" />
 </menu>

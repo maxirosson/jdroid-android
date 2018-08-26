@@ -16,7 +16,7 @@ public class AppAnalyticsSender extends AnalyticsSender<AppAnalyticsTracker> imp
 	public AppAnalyticsSender() {
 		super(Lists.newArrayList(new FirebaseAppAnalyticsTracker(), new AppGoogleAnalyticsTracker()));
 	}
-	
+
 	@Override
 	public void trackExampleEvent() {
 		execute(new TrackingCommand() {

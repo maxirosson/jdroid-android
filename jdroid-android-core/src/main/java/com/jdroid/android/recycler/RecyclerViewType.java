@@ -71,7 +71,6 @@ public abstract class RecyclerViewType<ITEM, VIEWHOLDER extends RecyclerView.Vie
 	 * @param containerView The view that contains the view to find.
 	 * @param id The id to search for.
 	 * @param <V> The {@link View} class.
-	 *
 	 * @return The view if found or null otherwise.
 	 */
 	@SuppressWarnings("unchecked")

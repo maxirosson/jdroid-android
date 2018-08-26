@@ -7,7 +7,7 @@ import com.jdroid.java.date.DateUtils;
 import com.jdroid.java.utils.RandomUtils;
 
 public class AppGoogleAnalyticsTracker extends AbstractGoogleAnalyticsTracker implements AppAnalyticsTracker {
-	
+
 	private static final String EXAMPLE_CATEGORY = "exampleCategory";
 	private static final String EXAMPLE_LABEL = "exampleLabel";
 
@@ -31,5 +31,5 @@ public class AppGoogleAnalyticsTracker extends AbstractGoogleAnalyticsTracker im
 	public void trackExampleTiming() {
 		getGoogleAnalyticsHelper().trackTiming(EXAMPLE_CATEGORY, "exampleVariable", EXAMPLE_LABEL, RandomUtils.getLong());
 	}
-	
+
 }

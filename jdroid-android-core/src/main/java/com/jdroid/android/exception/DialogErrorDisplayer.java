@@ -30,7 +30,7 @@ public class DialogErrorDisplayer extends AbstractErrorDisplayer {
 		if (throwable instanceof AbstractException) {
 			AbstractException abstractException = (AbstractException)throwable;
 			return abstractException.hasParameter(ERROR_DIALOG_STRATEGY_KEY) ? abstractException.<ErrorDialogStrategy>getParameter(ERROR_DIALOG_STRATEGY_KEY)
-					: getDefaultErrorDialogStrategy(abstractException);
+				: getDefaultErrorDialogStrategy(abstractException);
 		}
 		return getDefaultErrorDialogStrategy(throwable);
 	}
@@ -40,7 +40,7 @@ public class DialogErrorDisplayer extends AbstractErrorDisplayer {
 		if (throwable instanceof AbstractException) {
 			AbstractException abstractException = (AbstractException)throwable;
 			defaultStrategy.setGoBackOnError(abstractException.hasParameter(GO_BACK_KEY) ? abstractException.<Boolean>getParameter(GO_BACK_KEY)
-					: goBackOnErrorByDefault(abstractException));
+				: goBackOnErrorByDefault(abstractException));
 		} else {
 			defaultStrategy.setGoBackOnError(goBackOnErrorByDefault(throwable));
 		}

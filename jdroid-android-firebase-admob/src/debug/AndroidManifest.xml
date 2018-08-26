@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.jdroid.android.firebase.admob">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+		  package="com.jdroid.android.firebase.admob">
 
 	<application>
 
-		<meta-data android:name="com.jdroid.android.firebase.admob.AdMobDebugAppLifecycleCallback" android:value="ApplicationLifecycleCallback" />
+		<meta-data android:name="com.jdroid.android.firebase.admob.AdMobDebugAppLifecycleCallback"
+				   android:value="ApplicationLifecycleCallback" />
 
 	</application>
 

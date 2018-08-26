@@ -33,19 +33,28 @@ import java.util.Set;
  * Provides convenience methods for in-app billing. You can create one instance of this class for your application and
  * use it to process in-app billing operations. It provides asynchronous (non-blocking)
  * methods for many common in-app billing operations, as well as automatic signature verification.
- * 
+ * <p>
  * After instantiating, you must perform setup in order to start using the object. To perform setup, call the
  * {@link #startSetup} method and provide a listener; that listener will be notified when setup is complete, after which
  * (and not before) you may call other methods.
- * 
+ * <p>
  * After setup is complete, you will typically want to request an inventory of owned items and subscriptions. See
+<<<<<<< HEAD
  * {@link #queryPurchases(ItemType)} and related methods.
  * 
+=======
+ * {@link #queryInventory} and related methods.
+ * <p>
+ * When you are done with this object, don't forget to call {@link #disposeWhenFinished()} to ensure proper cleanup. This object holds
+ * a binding to the in-app billing service, which will leak unless you dispose of it correctly. If you created the
+ * object on an Activity's onCreate method, then the recommended place to dispose of it is the Activity's onDestroy
+ * method.
+ * <p>
+>>>>>>> master
  * A note about threading: When using this object from a background thread, you may call the blocking versions of
  * methods; when using from a UI thread, call only the asynchronous versions and handle the results via callbacks. Also,
  * notice that you can only call one asynchronous operation at a time; attempting to start a second asynchronous
  * operation while the first one has not yet completed will result in an exception being thrown.
- * 
  */
 public class InAppBillingClient implements PurchasesUpdatedListener {
 	
@@ -83,7 +92,7 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 	public void setListener(InAppBillingClientListener listener) {
 		this.listener = listener;
 	}
-	
+
 	/**
 	 * Starts the setup process. This will start up the setup process asynchronously. You will be notified through the
 	 * listener when the setup process is complete.
@@ -92,7 +101,7 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 	public void startSetup() {
 		try {
 			LOGGER.debug("Starting in-app billing setup.");
-			
+
 			billingClient = BillingClient.newBuilder(AbstractApplication.get()).setListener(this).build();
 			
 			Runnable runnable = new Runnable() {
@@ -103,7 +112,7 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 					for (ProductType productType : InAppBillingAppModule.get().getInAppBillingContext().getManagedProductTypes()) {
 						inventory.addProduct(new Product(productType));
 					}
-					
+
 					if (isSubscriptionsSupported()) {
 						for (ProductType productType : InAppBillingAppModule.get().getInAppBillingContext().getSubscriptionsProductTypes()) {
 							inventory.addProduct(new Product(productType));
@@ -115,7 +124,7 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 					}
 				}
 			};
-			
+
 			if (isServiceConnected) {
 				runnable.run();
 			} else {
@@ -165,7 +174,7 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 			startServiceConnection(runnable);
 		}
 	}
-	
+
 	/**
 	 * Returns the value Billing client response code or null if the client connection response was not received yet.
 	 */
@@ -247,7 +256,7 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 			}
 		});
 	}
-	
+
 	/**
 	 * Handle a callback that purchases were updated from the Billing library
 	 */
@@ -369,23 +378,23 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 			}
 		});
 	}
-	
+
 	@MainThread
 	public void launchInAppPurchaseFlow(Activity activity, Product product) {
 		launchPurchaseFlow(activity, product, ItemType.MANAGED, null);
 	}
-	
+
 	@MainThread
 	public void launchSubscriptionPurchaseFlow(Activity activity, Product product, String oldProductId) {
 		launchPurchaseFlow(activity, product, ItemType.SUBSCRIPTION, oldProductId);
 	}
-	
+
 	/**
 	 * Initiate the UI flow for an in-app purchase. Call this method to initiate an in-app purchase, which will involve
 	 * bringing up the Google Play screen. The calling activity will be paused while the user interacts with Google
 	 * Play
 	 * This method MUST be called from the UI thread of the Activity.
-	 * 
+	 *
 	 * @param activity The calling activity.
 	 * @param product The product to purchase.
 	 * @param itemType indicates if it's a product or a subscription (ITEM_TYPE_INAPP or ITEM_TYPE_SUBS)
@@ -421,7 +430,7 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 			}
 		});
 	}
-	
+
 	/**
 	 * Consumes a given in-app product. Consuming can only be done on an item that's owned, and as a result of
 	 * consumption, the user will no longer own it.
@@ -440,7 +449,7 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 					listener.onConsumeFailed(errorCodeException);
 				}
 			}
-			
+
 			// If we've already scheduled to consume this token - no action is needed (this could happen
 			// if you received the token when querying purchases inside onReceive() and later from
 			// onActivityResult()
@@ -490,7 +499,7 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 			}
 		}
 	}
-	
+
 	/**
 	 * @return whether subscriptions are supported.
 	 */

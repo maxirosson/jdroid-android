@@ -17,9 +17,8 @@ import java.util.Date;
  * FCM Message types
  */
 public enum AndroidFcmMessage implements FcmMessage {
-	
+
 	SAMPLE_MESSAGE("sampleMessage") {
-		
 		@Override
 		public void handle(RemoteMessage remoteMessage) {
 			NotificationBuilder builder = new NotificationBuilder("pushNotification", AndroidNotificationChannelType.DEFAULT_IMPORTANCE);
@@ -37,13 +36,13 @@ public enum AndroidFcmMessage implements FcmMessage {
 			NotificationUtils.sendNotification(IdGenerator.getIntId(), builder);
 		}
 	};
-	
+
 	private String messageKey;
-	
+
 	AndroidFcmMessage(String messageKey) {
 		this.messageKey = messageKey;
 	}
-	
+
 	@Override
 	public String getMessageKey() {
 		return messageKey;

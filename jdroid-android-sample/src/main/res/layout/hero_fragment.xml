@@ -1,44 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-				xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-				android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto">
+				xmlns:tools="http://schemas.android.com/tools"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				xmlns:app="http://schemas.android.com/apk/res-auto">
 
 	<com.jdroid.android.view.ParallaxScrollView android:id="@+id/scrollView"
-												android:layout_width="match_parent" android:layout_height="match_parent" android:layout_above="@+id/adViewContainer">
+												android:layout_width="match_parent"
+												android:layout_height="match_parent"
+												android:layout_above="@+id/adViewContainer">
 
-		<FrameLayout android:layout_height="wrap_content" android:layout_width="match_parent">
+		<FrameLayout android:layout_height="wrap_content"
+					 android:layout_width="match_parent">
 
-			<FrameLayout android:id="@+id/heroImageContainer" android:layout_width="match_parent"
+			<FrameLayout android:id="@+id/heroImageContainer"
+						 android:layout_width="match_parent"
 						 android:layout_height="wrap_content">
 
-				<ImageView android:id="@+id/heroImage" android:layout_height="250dp" android:layout_width="match_parent"
-						   android:scaleType="centerCrop" app:srcCompat="@drawable/hero" />
+				<ImageView android:id="@+id/heroImage"
+						   android:layout_height="250dp"
+						   android:layout_width="match_parent"
+						   android:scaleType="centerCrop"
+						   app:srcCompat="@drawable/hero" />
 
-				<View android:id="@+id/heroImageGradient" android:layout_width="match_parent" android:layout_height="wrap_content"
+				<View android:id="@+id/heroImageGradient"
+					  android:layout_width="match_parent"
+					  android:layout_height="wrap_content"
 					  android:background="@drawable/jdroid_actionbar_gradient" />
 
 			</FrameLayout>
 
-			<LinearLayout android:id="@+id/container" android:layout_height="wrap_content" android:layout_width="match_parent"
-						  android:orientation="vertical" android:layout_marginTop="220dp" android:paddingBottom="4dp">
-					<TextView android:layout_width="match_parent"
-								  android:layout_height="wrap_content" android:layout_marginTop="200dp" android:text="@string/jdroid_share"/>
-					<TextView android:layout_width="match_parent"
-								  android:layout_height="wrap_content" android:layout_marginTop="200dp" android:text="@string/jdroid_share"/>
-					<TextView android:layout_width="match_parent"
-								  android:layout_height="wrap_content" android:layout_marginTop="200dp" android:text="@string/jdroid_share"/>
-					<TextView android:layout_width="match_parent"
-								  android:layout_height="wrap_content" android:layout_marginTop="200dp" android:text="@string/jdroid_share"/>
-					<TextView android:layout_width="match_parent"
-								  android:layout_height="wrap_content" android:layout_marginTop="200dp" android:text="@string/jdroid_share"/>
-					<TextView android:layout_width="match_parent"
-								  android:layout_height="wrap_content" android:layout_marginTop="200dp" android:text="@string/jdroid_share"/>
-					<TextView android:layout_width="match_parent"
-								  android:layout_height="wrap_content" android:layout_marginTop="200dp" android:text="@string/jdroid_share"/>
-					<TextView android:layout_width="match_parent"
-								  android:layout_height="wrap_content" android:layout_marginTop="200dp" android:text="@string/jdroid_share"/>
-					<TextView android:layout_width="match_parent"
-								  android:layout_height="wrap_content" android:layout_marginTop="200dp" android:text="@string/jdroid_share"/>
+			<LinearLayout android:id="@+id/container"
+						  android:layout_height="wrap_content"
+						  android:layout_width="match_parent"
+						  android:orientation="vertical"
+						  android:layout_marginTop="220dp"
+						  android:paddingBottom="4dp">
+
+				<TextView android:layout_width="match_parent"
+						  android:layout_height="wrap_content"
+						  android:layout_marginTop="200dp"
+						  android:text="@string/jdroid_share" />
+
+				<TextView android:layout_width="match_parent"
+						  android:layout_height="wrap_content"
+						  android:layout_marginTop="200dp"
+						  android:text="@string/jdroid_share" />
+
+				<TextView android:layout_width="match_parent"
+						  android:layout_height="wrap_content"
+						  android:layout_marginTop="200dp"
+						  android:text="@string/jdroid_share" />
+
+				<TextView android:layout_width="match_parent"
+						  android:layout_height="wrap_content"
+						  android:layout_marginTop="200dp"
+						  android:text="@string/jdroid_share" />
+
+				<TextView android:layout_width="match_parent"
+						  android:layout_height="wrap_content"
+						  android:layout_marginTop="200dp"
+						  android:text="@string/jdroid_share" />
+
+				<TextView android:layout_width="match_parent"
+						  android:layout_height="wrap_content"
+						  android:layout_marginTop="200dp"
+						  android:text="@string/jdroid_share" />
+
+				<TextView android:layout_width="match_parent"
+						  android:layout_height="wrap_content"
+						  android:layout_marginTop="200dp"
+						  android:text="@string/jdroid_share" />
+
+				<TextView android:layout_width="match_parent"
+						  android:layout_height="wrap_content"
+						  android:layout_marginTop="200dp"
+						  android:text="@string/jdroid_share" />
+
+				<TextView android:layout_width="match_parent"
+						  android:layout_height="wrap_content"
+						  android:layout_marginTop="200dp"
+						  android:text="@string/jdroid_share" />
 
 			</LinearLayout>
 

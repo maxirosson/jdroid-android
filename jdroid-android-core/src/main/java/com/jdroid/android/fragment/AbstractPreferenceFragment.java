@@ -47,7 +47,7 @@ public abstract class AbstractPreferenceFragment extends PreferenceFragment impl
 	protected FragmentIf getFragmentIf() {
 		return (FragmentIf)this.getActivity();
 	}
-	
+
 	@Override
 	public Boolean shouldRetainInstance() {
 		return true;
@@ -68,13 +68,13 @@ public abstract class AbstractPreferenceFragment extends PreferenceFragment impl
 	public <V extends View> V findView(int id) {
 		return (V)getView().findViewById(id);
 	}
-	
+
 	@Override
 	@SuppressWarnings("unchecked")
 	public <V extends View> V findViewOnActivity(int id) {
 		return (V)getActivity().findViewById(id);
 	}
-	
+
 	@Override
 	public View inflate(int resource) {
 		return getFragmentIf().inflate(resource);
@@ -108,7 +108,7 @@ public abstract class AbstractPreferenceFragment extends PreferenceFragment impl
 	public void onFinishUseCase() {
 		getFragmentIf().onFinishUseCase();
 	}
-	
+
 	@Override
 	public void executeOnUIThread(Runnable runnable) {
 		FragmentIf fragmentIf = getFragmentIf();
@@ -116,12 +116,12 @@ public abstract class AbstractPreferenceFragment extends PreferenceFragment impl
 			fragmentIf.executeOnUIThread(runnable);
 		}
 	}
-	
+
 	@Override
 	public <E> E getExtra(String key) {
 		return getFragmentIf().getExtra(key);
 	}
-	
+
 	@Override
 	public <E> E getArgument(String key) {
 		return getArgument(key, null);
@@ -134,7 +134,7 @@ public abstract class AbstractPreferenceFragment extends PreferenceFragment impl
 		E value = (arguments != null) && arguments.containsKey(key) ? (E)arguments.get(key) : null;
 		return value != null ? value : defaultValue;
 	}
-	
+
 	@Override
 	public ActivityIf getActivityIf() {
 		return (ActivityIf)getActivity();
@@ -147,39 +147,39 @@ public abstract class AbstractPreferenceFragment extends PreferenceFragment impl
 	@Override
 	public void afterInitAppBar(Toolbar appBar) {
 	}
-	
+
 	@Override
 	public Toolbar getAppBar() {
 		return null;
 	}
-	
+
 	// //////////////////////// Analytics //////////////////////// //
-	
+
 	@NonNull
 	@Override
 	public String getScreenViewName() {
 		return AbstractPreferenceFragment.class.getSimpleName();
 	}
-	
+
 	// //////////////////////// Loading //////////////////////// //
-	
+
 	@Override
 	public void showLoading() {
 	}
-	
+
 	@Override
 	public void dismissLoading() {
 	}
-	
+
 	@Override
 	public FragmentLoading getDefaultLoading() {
 		return null;
 	}
-	
+
 	@Override
 	public void setLoading(FragmentLoading loading) {
 	}
-	
+
 	@Override
 	public Integer getMenuResourceId() {
 		return null;

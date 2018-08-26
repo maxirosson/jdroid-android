@@ -5,7 +5,7 @@ import com.jdroid.android.firebase.analytics.FirebaseAnalyticsParams;
 import com.jdroid.android.sample.analytics.AppAnalyticsTracker;
 
 public class FirebaseAppAnalyticsTracker extends AbstractFirebaseAnalyticsTracker implements AppAnalyticsTracker {
-	
+
 	@Override
 	public void trackExampleEvent() {
 		FirebaseAnalyticsParams params = new FirebaseAnalyticsParams();
@@ -28,5 +28,5 @@ public class FirebaseAppAnalyticsTracker extends AbstractFirebaseAnalyticsTracke
 	public void trackExampleTiming() {
 		// Do nothing
 	}
-	
+
 }

@@ -118,7 +118,7 @@ public class NotificationFcmMessage implements FcmMessage {
 	protected void initLargeIcon(RemoteMessage remoteMessage, NotificationBuilder builder) {
 		String largeIconUrl = remoteMessage.getData().get(LARGE_ICON_URL);
 		BitmapLoader bitmapLoader = createBitmapLoader(largeIconUrl);
-		if (largeIconUrl != null)  {
+		if (largeIconUrl != null) {
 			if (bitmapLoader != null) {
 				builder.setLargeIcon(bitmapLoader);
 			} else {
@@ -126,7 +126,7 @@ public class NotificationFcmMessage implements FcmMessage {
 			}
 		}
 	}
-	
+
 	protected BitmapLoader createBitmapLoader(String url) {
 		return null;
 	}

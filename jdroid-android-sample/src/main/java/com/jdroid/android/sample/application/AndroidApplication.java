@@ -46,15 +46,13 @@ import com.jdroid.android.shortcuts.AppShortcutsHelper;
 import com.jdroid.android.sqlite.SQLiteHelper;
 import com.jdroid.android.utils.LocalizationUtils;
 import com.jdroid.java.collections.Lists;
-import com.jdroid.java.domain.Identifiable;
 import com.jdroid.java.http.okhttp.OkHttpServiceFactory;
-import com.jdroid.java.repository.Repository;
 
 import java.util.List;
 import java.util.Map;
 
 public class AndroidApplication extends AbstractApplication {
-	
+
 	public static AndroidApplication get() {
 		return (AndroidApplication)AbstractApplication.INSTANCE;
 	}
@@ -62,14 +60,14 @@ public class AndroidApplication extends AbstractApplication {
 	public AndroidApplication() {
 		HttpConfiguration.setHttpServiceFactory(new OkHttpServiceFactory());
 	}
-	
+
 	@Override
 	public void onProviderInit() {
 		super.onProviderInit();
-		
+
 		AdMobAppModule.setAdMobAppContext(new SampleAdMobAppContext());
 	}
-	
+
 	@Override
 	protected void onMainProcessCreate() {
 		if (GoogleAnalyticsAppContext.isGoogleAnalyticsEnabled()) {
@@ -82,19 +80,21 @@ public class AndroidApplication extends AbstractApplication {
 		getUriMapper().addUriWatcher(new SampleUriWatcher());
 
 		Firebase.setAndroidContext(this);
-		
+
 		initAppShortcuts();
+
+		addRepository(SampleSQLiteEntity.class, new SampleSQLiteRepository(SQLiteHelper.getDefaultInstance(this)));
 	}
-	
+
 	private void initAppShortcuts() {
 		if (Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N_MR1) {
 			List<ShortcutInfo> shortcutInfos = Lists.newArrayList();
 			int rank = 0;
 			for (HomeItem item : HomeItem.values()) {
-				
+
 				Intent intent = item.getIntent();
 				intent.setAction(Intent.ACTION_VIEW);
-				
+
 				ShortcutInfo.Builder shortcutInfoBuilder = new ShortcutInfo.Builder(AbstractApplication.get(), item.name());
 				shortcutInfoBuilder.setShortLabel(LocalizationUtils.getString(item.getNameResource()));
 				shortcutInfoBuilder.setLongLabel(LocalizationUtils.getString(item.getNameResource()));
@@ -107,7 +107,7 @@ public class AndroidApplication extends AbstractApplication {
 			AppShortcutsHelper.setInitialShortcutInfos(shortcutInfos);
 		}
 	}
-	
+
 	@Override
 	protected void onInitMultiDex() {
 		MultiDex.install(this);
@@ -133,7 +133,7 @@ public class AndroidApplication extends AbstractApplication {
 	public ActivityHelper createActivityHelper(AbstractFragmentActivity activity) {
 		return new AndroidActivityHelper(activity);
 	}
-	
+
 	@Override
 	public FragmentHelper createFragmentHelper(Fragment fragment) {
 		return new AndroidFragmentHelper(fragment);
@@ -147,16 +147,6 @@ public class AndroidApplication extends AbstractApplication {
 	@Override
 	public UserRepository getUserRepository() {
 		return new UserRepositoryImpl();
-	}
-
-	@Override
-	public Boolean isDatabaseEnabled() {
-		return true;
-	}
-
-	@Override
-	protected void initDatabaseRepositories(Map<Class<? extends Identifiable>, Repository<? extends Identifiable>> repositories, SQLiteHelper dbHelper) {
-		repositories.put(SampleSQLiteEntity.class, new SampleSQLiteRepository(dbHelper));
 	}
 
 	@Override
@@ -182,7 +172,7 @@ public class AndroidApplication extends AbstractApplication {
 	public String getManifestPackageName() {
 		return "com.jdroid.android.sample";
 	}
-	
+
 	@Override
 	public List<NotificationChannelType> getNotificationChannelTypes() {
 		return Lists.newArrayList(AndroidNotificationChannelType.values());

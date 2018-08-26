@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.jdroid.android.google.inappbilling.R;
 import com.jdroid.android.google.inappbilling.client.Product;
 import com.jdroid.android.recycler.RecyclerViewType;
@@ -43,9 +44,9 @@ public abstract class ProductViewType extends RecyclerViewType<Product, ProductV
 		holder.title.setText(product.getTitle());
 		holder.description.setText(product.getDescription());
 		holder.price.setText(product.isAvailableToPurchase() ? product.getFormattedPrice() : LocalizationUtils.getString(
-				R.string.jdroid_purchased));
+			R.string.jdroid_purchased));
 		holder.price.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				onPriceClick(product);
@@ -54,11 +55,11 @@ public abstract class ProductViewType extends RecyclerViewType<Product, ProductV
 		holder.price.setFocusable(true);
 		holder.price.setEnabled(product.isAvailableToPurchase());
 	}
-	
+
 	protected abstract void onPriceClick(Product product);
-	
+
 	public static class ProductHolder extends RecyclerView.ViewHolder {
-		
+
 		protected ImageView icon;
 		protected TextView title;
 		protected TextView description;
@@ -68,5 +69,5 @@ public abstract class ProductViewType extends RecyclerViewType<Product, ProductV
 			super(itemView);
 		}
 	}
-	
+
 }

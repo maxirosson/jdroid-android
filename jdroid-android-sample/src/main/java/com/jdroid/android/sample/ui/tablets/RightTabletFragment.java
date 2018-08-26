@@ -8,7 +8,7 @@ import com.jdroid.android.utils.ScreenUtils;
 import com.jdroid.android.utils.ToastUtils;
 
 public class RightTabletFragment extends AbstractFragment {
-	
+
 	@Override
 	public Integer getContentFragmentLayout() {
 		return R.layout.right_tablet_fragment;

@@ -41,10 +41,6 @@
 	<string name="jdroid_debugInfoCategory" tools:ignore="MissingTranslation">Debug Info</string>
 	<string name="jdroid_debugInfo" tools:ignore="MissingTranslation">Debug Info</string>
 
-	<!-- Debug Database -->
-	<string name="jdroid_debugDatabase" tools:ignore="MissingTranslation">Debug Database</string>
-	<string name="jdroid_cleanDebugData" tools:ignore="MissingTranslation">Clean debug data</string>
-
 	<!-- RateApp -->
 	<string name="jdroid_rateApp" tools:ignore="MissingTranslation">Rate App</string>
 	<string name="jdroid_simulateHeavyUsage" tools:ignore="MissingTranslation">Simulate Heavy Usage</string>

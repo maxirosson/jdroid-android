@@ -16,7 +16,7 @@ public class AppInviteFragment extends AbstractFragment {
 	public Integer getContentFragmentLayout() {
 		return R.layout.app_invite_fragment;
 	}
-	
+
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
