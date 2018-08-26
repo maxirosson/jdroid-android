@@ -13,14 +13,6 @@ public class TestProductType {
 	// or when you cancel a user's order before it is charged.
 	public static final String CANCELED = "android.test.canceled";
 
-	// When you make an in-app billing request with this product ID, the Google Play app responds as though the purchase
-	// was refunded. Refunds cannot be initiated through the Google Play app's in-app billing service. Refunds must be
-	// initiated by you (the merchant). After you process a refund request through your Google Checkout account, a
-	// refund message is sent to your application by the Google Play app. This occurs only when the Google Play app gets
-	// notification from Google Checkout that a refund has been made. For more information about refunds, see Handling
-	// IN_APP_NOTIFY messages and In-app Billing Pricing.
-	public static final String REFUNDED = "android.test.refunded";
-
 	// When you make an in-app billing request with this product ID, the Google Play app responds as though the item
 	// being purchased was not listed in your application's product list.
 	public static final String UNAVAILABLE = "android.test.item_unavailable";

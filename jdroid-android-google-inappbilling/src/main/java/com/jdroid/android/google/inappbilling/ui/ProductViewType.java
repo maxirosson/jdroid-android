@@ -3,6 +3,7 @@ package com.jdroid.android.google.inappbilling.ui;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jdroid.android.google.inappbilling.R;
@@ -25,6 +26,7 @@ public abstract class ProductViewType extends RecyclerViewType<Product, ProductV
 	@Override
 	public RecyclerView.ViewHolder createViewHolderFromView(View view) {
 		ProductHolder holder = new ProductHolder(view);
+		holder.icon = findView(view, R.id.itemIcon);
 		holder.title = findView(view, R.id.itemTitle);
 		holder.description = findView(view, R.id.itemDescription);
 		holder.price = findView(view, R.id.itemPrice);
@@ -33,6 +35,12 @@ public abstract class ProductViewType extends RecyclerViewType<Product, ProductV
 
 	@Override
 	public void fillHolderFromItem(final Product product, ProductHolder holder) {
+		if (product.getProductType().getIconId() != null) {
+			holder.icon.setImageResource(product.getProductType().getIconId());
+			holder.icon.setVisibility(View.VISIBLE);
+		} else {
+			holder.icon.setVisibility(View.GONE);
+		}
 		holder.title.setText(product.getTitle());
 		holder.description.setText(product.getDescription());
 		holder.price.setText(product.isAvailableToPurchase() ? product.getFormattedPrice() : LocalizationUtils.getString(
@@ -52,6 +60,7 @@ public abstract class ProductViewType extends RecyclerViewType<Product, ProductV
 
 	public static class ProductHolder extends RecyclerView.ViewHolder {
 
+		protected ImageView icon;
 		protected TextView title;
 		protected TextView description;
 		protected TextView price;

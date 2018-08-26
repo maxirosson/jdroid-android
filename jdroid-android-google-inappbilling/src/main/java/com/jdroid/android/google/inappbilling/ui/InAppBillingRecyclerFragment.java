@@ -2,11 +2,10 @@ package com.jdroid.android.google.inappbilling.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.View;
 
-import com.jdroid.android.google.inappbilling.InAppBillingAppModule;
 import com.jdroid.android.google.inappbilling.client.Product;
-import com.jdroid.android.google.inappbilling.client.ProductType;
 import com.jdroid.android.recycler.AbstractRecyclerFragment;
 import com.jdroid.android.recycler.RecyclerViewAdapter;
 
@@ -19,24 +18,16 @@ public abstract class InAppBillingRecyclerFragment extends AbstractRecyclerFragm
 		super.onViewCreated(view, savedInstanceState);
 
 		if (savedInstanceState == null) {
-			InAppBillingHelperFragment.add(getActivity(), InAppBillingHelperFragment.class, getManagedProductTypes(),
-				getSubscriptionsProductTypes(), false, this);
+			InAppBillingHelperFragment.add(getActivity(), InAppBillingHelperFragment.class, false, this);
 		}
 		showLoading();
 	}
 
-	protected List<ProductType> getManagedProductTypes() {
-		return InAppBillingAppModule.get().getInAppBillingContext().getManagedProductTypes();
-	}
-
-	protected List<ProductType> getSubscriptionsProductTypes() {
-		return InAppBillingAppModule.get().getInAppBillingContext().getSubscriptionsProductTypes();
-	}
-
 	@Override
-	public void onProductsLoaded(final List<Product> products) {
+	public void onProductsLoaded(List<Product> products) {
 		setAdapter(new RecyclerViewAdapter(new ProductViewType() {
 
+			@NonNull
 			@Override
 			public AbstractRecyclerFragment getAbstractRecyclerFragment() {
 				return InAppBillingRecyclerFragment.this;
@@ -77,5 +68,15 @@ public abstract class InAppBillingRecyclerFragment extends AbstractRecyclerFragm
 	public void onDestroy() {
 		super.onDestroy();
 		InAppBillingHelperFragment.removeTarget(getActivity());
+	}
+
+	@Override
+	protected Boolean isCardViewDecorationEnabled() {
+		return true;
+	}
+
+	@Override
+	protected Boolean isDividerItemDecorationEnabled() {
+		return true;
 	}
 }

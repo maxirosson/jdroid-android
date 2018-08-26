@@ -19,14 +19,8 @@ public class Product {
 	private Double price;
 	private String currencyCode;
 
-	public Product(ProductType productType, String formattedPrice, Double price, String currencyCode, String title,
-				   String description) {
+	public Product(ProductType productType) {
 		this.productType = productType;
-		this.title = title;
-		this.description = description;
-		this.formattedPrice = formattedPrice;
-		this.price = price;
-		this.currencyCode = currencyCode;
 		availableToPurchase = true;
 	}
 
@@ -89,6 +83,7 @@ public class Product {
 		return productType.getItemType().equals(ItemType.MANAGED) && productType.isConsumable();
 	}
 
+	// TODO Is this status persistent? What happens if the app crashed before consuming a product?
 	public Boolean isWaitingToConsume() {
 		return isConsumable() && !availableToPurchase && hasVerifiedPurchase();
 	}
@@ -115,6 +110,26 @@ public class Product {
 		return getProductType().getProductId();
 	}
 
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	public void setFormattedPrice(String formattedPrice) {
+		this.formattedPrice = formattedPrice;
+	}
+	
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+	
+	public void setCurrencyCode(String currencyCode) {
+		this.currencyCode = currencyCode;
+	}
+	
 	@Override
 	public String toString() {
 		return "Product [productType=" + productType + ", title=" + title + ", description=" + description

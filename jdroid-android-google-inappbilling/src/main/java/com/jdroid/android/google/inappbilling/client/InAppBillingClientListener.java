@@ -2,6 +2,7 @@ package com.jdroid.android.google.inappbilling.client;
 
 import android.support.annotation.MainThread;
 
+import com.jdroid.java.exception.AbstractException;
 import com.jdroid.java.exception.ErrorCodeException;
 
 public interface InAppBillingClientListener {
@@ -15,27 +16,43 @@ public interface InAppBillingClientListener {
 	/**
 	 * Called to notify that setup failed.
 	 *
-	 * @param errorCodeException The result of the setup process.
+	 * @param abstractException The result of the setup process.
 	 */
 	@MainThread
-	public void onSetupFailed(ErrorCodeException errorCodeException);
-
+	public void onSetupFailed(AbstractException abstractException);
+	
 	/**
-	 * Called to notify that an inventory query operation completed.
+	 * Called to notify that a product details query operation completed.
+	 * 
+	 * @param inventory The inventory.
+	 */
+	@MainThread
+	public void onQueryProductDetailsFinished(Inventory inventory);
+	
+	/**
+	 * Called to notify that a product details query operation failed.
+	 * 
+	 * @param errorCodeException The result of the operation.
+	 */
+	@MainThread
+	public void onQueryProductDetailsFailed(ErrorCodeException errorCodeException);
+	
+	/**
+	 * Called to notify that a purchases query operation completed.
 	 *
 	 * @param inventory The inventory.
 	 */
 	@MainThread
-	public void onQueryInventoryFinished(Inventory inventory);
-
+	public void onQueryPurchasesFinished(Inventory inventory);
+	
 	/**
-	 * Called to notify that an inventory query operation failed.
+	 * Called to notify that a purchases query operation failed.
 	 *
 	 * @param errorCodeException The result of the operation.
 	 */
 	@MainThread
-	public void onQueryInventoryFailed(ErrorCodeException errorCodeException);
-
+	public void onQueryPurchasesFailed(ErrorCodeException errorCodeException);
+	
 	/**
 	 * Called to notify that an in-app purchase finished.
 	 *

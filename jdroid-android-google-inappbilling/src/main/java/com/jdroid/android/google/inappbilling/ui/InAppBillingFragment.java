@@ -5,11 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.jdroid.android.fragment.AbstractFragment;
-import com.jdroid.android.google.inappbilling.InAppBillingAppModule;
 import com.jdroid.android.google.inappbilling.client.Product;
-import com.jdroid.android.google.inappbilling.client.ProductType;
-
-import java.util.List;
 
 public abstract class InAppBillingFragment extends AbstractFragment implements InAppBillingListener {
 
@@ -18,17 +14,8 @@ public abstract class InAppBillingFragment extends AbstractFragment implements I
 		super.onViewCreated(view, savedInstanceState);
 
 		if (savedInstanceState == null) {
-			InAppBillingHelperFragment.add(getActivity(), InAppBillingHelperFragment.class, getManagedProductTypes(),
-				getSubscriptionsProductTypes(), false, this);
+			InAppBillingHelperFragment.add(getActivity(), InAppBillingHelperFragment.class, false, this);
 		}
-	}
-
-	protected List<ProductType> getManagedProductTypes() {
-		return InAppBillingAppModule.get().getInAppBillingContext().getManagedProductTypes();
-	}
-
-	protected List<ProductType> getSubscriptionsProductTypes() {
-		return InAppBillingAppModule.get().getInAppBillingContext().getSubscriptionsProductTypes();
 	}
 
 	public void launchPurchaseFlow(Product product) {

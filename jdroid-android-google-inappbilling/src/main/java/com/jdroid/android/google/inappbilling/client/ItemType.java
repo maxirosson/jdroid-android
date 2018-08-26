@@ -1,6 +1,9 @@
 package com.jdroid.android.google.inappbilling.client;
 
+import com.android.billingclient.api.BillingClient;
+
 public enum ItemType {
+	
 	MANAGED("inapp"),
 	SUBSCRIPTION("subs");
 
@@ -10,6 +13,7 @@ public enum ItemType {
 		this.type = type;
 	}
 
+	@BillingClient.SkuType
 	public String getType() {
 		return type;
 	}

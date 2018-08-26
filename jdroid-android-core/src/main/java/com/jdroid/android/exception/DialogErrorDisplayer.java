@@ -22,7 +22,7 @@ public class DialogErrorDisplayer extends AbstractErrorDisplayer {
 	@Override
 	public void onDisplayError(FragmentActivity activity, String title, String description, Throwable throwable) {
 		if (activity != null) {
-			ErrorDialogFragment.show((FragmentActivity)activity, title, description, getErrorDialogStrategy(throwable));
+			ErrorDialogFragment.show(activity, title, description, getErrorDialogStrategy(throwable));
 		}
 	}
 

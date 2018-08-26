@@ -38,7 +38,7 @@ public class InAppBillingContext extends AbstractAppContext {
 		return googlePlayPublicKey;
 	}
 
-	public Boolean isStaticResponsesEnabledEnabled() {
+	public Boolean isStaticResponsesEnabled() {
 		return !AppUtils.isReleaseBuildType() && getSharedPreferencesHelper().loadPreferenceAsBoolean(STATIC_RESPONSES_ENABLED, false);
 	}
 

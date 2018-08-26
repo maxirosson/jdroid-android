@@ -4,6 +4,8 @@
 	<string name="jdroid_inAppBillingSettings" tools:ignore="MissingTranslation">In App Billing</string>
 	<string name="jdroid_inAppBillingStaticResponsesTitle" tools:ignore="MissingTranslation">Static Responses</string>
 	<string name="jdroid_inAppBillingStaticResponsesDescription" tools:ignore="MissingTranslation">Enable/disable static responses</string>
+	<string name="jdroid_inAppBillingTestVerificationTitle" tools:ignore="MissingTranslation">Test Verification</string>
+	<string name="jdroid_inAppBillingTestVerificationDescription" tools:ignore="MissingTranslation">Enable/disable the test verification</string>
 	<string name="jdroid_inAppBillingPurchasedProductTypeTitle" tools:ignore="MissingTranslation">Purchased products ids</string>
 
 </resources>

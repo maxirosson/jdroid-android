@@ -4,13 +4,18 @@ package com.jdroid.android.sample.ui.google.inappbilling;
 import com.jdroid.android.google.inappbilling.client.ItemType;
 import com.jdroid.android.google.inappbilling.client.ProductType;
 import com.jdroid.android.google.inappbilling.client.TestProductType;
+import com.jdroid.android.sample.R;
 
 public enum SampleProductType implements ProductType {
 
 	CONSUMABLE_PURCHASED("sample.consumable.purchased.id", TestProductType.PURCHASED, true, null, null),
 	CONSUMABLE_CANCELED("sample.consumable.canceled.id", TestProductType.CANCELED, true, null, null),
-	CONSUMABLE_REFUNDED("sample.consumable.refunded.id", TestProductType.REFUNDED, true, null, null),
-	CONSUMABLE_UNAVAILABLED("sample.consumable.unavailable.id", TestProductType.UNAVAILABLE, true, null, null);
+	CONSUMABLE_UNAVAILABLED("sample.consumable.unavailable.id", TestProductType.UNAVAILABLE, true, null, null) {
+		@Override
+		public Integer getIconId() {
+			return null;
+		}
+	};
 //	NOT_CONSUMABLE_PURCHASED("sample.not.consumable.purchased.id", TestProductType.PURCHASED, false, null, null),
 //	NOT_CONSUMABLE_CANCELED("sample.not.consumable.canceled.id", TestProductType.CANCELED, false, null, null),
 //	NOT_CONSUMABLE_REFUNDED("sample.not.consumable.refunded.id", TestProductType.REFUNDED, false, null, null),
@@ -60,4 +65,8 @@ public enum SampleProductType implements ProductType {
 		return testProductId;
 	}
 
+	@Override
+	public Integer getIconId() {
+		return R.drawable.ic_inapp_billing;
+	}
 }

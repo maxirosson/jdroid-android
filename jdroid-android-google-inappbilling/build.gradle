@@ -18,6 +18,10 @@ dependencies {
 
 	api project(":jdroid-android-core")
 
+	// https://jcenter.bintray.com/com/android/billingclient/billing/
+	// https://developer.android.com/google/play/billing/billing_library_releases_notes
+	implementation 'com.android.billingclient:billing:1.1'
+
 	testImplementation "junit:junit:${JUNIT_VERSION}"
 	testImplementation "org.robolectric:robolectric:${ROBOLECTRIC_VERSION}"
 }

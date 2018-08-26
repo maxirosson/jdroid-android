@@ -17,8 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Represents a block of information about in-app items. An Inventory is returned by such methods as
- * {@link InAppBillingClient#queryInventory}.
+ * Represents a block of information about in-app items.
  */
 public class Inventory {
 
@@ -26,6 +25,20 @@ public class Inventory {
 
 	public List<Product> getProducts() {
 		return Lists.newArrayList(productsMap.values());
+	}
+
+	/**
+	 *
+	 * @return The list of products defined locally and also on Google Play
+	 */
+	public List<Product> getAvailableProducts() {
+		List<Product> availableProducts = Lists.newArrayList();
+		for (Product product : productsMap.values()) {
+			if (product.getPrice() != null) {
+				availableProducts.add(product);
+			}
+		}
+		return availableProducts;
 	}
 
 	public void addProduct(Product product) {
@@ -56,16 +69,31 @@ public class Inventory {
 	}
 
 	public Product getProduct(String productId) {
-		return productsMap.get(productId);
+		if (InAppBillingAppModule.get().getInAppBillingContext().isStaticResponsesEnabled()) {
+			return getProductByTestProductId(productId);
+		} else {
+			return productsMap.get(productId);
+		}
 	}
 
-	public Product getProductByTestProductId(String testProductId) {
+	private Product getProductByTestProductId(String testProductId) {
 		for (Product each : productsMap.values()) {
 			if (testProductId.equals(each.getProductType().getTestProductId())) {
 				return each;
 			}
 		}
 		return null;
+ 	}
+ 	
+ 	public List<String> getAllProductIds() {
+		List<String> productsIds = Lists.newArrayList();
+		for (Product each : productsMap.values()) {
+			String productId = InAppBillingAppModule.get().getInAppBillingContext().isStaticResponsesEnabled() ? each.getProductType().getTestProductId() : each.getProductType().getProductId();
+			if (!productsIds.contains(productId)) {
+				productsIds.add(productId);
+			}
+		}
+		return productsIds;
 	}
-
+	
 }
