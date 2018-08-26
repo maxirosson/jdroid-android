@@ -109,8 +109,7 @@ public class Product {
 	public String getId() {
 		return getProductType().getProductId();
 	}
-<<<<<<< HEAD
-	
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
@@ -131,9 +130,6 @@ public class Product {
 		this.currencyCode = currencyCode;
 	}
 	
-=======
-
->>>>>>> master
 	@Override
 	public String toString() {
 		return "Product [productType=" + productType + ", title=" + title + ", description=" + description
