@@ -47,7 +47,7 @@ public class AppInviteStats {
 		}
 		return sharedPreferencesHelper;
 	}
-	
+
 	// FIXME Find a way to call this method from UI thread
 	//@WorkerThread
 	public static Boolean displayAppInviteView(Context context) {

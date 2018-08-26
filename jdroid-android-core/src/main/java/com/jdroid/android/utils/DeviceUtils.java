@@ -17,7 +17,8 @@ import com.jdroid.java.utils.StringUtils;
 
 public class DeviceUtils {
 
-	public static @NonNull Integer getDeviceYearClass() {
+	@NonNull
+	public static Integer getDeviceYearClass() {
 		return YearClass.get(AbstractApplication.get());
 	}
 
@@ -61,13 +62,13 @@ public class DeviceUtils {
 
 	public static String getNetworkOperatorName() {
 		TelephonyManager manager = (TelephonyManager)AbstractApplication.get().getSystemService(
-				Context.TELEPHONY_SERVICE);
+			Context.TELEPHONY_SERVICE);
 		return manager.getNetworkOperatorName();
 	}
 
 	public static String getSimOperatorName() {
 		TelephonyManager manager = (TelephonyManager)AbstractApplication.get().getSystemService(
-				Context.TELEPHONY_SERVICE);
+			Context.TELEPHONY_SERVICE);
 		return manager.getSimOperatorName();
 	}
 

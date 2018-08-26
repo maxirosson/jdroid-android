@@ -20,7 +20,7 @@ jobs:
 
       - run: 
           name: Assembling
-          command: ./gradlew assemble -PRELEASE_BUILD_TYPE_ENABLED=true -PRELEASE_FAKE_ENABLED=true --stacktrace --scan
+          command: ./gradlew assemble -PRELEASE_BUILD_TYPE_ENABLED=true -PFAKE_RELEASE_BUILD_TYPE_ENABLED=true --stacktrace --scan
 
       - save_cache:
           paths:
@@ -89,10 +89,6 @@ jobs:
           destination: jdroid-android-firebase-fcm/tests
 
       - store_artifacts:
-          path: ./jdroid-android-firebase-instanceid/build/reports/tests/testDebugUnitTest
-          destination: jdroid-android-firebase-instanceid/tests
-
-      - store_artifacts:
           path: ./jdroid-android-firebase-remoteconfig/build/reports/tests/testDebugUnitTest
           destination: jdroid-android-firebase-remoteconfig/tests
 
@@ -119,6 +115,10 @@ jobs:
       - store_artifacts:
           path: ./jdroid-android-sample/build/reports/tests/testDebugUnitTest
           destination: jdroid-android-sample/tests
+
+      - store_artifacts:
+          path: ./jdroid-android-sqlite/build/reports/tests/testDebugUnitTest
+          destination: jdroid-android-sqlite/tests
 
       - store_artifacts:
           path: ./jdroid-android-twitter/build/reports/tests/testDebugUnitTest
@@ -196,10 +196,6 @@ jobs:
           destination: jdroid-android-firebase-fcm/lint
 
       - store_artifacts:
-          path: ./jdroid-android-firebase-instanceid/build/reports/lint-results-debug.html
-          destination: jdroid-android-firebase-instanceid/lint
-
-      - store_artifacts:
           path: ./jdroid-android-firebase-remoteconfig/build/reports/lint-results-debug.html
           destination: jdroid-android-firebase-remoteconfig/lint
 
@@ -228,6 +224,10 @@ jobs:
           destination: jdroid-android-sample/lint
 
       - store_artifacts:
+          path: ./jdroid-android-sqlite/build/reports/lint-results-debug.html
+          destination: jdroid-android-sqlite/lint
+
+      - store_artifacts:
           path: ./jdroid-android-twitter/build/reports/lint-results-debug.html
           destination: jdroid-android-twitter/lint
 
@@ -239,7 +239,7 @@ jobs:
       - restore_cache:
           key: app-{{ .Branch }}-{{ checksum "build.gradle" }}
           
-      - run: ./gradlew uploadArchives -PLOCAL_UPLOAD=false -PRELEASE_BUILD_TYPE_ENABLED=true -PRELEASE_FAKE_ENABLED=true --stacktrace
+      - run: ./gradlew uploadArchives -PLOCAL_UPLOAD=false -PRELEASE_BUILD_TYPE_ENABLED=true -PFAKE_RELEASE_BUILD_TYPE_ENABLED=true --stacktrace
   
 workflows:
   version: 2

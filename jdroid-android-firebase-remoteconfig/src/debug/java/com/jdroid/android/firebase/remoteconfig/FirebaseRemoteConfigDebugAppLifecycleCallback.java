@@ -8,21 +8,21 @@ import com.jdroid.android.debug.DebugSettingsHelper;
 import com.jdroid.android.lifecycle.ApplicationLifecycleCallback;
 
 public class FirebaseRemoteConfigDebugAppLifecycleCallback extends ApplicationLifecycleCallback {
-	
+
 	@Override
 	public void onProviderInit(Context context) {
-		
+
 		if (MockRemoteConfigLoader.isMocksEnabled()) {
 			AbstractApplication.get().setRemoteConfigLoader(new MockRemoteConfigLoader(true));
 		}
-		
+
 		DebugSettingsHelper.addPreferencesAppender(new FirebaseRemoteConfigPrefsAppender());
 	}
-	
+
 	@NonNull
 	@Override
 	public Integer getInitOrder() {
 		return 1;
 	}
-	
+
 }

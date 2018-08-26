@@ -11,17 +11,17 @@ import org.slf4j.Logger;
 import java.util.List;
 
 public class InstallReferrerReceiver extends BroadcastReceiver {
-	
+
 	private static final Logger LOGGER = LoggerUtils.getLogger(InstallReferrerReceiver.class);
-	
+
 	private static final String INSTALL_ACTION = "com.android.vending.INSTALL_REFERRER";
-	
+
 	private List<BroadcastReceiver> receivers;
-	
+
 	public InstallReferrerReceiver(List<BroadcastReceiver> receivers) {
 		this.receivers = receivers;
 	}
-	
+
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		try {
@@ -39,5 +39,5 @@ public class InstallReferrerReceiver extends BroadcastReceiver {
 			LOGGER.error("Error when executing receivers", e);
 		}
 	}
-	
+
 }

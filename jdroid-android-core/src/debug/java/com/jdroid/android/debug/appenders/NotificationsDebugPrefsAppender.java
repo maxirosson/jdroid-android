@@ -28,7 +28,7 @@ public class NotificationsDebugPrefsAppender extends PreferencesAppender {
 	public int getNameResId() {
 		return R.string.jdroid_notifications;
 	}
-	
+
 	@Override
 	public void initPreferences(Activity activity, PreferenceGroup preferenceGroup) {
 		for (final String url : urlsToTest) {

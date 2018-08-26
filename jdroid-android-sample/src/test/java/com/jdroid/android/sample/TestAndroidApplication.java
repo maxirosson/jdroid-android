@@ -15,15 +15,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TestAndroidApplication extends AbstractApplication {
-	
+
 	@Override
 	protected void onInitMultiDex() {
 		// Multidex support doesn't play well with Robolectric yet
-		
+
 		BuildConfigUtils.setBuildConfigResolver(new TestBuildConfigResolver());
 		ReflectionUtils.setStaticField(ApplicationLifecycleHelper.class, "applicationLifecycleCallbacks", createApplicationLifecycleCallbacks());
 	}
-	
+
 	/**
 	 * This method can be overridden in subclasses to provide the list of ApplicationLifecycleCallback to use in the tests.
 	 *
@@ -32,7 +32,7 @@ public class TestAndroidApplication extends AbstractApplication {
 	protected List<ApplicationLifecycleCallback> createApplicationLifecycleCallbacks() {
 		return new ArrayList<>();
 	}
-	
+
 	@Override
 	protected Boolean isMultiProcessSupportEnabled() {
 		return false;

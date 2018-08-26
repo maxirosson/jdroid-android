@@ -11,23 +11,23 @@ import com.jdroid.java.collections.Maps;
 import java.util.Map;
 
 public class FirebasePerformanceLifecycleCallbacks implements Application.ActivityLifecycleCallbacks {
-	
+
 	private static final FirebasePerformanceLifecycleCallbacks INSTANCE = new FirebasePerformanceLifecycleCallbacks();
-	
+
 	public static FirebasePerformanceLifecycleCallbacks get() {
 		return INSTANCE;
 	}
-	
+
 	private final Map<Activity, Trace> traces = Maps.newHashMap();
-	
+
 	private FirebasePerformanceLifecycleCallbacks() {
 	}
-	
+
 	@Override
 	public void onActivityCreated(Activity activity, Bundle bundle) {
-		
+
 	}
-	
+
 	@Override
 	public void onActivityStarted(Activity activity) {
 		String name = activity.getClass().getSimpleName();
@@ -36,17 +36,17 @@ public class FirebasePerformanceLifecycleCallbacks implements Application.Activi
 			traces.put(activity, trace);
 		}
 	}
-	
+
 	@Override
 	public void onActivityResumed(Activity activity) {
-		
+
 	}
-	
+
 	@Override
 	public void onActivityPaused(Activity activity) {
-		
+
 	}
-	
+
 	@Override
 	public void onActivityStopped(Activity activity) {
 		Trace trace = traces.remove(activity);
@@ -54,17 +54,17 @@ public class FirebasePerformanceLifecycleCallbacks implements Application.Activi
 			trace.stop();
 		}
 	}
-	
+
 	@Override
 	public void onActivitySaveInstanceState(Activity activity, Bundle bundle) {
-		
+
 	}
-	
+
 	@Override
 	public void onActivityDestroyed(Activity activity) {
-		
+
 	}
-	
+
 	@Nullable
 	public Trace getTrace(Activity activity) {
 		return traces.get(activity);

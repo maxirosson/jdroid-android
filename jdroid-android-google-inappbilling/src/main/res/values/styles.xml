@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+	<style name="jdroid_productItemPrice" parent="@style/jdroid_raisedButton">
+		<item name="android:textStyle">bold</item>
+	</style>
+
+</resources>

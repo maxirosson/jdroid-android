@@ -13,7 +13,7 @@ import com.jdroid.android.usecase.UseCaseTrigger;
 import com.jdroid.android.usecase.listener.ActivityLoadingUseCaseListener;
 
 public class BlockingLoadingFragment extends AbstractFragment {
-	
+
 	private SampleUseCase sampleUseCase;
 	private ActivityLoadingUseCaseListener sampleUseCaseListener;
 
@@ -25,7 +25,7 @@ public class BlockingLoadingFragment extends AbstractFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		sampleUseCase = new SampleUseCase();
 		sampleUseCase.setDelayInSeconds(5);
 		sampleUseCaseListener = new ActivityLoadingUseCaseListener() {

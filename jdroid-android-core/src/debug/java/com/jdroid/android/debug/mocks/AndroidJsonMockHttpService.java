@@ -13,7 +13,7 @@ public class AndroidJsonMockHttpService extends JsonMockHttpService {
 	public AndroidJsonMockHttpService(Object... urlSegments) {
 		super(urlSegments);
 	}
-	
+
 	@Override
 	protected void simulateCrash() {
 		ExceptionType exceptionType = getHttpMockExceptionType();
@@ -21,7 +21,7 @@ public class AndroidJsonMockHttpService extends JsonMockHttpService {
 			CrashGenerator.crash(exceptionType, false);
 		}
 	}
-	
+
 	@Override
 	protected Integer getHttpMockSleepDuration(Object... urlSegments) {
 		return HttpDebugConfiguration.getHttpMockSleepDuration();

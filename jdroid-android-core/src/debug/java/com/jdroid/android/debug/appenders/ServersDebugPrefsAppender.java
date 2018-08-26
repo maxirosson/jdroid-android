@@ -17,13 +17,13 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public class ServersDebugPrefsAppender extends PreferencesAppender {
-	
+
 	private Map<Class<? extends Server>, List<? extends Server>> serversMap = Maps.newHashMap();
-	
+
 	public ServersDebugPrefsAppender(Map<Class<? extends Server>, List<? extends Server>> serversMap) {
 		this.serversMap = serversMap;
 	}
-	
+
 	@Override
 	public int getNameResId() {
 		return R.string.jdroid_serversSettings;
@@ -37,7 +37,7 @@ public class ServersDebugPrefsAppender extends PreferencesAppender {
 			preference.setTitle(entry.getKey().getSimpleName());
 			preference.setDialogTitle(entry.getKey().getSimpleName());
 			preference.setSummary(entry.getKey().getSimpleName());
-			
+
 			List<CharSequence> entries = Lists.newArrayList();
 			for (Server each : entry.getValue()) {
 				entries.add(each.getName());
@@ -64,7 +64,7 @@ public class ServersDebugPrefsAppender extends PreferencesAppender {
 	protected void onServerPreferenceChange(Server each) {
 		// Do nothing
 	}
-	
+
 	@Override
 	public Boolean isEnabled() {
 		return (serversMap != null) && !serversMap.isEmpty();

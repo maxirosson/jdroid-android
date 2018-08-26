@@ -20,7 +20,7 @@ public class HttpMocksDebugPrefsAppender extends PreferencesAppender {
 	public int getNameResId() {
 		return R.string.jdroid_httpMocksSettings;
 	}
-	
+
 	@Override
 	public void initPreferences(Activity activity, PreferenceGroup preferenceGroup) {
 		CheckBoxPreference checkBoxPreference = new CheckBoxPreference(activity);
@@ -28,7 +28,7 @@ public class HttpMocksDebugPrefsAppender extends PreferencesAppender {
 		checkBoxPreference.setTitle(R.string.jdroid_httpMockEnabledTitle);
 		checkBoxPreference.setSummary(R.string.jdroid_httpMockEnabledDescription);
 		preferenceGroup.addPreference(checkBoxPreference);
-		
+
 		checkBoxPreference = new CheckBoxPreference(activity);
 		checkBoxPreference.setKey(HttpDebugConfiguration.HTTP_MOCK_SLEEP);
 		checkBoxPreference.setTitle(R.string.jdroid_httpMockSleepTitle);
@@ -36,7 +36,7 @@ public class HttpMocksDebugPrefsAppender extends PreferencesAppender {
 		// FIXME this is not working
 		// checkBoxPreference.setDependency(AppContext.HTTP_MOCK_ENABLED);
 		preferenceGroup.addPreference(checkBoxPreference);
-		
+
 		ListPreference preference = new ListPreference(activity);
 		preference.setKey(AndroidJsonMockHttpService.HTTP_MOCK_CRASH_TYPE);
 		preference.setTitle(R.string.jdroid_httpMockCrashType);

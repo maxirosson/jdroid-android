@@ -10,42 +10,42 @@ import com.jdroid.java.http.Server;
 import java.util.Locale;
 
 public class AppContext extends AbstractAppContext {
-	
+
 	// Environment
 	private Server defaultServer;
 
 	protected Server findServerByName(String name) {
 		return null;
 	}
-	
+
 	public Server getServer() {
 		if (defaultServer == null) {
 			defaultServer = findServerByName(getServerName());
 		}
 		return getServer(defaultServer);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	protected <T extends Server> T getServer(Server defaultServer) {
 		if (AppUtils.isReleaseBuildType() || !isDebugSettingsEnabled()) {
 			return (T)defaultServer;
 		} else {
 			Class<?> clazz = defaultServer.getClass().getEnclosingClass() != null ? defaultServer.getClass().getEnclosingClass()
-					: defaultServer.getClass();
+				: defaultServer.getClass();
 			return (T)defaultServer.instance(SharedPreferencesHelper.get().loadPreference(
-					clazz.getSimpleName(), defaultServer.getName()).toUpperCase(Locale.US));
+				clazz.getSimpleName(), defaultServer.getName()).toUpperCase(Locale.US));
 		}
 	}
 
 	protected String getServerName() {
 		return getBuildConfigValue("SERVER_NAME", null);
 	}
-	
+
 	/**
 	 * @return Whether the application should display the debug settings
 	 */
 	public Boolean isDebugSettingsEnabled() {
-		return getBuildConfigBoolean("DEBUG_SETTINGS_ENABLED",  !AppUtils.isReleaseBuildType());
+		return getBuildConfigBoolean("DEBUG_SETTINGS_ENABLED", false);
 	}
 
 	public String getLocalIp() {
@@ -66,11 +66,11 @@ public class AppContext extends AbstractAppContext {
 	public String getServerClientId() {
 		return getBuildConfigValue("GOOGLE_SERVER_CLIENT_ID", null);
 	}
-	
+
 	public String getServerApiVersion() {
 		return null;
 	}
-	
+
 	public String getWebsite() {
 		return null;
 	}
@@ -82,19 +82,19 @@ public class AppContext extends AbstractAppContext {
 	public String getTwitterAccount() {
 		return null;
 	}
-	
+
 	public String getInstagramAccount() {
 		return null;
 	}
-	
+
 	public String getLinkedInCompanyPageId() {
 		return null;
 	}
-	
+
 	public String getFacebookPageId() {
 		return null;
 	}
-	
+
 	public String getGooglePlusCommunityId() {
 		return null;
 	}

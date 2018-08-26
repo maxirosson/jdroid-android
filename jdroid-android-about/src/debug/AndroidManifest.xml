@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" package="com.jdroid.android.about">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+		  xmlns:tools="http://schemas.android.com/tools"
+		  package="com.jdroid.android.about">
 
 	<application>
 
-		<meta-data android:name="com.jdroid.android.about.AboutDebugAppLifecycleCallback" android:value="ApplicationLifecycleCallback" />
+		<meta-data android:name="com.jdroid.android.about.AboutDebugAppLifecycleCallback"
+				   android:value="ApplicationLifecycleCallback" />
 
 	</application>
 

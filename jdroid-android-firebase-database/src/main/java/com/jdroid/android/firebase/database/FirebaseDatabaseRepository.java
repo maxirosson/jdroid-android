@@ -35,7 +35,7 @@ public abstract class FirebaseDatabaseRepository<T extends Entity> implements Re
 	protected abstract String getPath();
 
 	protected abstract Class<T> getEntityClass();
-	
+
 	protected String getDatabaseUrl() {
 		return null;
 	}
@@ -102,7 +102,7 @@ public abstract class FirebaseDatabaseRepository<T extends Entity> implements Re
 
 	@Override
 	public void addAll(Collection<T> items) {
-		for(T each : items) {
+		for (T each : items) {
 			add(each);
 		}
 	}
@@ -144,13 +144,13 @@ public abstract class FirebaseDatabaseRepository<T extends Entity> implements Re
 		query.addListenerForSingleValueEvent(listener);
 		listener.waitOperation();
 		List<T> results = Lists.newArrayList();
-		for (DataSnapshot eachSnapshot: listener.getDataSnapshot().getChildren()) {
+		for (DataSnapshot eachSnapshot : listener.getDataSnapshot().getChildren()) {
 			results.add(eachSnapshot.getValue(getEntityClass()));
 		}
 		LOGGER.info("Retrieved objects [" + results.size() + "] from database of path: " + getPath() + " field: " + fieldName);
 		return results;
 	}
-	
+
 	@Override
 	public T getItemByField(String fieldName, Object... values) {
 		List<T> items = getByField(fieldName, values);
@@ -168,7 +168,7 @@ public abstract class FirebaseDatabaseRepository<T extends Entity> implements Re
 		databaseReference.addListenerForSingleValueEvent(listener);
 		listener.waitOperation();
 		List<T> results = Lists.newArrayList();
-		for (DataSnapshot eachSnapshot: listener.getDataSnapshot().getChildren()) {
+		for (DataSnapshot eachSnapshot : listener.getDataSnapshot().getChildren()) {
 			results.add(eachSnapshot.getValue(getEntityClass()));
 		}
 		LOGGER.info("Retrieved all objects [" + results.size() + "] from path: " + getPath());
@@ -182,7 +182,7 @@ public abstract class FirebaseDatabaseRepository<T extends Entity> implements Re
 		databaseReference.addListenerForSingleValueEvent(listener);
 		listener.waitOperation();
 		List<T> results = Lists.newArrayList();
-		for (DataSnapshot eachSnapshot: listener.getDataSnapshot().getChildren()) {
+		for (DataSnapshot eachSnapshot : listener.getDataSnapshot().getChildren()) {
 			T each = eachSnapshot.getValue(getEntityClass());
 			if (ids.contains(each.getId())) {
 				results.add(each);
@@ -205,7 +205,7 @@ public abstract class FirebaseDatabaseRepository<T extends Entity> implements Re
 
 	@Override
 	public void removeAll(Collection<T> items) {
-		for(T each : items) {
+		for (T each : items) {
 			remove(each);
 		}
 	}
@@ -245,7 +245,7 @@ public abstract class FirebaseDatabaseRepository<T extends Entity> implements Re
 
 	@Override
 	public void replaceAll(Collection<T> items) {
-		for(T each : items) {
+		for (T each : items) {
 			update(each);
 		}
 	}

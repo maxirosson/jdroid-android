@@ -2,8 +2,8 @@ package com.jdroid.android.sample.api;
 
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.firebase.fcm.FcmSender;
+import com.jdroid.android.firebase.fcm.InstanceIdHeaderAppender;
 import com.jdroid.android.firebase.fcm.device.Device;
-import com.jdroid.android.firebase.instanceid.InstanceIdHeaderAppender;
 import com.jdroid.android.http.DefaultHeaderAppender;
 import com.jdroid.java.collections.Lists;
 import com.jdroid.java.http.HttpServiceProcessor;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 public enum ApiServer implements FcmSender {
-	
+
 	PROD("url", ":8080", "/api", true, true) {
 		@Override
 		public String getSenderId() {
@@ -30,7 +30,7 @@ public enum ApiServer implements FcmSender {
 	private String segment;
 	private Boolean supportsSsl;
 	private Boolean isProduction;
-	
+
 	ApiServer(String domain, String port, String segment, Boolean supportsSsl, Boolean isProduction) {
 		this.domain = domain;
 		this.port = port;
@@ -38,12 +38,12 @@ public enum ApiServer implements FcmSender {
 		this.supportsSsl = supportsSsl;
 		this.isProduction = isProduction;
 	}
-	
+
 	@Override
 	public String getName() {
 		return name();
 	}
-	
+
 	@Override
 	public String getBaseUrl() {
 		if (domain == null) {
@@ -60,22 +60,22 @@ public enum ApiServer implements FcmSender {
 			return urlBuilder.toString();
 		}
 	}
-	
+
 	@Override
 	public Boolean supportsSsl() {
 		return supportsSsl;
 	}
-	
+
 	@Override
 	public Boolean isProduction() {
 		return isProduction;
 	}
-	
+
 	@Override
 	public List<HttpServiceProcessor> getHttpServiceProcessors() {
 		return Lists.newArrayList(DefaultHeaderAppender.get(), InstanceIdHeaderAppender.get(), HttpResponseValidator.get());
 	}
-	
+
 	@Override
 	public Server instance(String name) {
 		return valueOf(name);

@@ -18,7 +18,7 @@ public class UseCaseHelper {
 
 	@MainThread
 	public static void registerUseCase(final AbstractUseCase useCase, final UseCaseListener listener,
-								final UseCaseTrigger useCaseTrigger) {
+									   final UseCaseTrigger useCaseTrigger) {
 		if (useCase != null) {
 			useCase.addListener(listener);
 			useCase.setHandler(new Handler(Looper.getMainLooper()));
@@ -46,7 +46,7 @@ public class UseCaseHelper {
 				}
 
 			} else if (useCase.isNotInvoked()
-					&& (useCaseTrigger.equals(UseCaseTrigger.ONCE) || useCaseTrigger.equals(UseCaseTrigger.ALWAYS))) {
+				&& (useCaseTrigger.equals(UseCaseTrigger.ONCE) || useCaseTrigger.equals(UseCaseTrigger.ALWAYS))) {
 				executeUseCase(useCase);
 			}
 		}

@@ -19,7 +19,7 @@ public class WebViewFragment extends AbstractFragment {
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		
+
 		WebView webView = findView(R.id.webview);
 		webView.setWebViewClient(new DefaultWebViewClient());
 		WebSettings webSettings = webView.getSettings();

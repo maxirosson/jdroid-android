@@ -64,7 +64,7 @@ public class WidgetHelper {
 
 		// This is a hack to avoid the notification caching
 		if (intent.getData() == null) {
-			intent.setData( Uri.parse(WIDGET_SCHEME + "://" + RandomUtils.getInt()));
+			intent.setData(Uri.parse(WIDGET_SCHEME + "://" + RandomUtils.getInt()));
 		}
 
 		ReferrerUtils.setReferrer(intent, generateWidgetReferrer());

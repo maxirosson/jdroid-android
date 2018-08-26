@@ -19,20 +19,20 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 @RunWith(AndroidJUnit4.class)
 @LargeTest
 public class UriTest extends AbstractUriTest {
-	
+
 	@Test
 	public void noFlagsTestOk() {
 		openUri("http://jdroidtools.com/uri/noflags?a=1");
-		
+
 		ViewInteraction viewInteraction = onView(withId(R.id.activity));
 		viewInteraction.check(matches(isDisplayed()));
 		viewInteraction.check(matches(withText(UriMapperNoFlagsActivity.class.getSimpleName())));
 	}
-	
+
 	@Test
 	public void noFlagsTestFail() {
 		openUri("http://jdroidtools.com/uri/noflags");
-		
+
 		ViewInteraction viewInteraction = onView(withText("Analytics"));
 		viewInteraction.check(matches(isDisplayed()));
 	}

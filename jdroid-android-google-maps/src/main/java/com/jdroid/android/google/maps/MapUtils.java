@@ -15,7 +15,7 @@ import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.domain.GeoLocation;
 
 public class MapUtils {
-	
+
 	public static BitmapDescriptor safeVectorToBitmap(@DrawableRes int drawableRes, @ColorRes int colorRes) {
 		try {
 			return vectorToBitmap(drawableRes, colorRes);
@@ -37,7 +37,7 @@ public class MapUtils {
 		vectorDrawable.draw(canvas);
 		return BitmapDescriptorFactory.fromBitmap(bitmap);
 	}
-	
+
 	public static LatLng createLatLng(GeoLocation geoLocation) {
 		return geoLocation != null ? new LatLng(geoLocation.getLatitude(), geoLocation.getLongitude()) : null;
 	}

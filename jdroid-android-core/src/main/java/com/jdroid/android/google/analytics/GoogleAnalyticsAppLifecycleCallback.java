@@ -10,7 +10,7 @@ public class GoogleAnalyticsAppLifecycleCallback extends ApplicationLifecycleCal
 	public void onProviderInit(Context context) {
 		AbstractApplication.get().addCoreAnalyticsTracker(new GoogleCoreAnalyticsTracker());
 	}
-	
+
 	@Override
 	public Boolean isEnabled() {
 		return GoogleAnalyticsAppContext.isGoogleAnalyticsEnabled();

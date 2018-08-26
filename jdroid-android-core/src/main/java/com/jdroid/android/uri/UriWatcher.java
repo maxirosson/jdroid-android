@@ -8,7 +8,7 @@ public interface UriWatcher {
 
 	/**
 	 * Called when an Uri is opened on the App
-	 *
+	 * <p>
 	 * This method shouldn't perform long operations, because could block the user interface.
 	 *
 	 * @param uri The opened Uri

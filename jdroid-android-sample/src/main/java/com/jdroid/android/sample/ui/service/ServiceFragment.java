@@ -47,7 +47,7 @@ public class ServiceFragment extends AbstractFragment {
 		status = findView(R.id.status);
 		
 		findView(R.id.workerService).setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent();
@@ -143,7 +143,7 @@ public class ServiceFragment extends AbstractFragment {
 			}
 		});
 	}
-	
+
 	private UUID enqueue(OneTimeWorkRequest.Builder sampleWorkRequestBuilder) {
 		Integer delay = TypeUtils.getSafeInteger(delayEditText.getText());
 		if (delay != null) {

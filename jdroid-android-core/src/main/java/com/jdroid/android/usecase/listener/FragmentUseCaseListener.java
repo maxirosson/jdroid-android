@@ -5,17 +5,17 @@ import com.jdroid.android.fragment.FragmentIf;
 import com.jdroid.java.exception.AbstractException;
 
 public abstract class FragmentUseCaseListener implements UseCaseListener {
-	
+
 	@Override
 	public void onStartUseCase() {
 		getFragmentIf().showLoading();
 	}
-	
+
 	@Override
 	public void onUpdateUseCase() {
 		getFragmentIf().onUpdateUseCase();
 	}
-	
+
 	@Override
 	public void onFinishFailedUseCase(AbstractException abstractException) {
 		getFragmentIf().dismissLoading();
@@ -26,11 +26,11 @@ public abstract class FragmentUseCaseListener implements UseCaseListener {
 	protected ErrorDisplayer createErrorDisplayer(AbstractException abstractException) {
 		return getFragmentIf().createErrorDisplayer(abstractException);
 	}
-	
+
 	@Override
 	public void onFinishUseCase() {
 		getFragmentIf().onFinishUseCase();
 	}
-	
+
 	protected abstract FragmentIf getFragmentIf();
 }

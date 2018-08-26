@@ -74,9 +74,6 @@ Libray for Android apps. Support for Android 4.0 (api level 15) and higher versi
 * [Facebook SDK integration](https://developers.facebook.com/docs/android/)
   * Sign in, sign out, share with deep link
 
-## [jdroid-android-firebase-instanceid](https://github.com/maxirosson/jdroid/wiki/jdroid-Android)
-* [Instance ID support](https://developers.google.com/instance-id/)
-
 ## [jdroid-android-firebase-admob](https://github.com/maxirosson/jdroid/wiki/jdroid-Android)
 
 * [Firebase AdMob integration](https://firebase.google.com/docs/admob/)
@@ -122,6 +119,10 @@ Libray for Android apps. Support for Android 4.0 (api level 15) and higher versi
 ## [jdroid-android-glide](https://github.com/maxirosson/jdroid/wiki/jdroid-Android)
  
  * [Glide integration](https://github.com/bumptech/glide)
+
+## [jdroid-android-sqlite](https://github.com/maxirosson/jdroid/wiki/jdroid-Android)
+
+ * [Sqlite integration](https://sqlite.org/)
 
 ## Donations
 Help us to continue with this project:

@@ -1,7 +1,7 @@
 package com.jdroid.android.google.inappbilling.client;
 
 public class SimpleDeveloperPayloadVerificationStrategy implements DeveloperPayloadVerificationStrategy {
-	
+
 	@Override
 	public Boolean verify(Product product) {
 		/*
@@ -16,8 +16,8 @@ public class SimpleDeveloperPayloadVerificationStrategy implements DeveloperPayl
 		 * device work on other devices owned by the user). Using your own server to store and verify developer payloads
 		 * across app installations is recommended.
 		 */
-		
+
 		return product.getDeveloperPayload().equals(product.getPurchase().getDeveloperPayload());
 	}
-	
+
 }

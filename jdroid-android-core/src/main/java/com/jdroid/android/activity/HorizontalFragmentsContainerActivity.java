@@ -18,7 +18,7 @@ public abstract class HorizontalFragmentsContainerActivity extends AbstractFragm
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		if (savedInstanceState == null && !isFinishing()) {
 
 			FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -35,15 +35,15 @@ public abstract class HorizontalFragmentsContainerActivity extends AbstractFragm
 			fragmentTransaction.commit();
 		}
 	}
-	
+
 	protected Boolean addToBackStack() {
 		return false;
 	}
-	
+
 	protected Fragment createNewLeftFragment() {
 		return instanceFragment(getLeftFragmentClass(), getIntent().getExtras());
 	}
-	
+
 	protected Class<? extends Fragment> getLeftFragmentClass() {
 		return null;
 	}

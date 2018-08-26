@@ -17,9 +17,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
 public class BitmapUtils {
-	
+
 	private static final Logger LOGGER = LoggerUtils.getLogger(BitmapUtils.class);
-	
+
 	public static Bitmap toBitmap(@DrawableRes int resId) {
 		return BitmapFactory.decodeResource(AbstractApplication.get().getResources(), resId);
 	}
@@ -32,7 +32,7 @@ public class BitmapUtils {
 	}
 
 	public static Bitmap toBitmap(InputStream input, Integer maxWidth, Integer maxHeight) {
-		
+
 		Options options = new Options();
 		if ((maxWidth != null) && (maxHeight != null)) {
 			// Set the scaling options.
@@ -42,10 +42,10 @@ public class BitmapUtils {
 		options.inJustDecodeBounds = false;
 		return BitmapFactory.decodeStream(input, null, options);
 	}
-	
+
 	/**
 	 * Gets a {@link Bitmap} from a {@link Uri}. Resizes the image to a determined width and height.
-	 * 
+	 *
 	 * @param uri The {@link Uri} from which the image is obtained.
 	 * @param maxWidth The maximum width of the image used to scale it. If null, the image won't be scaled
 	 * @param maxHeight The maximum height of the image used to scale it. If null, the image won't be scaled
@@ -54,21 +54,21 @@ public class BitmapUtils {
 	public static Bitmap toBitmap(Uri uri, Integer maxWidth, Integer maxHeight) {
 		try {
 			Context context = AbstractApplication.get();
-			
+
 			// First decode with inJustDecodeBounds=true to check dimensions
 			Options options = new Options();
 			options.inJustDecodeBounds = true;
 			InputStream openInputStream = context.getContentResolver().openInputStream(uri);
 			BitmapFactory.decodeStream(openInputStream, null, options);
 			openInputStream.close();
-			
+
 			// Calculate inSampleSize
 			if ((maxWidth != null) && (maxHeight != null)) {
 				float scale = Math.min(maxWidth.floatValue() / options.outWidth, maxHeight.floatValue()
-						/ options.outHeight);
+					/ options.outHeight);
 				options.inSampleSize = Math.round(1 / scale);
 			}
-			
+
 			// Decode bitmap with inSampleSize set
 			openInputStream = context.getContentResolver().openInputStream(uri);
 			options.inJustDecodeBounds = false;
@@ -80,15 +80,15 @@ public class BitmapUtils {
 			return null;
 		}
 	}
-	
+
 	public static ByteArrayInputStream toPNGInputStream(Uri uri, Integer maxWidth, Integer maxHeight) {
 		Bitmap bitmap = BitmapUtils.toBitmap(uri, maxWidth, maxHeight);
 		return BitmapUtils.toPNGInputStream(bitmap);
 	}
-	
+
 	/**
 	 * Compress the bitmap to a PNG and return its {@link ByteArrayInputStream}
-	 * 
+	 *
 	 * @param bitmap The {@link Bitmap} to compress
 	 * @return The {@link ByteArrayInputStream}
 	 */

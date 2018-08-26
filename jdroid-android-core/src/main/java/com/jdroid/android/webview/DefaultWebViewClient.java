@@ -12,7 +12,7 @@ import com.jdroid.java.exception.UnexpectedException;
 import com.jdroid.java.http.exception.ConnectionException;
 
 public class DefaultWebViewClient extends WebViewClient {
-	
+
 	private Boolean errorReceived = false;
 
 	@Override
@@ -26,14 +26,14 @@ public class DefaultWebViewClient extends WebViewClient {
 		view.setVisibility(View.GONE);
 		errorReceived = true;
 	}
-	
+
 	@Override
 	public void onReceivedSslError(WebView view, @NonNull SslErrorHandler handler, SslError error) {
 		AbstractApplication.get().getExceptionHandler().logHandledException(
-					new UnexpectedException("WebView Ssl error: " + error.getPrimaryError()));
+			new UnexpectedException("WebView Ssl error: " + error.getPrimaryError()));
 		handler.cancel();
 	}
-	
+
 	public Boolean isErrorReceived() {
 		return errorReceived;
 	}

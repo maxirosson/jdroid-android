@@ -1,26 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-	android:layout_height="match_parent" android:orientation="vertical" android:padding="8dp">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  android:layout_width="match_parent"
+			  android:layout_height="match_parent"
+			  android:orientation="vertical"
+			  android:padding="8dp">
 
-	<Button android:id="@+id/httpGet" android:layout_width="wrap_content" android:layout_height="wrap_content"
-		android:text="@string/httpGet" />
+	<Button android:id="@+id/httpGet"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/httpGet" />
 
-	<Button android:id="@+id/httpPost" android:layout_width="wrap_content" android:layout_height="wrap_content"
-		android:text="@string/httpPost" />
+	<Button android:id="@+id/httpPost"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/httpPost" />
 
-	<Button android:id="@+id/httpPut" android:layout_width="wrap_content" android:layout_height="wrap_content"
-		android:text="@string/httpPut" />
+	<Button android:id="@+id/httpPut"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/httpPut" />
 
-	<Button android:id="@+id/httpDelete" android:layout_width="wrap_content" android:layout_height="wrap_content"
-		android:text="@string/httpDelete" />
+	<Button android:id="@+id/httpDelete"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/httpDelete" />
 
-	<Button android:id="@+id/httpPatch" android:layout_width="wrap_content" android:layout_height="wrap_content"
-		android:text="@string/httpPatch" />
+	<Button android:id="@+id/httpPatch"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/httpPatch" />
 
-	<Button android:id="@+id/connectionExceptionParser" android:layout_width="wrap_content" android:layout_height="wrap_content"
-		android:text="@string/connectionExceptionParser" />
+	<Button android:id="@+id/connectionExceptionParser"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/connectionExceptionParser" />
 
-	<Button android:id="@+id/unexpectedExceptionParser" android:layout_width="wrap_content" android:layout_height="wrap_content"
-		android:text="@string/unexpectedExceptionParser" />
+	<Button android:id="@+id/unexpectedExceptionParser"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/unexpectedExceptionParser" />
 
 </LinearLayout>

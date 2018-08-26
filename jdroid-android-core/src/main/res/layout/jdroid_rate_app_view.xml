@@ -1,22 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android" style="@style/jdroid_cardViewFullMarginStyle">
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+									style="@style/jdroid_cardViewFullMarginStyle">
 
-	<LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent"
-				  android:orientation="vertical" android:minHeight="48dp" android:paddingTop="8dp" android:paddingBottom="16dp"
-				  android:paddingLeft="8dp" android:paddingRight="8dp" >
+	<LinearLayout android:layout_height="wrap_content"
+				  android:layout_width="match_parent"
+				  android:orientation="vertical"
+				  android:minHeight="48dp"
+				  android:paddingTop="8dp"
+				  android:paddingBottom="16dp"
+				  android:paddingLeft="8dp"
+				  android:paddingRight="8dp">
 
-		<TextView android:id="@+id/rateAppTitle" android:layout_width="match_parent" android:layout_height="wrap_content"
-				  android:gravity="center_vertical|center_horizontal" android:text="@string/jdroid_rateAppEnjoying" android:textSize="18sp" android:paddingBottom="12dp" />
+		<TextView android:id="@+id/rateAppTitle"
+				  android:layout_width="match_parent"
+				  android:layout_height="wrap_content"
+				  android:gravity="center_vertical|center_horizontal"
+				  android:text="@string/jdroid_rateAppEnjoying"
+				  android:textSize="18sp"
+				  android:paddingBottom="12dp" />
 
-		<LinearLayout android:layout_height="wrap_content" android:layout_width="wrap_content"
-					  android:orientation="horizontal" android:layout_gravity="center_horizontal">
-			<Button android:id="@+id/negative" android:layout_width="wrap_content" android:layout_height="wrap_content"
-					android:text="@string/jdroid_rateAppNotReally" android:layout_marginRight="12dp" style="@style/jdroid_raisedButton"
-					android:minWidth="132dp" android:minHeight="36dp"/>
+		<LinearLayout android:layout_height="wrap_content"
+					  android:layout_width="wrap_content"
+					  android:orientation="horizontal"
+					  android:layout_gravity="center_horizontal">
 
-			<Button android:id="@+id/positive" android:layout_width="wrap_content" android:layout_height="wrap_content"
-					android:text="@string/jdroid_rateAppYes" android:layout_marginLeft="12dp" style="@style/jdroid_raisedButton"
-					android:minWidth="132dp" android:minHeight="36dp"/>
+			<Button android:id="@+id/negative"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="@string/jdroid_rateAppNotReally"
+					android:layout_marginRight="12dp"
+					style="@style/jdroid_raisedButton"
+					android:minWidth="132dp"
+					android:minHeight="36dp" />
+
+			<Button android:id="@+id/positive"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="@string/jdroid_rateAppYes"
+					android:layout_marginLeft="12dp"
+					style="@style/jdroid_raisedButton"
+					android:minWidth="132dp"
+					android:minHeight="36dp" />
 		</LinearLayout>
 	</LinearLayout>
 

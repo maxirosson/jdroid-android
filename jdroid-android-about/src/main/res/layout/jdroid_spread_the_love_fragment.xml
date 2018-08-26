@@ -1,103 +1,186 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-			android:layout_height="wrap_content" xmlns:app="http://schemas.android.com/apk/res-auto">
-	<LinearLayout android:id="@+id/container" android:layout_width="match_parent" android:layout_height="wrap_content"
-		android:orientation="vertical" android:padding="4dp">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			xmlns:app="http://schemas.android.com/apk/res-auto">
 
-		<TextView android:id="@+id/followUs" android:layout_height="wrap_content" android:layout_width="wrap_content" style="@style/jdroid_textMedium"
-			android:layout_margin="8dp" android:textStyle="bold" android:text="@string/jdroid_followUs" />
+	<LinearLayout android:id="@+id/container"
+				  android:layout_width="match_parent"
+				  android:layout_height="wrap_content"
+				  android:orientation="vertical"
+				  android:padding="4dp">
 
-		<android.support.v7.widget.CardView android:id="@+id/facebook" style="@style/jdroid_cardViewClickableStyle">
+		<TextView android:id="@+id/followUs"
+				  android:layout_height="wrap_content"
+				  android:layout_width="wrap_content"
+				  style="@style/jdroid_textMedium"
+				  android:layout_margin="8dp"
+				  android:textStyle="bold"
+				  android:text="@string/jdroid_followUs" />
 
-			<LinearLayout android:orientation="horizontal" style="@style/jdroid_cardViewInner" android:gravity="center_vertical"
+		<android.support.v7.widget.CardView android:id="@+id/facebook"
+											style="@style/jdroid_cardViewClickableStyle">
+
+			<LinearLayout android:orientation="horizontal"
+						  style="@style/jdroid_cardViewInner"
+						  android:gravity="center_vertical"
 						  android:minHeight="@dimen/jdroid_itemMinHeight">
 
-				<ImageView android:layout_width="@dimen/jdroid_itemIconSize" android:layout_height="@dimen/jdroid_itemIconSize"
-					android:layout_marginRight="12dp" android:duplicateParentState="true" app:srcCompat="@drawable/jdroid_ic_facebook_24dp" />
+				<ImageView android:layout_width="@dimen/jdroid_itemIconSize"
+						   android:layout_height="@dimen/jdroid_itemIconSize"
+						   android:layout_marginRight="12dp"
+						   android:duplicateParentState="true"
+						   app:srcCompat="@drawable/jdroid_ic_facebook_24dp" />
 
-				<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" style="@style/jdroid_spreadTheLoveFollowUsItemText"
-					android:duplicateParentState="true" android:text="@string/jdroid_facebook" />
-			</LinearLayout>
-
-		</android.support.v7.widget.CardView>
-		<android.support.v7.widget.CardView android:id="@+id/googlePlus" style="@style/jdroid_cardViewClickableStyle">
-
-			<LinearLayout android:orientation="horizontal" style="@style/jdroid_cardViewInner" android:gravity="center_vertical"
-						  android:minHeight="@dimen/jdroid_itemMinHeight">
-
-				<ImageView android:layout_width="@dimen/jdroid_itemIconSize" android:layout_height="@dimen/jdroid_itemIconSize"
-					android:layout_marginRight="12dp" android:duplicateParentState="true" app:srcCompat="@drawable/jdroid_ic_google_plus" />
-
-				<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" style="@style/jdroid_spreadTheLoveFollowUsItemText"
-					android:duplicateParentState="true" android:text="@string/jdroid_googlePlus" />
-			</LinearLayout>
-
-		</android.support.v7.widget.CardView>
-		<android.support.v7.widget.CardView android:id="@+id/twitter" style="@style/jdroid_cardViewClickableStyle">
-
-			<LinearLayout android:orientation="horizontal" style="@style/jdroid_cardViewInner" android:gravity="center_vertical"
-						  android:minHeight="@dimen/jdroid_itemMinHeight">
-
-				<ImageView android:layout_width="@dimen/jdroid_itemIconSize" android:layout_height="@dimen/jdroid_itemIconSize"
-					android:layout_marginRight="12dp" android:duplicateParentState="true" app:srcCompat="@drawable/jdroid_ic_twitter_24dp" />
-
-				<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" style="@style/jdroid_spreadTheLoveFollowUsItemText"
-					android:duplicateParentState="true" android:text="@string/jdroid_twitter" />
-			</LinearLayout>
-
-		</android.support.v7.widget.CardView>
-		<android.support.v7.widget.CardView android:id="@+id/instagram" style="@style/jdroid_cardViewClickableStyle">
-
-			<LinearLayout android:orientation="horizontal" style="@style/jdroid_cardViewInner" android:gravity="center_vertical"
-						  android:minHeight="@dimen/jdroid_itemMinHeight">
-
-				<ImageView android:layout_width="@dimen/jdroid_itemIconSize" android:layout_height="@dimen/jdroid_itemIconSize"
-					android:layout_marginRight="12dp" android:duplicateParentState="true" app:srcCompat="@drawable/jdroid_ic_instagram_24dp" />
-
-				<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" style="@style/jdroid_spreadTheLoveFollowUsItemText"
-					android:duplicateParentState="true" android:text="@string/jdroid_instagram" />
-			</LinearLayout>
-
-		</android.support.v7.widget.CardView>
-		<android.support.v7.widget.CardView android:id="@+id/linkedin" style="@style/jdroid_cardViewClickableStyle">
-
-			<LinearLayout android:orientation="horizontal" style="@style/jdroid_cardViewInner" android:gravity="center_vertical"
-						  android:minHeight="@dimen/jdroid_itemMinHeight">
-
-				<ImageView android:layout_width="@dimen/jdroid_itemIconSize" android:layout_height="@dimen/jdroid_itemIconSize"
-					android:layout_marginRight="12dp" android:duplicateParentState="true" app:srcCompat="@drawable/jdroid_ic_linkedin_24dp" />
-
-				<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" style="@style/jdroid_spreadTheLoveFollowUsItemText"
-					android:duplicateParentState="true" android:text="@string/jdroid_linkedin" />
+				<TextView android:layout_height="wrap_content"
+						  android:layout_width="wrap_content"
+						  style="@style/jdroid_spreadTheLoveFollowUsItemText"
+						  android:duplicateParentState="true"
+						  android:text="@string/jdroid_facebook" />
 			</LinearLayout>
 
 		</android.support.v7.widget.CardView>
 
-		<TextView android:id="@+id/shareSectionTitle" android:layout_height="wrap_content" android:layout_width="wrap_content"
-				  style="@style/jdroid_textMedium" android:layout_margin="8dp" android:textStyle="bold" android:text="@string/jdroid_share" />
+		<android.support.v7.widget.CardView android:id="@+id/googlePlus"
+											style="@style/jdroid_cardViewClickableStyle">
 
-		<include android:id="@+id/shareSection" layout="@layout/jdroid_share_section" />
-
-		<android.support.v7.widget.CardView android:id="@+id/appInvite" style="@style/jdroid_cardViewClickableStyle">
-
-			<LinearLayout android:orientation="horizontal" style="@style/jdroid_cardViewInner" android:gravity="center_vertical"
+			<LinearLayout android:orientation="horizontal"
+						  style="@style/jdroid_cardViewInner"
+						  android:gravity="center_vertical"
 						  android:minHeight="@dimen/jdroid_itemMinHeight">
 
-				<ImageView android:layout_width="@dimen/jdroid_itemIconSize" android:layout_height="@dimen/jdroid_itemIconSize"
-						   android:layout_marginRight="12dp" android:duplicateParentState="true" app:srcCompat="@drawable/jdroid_ic_mail_outline_black_24dp" />
+				<ImageView android:layout_width="@dimen/jdroid_itemIconSize"
+						   android:layout_height="@dimen/jdroid_itemIconSize"
+						   android:layout_marginRight="12dp"
+						   android:duplicateParentState="true"
+						   app:srcCompat="@drawable/jdroid_ic_google_plus" />
 
-				<TextView android:layout_height="wrap_content" android:layout_width="wrap_content" style="@style/jdroid_spreadTheLoveFollowUsItemText"
-						  android:duplicateParentState="true" android:text="@string/jdroid_appInviteButtonTitle" />
+				<TextView android:layout_height="wrap_content"
+						  android:layout_width="wrap_content"
+						  style="@style/jdroid_spreadTheLoveFollowUsItemText"
+						  android:duplicateParentState="true"
+						  android:text="@string/jdroid_googlePlus" />
 			</LinearLayout>
 
 		</android.support.v7.widget.CardView>
 
-		<android.support.v7.widget.CardView android:id="@+id/plusOneSection" style="@style/jdroid_cardViewClickableStyle" android:layout_marginBottom="4dp">
+		<android.support.v7.widget.CardView android:id="@+id/twitter"
+											style="@style/jdroid_cardViewClickableStyle">
+
+			<LinearLayout android:orientation="horizontal"
+						  style="@style/jdroid_cardViewInner"
+						  android:gravity="center_vertical"
+						  android:minHeight="@dimen/jdroid_itemMinHeight">
+
+				<ImageView android:layout_width="@dimen/jdroid_itemIconSize"
+						   android:layout_height="@dimen/jdroid_itemIconSize"
+						   android:layout_marginRight="12dp"
+						   android:duplicateParentState="true"
+						   app:srcCompat="@drawable/jdroid_ic_twitter_24dp" />
+
+				<TextView android:layout_height="wrap_content"
+						  android:layout_width="wrap_content"
+						  style="@style/jdroid_spreadTheLoveFollowUsItemText"
+						  android:duplicateParentState="true"
+						  android:text="@string/jdroid_twitter" />
+			</LinearLayout>
+
+		</android.support.v7.widget.CardView>
+
+		<android.support.v7.widget.CardView android:id="@+id/instagram"
+											style="@style/jdroid_cardViewClickableStyle">
+
+			<LinearLayout android:orientation="horizontal"
+						  style="@style/jdroid_cardViewInner"
+						  android:gravity="center_vertical"
+						  android:minHeight="@dimen/jdroid_itemMinHeight">
+
+				<ImageView android:layout_width="@dimen/jdroid_itemIconSize"
+						   android:layout_height="@dimen/jdroid_itemIconSize"
+						   android:layout_marginRight="12dp"
+						   android:duplicateParentState="true"
+						   app:srcCompat="@drawable/jdroid_ic_instagram_24dp" />
+
+				<TextView android:layout_height="wrap_content"
+						  android:layout_width="wrap_content"
+						  style="@style/jdroid_spreadTheLoveFollowUsItemText"
+						  android:duplicateParentState="true"
+						  android:text="@string/jdroid_instagram" />
+			</LinearLayout>
+
+		</android.support.v7.widget.CardView>
+
+		<android.support.v7.widget.CardView android:id="@+id/linkedin"
+											style="@style/jdroid_cardViewClickableStyle">
+
+			<LinearLayout android:orientation="horizontal"
+						  style="@style/jdroid_cardViewInner"
+						  android:gravity="center_vertical"
+						  android:minHeight="@dimen/jdroid_itemMinHeight">
+
+				<ImageView android:layout_width="@dimen/jdroid_itemIconSize"
+						   android:layout_height="@dimen/jdroid_itemIconSize"
+						   android:layout_marginRight="12dp"
+						   android:duplicateParentState="true"
+						   app:srcCompat="@drawable/jdroid_ic_linkedin_24dp" />
+
+				<TextView android:layout_height="wrap_content"
+						  android:layout_width="wrap_content"
+						  style="@style/jdroid_spreadTheLoveFollowUsItemText"
+						  android:duplicateParentState="true"
+						  android:text="@string/jdroid_linkedin" />
+			</LinearLayout>
+
+		</android.support.v7.widget.CardView>
+
+		<TextView android:id="@+id/shareSectionTitle"
+				  android:layout_height="wrap_content"
+				  android:layout_width="wrap_content"
+				  style="@style/jdroid_textMedium"
+				  android:layout_margin="8dp"
+				  android:textStyle="bold"
+				  android:text="@string/jdroid_share" />
+
+		<include android:id="@+id/shareSection"
+				 layout="@layout/jdroid_share_section" />
+
+		<android.support.v7.widget.CardView android:id="@+id/appInvite"
+											style="@style/jdroid_cardViewClickableStyle">
+
+			<LinearLayout android:orientation="horizontal"
+						  style="@style/jdroid_cardViewInner"
+						  android:gravity="center_vertical"
+						  android:minHeight="@dimen/jdroid_itemMinHeight">
+
+				<ImageView android:layout_width="@dimen/jdroid_itemIconSize"
+						   android:layout_height="@dimen/jdroid_itemIconSize"
+						   android:layout_marginRight="12dp"
+						   android:duplicateParentState="true"
+						   app:srcCompat="@drawable/jdroid_ic_mail_outline_black_24dp" />
+
+				<TextView android:layout_height="wrap_content"
+						  android:layout_width="wrap_content"
+						  style="@style/jdroid_spreadTheLoveFollowUsItemText"
+						  android:duplicateParentState="true"
+						  android:text="@string/jdroid_appInviteButtonTitle" />
+			</LinearLayout>
+
+		</android.support.v7.widget.CardView>
+
+		<android.support.v7.widget.CardView android:id="@+id/plusOneSection"
+											style="@style/jdroid_cardViewClickableStyle"
+											android:layout_marginBottom="4dp">
 
 			<com.google.android.gms.plus.PlusOneButton xmlns:plus="http://schemas.android.com/apk/lib/com.google.android.gms.plus"
-				android:id="@+id/plusOneButton" android:layout_width="match_parent" android:layout_height="wrap_content"
-				android:layout_marginTop="8dp" android:layout_marginBottom="8dp" android:layout_marginLeft="8dp"
-				android:layout_marginRight="8dp" plus:size="standard" plus:annotation="inline" />
+													   android:id="@+id/plusOneButton"
+													   android:layout_width="match_parent"
+													   android:layout_height="wrap_content"
+													   android:layout_marginTop="8dp"
+													   android:layout_marginBottom="8dp"
+													   android:layout_marginLeft="8dp"
+													   android:layout_marginRight="8dp"
+													   plus:size="standard"
+													   plus:annotation="inline" />
 
 		</android.support.v7.widget.CardView>
 

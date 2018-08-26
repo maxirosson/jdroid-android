@@ -1,9 +1,9 @@
 package com.jdroid.android.google.maps;
 
 import com.jdroid.android.domain.GeoLocation;
+import com.jdroid.java.http.parser.json.JsonParser;
 import com.jdroid.java.json.JSONArray;
 import com.jdroid.java.json.JSONObject;
-import com.jdroid.java.http.parser.json.JsonParser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.List;
  * From https://developers.google.com/maps/documentation/directions/?hl=es#Limits
  */
 public class GoogleRouteParser extends JsonParser<JSONObject> {
-	
+
 	/**
 	 * @see JsonParser#parse(java.lang.Object)
 	 */
@@ -44,11 +44,11 @@ public class GoogleRouteParser extends JsonParser<JSONObject> {
 		}
 		return route;
 	}
-	
+
 	/**
 	 * Decode a polyline string into a list of GeoLocations. From
 	 * https://developers.google.com/maps/documentation/directions/?hl=es#Limits
-	 * 
+	 *
 	 * @param poly polyline encoded string to decode.
 	 * @return the list of GeoLocations represented by this polystring.
 	 */
@@ -58,7 +58,7 @@ public class GoogleRouteParser extends JsonParser<JSONObject> {
 		List<GeoLocation> decoded = new ArrayList<>();
 		int lat = 0;
 		int lng = 0;
-		
+
 		while (index < len) {
 			int b;
 			int shift = 0;
@@ -70,7 +70,7 @@ public class GoogleRouteParser extends JsonParser<JSONObject> {
 			} while (b >= 0x20);
 			int dlat = (result & 1) != 0 ? ~(result >> 1) : (result >> 1);
 			lat += dlat;
-			
+
 			shift = 0;
 			result = 0;
 			do {
@@ -80,10 +80,10 @@ public class GoogleRouteParser extends JsonParser<JSONObject> {
 			} while (b >= 0x20);
 			int dlng = (result & 1) != 0 ? ~(result >> 1) : (result >> 1);
 			lng += dlng;
-			
+
 			decoded.add(new GeoLocation(lat / 1E5, lng / 1E5));
 		}
-		
+
 		return decoded;
 	}
 }

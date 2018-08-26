@@ -47,7 +47,7 @@ import com.jdroid.android.shortcuts.AppShortcutsHelper;
 import com.jdroid.android.utils.ScreenUtils;
 
 public enum HomeItem implements ActionItem {
-	
+
 	ANALYTCS(R.string.analytics, R.drawable.ic_analytics, AnalyticsActivity.class),
 	CARD_VIEW(R.string.cardView, R.drawable.ic_cardview, CardViewActivity.class),
 	DATE_TIME(R.string.dateTime, R.drawable.ic_date_time, DateTimeActivity.class),
@@ -86,23 +86,23 @@ public enum HomeItem implements ActionItem {
 	private Integer resourceId;
 	private Integer iconId;
 	private Class<? extends FragmentActivity> activityClass;
-	
+
 	HomeItem(Integer resourceId, Integer iconId, Class<? extends FragmentActivity> activityClass) {
 		this.resourceId = resourceId;
 		this.iconId = iconId;
 		this.activityClass = activityClass;
 	}
-	
+
 	@Override
 	public Integer getNameResource() {
 		return resourceId;
 	}
-	
+
 	@Override
 	public Integer getIconResource() {
 		return iconId;
 	}
-	
+
 	@Override
 	public void startActivity(FragmentActivity fragmentActivity) {
 		ActivityLauncher.startActivity(fragmentActivity, getIntent());
@@ -118,17 +118,17 @@ public enum HomeItem implements ActionItem {
 	public Boolean matchesActivity(FragmentActivity fragmentActivity) {
 		return activityClass.equals(fragmentActivity.getClass());
 	}
-	
+
 	@Override
 	public Fragment createFragment(Object args) {
 		return null;
 	}
-	
+
 	@Override
 	public String getName() {
 		return name();
 	}
-	
+
 	@Override
 	public Integer getDescriptionResource() {
 		return null;

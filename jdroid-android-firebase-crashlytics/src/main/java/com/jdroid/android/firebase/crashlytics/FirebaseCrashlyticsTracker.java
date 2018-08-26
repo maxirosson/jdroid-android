@@ -13,7 +13,7 @@ import java.util.List;
 
 
 public class FirebaseCrashlyticsTracker extends AbstractCoreAnalyticsTracker {
-	
+
 	@Override
 	public void trackHandledException(Throwable throwable, List<String> tags) {
 		if (areTagsEnabled()) {
@@ -30,7 +30,7 @@ public class FirebaseCrashlyticsTracker extends AbstractCoreAnalyticsTracker {
 	public void trackErrorLog(@NonNull String message) {
 		Crashlytics.log(message);
 	}
-	
+
 	@Override
 	public void trackErrorCustomKey(@NonNull String key, @NonNull Object value) {
 		if (value instanceof Boolean) {
@@ -45,7 +45,7 @@ public class FirebaseCrashlyticsTracker extends AbstractCoreAnalyticsTracker {
 			Crashlytics.setString(key, value.toString());
 		}
 	}
-	
+
 	@Override
 	public void onActivityCreate(Activity activity, Bundle savedInstanceState) {
 		Crashlytics.log(activity.getClass().getSimpleName() + " created. SavedInstanceState " + (savedInstanceState != null ? "not null" : "null"));
@@ -82,12 +82,12 @@ public class FirebaseCrashlyticsTracker extends AbstractCoreAnalyticsTracker {
 	public void onActivityDestroy(Activity activity) {
 		Crashlytics.log(activity.getClass().getSimpleName() + " destroyed");
 	}
-	
+
 	@Override
 	public void onFragmentStart(String screenViewName) {
 		Crashlytics.log(screenViewName + " started");
 	}
-	
+
 	@Override
 	public Boolean isEnabled() {
 		return FirebaseCrashlyticsContext.isFirebaseCrashlyticsEnabled();

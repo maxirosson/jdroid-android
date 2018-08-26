@@ -101,28 +101,28 @@ public class GoogleSignInHelper {
 
 	public void signOut() {
 		Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(
-				new ResultCallback<Status>() {
-					@Override
-					public void onResult(@NonNull Status status) {
-						LOGGER.debug("signOut: " + status.getStatusMessage());
-						if (googleSignInListener != null) {
-							googleSignInListener.onGoogleSignOut();
-						}
+			new ResultCallback<Status>() {
+				@Override
+				public void onResult(@NonNull Status status) {
+					LOGGER.debug("signOut: " + status.getStatusMessage());
+					if (googleSignInListener != null) {
+						googleSignInListener.onGoogleSignOut();
 					}
-				});
+				}
+			});
 	}
 
 	public void revokeAccess() {
 		Auth.GoogleSignInApi.revokeAccess(googleApiClient).setResultCallback(
-				new ResultCallback<Status>() {
-					@Override
-					public void onResult(@NonNull Status status) {
-						LOGGER.debug("revokeAccess: " + status.getStatusMessage());
-						if (googleSignInListener != null) {
-							googleSignInListener.onGoogleAccessRevoked();
-						}
+			new ResultCallback<Status>() {
+				@Override
+				public void onResult(@NonNull Status status) {
+					LOGGER.debug("revokeAccess: " + status.getStatusMessage());
+					if (googleSignInListener != null) {
+						googleSignInListener.onGoogleAccessRevoked();
 					}
-				});
+				}
+			});
 	}
 
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {

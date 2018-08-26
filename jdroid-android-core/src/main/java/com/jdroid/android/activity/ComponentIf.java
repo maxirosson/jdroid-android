@@ -18,7 +18,6 @@ public interface ComponentIf {
 	 *
 	 * @param id The id to search for.
 	 * @param <V> The {@link View} class
-	 *
 	 * @return The view if found or null otherwise.
 	 */
 	public <V extends View> V findView(@IdRes int id);
@@ -48,9 +47,9 @@ public interface ComponentIf {
 	public Boolean onBackPressedHandled();
 
 	// //////////////////////// Loading //////////////////////// //
-	
+
 	public void showLoading();
-	
+
 	public void dismissLoading();
 
 	// //////////////////////// Others //////////////////////// //
@@ -59,7 +58,7 @@ public interface ComponentIf {
 	 * Runs the specified action on the UI thread. If the current thread is the UI thread, then the action is executed
 	 * immediately. If the current thread is not the UI thread, the action is posted to the event queue of the UI
 	 * thread.
-	 *
+	 * <p>
 	 * If the current {@link Activity} is not equals to this, then no action is executed
 	 *
 	 * @param runnable the action to run on the UI thread

@@ -10,16 +10,16 @@ import com.jdroid.java.concurrent.ExecutorUtils;
  * {@link OnClickListener} that execute a {@link AbstractUseCase}
  */
 public class UseCaseOnClickListener implements OnClickListener {
-	
+
 	private AbstractUseCase useCase;
-	
+
 	/**
 	 * @param useCase The {@link AbstractUseCase} to execute
 	 */
 	public UseCaseOnClickListener(AbstractUseCase useCase) {
 		this.useCase = useCase;
 	}
-	
+
 	/**
 	 * @see android.view.View.OnClickListener#onClick(android.view.View)
 	 */
@@ -27,5 +27,5 @@ public class UseCaseOnClickListener implements OnClickListener {
 	public final void onClick(final View view) {
 		ExecutorUtils.execute(useCase);
 	}
-	
+
 }

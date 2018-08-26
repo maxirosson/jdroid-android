@@ -25,26 +25,25 @@ import com.jdroid.java.exception.UnexpectedException;
 
 /**
  * Base {@link Activity}
- * 
  */
 public abstract class AbstractFragmentActivity extends AppCompatActivity implements ActivityIf {
-	
+
 	private ActivityHelper activityHelper;
 
 	public ActivityHelper getActivityHelper() {
 		return activityHelper;
 	}
-	
+
 	@Override
 	public Boolean onBeforeSetContentView() {
 		return activityHelper.onBeforeSetContentView();
 	}
-	
+
 	@Override
 	public void onAfterSetContentView(Bundle savedInstanceState) {
 		activityHelper.onAfterSetContentView(savedInstanceState);
 	}
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Should we create a new instance on rotation?
@@ -53,45 +52,45 @@ public abstract class AbstractFragmentActivity extends AppCompatActivity impleme
 		super.onCreate(savedInstanceState);
 		activityHelper.onCreate(savedInstanceState);
 	}
-	
+
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		activityHelper.onSaveInstanceState(outState);
 	}
-	
+
 	@Override
 	protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
 		super.onRestoreInstanceState(savedInstanceState);
 		activityHelper.onRestoreInstanceState(savedInstanceState);
 	}
-	
+
 	@Override
 	protected void onStart() {
 		super.onStart();
 		activityHelper.onStart();
 	}
-	
+
 	@Override
 	protected void onResume() {
 		super.onResume();
 		activityHelper.onResume();
 	}
-	
+
 	@Override
 	protected void onPause() {
 		activityHelper.onBeforePause();
 		super.onPause();
 		activityHelper.onPause();
 	}
-	
+
 	@Override
 	protected void onStop() {
 		activityHelper.onBeforeStop();
 		super.onStop();
 		activityHelper.onStop();
 	}
-	
+
 	@Override
 	protected void onDestroy() {
 		activityHelper.onBeforeDestroy();
@@ -104,50 +103,50 @@ public abstract class AbstractFragmentActivity extends AppCompatActivity impleme
 		super.onActivityResult(requestCode, resultCode, data);
 		activityHelper.onActivityResult(requestCode, resultCode, data);
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		return activityHelper.onCreateOptionsMenu(menu);
 	}
-	
+
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		activityHelper.onPrepareOptionsMenu(menu);
 		return super.onPrepareOptionsMenu(menu);
 	}
-	
+
 	@Override
 	public Integer getMenuResourceId() {
 		return activityHelper.getMenuResourceId();
 	}
-	
+
 	@Override
 	public void doOnCreateOptionsMenu(Menu menu) {
 		activityHelper.doOnCreateOptionsMenu(menu);
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		return activityHelper.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
 	}
-	
+
 	@Override
 	public <V extends View> V findView(int id) {
 		return activityHelper.findView(id);
 	}
-	
+
 	@Override
 	public View inflate(int resource) {
 		return activityHelper.inflate(resource);
 	}
-	
+
 	@Override
 	public <E> E getExtra(String key) {
 		return activityHelper.getExtra(key);
 	}
-	
+
 	public void loadUseCaseFragment(Bundle savedInstanceState, Class<? extends UseCaseFragment<?>> useCaseFragmentClass) {
-		
+
 		if (savedInstanceState == null) {
 			try {
 				FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -160,22 +159,22 @@ public abstract class AbstractFragmentActivity extends AppCompatActivity impleme
 			}
 		}
 	}
-	
+
 	public void removeUseCaseFragment(Class<? extends UseCaseFragment<?>> useCaseFragmentClass) {
 		FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 		fragmentTransaction.remove(getUseCaseUseCaseFragment(useCaseFragmentClass));
 		fragmentTransaction.commit();
 	}
-	
+
 	public UseCaseFragment<?> getUseCaseUseCaseFragment(Class<? extends UseCaseFragment<?>> useCaseFragmentClass) {
 		return (UseCaseFragment<?>)getSupportFragmentManager().findFragmentByTag(useCaseFragmentClass.getSimpleName());
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public <E extends Fragment> E getFragment(Class<E> fragmentClass) {
 		return (E)getSupportFragmentManager().findFragmentByTag(fragmentClass.getSimpleName());
 	}
-	
+
 	public void addFragment(Fragment newFragment, int containerId, boolean addToBackStack) {
 		FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 		fragmentTransaction.add(containerId, newFragment, newFragment.getClass().getSimpleName());
@@ -206,18 +205,18 @@ public abstract class AbstractFragmentActivity extends AppCompatActivity impleme
 		fragment.setArguments(bundle);
 		return fragment;
 	}
-	
+
 	public void commitFragment(int containerViewId, Fragment fragment) {
 		FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 		fragmentTransaction.add(containerViewId, fragment);
 		fragmentTransaction.commit();
 	}
-	
+
 	@Override
 	public Boolean isLauncherActivity() {
 		return activityHelper.isLauncherActivity();
 	}
-	
+
 	@Override
 	public Long getLocationFrequency() {
 		return activityHelper.getLocationFrequency();
@@ -228,24 +227,24 @@ public abstract class AbstractFragmentActivity extends AppCompatActivity impleme
 		super.onPostCreate(savedInstanceState);
 		activityHelper.onPostCreate(savedInstanceState);
 	}
-	
+
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
 		activityHelper.onConfigurationChanged(newConfig);
 	}
-	
+
 	@Override
 	protected void onNewIntent(Intent intent) {
 		super.onNewIntent(intent);
 		activityHelper.onNewIntent(intent);
 	}
-	
+
 	@Override
 	public void executeOnUIThread(Runnable runnable) {
 		activityHelper.executeOnUIThread(runnable);
 	}
-	
+
 	@Override
 	public Boolean isActivityDestroyed() {
 		return activityHelper.isActivityDestroyed();
@@ -257,23 +256,23 @@ public abstract class AbstractFragmentActivity extends AppCompatActivity impleme
 	}
 
 	// //////////////////////// Loading //////////////////////// //
-	
+
 	@Override
 	public void showLoading() {
 		activityHelper.showLoading();
 	}
-	
+
 	@Override
 	public void dismissLoading() {
 		activityHelper.dismissLoading();
 	}
-	
+
 	@NonNull
 	@Override
 	public ActivityLoading getDefaultLoading() {
 		return activityHelper.getDefaultLoading();
 	}
-	
+
 	@Override
 	public void setLoading(ActivityLoading loading) {
 		activityHelper.setLoading(loading);
@@ -333,16 +332,16 @@ public abstract class AbstractFragmentActivity extends AppCompatActivity impleme
 	public GoogleApiClient getGoogleApiClient() {
 		return activityHelper.getGoogleApiClient();
 	}
-	
+
 	@Override
 	public void setRequestedOrientation(int requestedOrientation) {
 		try {
 			super.setRequestedOrientation(requestedOrientation);
-		} catch(IllegalStateException e) {
+		} catch (IllegalStateException e) {
 			activityHelper.catchRequestedOrientationIllegalStateException(e);
 		}
 	}
-	
+
 	@Override
 	public AbstractFragmentActivity getActivity() {
 		return this;

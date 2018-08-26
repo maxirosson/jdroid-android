@@ -24,25 +24,25 @@ public class RateAppView extends RelativeLayout {
 		super(context, attrs, defStyle);
 		init(context);
 	}
-	
+
 	public RateAppView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		init(context);
 	}
-	
+
 	public RateAppView(Context context) {
 		super(context);
 		init(context);
 	}
-	
+
 	protected int getLayoutResId() {
 		return R.layout.jdroid_rate_app_view;
 	}
-	
+
 	private void init(Context context) {
-		
+
 		LayoutInflater.from(context).inflate(getLayoutResId(), this, true);
-		
+
 		rateAppTitle = findViewById(R.id.rateAppTitle);
 		positiveButton = findViewById(R.id.positive);
 		negativeButton = findViewById(R.id.negative);
@@ -82,7 +82,7 @@ public class RateAppView extends RelativeLayout {
 
 			@Override
 			public void onClick(View v) {
-				
+
 				String contactUsEmailAddress = AbstractApplication.get().getAppContext().getContactUsEmail();
 				if (ExternalAppsUtils.openEmail(contactUsEmailAddress, AbstractApplication.get().getAppName())) {
 					AbstractApplication.get().getCoreAnalyticsSender().trackGiveFeedback(true);

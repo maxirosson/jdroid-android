@@ -11,13 +11,13 @@ import com.jdroid.android.usecase.UseCaseHelper;
 import com.jdroid.android.usecase.UseCaseTrigger;
 
 public class NonBlockingLoadingFragment extends AbstractFragment {
-	
+
 	private SampleItemsUseCase sampleItemsUseCase;
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		sampleItemsUseCase = new SampleItemsUseCase();
 	}
 
@@ -37,7 +37,7 @@ public class NonBlockingLoadingFragment extends AbstractFragment {
 		super.onStop();
 		UseCaseHelper.unregisterUseCase(sampleItemsUseCase, this);
 	}
-	
+
 	@Override
 	public FragmentLoading getDefaultLoading() {
 		return new NonBlockingLoading();

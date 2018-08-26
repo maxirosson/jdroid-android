@@ -9,8 +9,8 @@ import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.HitBuilders.SocialBuilder;
 import com.jdroid.android.analytics.CoreAnalyticsTracker;
 import com.jdroid.android.application.AbstractApplication;
-import com.jdroid.android.social.SocialNetwork;
 import com.jdroid.android.social.SocialAction;
+import com.jdroid.android.social.SocialNetwork;
 import com.jdroid.android.utils.DeviceUtils;
 import com.jdroid.java.utils.LoggerUtils;
 
@@ -19,15 +19,15 @@ import org.slf4j.Logger;
 import java.util.List;
 
 public class GoogleCoreAnalyticsTracker extends AbstractGoogleAnalyticsTracker implements CoreAnalyticsTracker {
-	
+
 	private static final Logger LOGGER = LoggerUtils.getLogger(GoogleCoreAnalyticsTracker.class);
-	
+
 	public static final String NOTIFICATION_CATEGORY = "notification";
 	private static final String FEEDBACK_CATEGORY = "feedback";
 	private static final String WIDGET_CATEGORY = "widget";
 
 	public static final String SOCIAL = "social";
-	
+
 	private Boolean firstTrackingSent = false;
 
 	public enum CustomDimension {
@@ -51,9 +51,9 @@ public class GoogleCoreAnalyticsTracker extends AbstractGoogleAnalyticsTracker i
 
 	@Override
 	public void onActivityStart(Activity activity, String referrer, Object data) {
-		
+
 		synchronized (GoogleCoreAnalyticsTracker.class) {
-			
+
 			HitBuilders.ScreenViewBuilder screenViewBuilder = new HitBuilders.ScreenViewBuilder();
 			Uri uri = activity.getIntent().getData();
 			if (uri != null) {
@@ -65,11 +65,11 @@ public class GoogleCoreAnalyticsTracker extends AbstractGoogleAnalyticsTracker i
 			if (!firstTrackingSent) {
 				getGoogleAnalyticsHelper().addCustomDimension(screenViewBuilder, CustomDimension.DEVICE_YEAR_CLASS, DeviceUtils.getDeviceYearClass().toString());
 				getGoogleAnalyticsHelper().addCustomDimension(screenViewBuilder, CustomDimension.DEVICE_TYPE, DeviceUtils.getDeviceType());
-				
+
 				String installationSource = AbstractApplication.get().getInstallationSource();
 				if (installationSource != null) {
 					getGoogleAnalyticsHelper().addCustomDimension(screenViewBuilder, CustomDimension.INSTALLATION_SOURCE, installationSource);
-					
+
 					onAppLoadTrack(screenViewBuilder, data);
 					firstTrackingSent = true;
 				}
@@ -98,11 +98,11 @@ public class GoogleCoreAnalyticsTracker extends AbstractGoogleAnalyticsTracker i
 	public void onActivityDestroy(Activity activity) {
 		// Do nothing
 	}
-	
+
 	protected void onAppLoadTrack(HitBuilders.ScreenViewBuilder screenViewBuilder, Object data) {
 		// Do nothing
 	}
-	
+
 	protected void onActivityStartTrack(HitBuilders.ScreenViewBuilder screenViewBuilder, Object data) {
 		// Do nothing
 	}
@@ -114,7 +114,7 @@ public class GoogleCoreAnalyticsTracker extends AbstractGoogleAnalyticsTracker i
 			getGoogleAnalyticsHelper().addCommonCustomDimension(CustomDimension.REFERRER.name(), "normal");
 		}
 	}
-	
+
 	@Override
 	public void onFragmentStart(String screenViewName) {
 		synchronized (GoogleCoreAnalyticsTracker.class) {
@@ -122,12 +122,12 @@ public class GoogleCoreAnalyticsTracker extends AbstractGoogleAnalyticsTracker i
 			getGoogleAnalyticsHelper().sendScreenView(screenViewBuilder, screenViewName);
 		}
 	}
-	
+
 	@Override
 	public void trackNotificationDisplayed(String notificationName) {
 		getGoogleAnalyticsHelper().sendEvent(NOTIFICATION_CATEGORY, "display", notificationName);
 	}
-	
+
 	@Override
 	public void trackNotificationOpened(String notificationName) {
 		getGoogleAnalyticsHelper().sendEvent(NOTIFICATION_CATEGORY, "open", notificationName);
@@ -168,10 +168,10 @@ public class GoogleCoreAnalyticsTracker extends AbstractGoogleAnalyticsTracker i
 	public void trackSendAppInvitation(String invitationId) {
 		getGoogleAnalyticsHelper().sendEvent(GoogleCoreAnalyticsTracker.SOCIAL, "sendAppInvitation", invitationId);
 	}
-	
+
 	@Override
 	public void trackSocialInteraction(String network, SocialAction socialAction, String socialTarget) {
-		
+
 		String category = SOCIAL;
 		if (network != null) {
 			category += "-" + network;
@@ -179,20 +179,15 @@ public class GoogleCoreAnalyticsTracker extends AbstractGoogleAnalyticsTracker i
 			network = "Undefined";
 		}
 		getGoogleAnalyticsHelper().sendEvent(category, socialAction.getName(), socialTarget);
-		
+
 		SocialBuilder socialBuilder = new SocialBuilder();
 		socialBuilder.setNetwork(network);
 		socialBuilder.setAction(socialAction.getName());
 		socialBuilder.setTarget(socialTarget);
-		
+
 		getGoogleAnalyticsHelper().getTracker().send(socialBuilder.build());
 		LOGGER.debug("Social interaction sent. Network [" + network + "] Action [" + socialAction.getName()
-				+ "] Target [" + socialTarget + "]");
-	}
-	
-	@Override
-	public void trackFatalException(Throwable throwable, List<String> tags) {
-		// Do nothing
+			+ "] Target [" + socialTarget + "]");
 	}
 
 	@Override
@@ -204,21 +199,21 @@ public class GoogleCoreAnalyticsTracker extends AbstractGoogleAnalyticsTracker i
 	public void trackErrorLog(String message) {
 		// Do nothing
 	}
-	
+
 	@Override
 	public void trackErrorCustomKey(@NonNull String key, @NonNull Object value) {
 		// Do nothing
 	}
-	
+
 	public void sendSocialInteraction(SocialNetwork socialNetwork, SocialAction socialAction, String socialTarget) {
-		
+
 		SocialBuilder socialBuilder = new SocialBuilder();
 		socialBuilder.setNetwork(socialNetwork.getName());
 		socialBuilder.setAction(socialAction.getName());
 		socialBuilder.setTarget(socialTarget);
-		
+
 		getGoogleAnalyticsHelper().getTracker().send(socialBuilder.build());
 		LOGGER.debug("Social interaction sent. Network [" + socialNetwork.getName() + "] Action ["
-				+ socialAction.getName() + "] Target [" + socialTarget + "]");
+			+ socialAction.getName() + "] Target [" + socialTarget + "]");
 	}
 }
