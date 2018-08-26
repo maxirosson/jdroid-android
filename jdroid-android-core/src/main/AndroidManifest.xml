@@ -61,24 +61,6 @@
 			</intent-filter>
 		</receiver>
 
-		<
-		<
-		<
-		<
-		<
-		<
-		< HEAD
-		=======
-		<service android:name="com.jdroid.android.firebase.jobdispatcher.CommandWorkerService"
-				 android:exported="false" />
-		<service android:name="com.jdroid.android.firebase.jobdispatcher.CommandJobService"
-				 android:exported="false">
-			<intent-filter>
-				<action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE" />
-			</intent-filter>
-		</service>
-
-		>>>>>>> master
 		<provider
 				android:name="com.jdroid.android.lifecycle.ApplicationLifecycleInitProvider"
 				android:authorities="${applicationId}.com.jdroid.android.lifecycle.ApplicationLifecycleInitProvider"
