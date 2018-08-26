@@ -39,18 +39,8 @@ import java.util.Set;
  * (and not before) you may call other methods.
  * <p>
  * After setup is complete, you will typically want to request an inventory of owned items and subscriptions. See
-<<<<<<< HEAD
  * {@link #queryPurchases(ItemType)} and related methods.
  * 
-=======
- * {@link #queryInventory} and related methods.
- * <p>
- * When you are done with this object, don't forget to call {@link #disposeWhenFinished()} to ensure proper cleanup. This object holds
- * a binding to the in-app billing service, which will leak unless you dispose of it correctly. If you created the
- * object on an Activity's onCreate method, then the recommended place to dispose of it is the Activity's onDestroy
- * method.
- * <p>
->>>>>>> master
  * A note about threading: When using this object from a background thread, you may call the blocking versions of
  * methods; when using from a UI thread, call only the asynchronous versions and handle the results via callbacks. Also,
  * notice that you can only call one asynchronous operation at a time; attempting to start a second asynchronous
