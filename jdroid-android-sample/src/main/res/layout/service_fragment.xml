@@ -46,36 +46,6 @@
 		<TextView
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:text="@string/firebaseJobServiceDescription"
-				android:layout_marginTop="8dp" />
-
-		<Button
-				android:id="@+id/firebaseJobService"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text="@string/firebaseJobService" />
-
-		<TextView
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text="@string/commandService1Description"
-				android:layout_marginTop="8dp" />
-
-		<Button
-				android:id="@+id/commandService1"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text="@string/commandService1" />
-
-		<TextView
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text="@string/commandService2Description"
-				android:layout_marginTop="8dp" />
-
-		<TextView
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
 				android:text="@string/sampleWorker1Description"
 				android:layout_marginTop="8dp" />
 
