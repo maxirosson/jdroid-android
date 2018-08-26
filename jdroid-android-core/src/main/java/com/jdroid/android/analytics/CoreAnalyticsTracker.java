@@ -14,8 +14,6 @@ public interface CoreAnalyticsTracker extends AnalyticsTracker {
 
 	// Error handling
 
-	public void trackFatalException(Throwable throwable, List<String> tags);
-
 	public void trackHandledException(Throwable throwable, List<String> tags);
 
 	public void trackErrorLog(@NonNull String message);

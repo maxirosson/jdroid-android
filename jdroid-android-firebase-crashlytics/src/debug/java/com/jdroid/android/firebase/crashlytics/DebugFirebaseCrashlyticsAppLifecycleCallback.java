@@ -30,7 +30,7 @@ public class DebugFirebaseCrashlyticsAppLifecycleCallback extends ApplicationLif
 			@Override
 			public List<Pair<String, Object>> getDebugInfoProperties() {
 				List<Pair<String, Object>> properties = Lists.newArrayList();
-				properties.add(new Pair<String, Object>("Firebase Crashlytics Enabled", FirebaseCrashlyticsContext.isFirebaseCrashlyticsEnabled()));
+				properties.add(new Pair<>("Firebase Crashlytics Enabled", FirebaseCrashlyticsContext.isFirebaseCrashlyticsEnabled()));
 				return properties;
 			}
 		});

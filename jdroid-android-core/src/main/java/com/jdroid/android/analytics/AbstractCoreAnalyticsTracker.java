@@ -72,11 +72,6 @@ public abstract class AbstractCoreAnalyticsTracker implements CoreAnalyticsTrack
 	}
 
 	@Override
-	public void trackFatalException(Throwable throwable, List<String> tags) {
-		// Do Nothing
-	}
-
-	@Override
 	public void trackHandledException(Throwable throwable, List<String> tags) {
 		// Do Nothing
 	}

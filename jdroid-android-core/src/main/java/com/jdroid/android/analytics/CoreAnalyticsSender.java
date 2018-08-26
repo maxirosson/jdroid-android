@@ -140,17 +140,6 @@ public class CoreAnalyticsSender<T extends CoreAnalyticsTracker> extends Analyti
 	}
 
 	@Override
-	public void trackFatalException(final Throwable throwable, final List<String> tags) {
-		execute(new TrackingCommand() {
-
-			@Override
-			protected void track(T tracker) {
-				tracker.trackFatalException(throwable, tags);
-			}
-		});
-	}
-
-	@Override
 	public void trackHandledException(final Throwable throwable, final List<String> tags) {
 		execute(new TrackingCommand() {
 

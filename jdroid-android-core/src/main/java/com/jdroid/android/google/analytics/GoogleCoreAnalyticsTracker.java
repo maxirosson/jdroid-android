@@ -191,11 +191,6 @@ public class GoogleCoreAnalyticsTracker extends AbstractGoogleAnalyticsTracker i
 	}
 
 	@Override
-	public void trackFatalException(Throwable throwable, List<String> tags) {
-		// Do nothing
-	}
-
-	@Override
 	public void trackHandledException(Throwable throwable, List<String> tags) {
 		// Do nothing
 	}
