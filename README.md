@@ -100,6 +100,9 @@ Libray for Android apps. Support for Android 4.0 (api level 15) and higher versi
  * [Google Maps integration](http://developer.android.com/google/play-services/maps.html)
  * [Google Street View integration](https://developers.google.com/maps/documentation/android-api/streetview)
 
+## [jdroid-android-google-play-games](https://github.com/maxirosson/jdroid/wiki/jdroid-Android)
+ * [Google Play Games Services](https://developers.google.com/games/services/) integration
+
 ## [jdroid-android-google-plus](https://github.com/maxirosson/jdroid/wiki/jdroid-Android)
 
  * [Google+ integration](http://developer.android.com/google/play-services/plus.html)
