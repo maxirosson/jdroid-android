@@ -26,7 +26,6 @@ Libray for Android apps. Support for Android 4.0 (api level 15) and higher versi
   * [Firebase Dynamic Links](https://firebase.google.com/docs/dynamic-links/)
   * [Firebase Invites](https://firebase.google.com/docs/invites/)
   * [Firebase Performance Monitor](https://firebase.google.com/docs/perf-mon/)
-* [Sqlite integration](https://sqlite.org/)
 * [Device year class integration](https://github.com/facebook/device-year-class)
 * [Facebook Stetho Integration](https://github.com/facebook/stetho)
 * [Leak Canary Integration](https://github.com/square/leakcanary)
