@@ -2,13 +2,11 @@ package com.jdroid.android.sample.ui.google.signin;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.jdroid.android.fragment.AbstractFragment;
 import com.jdroid.android.google.signin.GoogleSignInHelper;
@@ -145,17 +143,6 @@ public class GoogleSignInFragment extends AbstractFragment implements GoogleSign
 		revokeButton.setVisibility(View.GONE);
 
 		Snackbar.make(findView(R.id.container), "onGoogleAccessRevoked", Snackbar.LENGTH_SHORT).show();
-	}
-
-	@Override
-	public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-		status.setText(R.string.connectionFailed);
-
-		signInButton.setVisibility(View.VISIBLE);
-		signOutButton.setVisibility(View.GONE);
-		revokeButton.setVisibility(View.GONE);
-
-		Snackbar.make(findView(R.id.container), "onConnectionFailed", Snackbar.LENGTH_SHORT).show();
 	}
 
 	@Override
