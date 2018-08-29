@@ -89,7 +89,6 @@ public class GoogleSignInHelper {
 		Task<GoogleSignInAccount> task = googleSignInClient.silentSignIn();
 		if (task.isSuccessful()) {
 			// There's immediate result available.
-			GoogleSignInAccount signInAccount = task.getResult();
 			handleSignInResult(task);
 		} else {
 			showLoading();
@@ -154,8 +153,10 @@ public class GoogleSignInHelper {
 		try {
 			GoogleSignInAccount account = completedTask.getResult(ApiException.class);
 			if (isRequestIdTokenEnabled()) {
-				String idToken = account.getIdToken();
-				// TODO send ID Token to server and validate
+				if (!isTokenValid(account.getIdToken())) {
+					revokeAccess();
+					return;
+				}
 			}
 
 			LOGGER.debug("SignIn valid");
@@ -169,6 +170,11 @@ public class GoogleSignInHelper {
 				googleSignInListener.onGoogleSignOut();
 			}
 		}
+	}
+
+	protected Boolean isTokenValid(String idToken) {
+		// https://developers.google.com/identity/sign-in/android/backend-auth
+		return true;
 	}
 
 	public void setGoogleSignInListener(GoogleSignInListener googleSignInListener) {
