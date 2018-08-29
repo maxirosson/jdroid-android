@@ -70,12 +70,6 @@ public class GoogleSignInFragment extends AbstractFragment implements GoogleSign
 				googleSignInHelper.revokeAccess();
 			}
 		});
-	}
-
-	@Override
-	public void onStart() {
-		super.onStart();
-
 
 		googleSignInHelper = new GoogleSignInHelper(this, this) {
 			@Override
@@ -88,7 +82,16 @@ public class GoogleSignInFragment extends AbstractFragment implements GoogleSign
 				return true;
 			}
 		};
-		googleSignInHelper.silentSignIn();
+	}
+
+	@Override
+	public void onStart() {
+		super.onStart();
+
+		googleSignInHelper.verifyLastSignedInAccount();
+
+		// TODO
+		//googleSignInHelper.silentSignIn();
 	}
 
 	@Override
