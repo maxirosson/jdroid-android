@@ -122,6 +122,9 @@
 	<string name="checkGooglePlayServices">Check Google Play Services</string>
 	<string name="openGooglePlayServices">Open Google Play Services</string>
 
+	<!-- Google Play Games -->
+	<string name="googlePlayGames">Google Play Games</string>
+
 	<!-- Http -->
 	<string name="http">Http</string>
 	<string name="httpGet">GET</string>

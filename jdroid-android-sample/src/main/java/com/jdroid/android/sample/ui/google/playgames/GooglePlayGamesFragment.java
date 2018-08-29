@@ -1,4 +1,4 @@
-package com.jdroid.android.sample.ui.google.signin;
+package com.jdroid.android.sample.ui.google.playgames;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.jdroid.android.fragment.AbstractFragment;
 import com.jdroid.android.google.signin.GoogleSignInHelper;
@@ -15,7 +16,7 @@ import com.jdroid.android.loading.FragmentLoading;
 import com.jdroid.android.loading.NonBlockingLoading;
 import com.jdroid.android.sample.R;
 
-public class GoogleSignInFragment extends AbstractFragment implements GoogleSignInListener {
+public class GooglePlayGamesFragment extends AbstractFragment implements GoogleSignInListener {
 
 	private GoogleSignInHelper googleSignInHelper;
 
@@ -32,7 +33,7 @@ public class GoogleSignInFragment extends AbstractFragment implements GoogleSign
 
 	@Override
 	public Integer getContentFragmentLayout() {
-		return R.layout.google_sign_in_fragment;
+		return R.layout.google_play_games_fragment;
 	}
 
 	@Override
@@ -70,14 +71,10 @@ public class GoogleSignInFragment extends AbstractFragment implements GoogleSign
 		});
 
 		googleSignInHelper = new GoogleSignInHelper(this, this) {
-			@Override
-			protected Boolean isRequestIdTokenEnabled() {
-				return true;
-			}
 
 			@Override
-			protected Boolean isServerAuthCodeEnabled() {
-				return true;
+			protected GoogleSignInOptions getGoogleSignInOptions() {
+				return GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN;
 			}
 		};
 	}
@@ -107,12 +104,8 @@ public class GoogleSignInFragment extends AbstractFragment implements GoogleSign
 		builder.append(googleSignInAccount.getEmail());
 		builder.append("\nGranted Scopes: ");
 		builder.append(googleSignInAccount.getGrantedScopes());
-		builder.append("\nId: ");
-		builder.append(googleSignInAccount.getId());
 		builder.append("\nId Token: ");
 		builder.append(googleSignInAccount.getIdToken() != null ? googleSignInAccount.getIdToken().substring(0, 50) : null);
-		builder.append("\nServer Auth Code: ");
-		builder.append(googleSignInAccount.getServerAuthCode());
 		status.setText(builder.toString());
 
 

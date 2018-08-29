@@ -653,6 +653,13 @@
 				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
 				  tools:ignore="UnusedAttribute" />
 
+		<!-- Google Play Games -->
+
+		<activity android:name="com.jdroid.android.sample.ui.google.playgames.GooglePlayGamesActivity"
+				  android:label="@string/googlePlayGames"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute" />
+
 		<!-- Strict Mode -->
 
 		<activity android:name="com.jdroid.android.sample.ui.strictmode.StrictModeActivity"
