@@ -7,9 +7,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.jdroid.android.fragment.AbstractFragment;
+import com.jdroid.android.google.playgames.GooglePlayGamesHelper;
 import com.jdroid.android.google.signin.GoogleSignInHelper;
 import com.jdroid.android.google.signin.GoogleSignInListener;
 import com.jdroid.android.loading.FragmentLoading;
@@ -70,23 +70,14 @@ public class GooglePlayGamesFragment extends AbstractFragment implements GoogleS
 			}
 		});
 
-		googleSignInHelper = new GoogleSignInHelper(this, this) {
-
-			@Override
-			protected GoogleSignInOptions getGoogleSignInOptions() {
-				return GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN;
-			}
-		};
+		googleSignInHelper = new GooglePlayGamesHelper(this, this);
 	}
 
 	@Override
 	public void onStart() {
 		super.onStart();
 
-		googleSignInHelper.verifyLastSignedInAccount();
-
-		// TODO
-		//googleSignInHelper.silentSignIn();
+		googleSignInHelper.silentSignIn();
 	}
 
 	@Override
