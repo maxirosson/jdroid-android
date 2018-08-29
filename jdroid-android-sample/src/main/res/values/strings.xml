@@ -116,7 +116,6 @@
 	<!-- Google Sign In -->
 	<string name="revokeAccess">Revoke</string>
 	<string name="notLogged">Not Logged</string>
-	<string name="connectionFailed">Connection Failed</string>
 
 	<!-- Google Play Services -->
 	<string name="googlePlayServices">Google Play Services</string>

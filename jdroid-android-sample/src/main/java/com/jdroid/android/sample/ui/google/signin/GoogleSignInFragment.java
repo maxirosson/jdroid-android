@@ -2,13 +2,11 @@ package com.jdroid.android.sample.ui.google.signin;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.jdroid.android.fragment.AbstractFragment;
 import com.jdroid.android.google.signin.GoogleSignInHelper;
@@ -70,12 +68,6 @@ public class GoogleSignInFragment extends AbstractFragment implements GoogleSign
 				googleSignInHelper.revokeAccess();
 			}
 		});
-	}
-
-	@Override
-	public void onStart() {
-		super.onStart();
-
 
 		googleSignInHelper = new GoogleSignInHelper(this, this) {
 			@Override
@@ -88,7 +80,16 @@ public class GoogleSignInFragment extends AbstractFragment implements GoogleSign
 				return true;
 			}
 		};
-		googleSignInHelper.silentSignIn();
+	}
+
+	@Override
+	public void onStart() {
+		super.onStart();
+
+		googleSignInHelper.verifyLastSignedInAccount();
+
+		// TODO
+		//googleSignInHelper.silentSignIn();
 	}
 
 	@Override
@@ -142,17 +143,6 @@ public class GoogleSignInFragment extends AbstractFragment implements GoogleSign
 		revokeButton.setVisibility(View.GONE);
 
 		Snackbar.make(findView(R.id.container), "onGoogleAccessRevoked", Snackbar.LENGTH_SHORT).show();
-	}
-
-	@Override
-	public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-		status.setText(R.string.connectionFailed);
-
-		signInButton.setVisibility(View.VISIBLE);
-		signOutButton.setVisibility(View.GONE);
-		revokeButton.setVisibility(View.GONE);
-
-		Snackbar.make(findView(R.id.container), "onConnectionFailed", Snackbar.LENGTH_SHORT).show();
 	}
 
 	@Override
