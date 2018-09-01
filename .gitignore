@@ -10,6 +10,8 @@ gradle.properties
 .idea/*.xml
 .idea/libraries
 .idea/markdown-navigator
+.idea/copyright
+.idea/modules
 
 # Android Studio
 /local.properties
