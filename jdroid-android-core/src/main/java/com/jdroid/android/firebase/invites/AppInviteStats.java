@@ -10,6 +10,7 @@ import com.jdroid.java.date.DateUtils;
 import com.jdroid.java.utils.StringUtils;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class AppInviteStats {
 
@@ -51,8 +52,8 @@ public class AppInviteStats {
 	// FIXME Find a way to call this method from UI thread
 	//@WorkerThread
 	public static Boolean displayAppInviteView(Context context) {
-		Boolean enoughDaysSinceLastInvite = DateUtils.millisecondsToDays(AppInviteStats.getLastInviteSentTimestamp()) >= 21;
-		Boolean enoughDaysSinceFirstAppLoad = DateUtils.millisecondsToDays(UsageStats.getFirstAppLoadTimestamp()) >= 7;
+		Boolean enoughDaysSinceLastInvite = TimeUnit.MILLISECONDS.toDays(AppInviteStats.getLastInviteSentTimestamp()) >= 21;
+		Boolean enoughDaysSinceFirstAppLoad = TimeUnit.MILLISECONDS.toDays(UsageStats.getFirstAppLoadTimestamp()) >= 7;
 		Boolean enoughAppLoads = UsageStats.getAppLoads() >= 10;
 		return enoughDaysSinceLastInvite && enoughDaysSinceFirstAppLoad && enoughAppLoads && context != null && GooglePlayServicesUtils.isGooglePlayServicesAvailable(context);
 	}

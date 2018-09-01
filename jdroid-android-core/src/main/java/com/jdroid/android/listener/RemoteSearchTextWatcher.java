@@ -8,6 +8,7 @@ import com.jdroid.java.concurrent.ExecutorUtils;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.TimeUnit;
 
 public abstract class RemoteSearchTextWatcher implements TextWatcher {
 
@@ -72,7 +73,7 @@ public abstract class RemoteSearchTextWatcher implements TextWatcher {
 				try {
 					String searchValue = queue.take();
 					if (queue.isEmpty()) {
-						ExecutorUtils.sleepInMillis(SEARCH_FREQUENCY);
+						ExecutorUtils.sleep(SEARCH_FREQUENCY, TimeUnit.MILLISECONDS);
 						// If after waiting for a SEARCH_FREQUENCY, no more input was added, the search is performed.
 						if (queue.isEmpty()) {
 							RemoteSearchTextWatcher.this.onPerformSearch(searchValue);

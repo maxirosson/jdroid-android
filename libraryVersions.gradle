@@ -2,7 +2,7 @@
 ext.JDROID_GRADLE_PLUGIN_VERSION = '1.1.0-SNAPSHOT'
 
 // https://github.com/maxirosson/jdroid-java/blob/master/CHANGELOG.md
-ext.JDROID_JAVA_VERSION = '1.1.0-SNAPSHOT'
+ext.JDROID_JAVA_VERSION = '2.0.0'
 
 // https://github.com/maxirosson/jdroid-java-http/blob/master/CHANGELOG.md
 ext.JDROID_JAVA_HTTP_VERSION = '2.0.0-SNAPSHOT'
