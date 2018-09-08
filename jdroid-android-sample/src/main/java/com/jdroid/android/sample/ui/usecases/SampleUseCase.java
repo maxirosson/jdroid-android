@@ -4,6 +4,8 @@ import com.jdroid.android.usecase.AbstractUseCase;
 import com.jdroid.java.concurrent.ExecutorUtils;
 import com.jdroid.java.exception.UnexpectedException;
 
+import java.util.concurrent.TimeUnit;
+
 public class SampleUseCase extends AbstractUseCase {
 
 	private Boolean fail = false;
@@ -12,7 +14,7 @@ public class SampleUseCase extends AbstractUseCase {
 	@Override
 	protected void doExecute() {
 		if (delayInSeconds != null) {
-			ExecutorUtils.sleep(delayInSeconds);
+			ExecutorUtils.sleep(delayInSeconds, TimeUnit.SECONDS);
 		}
 		if (fail) {
 			throw new UnexpectedException("Sample use case failed");

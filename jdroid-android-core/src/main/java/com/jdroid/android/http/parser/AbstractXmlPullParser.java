@@ -4,7 +4,7 @@ import android.util.Xml;
 
 import com.jdroid.java.http.exception.ConnectionException;
 import com.jdroid.java.http.parser.Parser;
-import com.jdroid.java.utils.FileUtils;
+import com.jdroid.java.utils.StreamUtils;
 import com.jdroid.java.utils.TypeUtils;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -38,7 +38,7 @@ public abstract class AbstractXmlPullParser implements Parser {
 		} catch (XmlPullParserException | IOException e) {
 			throw new ConnectionException(e);
 		} finally {
-			FileUtils.safeClose(inputStream);
+			StreamUtils.safeClose(inputStream);
 		}
 	}
 
