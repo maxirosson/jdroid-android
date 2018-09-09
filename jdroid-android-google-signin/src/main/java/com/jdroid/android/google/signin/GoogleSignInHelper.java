@@ -1,6 +1,7 @@
 package com.jdroid.android.google.signin;
 
 import android.content.Intent;
+import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -22,7 +23,7 @@ public class GoogleSignInHelper {
 
 	private static Logger LOGGER = LoggerUtils.getLogger(GoogleSignInHelper.class);
 
-	private static final int RC_SIGN_IN = RandomUtils.get16BitsInt();
+	private static final int SIGN_IN_REQUEST_CODE = RandomUtils.get16BitsInt();
 
 	private GoogleSignInClient googleSignInClient;
 
@@ -69,13 +70,9 @@ public class GoogleSignInHelper {
 		GoogleSignInAccount googleSignInAccount = GoogleSignIn.getLastSignedInAccount(abstractFragment.getContext());
 
 		if (googleSignInAccount != null) {
-			if (googleSignInListener != null) {
-				googleSignInListener.onGoogleSignIn(googleSignInAccount);
-			}
+			onGoogleSignIn(googleSignInAccount);
 		} else {
-			if (googleSignInListener != null) {
-				googleSignInListener.onGoogleSignOut();
-			}
+			onGoogleSignOut();
 		}
 	}
 
@@ -112,7 +109,7 @@ public class GoogleSignInHelper {
 
 	public void signIn() {
 		Intent signInIntent = googleSignInClient.getSignInIntent();
-		ActivityLauncher.startActivityForResult(abstractFragment.getActivity(), signInIntent, RC_SIGN_IN);
+		ActivityLauncher.startActivityForResult(abstractFragment.getActivity(), signInIntent, SIGN_IN_REQUEST_CODE);
 	}
 
 	public void signOut() {
@@ -120,9 +117,7 @@ public class GoogleSignInHelper {
 			@Override
 			public void onComplete(@NonNull Task<Void> task) {
 				LOGGER.debug("SignOut");
-				if (googleSignInListener != null) {
-					googleSignInListener.onGoogleSignOut();
-				}
+				onGoogleSignOut();
 			}
 		});
 	}
@@ -133,16 +128,14 @@ public class GoogleSignInHelper {
 				@Override
 				public void onComplete(@NonNull Task<Void> task) {
 					LOGGER.debug("RevokeAccess");
-					if (googleSignInListener != null) {
-						googleSignInListener.onGoogleAccessRevoked();
-					}
+					onGoogleAccessRevoked();
 				}
 			});
 	}
 
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
-		if (requestCode == RC_SIGN_IN) {
+		if (requestCode == SIGN_IN_REQUEST_CODE) {
 			// The Task returned from this call is always completed, no need to attach a listener.
 			Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
 			handleSignInResult(task);
@@ -160,15 +153,31 @@ public class GoogleSignInHelper {
 			}
 
 			LOGGER.debug("SignIn valid");
-
-			if (googleSignInListener != null) {
-				googleSignInListener.onGoogleSignIn(account);
-			}
+			onGoogleSignIn(account);
 		} catch (ApiException e) {
 			AbstractApplication.get().getExceptionHandler().logHandledException(e);
-			if (googleSignInListener != null) {
-				googleSignInListener.onGoogleSignOut();
-			}
+			onGoogleSignOut();
+		}
+	}
+
+	@CallSuper
+	protected void onGoogleSignIn(GoogleSignInAccount account) {
+		if (googleSignInListener != null) {
+			googleSignInListener.onGoogleSignIn(account);
+		}
+	}
+
+	@CallSuper
+	protected void onGoogleSignOut() {
+		if (googleSignInListener != null) {
+			googleSignInListener.onGoogleSignOut();
+		}
+	}
+
+	@CallSuper
+	protected void onGoogleAccessRevoked() {
+		if (googleSignInListener != null) {
+			googleSignInListener.onGoogleAccessRevoked();
 		}
 	}
 
@@ -179,5 +188,9 @@ public class GoogleSignInHelper {
 
 	public void setGoogleSignInListener(GoogleSignInListener googleSignInListener) {
 		this.googleSignInListener = googleSignInListener;
+	}
+
+	protected AbstractFragment getAbstractFragment() {
+		return abstractFragment;
 	}
 }

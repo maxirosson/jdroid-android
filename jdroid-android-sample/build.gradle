@@ -1,14 +1,10 @@
 ext.COMPONENTS = ['jdroid-android', 'jdroid-java-okhttp']
-ext.RES_CONFIGS = ['en', 'es']
+ext.RES_CONFIGS = ['en']
 ext.PROJECT_NAME = 'Jdroid Android - Sample'
 
 apply plugin: 'com.jdroid.android.application'
 
 description = 'Jdroid Sample Android'
-
-jdroid {
-	notDefaultLanguages = ['es']
-}
 
 repositories {
 	jcenter()
