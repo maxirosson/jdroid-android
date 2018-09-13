@@ -1,15 +1,16 @@
 package com.jdroid.android.google.signin;
 
 import android.content.Intent;
+import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 
-import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.auth.api.signin.GoogleSignInResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.OptionalPendingResult;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.jdroid.android.activity.ActivityLauncher;
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.fragment.AbstractFragment;
@@ -22,9 +23,9 @@ public class GoogleSignInHelper {
 
 	private static Logger LOGGER = LoggerUtils.getLogger(GoogleSignInHelper.class);
 
-	private static final int RC_SIGN_IN = RandomUtils.get16BitsInt();
+	private static final int SIGN_IN_REQUEST_CODE = RandomUtils.get16BitsInt();
 
-	private GoogleApiClient googleApiClient;
+	private GoogleSignInClient googleSignInClient;
 
 	private AbstractFragment abstractFragment;
 	private GoogleSignInListener googleSignInListener;
@@ -32,20 +33,13 @@ public class GoogleSignInHelper {
 	public GoogleSignInHelper(AbstractFragment abstractFragment, GoogleSignInListener googleSignInListener) {
 		this.abstractFragment = abstractFragment;
 		this.googleSignInListener = googleSignInListener;
-		googleApiClient = getGoogleApiClientBuilder().build();
-	}
-
-	protected GoogleApiClient.Builder getGoogleApiClientBuilder() {
-		GoogleApiClient.Builder builder = new GoogleApiClient.Builder(abstractFragment.getActivity());
-		builder.enableAutoManage(abstractFragment.getActivity(), googleSignInListener);
-		builder.addApi(Auth.GOOGLE_SIGN_IN_API, getGoogleSignInOptionsBuilder().build());
-		return builder;
+		googleSignInClient = GoogleSignIn.getClient(abstractFragment.getContext(), getGoogleSignInOptionsBuilder().build());
 	}
 
 	protected GoogleSignInOptions.Builder getGoogleSignInOptionsBuilder() {
 		// Configure sign-in to request the user's ID, email address, and basic
 		// profile. ID and basic profile are included in DEFAULT_SIGN_IN.
-		GoogleSignInOptions.Builder builder = new GoogleSignInOptions.Builder();
+		GoogleSignInOptions.Builder builder = new GoogleSignInOptions.Builder(getGoogleSignInOptions());
 		builder.requestEmail();
 		if (isRequestIdTokenEnabled()) {
 			builder.requestIdToken(AbstractApplication.get().getAppContext().getServerClientId());
@@ -56,6 +50,10 @@ public class GoogleSignInHelper {
 		return builder;
 	}
 
+	protected GoogleSignInOptions getGoogleSignInOptions() {
+		return GoogleSignInOptions.DEFAULT_SIGN_IN;
+	}
+
 	protected Boolean isRequestIdTokenEnabled() {
 		return false;
 	}
@@ -64,22 +62,37 @@ public class GoogleSignInHelper {
 		return false;
 	}
 
-	public void silentSignIn() {
-		OptionalPendingResult<GoogleSignInResult> pendingResult = Auth.GoogleSignInApi.silentSignIn(googleApiClient);
-		if (pendingResult.isDone()) {
-			// If the user's cached credentials are valid, the OptionalPendingResult will be "done"
-			// and the GoogleSignInResult will be available instantly.
-			GoogleSignInResult result = pendingResult.get();
-			handleSignInResult(result);
+	public GoogleSignInAccount getLastSignedInAccount() {
+		return GoogleSignIn.getLastSignedInAccount(abstractFragment.getContext());
+	}
+
+	public void verifyLastSignedInAccount() {
+		GoogleSignInAccount googleSignInAccount = GoogleSignIn.getLastSignedInAccount(abstractFragment.getContext());
+
+		if (googleSignInAccount != null) {
+			onGoogleSignIn(googleSignInAccount);
 		} else {
-			// If the user has not previously signed in on this device or the sign-in has expired,
-			// this asynchronous branch will attempt to sign in the user silently.  Cross-device
-			// single sign-on will occur in this branch.
+			onGoogleSignOut();
+		}
+	}
+
+	public void silentSignIn() {
+		// Attempt to silently refresh the GoogleSignInAccount. If the GoogleSignInAccount
+		// already has a valid token this method may complete immediately.
+		//
+		// If the user has not previously signed in on this device or the sign-in has expired,
+		// this asynchronous branch will attempt to sign in the user silently and get a valid
+		// ID token. Cross-device single sign on will occur in this branch.
+		Task<GoogleSignInAccount> task = googleSignInClient.silentSignIn();
+		if (task.isSuccessful()) {
+			// There's immediate result available.
+			handleSignInResult(task);
+		} else {
 			showLoading();
-			pendingResult.setResultCallback(new ResultCallback<GoogleSignInResult>() {
+			task.addOnCompleteListener(abstractFragment.getActivity(), new OnCompleteListener<GoogleSignInAccount>() {
 				@Override
-				public void onResult(@NonNull GoogleSignInResult googleSignInResult) {
-					handleSignInResult(googleSignInResult);
+				public void onComplete(@NonNull Task<GoogleSignInAccount> task) {
+					handleSignInResult(task);
 					dismissLoading();
 				}
 			});
@@ -95,58 +108,89 @@ public class GoogleSignInHelper {
 	}
 
 	public void signIn() {
-		Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
-		ActivityLauncher.startActivityForResult(abstractFragment.getActivity(), signInIntent, RC_SIGN_IN);
+		Intent signInIntent = googleSignInClient.getSignInIntent();
+		ActivityLauncher.startActivityForResult(abstractFragment.getActivity(), signInIntent, SIGN_IN_REQUEST_CODE);
 	}
 
 	public void signOut() {
-		Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(
-				new ResultCallback<Status>() {
-					@Override
-					public void onResult(@NonNull Status status) {
-						LOGGER.debug("signOut: " + status.getStatusMessage());
-						if (googleSignInListener != null) {
-							googleSignInListener.onGoogleSignOut();
-						}
-					}
-				});
+		googleSignInClient.signOut().addOnCompleteListener(abstractFragment.getActivity(), new OnCompleteListener<Void>() {
+			@Override
+			public void onComplete(@NonNull Task<Void> task) {
+				LOGGER.debug("SignOut");
+				onGoogleSignOut();
+			}
+		});
 	}
 
 	public void revokeAccess() {
-		Auth.GoogleSignInApi.revokeAccess(googleApiClient).setResultCallback(
-				new ResultCallback<Status>() {
-					@Override
-					public void onResult(@NonNull Status status) {
-						LOGGER.debug("revokeAccess: " + status.getStatusMessage());
-						if (googleSignInListener != null) {
-							googleSignInListener.onGoogleAccessRevoked();
-						}
-					}
-				});
+		googleSignInClient.revokeAccess().addOnCompleteListener(abstractFragment.getActivity(),
+			new OnCompleteListener<Void>() {
+				@Override
+				public void onComplete(@NonNull Task<Void> task) {
+					LOGGER.debug("RevokeAccess");
+					onGoogleAccessRevoked();
+				}
+			});
 	}
 
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		// Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-		if (requestCode == RC_SIGN_IN) {
-			GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-			handleSignInResult(result);
+		// Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
+		if (requestCode == SIGN_IN_REQUEST_CODE) {
+			// The Task returned from this call is always completed, no need to attach a listener.
+			Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+			handleSignInResult(task);
 		}
 	}
 
-	private void handleSignInResult(GoogleSignInResult result) {
-		LOGGER.debug("handleSignInResult: " + result.isSuccess());
-		if (result.isSuccess()) {
-			if (googleSignInListener != null) {
-				googleSignInListener.onGoogleSignIn(result.getSignInAccount());
+	private void handleSignInResult(@NonNull Task<GoogleSignInAccount> completedTask) {
+		try {
+			GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+			if (isRequestIdTokenEnabled()) {
+				if (!isTokenValid(account.getIdToken())) {
+					revokeAccess();
+					return;
+				}
 			}
-		} else {
-			if (googleSignInListener != null) {
-				googleSignInListener.onGoogleSignOut();
-			}
+
+			LOGGER.debug("SignIn valid");
+			onGoogleSignIn(account);
+		} catch (ApiException e) {
+			AbstractApplication.get().getExceptionHandler().logHandledException(e);
+			onGoogleSignOut();
 		}
+	}
+
+	@CallSuper
+	protected void onGoogleSignIn(GoogleSignInAccount account) {
+		if (googleSignInListener != null) {
+			googleSignInListener.onGoogleSignIn(account);
+		}
+	}
+
+	@CallSuper
+	protected void onGoogleSignOut() {
+		if (googleSignInListener != null) {
+			googleSignInListener.onGoogleSignOut();
+		}
+	}
+
+	@CallSuper
+	protected void onGoogleAccessRevoked() {
+		if (googleSignInListener != null) {
+			googleSignInListener.onGoogleAccessRevoked();
+		}
+	}
+
+	protected Boolean isTokenValid(String idToken) {
+		// https://developers.google.com/identity/sign-in/android/backend-auth
+		return true;
 	}
 
 	public void setGoogleSignInListener(GoogleSignInListener googleSignInListener) {
 		this.googleSignInListener = googleSignInListener;
+	}
+
+	protected AbstractFragment getAbstractFragment() {
+		return abstractFragment;
 	}
 }

@@ -24,9 +24,9 @@ import com.jdroid.java.collections.Lists;
 import java.util.List;
 
 public class AboutFragment extends AbstractRecyclerFragment {
-	
+
 	private List<Object> aboutItems = Lists.newArrayList();
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -69,7 +69,7 @@ public class AboutFragment extends AbstractRecyclerFragment {
 			});
 		}
 		aboutItems.add(new AboutItem(R.drawable.jdroid_ic_libraries_black_24dp, R.string.jdroid_libraries) {
-			
+
 			@Override
 			public void onSelected(Activity activity) {
 				ActivityLauncher.startActivity(activity, LibrariesActivity.class);
@@ -86,7 +86,7 @@ public class AboutFragment extends AbstractRecyclerFragment {
 		}
 		aboutItems.addAll(getCustomAboutItems());
 	}
-	
+
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
@@ -96,7 +96,7 @@ public class AboutFragment extends AbstractRecyclerFragment {
 		}
 		setAdapter(recyclerViewAdapter);
 	}
-	
+
 	protected String getWebsite() {
 		return AbstractApplication.get().getAppContext().getWebsite();
 	}
@@ -108,7 +108,7 @@ public class AboutFragment extends AbstractRecyclerFragment {
 	protected List<AboutItem> getCustomAboutItems() {
 		return Lists.newArrayList();
 	}
-	
+
 	@MainThread
 	protected Boolean rateAppViewEnabled() {
 		return RateAppStats.displayRateAppView();

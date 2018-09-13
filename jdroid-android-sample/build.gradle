@@ -1,13 +1,10 @@
 ext.COMPONENTS = ['jdroid-android', 'jdroid-java-okhttp']
-ext.RES_CONFIGS = ['en', 'es']
+ext.RES_CONFIGS = ['en']
 ext.PROJECT_NAME = 'Jdroid Android - Sample'
+
 apply plugin: 'com.jdroid.android.application'
 
 description = 'Jdroid Sample Android'
-
-jdroid {
-	notDefaultLanguages = ['es']
-}
 
 repositories {
 	jcenter()
@@ -35,7 +32,6 @@ dependencies {
 	implementation project(':jdroid-android-core')
 	implementation project(':jdroid-android-about')
 	implementation project(':jdroid-android-facebook-login')
-	implementation project(':jdroid-android-firebase-instanceid')
 	implementation project(':jdroid-android-firebase-admob')
 	implementation project(':jdroid-android-firebase-crashlytics')
 	implementation project(':jdroid-android-glide')
@@ -45,6 +41,8 @@ dependencies {
 	implementation project(':jdroid-android-firebase-fcm')
 	implementation project(':jdroid-android-firebase-remoteconfig')
 	implementation project(':jdroid-android-google-signin')
+	implementation project(':jdroid-android-google-play-games')
+	implementation project(':jdroid-android-sqlite')
 	implementation project(':jdroid-android-twitter')
 	implementation 'com.firebase:firebase-client-android:2.5.0'
 
@@ -100,17 +98,18 @@ android {
 
 		applicationId 'com.jdroid.android.sample'
 
+		jdroid.setBuildConfigBoolean(defaultConfig, "DEBUG_SETTINGS_ENABLED", false)
 		jdroid.setBuildConfigBoolean(defaultConfig, "STRICT_MODE_ENABLED", false)
 		jdroid.setBuildConfigBoolean(defaultConfig, "LEAK_CANARY_ENABLED", false)
-		jdroid.setBuildConfigBoolean(defaultConfig, "FIREBASE_ANALYTICS_ENABLED", true)
 
+		jdroid.setBuildConfigBoolean(defaultConfig, "FIREBASE_ANALYTICS_ENABLED", true)
 		jdroid.setBuildConfigBoolean(defaultConfig, "FIREBASE_PERFORMANCE_MONITORING_ENABLED", true)
 		jdroid.setBuildConfigBoolean(defaultConfig, "FIREBASE_CRASHLYTICS_ENABLED", true)
 
 		jdroid.setBuildConfigBoolean(defaultConfig, "GOOGLE_ANALYTICS_ENABLED", true)
 		jdroid.setBuildConfigString(defaultConfig, "GOOGLE_ANALYTICS_TRACKING_ID", "UA-84573310-1")
 
-		jdroid.setBuildConfigString(defaultConfig, "GOOGLE_SERVER_CLIENT_ID", "852072465140-ksbqqoidt2jl2nqqvffnc6ic07fqb6g8.apps.googleusercontent.com")
+		jdroid.setBuildConfigString(defaultConfig, "GOOGLE_SERVER_CLIENT_ID", "527857945512-qr7kk98nntlt44po5cblnrgq41ief65s.apps.googleusercontent.com")
 
 		jdroid.setBuildConfigString(defaultConfig, "LOCAL_IP")
 
@@ -131,8 +130,8 @@ android {
 		jdroid.setBuildConfigString(defaultConfig, "FIREBASE_WEB_API_KEY", "AIzaSyCcwMZ25CMtubXhcW3I7NVTybckPu0Dwtg")
 
 		manifestPlaceholders = [
-				googleMapsApiKey: "AIzaSyA2UZNjUMaw7kFk9qvHeGLTppXxcgI3l1Y",
-				facebookAppId: "fb1048902711862195"
+			googleMapsApiKey: "AIzaSyA2UZNjUMaw7kFk9qvHeGLTppXxcgI3l1Y",
+			facebookAppId   : "fb1048902711862195"
 		]
 
 		multiDexEnabled true
@@ -149,8 +148,7 @@ android {
 
 			applicationIdSuffix ".debug"
 
-			jdroid.setBuildConfigBoolean(buildTypes.debug, "FIREBASE_CRASHLYTICS_ENABLED", false)
-
+			jdroid.setBuildConfigBoolean(buildTypes.debug, "DEBUG_SETTINGS_ENABLED", true)
 			jdroid.setBuildConfigString(buildTypes.debug, "SERVER_NAME", "DEV")
 		}
 
@@ -170,20 +168,18 @@ android {
 			matchingFallbacks = ['debug']
 
 			jdroid.setBuildConfigString(buildTypes.automation, "SERVER_NAME", "UAT")
-			jdroid.setBuildConfigBoolean(buildTypes.automation, "DEBUG_SETTINGS_ENABLED", false)
 		}
 
 		if (jdroid.isReleaseBuildTypeEnabled()) {
 			release {
 
-				if (jdroid.propertyResolver.getBooleanProp("RELEASE_FAKE_ENABLED", false)) {
+				if (jdroid.isFakeReleaseBuildTypeEnabled()) {
 					signingConfig signingConfigs.debug
 					debuggable true
 				} else {
 
 					signingConfig signingConfigs.release
-
-					debuggable jdroid.propertyResolver.getBooleanProp('DEBUGGABLE', false)
+					debuggable jdroid.isReleaseBuildTypeDebuggable()
 
 					jdroid.setBuildConfigString(buildTypes.release, "SERVER_NAME", "PROD")
 
@@ -193,8 +189,8 @@ android {
 					// TODO Add GOOGLE_SERVER_CLIENT_ID
 
 					manifestPlaceholders = [
-							googleMapsApiKey: jdroid.propertyResolver.getStringProp("GOOGLE_MAPS_API_KEY", ""),
-							facebookAppId: jdroid.propertyResolver.getStringProp("FACEBOOK_APP_ID", "")
+						googleMapsApiKey: jdroid.propertyResolver.getStringProp("GOOGLE_MAPS_API_KEY", ""),
+						facebookAppId   : jdroid.propertyResolver.getStringProp("FACEBOOK_APP_ID", "")
 					]
 				}
 			}
@@ -223,3 +219,6 @@ android {
 }
 
 apply plugin: 'com.google.gms.google-services'
+
+// TODO Remove this when Firebase release the missing libs
+com.google.gms.googleservices.GoogleServicesPlugin.config.disableVersionCheck = true

@@ -18,7 +18,7 @@ import java.util.List;
 public class SQLiteFragment extends AbstractFragment {
 
 	private static String lastId;
-	
+
 	@Override
 	public Integer getContentFragmentLayout() {
 		return R.layout.sqlite_fragment;
@@ -27,9 +27,9 @@ public class SQLiteFragment extends AbstractFragment {
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		
+
 		findView(R.id.sqliteAdd).setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				ExecutorUtils.execute(new Runnable() {
@@ -46,7 +46,7 @@ public class SQLiteFragment extends AbstractFragment {
 			}
 		});
 		findView(R.id.sqliteUpdate).setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				ExecutorUtils.execute(new Runnable() {
@@ -65,7 +65,7 @@ public class SQLiteFragment extends AbstractFragment {
 			}
 		});
 		findView(R.id.sqliteRemove).setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				ExecutorUtils.execute(new Runnable() {
@@ -123,7 +123,7 @@ public class SQLiteFragment extends AbstractFragment {
 		});
 
 		findView(R.id.sqliteGetAll).setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				ExecutorUtils.execute(new Runnable() {

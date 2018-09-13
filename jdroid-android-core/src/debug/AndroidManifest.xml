@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.jdroid.android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+		  package="com.jdroid.android">
 
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 	<application>
 
-		<meta-data android:name="com.jdroid.android.debug.firebase.analytics.FirebaseAnalyticsDebugAppLifecycleCallback" android:value="ApplicationLifecycleCallback" />
-		<meta-data android:name="com.jdroid.android.debug.google.analytics.GoogleAnalyticsDebugAppLifecycleCallback" android:value="ApplicationLifecycleCallback" />
-		<meta-data android:name="com.jdroid.android.debug.facebook.stetho.StethoApplicationLifecycleCallback" android:value="ApplicationLifecycleCallback" />
-		<meta-data android:name="com.jdroid.android.leakcanary.LeakCanaryAppLifecycleCallback" android:value="ApplicationLifecycleCallback" />
+		<meta-data android:name="com.jdroid.android.debug.firebase.analytics.FirebaseAnalyticsDebugAppLifecycleCallback"
+				   android:value="ApplicationLifecycleCallback" />
+		<meta-data android:name="com.jdroid.android.debug.google.analytics.GoogleAnalyticsDebugAppLifecycleCallback"
+				   android:value="ApplicationLifecycleCallback" />
+		<meta-data android:name="com.jdroid.android.debug.facebook.stetho.StethoApplicationLifecycleCallback"
+				   android:value="ApplicationLifecycleCallback" />
+		<meta-data android:name="com.jdroid.android.leakcanary.LeakCanaryAppLifecycleCallback"
+				   android:value="ApplicationLifecycleCallback" />
 
 		<activity android:name="com.jdroid.android.debug.DebugSettingsActivity"
 				  android:label="@string/jdroid_debugSettings" />

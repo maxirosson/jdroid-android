@@ -77,7 +77,7 @@ public class SampleApiService extends AndroidApiService {
 	}
 
 	public void removeDevice() {
-		HttpService httpService = newDeleteService("gcm", "device");
+		HttpService httpService = newDeleteService("fcm", "device");
 		httpService.execute();
 	}
 
@@ -92,7 +92,7 @@ public class SampleApiService extends AndroidApiService {
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append("[");
 		Boolean firstItem = true;
-		for(Map.Entry<String, String> entry : params.entrySet()) {
+		for (Map.Entry<String, String> entry : params.entrySet()) {
 			if (firstItem) {
 				firstItem = false;
 			} else {

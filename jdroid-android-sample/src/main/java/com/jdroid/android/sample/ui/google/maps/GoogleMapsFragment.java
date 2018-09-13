@@ -9,18 +9,18 @@ import com.jdroid.android.fragment.AbstractFragment;
 import com.jdroid.android.sample.R;
 
 public class GoogleMapsFragment extends AbstractFragment {
-	
+
 	@Override
 	public Integer getContentFragmentLayout() {
 		return R.layout.google_maps_fragment;
 	}
-	
+
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		
+
 		findView(R.id.fullMap).setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				ActivityLauncher.startActivity(getActivity(), MapActivity.class);

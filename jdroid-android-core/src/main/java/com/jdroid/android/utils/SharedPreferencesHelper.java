@@ -24,18 +24,18 @@ public class SharedPreferencesHelper {
 	private static final Logger LOGGER = LoggerUtils.getLogger(SharedPreferencesHelper.class);
 
 	private static SharedPreferencesHelper defaultSharedPreferencesHelper = new SharedPreferencesHelper(null);
-	
+
 	private String name;
 	private SharedPreferences sharedPreferences;
-	
+
 	public static SharedPreferencesHelper get(Class<?> clazz) {
 		return get(clazz.getSimpleName());
 	}
-	
+
 	public static SharedPreferencesHelper get(String name) {
 		return new SharedPreferencesHelper(name);
 	}
-	
+
 	public static SharedPreferencesHelper get() {
 		return defaultSharedPreferencesHelper;
 	}
@@ -43,11 +43,11 @@ public class SharedPreferencesHelper {
 	public SharedPreferencesHelper(String name) {
 		this.name = name;
 	}
-	
+
 	public Editor getEditor() {
 		return getSharedPreferences().edit();
 	}
-	
+
 	@WorkerThread
 	public SharedPreferences getSharedPreferences() {
 		if (sharedPreferences == null) {
@@ -59,7 +59,7 @@ public class SharedPreferencesHelper {
 		}
 		return sharedPreferences;
 	}
-	
+
 	private void logSave(String key, Object value) {
 		if (name != null) {
 			LOGGER.info("Saved [" + name + "] preference. Key [" + key + "] Value [" + value + "]");
@@ -67,21 +67,21 @@ public class SharedPreferencesHelper {
 			LOGGER.info("Saved preference. Key [" + key + "] Value [" + value + "]");
 		}
 	}
-	
+
 	public void savePreference(String key, String value) {
 		Editor editor = getEditor();
 		editor.putString(key, value);
 		editor.commit();
 		logSave(key, value);
 	}
-	
+
 	public void savePreferenceAsync(String key, String value) {
 		Editor editor = getEditor();
 		editor.putString(key, value);
 		editor.apply();
 		logSave(key, value);
 	}
-	
+
 	public void savePreference(String key, Boolean value) {
 		Editor editor = getEditor();
 		editor.putBoolean(key, value);
@@ -95,7 +95,7 @@ public class SharedPreferencesHelper {
 		editor.apply();
 		logSave(key, value);
 	}
-	
+
 	public void savePreference(String key, Integer value) {
 		Editor editor = getEditor();
 		editor.putInt(key, value);
@@ -109,7 +109,7 @@ public class SharedPreferencesHelper {
 		editor.apply();
 		logSave(key, value);
 	}
-	
+
 	public void savePreference(String key, Long value) {
 		Editor editor = getEditor();
 		editor.putLong(key, value);
@@ -154,7 +154,7 @@ public class SharedPreferencesHelper {
 
 	/**
 	 * Retrieves all the existent shared preferences.
-	 * 
+	 *
 	 * @return The shared preferences.
 	 */
 	public Map<String, ?> loadAllPreferences() {
@@ -168,10 +168,10 @@ public class SharedPreferencesHelper {
 			LOGGER.info("Loaded preference. Key [" + key + "] Value [" + value + "]");
 		}
 	}
-	
+
 	/**
 	 * Retrieve a string value from the preferences.
-	 * 
+	 *
 	 * @param key The name of the preference to retrieve
 	 * @param defaultValue Value to return if this preference does not exist
 	 * @return the preference value if it exists, or defaultValue.
@@ -181,20 +181,20 @@ public class SharedPreferencesHelper {
 		logLoad(key, value);
 		return value;
 	}
-	
+
 	/**
 	 * Retrieve a string value from the preferences.
-	 * 
+	 *
 	 * @param key The name of the preference to retrieve
 	 * @return the preference value if it exists, or null.
 	 */
 	public String loadPreference(String key) {
 		return loadPreference(key, null);
 	}
-	
+
 	/**
 	 * Retrieve a boolean value from the preferences.
-	 * 
+	 *
 	 * @param key The name of the preference to retrieve
 	 * @param defaultValue Value to return if this preference does not exist
 	 * @return the preference value if it exists, or defaultValue.
@@ -207,20 +207,20 @@ public class SharedPreferencesHelper {
 		logLoad(key, value);
 		return value;
 	}
-	
+
 	/**
 	 * Retrieve a boolean value from the preferences.
-	 * 
+	 *
 	 * @param key The name of the preference to retrieve
 	 * @return the preference value if it exists, or null.
 	 */
 	public Boolean loadPreferenceAsBoolean(String key) {
 		return loadPreferenceAsBoolean(key, null);
 	}
-	
+
 	/**
 	 * Retrieve a long value from the preferences.
-	 * 
+	 *
 	 * @param key The name of the preference to retrieve
 	 * @param defaultValue Value to return if this preference does not exist
 	 * @return the preference value if it exists, or defaultValue.
@@ -232,22 +232,22 @@ public class SharedPreferencesHelper {
 		}
 		logLoad(key, value);
 		return value;
-		
+
 	}
-	
+
 	/**
 	 * Retrieve a long value from the preferences.
-	 * 
+	 *
 	 * @param key The name of the preference to retrieve
 	 * @return the preference value if it exists, or null.
 	 */
 	public Long loadPreferenceAsLong(String key) {
 		return loadPreferenceAsLong(key, null);
 	}
-	
+
 	/**
 	 * Retrieve an Integer value from the preferences.
-	 * 
+	 *
 	 * @param key The name of the preference to retrieve
 	 * @param defaultValue Value to return if this preference does not exist
 	 * @return the preference value if it exists, or defaultValue.
@@ -260,20 +260,20 @@ public class SharedPreferencesHelper {
 		logLoad(key, value);
 		return value;
 	}
-	
+
 	/**
 	 * Retrieve an Integer value from the preferences.
-	 * 
+	 *
 	 * @param key The name of the preference to retrieve
 	 * @return the preference value if it exists, or null.
 	 */
 	public Integer loadPreferenceAsInteger(String key) {
 		return loadPreferenceAsInteger(key, null);
 	}
-	
+
 	/**
 	 * Retrieve a Float value from the preferences.
-	 * 
+	 *
 	 * @param key The name of the preference to retrieve
 	 * @param defaultValue Value to return if this preference does not exist
 	 * @return the preference value if it exists, or defaultValue.
@@ -286,10 +286,10 @@ public class SharedPreferencesHelper {
 		logLoad(key, value);
 		return value;
 	}
-	
+
 	/**
 	 * Retrieve a Float value from the preferences.
-	 * 
+	 *
 	 * @param key The name of the preference to retrieve
 	 * @return the preference value if it exists, or null.
 	 */
@@ -304,11 +304,11 @@ public class SharedPreferencesHelper {
 		}
 		return Lists.newArrayList();
 	}
-	
+
 	public boolean hasPreference(String key) {
 		return getSharedPreferences().contains(key);
 	}
-	
+
 	public void removePreferences(String... keys) {
 		Editor editor = getEditor();
 		for (String key : keys) {
@@ -316,11 +316,11 @@ public class SharedPreferencesHelper {
 		}
 		editor.commit();
 	}
-	
+
 	public void removeAllPreferences() {
 		Editor editor = getEditor();
 		editor.clear();
 		editor.commit();
 	}
-	
+
 }

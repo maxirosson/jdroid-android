@@ -16,9 +16,9 @@ import com.jdroid.java.utils.LoggerUtils;
 import org.slf4j.Logger;
 
 public class GlideHelper {
-	
+
 	private static final Logger LOGGER = LoggerUtils.getLogger(GlideHelper.class);
-	
+
 	public static RequestManager with(@Nullable Fragment fragment) {
 		if (fragment != null) {
 			if (fragment.getActivity() != null) {
@@ -33,7 +33,7 @@ public class GlideHelper {
 			return Glide.with(AbstractApplication.get());
 		}
 	}
-	
+
 	public static RequestManager with(@Nullable Context context) {
 		if (context != null) {
 			if (context instanceof FragmentActivity) {
@@ -48,10 +48,10 @@ public class GlideHelper {
 			return Glide.with(AbstractApplication.get());
 		}
 	}
-	
-	
+
+
 	private static RequestManager with(@Nullable Activity activity) {
-		if(activity != null) {
+		if (activity != null) {
 			if (activity.isDestroyed()) {
 				// We do this to avoid an IllegalArgumentException("You cannot start a load for a destroyed activity")
 				LOGGER.warn("Activity " + activity.getClass().getSimpleName() + " is destroyed when starting a Glide load.");
@@ -64,7 +64,7 @@ public class GlideHelper {
 			return Glide.with(AbstractApplication.get());
 		}
 	}
-	
+
 	public static void clearDiskCache() {
 		if (AndroidUtils.isMainThread()) {
 			ExecutorUtils.execute(new Runnable() {
@@ -77,7 +77,7 @@ public class GlideHelper {
 			Glide.get(AbstractApplication.get()).clearDiskCache();
 		}
 	}
-	
+
 	public static void clearMemory() {
 		Glide.get(AbstractApplication.get()).clearMemory();
 	}

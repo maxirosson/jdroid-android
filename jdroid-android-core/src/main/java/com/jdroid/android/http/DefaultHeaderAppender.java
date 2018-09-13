@@ -12,19 +12,19 @@ import com.jdroid.java.http.MimeType;
 import com.jdroid.java.utils.LocaleUtils;
 
 public class DefaultHeaderAppender implements HttpServiceProcessor {
-	
+
 	private static final String API_VERSION_HEADER = "api-version";
 
 	private static final String USER_AGENT_HEADER_VALUE = "android";
-	
+
 	public static final String USER_TOKEN_HEADER = "x-user-token";
 
 	// TODO Review these name to unify them with Device class
 	public static final String CLIENT_APP_VERSION_HEADER = "clientAppVersion";
 	public static final String CLIENT_OS_VERSION_HEADER = "clientOsVersion";
-	
+
 	private static final DefaultHeaderAppender INSTANCE = new DefaultHeaderAppender();
-	
+
 	public static DefaultHeaderAppender get() {
 		return INSTANCE;
 	}
@@ -36,7 +36,7 @@ public class DefaultHeaderAppender implements HttpServiceProcessor {
 
 	@Override
 	public void beforeExecute(HttpService httpService) {
-		
+
 		// User Agent header
 		httpService.setUserAgent(USER_AGENT_HEADER_VALUE);
 
@@ -53,7 +53,7 @@ public class DefaultHeaderAppender implements HttpServiceProcessor {
 	}
 
 	protected void addLanguageHeader(HttpService httpService) {
-		httpService.addHeader(HttpService.ACCEPT_LANGUAGE_HEADER,  LocaleUtils.getAcceptLanguage());
+		httpService.addHeader(HttpService.ACCEPT_LANGUAGE_HEADER, LocaleUtils.getAcceptLanguage());
 	}
 
 	protected void addApiVersionHeader(HttpService httpService) {
@@ -71,5 +71,5 @@ public class DefaultHeaderAppender implements HttpServiceProcessor {
 	public void afterExecute(HttpService httpService, HttpResponseWrapper httpResponse) {
 		// Do Nothing
 	}
-	
+
 }

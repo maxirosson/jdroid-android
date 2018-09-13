@@ -9,7 +9,7 @@ public class GoogleAnalyticsAppContext {
 	 * @return Whether the application has Google Analytics enabled or not
 	 */
 	public static Boolean isGoogleAnalyticsEnabled() {
-		return BuildConfigUtils.getBuildConfigBoolean("GOOGLE_ANALYTICS_ENABLED", false) && !FirebaseTestLab.isRunningInstrumentedTests();
+		return BuildConfigUtils.getBuildConfigBoolean("GOOGLE_ANALYTICS_ENABLED", true) && !FirebaseTestLab.isRunningInstrumentedTests();
 	}
 
 	/**

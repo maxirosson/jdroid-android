@@ -1,20 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-	android:layout_height="match_parent" xmlns:tools="http://schemas.android.com/tools">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			 android:layout_width="match_parent"
+			 android:layout_height="match_parent"
+			 xmlns:tools="http://schemas.android.com/tools">
 
-	<LinearLayout android:id="@+id/updateGoogleplayServicesContainer" android:orientation="vertical"
-				  android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center_vertical|center_horizontal"
-				  android:gravity="center_vertical" android:padding="32dp" android:visibility="gone">
+	<LinearLayout android:id="@+id/updateGoogleplayServicesContainer"
+				  android:orientation="vertical"
+				  android:layout_width="wrap_content"
+				  android:layout_height="wrap_content"
+				  android:layout_gravity="center_vertical|center_horizontal"
+				  android:gravity="center_vertical"
+				  android:padding="32dp"
+				  android:visibility="gone">
 
-		<TextView android:id="@+id/legend" android:layout_width="wrap_content" android:layout_height="wrap_content"
-				  android:text="@string/jdroid_updateGooglePlayServices" style="@style/jdroid_updateGooglePlayServicesLegend" />
+		<TextView android:id="@+id/legend"
+				  android:layout_width="wrap_content"
+				  android:layout_height="wrap_content"
+				  android:text="@string/jdroid_updateGooglePlayServices"
+				  style="@style/jdroid_updateGooglePlayServicesLegend" />
 
-		<Button android:id="@+id/button" android:layout_width="wrap_content"
-				android:layout_height="wrap_content" android:layout_gravity="center_horizontal" android:text="@string/jdroid_update"
-				style="@style/jdroid_raisedButton" android:layout_marginTop="16dp" />
+		<Button android:id="@+id/button"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_horizontal"
+				android:text="@string/jdroid_update"
+				style="@style/jdroid_raisedButton"
+				android:layout_marginTop="16dp" />
 	</LinearLayout>
 
-	<FrameLayout android:id="@+id/mapContainer" android:layout_height="match_parent" android:layout_width="match_parent"
-		android:layout_above="@+id/adViewContainer" tools:ignore="UnknownIdInLayout" />
+	<FrameLayout android:id="@+id/mapContainer"
+				 android:layout_height="match_parent"
+				 android:layout_width="match_parent"
+				 android:layout_above="@+id/adViewContainer"
+				 tools:ignore="UnknownIdInLayout" />
 
 </FrameLayout>

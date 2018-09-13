@@ -30,8 +30,8 @@ public class ExampleUnitTest extends AbstractUnitTest {
 		assertFalse(LeakCanaryHelper.isLeakCanaryEnabled());
 		assertFalse(StrictModeHelper.isStrictModeEnabled());
 		assertFalse(AppUtils.isReleaseBuildType());
-		assertFalse(GoogleAnalyticsAppContext.isGoogleAnalyticsEnabled());
-		assertFalse(FirebaseAnalyticsFactory.getFirebaseAnalyticsHelper().isFirebaseAnalyticsEnabled());
+		assertTrue(GoogleAnalyticsAppContext.isGoogleAnalyticsEnabled());
+		assertTrue(FirebaseAnalyticsFactory.getFirebaseAnalyticsHelper().isFirebaseAnalyticsEnabled());
 		assertEquals(TestExceptionHandler.class, AbstractApplication.get().getExceptionHandler().getClass());
 	}
 }

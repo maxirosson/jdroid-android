@@ -43,7 +43,7 @@ public class AndroidDebugContext extends DebugContext {
 		urls.add("http://jdroidtools.com/uri/invalid");
 		return urls;
 	}
-	
+
 	@Override
 	public List<RemoteConfigParameter> getRemoteConfigParameters() {
 		return Arrays.asList(AndroidRemoteConfigParameter.values());

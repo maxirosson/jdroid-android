@@ -14,11 +14,11 @@ import com.jdroid.java.utils.ValidationUtils;
 import java.util.List;
 
 public class AndroidUtils {
-	
+
 	public static Integer getApiLevel() {
 		return android.os.Build.VERSION.SDK_INT;
 	}
-	
+
 	public static Boolean isPreLollipop() {
 		return android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP;
 	}
@@ -26,7 +26,7 @@ public class AndroidUtils {
 	public static String getPlatformVersion() {
 		return android.os.Build.VERSION.RELEASE;
 	}
-	
+
 	@RequiresPermission(Manifest.permission.GET_ACCOUNTS)
 	public static List<String> getAccountsEmails() {
 		List<String> emails = Lists.newArrayList();
@@ -37,7 +37,7 @@ public class AndroidUtils {
 		}
 		return emails;
 	}
-	
+
 	public static Boolean isMainThread() {
 		return Looper.getMainLooper().getThread() == Thread.currentThread();
 	}

@@ -26,7 +26,7 @@ public abstract class AbstractPaginatedRecyclerFragment extends AbstractRecycler
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		paginatedUseCase = createPaginatedUseCase();
 	}
 
@@ -130,7 +130,7 @@ public abstract class AbstractPaginatedRecyclerFragment extends AbstractRecycler
 						int firstVisibleItemPosition = ((LinearLayoutManager)getLayoutManager()).findFirstVisibleItemPosition();
 
 						if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount - getItemsRemainingToStartPagination()
-								&& firstVisibleItemPosition >= 0) {
+							&& firstVisibleItemPosition >= 0) {
 							paginatedUseCase.markAsPaginating();
 							UseCaseHelper.executeUseCase(paginatedUseCase);
 							paginationInProgress = true;
@@ -152,7 +152,7 @@ public abstract class AbstractPaginatedRecyclerFragment extends AbstractRecycler
 	protected int getPaginationFooterResId() {
 		return R.layout.jdroid_pagination_footer;
 	}
-	
+
 	public class LoadingRecyclerViewType extends FooterRecyclerViewType {
 
 		@Override

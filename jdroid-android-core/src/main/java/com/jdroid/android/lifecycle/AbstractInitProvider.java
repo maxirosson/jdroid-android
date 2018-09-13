@@ -8,9 +8,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 abstract class AbstractInitProvider extends ContentProvider {
-	
+
 	protected abstract void init();
-	
+
 	@Override
 	public final boolean onCreate() {
 		init();

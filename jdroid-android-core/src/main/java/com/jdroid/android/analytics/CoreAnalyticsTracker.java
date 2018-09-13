@@ -13,13 +13,11 @@ import java.util.List;
 public interface CoreAnalyticsTracker extends AnalyticsTracker {
 
 	// Error handling
-	
-	public void trackFatalException(Throwable throwable, List<String> tags);
 
 	public void trackHandledException(Throwable throwable, List<String> tags);
 
 	public void trackErrorLog(@NonNull String message);
-	
+
 	public void trackErrorCustomKey(@NonNull String key, @NonNull Object value);
 
 	// Activity/fragment life cycle
@@ -31,13 +29,13 @@ public interface CoreAnalyticsTracker extends AnalyticsTracker {
 	public void onActivityStart(Activity activity, String referrer, Object data);
 
 	public void onActivityResume(Activity activity);
-	
+
 	public void onActivityPause(Activity activity);
-	
+
 	public void onActivityStop(Activity activity);
-	
+
 	public void onActivityDestroy(Activity activity);
-	
+
 	public void onFragmentStart(String screenViewName);
 
 	// Notifications

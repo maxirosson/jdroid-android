@@ -22,9 +22,9 @@ import org.slf4j.Logger;
 import java.io.File;
 
 public class ExternalAppsUtils {
-	
+
 	private final static Logger LOGGER = LoggerUtils.getLogger(ExternalAppsUtils.class);
-	
+
 	public static final String TWITTER_PACKAGE_NAME = "com.twitter.android";
 	public static final String FACEBOOK_PACKAGE_NAME = "com.facebook.katana";
 	public static final String WHATSAPP_PACKAGE_NAME = "com.whatsapp";
@@ -32,14 +32,14 @@ public class ExternalAppsUtils {
 	public static final String HANGOUTS_PACKAGE_NAME = "com.google.android.talk";
 	public static final String GOOGLE_PLUS_PACKAGE_NAME = "com.google.android.apps.plus";
 	public static final String GOOGLE_MAPS_PACKAGE_NAME = "com.google.android.apps.maps";
-	
-	public static boolean isAppInstalled(String packageName) {
-		return isAppInstalled(packageName, null);
+
+	public static boolean isAppInstalled(String applicationId) {
+		return isAppInstalled(applicationId, null);
 	}
-	
-	public static boolean isAppInstalled(String packageName, Integer minimumVersionCode) {
+
+	public static boolean isAppInstalled(String applicationId, Integer minimumVersionCode) {
 		boolean installed = false;
-		Integer installedAppVersionCode = getInstalledAppVersionCode(packageName);
+		Integer installedAppVersionCode = getInstalledAppVersionCode(applicationId);
 		if (installedAppVersionCode != null) {
 			if ((minimumVersionCode == null) || (installedAppVersionCode >= minimumVersionCode)) {
 				installed = true;
@@ -48,50 +48,50 @@ public class ExternalAppsUtils {
 		return installed;
 	}
 
-	public static Integer getInstalledAppVersionCode(String packageName) {
+	public static Integer getInstalledAppVersionCode(String applicationId) {
 		PackageManager pm = AbstractApplication.get().getPackageManager();
 		try {
-			PackageInfo packageInfo = pm.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES);
+			PackageInfo packageInfo = pm.getPackageInfo(applicationId, PackageManager.GET_ACTIVITIES);
 			return packageInfo.versionCode;
 		} catch (PackageManager.NameNotFoundException e) {
 			return null;
 		} catch (RuntimeException e) {
 			if (e.getMessage().equals("Package manager has died")
-					|| e.getMessage().equals("Transaction has failed to Package manger")) {
+				|| e.getMessage().equals("Transaction has failed to Package manger")) {
 				AbstractApplication.get().getExceptionHandler().logWarningException(
-						"Runtime error while loading package info", e);
+					"Runtime error while loading package info", e);
 				return null;
 			} else {
 				throw e;
 			}
 		}
 	}
-	
+
 	/**
-	 * Launch packageName app or open Google Play to download.
-	 * 
-	 * @param packageName
+	 * Launch applicationId app or open Google Play to download.
+	 *
+	 * @param applicationId
 	 * @return true if app is installed, false otherwise.
 	 */
-	public static boolean launchOrDownloadApp(String packageName) {
-		boolean isAppInstalled = isAppInstalled(packageName);
+	public static boolean launchOrDownloadApp(String applicationId) {
+		boolean isAppInstalled = isAppInstalled(applicationId);
 		if (isAppInstalled) {
-			launchExternalApp(packageName);
+			launchExternalApp(applicationId);
 		} else {
-			GooglePlayUtils.launchAppDetails(packageName);
+			GooglePlayUtils.launchAppDetails(applicationId);
 		}
 		return isAppInstalled;
 	}
-	
-	public static void launchExternalApp(String packageName) {
-		Intent launchIntent = AbstractApplication.get().getPackageManager().getLaunchIntentForPackage(packageName);
+
+	public static void launchExternalApp(String applicationId) {
+		Intent launchIntent = AbstractApplication.get().getPackageManager().getLaunchIntentForPackage(applicationId);
 		if (launchIntent != null) {
 			ActivityLauncher.startActivityNewTask(launchIntent);
 		} else {
-			LOGGER.info("Could not open launch intent for package: " + packageName);
+			LOGGER.info("Could not open launch intent for applicationId: " + applicationId);
 		}
 	}
-	
+
 	public static Boolean startSkypeCall(String username) {
 		Intent intent = new Intent(Intent.ACTION_VIEW);
 		intent.setData(Uri.parse("skype:" + username + "?call"));
@@ -128,16 +128,16 @@ public class ExternalAppsUtils {
 	private static String getCustomMapUrl(String mapId) {
 		return "https://www.google.com/maps/d/viewer?mid=" + mapId;
 	}
-	
+
 	public static void openUrl(String url) {
 		Intent intent = new Intent(Intent.ACTION_VIEW);
 		intent.setData(Uri.parse(url));
 		ActivityLauncher.startActivityNewTask(intent);
 	}
-	
-	public static Drawable getAppIcon(String packageName) {
+
+	public static Drawable getAppIcon(String applicationId) {
 		try {
-			return AbstractApplication.get().getPackageManager().getApplicationIcon(packageName);
+			return AbstractApplication.get().getPackageManager().getApplicationIcon(applicationId);
 		} catch (NameNotFoundException e) {
 			return null;
 		}
@@ -162,7 +162,7 @@ public class ExternalAppsUtils {
 			ActivityLauncher.startActivityNewTask(intent);
 		}
 	}
-	
+
 	public static Boolean openYoutubeVideo(String videoUrl) {
 		Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(videoUrl));
 		if (IntentUtils.isIntentAvailable(intent)) {
@@ -173,7 +173,7 @@ public class ExternalAppsUtils {
 			return false;
 		}
 	}
-	
+
 	public static Boolean dialPhoneNumber(String phoneNumber) {
 		Intent intent = new Intent(Intent.ACTION_DIAL);
 		intent.setData(Uri.fromParts("tel", phoneNumber, null));
@@ -185,14 +185,14 @@ public class ExternalAppsUtils {
 			return false;
 		}
 	}
-	
+
 	public static Boolean openEmail(String mailto) {
 		return openEmail(mailto, null);
 	}
-	
+
 	public static Boolean openEmail(String mailto, String subject) {
 		Intent intent = new Intent(Intent.ACTION_SENDTO);
-		intent.setData(Uri.parse("mailto:" + mailto  + (subject != null ? "?subject=" + EncodingUtils.encodeURL(subject) : "")));
+		intent.setData(Uri.parse("mailto:" + mailto + (subject != null ? "?subject=" + EncodingUtils.encodeURL(subject) : "")));
 		if (IntentUtils.isIntentAvailable(intent)) {
 			ActivityLauncher.startActivityNewTask(intent);
 			return true;

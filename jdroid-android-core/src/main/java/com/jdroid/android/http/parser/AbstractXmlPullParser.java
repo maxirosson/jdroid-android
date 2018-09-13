@@ -4,7 +4,7 @@ import android.util.Xml;
 
 import com.jdroid.java.http.exception.ConnectionException;
 import com.jdroid.java.http.parser.Parser;
-import com.jdroid.java.utils.FileUtils;
+import com.jdroid.java.utils.StreamUtils;
 import com.jdroid.java.utils.TypeUtils;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public abstract class AbstractXmlPullParser implements Parser {
-	
+
 	/**
 	 * @see Parser#parse(java.lang.String)
 	 */
@@ -23,7 +23,7 @@ public abstract class AbstractXmlPullParser implements Parser {
 	public Object parse(String input) {
 		return parse(new ByteArrayInputStream(input.getBytes()));
 	}
-	
+
 	/**
 	 * @see Parser#parse(java.io.InputStream)
 	 */
@@ -38,20 +38,20 @@ public abstract class AbstractXmlPullParser implements Parser {
 		} catch (XmlPullParserException | IOException e) {
 			throw new ConnectionException(e);
 		} finally {
-			FileUtils.safeClose(inputStream);
+			StreamUtils.safeClose(inputStream);
 		}
 	}
-	
+
 	protected abstract Object readFeed(XmlPullParser parser) throws XmlPullParserException, IOException;
-	
+
 	protected String readStringAttribute(XmlPullParser parser, String attributeName) {
 		return parser.getAttributeValue(null, attributeName);
 	}
-	
+
 	protected Long readLongValue(XmlPullParser parser, String name) throws IOException, XmlPullParserException {
 		return TypeUtils.getLong(readStringValue(parser, name));
 	}
-	
+
 	protected String readStringValue(XmlPullParser parser, String name) throws IOException, XmlPullParserException {
 		parser.require(XmlPullParser.START_TAG, null, name);
 		String value = "";
@@ -62,7 +62,7 @@ public abstract class AbstractXmlPullParser implements Parser {
 		parser.require(XmlPullParser.END_TAG, null, name);
 		return value;
 	}
-	
+
 	protected void skip(XmlPullParser parser) throws XmlPullParserException, IOException {
 		if (parser.getEventType() != XmlPullParser.START_TAG) {
 			throw new IllegalStateException();
@@ -79,5 +79,5 @@ public abstract class AbstractXmlPullParser implements Parser {
 			}
 		}
 	}
-	
+
 }

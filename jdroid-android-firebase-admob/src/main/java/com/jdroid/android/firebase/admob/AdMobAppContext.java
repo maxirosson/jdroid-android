@@ -28,7 +28,7 @@ public class AdMobAppContext extends AbstractAppContext {
 		Boolean enoughAppLoads = UsageStats.getAppLoads() >= getMinAppLoadsToDisplayAds();
 		return prefEnabled && enoughDaysSinceFirstAppLoad && enoughAppLoads;
 	}
-	
+
 	public Boolean isInterstitialEnabled() {
 		return areAdsEnabled() && TimeUnit.MILLISECONDS.toSeconds(DateUtils.nowMillis() - AdsStats.getLastInterstitialOpenedTimestamp()) > getMinSecondsBetweenInterstitials();
 	}
@@ -40,7 +40,7 @@ public class AdMobAppContext extends AbstractAppContext {
 	protected Long getMinDaysSinceFirstAppLoad() {
 		return AbstractApplication.get().getRemoteConfigLoader().getLong(AdMobRemoteConfigParameter.MIN_DAYS_TO_DISPLAY_ADS);
 	}
-	
+
 	protected Long getMinSecondsBetweenInterstitials() {
 		return AbstractApplication.get().getRemoteConfigLoader().getLong(AdMobRemoteConfigParameter.MIN_SECONDS_BETWEEN_INTERSTITIALS);
 	}

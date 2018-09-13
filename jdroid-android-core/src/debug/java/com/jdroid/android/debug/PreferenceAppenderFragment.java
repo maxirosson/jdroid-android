@@ -18,14 +18,14 @@ public class PreferenceAppenderFragment extends AbstractPreferenceFragment {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.jdroid_debug_preferences);
 	}
-	
+
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
 		PreferencesAppender preferencesAppender = getArgument(PreferenceAppenderActivity.APPENDER_EXTRA);
 		getActivity().setTitle(preferencesAppender.getNameResId());
-		
+
 		String sharedPreferencesName = preferencesAppender.getSharedPreferencesName();
 		if (sharedPreferencesName != null) {
 			getPreferenceManager().setSharedPreferencesName(sharedPreferencesName);

@@ -5,7 +5,7 @@ import com.jdroid.android.firebase.analytics.AbstractFirebaseAnalyticsTracker;
 import com.jdroid.android.firebase.analytics.FirebaseAnalyticsParams;
 
 public class FirebaseAppShortcutsAnalyticsTracker extends AbstractFirebaseAnalyticsTracker implements AppShortcutsAnalyticsTracker {
-	
+
 	@Override
 	public void trackPinShortcut(String shortcutName) {
 		FirebaseAnalyticsParams params = new FirebaseAnalyticsParams();

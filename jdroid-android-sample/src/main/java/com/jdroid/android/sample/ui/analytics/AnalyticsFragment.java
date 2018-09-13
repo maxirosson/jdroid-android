@@ -9,18 +9,18 @@ import com.jdroid.android.sample.R;
 import com.jdroid.android.sample.analytics.AppAnalyticsSender;
 
 public class AnalyticsFragment extends AbstractFragment {
-	
+
 	@Override
 	public Integer getContentFragmentLayout() {
 		return R.layout.analytics_fragment;
 	}
-	
+
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		
+
 		findView(R.id.sendExampleEvent).setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				AppAnalyticsSender.get().trackExampleEvent();

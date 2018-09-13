@@ -10,6 +10,7 @@ import com.jdroid.java.http.cache.Cache;
 import com.jdroid.java.http.cache.CachedHttpService;
 import com.jdroid.java.utils.FileUtils;
 import com.jdroid.java.utils.LoggerUtils;
+import com.jdroid.java.utils.StreamUtils;
 
 import org.slf4j.Logger;
 
@@ -59,13 +60,13 @@ public class CacheManager {
 			if ((defaultContent != null) && !defaultContent.isEmpty()) {
 				for (Map.Entry<String, String> entry : defaultContent.entrySet()) {
 					InputStream source = AbstractApplication.class.getClassLoader().getResourceAsStream(
-							"cache/" + entry.getKey());
+						"cache/" + entry.getKey());
 					if (source != null) {
 						File cacheFile = new File(getFileSystemCacheDirectory(cache),
-								CachedHttpService.generateCacheFileName(entry.getValue()));
+							CachedHttpService.generateCacheFileName(entry.getValue()));
 						FileUtils.copyStream(source, cacheFile);
 						LOGGER.debug("Populated " + entry.toString() + " to " + cacheFile.getAbsolutePath());
-						FileUtils.safeClose(source);
+						StreamUtils.safeClose(source);
 					}
 				}
 				LOGGER.debug(cache.getName() + " cache populated");

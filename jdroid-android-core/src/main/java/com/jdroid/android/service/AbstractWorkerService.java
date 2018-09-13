@@ -12,21 +12,22 @@ import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.firebase.performance.TraceHelper;
 import com.jdroid.java.date.DateUtils;
 import com.jdroid.java.utils.LoggerUtils;
+import com.squareup.leakcanary.LeakCanary;
 
 import org.slf4j.Logger;
 
 public abstract class AbstractWorkerService extends IntentService {
-	
+
 	private static String TAG = AbstractWorkerService.class.getSimpleName();
-	
+
 	public AbstractWorkerService() {
 		super(TAG);
 	}
-	
+
 	public AbstractWorkerService(String name) {
 		super(name);
 	}
-	
+
 	@Override
 	protected final void onHandleIntent(Intent intent) {
 		String tag = getTag(intent);
@@ -42,7 +43,7 @@ public abstract class AbstractWorkerService extends IntentService {
 				doExecute(intent);
 				long executionTime = DateUtils.nowMillis() - startTime;
 				logger.info("Service finished. Execution time: " + DateUtils.formatDuration(executionTime));
-				
+
 				if (trace != null) {
 					trace.putAttribute("result", "success");
 					trace.incrementMetric("successes", 1);
@@ -62,23 +63,30 @@ public abstract class AbstractWorkerService extends IntentService {
 			logger.warn("Null intent when starting the service: " + getClass().getName());
 		}
 	}
-	
+
 	protected Boolean timingTrackingEnabled() {
 		return true;
 	}
-	
+
 	protected String getTag(@Nullable Intent intent) {
 		return getClass().getSimpleName();
 	}
-	
+
 	protected abstract void doExecute(@NonNull Intent intent);
-	
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+
+		LeakCanary.installedRefWatcher().watch(this);
+	}
+
 	public static void runIntentInService(Context context, Bundle bundle, Class<? extends AbstractWorkerService> serviceClass) {
 		Intent intent = new Intent();
 		intent.putExtras(bundle);
 		runIntentInService(context, intent, serviceClass);
 	}
-	
+
 	public static void runIntentInService(Context context, Intent intent, Class<? extends AbstractWorkerService> serviceClass) {
 		try {
 			context.startService(getServiceIntent(context, intent, serviceClass));
@@ -86,10 +94,10 @@ public abstract class AbstractWorkerService extends IntentService {
 			AbstractApplication.get().getExceptionHandler().logHandledException(e);
 		}
 	}
-	
+
 	public static Intent getServiceIntent(Context context, Intent intent, Class<? extends AbstractWorkerService> serviceClass) {
 		intent.setClass(context, serviceClass);
 		return intent;
 	}
-	
+
 }

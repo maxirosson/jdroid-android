@@ -17,7 +17,7 @@ import com.jdroid.java.utils.LoggerUtils;
 // TODO See if we should extend SimpleJobService
 // TODO Rename to AbstractFirebaseJobService
 public abstract class AbstractJobService extends JobService {
-	
+
 	@MainThread
 	@Override
 	public final boolean onStartJob(final JobParameters jobParameters) {
@@ -37,19 +37,19 @@ public abstract class AbstractJobService extends JobService {
 					needsReschedule = onRunJob(jobParameters);
 					long executionTime = DateUtils.nowMillis() - startTime;
 					LoggerUtils.getLogger(tag).info("Firebase Job finished successfully. NeedsReschedule: " + needsReschedule + " - Execution time: " + DateUtils.formatDuration(executionTime));
-					
+
 					if (trace != null) {
 						if (!needsReschedule) {
 							trace.putAttribute("result", "success");
 							trace.incrementMetric("successes", 1);
 						}
 					}
-					
+
 				} catch (Exception e) {
 					needsReschedule = needsReschedule(e);
 					LoggerUtils.getLogger(tag).error("Firebase Job finished with error. NeedsReschedule: " + needsReschedule);
 					AbstractApplication.get().getExceptionHandler().logHandledException(e);
-					
+
 					if (trace != null) {
 						if (!needsReschedule) {
 							trace.putAttribute("result", "failure");
@@ -69,22 +69,22 @@ public abstract class AbstractJobService extends JobService {
 		});
 		return true;
 	}
-	
+
 	protected Boolean timingTrackingEnabled() {
 		return true;
 	}
-	
+
 	@WorkerThread
 	public abstract boolean onRunJob(JobParameters jobParameters);
-	
+
 	protected Boolean needsReschedule(Throwable throwable) {
 		return throwable instanceof ConnectionException;
 	}
-	
+
 	protected String getTag(JobParameters jobParameters) {
 		return getClass().getSimpleName();
 	}
-	
+
 	@MainThread
 	@Override
 	public boolean onStopJob(JobParameters jobParameters) {

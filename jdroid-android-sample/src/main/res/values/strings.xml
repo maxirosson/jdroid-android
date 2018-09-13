@@ -116,12 +116,28 @@
 	<!-- Google Sign In -->
 	<string name="revokeAccess">Revoke</string>
 	<string name="notLogged">Not Logged</string>
-	<string name="connectionFailed">Connection Failed</string>
 
 	<!-- Google Play Services -->
 	<string name="googlePlayServices">Google Play Services</string>
 	<string name="checkGooglePlayServices">Check Google Play Services</string>
 	<string name="openGooglePlayServices">Open Google Play Services</string>
+
+	<!-- Google Play Games -->
+	<string name="googlePlayGames">Google Play Games</string>
+	<string name="showLeaderboard">Show Leaderboard</string>
+	<string name="leaderboardId">Leaderboard Id</string>
+	<string name="showAllLeaderboards">Show All Leaderboards</string>
+	<string name="score">Score</string>
+	<string name="submitScore">Submit Score</string>
+	<string name="achievementId">Achievement Id</string>
+	<string name="unlockAchievement">Unlock Achievement</string>
+	<string name="incrementAchievement">Increment Achievement</string>
+	<string name="showAchievements">Show Achievement</string>
+	<string name="eventId">Event Id</string>
+	<string name="incrementEvent">Increment Event</string>
+	<string name="loadEvents">Load Events</string>
+	<string name="loadCurrentPlayer">Load Current Player</string>
+	<string name="loadPlayerStats">Load Player Stats</string>
 
 	<!-- Http -->
 	<string name="http">Http</string>

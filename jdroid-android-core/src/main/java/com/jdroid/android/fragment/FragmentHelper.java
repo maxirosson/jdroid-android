@@ -20,18 +20,18 @@ import com.jdroid.android.application.AppModule;
 import com.jdroid.android.concurrent.SafeExecuteWrapperRunnable;
 import com.jdroid.android.exception.AbstractErrorDisplayer;
 import com.jdroid.android.exception.ErrorDisplayer;
-import com.jdroid.android.leakcanary.LeakCanaryHelper;
 import com.jdroid.android.loading.FragmentLoading;
 import com.jdroid.java.collections.Maps;
 import com.jdroid.java.exception.AbstractException;
 import com.jdroid.java.utils.LoggerUtils;
+import com.squareup.leakcanary.LeakCanary;
 
 import org.slf4j.Logger;
 
 import java.util.Map;
 
 public class FragmentHelper implements FragmentIf {
-	
+
 	private final static Logger LOGGER = LoggerUtils.getLogger(FragmentHelper.class);
 
 	private Fragment fragment;
@@ -41,24 +41,24 @@ public class FragmentHelper implements FragmentIf {
 	private FragmentLoading loading;
 
 	private Toolbar appBar;
-	
+
 	public FragmentHelper(Fragment fragment) {
 		this.fragment = fragment;
 	}
-	
+
 	public FragmentIf getFragmentIf() {
 		return (FragmentIf)fragment;
 	}
-	
+
 	protected Fragment getFragment() {
 		return fragment;
 	}
-	
+
 	@Override
 	public ActivityIf getActivityIf() {
 		return (ActivityIf)fragment.getActivity();
 	}
-	
+
 	// //////////////////////// Layout //////////////////////// //
 
 	@Override
@@ -180,9 +180,7 @@ public class FragmentHelper implements FragmentIf {
 	public void onStart() {
 		LOGGER.debug("Executing onStart on " + fragment);
 		FragmentIf fragmentIf = getFragmentIf();
-		if (fragmentIf.shouldTrackOnFragmentStart()) {
-			AbstractApplication.get().getCoreAnalyticsSender().onFragmentStart(fragmentIf.getScreenViewName());
-		}
+		AbstractApplication.get().getCoreAnalyticsSender().onFragmentStart(fragmentIf.getScreenViewName());
 	}
 
 	public void onResume() {
@@ -209,8 +207,6 @@ public class FragmentHelper implements FragmentIf {
 
 	public void onDestroyView() {
 		LOGGER.debug("Executing onDestroyView on " + fragment);
-		
-		LeakCanaryHelper.onFragmentDestroyView(getFragment());
 	}
 
 	public void onBeforeDestroy() {
@@ -221,6 +217,8 @@ public class FragmentHelper implements FragmentIf {
 
 	public void onDestroy() {
 		LOGGER.debug("Executing onDestroy on " + fragment);
+
+		LeakCanary.installedRefWatcher().watch(fragment);
 	}
 
 	@Override
@@ -356,11 +354,6 @@ public class FragmentHelper implements FragmentIf {
 	}
 
 	// //////////////////////// Analytics //////////////////////// //
-
-	@Override
-	public Boolean shouldTrackOnFragmentStart() {
-		return false;
-	}
 
 	@NonNull
 	@Override

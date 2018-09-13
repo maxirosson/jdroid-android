@@ -37,7 +37,7 @@ public class AppInviteView extends RelativeLayout {
 		super(context);
 		init(context);
 	}
-	
+
 	private void init(Context context) {
 		LayoutInflater.from(context).inflate(R.layout.jdroid_app_invite_view, this, true);
 

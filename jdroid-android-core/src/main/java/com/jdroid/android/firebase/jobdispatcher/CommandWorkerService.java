@@ -11,7 +11,7 @@ import com.jdroid.java.utils.LoggerUtils;
 import com.jdroid.java.utils.ReflectionUtils;
 
 public class CommandWorkerService extends AbstractWorkerService {
-	
+
 	public CommandWorkerService() {
 		super(CommandWorkerService.class.getSimpleName());
 	}
@@ -43,11 +43,11 @@ public class CommandWorkerService extends AbstractWorkerService {
 			AbstractApplication.get().getExceptionHandler().logWarningException("Service command not found on " + getClass().getSimpleName());
 		}
 	}
-	
+
 	private String getServiceCommand(@Nullable Intent intent) {
 		return intent != null ? intent.getStringExtra(ServiceCommand.COMMAND_EXTRA) : null;
 	}
-	
+
 	protected Boolean needsReschedule(Throwable throwable) {
 		return throwable instanceof ConnectionException;
 	}

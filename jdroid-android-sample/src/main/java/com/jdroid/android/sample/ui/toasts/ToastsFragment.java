@@ -10,7 +10,7 @@ import com.jdroid.android.utils.ToastUtils;
 import com.jdroid.java.concurrent.ExecutorUtils;
 
 public class ToastsFragment extends AbstractFragment {
-	
+
 	@Override
 	public Integer getContentFragmentLayout() {
 		return R.layout.toasts_fragment;
@@ -22,16 +22,16 @@ public class ToastsFragment extends AbstractFragment {
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		
+
 		findView(R.id.displayToastFromUIThread).setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				ToastUtils.showToast(R.string.toastFromUIThread);
 			}
 		});
 		findView(R.id.displayToastFromWorkerThread).setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				ExecutorUtils.execute(new Runnable() {

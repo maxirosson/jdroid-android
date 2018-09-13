@@ -13,23 +13,23 @@ import com.jdroid.android.sample.R;
 import com.jdroid.java.collections.Lists;
 
 public class HomeFragment extends AbstractRecyclerFragment {
-	
+
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 		setAdapter(new RecyclerViewAdapter(new HomeRecyclerViewType(), Lists.newArrayList(HomeItem.values())));
 	}
-	
+
 	@Override
 	protected Boolean isCardViewDecorationEnabled() {
 		return true;
 	}
-	
+
 	@Override
 	protected Boolean isDividerItemDecorationEnabled() {
 		return true;
 	}
-	
+
 	public class HomeRecyclerViewType extends RecyclerViewType<HomeItem, HomeHolder> {
 
 		@Override
@@ -76,5 +76,5 @@ public class HomeFragment extends AbstractRecyclerFragment {
 			super(itemView);
 		}
 	}
-	
+
 }

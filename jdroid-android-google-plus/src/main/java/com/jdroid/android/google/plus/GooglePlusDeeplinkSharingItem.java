@@ -8,12 +8,12 @@ import com.jdroid.android.share.SharingItem;
 import com.jdroid.android.utils.ExternalAppsUtils;
 
 public abstract class GooglePlusDeeplinkSharingItem extends SharingItem {
-	
+
 	@Override
-	public String getPackageName() {
+	public String getApplicationId() {
 		return ExternalAppsUtils.GOOGLE_PLUS_PACKAGE_NAME;
 	}
-	
+
 	@Override
 	public void share(Activity activity) {
 		GooglePlusHelperFragment googlePlusHelperFragment = GooglePlusHelperFragment.get((FragmentActivity)activity);
@@ -23,8 +23,8 @@ public abstract class GooglePlusDeeplinkSharingItem extends SharingItem {
 			AbstractApplication.get().getExceptionHandler().logWarningException("GooglePlusHelperFragment is null when trying to share");
 		}
 	}
-	
+
 	protected abstract String getContent();
-	
+
 	protected abstract String getLink();
 }

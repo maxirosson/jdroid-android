@@ -32,9 +32,9 @@ public class ServiceFragment extends AbstractFragment {
 
 		failCheckBox = findView(R.id.fail);
 		delayEditText = findView(R.id.delay);
-		
+
 		findView(R.id.workerService).setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent();
@@ -53,7 +53,7 @@ public class ServiceFragment extends AbstractFragment {
 			}
 		});
 		findView(R.id.firebaseJobService).setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				Bundle bundle = new Bundle();
@@ -63,7 +63,7 @@ public class ServiceFragment extends AbstractFragment {
 			}
 		});
 		findView(R.id.commandService1).setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				Bundle bundle = createServiceCommandBundle();
@@ -110,7 +110,7 @@ public class ServiceFragment extends AbstractFragment {
 			}
 		});
 	}
-	
+
 	private Bundle createServiceCommandBundle() {
 		Bundle bundle = new Bundle();
 		bundle.putBoolean("fail", failCheckBox.isChecked());

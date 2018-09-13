@@ -25,7 +25,7 @@ public abstract class BaseAdViewHelper implements AdHelper {
 	private AdSize adSize;
 	private String adUnitId;
 	private HouseAdBuilder houseAdBuilder;
-	
+
 	private List<AdListener> adListeners;
 
 	private Boolean displayAds = false;
@@ -49,13 +49,13 @@ public abstract class BaseAdViewHelper implements AdHelper {
 					}
 					baseAdViewWrapper.setAdSize(getAdSize());
 					final View customView = getHouseAdBuilder() != null ? getHouseAdBuilder().build(activity) : null;
-					
+
 					AdListenerWrapper adListenerWrapper = new AdListenerWrapper();
 					if (customView != null) {
 
 						adViewContainer.setVisibility(View.VISIBLE);
 						adViewContainer.addView(customView);
-						
+
 						adListenerWrapper.addAdListener(new AdListener() {
 
 							@Override
@@ -112,7 +112,7 @@ public abstract class BaseAdViewHelper implements AdHelper {
 							}
 						});
 					}
-					
+
 					if (adListeners != null) {
 						for (AdListener adListener : adListeners) {
 							adListenerWrapper.addAdListener(adListener);
@@ -174,7 +174,7 @@ public abstract class BaseAdViewHelper implements AdHelper {
 		this.adUnitId = adUnitId;
 		return this;
 	}
-	
+
 	@Override
 	public AdHelper setAdListeners(List<AdListener> adListeners) {
 		this.adListeners = adListeners;

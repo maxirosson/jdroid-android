@@ -1,20 +1,23 @@
 package com.jdroid.android.context;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class BuildConfigUtils {
-	
+
 	private static BuildConfigResolver buildConfigResolver = new BuildConfigResolver();
 	private static Map<String, Object> cache = new ConcurrentHashMap<>();
 
 	@SuppressWarnings("unchecked")
-	public static <T> T getBuildConfigValue(String property) {
+	public static <T> T getBuildConfigValue(@NonNull String property) {
 		return (T)getBuildConfigValue(property, null);
 	}
 
 	@SuppressWarnings("unchecked")
-	public static <T> T getBuildConfigValue(String property, Object defaultValue) {
+	public static <T> T getBuildConfigValue(@NonNull String property, @Nullable Object defaultValue) {
 		Object value = cache.get(property);
 		if (value == null) {
 			value = buildConfigResolver.getBuildConfigValue(property, defaultValue);
@@ -24,16 +27,16 @@ public class BuildConfigUtils {
 		}
 		return (T)value;
 	}
-	
-	public static String getBuildConfigString(String property) {
+
+	public static String getBuildConfigString(@NonNull String property) {
 		return (String)getBuildConfigValue(property);
 	}
-	
-	public static Boolean getBuildConfigBoolean(String property, Boolean defaultValue) {
+
+	public static Boolean getBuildConfigBoolean(@NonNull String property, @Nullable Boolean defaultValue) {
 		return (Boolean)getBuildConfigValue(property, defaultValue);
 	}
-	
-	public static void setBuildConfigResolver(BuildConfigResolver buildConfigResolver) {
+
+	public static void setBuildConfigResolver(@NonNull BuildConfigResolver buildConfigResolver) {
 		BuildConfigUtils.buildConfigResolver = buildConfigResolver;
 	}
 }

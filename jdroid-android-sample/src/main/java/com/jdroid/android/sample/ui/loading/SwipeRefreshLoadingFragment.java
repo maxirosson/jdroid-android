@@ -16,13 +16,13 @@ import com.jdroid.java.utils.IdGenerator;
 
 
 public class SwipeRefreshLoadingFragment extends SwipeRecyclerFragment {
-	
+
 	private SampleItemsUseCase sampleItemsUseCase;
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		sampleItemsUseCase = new SampleItemsUseCase();
 	}
 
@@ -37,7 +37,7 @@ public class SwipeRefreshLoadingFragment extends SwipeRecyclerFragment {
 		super.onStop();
 		UseCaseHelper.unregisterUseCase(sampleItemsUseCase, this);
 	}
-	
+
 	@Override
 	public void onRefresh() {
 		if (!sampleItemsUseCase.isInProgress()) {

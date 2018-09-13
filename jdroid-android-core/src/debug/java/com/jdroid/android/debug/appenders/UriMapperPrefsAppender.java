@@ -31,6 +31,7 @@ public class UriMapperPrefsAppender extends PreferencesAppender {
 	public UriMapperPrefsAppender(Integer htmlRawId) {
 		this.htmlRawId = htmlRawId;
 	}
+
 	public UriMapperPrefsAppender() {
 		this(null);
 	}
@@ -44,7 +45,7 @@ public class UriMapperPrefsAppender extends PreferencesAppender {
 	public void initPreferences(final Activity activity, PreferenceGroup preferenceGroup) {
 
 		if (htmlRawId == null) {
-			htmlRawId = activity.getResources().getIdentifier("url_samples", "raw", activity.getPackageName());
+			htmlRawId = activity.getResources().getIdentifier("url_samples", "raw", AppUtils.getApplicationId());
 		}
 
 		Preference preference = new Preference(activity);
@@ -92,10 +93,10 @@ public class UriMapperPrefsAppender extends PreferencesAppender {
 				}
 
 				Intent shareIntent = ShareCompat.IntentBuilder.from(activity)
-						.setType("text/html")
-						.setSubject(AppUtils.getApplicationName() + " urls samples")
-						.setHtmlText(builder.toString())
-						.getIntent();
+					.setType("text/html")
+					.setSubject(AppUtils.getApplicationName() + " urls samples")
+					.setHtmlText(builder.toString())
+					.getIntent();
 				if (shareIntent.resolveActivity(activity.getPackageManager()) != null) {
 					ActivityLauncher.startActivity(activity, shareIntent);
 				}

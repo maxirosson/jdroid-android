@@ -34,7 +34,7 @@ public class NotificationsFragment extends AbstractFragment {
 	public Integer getContentFragmentLayout() {
 		return R.layout.notifications_fragment;
 	}
-	
+
 	@SuppressLint("SetTextI18n")
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -42,7 +42,7 @@ public class NotificationsFragment extends AbstractFragment {
 
 		notificationName = findView(R.id.notificationName);
 		notificationName.setText("myNotification");
-		
+
 		notificationChannel = findView(R.id.notificationChannel);
 		notificationChannel.setText(AndroidNotificationChannelType.DEFAULT_IMPORTANCE.getChannelId());
 
@@ -62,7 +62,7 @@ public class NotificationsFragment extends AbstractFragment {
 		largeIconDrawable.setChecked(false);
 
 		findView(R.id.sendNotification).setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 
@@ -103,7 +103,7 @@ public class NotificationsFragment extends AbstractFragment {
 		});
 
 		findView(R.id.cancelNotifications).setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				NotificationUtils.cancelAllNotifications();

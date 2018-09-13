@@ -17,7 +17,7 @@ public class AutofitGridLayoutManager extends GridLayoutManager {
 	private int columnWidth;
 	private boolean recalculateSpanCount = false;
 
-	public AutofitGridLayoutManager(Context context, int  columnWidth) {
+	public AutofitGridLayoutManager(Context context, int columnWidth) {
 		// Initially set spanCount to 1, will be changed later if needed in onLayoutChildren(...)
 		super(context, 1);
 		innerSetColumnWidth(columnWidth);
@@ -43,7 +43,7 @@ public class AutofitGridLayoutManager extends GridLayoutManager {
 	/**
 	 * Set the width of columns in the grid.
 	 *
-	 * @param columnWidth  The column width, in pixels.
+	 * @param columnWidth The column width, in pixels.
 	 */
 	@CallSuper
 	public void setColumnWidth(int columnWidth) {

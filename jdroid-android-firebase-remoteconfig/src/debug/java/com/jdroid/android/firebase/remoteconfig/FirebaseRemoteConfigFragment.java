@@ -83,7 +83,7 @@ public class FirebaseRemoteConfigFragment extends AbstractRecyclerFragment {
 					});
 				}
 			});
-			
+
 			holder.mocksEnabled.setOnCheckedChangeListener(null);
 			holder.mocksEnabled.setChecked(MockRemoteConfigLoader.isMocksEnabled());
 			holder.mocksEnabled.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -162,17 +162,17 @@ public class FirebaseRemoteConfigFragment extends AbstractRecyclerFragment {
 		public void fillHolderFromItem(final RemoteConfigParameter item, final RemoteConfigParameterItemHolder holder) {
 			holder.key.setText(item.getKey());
 			holder.specs.setText(getString(R.string.jdroid_firebaseRemoteConfigSpec, item.getDefaultValue()));
-			
+
 			if (MockRemoteConfigLoader.isMocksEnabled()) {
 				holder.source.setVisibility(View.GONE);
 			} else {
 				holder.source.setText(getString(R.string.jdroid_firebaseRemoteConfigSource, FirebaseRemoteConfigLoader.get().getSourceName(item)));
 				holder.source.setVisibility(View.VISIBLE);
 			}
-			
+
 			holder.value.setText(AbstractApplication.get().getRemoteConfigLoader().getString(item));
 			holder.value.setEnabled(MockRemoteConfigLoader.isMocksEnabled());
-			
+
 			holder.save.setVisibility(MockRemoteConfigLoader.isMocksEnabled() ? View.VISIBLE : View.GONE);
 			holder.save.setOnClickListener(new View.OnClickListener() {
 				@Override

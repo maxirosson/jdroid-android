@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.jdroid.android.scroll.ScrimInsetsScrollView
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	android:layout_gravity="start"
-	android:id="@+id/navDrawerHeader"
-	android:background="@android:color/white"
-	android:fitsSystemWindows="true"
-	app:jdroid_insetScrollForeground="#4000">
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_gravity="start"
+		android:id="@+id/navDrawerHeader"
+		android:background="@android:color/white"
+		android:fitsSystemWindows="true"
+		app:jdroid_insetScrollForeground="#4000">
 
-	<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+	<LinearLayout android:layout_width="match_parent"
+				  android:layout_height="wrap_content"
+				  android:orientation="vertical">
 
-		<FrameLayout android:id="@+id/chosen_account_view" android:layout_width="match_parent" android:layout_height="@dimen/jdroid_navdrawerHeaderHeight">
+		<FrameLayout android:id="@+id/chosen_account_view"
+					 android:layout_width="match_parent"
+					 android:layout_height="@dimen/jdroid_navdrawerHeaderHeight">
 
 			<ImageView android:layout_width="match_parent"
 					   android:layout_height="match_parent"
@@ -21,56 +25,56 @@
 					   android:id="@+id/cover" />
 
 			<RelativeLayout
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:paddingLeft="@dimen/jdroid_navdrawerHeaderHorizontalPadding"
-				android:paddingRight="@dimen/jdroid_navdrawerHeaderHorizontalPadding"
-				android:paddingTop="@dimen/jdroid_navdrawerHeaderTopPadding"
-				android:id="@+id/chosen_account_content_view">
-
-				<ImageView
-					android:id="@+id/photo"
-					android:layout_width="@dimen/jdroid_navdrawerHeaderImageSize"
-					android:layout_height="@dimen/jdroid_navdrawerHeaderImageSize"
-					app:srcCompat="@drawable/jdroid_person_default"
-					android:scaleType="centerCrop"/>
-
-				<ImageView
-					android:id="@+id/expand_account_box_indicator"
-					android:layout_height="wrap_content"
-					android:layout_width="wrap_content"
-					android:visibility="gone"
-					android:layout_marginLeft="16dp"
-					android:paddingBottom="16dp"
-					android:layout_alignParentRight="true"
-					android:layout_alignParentBottom="true"
-					android:scaleType="center"
-					app:srcCompat="@drawable/jdroid_ic_drawer_accounts_expand" />
-
-				<TextView
-					android:id="@+id/subTitle"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:layout_alignLeft="@id/photo"
-					android:layout_toLeftOf="@id/expand_account_box_indicator"
-					android:layout_alignParentBottom="true"
-					android:paddingBottom="16dp"
-					android:textSize="14sp"
-					android:textColor="@color/jdroid_navDrawerHeaderSubTitle"
-					android:maxLines="1"
-					android:ellipsize="end" />
+					android:paddingLeft="@dimen/jdroid_navdrawerHeaderHorizontalPadding"
+					android:paddingRight="@dimen/jdroid_navdrawerHeaderHorizontalPadding"
+					android:paddingTop="@dimen/jdroid_navdrawerHeaderTopPadding"
+					android:id="@+id/chosen_account_content_view">
+
+				<ImageView
+						android:id="@+id/photo"
+						android:layout_width="@dimen/jdroid_navdrawerHeaderImageSize"
+						android:layout_height="@dimen/jdroid_navdrawerHeaderImageSize"
+						app:srcCompat="@drawable/jdroid_person_default"
+						android:scaleType="centerCrop" />
+
+				<ImageView
+						android:id="@+id/expand_account_box_indicator"
+						android:layout_height="wrap_content"
+						android:layout_width="wrap_content"
+						android:visibility="gone"
+						android:layout_marginLeft="16dp"
+						android:paddingBottom="16dp"
+						android:layout_alignParentRight="true"
+						android:layout_alignParentBottom="true"
+						android:scaleType="center"
+						app:srcCompat="@drawable/jdroid_ic_drawer_accounts_expand" />
 
 				<TextView
-					android:id="@+id/title"
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:layout_above="@id/subTitle"
-					android:layout_alignLeft="@id/photo"
-					android:layout_toLeftOf="@id/expand_account_box_indicator"
-					android:textSize="18sp"
-					android:textColor="@color/jdroid_navDrawerHeaderTitle"
-					android:maxLines="1"
-					android:ellipsize="end" />
+						android:id="@+id/subTitle"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_alignLeft="@id/photo"
+						android:layout_toLeftOf="@id/expand_account_box_indicator"
+						android:layout_alignParentBottom="true"
+						android:paddingBottom="16dp"
+						android:textSize="14sp"
+						android:textColor="@color/jdroid_navDrawerHeaderSubTitle"
+						android:maxLines="1"
+						android:ellipsize="end" />
+
+				<TextView
+						android:id="@+id/title"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_above="@id/subTitle"
+						android:layout_alignLeft="@id/photo"
+						android:layout_toLeftOf="@id/expand_account_box_indicator"
+						android:textSize="18sp"
+						android:textColor="@color/jdroid_navDrawerHeaderTitle"
+						android:maxLines="1"
+						android:ellipsize="end" />
 
 			</RelativeLayout>
 

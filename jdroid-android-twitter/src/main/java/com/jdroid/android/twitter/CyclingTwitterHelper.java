@@ -12,35 +12,35 @@ import com.twitter.sdk.android.tweetui.CompactTweetView;
 import java.util.List;
 
 public abstract class CyclingTwitterHelper extends TwitterHelper {
-	
+
 	private final static int TWEET_CYCLE_FREQUENCY = 10000;
-	
+
 	private int currentTweetIndex = 0;
 	private DisplayTweetRunnable displayTweetRunnable = new DisplayTweetRunnable();
-	
+
 	public void onStart() {
 		getTweetContainer().postDelayed(displayTweetRunnable, TWEET_CYCLE_FREQUENCY);
 	}
-	
+
 	public void onStop() {
 		getTweetContainer().removeCallbacks(displayTweetRunnable);
 	}
-	
+
 	@MainThread
 	@Override
 	protected void onSuccess(List<Tweet> tweets) {
 		displayTweet(tweets);
 	}
-	
+
 	private void displayTweet(List<Tweet> tweets) {
 		if (tweets.size() > currentTweetIndex) {
 			Tweet tweet = tweets.get(currentTweetIndex);
-			
+
 			currentTweetIndex++;
 			if (tweets.size() <= currentTweetIndex) {
 				currentTweetIndex = 0;
 			}
-			
+
 			AbstractFragment abstractFragment = getAbstractFragment();
 			if (abstractFragment != null) {
 				getTweetContainer().removeAllViews();
@@ -54,12 +54,12 @@ public abstract class CyclingTwitterHelper extends TwitterHelper {
 					getTweetContainer().removeCallbacks(displayTweetRunnable);
 				}
 			}
-			
+
 		}
 	}
-	
+
 	private class DisplayTweetRunnable extends SafeRunnable {
-		
+
 		@Override
 		public void doRun() {
 			displayTweet(getTweets());

@@ -7,10 +7,10 @@ import com.jdroid.android.activity.AbstractFragmentActivity;
 import com.jdroid.android.activity.ActivityDelegate;
 import com.jdroid.android.application.AbstractAppModule;
 import com.jdroid.android.application.AbstractApplication;
-import com.jdroid.android.fragment.FragmentDelegate;
 import com.jdroid.android.firebase.admob.analytics.AdMobAnalyticsSender;
 import com.jdroid.android.firebase.admob.analytics.AdMobAnalyticsTracker;
 import com.jdroid.android.firebase.admob.analytics.GoogleAdMobAnalyticsTracker;
+import com.jdroid.android.fragment.FragmentDelegate;
 import com.jdroid.java.analytics.AnalyticsSender;
 import com.jdroid.java.analytics.AnalyticsTracker;
 import com.jdroid.java.collections.Lists;
@@ -26,13 +26,13 @@ public class AdMobAppModule extends AbstractAppModule {
 	public static AdMobAppModule get() {
 		return (AdMobAppModule)AbstractApplication.get().getAppModule(MODULE_NAME);
 	}
-	
+
 	private static AdMobAppContext adMobAppContext = new AdMobAppContext();
 
 	public static AdMobAppContext getAdMobAppContext() {
 		return adMobAppContext;
 	}
-	
+
 	public static void setAdMobAppContext(AdMobAppContext adMobAppContext) {
 		AdMobAppModule.adMobAppContext = adMobAppContext;
 	}
@@ -63,7 +63,7 @@ public class AdMobAppModule extends AbstractAppModule {
 	public AdMobAnalyticsSender getModuleAnalyticsSender() {
 		return (AdMobAnalyticsSender)super.getModuleAnalyticsSender();
 	}
-	
+
 	@NonNull
 	@Override
 	public List<RemoteConfigParameter> getRemoteConfigParameters() {

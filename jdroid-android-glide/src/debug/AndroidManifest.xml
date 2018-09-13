@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.jdroid.android.glide">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+		  package="com.jdroid.android.glide">
 
-    <application>
+	<application>
 
-        <meta-data android:name="com.jdroid.android.glide.debug.GlideDebugAppLifecycleCallback" android:value="ApplicationLifecycleCallback" />
+		<meta-data android:name="com.jdroid.android.glide.debug.GlideDebugAppLifecycleCallback"
+				   android:value="ApplicationLifecycleCallback" />
 
-    </application>
+	</application>
 
 </manifest>

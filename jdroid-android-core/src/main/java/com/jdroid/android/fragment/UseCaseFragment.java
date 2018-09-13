@@ -11,30 +11,29 @@ import com.jdroid.java.exception.AbstractException;
 import com.jdroid.java.utils.ReflectionUtils;
 
 /**
- * 
  * @param <T>
  */
 public abstract class UseCaseFragment<T extends AbstractUseCase> extends AbstractFragment {
-	
+
 	private T useCase;
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setRetainInstance(true);
-		
+
 		useCase = ReflectionUtils.newInstance(getUseCaseClass());
 		initializeUseCase(useCase);
 	}
-	
+
 	protected void initializeUseCase(T useCase) {
 		// Do Nothing
 	}
-	
+
 	public T getUseCase() {
 		return useCase;
 	}
-	
+
 	protected abstract Class<T> getUseCaseClass();
 
 
@@ -49,11 +48,11 @@ public abstract class UseCaseFragment<T extends AbstractUseCase> extends Abstrac
 		super.onStop();
 		UseCaseHelper.unregisterUseCase(useCase, this);
 	}
-	
+
 	protected UseCaseTrigger getUseCaseTrigger() {
 		return UseCaseTrigger.ONCE;
 	}
-	
+
 	public void executeUseCase() {
 		UseCaseHelper.executeUseCase(useCase);
 	}

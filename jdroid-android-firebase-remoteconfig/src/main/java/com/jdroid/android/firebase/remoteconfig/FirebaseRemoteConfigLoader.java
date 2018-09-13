@@ -35,24 +35,24 @@ public class FirebaseRemoteConfigLoader implements RemoteConfigLoader {
 	private static final Logger LOGGER = LoggerUtils.getLogger(FirebaseRemoteConfigLoader.class);
 
 	private FirebaseRemoteConfig firebaseRemoteConfig;
-	
+
 	private int retryCount = 0;
 	private long defaultFetchExpiration = TimeUnit.HOURS.toSeconds(12);
 
 	private List<RemoteConfigParameter> remoteConfigParametersAsUserProperties = Lists.newArrayList();
-	
+
 	public static FirebaseRemoteConfigLoader get() {
 		return ((FirebaseRemoteConfigLoader)AbstractApplication.get().getRemoteConfigLoader());
 	}
-	
+
 	@WorkerThread
 	@RestrictTo(LIBRARY)
 	void init() {
 
 		try {
-			
+
 			LOGGER.debug("Initializing Firebase Remote Config");
-			
+
 			FirebaseApp.initializeApp(AbstractApplication.get());
 
 			firebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
@@ -67,25 +67,25 @@ public class FirebaseRemoteConfigLoader implements RemoteConfigLoader {
 			AbstractApplication.get().getExceptionHandler().logHandledException("Error initializing Firebase Remote Config", e);
 		}
 	}
-	
+
 	public void setDefaultFetchExpiration(long defaultFetchExpiration) {
 		this.defaultFetchExpiration = defaultFetchExpiration;
 	}
-	
+
 	@Override
 	public void fetch() {
 		fetch(null);
 	}
-	
+
 	public void fetch(OnSuccessListener<Void> onSuccessListener) {
 		fetch(0, false, onSuccessListener);
 	}
-	
+
 	@RestrictTo(LIBRARY)
 	public void fetch(long cacheExpirationSeconds, Boolean setExperimentUserProperty) {
 		fetch(cacheExpirationSeconds, setExperimentUserProperty, null);
 	}
-	
+
 	@RestrictTo(LIBRARY)
 	public void fetch(final long cacheExpirationSeconds, final Boolean setExperimentUserProperty, final OnSuccessListener<Void> onSuccessListener) {
 		if (firebaseRemoteConfig != null) {
@@ -149,7 +149,7 @@ public class FirebaseRemoteConfigLoader implements RemoteConfigLoader {
 		return firebaseRemoteConfig;
 	}
 
-	private FirebaseRemoteConfigValue getFirebaseRemoteConfigValue(RemoteConfigParameter remoteConfigParameter) {
+	private FirebaseRemoteConfigValue getFirebaseRemoteConfigValue(@NonNull RemoteConfigParameter remoteConfigParameter) {
 		if (firebaseRemoteConfig == null) {
 			return new StaticFirebaseRemoteConfigValue(remoteConfigParameter);
 		} else {
@@ -158,7 +158,7 @@ public class FirebaseRemoteConfigLoader implements RemoteConfigLoader {
 	}
 
 	@Override
-	public String getString(RemoteConfigParameter remoteConfigParameter) {
+	public String getString(@NonNull RemoteConfigParameter remoteConfigParameter) {
 		FirebaseRemoteConfigValue firebaseRemoteConfigValue = getFirebaseRemoteConfigValue(remoteConfigParameter);
 		Object value;
 		if (firebaseRemoteConfigValue.getSource() == FirebaseRemoteConfig.VALUE_SOURCE_STATIC) {
@@ -169,14 +169,14 @@ public class FirebaseRemoteConfigLoader implements RemoteConfigLoader {
 		log(remoteConfigParameter, firebaseRemoteConfigValue, value);
 		return value != null ? value.toString() : null;
 	}
-	
+
 	@Override
-	public List<String> getStringList(RemoteConfigParameter remoteConfigParameter) {
+	public List<String> getStringList(@NonNull RemoteConfigParameter remoteConfigParameter) {
 		return StringUtils.splitWithCommaSeparator(getString(remoteConfigParameter));
 	}
-	
+
 	@Override
-	public Boolean getBoolean(RemoteConfigParameter remoteConfigParameter) {
+	public Boolean getBoolean(@NonNull RemoteConfigParameter remoteConfigParameter) {
 		FirebaseRemoteConfigValue firebaseRemoteConfigValue = getFirebaseRemoteConfigValue(remoteConfigParameter);
 		Object value;
 		if (firebaseRemoteConfigValue.getSource() == FirebaseRemoteConfig.VALUE_SOURCE_STATIC) {
@@ -189,7 +189,7 @@ public class FirebaseRemoteConfigLoader implements RemoteConfigLoader {
 	}
 
 	@Override
-	public Double getDouble(RemoteConfigParameter remoteConfigParameter) {
+	public Double getDouble(@NonNull RemoteConfigParameter remoteConfigParameter) {
 		FirebaseRemoteConfigValue firebaseRemoteConfigValue = getFirebaseRemoteConfigValue(remoteConfigParameter);
 		Object value;
 		if (firebaseRemoteConfigValue.getSource() == FirebaseRemoteConfig.VALUE_SOURCE_STATIC) {
@@ -205,7 +205,7 @@ public class FirebaseRemoteConfigLoader implements RemoteConfigLoader {
 	}
 
 	@Override
-	public Long getLong(RemoteConfigParameter remoteConfigParameter) {
+	public Long getLong(@NonNull RemoteConfigParameter remoteConfigParameter) {
 		FirebaseRemoteConfigValue firebaseRemoteConfigValue = getFirebaseRemoteConfigValue(remoteConfigParameter);
 		Object value;
 		if (firebaseRemoteConfigValue.getSource() == FirebaseRemoteConfig.VALUE_SOURCE_STATIC) {
@@ -219,9 +219,9 @@ public class FirebaseRemoteConfigLoader implements RemoteConfigLoader {
 		log(remoteConfigParameter, firebaseRemoteConfigValue, value);
 		return (Long)value;
 	}
-	
+
 	@Override
-	public Object getObject(RemoteConfigParameter remoteConfigParameter) {
+	public Object getObject(@NonNull RemoteConfigParameter remoteConfigParameter) {
 		FirebaseRemoteConfigValue firebaseRemoteConfigValue = getFirebaseRemoteConfigValue(remoteConfigParameter);
 		Object value;
 		if (firebaseRemoteConfigValue.getSource() == FirebaseRemoteConfig.VALUE_SOURCE_STATIC) {
@@ -232,12 +232,12 @@ public class FirebaseRemoteConfigLoader implements RemoteConfigLoader {
 		log(remoteConfigParameter, firebaseRemoteConfigValue, value);
 		return value;
 	}
-	
-	public String getSourceName(RemoteConfigParameter remoteConfigParameter) {
+
+	public String getSourceName(@NonNull RemoteConfigParameter remoteConfigParameter) {
 		return getSourceName(getFirebaseRemoteConfigValue(remoteConfigParameter));
 	}
-	
-	private String getSourceName(FirebaseRemoteConfigValue firebaseRemoteConfigValue) {
+
+	private String getSourceName(@NonNull FirebaseRemoteConfigValue firebaseRemoteConfigValue) {
 		String source = null;
 		if (firebaseRemoteConfigValue.getSource() == FirebaseRemoteConfig.VALUE_SOURCE_STATIC) {
 			source = "Static";
@@ -249,17 +249,17 @@ public class FirebaseRemoteConfigLoader implements RemoteConfigLoader {
 		return source;
 	}
 
-	private void log(RemoteConfigParameter remoteConfigParameter, FirebaseRemoteConfigValue firebaseRemoteConfigValue, Object value) {
+	private void log(@NonNull RemoteConfigParameter remoteConfigParameter, @NonNull FirebaseRemoteConfigValue firebaseRemoteConfigValue, Object value) {
 		if (LoggerUtils.isEnabled()) {
 			String source = getSourceName(firebaseRemoteConfigValue);
 			LOGGER.info("Loaded Firebase Remote Config. Source [" + source + "] Key [" + remoteConfigParameter.getKey() + "] Value [" + value + "]");
 		}
 	}
-	
+
 	public void addRemoteConfigParametersAsUserProperties(List<RemoteConfigParameter> remoteConfigParametersAsUserProperties) {
 		this.remoteConfigParametersAsUserProperties.addAll(remoteConfigParametersAsUserProperties);
 	}
-	
+
 	public List<RemoteConfigParameter> getRemoteConfigParametersAsUserProperties() {
 		return remoteConfigParametersAsUserProperties;
 	}
