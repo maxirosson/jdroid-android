@@ -70,10 +70,10 @@ public class RateAppStats {
 	//@WorkerThread
 	public static Boolean displayRateAppView() {
 		Boolean alreadyRated = getRateOnGooglePlay();
-		Boolean enoughDaysSinceLastResponse = TimeUnit.MILLISECONDS.toDays(RateAppStats.getLastResponseTimestamp()) >= AbstractApplication.get().getRemoteConfigLoader().getLong(AboutRemoteConfigParameter.RATE_APP_MIN_DAYS_SINCE_LAST_RESPONSE);
-		Boolean enoughDaysSinceFirstAppLoad = TimeUnit.MILLISECONDS.toDays(UsageStats.getFirstAppLoadTimestamp()) >= AbstractApplication.get().getRemoteConfigLoader().getLong(AboutRemoteConfigParameter.RATE_APP_MIN_DAYS_SINCE_FIRST_APP_LOAD);
+		Boolean enoughDaysSinceLastResponse = TimeUnit.MILLISECONDS.toDays(DateUtils.nowMillis() - RateAppStats.getLastResponseTimestamp()) >= AbstractApplication.get().getRemoteConfigLoader().getLong(AboutRemoteConfigParameter.RATE_APP_MIN_DAYS_SINCE_LAST_RESPONSE);
+		Boolean enoughDaysSinceFirstAppLoad = TimeUnit.MILLISECONDS.toDays(DateUtils.nowMillis() - UsageStats.getFirstAppLoadTimestamp()) >= AbstractApplication.get().getRemoteConfigLoader().getLong(AboutRemoteConfigParameter.RATE_APP_MIN_DAYS_SINCE_FIRST_APP_LOAD);
 		Boolean enoughAppLoads = UsageStats.getAppLoads() >= AbstractApplication.get().getRemoteConfigLoader().getLong(AboutRemoteConfigParameter.RATE_APP_MIN_APP_LOADS);
-		Boolean enoughDaysSinceLastCrash = TimeUnit.MILLISECONDS.toDays(UsageStats.getLastCrashTimestamp()) >= AbstractApplication.get().getRemoteConfigLoader().getLong(AboutRemoteConfigParameter.RATE_APP_MIN_DAYS_SINCE_LAST_CRASH);
+		Boolean enoughDaysSinceLastCrash = TimeUnit.MILLISECONDS.toDays(DateUtils.nowMillis() - UsageStats.getLastCrashTimestamp()) >= AbstractApplication.get().getRemoteConfigLoader().getLong(AboutRemoteConfigParameter.RATE_APP_MIN_DAYS_SINCE_LAST_CRASH);
 		return (alreadyRated == null || !alreadyRated) && enoughDaysSinceLastResponse && enoughDaysSinceFirstAppLoad && enoughAppLoads && enoughDaysSinceLastCrash;
 	}
 }
