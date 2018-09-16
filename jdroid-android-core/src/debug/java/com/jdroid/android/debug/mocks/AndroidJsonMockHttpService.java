@@ -4,7 +4,6 @@ import com.jdroid.android.debug.crash.CrashGenerator;
 import com.jdroid.android.debug.crash.ExceptionType;
 import com.jdroid.android.debug.http.HttpDebugConfiguration;
 import com.jdroid.android.utils.SharedPreferencesHelper;
-import com.jdroid.java.http.mock.AbstractMockHttpService;
 import com.jdroid.java.http.mock.JsonMockHttpService;
 
 public class AndroidJsonMockHttpService extends JsonMockHttpService {
@@ -14,10 +13,7 @@ public class AndroidJsonMockHttpService extends JsonMockHttpService {
 	public AndroidJsonMockHttpService(Object... urlSegments) {
 		super(urlSegments);
 	}
-	
-	/**
-	 * @see AbstractMockHttpService#simulateCrash()
-	 */
+
 	@Override
 	protected void simulateCrash() {
 		ExceptionType exceptionType = getHttpMockExceptionType();
@@ -25,7 +21,7 @@ public class AndroidJsonMockHttpService extends JsonMockHttpService {
 			CrashGenerator.crash(exceptionType, false);
 		}
 	}
-	
+
 	@Override
 	protected Integer getHttpMockSleepDuration(Object... urlSegments) {
 		return HttpDebugConfiguration.getHttpMockSleepDuration();

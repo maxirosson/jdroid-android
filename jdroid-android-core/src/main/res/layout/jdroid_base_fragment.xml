@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent">
 
 	<include layout="@layout/jdroid_app_bar" />
 
-	<FrameLayout android:id="@+id/content" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_above="@+id/adViewContainer" android:layout_below="@+id/appBar"/>
+	<FrameLayout android:id="@+id/content"
+				 android:layout_width="match_parent"
+				 android:layout_height="match_parent"
+				 android:layout_above="@+id/adViewContainer"
+				 android:layout_below="@+id/appBar" />
 
-	<LinearLayout android:id="@+id/adViewContainer" style="@style/jdroid_adsViewContainer"/>
+	<LinearLayout android:id="@+id/adViewContainer"
+				  style="@style/jdroid_adsViewContainer" />
 
 </RelativeLayout>

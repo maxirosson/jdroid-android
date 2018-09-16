@@ -1,22 +1,25 @@
 package com.jdroid.android.sample.ui.google.admob;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.View.OnClickListener;
 
 import com.jdroid.android.activity.ActivityLauncher;
+import com.jdroid.android.firebase.admob.interstitial.InterstitialAction;
 import com.jdroid.android.fragment.AbstractFragment;
-import com.jdroid.android.firebase.admob.AdMobActivityDelegate;
-import com.jdroid.android.firebase.admob.AdMobAppModule;
 import com.jdroid.android.sample.R;
+import com.jdroid.android.sample.firebase.remoteconfig.AndroidRemoteConfigParameter;
+import com.jdroid.android.utils.ToastUtils;
+import com.jdroid.java.remoteconfig.RemoteConfigParameter;
 
 public class AdsFragment extends AbstractFragment {
-	
+
 	@Override
 	public Integer getContentFragmentLayout() {
 		return R.layout.ads_fragment;
 	}
-	
+
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
@@ -25,7 +28,7 @@ public class AdsFragment extends AbstractFragment {
 
 			@Override
 			public void onClick(View v) {
-				ActivityLauncher.launchActivity(FragmentBannerActivity.class);
+				ActivityLauncher.startActivity(getActivity(), FragmentBannerActivity.class);
 			}
 		});
 
@@ -33,7 +36,7 @@ public class AdsFragment extends AbstractFragment {
 
 			@Override
 			public void onClick(View v) {
-				ActivityLauncher.launchActivity(AdRecyclerActivity.class);
+				ActivityLauncher.startActivity(getActivity(), AdRecyclerActivity.class);
 			}
 		});
 
@@ -41,15 +44,26 @@ public class AdsFragment extends AbstractFragment {
 
 			@Override
 			public void onClick(View v) {
-				ActivityLauncher.launchActivity(ActivityBannerActivity.class);
+				ActivityLauncher.startActivity(getActivity(), ActivityBannerActivity.class);
 			}
 		});
 
 		findView(R.id.displayInterstitial).setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				((AdMobActivityDelegate)getActivityIf().getActivityDelegate(AdMobAppModule.get())).getInterstitialAdHelper().displayInterstitial(false);
+				new InterstitialAction() {
+					@Override
+					protected void onAction() {
+						ToastUtils.showToast(R.string.interstitialAction);
+					}
+
+					@NonNull
+					@Override
+					protected RemoteConfigParameter getEnabledRemoteConfigParameter() {
+						return AndroidRemoteConfigParameter.INTERSTITIAL_ENABLED;
+					}
+				}.start(getActivityIf());
 			}
 		});
 
@@ -57,7 +71,7 @@ public class AdsFragment extends AbstractFragment {
 
 			@Override
 			public void onClick(View v) {
-				ActivityLauncher.launchActivity(HouseAdsActivity.class);
+				ActivityLauncher.startActivity(getActivity(), HouseAdsActivity.class);
 			}
 		});
 	}

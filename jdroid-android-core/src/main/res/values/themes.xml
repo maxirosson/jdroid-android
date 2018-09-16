@@ -3,19 +3,6 @@
 
 	<!-- Themes -->
 
-	<!-- DEPRECATED -->
-	<style name="Jdroid.Theme.Base" parent="@style/Theme.AppCompat.Light.DarkActionBar">
-		<!-- your app branding color for the app bar -->
-		<item name="colorPrimary">@color/jdroid_colorPrimary</item>
-		<!-- darker variant for the status bar and contextual app bars -->
-		<item name="colorPrimaryDark">@color/jdroid_colorPrimaryDark</item>
-		<!-- theme UI controls like checkboxes and text fields -->
-		<item name="colorAccent">@color/jdroid_accentColor</item>
-
-		<item name="alertDialogTheme">@style/Jdroid.Dialog.Alert</item>
-		<item name="dialogTheme">@style/Jdroid.Dialog</item>
-	</style>
-
 	<style name="Jdroid.Theme.Light" parent="@style/Theme.AppCompat.Light.DarkActionBar">
 		<!-- your app branding color for the app bar -->
 		<item name="colorPrimary">@color/jdroid_colorPrimary</item>

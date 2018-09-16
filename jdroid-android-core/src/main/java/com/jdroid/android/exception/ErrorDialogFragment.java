@@ -46,7 +46,7 @@ public class ErrorDialogFragment extends AlertDialogFragment {
 		}
 		return String.valueOf(builder.toString().hashCode());
 	}
-	
+
 	/**
 	 * @see com.jdroid.android.dialog.AlertDialogFragment#onPositiveClick()
 	 */
@@ -54,7 +54,7 @@ public class ErrorDialogFragment extends AlertDialogFragment {
 	protected void onPositiveClick() {
 		handleStrategy();
 	}
-	
+
 	/**
 	 * @see android.support.v4.app.DialogFragment#onCancel(android.content.DialogInterface)
 	 */

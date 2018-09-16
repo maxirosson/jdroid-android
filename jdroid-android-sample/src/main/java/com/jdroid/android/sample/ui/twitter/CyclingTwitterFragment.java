@@ -11,7 +11,7 @@ public class CyclingTwitterFragment extends TwitterListFragment {
 	@Override
 	protected TwitterHelper createTwitterHelper() {
 		return new CyclingTwitterHelper() {
-			
+
 			@Override
 			protected SearchTimeline createSearchTimeline() {
 				SearchTimeline.Builder searchTimelineBuilder = new SearchTimeline.Builder();
@@ -22,7 +22,7 @@ public class CyclingTwitterFragment extends TwitterListFragment {
 				searchTimelineBuilder.query(queryBuilder.toString());
 				return searchTimelineBuilder.build();
 			}
-			
+
 			@Override
 			public AbstractFragment getAbstractFragment() {
 				return CyclingTwitterFragment.this;

@@ -2,12 +2,13 @@ package com.jdroid.android.loading;
 
 import android.app.Dialog;
 import android.content.Context;
+
 import com.jdroid.android.activity.ActivityIf;
 
 public class DefaultBlockingLoading extends BlockingLoading {
-	
+
 	private Dialog loadingDialog;
-	
+
 	/**
 	 * @see com.jdroid.android.loading.ActivityLoading#show(com.jdroid.android.activity.ActivityIf)
 	 */
@@ -19,7 +20,7 @@ public class DefaultBlockingLoading extends BlockingLoading {
 			loadingDialog.show();
 		}
 	}
-	
+
 	/**
 	 * @see com.jdroid.android.loading.ActivityLoading#dismiss(com.jdroid.android.activity.ActivityIf)
 	 */

@@ -25,7 +25,7 @@ public class ReferrerUtils {
 		} catch (Exception e) {
 			LOGGER.error("Error when getting referrer", e);
 		}
-		if (referrerUri != null) {
+		if (referrerUri != null && referrerUri.getScheme() != null) {
 			if (referrerUri.getScheme().equals("http") || referrerUri.getScheme().equals("https")) {
 				referrerCategory = "http://";
 				// App was opened from a browser

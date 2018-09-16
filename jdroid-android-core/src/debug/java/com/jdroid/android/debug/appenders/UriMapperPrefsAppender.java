@@ -9,6 +9,7 @@ import android.preference.PreferenceGroup;
 import android.support.v4.app.ShareCompat;
 
 import com.jdroid.android.R;
+import com.jdroid.android.activity.ActivityLauncher;
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.debug.PreferencesAppender;
 import com.jdroid.android.permission.PermissionHelper;
@@ -30,6 +31,7 @@ public class UriMapperPrefsAppender extends PreferencesAppender {
 	public UriMapperPrefsAppender(Integer htmlRawId) {
 		this.htmlRawId = htmlRawId;
 	}
+
 	public UriMapperPrefsAppender() {
 		this(null);
 	}
@@ -43,7 +45,7 @@ public class UriMapperPrefsAppender extends PreferencesAppender {
 	public void initPreferences(final Activity activity, PreferenceGroup preferenceGroup) {
 
 		if (htmlRawId == null) {
-			htmlRawId = activity.getResources().getIdentifier("url_samples", "raw", activity.getPackageName());
+			htmlRawId = activity.getResources().getIdentifier("url_samples", "raw", AppUtils.getApplicationId());
 		}
 
 		Preference preference = new Preference(activity);
@@ -63,7 +65,7 @@ public class UriMapperPrefsAppender extends PreferencesAppender {
 					FileUtils.copyStream(openInputStream, file);
 					openInputStream.close();
 
-					ExternalAppsUtils.openOnBrowser(activity, file);
+					ExternalAppsUtils.openOnBrowser(file);
 				} catch (IOException e) {
 					throw new UnexpectedException(e);
 				}
@@ -91,12 +93,12 @@ public class UriMapperPrefsAppender extends PreferencesAppender {
 				}
 
 				Intent shareIntent = ShareCompat.IntentBuilder.from(activity)
-						.setType("text/html")
-						.setSubject(AppUtils.getApplicationName() + " urls samples")
-						.setHtmlText(builder.toString())
-						.getIntent();
+					.setType("text/html")
+					.setSubject(AppUtils.getApplicationName() + " urls samples")
+					.setHtmlText(builder.toString())
+					.getIntent();
 				if (shareIntent.resolveActivity(activity.getPackageManager()) != null) {
-					activity.startActivity(shareIntent);
+					ActivityLauncher.startActivity(activity, shareIntent);
 				}
 
 				return true;

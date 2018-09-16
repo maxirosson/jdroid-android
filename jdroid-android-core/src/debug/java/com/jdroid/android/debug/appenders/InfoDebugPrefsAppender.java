@@ -7,8 +7,8 @@ import android.preference.PreferenceGroup;
 
 import com.jdroid.android.R;
 import com.jdroid.android.activity.ActivityLauncher;
-import com.jdroid.android.debug.info.DebugInfoActivity;
 import com.jdroid.android.debug.PreferencesAppender;
+import com.jdroid.android.debug.info.DebugInfoActivity;
 
 public class InfoDebugPrefsAppender extends PreferencesAppender {
 
@@ -26,7 +26,7 @@ public class InfoDebugPrefsAppender extends PreferencesAppender {
 
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
-				ActivityLauncher.launchActivity(DebugInfoActivity.class);
+				ActivityLauncher.startActivity(activity, DebugInfoActivity.class);
 				return true;
 			}
 		});

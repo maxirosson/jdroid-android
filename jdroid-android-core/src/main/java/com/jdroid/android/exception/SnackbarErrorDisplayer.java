@@ -1,12 +1,11 @@
 package com.jdroid.android.exception;
 
-import android.app.Activity;
 import android.support.annotation.IdRes;
 import android.support.annotation.StringRes;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 
-import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.snackbar.SnackbarBuilder;
 
 public class SnackbarErrorDisplayer extends AbstractErrorDisplayer {
@@ -14,8 +13,7 @@ public class SnackbarErrorDisplayer extends AbstractErrorDisplayer {
 	private SnackbarBuilder snackbarBuilder = new SnackbarBuilder();
 
 	@Override
-	public void onDisplayError(String title, String description, Throwable throwable) {
-		Activity activity = AbstractApplication.get().getCurrentActivity();
+	public void onDisplayError(FragmentActivity activity, String title, String description, Throwable throwable) {
 		if (activity != null) {
 			snackbarBuilder.setDescription(description);
 			Snackbar snackbar = snackbarBuilder.build(activity);

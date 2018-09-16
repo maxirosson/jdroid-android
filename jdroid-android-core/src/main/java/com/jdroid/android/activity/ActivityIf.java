@@ -1,5 +1,6 @@
 package com.jdroid.android.activity;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
@@ -22,15 +23,15 @@ public interface ActivityIf extends ComponentIf {
 	public int getContentView();
 
 	// //////////////////////// Life cycle //////////////////////// //
-	
+
 	public Boolean onBeforeSetContentView();
-	
+
 	public void onAfterSetContentView(Bundle savedInstanceState);
 
 	public void doOnCreateOptionsMenu(Menu menu);
-	
+
 	public MenuInflater getMenuInflater();
-	
+
 	public Boolean isLauncherActivity();
 
 	public Boolean isActivityDestroyed();
@@ -45,9 +46,9 @@ public interface ActivityIf extends ComponentIf {
 
 	@NonNull
 	public ActivityLoading getDefaultLoading();
-	
+
 	public void setLoading(ActivityLoading loading);
-	
+
 	// //////////////////////// Navigation Drawer //////////////////////// //
 
 	public void initNavDrawer(Toolbar appBar);
@@ -61,20 +62,18 @@ public interface ActivityIf extends ComponentIf {
 	@Nullable
 	public Long getLocationFrequency();
 
-	public Boolean isLocationServicesEnabled();
-
 	// //////////////////////// Uri, Dynamic Links & App Invites //////////////////////// //
 
 	@Nullable
 	public UriHandler createUriHandler();
 
-	public Boolean isAppInviteEnabled();
-
-	public void onAppInvite(String deepLink, String invitationId);
+	public void onAppInvite(Uri deepLink, String invitationId);
 
 	// //////////////////////// Others //////////////////////// //
 
 	public Boolean isGooglePlayServicesVerificationEnabled();
 
 	public GoogleApiClient getGoogleApiClient();
+
+	public AbstractFragmentActivity getActivity();
 }

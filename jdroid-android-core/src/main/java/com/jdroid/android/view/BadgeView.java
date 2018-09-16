@@ -13,39 +13,39 @@ import android.util.TypedValue;
  * isn't visible.
  */
 public class BadgeView extends AppCompatTextView {
-	
+
 	private static final int DEFAULT_MAXIMUM = 9;
 	private int maximum = DEFAULT_MAXIMUM;
-	
+
 	public BadgeView(Context context) {
 		this(context, null);
 	}
-	
+
 	public BadgeView(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		
+
 		if (isInEditMode()) {
 			setText("1");
 		} else {
 			// hide by default
 			setVisibility(GONE);
 		}
-		
+
 		// Adding styles
 		setPadding(8, 4, 8, 4);
 		setTextColor(Color.WHITE);
 		setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
 		setTypeface(Typeface.DEFAULT_BOLD);
 	}
-	
+
 	/**
 	 * Sets a notification number in the badge.
-	 * 
+	 *
 	 * @param notifications
 	 */
 	@SuppressLint("SetTextI18n")
 	public void setNotifications(Integer notifications) {
-		
+
 		if ((notifications != null) && (notifications > 0)) {
 			setVisibility(VISIBLE);
 			if (notifications > maximum) {
@@ -57,12 +57,12 @@ public class BadgeView extends AppCompatTextView {
 			setVisibility(GONE);
 		}
 	}
-	
+
 	/**
 	 * @param maximum the maximum to set
 	 */
 	public void setMaximum(int maximum) {
 		this.maximum = maximum;
 	}
-	
+
 }

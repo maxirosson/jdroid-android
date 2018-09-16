@@ -15,6 +15,8 @@ import com.jdroid.android.activity.AbstractFragmentActivity;
 import com.jdroid.android.utils.SharedPreferencesHelper;
 import com.jdroid.java.concurrent.ExecutorUtils;
 
+import java.util.concurrent.TimeUnit;
+
 public abstract class NavDrawer {
 
 	public static final String NAV_DRAWER_MANUALLY_USED = "navDrawerManuallyUsed";
@@ -69,7 +71,7 @@ public abstract class NavDrawer {
 
 		if (isNavDrawerTopLevelView && appBar != null) {
 			drawerToggle = new ActionBarDrawerToggle(activity, drawerLayout, appBar, R.string.jdroid_drawerOpen,
-					R.string.jdroid_drawerClose) {
+				R.string.jdroid_drawerClose) {
 
 				@Override
 				public void onDrawerStateChanged(int newState) {
@@ -121,7 +123,7 @@ public abstract class NavDrawer {
 						}
 					});
 				}
-			}, 1L);
+			}, 1L, TimeUnit.SECONDS);
 		}
 	}
 

@@ -17,16 +17,15 @@ import com.jdroid.android.dialog.AppInfoDialogFragment;
 
 /**
  * Helper class for permissions.
- *
+ * <p>
  * When using an PermissionHelper instance, it is required to set the listener to receive callbacks using the method
  * {@link #setOnRequestPermissionsResultListener(OnRequestPermissionsResultListener)}, and to call the methods
  * {@link #onResume()} and {@link #onRequestPermissionsResult(int, String[], int[])} from the respective activity/fragment methods.
- *
+ * <p>
  * If you prefer to use the static methods to chek permissions like {@link #checkPermission(Fragment, int, int, String, int)},
  * Your activity/Fragment has to implement the "OnRequestPermissionsResultCallback" method (
  * {@link android.support.v4.app.ActivityCompat.OnRequestPermissionsResultCallback#onRequestPermissionsResult(int, String[], int[])} or
  * {@link android.support.v4.app.Fragment#onRequestPermissionsResult(int, String[], int[])})
- *
  */
 public class PermissionHelper {
 
@@ -114,7 +113,7 @@ public class PermissionHelper {
 				if (permissionDelegate.shouldShowRequestPermissionRationale(permission)) {
 					permissionDelegate.showPermissionDialogFragment(title, message, permission, permissionRequestCode);
 				} else {
-					permissionDelegate.requestPermissions(new String[]{permission}, permissionRequestCode);
+					permissionDelegate.requestPermissions(new String[] { permission }, permissionRequestCode);
 				}
 				hasPermission = false;
 			} else {
@@ -132,7 +131,7 @@ public class PermissionHelper {
 		boolean hasPermission;
 		try {
 			if (permissionDelegate.checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
-				permissionDelegate.requestPermissions(new String[] {permission}, permissionRequestCode);
+				permissionDelegate.requestPermissions(new String[] { permission }, permissionRequestCode);
 				hasPermission = false;
 			} else {
 				hasPermission = true;
@@ -169,7 +168,6 @@ public class PermissionHelper {
 	}
 
 
-
 	public PermissionHelper(@NonNull FragmentActivity fragmentActivity, @NonNull String permission, int permissionRequestCode) {
 		this(new ActivityPermissionDelegate(fragmentActivity), permission, permissionRequestCode);
 	}
@@ -188,7 +186,7 @@ public class PermissionHelper {
 	 * Sets the message to be displayed in the permission rationale dialog, from a resource.
 	 * If not set, the permission rationale dialog will not be shown.
 	 *
-	 * @param permissionRationaleMessageResId  the resource id for the message
+	 * @param permissionRationaleMessageResId the resource id for the message
 	 */
 	public void setPermissionRationaleMessageResId(@StringRes int permissionRationaleMessageResId) {
 		this.permissionRationaleMessageResId = permissionRationaleMessageResId;
@@ -198,7 +196,7 @@ public class PermissionHelper {
 	 * Sets the title to be displayed in the permission rationale dialog, from a resource.
 	 * If not set, the default title is used {@link R.string#jdroid_requiredPermission} is used.
 	 *
-	 * @param permissionRationaleTitleResId  the resource id for the title
+	 * @param permissionRationaleTitleResId the resource id for the title
 	 */
 	public void setPermissionRationaleTitleResId(int permissionRationaleTitleResId) {
 		this.permissionRationaleTitleResId = permissionRationaleTitleResId;
@@ -208,7 +206,7 @@ public class PermissionHelper {
 	 * Sets the message to be displayed in the App Info dialog, from a resource.
 	 * If not set and {@link #isShowAppInfoDialogEnabled()} is true, the message specified in {@link #setPermissionRationaleMessageResId(int)} is used.
 	 *
-	 * @param appInfoDialogMessageResId  the resource id for the message
+	 * @param appInfoDialogMessageResId the resource id for the message
 	 */
 	public void setAppInfoDialogMessageResId(@StringRes int appInfoDialogMessageResId) {
 		this.appInfoDialogMessageResId = appInfoDialogMessageResId;
@@ -218,7 +216,7 @@ public class PermissionHelper {
 	 * Sets the title to be displayed in the App Info dialog, from a resource.
 	 * If not set and {@link #isShowAppInfoDialogEnabled()} is true, the title specified in {@link #setPermissionRationaleTitleResId(int)} or the default title is used.
 	 *
-	 * @param appInfoDialogTitleResId  the resource id for the title
+	 * @param appInfoDialogTitleResId the resource id for the title
 	 */
 	public void setAppInfoDialogTitleResId(int appInfoDialogTitleResId) {
 		this.appInfoDialogTitleResId = appInfoDialogTitleResId;
@@ -269,18 +267,17 @@ public class PermissionHelper {
 	 * @see #setRequestPermissionOnStart(boolean)
 	 */
 	public void onCreate(Bundle savedInstanceState) {
-		firstTime = savedInstanceState==null;
+		firstTime = savedInstanceState == null;
 	}
 
 	/**
 	 * This method must be called from the respective method of the fragment/activity.
-	 *
 	 */
 	public void onResume() {
-		if(requestPermissionOnStart && firstTime) {
+		if (requestPermissionOnStart && firstTime) {
 			checkPermission(false);
 			firstTime = false;
-		} else if(pendingAppInfoDialog) {
+		} else if (pendingAppInfoDialog) {
 			pendingAppInfoDialog = false;
 			showAppInfoDialog();
 		}
@@ -310,23 +307,20 @@ public class PermissionHelper {
 	}
 
 	/**
-	 * 	Check wheter the app has the permission. If the app does not have the permission, the permission will be request
-	 * 	to the user using the default Android UI for accepting it. If the user previously was denied this permission
-	 * 	a dialog with the "Permission Rationale Message" will be showed. By last, if the user previously was denied
-	 * 	this permission with the option "Never ask again" the AppInfoDialog could be showed.
-	 * 	After the user has accepted or rejected the requested permission the OnRequestPermissionsResultListener
-	 * 	will receive a callback.
+	 * Check wheter the app has the permission. If the app does not have the permission, the permission will be request
+	 * to the user using the default Android UI for accepting it. If the user previously was denied this permission
+	 * a dialog with the "Permission Rationale Message" will be showed. By last, if the user previously was denied
+	 * this permission with the option "Never ask again" the AppInfoDialog could be showed.
+	 * After the user has accepted or rejected the requested permission the OnRequestPermissionsResultListener
+	 * will receive a callback.
 	 *
-	 * 	@return true if the app already has the permission, false otherwise.
-	 *
-	 * 	@see #setPermissionRationaleMessageResId(int)
-	 * 	@see #setPermissionRationaleTitleResId(int)
-	 * 	@see #setAppInfoDialogMessageResId(int)
-	 * 	@see #setAppInfoDialogTitleResId(int)
-	 * 	@see #setShowAppInfoDialogEnabled(boolean)
-	 *
-	 * 	@see #setOnRequestPermissionsResultListener(OnRequestPermissionsResultListener)
-	 *
+	 * @return true if the app already has the permission, false otherwise.
+	 * @see #setPermissionRationaleMessageResId(int)
+	 * @see #setPermissionRationaleTitleResId(int)
+	 * @see #setAppInfoDialogMessageResId(int)
+	 * @see #setAppInfoDialogTitleResId(int)
+	 * @see #setShowAppInfoDialogEnabled(boolean)
+	 * @see #setOnRequestPermissionsResultListener(OnRequestPermissionsResultListener)
 	 */
 	public boolean checkPermission() {
 		return checkPermission(showAppInfoDialogEnabled);
@@ -339,12 +333,12 @@ public class PermissionHelper {
 	 */
 	public boolean checkPermission(boolean showAppInfoDialogEnabled) {
 		boolean hasPermission;
-		if(permissionRationaleMessageResId != 0) {
+		if (permissionRationaleMessageResId != 0) {
 			hasPermission = checkPermission(permissionDelegate, getPermissionRationaleTitleResId(), permissionRationaleMessageResId, permission, permissionRequestCode);
 		} else {
 			hasPermission = checkPermission(permissionDelegate, permission, permissionRequestCode);
 		}
-		if(!hasPermission && showAppInfoDialogEnabled) {
+		if (!hasPermission && showAppInfoDialogEnabled) {
 			previouslyShouldShowRequestPermissionRationale = permissionDelegate.shouldShowRequestPermissionRationale(permission);
 		} else {
 			previouslyShouldShowRequestPermissionRationale = null;
@@ -367,21 +361,21 @@ public class PermissionHelper {
 	}
 
 	private int getAppInfoDialogMessageResId() {
-		if(appInfoDialogMessageResId != 0) {
+		if (appInfoDialogMessageResId != 0) {
 			return appInfoDialogMessageResId;
 		}
 		return permissionRationaleMessageResId;
 	}
 
 	private int getAppInfoDialogTitleResId() {
-		if(appInfoDialogTitleResId != 0) {
+		if (appInfoDialogTitleResId != 0) {
 			return appInfoDialogTitleResId;
 		}
 		return getPermissionRationaleTitleResId();
 	}
 
 	private int getPermissionRationaleTitleResId() {
-		if(permissionRationaleTitleResId != 0) {
+		if (permissionRationaleTitleResId != 0) {
 			return permissionRationaleTitleResId;
 		}
 		return R.string.jdroid_requiredPermission;
@@ -389,13 +383,14 @@ public class PermissionHelper {
 
 	private void showAppInfoDialog() {
 		int appInfoDialogMessageResId = getAppInfoDialogMessageResId();
-		if(appInfoDialogMessageResId != 0) {
+		if (appInfoDialogMessageResId != 0) {
 			AppInfoDialogFragment.show(permissionDelegate.getActivity(), getAppInfoDialogTitleResId(), appInfoDialogMessageResId, permission);
 		}
 	}
 
 
 	// Nested classes -------------------------
+
 	/**
 	 * Listener for the result from requesting permissions.
 	 * The listener will be called when the fragment/activity onRequestPermissionsResult(...) is called and this can occur immediately before onResume() (like onActivityResult(...)).
@@ -445,7 +440,7 @@ public class PermissionHelper {
 
 		@Override
 		public void requestPermissions(@NonNull String[] permissions, int requestCode) {
-			ActivityCompat.requestPermissions(fragmentActivity, permissions,requestCode);
+			ActivityCompat.requestPermissions(fragmentActivity, permissions, requestCode);
 		}
 
 		@Override

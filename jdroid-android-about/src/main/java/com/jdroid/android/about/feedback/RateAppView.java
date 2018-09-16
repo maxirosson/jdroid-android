@@ -12,6 +12,7 @@ import com.jdroid.android.R;
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.google.GooglePlayUtils;
 import com.jdroid.android.utils.ExternalAppsUtils;
+import com.jdroid.android.utils.LocalizationUtils;
 
 public class RateAppView extends RelativeLayout {
 
@@ -23,40 +24,40 @@ public class RateAppView extends RelativeLayout {
 		super(context, attrs, defStyle);
 		init(context);
 	}
-	
+
 	public RateAppView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		init(context);
 	}
-	
+
 	public RateAppView(Context context) {
 		super(context);
 		init(context);
 	}
-	
+
 	protected int getLayoutResId() {
 		return R.layout.jdroid_rate_app_view;
 	}
-	
-	private void init(final Context context) {
-		
+
+	private void init(Context context) {
+
 		LayoutInflater.from(context).inflate(getLayoutResId(), this, true);
-		
+
 		rateAppTitle = findViewById(R.id.rateAppTitle);
 		positiveButton = findViewById(R.id.positive);
 		negativeButton = findViewById(R.id.negative);
 
-		enjoyingAppView(context);
+		enjoyingAppView();
 	}
 
-	private void enjoyingAppView(final Context context) {
-		rateAppTitle.setText(context.getString(R.string.jdroid_rateAppEnjoying, context.getString(R.string.jdroid_appName)));
+	private void enjoyingAppView() {
+		rateAppTitle.setText(LocalizationUtils.getString(R.string.jdroid_rateAppEnjoying, LocalizationUtils.getString(R.string.jdroid_appName)));
 		positiveButton.setText(R.string.jdroid_rateAppYes);
 		positiveButton.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				googlePlayView(context);
+				googlePlayView();
 				AbstractApplication.get().getCoreAnalyticsSender().trackEnjoyingApp(true);
 				RateAppStats.setEnjoyingApp(true);
 			}
@@ -67,23 +68,23 @@ public class RateAppView extends RelativeLayout {
 
 			@Override
 			public void onClick(View v) {
-				feedbackView(context);
+				feedbackView();
 				AbstractApplication.get().getCoreAnalyticsSender().trackEnjoyingApp(false);
 				RateAppStats.setEnjoyingApp(false);
 			}
 		});
 	}
 
-	private void feedbackView(final Context context) {
-		rateAppTitle.setText(context.getString(R.string.jdroid_rateAppFeedback));
+	private void feedbackView() {
+		rateAppTitle.setText(LocalizationUtils.getString(R.string.jdroid_rateAppFeedback));
 		positiveButton.setText(R.string.jdroid_rateAppOkSure);
 		positiveButton.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				
+
 				String contactUsEmailAddress = AbstractApplication.get().getAppContext().getContactUsEmail();
-				if (ExternalAppsUtils.openEmail(context, contactUsEmailAddress, AbstractApplication.get().getAppName())) {
+				if (ExternalAppsUtils.openEmail(contactUsEmailAddress, AbstractApplication.get().getAppName())) {
 					AbstractApplication.get().getCoreAnalyticsSender().trackGiveFeedback(true);
 					RateAppStats.setGiveFeedback(true);
 				} else {
@@ -106,14 +107,14 @@ public class RateAppView extends RelativeLayout {
 		});
 	}
 
-	private void googlePlayView(final Context context) {
-		rateAppTitle.setText(context.getString(R.string.jdroid_rateAppGooglePlay));
+	private void googlePlayView() {
+		rateAppTitle.setText(LocalizationUtils.getString(R.string.jdroid_rateAppGooglePlay));
 		positiveButton.setText(R.string.jdroid_rateAppOkSure);
 		positiveButton.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				GooglePlayUtils.launchAppDetails(context);
+				GooglePlayUtils.launchAppDetails();
 				setVisibility(View.GONE);
 				AbstractApplication.get().getCoreAnalyticsSender().trackRateOnGooglePlay(true);
 				RateAppStats.setRateOnGooglePlay(true);

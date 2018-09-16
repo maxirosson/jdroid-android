@@ -4,8 +4,8 @@ ext.PROJECT_NAME = 'Jdroid Android'
 description = 'Jdroid dependency project for Android apps'
 
 configurations {
-	compile.exclude group: "org.apache.httpcomponents",  module: "httpclient"
-	compile.exclude group: "org.slf4j",  module: "slf4j-api"
+	compile.exclude group: "org.apache.httpcomponents", module: "httpclient"
+	compile.exclude group: "org.slf4j", module: "slf4j-api"
 }
 
 configurations.all {
@@ -31,26 +31,24 @@ dependencies {
 	api "com.android.support:cardview-v7:${ANDROID_SUPPORT_VERSION}"
 
 	// https://developers.google.com/android/guides/releases
-	api "com.google.android.gms:play-services-analytics:15.0.0"
+	api "com.google.android.gms:play-services-analytics:16.0.3"
 	api "com.google.android.gms:play-services-base:15.0.1"
-	api "com.google.android.gms:play-services-location:15.0.1"
 
 	// https://firebase.google.com/support/release-notes/android
-	api "com.google.firebase:firebase-core:15.0.2"
-	api "com.google.firebase:firebase-appindexing:15.0.0"
-	api "com.google.firebase:firebase-messaging:15.0.2"
-	api "com.google.firebase:firebase-invites:15.0.1"
-	api "com.google.firebase:firebase-perf:15.1.0"
+	api "com.google.firebase:firebase-core:16.0.3"
+	api "com.google.firebase:firebase-appindexing:16.0.1"
+	api "com.google.firebase:firebase-invites:16.0.3"
+	api "com.google.firebase:firebase-perf:16.1.0"
 
 	// https://github.com/firebase/firebase-jobdispatcher-android/releases
 	api 'com.firebase:firebase-jobdispatcher:0.8.5'
 
 	debugApi("com.squareup.leakcanary:leakcanary-android:${LEAK_CANARY_VERSION}") { force = true }
-	releaseApi ("com.squareup.leakcanary:leakcanary-android-no-op:${LEAK_CANARY_VERSION}") { force = true }
-	testImplementation ("com.squareup.leakcanary:leakcanary-android-no-op:${LEAK_CANARY_VERSION}") { force = true }
+	releaseApi("com.squareup.leakcanary:leakcanary-android-no-op:${LEAK_CANARY_VERSION}") { force = true }
+	testImplementation("com.squareup.leakcanary:leakcanary-android-no-op:${LEAK_CANARY_VERSION}") { force = true }
 
 	// https://github.com/facebook/device-year-class/blob/master/CHANGELOG.md
-	api 'com.facebook.device.yearclass:yearclass:2.0.0'
+	api 'com.facebook.device.yearclass:yearclass:2.1.0'
 
 	// Jdroid dependencies
 
@@ -58,14 +56,14 @@ dependencies {
 		api project(":jdroid-java-core")
 		api project(":jdroid-java-remote-config")
 	} else {
-		api ("com.jdroidtools:jdroid-java-core:${JDROID_JAVA_VERSION}")
-		api ("com.jdroidtools:jdroid-java-remote-config:${JDROID_JAVA_VERSION}")
+		api("com.jdroidtools:jdroid-java-core:${JDROID_JAVA_VERSION}")
+		api("com.jdroidtools:jdroid-java-remote-config:${JDROID_JAVA_VERSION}")
 	}
 
 	if (jdroid.propertyResolver.getBooleanProp("JDROID_JAVA_HTTP_AS_PROJECT_DEPENDENCY", false)) {
 		api project(":jdroid-java-http-core")
 	} else {
-		api ("com.jdroidtools:jdroid-java-http-core:${JDROID_JAVA_HTTP_VERSION}") {
+		api("com.jdroidtools:jdroid-java-http-core:${JDROID_JAVA_HTTP_VERSION}") {
 			exclude module: 'jdroid-java-core'
 		}
 	}

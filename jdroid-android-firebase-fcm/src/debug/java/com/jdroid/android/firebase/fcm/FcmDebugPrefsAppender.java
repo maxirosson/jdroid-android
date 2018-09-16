@@ -15,9 +15,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public class FcmDebugPrefsAppender extends PreferencesAppender {
-	
+
 	private Map<FcmMessage, Map<String, String>> fcmMessagesMap;
-	
+
 	public FcmDebugPrefsAppender(Map<FcmMessage, Map<String, String>> fcmMessagesMap) {
 		this.fcmMessagesMap = fcmMessagesMap;
 	}
@@ -26,7 +26,7 @@ public class FcmDebugPrefsAppender extends PreferencesAppender {
 	public int getNameResId() {
 		return R.string.jdroid_fcmSettings;
 	}
-	
+
 	@Override
 	public void initPreferences(Activity activity, PreferenceGroup preferenceGroup) {
 		ListPreference preference = new ListPreference(activity);
@@ -41,15 +41,15 @@ public class FcmDebugPrefsAppender extends PreferencesAppender {
 		preference.setEntryValues(entries.toArray(new CharSequence[0]));
 		preference.setPersistent(false);
 		preference.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-			
+
 			@Override
 			public boolean onPreferenceChange(Preference preference, Object newValue) {
-				
+
 				for (Entry<FcmMessage, Map<String, String>> entry : fcmMessagesMap.entrySet()) {
 					if (entry.getKey().getMessageKey().equals(newValue.toString())) {
 						RemoteMessage.Builder builder = new RemoteMessage.Builder("to");
 						if (entry.getValue() != null) {
-							for(Map.Entry<String, String> each : entry.getValue().entrySet()) {
+							for (Map.Entry<String, String> each : entry.getValue().entrySet()) {
 								builder.addData(each.getKey(), each.getValue());
 							}
 						}
@@ -69,13 +69,13 @@ public class FcmDebugPrefsAppender extends PreferencesAppender {
 
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
-				new FcmRegistrationCommand().start(true);
+				AbstractFcmAppModule.get().startFcmRegistration(true);
 				return true;
 			}
 		});
 		preferenceGroup.addPreference(registerDevicePreference);
 	}
-	
+
 	@Override
 	public Boolean isEnabled() {
 		return (fcmMessagesMap != null) && !fcmMessagesMap.isEmpty();

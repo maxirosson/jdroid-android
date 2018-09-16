@@ -8,9 +8,9 @@ import android.widget.TextView;
 import com.jdroid.android.recycler.AbstractRecyclerFragment;
 import com.jdroid.android.recycler.RecyclerViewAdapter;
 import com.jdroid.android.recycler.RecyclerViewType;
-import com.jdroid.android.sample.R;
 import com.jdroid.android.recycler.pagination.AbstractSearchPaginatedRecyclerFragment;
 import com.jdroid.android.recycler.pagination.SearchUseCase;
+import com.jdroid.android.sample.R;
 
 import java.util.List;
 

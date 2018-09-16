@@ -26,7 +26,7 @@ public class UriMapper {
 	private static final Logger LOGGER = LoggerUtils.getLogger(UriMapper.class);
 
 	private List<UriWatcher> uriWatchers = Lists.newArrayList();
-	
+
 	@RestrictTo(LIBRARY)
 	public Boolean handleUri(@NonNull Activity activity, Intent intent, @Nullable UriHandler uriHandler, Boolean onActivityCreation) {
 		Uri uri = UriUtils.getUri(intent);
@@ -88,7 +88,7 @@ public class UriMapper {
 		}
 	}
 
-	private void handleDefaultIntent(Activity activity, UriHandler uriHandler, Uri uri, String referrerCategory, Boolean onActivityCreation) {
+	private void handleDefaultIntent(@NonNull Activity activity, UriHandler uriHandler, Uri uri, String referrerCategory, Boolean onActivityCreation) {
 		Intent intent = uriHandler.createDefaultIntent(activity, uri);
 		handleIntent(intent, activity, uri, referrerCategory, onActivityCreation);
 	}

@@ -1,6 +1,5 @@
 package com.jdroid.android.exception;
 
-import com.jdroid.android.analytics.CoreAnalyticsSender;
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.context.UsageStats;
 import com.jdroid.android.utils.LocalizationUtils;
@@ -21,14 +20,14 @@ import java.util.List;
 import java.util.Locale;
 
 public class DefaultExceptionHandler implements ExceptionHandler {
-	
+
 	private final static Logger LOGGER = LoggerUtils.getLogger(DefaultExceptionHandler.class);
-	
+
 	private static final String MAIN_THREAD_NAME = "main";
 
 	private UncaughtExceptionHandler wrappedExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
 	private UncaughtExceptionHandler defaultExceptionHandler;
-	
+
 	@Override
 	public void uncaughtException(Thread thread, Throwable throwable) {
 		Boolean mainThread = thread.getName().equals(MAIN_THREAD_NAME);
@@ -38,16 +37,11 @@ public class DefaultExceptionHandler implements ExceptionHandler {
 			handleWorkerThreadException(throwable);
 		}
 	}
-	
+
 	protected void handleMainThreadException(Thread thread, Throwable throwable) {
 		try {
 			try {
 				UsageStats.setLastCrashTimestamp();
-				List<String> tags = getThrowableTags(throwable, null);
-				CoreAnalyticsSender<?> coreAnalyticsSender = AbstractApplication.get().getCoreAnalyticsSender();
-				if (coreAnalyticsSender != null) {
-					coreAnalyticsSender.trackFatalException(throwable, tags);
-				}
 			} catch (Exception e) {
 				wrappedExceptionHandler.uncaughtException(thread, e);
 			}
@@ -77,7 +71,7 @@ public class DefaultExceptionHandler implements ExceptionHandler {
 
 	@Override
 	public void logHandledException(String errorMessage, Throwable throwable) {
-		
+
 		if (throwable instanceof ConnectionException) {
 			if (errorMessage == null) {
 				errorMessage = "Connection error";
@@ -94,14 +88,14 @@ public class DefaultExceptionHandler implements ExceptionHandler {
 				throwableToLog = abstractException.getThrowableToLog();
 				priorityLevel = abstractException.getPriorityLevel();
 			}
-			
+
 			if (errorMessage == null) {
 				errorMessage = throwableToLog.getMessage();
 				if (errorMessage == null) {
 					errorMessage = "Error";
 				}
 			}
-			
+
 			if (trackable) {
 				LOGGER.error(errorMessage, throwableToLog);
 				List<String> tags = getThrowableTags(throwable, priorityLevel);
@@ -120,7 +114,7 @@ public class DefaultExceptionHandler implements ExceptionHandler {
 	protected List<String> getDefaultThrowableTags() {
 		return Lists.newArrayList();
 	}
-	
+
 	public static Boolean matchAnyErrorCode(Throwable throwable, ErrorCode... errorCodes) {
 		List<ErrorCode> errorCodesList = Lists.newArrayList(errorCodes);
 		if (throwable instanceof ErrorCodeException) {
@@ -129,7 +123,7 @@ public class DefaultExceptionHandler implements ExceptionHandler {
 		}
 		return false;
 	}
-	
+
 	protected List<String> getThrowableTags(Throwable throwable, Integer priorityLevel) {
 		List<String> tags = Lists.newArrayList();
 		if (priorityLevel != null) {
@@ -168,6 +162,11 @@ public class DefaultExceptionHandler implements ExceptionHandler {
 	@Override
 	public void logWarningException(String errorMessage) {
 		logHandledException(new WarningException(errorMessage));
+	}
+
+	@Override
+	public void logWarningException(Throwable throwable) {
+		logHandledException(throwable.getMessage(), throwable);
 	}
 
 	@Override

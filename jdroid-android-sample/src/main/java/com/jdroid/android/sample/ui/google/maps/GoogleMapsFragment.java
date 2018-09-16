@@ -9,21 +9,21 @@ import com.jdroid.android.fragment.AbstractFragment;
 import com.jdroid.android.sample.R;
 
 public class GoogleMapsFragment extends AbstractFragment {
-	
+
 	@Override
 	public Integer getContentFragmentLayout() {
 		return R.layout.google_maps_fragment;
 	}
-	
+
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		
+
 		findView(R.id.fullMap).setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				ActivityLauncher.launchActivity(MapActivity.class);
+				ActivityLauncher.startActivity(getActivity(), MapActivity.class);
 			}
 		});
 
@@ -31,7 +31,7 @@ public class GoogleMapsFragment extends AbstractFragment {
 
 			@Override
 			public void onClick(View v) {
-				ActivityLauncher.launchActivity(LiteModeMapActivity.class);
+				ActivityLauncher.startActivity(getActivity(), LiteModeMapActivity.class);
 			}
 		});
 
@@ -39,7 +39,7 @@ public class GoogleMapsFragment extends AbstractFragment {
 
 			@Override
 			public void onClick(View v) {
-				ActivityLauncher.launchActivity(StreetViewActivity.class);
+				ActivityLauncher.startActivity(getActivity(), StreetViewActivity.class);
 			}
 		});
 	}

@@ -16,18 +16,18 @@ import com.jdroid.android.glide.LoggingRequestListener;
 import com.jdroid.android.sample.R;
 
 public class GlideFragment extends AbstractFragment {
-	
+
 	@Override
 	public Integer getContentFragmentLayout() {
 		return R.layout.glide_fragment;
 	}
-	
+
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		
+
 		ImageView imageView = findView(R.id.image);
-		
+
 		findView(R.id.withActivity).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -43,7 +43,7 @@ public class GlideFragment extends AbstractFragment {
 				GlideHelper.with(GlideFragment.this).load("http://jdroidtools.com/images/android.png").listener(new LoggingRequestListener<>()).apply(options).into(imageView);
 			}
 		});
-		
+
 		findView(R.id.withApplicationContext).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -52,7 +52,7 @@ public class GlideFragment extends AbstractFragment {
 				GlideHelper.with(AbstractApplication.get()).load("http://jdroidtools.com/images/gradle.png").listener(new LoggingRequestListener<>()).apply(options).into(imageView);
 			}
 		});
-		
+
 		findView(R.id.withNullContext).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -61,7 +61,7 @@ public class GlideFragment extends AbstractFragment {
 				GlideHelper.with((Context)null).load("http://jdroidtools.com/images/gradle.png").listener(new LoggingRequestListener<>()).apply(options).into(imageView);
 			}
 		});
-		
+
 		findView(R.id.invalidResourceUrl).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -70,7 +70,7 @@ public class GlideFragment extends AbstractFragment {
 				GlideHelper.with(AbstractApplication.get()).load("http://jdroidtools.com/images/invalid.png").listener(new LoggingRequestListener<>()).apply(options).into(imageView);
 			}
 		});
-		
+
 		findView(R.id.outOfMemory).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {

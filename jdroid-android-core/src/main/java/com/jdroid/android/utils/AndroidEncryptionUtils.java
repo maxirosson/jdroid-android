@@ -19,20 +19,20 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
 public class AndroidEncryptionUtils {
-	
+
 	private static final String BASE64_KEY = "base64Key";
-	
+
 	private static final String TRANSFORMATION = "AES/ECB/PKCS5Padding";
 	private static final String ALGORITHM = "AES";
 	private static final String SHA_ALGORITHM = "SHA-1";
 	private static final String UTF_8 = "UTF-8";
-	
+
 	private static String base64Key;
-	
+
 	/**
 	 * Returns the data encrypted. Avoid calling this method on the UI thread if possible, since it may access to shared
 	 * preferences.
-	 * 
+	 *
 	 * @param cleartext
 	 * @return encrypted data
 	 */
@@ -44,11 +44,11 @@ public class AndroidEncryptionUtils {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Returns the original data. Avoid calling this method on the UI thread if possible, since it may access to shared
 	 * preferences.
-	 * 
+	 *
 	 * @param base64Encrypted
 	 * @return the original data
 	 */
@@ -60,7 +60,7 @@ public class AndroidEncryptionUtils {
 		}
 		return null;
 	}
-	
+
 	private static byte[] doFinal(byte[] raw, int opMode, byte[] input) {
 		try {
 			Cipher cipher = Cipher.getInstance(TRANSFORMATION);
@@ -88,7 +88,7 @@ public class AndroidEncryptionUtils {
 		}
 		return base64Key;
 	}
-	
+
 	private static String generateBase64Key() {
 		final int outputKeyLength = 128;
 		try {
@@ -102,7 +102,7 @@ public class AndroidEncryptionUtils {
 			throw new UnexpectedException(e);
 		}
 	}
-	
+
 	private static String toHexEncode(byte[] bytes) {
 		StringBuilder sb = new StringBuilder();
 		for (byte aByte : bytes) {
@@ -113,10 +113,10 @@ public class AndroidEncryptionUtils {
 		}
 		return sb.toString();
 	}
-	
+
 	/**
 	 * Generates the SHA hash for the input string.
-	 * 
+	 *
 	 * @param text the input string to hash
 	 * @return the hash for the input string in hexadecimal encoding
 	 */

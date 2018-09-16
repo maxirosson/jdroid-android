@@ -1,15 +1,16 @@
 package com.jdroid.android.sample.ui.recyclerview;
 
-import com.jdroid.android.search.SortingType;
 import com.jdroid.android.recycler.pagination.SearchUseCase;
+import com.jdroid.android.search.SortingType;
 import com.jdroid.java.collections.Lists;
 import com.jdroid.java.concurrent.ExecutorUtils;
 import com.jdroid.java.search.PagedResult;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class SampleSearchUseCase extends SearchUseCase<String> {
-	
+
 	private List<String> results = Lists.newArrayList();
 
 	public SampleSearchUseCase() {
@@ -35,7 +36,7 @@ public class SampleSearchUseCase extends SearchUseCase<String> {
 			}
 		}
 		PagedResult<String> pagedResult = new PagedResult<>(pagedResults, isLastPage);
-		ExecutorUtils.sleep(5);
+		ExecutorUtils.sleep(5, TimeUnit.SECONDS);
 		return pagedResult;
 	}
 }

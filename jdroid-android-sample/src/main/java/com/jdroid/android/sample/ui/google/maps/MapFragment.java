@@ -16,7 +16,7 @@ import com.jdroid.android.google.maps.AbstractMapFragment;
 import com.jdroid.android.sample.R;
 
 public class MapFragment extends AbstractMapFragment {
-	
+
 	@Override
 	protected InfoWindowAdapter getInfoWindowAdapter() {
 		return new InfoWindowAdapter() {
@@ -64,7 +64,7 @@ public class MapFragment extends AbstractMapFragment {
 
 		googleMap.animateCamera(CameraUpdateFactory.newLatLngBounds(boundsBuilder.build(), 50));
 	}
-	
+
 	@Override
 	protected Boolean isLocationEnabled() {
 		return true;

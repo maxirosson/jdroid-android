@@ -9,11 +9,12 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.jdroid.android.application.AbstractApplication;
-import com.jdroid.android.context.AppContext;
 import com.jdroid.android.firebase.admob.AdMobAppModule;
 import com.jdroid.android.firebase.admob.HouseAdBuilder;
 import com.jdroid.android.location.LocationHelper;
 import com.jdroid.android.utils.AppUtils;
+
+import java.util.List;
 
 public abstract class BaseAdViewHelper implements AdHelper {
 
@@ -24,6 +25,8 @@ public abstract class BaseAdViewHelper implements AdHelper {
 	private AdSize adSize;
 	private String adUnitId;
 	private HouseAdBuilder houseAdBuilder;
+
+	private List<AdListener> adListeners;
 
 	private Boolean displayAds = false;
 
@@ -46,12 +49,14 @@ public abstract class BaseAdViewHelper implements AdHelper {
 					}
 					baseAdViewWrapper.setAdSize(getAdSize());
 					final View customView = getHouseAdBuilder() != null ? getHouseAdBuilder().build(activity) : null;
+
+					AdListenerWrapper adListenerWrapper = new AdListenerWrapper();
 					if (customView != null) {
 
 						adViewContainer.setVisibility(View.VISIBLE);
 						adViewContainer.addView(customView);
 
-						baseAdViewWrapper.setAdListener(new AdListener() {
+						adListenerWrapper.addAdListener(new AdListener() {
 
 							@Override
 							public void onAdLoaded() {
@@ -86,7 +91,7 @@ public abstract class BaseAdViewHelper implements AdHelper {
 							}
 						});
 					} else {
-						baseAdViewWrapper.setAdListener(new AdListener() {
+						adListenerWrapper.addAdListener(new AdListener() {
 
 							@Override
 							public void onAdLoaded() {
@@ -107,6 +112,13 @@ public abstract class BaseAdViewHelper implements AdHelper {
 							}
 						});
 					}
+
+					if (adListeners != null) {
+						for (AdListener adListener : adListeners) {
+							adListenerWrapper.addAdListener(adListener);
+						}
+					}
+					baseAdViewWrapper.setAdListener(adListenerWrapper);
 
 					AdRequest.Builder builder = createBuilder();
 					try {
@@ -160,6 +172,12 @@ public abstract class BaseAdViewHelper implements AdHelper {
 	@Override
 	public AdHelper setAdUnitId(String adUnitId) {
 		this.adUnitId = adUnitId;
+		return this;
+	}
+
+	@Override
+	public AdHelper setAdListeners(List<AdListener> adListeners) {
+		this.adListeners = adListeners;
 		return this;
 	}
 

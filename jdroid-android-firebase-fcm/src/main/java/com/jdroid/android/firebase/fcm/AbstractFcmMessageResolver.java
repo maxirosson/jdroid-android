@@ -15,27 +15,27 @@ import org.slf4j.Logger;
 import java.util.List;
 
 public abstract class AbstractFcmMessageResolver implements FcmMessageResolver {
-	
+
 	private final static Logger LOGGER = LoggerUtils.getLogger(AbstractFcmMessageResolver.class);
-	
+
 	public static final String MESSAGE_KEY_EXTRA = "messageKey";
 	public static final String USER_ID_KEY = "userIdKey";
 	public static final String MIN_DEVICE_OS_VERSION_KEY = "minDeviceOsVersion";
 	public static final String MIN_APP_VERSION_CODE_KEY = "minAppVersionCode";
 
 	private List<FcmMessage> fcmMessages;
-	
+
 	public AbstractFcmMessageResolver() {
 		this(Lists.newArrayList());
 	}
-	
+
 	public AbstractFcmMessageResolver(List<FcmMessage> fcmMessages) {
 		this.fcmMessages = fcmMessages;
 		if (includeNotificationFcmMessage()) {
 			this.fcmMessages.add(createNotificationFcmMessage());
 		}
 	}
-	
+
 	public AbstractFcmMessageResolver(FcmMessage... fcmMessages) {
 		this(Lists.newArrayList(fcmMessages));
 	}
@@ -52,7 +52,7 @@ public abstract class AbstractFcmMessageResolver implements FcmMessageResolver {
 	public FcmMessage resolve(RemoteMessage remoteMessage) {
 		String messageKey = remoteMessage.getData().get(getMessageKeyExtraName());
 		LOGGER.debug("FCM message received. / Message Key: " + messageKey);
-		Long minAppVersionCode =  TypeUtils.getLong(remoteMessage.getData().get(MIN_APP_VERSION_CODE_KEY), 0L);
+		Long minAppVersionCode = TypeUtils.getLong(remoteMessage.getData().get(MIN_APP_VERSION_CODE_KEY), 0L);
 		if (AppUtils.getVersionCode() >= minAppVersionCode) {
 			Long minDeviceOsVersion = TypeUtils.getLong(remoteMessage.getData().get(MIN_DEVICE_OS_VERSION_KEY), 0L);
 			if (AndroidUtils.getApiLevel() >= minDeviceOsVersion) {
@@ -79,10 +79,10 @@ public abstract class AbstractFcmMessageResolver implements FcmMessageResolver {
 		}
 		return null;
 	}
-	
+
 	protected String getMessageKeyExtraName() {
 		return MESSAGE_KEY_EXTRA;
 	}
-	
+
 	protected abstract void onNotAuthenticatedUser(Long userId);
 }

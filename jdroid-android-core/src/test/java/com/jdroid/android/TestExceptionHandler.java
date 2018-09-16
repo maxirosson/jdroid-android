@@ -29,4 +29,9 @@ public class TestExceptionHandler extends DefaultExceptionHandler {
 	public void logWarningException(String errorMessage, Throwable throwable) {
 		throwable.printStackTrace();
 	}
+
+	@Override
+	public void logWarningException(Throwable throwable) {
+		throwable.printStackTrace();
+	}
 }

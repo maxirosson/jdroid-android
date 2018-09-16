@@ -35,7 +35,6 @@ public interface FragmentIf extends ComponentIf, UseCaseListener {
 	 *
 	 * @param id The id to search for.
 	 * @param <V> The {@link View} class
-	 *
 	 * @return The view if found or null otherwise.
 	 */
 	public <V extends View> V findViewOnActivity(@IdRes int id);
@@ -43,16 +42,16 @@ public interface FragmentIf extends ComponentIf, UseCaseListener {
 	// //////////////////////// Life cycle //////////////////////// //
 
 	public void onNewIntent(Intent intent);
-	
+
 	/**
 	 * @param key The key of the argument extra
 	 * @param <E> The instance type
 	 * @return the entry with the given key as an object.
 	 */
 	public <E> E getArgument(String key);
-	
+
 	public <E> E getArgument(String key, E defaultValue);
-	
+
 	public Boolean shouldRetainInstance();
 
 	// //////////////////////// App bar //////////////////////// //
@@ -68,11 +67,11 @@ public interface FragmentIf extends ComponentIf, UseCaseListener {
 	public ErrorDisplayer createErrorDisplayer(AbstractException abstractException);
 
 	// //////////////////////// Loading //////////////////////// //
-	
+
 	public FragmentLoading getDefaultLoading();
-	
+
 	public void setLoading(FragmentLoading loading);
-	
+
 	// //////////////////////// Delegates //////////////////////// //
 
 	public FragmentDelegate createFragmentDelegate(AppModule appModule);
@@ -80,8 +79,6 @@ public interface FragmentIf extends ComponentIf, UseCaseListener {
 	public FragmentDelegate getFragmentDelegate(AppModule appModule);
 
 	// //////////////////////// Analytics //////////////////////// //
-
-	public Boolean shouldTrackOnFragmentStart();
 
 	@NonNull
 	public String getScreenViewName();

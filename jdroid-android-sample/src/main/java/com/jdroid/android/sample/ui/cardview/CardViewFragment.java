@@ -21,14 +21,14 @@ public class CardViewFragment extends AbstractFragment {
 		findView(R.id.simpleCardView).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ActivityLauncher.launchActivity(SimpleCardViewActivity.class);
+				ActivityLauncher.startActivity(getActivity(), SimpleCardViewActivity.class);
 			}
 		});
 
 		findView(R.id.cardViewInsideRecyclerView).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ActivityLauncher.launchActivity(CardViewRecyclerViewActivity.class);
+				ActivityLauncher.startActivity(getActivity(), CardViewRecyclerViewActivity.class);
 			}
 		});
 	}

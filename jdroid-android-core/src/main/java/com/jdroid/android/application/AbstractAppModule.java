@@ -2,7 +2,6 @@ package com.jdroid.android.application;
 
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
-import android.support.annotation.WorkerThread;
 import android.support.v4.app.Fragment;
 
 import com.jdroid.android.activity.AbstractFragmentActivity;
@@ -37,12 +36,6 @@ public abstract class AbstractAppModule implements AppModule {
 		}
 		return analyticsSender;
 	}
-	
-	@WorkerThread
-	@Override
-	public void onInstanceIdTokenRefresh() {
-		// Do Nothing
-	}
 
 	@MainThread
 	@Override
@@ -61,7 +54,7 @@ public abstract class AbstractAppModule implements AppModule {
 	public FragmentDelegate createFragmentDelegate(Fragment fragment) {
 		return null;
 	}
-	
+
 	@NonNull
 	@Override
 	public List<RemoteConfigParameter> getRemoteConfigParameters() {

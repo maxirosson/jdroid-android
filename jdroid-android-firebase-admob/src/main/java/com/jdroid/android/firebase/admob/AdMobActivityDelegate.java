@@ -2,7 +2,6 @@ package com.jdroid.android.firebase.admob;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.ViewGroup;
 
 import com.google.android.gms.ads.MobileAds;
 import com.jdroid.android.activity.AbstractFragmentActivity;
@@ -39,7 +38,7 @@ public class AdMobActivityDelegate extends ActivityDelegate {
 			baseAdViewHelper = createBaseAdViewHelper();
 			if (baseAdViewHelper != null) {
 				initBaseAdViewHelper(baseAdViewHelper);
-				baseAdViewHelper.loadAd(getActivity(), (ViewGroup)(getActivity().findViewById(R.id.adViewContainer)));
+				baseAdViewHelper.loadAd(getActivity(), getActivity().findViewById(R.id.adViewContainer));
 			}
 
 			interstitialAdHelper = createInterstitialAdHelper();

@@ -1,439 +1,699 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.jdroid.android.sample"
-	 xmlns:tools="http://schemas.android.com/tools">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+		  package="com.jdroid.android.sample"
+		  xmlns:tools="http://schemas.android.com/tools">
 
-	<permission android:name="${applicationId}.permission.MAPS_RECEIVE" android:protectionLevel="signature" />
+	<permission android:name="${applicationId}.permission.MAPS_RECEIVE"
+				android:protectionLevel="signature" />
+
 	<uses-permission android:name="${applicationId}.permission.MAPS_RECEIVE" />
 
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
-	<uses-feature android:name="com.google.android.tv" android:required="false" />
-	<uses-feature android:name="android.hardware.touchscreen" android:required="false" />
-	<uses-feature android:name="android.hardware.telephony" android:required="false" />
+	<uses-feature android:name="com.google.android.tv"
+				  android:required="false" />
+	<uses-feature android:name="android.hardware.touchscreen"
+				  android:required="false" />
+	<uses-feature android:name="android.hardware.telephony"
+				  android:required="false" />
 
-	<uses-feature android:name="android.hardware.LOCATION" android:required="false" />
-	<uses-feature android:name="android.hardware.location.NETWORK" android:required="false" />
-	<uses-feature android:name="android.hardware.location.GPS" android:required="false" />
+	<uses-feature android:name="android.hardware.LOCATION"
+				  android:required="false" />
+	<uses-feature android:name="android.hardware.location.NETWORK"
+				  android:required="false" />
+	<uses-feature android:name="android.hardware.location.GPS"
+				  android:required="false" />
 
-	<application android:icon="@mipmap/ic_launcher" android:roundIcon="@mipmap/ic_launcher" android:logo="@mipmap/ic_launcher" android:label="@string/jdroid_appName"
-		android:allowBackup="false" android:name="com.jdroid.android.sample.application.AndroidApplication" android:hardwareAccelerated="true"
-		android:theme="@style/App.Theme">
+	<application android:icon="@mipmap/ic_launcher"
+				 android:logo="@mipmap/ic_launcher"
+				 android:label="@string/jdroid_appName"
+				 android:allowBackup="false"
+				 android:name="com.jdroid.android.sample.application.AndroidApplication"
+				 android:hardwareAccelerated="true"
+				 android:theme="@style/App.Theme">
 
-		<meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="${googleMapsApiKey}" />
-		<meta-data android:name="com.facebook.sdk.ApplicationId" android:value="${facebookAppId}"/>
+		<meta-data android:name="com.google.android.maps.v2.API_KEY"
+				   android:value="${googleMapsApiKey}" />
+		<meta-data android:name="com.facebook.sdk.ApplicationId"
+				   android:value="${facebookAppId}" />
 
-		<meta-data android:name="com.jdroid.android.sample.application.lifecycle.SampleApplicationLifecycleCallback" android:value="ApplicationLifecycleCallback" />
+		<meta-data android:name="com.jdroid.android.sample.application.lifecycle.SampleApplicationLifecycleCallback"
+				   android:value="ApplicationLifecycleCallback" />
 
 		<!-- Set custom default icon. This is used when no icon is set for incoming notification messages. -->
-		<meta-data android:name="com.google.firebase.messaging.default_notification_icon" android:resource="@drawable/ic_notification" />
+		<meta-data android:name="com.google.firebase.messaging.default_notification_icon"
+				   android:resource="@drawable/ic_notification" />
 		<!-- Set color used with incoming notification messages. This is used when no color is set for the incoming notification message. -->
-		<meta-data android:name="com.google.firebase.messaging.default_notification_color" android:resource="@color/jdroid_accentColor" />
+		<meta-data android:name="com.google.firebase.messaging.default_notification_color"
+				   android:resource="@color/jdroid_accentColor" />
 
-		<activity android:name="com.jdroid.android.sample.ui.home.HomeActivity" android:windowSoftInputMode="stateHidden">
+		<activity android:name="com.jdroid.android.sample.ui.home.HomeActivity"
+				  android:windowSoftInputMode="stateHidden">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 			<intent-filter>
 				<action android:name="android.intent.action.VIEW" />
+
 				<category android:name="android.intent.category.DEFAULT" />
 				<category android:name="android.intent.category.BROWSABLE" />
-				<data android:scheme="http" android:host="jdroidtools.com" android:path="/" />
-				<data android:scheme="https" android:host="jdroidtools.com" android:path="/" />
+
+				<data android:scheme="http"
+					  android:host="jdroidtools.com"
+					  android:path="/" />
+				<data android:scheme="https"
+					  android:host="jdroidtools.com"
+					  android:path="/" />
 			</intent-filter>
 		</activity>
 
 		<!-- App Invite -->
 
-		<activity android:name="com.jdroid.android.sample.ui.appinvite.AppInviteActivity" android:label="@string/appInvite"
-				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.appinvite.AppInviteActivity"
+				  android:label="@string/appInvite"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute" />
 
 		<!-- Ads -->
 
-		<activity android:name="com.jdroid.android.sample.ui.google.admob.AdsActivity" android:label="@string/adMob"
-				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.google.admob.AdsActivity"
+				  android:label="@string/adMob"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute" />
 
-		<activity android:name="com.jdroid.android.sample.ui.google.admob.HouseAdsActivity" android:label="@string/houseAds"
-				  android:parentActivityName="com.jdroid.android.sample.ui.google.admob.AdsActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.google.admob.HouseAdsActivity"
+				  android:label="@string/houseAds"
+				  android:parentActivityName="com.jdroid.android.sample.ui.google.admob.AdsActivity"
+				  tools:ignore="UnusedAttribute" />
 
-		<activity android:name="com.jdroid.android.sample.ui.google.admob.ActivityBannerActivity" android:label="@string/activityBanner"
-				  android:parentActivityName="com.jdroid.android.sample.ui.google.admob.AdsActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.google.admob.ActivityBannerActivity"
+				  android:label="@string/activityBanner"
+				  android:parentActivityName="com.jdroid.android.sample.ui.google.admob.AdsActivity"
+				  tools:ignore="UnusedAttribute" />
 
-		<activity android:name="com.jdroid.android.sample.ui.google.admob.FragmentBannerActivity" android:label="@string/fragmentBanner"
-				  android:parentActivityName="com.jdroid.android.sample.ui.google.admob.AdsActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.google.admob.FragmentBannerActivity"
+				  android:label="@string/fragmentBanner"
+				  android:parentActivityName="com.jdroid.android.sample.ui.google.admob.AdsActivity"
+				  tools:ignore="UnusedAttribute" />
 
-		<activity android:name="com.jdroid.android.sample.ui.google.admob.AdRecyclerActivity" android:label="@string/adReycler"
-				  android:parentActivityName="com.jdroid.android.sample.ui.google.admob.AdsActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.google.admob.AdRecyclerActivity"
+				  android:label="@string/adReycler"
+				  android:parentActivityName="com.jdroid.android.sample.ui.google.admob.AdsActivity"
+				  tools:ignore="UnusedAttribute" />
 
 		<!-- Glide -->
 
-		<activity android:name="com.jdroid.android.sample.ui.glide.GlideActivity" android:label="@string/glide"
-			android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.glide.GlideActivity"
+				  android:label="@string/glide"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute" />
 
 		<!-- Date Time -->
 
-		<activity android:name="com.jdroid.android.sample.ui.datetime.DateTimeActivity" android:label="@string/dateTime"
-			android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.datetime.DateTimeActivity"
+				  android:label="@string/dateTime"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute" />
 
 		<!-- Notifications -->
 
-		<activity android:name="com.jdroid.android.sample.ui.notifications.NotificationsActivity" android:label="@string/notifications"
-			android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.notifications.NotificationsActivity"
+				  android:label="@string/notifications"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute" />
 
 		<!-- Toasts -->
 
-		<activity android:name="com.jdroid.android.sample.ui.toasts.ToastsActivity" android:label="@string/toasts"
-				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.toasts.ToastsActivity"
+				  android:label="@string/toasts"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute" />
 
 		<!-- Analytics -->
 
-		<activity android:name="com.jdroid.android.sample.ui.analytics.AnalyticsActivity" android:label="@string/analytics"
-				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.analytics.AnalyticsActivity"
+				  android:label="@string/analytics"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute" />
 
 		<!-- Hero -->
 
-		<activity android:name="com.jdroid.android.sample.ui.hero.HeroActivity" android:label="@string/hero"
-				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"  tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.hero.HeroActivity"
+				  android:label="@string/hero"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute" />
 
 		<!-- Error -->
 
-		<activity android:name="com.jdroid.android.sample.ui.exceptions.ErrorDisplayerActivity" android:label="@string/errorDisplayer"
-			android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.exceptions.ErrorDisplayerActivity"
+				  android:label="@string/errorDisplayer"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute" />
 
 		<!-- Floating Action Button -->
 
-		<activity android:name="com.jdroid.android.sample.ui.fab.FabActivity" android:label="@string/floatingActionButton"
-			android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.fab.FabActivity"
+				  android:label="@string/floatingActionButton"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute" />
 
 		<!-- Facebook Sign In -->
 
-		<activity android:name="com.jdroid.android.sample.ui.facebook.FacebookSignInActivity" android:label="@string/jdroid_facebook"
-				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.facebook.FacebookSignInActivity"
+				  android:label="@string/jdroid_facebook"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute" />
 
 		<!-- Google Sign In -->
 
-		<activity android:name="com.jdroid.android.sample.ui.google.signin.GoogleSignInActivity" android:label="@string/jdroid_googleSignIn"
-				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.google.signin.GoogleSignInActivity"
+				  android:label="@string/jdroid_googleSignIn"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute" />
 
 		<!-- Leak Canary -->
 
-		<activity android:name="com.jdroid.android.sample.ui.leakcanary.LeakCanaryActivity" android:label="@string/jdroid_leakCanary"
-				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.leakcanary.LeakCanaryActivity"
+				  android:label="@string/jdroid_leakCanary"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute" />
 
 		<!-- Loading -->
 
-		<activity android:name="com.jdroid.android.sample.ui.loading.LoadingActivity" android:label="@string/loading"
-				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.loading.LoadingActivity"
+				  android:label="@string/loading"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute" />
 
-		<activity android:name="com.jdroid.android.sample.ui.loading.BlockingLoadingActivity" android:label="@string/blockingLoading"
-			android:parentActivityName="com.jdroid.android.sample.ui.loading.LoadingActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.loading.BlockingLoadingActivity"
+				  android:label="@string/blockingLoading"
+				  android:parentActivityName="com.jdroid.android.sample.ui.loading.LoadingActivity"
+				  tools:ignore="UnusedAttribute" />
 
-		<activity android:name="com.jdroid.android.sample.ui.loading.CustomActivityLoadingActivity" android:label="@string/customBlockingLoading"
-			android:parentActivityName="com.jdroid.android.sample.ui.loading.LoadingActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.loading.CustomActivityLoadingActivity"
+				  android:label="@string/customBlockingLoading"
+				  android:parentActivityName="com.jdroid.android.sample.ui.loading.LoadingActivity"
+				  tools:ignore="UnusedAttribute" />
 
-		<activity android:name="com.jdroid.android.sample.ui.loading.NonBlockingLoadingActivity" android:label="@string/nonBlockingLoading"
-			android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.loading.NonBlockingLoadingActivity"
+				  android:label="@string/nonBlockingLoading"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute" />
 
-		<activity android:name="com.jdroid.android.sample.ui.loading.SwipeRefreshLoadingActivity" android:label="@string/swipeRefresLoading"
-			android:parentActivityName="com.jdroid.android.sample.ui.loading.LoadingActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.loading.SwipeRefreshLoadingActivity"
+				  android:label="@string/swipeRefresLoading"
+				  android:parentActivityName="com.jdroid.android.sample.ui.loading.LoadingActivity"
+				  tools:ignore="UnusedAttribute" />
 
 		<!-- FCM -->
 
-		<activity android:name="com.jdroid.android.sample.ui.firebase.fcm.FcmActivity" android:label="@string/fcm"
-			android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.firebase.fcm.FcmActivity"
+				  android:label="@string/fcm"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute" />
 
 		<!-- Firebase Dynamic Links -->
 
-		<activity android:name="com.jdroid.android.sample.ui.firebase.dynamiclinks.DynamicLinksActivity" android:label="@string/firebaseDynamicLinks"
-			android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.firebase.dynamiclinks.DynamicLinksActivity"
+				  android:label="@string/firebaseDynamicLinks"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute" />
 
 		<!-- Timer -->
 
-		<activity android:name="com.jdroid.android.sample.ui.timer.TimerActivity" android:label="@string/timer"
-			android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.timer.TimerActivity"
+				  android:label="@string/timer"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute" />
 
 		<!-- Google InAppBilling -->
 
-		<activity android:name="com.jdroid.android.sample.ui.google.inappbilling.GoogleInAppBillingActivity" android:label="@string/inAppBilling"
-				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.google.inappbilling.GoogleInAppBillingActivity"
+				  android:label="@string/inAppBilling"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute" />
 
 		<!-- Google Maps -->
 
-		<activity android:name="com.jdroid.android.sample.ui.google.maps.GoogleMapsActivity" android:label="@string/googleMaps"
-				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.google.maps.GoogleMapsActivity"
+				  android:label="@string/googleMaps"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute" />
 
-		<activity android:name="com.jdroid.android.sample.ui.google.maps.LiteModeMapActivity" android:label="@string/googleMaps"
-				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.google.maps.LiteModeMapActivity"
+				  android:label="@string/googleMaps"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute" />
 
-		<activity android:name="com.jdroid.android.sample.ui.google.maps.MapActivity" android:label="@string/googleMaps"
-				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.google.maps.MapActivity"
+				  android:label="@string/googleMaps"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute" />
 
-		<activity android:name="com.jdroid.android.sample.ui.google.maps.StreetViewActivity" android:label="@string/googleMaps"
-				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.google.maps.StreetViewActivity"
+				  android:label="@string/googleMaps"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute" />
 
 		<!-- Nav Drawer -->
 
-		<activity android:name="com.jdroid.android.sample.ui.navdrawer.NavDrawerActivity" android:label="@string/navDrawer"
-				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.navdrawer.NavDrawerActivity"
+				  android:label="@string/navDrawer"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute" />
 
-		<activity android:name="com.jdroid.android.sample.ui.navdrawer.LeftCustomNavDrawerActivity" android:label="@string/leftCustomNavDrawer"
-				  android:parentActivityName="com.jdroid.android.sample.ui.navdrawer.NavDrawerActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.navdrawer.LeftCustomNavDrawerActivity"
+				  android:label="@string/leftCustomNavDrawer"
+				  android:parentActivityName="com.jdroid.android.sample.ui.navdrawer.NavDrawerActivity"
+				  tools:ignore="UnusedAttribute" />
 
-		<activity android:name="com.jdroid.android.sample.ui.navdrawer.RightCustomNavDrawerActivity" android:label="@string/rightCustomNavDrawer"
-				  android:parentActivityName="com.jdroid.android.sample.ui.navdrawer.NavDrawerActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.navdrawer.RightCustomNavDrawerActivity"
+				  android:label="@string/rightCustomNavDrawer"
+				  android:parentActivityName="com.jdroid.android.sample.ui.navdrawer.NavDrawerActivity"
+				  tools:ignore="UnusedAttribute" />
 
-		<activity android:name="com.jdroid.android.sample.ui.navdrawer.NoNavDrawerActivity" android:label="@string/noNavDrawer"
-				  android:parentActivityName="com.jdroid.android.sample.ui.navdrawer.NavDrawerActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.navdrawer.NoNavDrawerActivity"
+				  android:label="@string/noNavDrawer"
+				  android:parentActivityName="com.jdroid.android.sample.ui.navdrawer.NavDrawerActivity"
+				  tools:ignore="UnusedAttribute" />
 
-		<activity android:name="com.jdroid.android.sample.ui.navdrawer.UserNavDrawerActivity" android:label="@string/userNavDrawer"
-				  android:parentActivityName="com.jdroid.android.sample.ui.navdrawer.NavDrawerActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.navdrawer.UserNavDrawerActivity"
+				  android:label="@string/userNavDrawer"
+				  android:parentActivityName="com.jdroid.android.sample.ui.navdrawer.NavDrawerActivity"
+				  tools:ignore="UnusedAttribute" />
 
 		<!-- Http -->
 
-		<activity android:name="com.jdroid.android.sample.ui.http.HttpActivity" android:label="@string/http"
-				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.http.HttpActivity"
+				  android:label="@string/http"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute" />
 
 		<!-- Recycler -->
 
-		<activity android:name="com.jdroid.android.sample.ui.recyclerview.RecyclerViewActivity" android:label="@string/recyclerView"
-				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.recyclerview.RecyclerViewActivity"
+				  android:label="@string/recyclerView"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute" />
 
-		<activity android:name="com.jdroid.android.sample.ui.recyclerview.ComplexRecyclerActivity" android:label="@string/complexRecycler"
-				  android:parentActivityName="com.jdroid.android.sample.ui.recyclerview.RecyclerViewActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.recyclerview.ComplexRecyclerActivity"
+				  android:label="@string/complexRecycler"
+				  android:parentActivityName="com.jdroid.android.sample.ui.recyclerview.RecyclerViewActivity"
+				  tools:ignore="UnusedAttribute" />
 
-		<activity android:name="com.jdroid.android.sample.ui.recyclerview.SimpleRecyclerActivity" android:label="@string/simpleRecycler"
-				  android:parentActivityName="com.jdroid.android.sample.ui.recyclerview.RecyclerViewActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.recyclerview.SimpleRecyclerActivity"
+				  android:label="@string/simpleRecycler"
+				  android:parentActivityName="com.jdroid.android.sample.ui.recyclerview.RecyclerViewActivity"
+				  tools:ignore="UnusedAttribute" />
 
-		<activity android:name="com.jdroid.android.sample.ui.recyclerview.PaginatedRecyclerActivity" android:label="@string/paginatedRecycler"
-				  android:parentActivityName="com.jdroid.android.sample.ui.recyclerview.RecyclerViewActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.recyclerview.PaginatedRecyclerActivity"
+				  android:label="@string/paginatedRecycler"
+				  android:parentActivityName="com.jdroid.android.sample.ui.recyclerview.RecyclerViewActivity"
+				  tools:ignore="UnusedAttribute" />
 
-		<activity android:name="com.jdroid.android.sample.ui.recyclerview.PaginatedGridRecyclerActivity" android:label="@string/paginatedGridRecycler"
-				  android:parentActivityName="com.jdroid.android.sample.ui.recyclerview.RecyclerViewActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.recyclerview.PaginatedGridRecyclerActivity"
+				  android:label="@string/paginatedGridRecycler"
+				  android:parentActivityName="com.jdroid.android.sample.ui.recyclerview.RecyclerViewActivity"
+				  tools:ignore="UnusedAttribute" />
 
-		<activity android:name="com.jdroid.android.sample.ui.recyclerview.SearchPaginatedRecyclerActivity" android:label="@string/searchPaginatedRecycler"
-				  android:parentActivityName="com.jdroid.android.sample.ui.recyclerview.RecyclerViewActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.recyclerview.SearchPaginatedRecyclerActivity"
+				  android:label="@string/searchPaginatedRecycler"
+				  android:parentActivityName="com.jdroid.android.sample.ui.recyclerview.RecyclerViewActivity"
+				  tools:ignore="UnusedAttribute" />
 
-		<activity android:name="com.jdroid.android.sample.ui.recyclerview.AutofitGridLayoutRecyclerActivity" android:label="@string/autofitGridLayoutRecycler"
-				  android:parentActivityName="com.jdroid.android.sample.ui.recyclerview.RecyclerViewActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.recyclerview.AutofitGridLayoutRecyclerActivity"
+				  android:label="@string/autofitGridLayoutRecycler"
+				  android:parentActivityName="com.jdroid.android.sample.ui.recyclerview.RecyclerViewActivity"
+				  tools:ignore="UnusedAttribute" />
 
 		<!-- Tablet -->
 
-		<activity android:name="com.jdroid.android.sample.ui.tablets.TabletActivity" android:label="@string/tablets"
-				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.tablets.TabletActivity"
+				  android:label="@string/tablets"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute" />
 
-		<activity android:name="com.jdroid.android.sample.ui.tablets.LeftTabletActivity" android:label="@string/tablets"
-				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.tablets.LeftTabletActivity"
+				  android:label="@string/tablets"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute" />
 
-		<activity android:name="com.jdroid.android.sample.ui.tablets.RightTabletActivity" android:label="@string/tablets"
-				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.tablets.RightTabletActivity"
+				  android:label="@string/tablets"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute" />
 
 		<!-- Rate -->
 
-		<activity android:name="com.jdroid.android.sample.ui.rateme.RateAppActivity" android:label="@string/rateApp"
-				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.rateme.RateAppActivity"
+				  android:label="@string/rateApp"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute" />
 
 		<!-- SQLite -->
 
-		<activity android:name="com.jdroid.android.sample.ui.sqlite.SQLiteActivity" android:label="@string/sqlite"
-				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.sqlite.SQLiteActivity"
+				  android:label="@string/sqlite"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute" />
 
 		<!-- Service -->
 
-		<activity android:name="com.jdroid.android.sample.ui.service.ServiceActivity" android:label="@string/service"
-				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.service.ServiceActivity"
+				  android:label="@string/service"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute" />
 
 		<!-- Firebase -->
 
-		<activity android:name="com.jdroid.android.sample.ui.firebase.database.FirebaseDatabaseActivity" android:label="@string/firebaseDatabase"
-				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.firebase.database.FirebaseDatabaseActivity"
+				  android:label="@string/firebaseDatabase"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute" />
 
 		<!-- Card View -->
 
-		<activity android:name="com.jdroid.android.sample.ui.cardview.CardViewActivity" android:label="@string/cardView"
-				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.cardview.CardViewActivity"
+				  android:label="@string/cardView"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute" />
 
-		<activity android:name="com.jdroid.android.sample.ui.cardview.SimpleCardViewActivity" android:label="@string/cardView"
-				  android:parentActivityName="com.jdroid.android.sample.ui.cardview.CardViewActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.cardview.SimpleCardViewActivity"
+				  android:label="@string/cardView"
+				  android:parentActivityName="com.jdroid.android.sample.ui.cardview.CardViewActivity"
+				  tools:ignore="UnusedAttribute" />
 
-		<activity android:name="com.jdroid.android.sample.ui.cardview.CardViewRecyclerViewActivity" android:label="@string/cardView"
-				  android:parentActivityName="com.jdroid.android.sample.ui.cardview.CardViewActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.cardview.CardViewRecyclerViewActivity"
+				  android:label="@string/cardView"
+				  android:parentActivityName="com.jdroid.android.sample.ui.cardview.CardViewActivity"
+				  tools:ignore="UnusedAttribute" />
 
 		<!-- Twitter -->
 
-		<activity android:name="com.jdroid.android.sample.ui.twitter.TwitterActivity" android:label="@string/jdroid_twitter"
-				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.twitter.TwitterActivity"
+				  android:label="@string/jdroid_twitter"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute" />
 
-		<activity android:name=".ui.twitter.SampleListTwitterActivity" android:label="@string/listTweetHelper"
-				  android:parentActivityName="com.jdroid.android.sample.ui.twitter.TwitterActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name=".ui.twitter.SampleListTwitterActivity"
+				  android:label="@string/listTweetHelper"
+				  android:parentActivityName="com.jdroid.android.sample.ui.twitter.TwitterActivity"
+				  tools:ignore="UnusedAttribute" />
 
-		<activity android:name="com.jdroid.android.sample.ui.twitter.CyclingTwitterActivity" android:label="@string/cyclingTweetHelper"
-				  android:parentActivityName="com.jdroid.android.sample.ui.twitter.TwitterActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.twitter.CyclingTwitterActivity"
+				  android:label="@string/cyclingTweetHelper"
+				  android:parentActivityName="com.jdroid.android.sample.ui.twitter.TwitterActivity"
+				  tools:ignore="UnusedAttribute" />
 
 
 		<!-- Uri Mapper -->
 
-		<activity android:name="com.jdroid.android.sample.ui.uri.UriMapperActivity" android:label="@string/uriMapper"
-				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" tools:ignore="UnusedAttribute">
+		<activity android:name="com.jdroid.android.sample.ui.uri.UriMapperActivity"
+				  android:label="@string/uriMapper"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute">
 			<intent-filter>
 				<action android:name="android.intent.action.VIEW" />
+
 				<category android:name="android.intent.category.DEFAULT" />
 				<category android:name="android.intent.category.BROWSABLE" />
-				<data android:scheme="http" android:host="jdroidtools.com" android:path="/uri" />
-				<data android:scheme="https" android:host="jdroidtools.com" android:path="/uri" />
+
+				<data android:scheme="http"
+					  android:host="jdroidtools.com"
+					  android:path="/uri" />
+				<data android:scheme="https"
+					  android:host="jdroidtools.com"
+					  android:path="/uri" />
 			</intent-filter>
 		</activity>
 
-		<activity android:name="com.jdroid.android.sample.ui.uri.UriMapperSingleTopActivity" android:label="@string/uriMapperSingleTop"
-				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" tools:ignore="UnusedAttribute" android:launchMode="singleTop">
+		<activity android:name="com.jdroid.android.sample.ui.uri.UriMapperSingleTopActivity"
+				  android:label="@string/uriMapperSingleTop"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute"
+				  android:launchMode="singleTop">
 			<intent-filter>
 				<action android:name="android.intent.action.VIEW" />
+
 				<category android:name="android.intent.category.DEFAULT" />
 				<category android:name="android.intent.category.BROWSABLE" />
-				<data android:scheme="http" android:host="jdroidtools.com" android:path="/uri/singletop" />
-				<data android:scheme="https" android:host="jdroidtools.com" android:path="/uri/singletop" />
+
+				<data android:scheme="http"
+					  android:host="jdroidtools.com"
+					  android:path="/uri/singletop" />
+				<data android:scheme="https"
+					  android:host="jdroidtools.com"
+					  android:path="/uri/singletop" />
 			</intent-filter>
 		</activity>
 
-		<activity android:name="com.jdroid.android.sample.ui.uri.UriMapperNoFlagsActivity" android:label="@string/uriMapperNoFlags"
-				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" tools:ignore="UnusedAttribute">
+		<activity android:name="com.jdroid.android.sample.ui.uri.UriMapperNoFlagsActivity"
+				  android:label="@string/uriMapperNoFlags"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute">
 			<intent-filter>
 				<action android:name="android.intent.action.VIEW" />
+
 				<category android:name="android.intent.category.DEFAULT" />
 				<category android:name="android.intent.category.BROWSABLE" />
-				<data android:scheme="http" android:host="jdroidtools.com" android:path="/uri/noflags" />
-				<data android:scheme="https" android:host="jdroidtools.com" android:path="/uri/noflags" />
+
+				<data android:scheme="http"
+					  android:host="jdroidtools.com"
+					  android:path="/uri/noflags" />
+				<data android:scheme="https"
+					  android:host="jdroidtools.com"
+					  android:path="/uri/noflags" />
 			</intent-filter>
 		</activity>
 
-		<activity android:name="com.jdroid.android.sample.ui.uri.MatchErrorActivity" android:label="@string/matchError"
-				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" tools:ignore="UnusedAttribute">
+		<activity android:name="com.jdroid.android.sample.ui.uri.MatchErrorActivity"
+				  android:label="@string/matchError"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute">
 			<intent-filter>
 				<action android:name="android.intent.action.VIEW" />
+
 				<category android:name="android.intent.category.DEFAULT" />
 				<category android:name="android.intent.category.BROWSABLE" />
-				<data android:scheme="http" android:host="jdroidtools.com" android:path="/uri/matchError" />
-				<data android:scheme="https" android:host="jdroidtools.com" android:path="/uri/matchError" />
+
+				<data android:scheme="http"
+					  android:host="jdroidtools.com"
+					  android:path="/uri/matchError" />
+				<data android:scheme="https"
+					  android:host="jdroidtools.com"
+					  android:path="/uri/matchError" />
 			</intent-filter>
 		</activity>
 
-		<activity android:name="com.jdroid.android.sample.ui.uri.MainIntentErrorActivity" android:label="@string/mainIntentError"
-				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" tools:ignore="UnusedAttribute">
+		<activity android:name="com.jdroid.android.sample.ui.uri.MainIntentErrorActivity"
+				  android:label="@string/mainIntentError"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute">
 			<intent-filter>
 				<action android:name="android.intent.action.VIEW" />
+
 				<category android:name="android.intent.category.DEFAULT" />
 				<category android:name="android.intent.category.BROWSABLE" />
-				<data android:scheme="http" android:host="jdroidtools.com" android:path="/uri/mainIntentError" />
-				<data android:scheme="https" android:host="jdroidtools.com" android:path="/uri/mainIntentError" />
+
+				<data android:scheme="http"
+					  android:host="jdroidtools.com"
+					  android:path="/uri/mainIntentError" />
+				<data android:scheme="https"
+					  android:host="jdroidtools.com"
+					  android:path="/uri/mainIntentError" />
 			</intent-filter>
 		</activity>
 
-		<activity android:name="com.jdroid.android.sample.ui.uri.DefaulItntentErrorActivity" android:label="@string/defaultIntentError"
-				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" tools:ignore="UnusedAttribute">
+		<activity android:name="com.jdroid.android.sample.ui.uri.DefaulItntentErrorActivity"
+				  android:label="@string/defaultIntentError"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute">
 			<intent-filter>
 				<action android:name="android.intent.action.VIEW" />
+
 				<category android:name="android.intent.category.DEFAULT" />
 				<category android:name="android.intent.category.BROWSABLE" />
-				<data android:scheme="http" android:host="jdroidtools.com" android:path="/uri/defaultIntentError" />
-				<data android:scheme="https" android:host="jdroidtools.com" android:path="/uri/defaultIntentError" />
+
+				<data android:scheme="http"
+					  android:host="jdroidtools.com"
+					  android:path="/uri/defaultIntentError" />
+				<data android:scheme="https"
+					  android:host="jdroidtools.com"
+					  android:path="/uri/defaultIntentError" />
 			</intent-filter>
 		</activity>
 
-		<activity android:name="com.jdroid.android.sample.ui.uri.MatchNewActivity" android:label="@string/matchNewActivity"
-				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" tools:ignore="UnusedAttribute">
+		<activity android:name="com.jdroid.android.sample.ui.uri.MatchNewActivity"
+				  android:label="@string/matchNewActivity"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute">
 			<intent-filter>
 				<action android:name="android.intent.action.VIEW" />
+
 				<category android:name="android.intent.category.DEFAULT" />
 				<category android:name="android.intent.category.BROWSABLE" />
-				<data android:scheme="http" android:host="jdroidtools.com" android:path="/uri/matchNewActivity" />
-				<data android:scheme="https" android:host="jdroidtools.com" android:path="/uri/matchNewActivity" />
+
+				<data android:scheme="http"
+					  android:host="jdroidtools.com"
+					  android:path="/uri/matchNewActivity" />
+				<data android:scheme="https"
+					  android:host="jdroidtools.com"
+					  android:path="/uri/matchNewActivity" />
 			</intent-filter>
 		</activity>
 
-		<activity android:name="com.jdroid.android.sample.ui.uri.NoMatchNewActivity" android:label="@string/noMatchNewActivity"
-				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" tools:ignore="UnusedAttribute">
+		<activity android:name="com.jdroid.android.sample.ui.uri.NoMatchNewActivity"
+				  android:label="@string/noMatchNewActivity"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute">
 			<intent-filter>
 				<action android:name="android.intent.action.VIEW" />
+
 				<category android:name="android.intent.category.DEFAULT" />
 				<category android:name="android.intent.category.BROWSABLE" />
-				<data android:scheme="http" android:host="jdroidtools.com" android:path="/uri/noMatchNewActivity" />
-				<data android:scheme="https" android:host="jdroidtools.com" android:path="/uri/noMatchNewActivity" />
+
+				<data android:scheme="http"
+					  android:host="jdroidtools.com"
+					  android:path="/uri/noMatchNewActivity" />
+				<data android:scheme="https"
+					  android:host="jdroidtools.com"
+					  android:path="/uri/noMatchNewActivity" />
 			</intent-filter>
 		</activity>
 
-		<activity android:name="com.jdroid.android.sample.ui.uri.MatchSameActivity" android:label="@string/matchSameActivity"
-				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" tools:ignore="UnusedAttribute">
+		<activity android:name="com.jdroid.android.sample.ui.uri.MatchSameActivity"
+				  android:label="@string/matchSameActivity"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute">
 			<intent-filter>
 				<action android:name="android.intent.action.VIEW" />
+
 				<category android:name="android.intent.category.DEFAULT" />
 				<category android:name="android.intent.category.BROWSABLE" />
-				<data android:scheme="http" android:host="jdroidtools.com" android:path="/uri/matchSameActivity" />
-				<data android:scheme="https" android:host="jdroidtools.com" android:path="/uri/matchSameActivity" />
+
+				<data android:scheme="http"
+					  android:host="jdroidtools.com"
+					  android:path="/uri/matchSameActivity" />
+				<data android:scheme="https"
+					  android:host="jdroidtools.com"
+					  android:path="/uri/matchSameActivity" />
 			</intent-filter>
 		</activity>
 
-		<activity android:name="com.jdroid.android.sample.ui.uri.NoMatchSameActivity" android:label="@string/noMatchSameActivity"
-				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" tools:ignore="UnusedAttribute">
+		<activity android:name="com.jdroid.android.sample.ui.uri.NoMatchSameActivity"
+				  android:label="@string/noMatchSameActivity"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute">
 			<intent-filter>
 				<action android:name="android.intent.action.VIEW" />
+
 				<category android:name="android.intent.category.DEFAULT" />
 				<category android:name="android.intent.category.BROWSABLE" />
-				<data android:scheme="http" android:host="jdroidtools.com" android:path="/uri/noMatchSameActivity" />
-				<data android:scheme="https" android:host="jdroidtools.com" android:path="/uri/noMatchSameActivity" />
+
+				<data android:scheme="http"
+					  android:host="jdroidtools.com"
+					  android:path="/uri/noMatchSameActivity" />
+				<data android:scheme="https"
+					  android:host="jdroidtools.com"
+					  android:path="/uri/noMatchSameActivity" />
 			</intent-filter>
 		</activity>
 
-		<activity android:name="com.jdroid.android.sample.ui.uri.MatchNullIntentActivity" android:label="@string/matchNullIntent"
-				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" tools:ignore="UnusedAttribute">
+		<activity android:name="com.jdroid.android.sample.ui.uri.MatchNullIntentActivity"
+				  android:label="@string/matchNullIntent"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute">
 			<intent-filter>
 				<action android:name="android.intent.action.VIEW" />
+
 				<category android:name="android.intent.category.DEFAULT" />
 				<category android:name="android.intent.category.BROWSABLE" />
-				<data android:scheme="http" android:host="jdroidtools.com" android:path="/uri/matchNullIntent" />
-				<data android:scheme="https" android:host="jdroidtools.com" android:path="/uri/matchNullIntent" />
+
+				<data android:scheme="http"
+					  android:host="jdroidtools.com"
+					  android:path="/uri/matchNullIntent" />
+				<data android:scheme="https"
+					  android:host="jdroidtools.com"
+					  android:path="/uri/matchNullIntent" />
 			</intent-filter>
 		</activity>
 
-		<activity android:name="com.jdroid.android.sample.ui.uri.NoMatchNullIntentActivity" android:label="@string/noMatchNullIntent"
-				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" tools:ignore="UnusedAttribute">
+		<activity android:name="com.jdroid.android.sample.ui.uri.NoMatchNullIntentActivity"
+				  android:label="@string/noMatchNullIntent"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute">
 			<intent-filter>
 				<action android:name="android.intent.action.VIEW" />
+
 				<category android:name="android.intent.category.DEFAULT" />
 				<category android:name="android.intent.category.BROWSABLE" />
-				<data android:scheme="http" android:host="jdroidtools.com" android:path="/uri/noMatchNullIntent" />
-				<data android:scheme="https" android:host="jdroidtools.com" android:path="/uri/noMatchNullIntent" />
+
+				<data android:scheme="http"
+					  android:host="jdroidtools.com"
+					  android:path="/uri/noMatchNullIntent" />
+				<data android:scheme="https"
+					  android:host="jdroidtools.com"
+					  android:path="/uri/noMatchNullIntent" />
 			</intent-filter>
 		</activity>
 
 		<!-- Use Cases -->
 
-		<activity android:name="com.jdroid.android.sample.ui.usecases.UseCasesActivity" android:label="@string/useCases"
-				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.usecases.UseCasesActivity"
+				  android:label="@string/useCases"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute" />
 
 		<!-- Google Play Services -->
 
-		<activity android:name="com.jdroid.android.sample.ui.google.playservices.GooglePlayServicesActivity" android:label="@string/googlePlayServices"
-				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" tools:ignore="UnusedAttribute"/>
+		<activity android:name="com.jdroid.android.sample.ui.google.playservices.GooglePlayServicesActivity"
+				  android:label="@string/googlePlayServices"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute" />
+
+		<!-- Google Play Games -->
+
+		<activity android:name="com.jdroid.android.sample.ui.google.playgames.GooglePlayGamesActivity"
+				  android:label="@string/googlePlayGames"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
+				  tools:ignore="UnusedAttribute" />
 
 		<!-- Strict Mode -->
 
-		<activity android:name="com.jdroid.android.sample.ui.strictmode.StrictModeActivity" android:label="@string/strictMode"
-				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"/>
+		<activity android:name="com.jdroid.android.sample.ui.strictmode.StrictModeActivity"
+				  android:label="@string/strictMode"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" />
 
-		<service android:name="com.jdroid.android.usecase.service.UseCaseService" android:exported="false" />
-		<service android:name="com.jdroid.android.sample.ui.service.SampleWorkerService" android:exported="false" />
-		<service android:name="com.jdroid.android.sample.ui.service.SampleFirebaseJobService" android:exported="false">
+		<!-- WebView -->
+
+		<activity android:name="com.jdroid.android.sample.ui.webview.WebViewActivity"
+				  android:label="@string/webView"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" />
+
+		<service android:name="com.jdroid.android.sample.ui.leakcanary.LeakCanaryService"
+				 android:exported="false" />
+
+		<service android:name="com.jdroid.android.usecase.service.UseCaseService"
+				 android:exported="false" />
+		<service android:name="com.jdroid.android.sample.ui.service.SampleWorkerService"
+				 android:exported="false" />
+		<service android:name="com.jdroid.android.sample.ui.service.SampleFirebaseJobService"
+				 android:exported="false">
 			<intent-filter>
-				<action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE"/>
+				<action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE" />
 			</intent-filter>
 		</service>
 
 		<!-- Widgets -->
-		<receiver android:name="com.jdroid.android.sample.ui.widget.SampleWidgetProvider" android:label="@string/sampleWidget">
+		<receiver android:name="com.jdroid.android.sample.ui.widget.SampleWidgetProvider"
+				  android:label="@string/sampleWidget">
 			<intent-filter>
 				<action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
 			</intent-filter>
-			<meta-data android:name="android.appwidget.provider" android:resource="@xml/sample_appwidget_info" />
+			<meta-data android:name="android.appwidget.provider"
+					   android:resource="@xml/sample_appwidget_info" />
 		</receiver>
 
 	</application>

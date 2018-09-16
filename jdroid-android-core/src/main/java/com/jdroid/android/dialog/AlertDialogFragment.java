@@ -20,7 +20,7 @@ import java.io.Serializable;
 import java.util.Map;
 
 public class AlertDialogFragment extends AbstractDialogFragment {
-	
+
 	private static final String TITLE_EXTRA = "titleExtra";
 	private static final String MESSAGE_EXTRA = "messageExtra";
 	private static final String IS_HTML_MESSAGE_EXTRA = "isHtmlMessageExtra";
@@ -29,7 +29,7 @@ public class AlertDialogFragment extends AbstractDialogFragment {
 	private static final String POSITIVE_BUTTON_TEXT_EXTRA = "positiveButtonTextExtra";
 	private static final String SCREEN_VIEW_NAME = "screenViewName";
 
-	
+
 	private String title;
 	private CharSequence message;
 	private String negativeButtonText;
@@ -39,35 +39,35 @@ public class AlertDialogFragment extends AbstractDialogFragment {
 	private String screenViewName = null;
 
 	public static void show(Fragment fragment, String title, CharSequence message, String negativeButtonText,
-			String neutralButtonText, String positiveButtonText, Boolean cancelable) {
+							String neutralButtonText, String positiveButtonText, Boolean cancelable) {
 		show(fragment.getActivity(), new AlertDialogFragment(), title, message, negativeButtonText, neutralButtonText,
 			positiveButtonText, cancelable);
 	}
-	
+
 	public static void show(FragmentActivity fragmentActivity, AlertDialogFragment alertDialogFragment, String title,
-			CharSequence message, String negativeButtonText, String neutralButtonText, String positiveButtonText,
-			Boolean cancelable) {
+							CharSequence message, String negativeButtonText, String neutralButtonText, String positiveButtonText,
+							Boolean cancelable) {
 		show(fragmentActivity.getSupportFragmentManager(), alertDialogFragment, null, title, message,
 			negativeButtonText, neutralButtonText, positiveButtonText, cancelable, null, null);
 	}
-	
+
 	public static void show(FragmentActivity fragmentActivity, AlertDialogFragment alertDialogFragment,
-			Fragment targetFragment, String title, CharSequence message, String negativeButtonText, String neutralButtonText,
-			String positiveButtonText, Boolean cancelable, String screenViewName, String tag) {
+							Fragment targetFragment, String title, CharSequence message, String negativeButtonText, String neutralButtonText,
+							String positiveButtonText, Boolean cancelable, String screenViewName, String tag) {
 		show(fragmentActivity.getSupportFragmentManager(), alertDialogFragment, targetFragment, title, message,
 			negativeButtonText, neutralButtonText, positiveButtonText, cancelable, screenViewName, tag);
 	}
-	
+
 	public static void show(FragmentManager fragmentManager, AlertDialogFragment alertDialogFragment,
-			Fragment targetFragment, String title, CharSequence message, String negativeButtonText, String neutralButtonText,
-			String positiveButtonText, Boolean cancelable, String screenViewName, String tag) {
-		
+							Fragment targetFragment, String title, CharSequence message, String negativeButtonText, String neutralButtonText,
+							String positiveButtonText, Boolean cancelable, String screenViewName, String tag) {
+
 		Bundle bundle = new Bundle();
 		bundle.putSerializable(TITLE_EXTRA, title);
-		if(message instanceof Spanned) {
+		if (message instanceof Spanned) {
 			bundle.putSerializable(MESSAGE_EXTRA, Html.toHtml((Spanned)message));
 			bundle.putBoolean(IS_HTML_MESSAGE_EXTRA, true);
-		} else if(message!=null) {
+		} else if (message != null) {
 			bundle.putSerializable(MESSAGE_EXTRA, message.toString());
 		}
 		bundle.putSerializable(NEGATIVE_BUTTON_TEXT_EXTRA, negativeButtonText);
@@ -89,14 +89,14 @@ public class AlertDialogFragment extends AbstractDialogFragment {
 		} else {
 			dialogTag = alertDialogFragment.getClass().getSimpleName();
 		}
-		
+
 		alertDialogFragment.show(fragmentManager, dialogTag);
 	}
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		title = getArgument(TITLE_EXTRA);
 		if (getArgument(IS_HTML_MESSAGE_EXTRA, false)) {
 			message = StringUtils.removeTrailingWhitespaces(Html.fromHtml((String)getArgument(MESSAGE_EXTRA)));
@@ -108,24 +108,24 @@ public class AlertDialogFragment extends AbstractDialogFragment {
 		negativeButtonText = getArgument(NEGATIVE_BUTTON_TEXT_EXTRA);
 		screenViewName = getArgument(SCREEN_VIEW_NAME);
 	}
-	
+
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		
+
 		AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
 		dialogBuilder.setTitle(title);
-		
+
 		View contentView = createContentView();
 		if (contentView != null) {
 			dialogBuilder.setView(contentView);
 		} else if (message != null) {
 			dialogBuilder.setMessage(message);
 		}
-		
+
 		if (negativeButtonText != null) {
 			dialogBuilder.setNegativeButton(negativeButtonText, new DialogInterface.OnClickListener() {
-				
+
 				@Override
 				public void onClick(DialogInterface dialog, int whichButton) {
 					onNegativeClick();
@@ -134,7 +134,7 @@ public class AlertDialogFragment extends AbstractDialogFragment {
 		}
 		if (neutralButtonText != null) {
 			dialogBuilder.setNeutralButton(neutralButtonText, new DialogInterface.OnClickListener() {
-				
+
 				@Override
 				public void onClick(DialogInterface dialog, int whichButton) {
 					onNeutralClick();
@@ -143,24 +143,24 @@ public class AlertDialogFragment extends AbstractDialogFragment {
 		}
 		if (positiveButtonText != null) {
 			dialogBuilder.setPositiveButton(positiveButtonText, new DialogInterface.OnClickListener() {
-				
+
 				@Override
 				public void onClick(DialogInterface dialog, int whichButton) {
 					onPositiveClick();
 				}
 			});
 		}
-		
+
 		AlertDialog dialog = dialogBuilder.create();
 		if ((positiveButtonText != null) && !dismissOnPositiveButtonClick()) {
 			// As workaround, to override default dismiss behavior the listener is directly set on the button.
 			dialog.setOnShowListener(new DialogInterface.OnShowListener() {
-				
+
 				@Override
 				public void onShow(final DialogInterface dialogInterface) {
 					Button possitiveButton = ((AlertDialog)dialogInterface).getButton(DialogInterface.BUTTON_POSITIVE);
 					possitiveButton.setOnClickListener(new View.OnClickListener() {
-						
+
 						@Override
 						public void onClick(View arg0) {
 							onPositiveClick();
@@ -169,42 +169,37 @@ public class AlertDialogFragment extends AbstractDialogFragment {
 				}
 			});
 		}
-		
+
 		return dialog;
 	}
-	
+
 	protected void onNegativeClick() {
 		// Do nothing by default
 	}
-	
+
 	protected void onPositiveClick() {
 		// Do nothing by default
 	}
-	
+
 	protected void onNeutralClick() {
 		// Do nothing by default
 	}
-	
+
 	public void addParameter(String key, Serializable value) {
 		parameters.put(key, value);
 	}
-	
+
 	protected boolean dismissOnPositiveButtonClick() {
 		return true;
 	}
-	
+
 	protected View createContentView() {
 		return null;
-	}
-
-	@Override
-	public Boolean shouldTrackOnFragmentStart() {
-		return screenViewName != null;
 	}
 
 	@NonNull
 	@Override
 	public String getScreenViewName() {
-		return screenViewName;
+		return screenViewName != null ? screenViewName : super.getScreenViewName();
 	}
 }

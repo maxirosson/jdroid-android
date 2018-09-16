@@ -15,7 +15,7 @@ public class SampleServiceCommand4 extends AbstractSampleServiceCommand {
 		ExecutorUtils.sleep(20, TimeUnit.SECONDS);
 		return false;
 	}
-	
+
 	@Nullable
 	@Override
 	protected Long getMinimumTimeBetweenExecutions() {

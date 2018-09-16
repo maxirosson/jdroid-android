@@ -2,19 +2,27 @@ package com.jdroid.android.firebase.fcm;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.annotation.WorkerThread;
 
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.firebase.jobdispatcher.ServiceCommand;
 import com.jdroid.android.google.GooglePlayServicesUtils;
+import com.jdroid.java.exception.UnexpectedException;
 import com.jdroid.java.utils.LoggerUtils;
 
 import org.slf4j.Logger;
 
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 
+// TODO By Google recommendation, we should execute this command every 2 weeks, to have always fresh tokens on server side
 public class FcmRegistrationCommand extends ServiceCommand {
-	
+
 	private final static Logger LOGGER = LoggerUtils.getLogger(FcmRegistrationCommand.class);
 
 	private final static String UPDATE_LAST_ACTIVE_TIMESTAMP_EXTRA = "updateLastActiveTimestamp";
@@ -32,11 +40,13 @@ public class FcmRegistrationCommand extends ServiceCommand {
 				String registrationToken;
 				try {
 					registrationToken = getRegistrationToken(fcmSender.getSenderId());
-				} catch (IOException e) {
-					LOGGER.warn("Error when getting registration token", e);
-					return true;
 				} catch (Exception e) {
 					AbstractApplication.get().getExceptionHandler().logHandledException("Error when getting FCM registration token. Will retry later.", e);
+					return true;
+				}
+
+				if (registrationToken == null) {
+					LOGGER.info("Null registration token. Will retry later.");
 					return true;
 				}
 
@@ -56,15 +66,24 @@ public class FcmRegistrationCommand extends ServiceCommand {
 		}
 	}
 
-	public static String getRegistrationToken(String senderId) throws IOException {
+	@WorkerThread
+	@Nullable
+	public static String getRegistrationToken(String senderId) {
 		if (GooglePlayServicesUtils.isGooglePlayServicesAvailable(AbstractApplication.get())) {
 			String registrationToken;
-			if (senderId != null) {
-				registrationToken = FirebaseInstanceId.getInstance().getToken(senderId, "FCM");
-				LOGGER.info("Registration token for sender id [" + senderId + "]: " + registrationToken);
-			} else {
-				registrationToken = FirebaseInstanceId.getInstance().getToken();
-				LOGGER.info("Registration token for default sender id: " + registrationToken);
+			try {
+				if (senderId != null) {
+					registrationToken = FirebaseInstanceId.getInstance().getToken(senderId, "FCM");
+					LOGGER.info("Registration token for sender id [" + senderId + "]: " + registrationToken);
+				} else {
+					Task<InstanceIdResult> task = FirebaseInstanceId.getInstance().getInstanceId();
+					// Block on the task and get the result synchronously
+					InstanceIdResult instanceIdResult = Tasks.await(task);
+					registrationToken = instanceIdResult.getToken();
+					LOGGER.info("Registration token for default sender id: " + registrationToken);
+				}
+			} catch (IOException | ExecutionException | InterruptedException e) {
+				throw new UnexpectedException(e);
 			}
 			return registrationToken;
 		}

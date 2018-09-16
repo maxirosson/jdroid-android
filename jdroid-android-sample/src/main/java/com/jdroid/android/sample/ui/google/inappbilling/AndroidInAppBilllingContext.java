@@ -10,6 +10,6 @@ public class AndroidInAppBilllingContext extends InAppBillingContext {
 
 	@Override
 	public List<ProductType> getManagedProductTypes() {
-		return Lists.<ProductType>newArrayList(SampleProductType.values());
+		return Lists.newArrayList(SampleProductType.values());
 	}
 }

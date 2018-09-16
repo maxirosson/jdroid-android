@@ -17,17 +17,17 @@ public abstract class AndroidApiService extends AbstractApiService {
 	protected File getHttpCacheDirectory(Cache cache) {
 		return AbstractApplication.get().getCacheManager().getFileSystemCacheDirectory(cache);
 	}
-	
+
 	@Override
 	protected Boolean isHttpMockEnabled() {
 		return HttpDebugConfiguration.isHttpMockEnabled();
 	}
-	
+
 	@Override
 	protected AbstractMockHttpService getAbstractMockHttpServiceInstance(Object... urlSegments) {
 		return HttpDebugConfiguration.getAbstractMockHttpServiceInstance(urlSegments);
 	}
-	
+
 	@Override
 	protected Server getServer() {
 		return AbstractApplication.get().getAppContext().getServer();

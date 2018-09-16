@@ -3,9 +3,15 @@ package com.jdroid.android.firebase.admob.helpers;
 import android.app.Activity;
 import android.view.ViewGroup;
 
-public interface AdHelper {
-	
-	public AdHelper setAdUnitId(String adUnitId);
+import com.google.android.gms.ads.AdListener;
 
-	public void loadAd(Activity activity, ViewGroup adViewContainer);
+import java.util.List;
+
+public interface AdHelper {
+
+	AdHelper setAdUnitId(String adUnitId);
+
+	AdHelper setAdListeners(List<AdListener> adListeners);
+
+	void loadAd(Activity activity, ViewGroup adViewContainer);
 }

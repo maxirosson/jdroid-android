@@ -8,16 +8,14 @@ import android.widget.EditText;
 import com.jdroid.android.firebase.fcm.AbstractFcmAppModule;
 import com.jdroid.android.firebase.fcm.AbstractFcmMessageResolver;
 import com.jdroid.android.firebase.fcm.FcmRegistrationCommand;
+import com.jdroid.android.firebase.fcm.InstanceIdHelper;
 import com.jdroid.android.firebase.fcm.notification.NotificationFcmMessage;
-import com.jdroid.android.firebase.instanceid.InstanceIdHelper;
 import com.jdroid.android.fragment.AbstractFragment;
 import com.jdroid.android.sample.R;
 import com.jdroid.android.sample.api.SampleApiService;
 import com.jdroid.java.collections.Maps;
 import com.jdroid.java.concurrent.ExecutorUtils;
-import com.jdroid.java.exception.UnexpectedException;
 
-import java.io.IOException;
 import java.util.Map;
 
 public class FcmFragment extends AbstractFragment {
@@ -35,13 +33,13 @@ public class FcmFragment extends AbstractFragment {
 		findView(R.id.registerDevice).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				new FcmRegistrationCommand().start(false);
+				AbstractFcmAppModule.get().startFcmRegistration(false);
 			}
 		});
 		findView(R.id.registerDeviceAndUpdateLastActiveTimestamp).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				new FcmRegistrationCommand().start(true);
+				AbstractFcmAppModule.get().startFcmRegistration(true);
 			}
 		});
 
@@ -90,34 +88,29 @@ public class FcmFragment extends AbstractFragment {
 				ExecutorUtils.execute(new Runnable() {
 					@Override
 					public void run() {
-						try {
+						String googleServerApiKey = googleServerApiKeyEditText.getText().length() > 0 ? googleServerApiKeyEditText.getText().toString() : null;
+						String registrationToken = FcmRegistrationCommand.getRegistrationToken(senderId.getText().toString());
 
-							String googleServerApiKey = googleServerApiKeyEditText.getText().length() > 0 ? googleServerApiKeyEditText.getText().toString() : null;
-							String registrationToken = FcmRegistrationCommand.getRegistrationToken(senderId.getText().toString());
-
-							Map<String, String> params = Maps.newHashMap();
-							if (minAppVersionCode.getText().length() > 0) {
-								params.put(AbstractFcmMessageResolver.MIN_APP_VERSION_CODE_KEY, minAppVersionCode.getText().toString());
-							}
-							if (minDeviceOsVersion.getText().length() > 0) {
-								params.put(AbstractFcmMessageResolver.MIN_DEVICE_OS_VERSION_KEY, minDeviceOsVersion.getText().toString());
-							}
-
-							String messageKey = messageKeyEditText.getText().toString();
-							if (NotificationFcmMessage.MESSAGE_KEY.equals(messageKey)) {
-								params.put(NotificationFcmMessage.CONTENT_TITLE, "Sample Content Title");
-								params.put(NotificationFcmMessage.CONTENT_TEXT, "Sample Content Text");
-								params.put(NotificationFcmMessage.LIGHT_ENABLED, "true");
-								params.put(NotificationFcmMessage.SOUND_ENABLED, "false");
-								params.put(NotificationFcmMessage.VIBRATION_ENABLED, "true");
-								params.put(NotificationFcmMessage.URL, "http://jdroidtools.com/uri/noflags?a=1");
-								params.put(NotificationFcmMessage.LARGE_ICON_URL, "http://jdroidtools.com/images/gradle.png");
-							}
-
-							new SampleApiService().sendPush(googleServerApiKey, registrationToken, messageKey, params);
-						} catch (IOException e) {
-							throw new UnexpectedException(e);
+						Map<String, String> params = Maps.newHashMap();
+						if (minAppVersionCode.getText().length() > 0) {
+							params.put(AbstractFcmMessageResolver.MIN_APP_VERSION_CODE_KEY, minAppVersionCode.getText().toString());
 						}
+						if (minDeviceOsVersion.getText().length() > 0) {
+							params.put(AbstractFcmMessageResolver.MIN_DEVICE_OS_VERSION_KEY, minDeviceOsVersion.getText().toString());
+						}
+
+						String messageKey = messageKeyEditText.getText().toString();
+						if (NotificationFcmMessage.MESSAGE_KEY.equals(messageKey)) {
+							params.put(NotificationFcmMessage.CONTENT_TITLE, "Sample Content Title");
+							params.put(NotificationFcmMessage.CONTENT_TEXT, "Sample Content Text");
+							params.put(NotificationFcmMessage.LIGHT_ENABLED, "true");
+							params.put(NotificationFcmMessage.SOUND_ENABLED, "false");
+							params.put(NotificationFcmMessage.VIBRATION_ENABLED, "true");
+							params.put(NotificationFcmMessage.URL, "http://jdroidtools.com/uri/noflags?a=1");
+							params.put(NotificationFcmMessage.LARGE_ICON_URL, "http://jdroidtools.com/images/gradle.png");
+						}
+
+						new SampleApiService().sendPush(googleServerApiKey, registrationToken, messageKey, params);
 					}
 				});
 			}

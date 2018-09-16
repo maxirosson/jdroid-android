@@ -1,20 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.jdroid.android.google.maps">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+		  package="com.jdroid.android.google.maps">
 
 	<!-- TODO: Enabled this when https://code.google.com/p/android/issues/detail?id=178409 is fixed-->
 	<!--<permission android:name="${applicationId}.permission.MAPS_RECEIVE" android:protectionLevel="signature" />-->
 	<!--<uses-permission android:name="${applicationId}.permission.MAPS_RECEIVE" />-->
 
 	<!-- Used by the API to download map tiles from Google Maps servers -->
-	<uses-permission android:name="android.permission.INTERNET"/>
+	<uses-permission android:name="android.permission.INTERNET" />
 
 	<!-- Allows the API to check the connection status in order to determine whether data can be downloaded -->
-	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
 	<!-- The Google Maps Android API uses OpenGL ES version 2 to render the map. If OpenGL ES version 2 is not installed, your map will not appear. -->
-	<uses-feature android:glEsVersion="0x00020000" android:required="true" />
+	<uses-feature android:glEsVersion="0x00020000"
+				  android:required="true" />
 
 	<application>
+
+		<!-- https://developers.google.com/maps/documentation/android-sdk/config#specify_requirement_for_apache_http_legacy_library -->
+		<uses-library
+				android:name="org.apache.http.legacy"
+				android:required="false" />
 
 	</application>
 

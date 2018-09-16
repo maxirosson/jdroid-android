@@ -20,7 +20,7 @@ jobs:
 
       - run: 
           name: Assembling
-          command: ./gradlew assemble -PRELEASE_BUILD_TYPE_ENABLED=true -PRELEASE_FAKE_ENABLED=true --stacktrace --scan
+          command: ./gradlew assemble -PRELEASE_BUILD_TYPE_ENABLED=true -PFAKE_RELEASE_BUILD_TYPE_ENABLED=true --stacktrace --scan
 
       - save_cache:
           paths:
@@ -69,8 +69,8 @@ jobs:
           destination: jdroid-android-about/tests
 
       - store_artifacts:
-          path: ./jdroid-android-facebook/build/reports/tests/testDebugUnitTest
-          destination: jdroid-android-facebook/tests
+          path: ./jdroid-android-facebook-login/build/reports/tests/testDebugUnitTest
+          destination: jdroid-android-facebook-login/tests
 
       - store_artifacts:
           path: ./jdroid-android-firebase-admob/build/reports/tests/testDebugUnitTest
@@ -89,10 +89,6 @@ jobs:
           destination: jdroid-android-firebase-fcm/tests
 
       - store_artifacts:
-          path: ./jdroid-android-firebase-instanceid/build/reports/tests/testDebugUnitTest
-          destination: jdroid-android-firebase-instanceid/tests
-
-      - store_artifacts:
           path: ./jdroid-android-firebase-remoteconfig/build/reports/tests/testDebugUnitTest
           destination: jdroid-android-firebase-remoteconfig/tests
 
@@ -109,6 +105,10 @@ jobs:
           destination: jdroid-android-google-maps/tests
 
       - store_artifacts:
+          path: ./jdroid-android-google-play-games/build/reports/tests/testDebugUnitTest
+          destination: jdroid-android-google-play-games/tests
+
+      - store_artifacts:
           path: ./jdroid-android-google-plus/build/reports/tests/testDebugUnitTest
           destination: jdroid-android-google-plus/tests
 
@@ -119,6 +119,10 @@ jobs:
       - store_artifacts:
           path: ./jdroid-android-sample/build/reports/tests/testDebugUnitTest
           destination: jdroid-android-sample/tests
+
+      - store_artifacts:
+          path: ./jdroid-android-sqlite/build/reports/tests/testDebugUnitTest
+          destination: jdroid-android-sqlite/tests
 
       - store_artifacts:
           path: ./jdroid-android-twitter/build/reports/tests/testDebugUnitTest
@@ -176,8 +180,8 @@ jobs:
           destination: jdroid-android-about/lint
 
       - store_artifacts:
-          path: ./jdroid-android-facebook/build/reports/lint-results-debug.html
-          destination: jdroid-android-facebook/lint
+          path: ./jdroid-android-facebook-login/build/reports/lint-results-debug.html
+          destination: jdroid-android-facebook-login/lint
 
       - store_artifacts:
           path: ./jdroid-android-firebase-admob/build/reports/lint-results-debug.html
@@ -196,10 +200,6 @@ jobs:
           destination: jdroid-android-firebase-fcm/lint
 
       - store_artifacts:
-          path: ./jdroid-android-firebase-instanceid/build/reports/lint-results-debug.html
-          destination: jdroid-android-firebase-instanceid/lint
-
-      - store_artifacts:
           path: ./jdroid-android-firebase-remoteconfig/build/reports/lint-results-debug.html
           destination: jdroid-android-firebase-remoteconfig/lint
 
@@ -216,6 +216,10 @@ jobs:
           destination: jdroid-android-google-maps/lint
 
       - store_artifacts:
+          path: ./jdroid-android-google-play-games/build/reports/lint-results-debug.html
+          destination: jdroid-android-google-play-games/lint
+
+      - store_artifacts:
           path: ./jdroid-android-google-plus/build/reports/lint-results-debug.html
           destination: jdroid-android-google-plus/lint
 
@@ -226,6 +230,10 @@ jobs:
       - store_artifacts:
           path: ./jdroid-android-sample/build/reports/lint-results-debug.html
           destination: jdroid-android-sample/lint
+
+      - store_artifacts:
+          path: ./jdroid-android-sqlite/build/reports/lint-results-debug.html
+          destination: jdroid-android-sqlite/lint
 
       - store_artifacts:
           path: ./jdroid-android-twitter/build/reports/lint-results-debug.html
@@ -239,7 +247,7 @@ jobs:
       - restore_cache:
           key: app-{{ .Branch }}-{{ checksum "build.gradle" }}
           
-      - run: ./gradlew uploadArchives -PLOCAL_UPLOAD=false -PRELEASE_BUILD_TYPE_ENABLED=true -PRELEASE_FAKE_ENABLED=true --stacktrace
+      - run: ./gradlew uploadArchives -PLOCAL_UPLOAD=false -PRELEASE_BUILD_TYPE_ENABLED=true -PFAKE_RELEASE_BUILD_TYPE_ENABLED=true --stacktrace
   
 workflows:
   version: 2

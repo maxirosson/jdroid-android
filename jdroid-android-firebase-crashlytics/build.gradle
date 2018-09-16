@@ -19,7 +19,7 @@ dependencies {
 	api project(":jdroid-android-core")
 
 	// https://docs.fabric.io/android/changelog.html#crashlytics
-	api('com.crashlytics.sdk.android:crashlytics:2.9.1@aar') {
+	api('com.crashlytics.sdk.android:crashlytics:2.9.5@aar') {
 		transitive = true
 	}
 

@@ -19,7 +19,7 @@ import com.jdroid.java.exception.UnexpectedException;
 import com.jdroid.java.utils.IdGenerator;
 
 public class SampleFirebaseJobService extends AbstractJobService {
-	
+
 	@MainThread
 	@Override
 	public boolean onRunJob(JobParameters jobParameters) {

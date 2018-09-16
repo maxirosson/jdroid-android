@@ -4,7 +4,7 @@ import com.jdroid.android.about.SpreadTheLoveFragment;
 import com.jdroid.android.sample.R;
 
 public class AndroidSpreadTheLoveFragment extends SpreadTheLoveFragment {
-	
+
 	public static final String TWITTER_SHARE_URL = "http://goo.gl/XcxvIh";
 	public static final String GOOGLE_PLUS_SHARE_URL = "http://goo.gl/6BloFX";
 	public static final String FACEBOOK_SHARE_URL = "http://goo.gl/ogJoNX";
@@ -26,7 +26,7 @@ public class AndroidSpreadTheLoveFragment extends SpreadTheLoveFragment {
 	protected String getDefaultShareText() {
 		return getString(R.string.shareMessage, UNKNOWN_SHARE_URL);
 	}
-	
+
 	/**
 	 * @see com.jdroid.android.about.SpreadTheLoveFragment#getTwitterShareText()
 	 */
@@ -34,7 +34,7 @@ public class AndroidSpreadTheLoveFragment extends SpreadTheLoveFragment {
 	protected String getTwitterShareText() {
 		return getString(R.string.shareMessage, TWITTER_SHARE_URL);
 	}
-	
+
 	/**
 	 * @see com.jdroid.android.about.SpreadTheLoveFragment#getGooglePlusShareText()
 	 */
@@ -42,7 +42,7 @@ public class AndroidSpreadTheLoveFragment extends SpreadTheLoveFragment {
 	protected String getGooglePlusShareText() {
 		return getString(R.string.shareMessage, GOOGLE_PLUS_SHARE_URL);
 	}
-	
+
 	/**
 	 * @see com.jdroid.android.about.SpreadTheLoveFragment#getSmsShareText()
 	 */
@@ -50,7 +50,7 @@ public class AndroidSpreadTheLoveFragment extends SpreadTheLoveFragment {
 	protected String getSmsShareText() {
 		return getString(R.string.shareMessage, SMS_SHARE_URL);
 	}
-	
+
 	/**
 	 * @see com.jdroid.android.about.SpreadTheLoveFragment#getWhatsAppShareText()
 	 */
@@ -58,7 +58,7 @@ public class AndroidSpreadTheLoveFragment extends SpreadTheLoveFragment {
 	protected String getWhatsAppShareText() {
 		return getString(R.string.shareMessage, WHATSAPP_SHARE_URL);
 	}
-	
+
 	/**
 	 * @see com.jdroid.android.about.SpreadTheLoveFragment#getHangoutsShareText()
 	 */
@@ -66,7 +66,7 @@ public class AndroidSpreadTheLoveFragment extends SpreadTheLoveFragment {
 	protected String getHangoutsShareText() {
 		return getString(R.string.shareMessage, HANGOUTS_SHARE_URL);
 	}
-	
+
 	/**
 	 * @see com.jdroid.android.about.SpreadTheLoveFragment#getTelegramShareText()
 	 */

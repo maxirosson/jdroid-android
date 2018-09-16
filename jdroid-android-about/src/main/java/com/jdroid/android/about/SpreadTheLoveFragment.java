@@ -57,7 +57,7 @@ public abstract class SpreadTheLoveFragment extends AbstractFragment {
 
 				@Override
 				public void onClick(View v) {
-					FacebookHelper.openPage(getActivity(), getFacebookPageId());
+					FacebookHelper.openPage(getFacebookPageId());
 				}
 			});
 			followUsVisible = true;
@@ -71,7 +71,7 @@ public abstract class SpreadTheLoveFragment extends AbstractFragment {
 
 				@Override
 				public void onClick(View v) {
-					GooglePlusHelperFragment.openCommunity(getGooglePlusCommunityId());
+					GooglePlusHelperFragment.openCommunity(getActivity(), getGooglePlusCommunityId());
 				}
 			});
 			followUsVisible = true;
@@ -92,28 +92,28 @@ public abstract class SpreadTheLoveFragment extends AbstractFragment {
 		} else {
 			twitter.setVisibility(View.GONE);
 		}
-		
+
 		View instagram = findView(R.id.instagram);
 		if (getInstagramAccount() != null) {
 			instagram.setOnClickListener(new OnClickListener() {
 
 				@Override
 				public void onClick(View v) {
-					InstagramHelper.openProfile(getActivity(),getInstagramAccount());
+					InstagramHelper.openProfile(getInstagramAccount());
 				}
 			});
 			followUsVisible = true;
 		} else {
 			instagram.setVisibility(View.GONE);
 		}
-		
+
 		View linkedin = findView(R.id.linkedin);
 		if (getLinkedInCompanyPageId() != null) {
 			linkedin.setOnClickListener(new OnClickListener() {
 
 				@Override
 				public void onClick(View v) {
-					LinkedInHelper.openCompanyPage(getActivity(), getLinkedInCompanyPageId());
+					LinkedInHelper.openCompanyPage(getLinkedInCompanyPageId());
 				}
 			});
 			followUsVisible = true;
@@ -122,7 +122,7 @@ public abstract class SpreadTheLoveFragment extends AbstractFragment {
 		}
 
 		findView(R.id.followUs).setVisibility(followUsVisible ? View.VISIBLE : View.GONE);
-		
+
 		Map<String, SharingDataItem> sharingDataItemsMap = Maps.newHashMap();
 		sharingDataItemsMap.put(SharingMedium.TWITTER.getName(), new SharingDataItem(getTwitterShareText()));
 		sharingDataItemsMap.put(SharingMedium.GOOGLE_PLUS.getName(), new SharingDataItem(getGooglePlusShareText()));
@@ -131,7 +131,7 @@ public abstract class SpreadTheLoveFragment extends AbstractFragment {
 		sharingDataItemsMap.put(SharingMedium.HANGOUTS.getName(), new SharingDataItem(getHangoutsShareText()));
 		sharingDataItemsMap.put(SharingMedium.SMS.getName(), new SharingDataItem(getSmsShareText()));
 		SharingData sharingData = new SharingData(getShareKey(), sharingDataItemsMap, new SharingDataItem(getDefaultShareSubject(), getDefaultShareText()));
-		
+
 		List<SharingItem> sharingItems = Lists.newArrayList();
 		sharingItems.add(new TwitterSharingItem(sharingData));
 		sharingItems.add(new GooglePlusSharingItem(sharingData));
@@ -139,9 +139,9 @@ public abstract class SpreadTheLoveFragment extends AbstractFragment {
 		sharingItems.add(new TelegramSharingItem(sharingData));
 		sharingItems.add(new HangoutsSharingItem(sharingData));
 		sharingItems.add(new SmsSharingItem(sharingData));
-		
+
 		Boolean displayShareTitle = ShareView.initShareSection(getActivity(), sharingItems, new MoreSharingItem(sharingData));
-		
+
 		View appInvite = findView(R.id.appInvite);
 		if (displayAppInviteButton() && GooglePlayServicesUtils.isGooglePlayServicesAvailable(getActivity())) {
 			appInvite.setOnClickListener(new OnClickListener() {
@@ -155,7 +155,7 @@ public abstract class SpreadTheLoveFragment extends AbstractFragment {
 		} else {
 			appInvite.setVisibility(View.GONE);
 		}
-		
+
 		if (displayGooglePlusOneButton()) {
 			PlusOneButton plusOneButton = findView(R.id.plusOneButton);
 			googlePlusOneButtonHelper = new GooglePlusOneButtonHelper(this, plusOneButton);
@@ -172,23 +172,23 @@ public abstract class SpreadTheLoveFragment extends AbstractFragment {
 			findView(R.id.shareSectionTitle).setVisibility(View.GONE);
 		}
 	}
-	
+
 	protected String getFacebookPageId() {
 		return AbstractApplication.get().getAppContext().getFacebookPageId();
 	}
-	
+
 	protected String getGooglePlusCommunityId() {
 		return AbstractApplication.get().getAppContext().getGooglePlusCommunityId();
 	}
-	
+
 	protected String getTwitterAccount() {
 		return AbstractApplication.get().getAppContext().getTwitterAccount();
 	}
-	
+
 	protected String getInstagramAccount() {
 		return AbstractApplication.get().getAppContext().getInstagramAccount();
 	}
-	
+
 	protected String getLinkedInCompanyPageId() {
 		return AbstractApplication.get().getAppContext().getLinkedInCompanyPageId();
 	}
@@ -204,50 +204,50 @@ public abstract class SpreadTheLoveFragment extends AbstractFragment {
 	protected Boolean displayGooglePlusOneButton() {
 		return true;
 	}
-	
+
 	public String getShareKey() {
 		return GooglePlayUtils.getGooglePlayLink();
 	}
-	
+
 	protected String getDefaultShareSubject() {
 		return getString(R.string.jdroid_appName);
 	}
-	
+
 	protected abstract String getDefaultShareText();
-	
+
 	protected String getTwitterShareText() {
 		return getDefaultShareText();
 	}
-	
+
 	protected String getGooglePlusShareText() {
 		return getDefaultShareText();
 	}
-	
+
 	protected String getWhatsAppShareText() {
 		return getDefaultShareText();
 	}
-	
+
 	protected String getTelegramShareText() {
 		return getDefaultShareText();
 	}
-	
+
 	protected String getHangoutsShareText() {
 		return getDefaultShareText();
 	}
-	
+
 	protected String getSmsShareText() {
 		return getDefaultShareText();
 	}
-	
+
 	@Override
 	public void onResume() {
 		super.onResume();
-		
+
 		if (googlePlusOneButtonHelper != null) {
 			googlePlusOneButtonHelper.onResume();
 		}
 	}
-	
+
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
@@ -258,5 +258,5 @@ public abstract class SpreadTheLoveFragment extends AbstractFragment {
 			googlePlusOneButtonHelper.onActivityResult(requestCode, resultCode, data);
 		}
 	}
-	
+
 }

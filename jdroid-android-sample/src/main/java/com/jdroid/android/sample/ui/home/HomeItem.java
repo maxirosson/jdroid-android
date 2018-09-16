@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 
 import com.jdroid.android.ActionItem;
+import com.jdroid.android.activity.ActivityLauncher;
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.sample.R;
 import com.jdroid.android.sample.ui.analytics.AnalyticsActivity;
@@ -21,6 +22,7 @@ import com.jdroid.android.sample.ui.glide.GlideActivity;
 import com.jdroid.android.sample.ui.google.admob.AdsActivity;
 import com.jdroid.android.sample.ui.google.inappbilling.GoogleInAppBillingActivity;
 import com.jdroid.android.sample.ui.google.maps.GoogleMapsActivity;
+import com.jdroid.android.sample.ui.google.playgames.GooglePlayGamesActivity;
 import com.jdroid.android.sample.ui.google.playservices.GooglePlayServicesActivity;
 import com.jdroid.android.sample.ui.google.signin.GoogleSignInActivity;
 import com.jdroid.android.sample.ui.hero.HeroActivity;
@@ -41,25 +43,27 @@ import com.jdroid.android.sample.ui.toasts.ToastsActivity;
 import com.jdroid.android.sample.ui.twitter.TwitterActivity;
 import com.jdroid.android.sample.ui.uri.UriMapperActivity;
 import com.jdroid.android.sample.ui.usecases.UseCasesActivity;
+import com.jdroid.android.sample.ui.webview.WebViewActivity;
 import com.jdroid.android.shortcuts.AppShortcutsHelper;
 import com.jdroid.android.utils.ScreenUtils;
 
 public enum HomeItem implements ActionItem {
-	
+
 	ANALYTCS(R.string.analytics, R.drawable.ic_analytics, AnalyticsActivity.class),
 	CARD_VIEW(R.string.cardView, R.drawable.ic_cardview, CardViewActivity.class),
 	DATE_TIME(R.string.dateTime, R.drawable.ic_date_time, DateTimeActivity.class),
 	ERROR_DISPLAYER(R.string.errorDisplayer, R.drawable.ic_exception_handling, ErrorDisplayerActivity.class),
 	FACEBOOK(R.string.jdroid_facebook, R.drawable.ic_facebook_black_24dp, FacebookSignInActivity.class),
+	FIREBASE_ADMOB(R.string.adMob, R.drawable.ic_admob, AdsActivity.class),
+	FIREBASE_FCM(R.string.fcm, R.drawable.ic_fcm, FcmActivity.class),
 	FIREBASE_DATABASE(R.string.firebaseDatabase, R.drawable.ic_firebase, FirebaseDatabaseActivity.class),
 	FIREBASE_DYNAMIC_LINKS(R.string.firebaseDynamicLinks, R.drawable.ic_fcm, DynamicLinksActivity.class),
-	FIREBASE_FCM(R.string.fcm, R.drawable.ic_fcm, FcmActivity.class),
 	FIREBASE_INVITES(R.string.appInvite, R.drawable.ic_admob, AppInviteActivity.class),
 	FAB(R.string.floatingActionButton, R.drawable.ic_firebase, FabActivity.class),
 	GLIDE(R.string.glide, R.drawable.ic_photo, GlideActivity.class),
-	GOOGLE_ADMOB(R.string.adMob, R.drawable.ic_admob, AdsActivity.class),
 	GOOGLE_IN_APP_BILLING(R.string.inAppBilling, R.drawable.ic_inapp_billing, GoogleInAppBillingActivity.class),
 	GOOGLE_MAPS(R.string.googleMaps, R.drawable.ic_maps, GoogleMapsActivity.class),
+	GOOGLE_PLAY_GAMES(R.string.googlePlayGames, R.drawable.ic_games_black_24dp, GooglePlayGamesActivity.class),
 	GOOGLE_PLAY_SERVICES(R.string.googlePlayServices, R.drawable.ic_fcm, GooglePlayServicesActivity.class),
 	GOOGLE_SIGN_IN(R.string.jdroid_googleSignIn, R.drawable.ic_sign_in_24dp, GoogleSignInActivity.class),
 	HERO(R.string.hero, R.drawable.ic_photo, HeroActivity.class),
@@ -78,31 +82,32 @@ public enum HomeItem implements ActionItem {
 	TOASTS(R.string.toasts, R.drawable.ic_toasts, ToastsActivity.class),
 	TWITTER(R.string.jdroid_twitter, R.drawable.ic_twitter_black_24dp, TwitterActivity.class),
 	URI_MAPPER(R.string.uriMapper, R.drawable.ic_photo, UriMapperActivity.class),
-	USE_CASES(R.string.useCases, R.drawable.ic_service, UseCasesActivity.class);
+	USE_CASES(R.string.useCases, R.drawable.ic_service, UseCasesActivity.class),
+	WEBVIEW(R.string.webView, R.drawable.ic_http, WebViewActivity.class);
 
 	private Integer resourceId;
 	private Integer iconId;
 	private Class<? extends FragmentActivity> activityClass;
-	
+
 	HomeItem(Integer resourceId, Integer iconId, Class<? extends FragmentActivity> activityClass) {
 		this.resourceId = resourceId;
 		this.iconId = iconId;
 		this.activityClass = activityClass;
 	}
-	
+
 	@Override
 	public Integer getNameResource() {
 		return resourceId;
 	}
-	
+
 	@Override
 	public Integer getIconResource() {
 		return iconId;
 	}
-	
+
 	@Override
 	public void startActivity(FragmentActivity fragmentActivity) {
-		fragmentActivity.startActivity(getIntent());
+		ActivityLauncher.startActivity(fragmentActivity, getIntent());
 	}
 
 	@Override
@@ -115,17 +120,17 @@ public enum HomeItem implements ActionItem {
 	public Boolean matchesActivity(FragmentActivity fragmentActivity) {
 		return activityClass.equals(fragmentActivity.getClass());
 	}
-	
+
 	@Override
 	public Fragment createFragment(Object args) {
 		return null;
 	}
-	
+
 	@Override
 	public String getName() {
 		return name();
 	}
-	
+
 	@Override
 	public Integer getDescriptionResource() {
 		return null;

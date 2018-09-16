@@ -12,7 +12,7 @@ public class AdsDebugPrefsAppender extends PreferencesAppender {
 	public int getNameResId() {
 		return R.string.jdroid_adsSettings;
 	}
-	
+
 	@Override
 	public void initPreferences(Activity activity, PreferenceGroup preferenceGroup) {
 		CheckBoxPreference checkBoxPreference = new CheckBoxPreference(activity);

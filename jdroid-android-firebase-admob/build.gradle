@@ -18,8 +18,8 @@ dependencies {
 
 	api project(":jdroid-android-core")
 
-	api ("com.google.firebase:firebase-ads:15.0.0") {
-		exclude group: 'com.android.support',  module: 'customtabs'
+	api("com.google.firebase:firebase-ads:15.0.1") {
+		exclude group: 'com.android.support', module: 'customtabs'
 	}
 
 	api "com.android.support:customtabs:${ANDROID_SUPPORT_VERSION}"

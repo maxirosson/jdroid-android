@@ -30,15 +30,15 @@ public abstract class DefaultNavDrawer extends NavDrawer {
 	public View createContentView() {
 		navigationView = getActivity().findView(R.id.drawer);
 		navigationView.setNavigationItemSelectedListener(
-				new NavigationView.OnNavigationItemSelectedListener() {
-					@Override
-					public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-						DefaultNavDrawer.this.onNavigationItemSelected(menuItem);
-						menuItem.setChecked(true);
-						getDrawerLayout().closeDrawers();
-						return true;
-					}
-				});
+			new NavigationView.OnNavigationItemSelectedListener() {
+				@Override
+				public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+					DefaultNavDrawer.this.onNavigationItemSelected(menuItem);
+					menuItem.setChecked(true);
+					getDrawerLayout().closeDrawers();
+					return true;
+				}
+			});
 		NavDrawerHeader navDrawerHeader = new NavDrawerHeader(navigationView);
 		initNavDrawerHeader(navDrawerHeader);
 		return navigationView;
@@ -59,12 +59,12 @@ public abstract class DefaultNavDrawer extends NavDrawer {
 		for (int i = 0; i < navigationView.getMenu().size(); i++) {
 			MenuItem menuItem = navigationView.getMenu().getItem(i);
 			NavDrawerItem navDrawerItem = findNavDrawerByMenu(menuItem);
-			menuItem.setChecked(navDrawerItem.matchesActivity(AbstractApplication.get().getCurrentActivity()));
+			menuItem.setChecked(navDrawerItem.matchesActivity(getActivity()));
 		}
 	}
 
 	private NavDrawerItem findNavDrawerByMenu(MenuItem menuItem) {
-		for (NavDrawerItem each: navDrawerItems) {
+		for (NavDrawerItem each : navDrawerItems) {
 			if (each.getItemId().equals(menuItem.getItemId())) {
 				return each;
 			}
@@ -99,7 +99,7 @@ public abstract class DefaultNavDrawer extends NavDrawer {
 			}
 		}
 	}
-	
+
 	protected ImageViewLoader createImageViewLoader() {
 		return null;
 	}

@@ -10,7 +10,7 @@ public class SampleListTwitterFragment extends TwitterListFragment {
 	@Override
 	protected ListTwitterHelper createTwitterHelper() {
 		return new ListTwitterHelper() {
-			
+
 			@Override
 			protected SearchTimeline createSearchTimeline() {
 				SearchTimeline.Builder searchTimelineBuilder = new SearchTimeline.Builder();
@@ -21,7 +21,7 @@ public class SampleListTwitterFragment extends TwitterListFragment {
 				searchTimelineBuilder.query(queryBuilder.toString());
 				return searchTimelineBuilder.build();
 			}
-			
+
 			@Override
 			public AbstractFragment getAbstractFragment() {
 				return SampleListTwitterFragment.this;

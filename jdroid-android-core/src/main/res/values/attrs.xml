@@ -1,16 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-	<declare-styleable name="jdroid_bezelImageView">
-		<attr name="jdroid_maskDrawable" format="reference" />
-		<attr name="jdroid_borderDrawable" format="reference" />
-		<attr name="jdroid_desaturateOnPress" format="boolean" />
-	</declare-styleable>
-
-	<declare-styleable name="jdroid_navDrawerHeaderImageView">
-		<attr name="jdroid_circleImage" format="boolean" />
-	</declare-styleable>
-
 	<declare-styleable name="jdroid_scrimInsetsView">
 		<attr name="jdroid_insetScrollForeground" format="reference|color" />
 	</declare-styleable>
