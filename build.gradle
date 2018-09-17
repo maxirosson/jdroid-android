@@ -32,7 +32,7 @@ buildscript {
 		classpath 'com.jdroidtools:jdroid-component-builder:1.1.0-SNAPSHOT'
 
 		// https://github.com/maxirosson/jdroid-gradle-plugin/blob/master/CHANGELOG.md
-		classpath 'com.jdroidtools:jdroid-gradle-root-plugin:2.0.0-android_gradle_plugin_3_2_0-SNAPSHOT'
+		classpath 'com.jdroidtools:jdroid-gradle-root-plugin:2.0.0-SNAPSHOT'
 	}
 }
 
