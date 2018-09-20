@@ -23,7 +23,7 @@ public class LibrariesFragment extends AbstractRecyclerFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		libraries.add(new Library("jdroid", "Jdroid Tools", "Maxi Rosson", "http://jdroidtools.com"));
+		libraries.add(new Library("jdroid", "Jdroid Tools", "Maxi Rosson", "https://jdroidtools.com"));
 		libraries.add(new Library("androidSupport", "Android Support", "Google", "https://developer.android.com/topic/libraries/support-library/index.html"));
 		libraries.add(new Library("googlePlayServices", "Google Play Services", "Google", "https://developers.google.com/android/guides/overview"));
 		libraries.add(new Library("firebase", "Firebase", "Google", "https://firebase.google.com"));

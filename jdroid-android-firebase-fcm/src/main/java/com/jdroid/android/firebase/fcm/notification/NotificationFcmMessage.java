@@ -27,7 +27,8 @@ public class NotificationFcmMessage implements FcmMessage {
 
 	@Override
 	public void handle(RemoteMessage remoteMessage) {
-		NotificationBuilder builder = new NotificationBuilder(getMessageKey(), remoteMessage.getData().get(CHANNEL));
+
+		NotificationBuilder builder = new NotificationBuilder(getMessageKey(), remoteMessage.getData() != null ? remoteMessage.getData().get(CHANNEL) : null);
 
 		initContentTitle(remoteMessage, builder);
 		initContentText(remoteMessage, builder);
@@ -53,7 +54,7 @@ public class NotificationFcmMessage implements FcmMessage {
 		if (remoteMessage.getNotification() != null) {
 			contentTitle = remoteMessage.getNotification().getTitle();
 		}
-		if (StringUtils.isEmpty(contentTitle)) {
+		if (StringUtils.isEmpty(contentTitle) && remoteMessage.getData() != null) {
 			contentTitle = remoteMessage.getData().get(CONTENT_TITLE);
 		}
 		if (StringUtils.isNotEmpty(contentTitle)) {
@@ -68,7 +69,7 @@ public class NotificationFcmMessage implements FcmMessage {
 		if (remoteMessage.getNotification() != null) {
 			contentText = remoteMessage.getNotification().getBody();
 		}
-		if (StringUtils.isEmpty(contentText)) {
+		if (StringUtils.isEmpty(contentText) && remoteMessage.getData() != null) {
 			contentText = remoteMessage.getData().get(CONTENT_TEXT);
 		}
 		if (StringUtils.isNotEmpty(contentText)) {
@@ -79,19 +80,19 @@ public class NotificationFcmMessage implements FcmMessage {
 	}
 
 	protected void initSound(RemoteMessage remoteMessage, NotificationBuilder builder) {
-		if (TypeUtils.getBoolean(remoteMessage.getData().get(SOUND_ENABLED), false)) {
+		if (remoteMessage.getData() != null && TypeUtils.getBoolean(remoteMessage.getData().get(SOUND_ENABLED), false)) {
 			builder.setDefaultSound();
 		}
 	}
 
 	protected void initVibration(RemoteMessage remoteMessage, NotificationBuilder builder) {
-		if (TypeUtils.getBoolean(remoteMessage.getData().get(VIBRATION_ENABLED), false)) {
+		if (remoteMessage.getData() != null && TypeUtils.getBoolean(remoteMessage.getData().get(VIBRATION_ENABLED), false)) {
 			builder.setDefaultVibration();
 		}
 	}
 
 	protected void initLight(RemoteMessage remoteMessage, NotificationBuilder builder) {
-		if (TypeUtils.getBoolean(remoteMessage.getData().get(LIGHT_ENABLED), false)) {
+		if (remoteMessage.getData() != null && TypeUtils.getBoolean(remoteMessage.getData().get(LIGHT_ENABLED), false)) {
 			builder.setWhiteLight();
 		}
 	}
@@ -101,7 +102,7 @@ public class NotificationFcmMessage implements FcmMessage {
 		if (remoteMessage.getNotification() != null) {
 			url = remoteMessage.getNotification().getClickAction();
 		}
-		if (StringUtils.isEmpty(url)) {
+		if (StringUtils.isEmpty(url) && remoteMessage.getData() != null) {
 			url = remoteMessage.getData().get(URL);
 		}
 		if (StringUtils.isNotEmpty(url)) {
@@ -116,13 +117,15 @@ public class NotificationFcmMessage implements FcmMessage {
 	}
 
 	protected void initLargeIcon(RemoteMessage remoteMessage, NotificationBuilder builder) {
-		String largeIconUrl = remoteMessage.getData().get(LARGE_ICON_URL);
-		BitmapLoader bitmapLoader = createBitmapLoader(largeIconUrl);
-		if (largeIconUrl != null) {
-			if (bitmapLoader != null) {
-				builder.setLargeIcon(bitmapLoader);
-			} else {
-				AbstractApplication.get().getExceptionHandler().logWarningException("Not bitmapLoader defined to load large icon url");
+		if (remoteMessage.getData() != null) {
+			String largeIconUrl = remoteMessage.getData().get(LARGE_ICON_URL);
+			BitmapLoader bitmapLoader = createBitmapLoader(largeIconUrl);
+			if (largeIconUrl != null) {
+				if (bitmapLoader != null) {
+					builder.setLargeIcon(bitmapLoader);
+				} else {
+					AbstractApplication.get().getExceptionHandler().logWarningException("Not bitmapLoader defined to load large icon url");
+				}
 			}
 		}
 	}

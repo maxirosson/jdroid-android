@@ -31,7 +31,7 @@ public class GlideFragment extends AbstractFragment {
 		findView(R.id.withActivity).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				GlideHelper.with(getActivity()).load("http://jdroidtools.com/images/mainImage.png").listener(new LoggingRequestListener<>()).into(imageView);
+				GlideHelper.with(getActivity()).load("https://jdroidtools.com/images/mainImage.png").listener(new LoggingRequestListener<>()).into(imageView);
 			}
 		});
 
@@ -40,7 +40,7 @@ public class GlideFragment extends AbstractFragment {
 			public void onClick(View view) {
 				RequestOptions options = new RequestOptions();
 				options = options.placeholder(new ColorDrawable(Color.BLACK));
-				GlideHelper.with(GlideFragment.this).load("http://jdroidtools.com/images/android.png").listener(new LoggingRequestListener<>()).apply(options).into(imageView);
+				GlideHelper.with(GlideFragment.this).load("https://jdroidtools.com/images/android.png").listener(new LoggingRequestListener<>()).apply(options).into(imageView);
 			}
 		});
 
@@ -49,7 +49,7 @@ public class GlideFragment extends AbstractFragment {
 			public void onClick(View view) {
 				RequestOptions options = new RequestOptions();
 				options = options.placeholder(R.drawable.jdroid_ic_about_black_24dp);
-				GlideHelper.with(AbstractApplication.get()).load("http://jdroidtools.com/images/gradle.png").listener(new LoggingRequestListener<>()).apply(options).into(imageView);
+				GlideHelper.with(AbstractApplication.get()).load("https://jdroidtools.com/images/gradle.png").listener(new LoggingRequestListener<>()).apply(options).into(imageView);
 			}
 		});
 
@@ -58,7 +58,7 @@ public class GlideFragment extends AbstractFragment {
 			public void onClick(View view) {
 				RequestOptions options = new RequestOptions();
 				options = options.placeholder(R.drawable.jdroid_ic_about_black_24dp);
-				GlideHelper.with((Context)null).load("http://jdroidtools.com/images/gradle.png").listener(new LoggingRequestListener<>()).apply(options).into(imageView);
+				GlideHelper.with((Context)null).load("https://jdroidtools.com/images/gradle.png").listener(new LoggingRequestListener<>()).apply(options).into(imageView);
 			}
 		});
 
@@ -67,7 +67,7 @@ public class GlideFragment extends AbstractFragment {
 			public void onClick(View view) {
 				RequestOptions options = new RequestOptions();
 				options = options.placeholder(R.drawable.jdroid_ic_about_black_24dp);
-				GlideHelper.with(AbstractApplication.get()).load("http://jdroidtools.com/images/invalid.png").listener(new LoggingRequestListener<>()).apply(options).into(imageView);
+				GlideHelper.with(AbstractApplication.get()).load("https://jdroidtools.com/images/invalid.png").listener(new LoggingRequestListener<>()).apply(options).into(imageView);
 			}
 		});
 

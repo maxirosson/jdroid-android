@@ -532,8 +532,14 @@ public abstract class AbstractApplication extends Application {
 		this.coreAnalyticsTrackers.add(coreAnalyticsTracker);
 	}
 
+	@NonNull
 	public List<NotificationChannelType> getNotificationChannelTypes() {
 		return Lists.newArrayList();
+	}
+
+	@Nullable
+	public NotificationChannelType getDefaultNotificationChannelType() {
+		return getNotificationChannelTypes().isEmpty() ? null : getNotificationChannelTypes().iterator().next();
 	}
 
 	public RemoteConfigLoader getRemoteConfigLoader() {

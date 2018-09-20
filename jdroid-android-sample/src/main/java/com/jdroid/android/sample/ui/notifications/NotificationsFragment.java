@@ -53,10 +53,10 @@ public class NotificationsFragment extends AbstractFragment {
 		contentText.setText(R.string.contextTextSample);
 
 		largeIconUrlEditText = findView(R.id.largeIconUrl);
-		largeIconUrlEditText.setText("http://jdroidtools.com/images/gradle.png");
+		largeIconUrlEditText.setText("https://jdroidtools.com/images/gradle.png");
 
 		urlEditText = findView(R.id.url);
-		urlEditText.setText("http://jdroidtools.com/uri");
+		urlEditText.setText("https://jdroidtools.com/uri");
 
 		largeIconDrawable = findView(R.id.largeIconDrawable);
 		largeIconDrawable.setChecked(false);

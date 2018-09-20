@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.annotation.WorkerThread;
 import android.support.v4.app.NotificationCompat;
@@ -41,9 +42,14 @@ public class NotificationBuilder {
 		this(notificationName, notificationChannelType.getChannelId());
 	}
 
-	public NotificationBuilder(@NonNull String notificationName, @NonNull String channelId) {
+	public NotificationBuilder(@NonNull String notificationName, @Nullable String channelId) {
+
 		if (NotificationUtils.findNotificationChannelType(channelId) == null) {
 			AbstractApplication.get().getExceptionHandler().logHandledException("Channel id not found: " + channelId);
+			NotificationChannelType defaultNotificationChannelType = AbstractApplication.get().getDefaultNotificationChannelType();
+			if (defaultNotificationChannelType != null) {
+				channelId = defaultNotificationChannelType.getChannelId();
+			}
 		}
 
 		this.notificationName = notificationName;

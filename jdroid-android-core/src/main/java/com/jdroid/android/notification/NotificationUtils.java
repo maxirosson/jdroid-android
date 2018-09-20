@@ -5,6 +5,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.os.Build;
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 
 import com.jdroid.android.application.AbstractApplication;
@@ -65,7 +66,7 @@ public class NotificationUtils {
 		}
 	}
 
-	public static NotificationChannelType findNotificationChannelType(String channelId) {
+	public static NotificationChannelType findNotificationChannelType(@Nullable String channelId) {
 		for (NotificationChannelType notificationChannelType : NOTIFICATION_CHANNEL_TYPES) {
 			if (notificationChannelType.getChannelId().equals(channelId)) {
 				return notificationChannelType;

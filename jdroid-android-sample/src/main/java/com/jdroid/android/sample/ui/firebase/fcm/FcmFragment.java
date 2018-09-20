@@ -106,8 +106,8 @@ public class FcmFragment extends AbstractFragment {
 							params.put(NotificationFcmMessage.LIGHT_ENABLED, "true");
 							params.put(NotificationFcmMessage.SOUND_ENABLED, "false");
 							params.put(NotificationFcmMessage.VIBRATION_ENABLED, "true");
-							params.put(NotificationFcmMessage.URL, "http://jdroidtools.com/uri/noflags?a=1");
-							params.put(NotificationFcmMessage.LARGE_ICON_URL, "http://jdroidtools.com/images/gradle.png");
+							params.put(NotificationFcmMessage.URL, "https://jdroidtools.com/uri/noflags?a=1");
+							params.put(NotificationFcmMessage.LARGE_ICON_URL, "https://jdroidtools.com/images/gradle.png");
 						}
 
 						new SampleApiService().sendPush(googleServerApiKey, registrationToken, messageKey, params);
