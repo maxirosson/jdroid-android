@@ -1,5 +1,6 @@
 package com.jdroid.android.firebase.fcm;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -21,6 +22,7 @@ import androidx.work.NetworkType;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
+import androidx.work.WorkerParameters;
 
 public class FcmRegistrationWorker extends AbstractWorker {
 	
@@ -29,6 +31,10 @@ public class FcmRegistrationWorker extends AbstractWorker {
 	private final static Logger LOGGER = LoggerUtils.getLogger(FcmRegistrationWorker.class);
 
 	private final static String UPDATE_LAST_ACTIVE_TIMESTAMP_EXTRA = "updateLastActiveTimestamp";
+
+	public FcmRegistrationWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
+		super(context, workerParams);
+	}
 
 	public static void start(Boolean updateLastActiveTimestamp) {
 		OneTimeWorkRequest.Builder requestBuilder = new OneTimeWorkRequest.Builder(FcmRegistrationWorker.class);

@@ -1,5 +1,6 @@
 package com.jdroid.android.sample.ui.service;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.jdroid.android.application.AbstractApplication;
@@ -11,9 +12,14 @@ import com.jdroid.java.http.exception.ConnectionException;
 import com.jdroid.java.utils.IdGenerator;
 
 import androidx.work.Worker;
+import androidx.work.WorkerParameters;
 
 public class SampleWorker2 extends AbstractWorker {
-	
+
+	public SampleWorker2(@NonNull Context context, @NonNull WorkerParameters workerParams) {
+		super(context, workerParams);
+	}
+
 	@NonNull
 	@Override
 	protected Worker.Result onWork() {

@@ -1,5 +1,6 @@
 package com.jdroid.android.shortcuts;
 
+import android.content.Context;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
@@ -10,11 +11,16 @@ import com.jdroid.android.utils.AndroidUtils;
 import androidx.work.ExistingWorkPolicy;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
+import androidx.work.WorkerParameters;
 
 public class AppShortcutsWorker extends AbstractWorker {
 	
 	public static final String WORK_MANAGER_TAG = "app_shortcuts";
-	
+
+	public AppShortcutsWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
+		super(context, workerParams);
+	}
+
 	public static void start() {
 		if (AndroidUtils.getApiLevel() >= Build.VERSION_CODES.N_MR1) {
 			OneTimeWorkRequest.Builder requestBuilder = new OneTimeWorkRequest.Builder(AppShortcutsWorker.class);

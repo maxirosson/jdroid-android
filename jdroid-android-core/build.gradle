@@ -41,8 +41,8 @@ dependencies {
 	api "com.google.firebase:firebase-perf:16.1.0"
 
 	// https://developer.android.com/jetpack/docs/release-notes
-	api 'android.arch.work:work-runtime:1.0.0-alpha07'
-	implementation 'android.arch.work:work-firebase:1.0.0-alpha07'
+	api 'android.arch.work:work-runtime:1.0.0-alpha09'
+	implementation 'android.arch.work:work-firebase:1.0.0-alpha09'
 
 	debugApi("com.squareup.leakcanary:leakcanary-android:${LEAK_CANARY_VERSION}") { force = true }
 	releaseApi("com.squareup.leakcanary:leakcanary-android-no-op:${LEAK_CANARY_VERSION}") { force = true }

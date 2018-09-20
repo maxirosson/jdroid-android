@@ -1,5 +1,6 @@
 package com.jdroid.android.jetpack.work;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.google.firebase.perf.metrics.Trace;
@@ -10,9 +11,14 @@ import com.jdroid.java.http.exception.ConnectionException;
 import com.jdroid.java.utils.LoggerUtils;
 
 import androidx.work.Worker;
+import androidx.work.WorkerParameters;
 
 public abstract class AbstractWorker extends Worker {
-	
+
+	public AbstractWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
+		super(context, workerParams);
+	}
+
 	@NonNull
 	@Override
 	public final Result doWork() {

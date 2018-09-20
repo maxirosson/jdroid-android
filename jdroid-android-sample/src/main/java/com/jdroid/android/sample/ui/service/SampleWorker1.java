@@ -1,5 +1,6 @@
 package com.jdroid.android.sample.ui.service;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.jdroid.android.application.AbstractApplication;
@@ -10,8 +11,14 @@ import com.jdroid.android.sample.application.AndroidNotificationChannelType;
 import com.jdroid.java.exception.UnexpectedException;
 import com.jdroid.java.utils.IdGenerator;
 
+import androidx.work.WorkerParameters;
+
 public class SampleWorker1 extends AbstractWorker {
-	
+
+	public SampleWorker1(@NonNull Context context, @NonNull WorkerParameters workerParams) {
+		super(context, workerParams);
+	}
+
 	@NonNull
 	@Override
 	protected Result onWork() {

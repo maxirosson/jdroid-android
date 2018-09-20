@@ -1,5 +1,6 @@
 package com.jdroid.android.firebase.remoteconfig;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.jdroid.android.jetpack.work.AbstractWorker;
@@ -10,6 +11,7 @@ import androidx.work.ExistingWorkPolicy;
 import androidx.work.NetworkType;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
+import androidx.work.WorkerParameters;
 
 public class FirebaseRemoteConfigFetchWorker extends AbstractWorker {
 	
@@ -17,7 +19,11 @@ public class FirebaseRemoteConfigFetchWorker extends AbstractWorker {
 	
 	private static final String CACHE_EXPIRATION_SECONDS = "cacheExpirationSeconds";
 	private static final String SET_EXPERIMENT_USER_PROPERTY = "setExperimentUserProperty";
-	
+
+	public FirebaseRemoteConfigFetchWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
+		super(context, workerParams);
+	}
+
 	public static void start(long cacheExpirationSeconds, final Boolean setExperimentUserProperty) {
 		OneTimeWorkRequest.Builder requestBuilder = new OneTimeWorkRequest.Builder(FirebaseRemoteConfigFetchWorker.class);
 		
