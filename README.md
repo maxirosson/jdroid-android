@@ -6,7 +6,6 @@ Continuous Integration
 |Branch|Status|Workflows|Insights|
 | ------------- | ------------- | ------------- | ------------- |
 |master|[![CircleCI](https://circleci.com/gh/maxirosson/jdroid-android/tree/master.svg?style=svg)](https://circleci.com/gh/maxirosson/jdroid-android/tree/master)|[Workflows](https://circleci.com/gh/maxirosson/workflows/jdroid-android/tree/master)|[Insights](https://circleci.com/build-insights/gh/maxirosson/jdroid-android/master)|
-|staging|[![CircleCI](https://circleci.com/gh/maxirosson/jdroid-android/tree/staging.svg?style=svg)](https://circleci.com/gh/maxirosson/jdroid-android/tree/staging)|[Workflows](https://circleci.com/gh/maxirosson/workflows/jdroid-android/tree/staging)|[Insights](https://circleci.com/build-insights/gh/maxirosson/jdroid-android/staging)|
 |production|[![CircleCI](https://circleci.com/gh/maxirosson/jdroid-android/tree/production.svg?style=svg)](https://circleci.com/gh/maxirosson/jdroid-android/tree/production)|[Workflows](https://circleci.com/gh/maxirosson/workflows/jdroid-android/tree/production)|[Insights](https://circleci.com/build-insights/gh/maxirosson/jdroid-android/production)|
 
 Components
@@ -100,6 +99,9 @@ Libray for Android apps. Support for Android 4.0 (api level 15) and higher versi
 
  * [Google Maps integration](http://developer.android.com/google/play-services/maps.html)
  * [Google Street View integration](https://developers.google.com/maps/documentation/android-api/streetview)
+
+## [jdroid-android-google-play-games](https://github.com/maxirosson/jdroid/wiki/jdroid-Android)
+ * [Google Play Games Services](https://developers.google.com/games/services/) integration
 
 ## [jdroid-android-google-plus](https://github.com/maxirosson/jdroid/wiki/jdroid-Android)
 

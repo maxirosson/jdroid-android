@@ -22,6 +22,7 @@ import com.jdroid.android.sample.ui.glide.GlideActivity;
 import com.jdroid.android.sample.ui.google.admob.AdsActivity;
 import com.jdroid.android.sample.ui.google.inappbilling.GoogleInAppBillingActivity;
 import com.jdroid.android.sample.ui.google.maps.GoogleMapsActivity;
+import com.jdroid.android.sample.ui.google.playgames.GooglePlayGamesActivity;
 import com.jdroid.android.sample.ui.google.playservices.GooglePlayServicesActivity;
 import com.jdroid.android.sample.ui.google.signin.GoogleSignInActivity;
 import com.jdroid.android.sample.ui.hero.HeroActivity;
@@ -62,6 +63,7 @@ public enum HomeItem implements ActionItem {
 	GLIDE(R.string.glide, R.drawable.ic_photo, GlideActivity.class),
 	GOOGLE_IN_APP_BILLING(R.string.inAppBilling, R.drawable.ic_inapp_billing, GoogleInAppBillingActivity.class),
 	GOOGLE_MAPS(R.string.googleMaps, R.drawable.ic_maps, GoogleMapsActivity.class),
+	GOOGLE_PLAY_GAMES(R.string.googlePlayGames, R.drawable.ic_games_black_24dp, GooglePlayGamesActivity.class),
 	GOOGLE_PLAY_SERVICES(R.string.googlePlayServices, R.drawable.ic_fcm, GooglePlayServicesActivity.class),
 	GOOGLE_SIGN_IN(R.string.jdroid_googleSignIn, R.drawable.ic_sign_in_24dp, GoogleSignInActivity.class),
 	HERO(R.string.hero, R.drawable.ic_photo, HeroActivity.class),

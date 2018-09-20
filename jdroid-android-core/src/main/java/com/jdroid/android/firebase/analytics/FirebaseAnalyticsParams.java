@@ -20,6 +20,7 @@ public class FirebaseAnalyticsParams {
 	}
 
 	public void put(@NonNull String key, @Nullable String value) {
+		key = getSanitizedKey(key);
 		if (value != null) {
 			key = getSanitizedKey(key);
 			if (value.length() > PARAMETER_VALUE_MAX_CHARS_LONG) {
@@ -31,6 +32,7 @@ public class FirebaseAnalyticsParams {
 	}
 
 	public void put(@NonNull String key, @Nullable Integer value) {
+		key = getSanitizedKey(key);
 		if (value != null) {
 			key = getSanitizedKey(key);
 			bundle.putLong(key, value);
@@ -38,6 +40,7 @@ public class FirebaseAnalyticsParams {
 	}
 
 	public void put(@NonNull String key, @Nullable Long value) {
+		key = getSanitizedKey(key);
 		if (value != null) {
 			key = getSanitizedKey(key);
 			bundle.putLong(key, value);
@@ -45,6 +48,7 @@ public class FirebaseAnalyticsParams {
 	}
 
 	public void put(@NonNull String key, @Nullable Float value) {
+		key = getSanitizedKey(key);
 		if (value != null) {
 			key = getSanitizedKey(key);
 			bundle.putDouble(key, value);
@@ -52,6 +56,7 @@ public class FirebaseAnalyticsParams {
 	}
 
 	public void put(@NonNull String key, @Nullable Double value) {
+		key = getSanitizedKey(key);
 		if (value != null) {
 			key = getSanitizedKey(key);
 			bundle.putDouble(key, value);
@@ -59,6 +64,7 @@ public class FirebaseAnalyticsParams {
 	}
 
 	public void put(@NonNull String key, @Nullable Boolean value) {
+		key = getSanitizedKey(key);
 		if (value != null) {
 			key = getSanitizedKey(key);
 			bundle.putString(key, value.toString());

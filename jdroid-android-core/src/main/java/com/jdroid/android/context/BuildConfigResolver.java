@@ -1,12 +1,16 @@
 package com.jdroid.android.context;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.java.utils.ReflectionUtils;
 
 public class BuildConfigResolver {
 
 	@SuppressWarnings("unchecked")
-	public <T> T getBuildConfigValue(String property, Object defaultValue) {
+	@Nullable
+	public <T> T getBuildConfigValue(@NonNull String property, @Nullable Object defaultValue) {
 		return (T)ReflectionUtils.getStaticFieldValue(getBuildConfigClass(), property, defaultValue);
 	}
 

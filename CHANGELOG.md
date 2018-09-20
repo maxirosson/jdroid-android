@@ -1,5 +1,18 @@
 # Change Log
 
+## [v2.0.0](https://github.com/maxirosson/jdroid-android/tree/v2.0.0) (2018-09-13)
+[Full Changelog](https://github.com/maxirosson/jdroid-android/compare/v1.0.0...v2.0.0)
+
+**Implemented enhancements:**
+
+- Added TimeUnit usage [\#440](https://github.com/maxirosson/jdroid-android/issues/440)
+- Migrate from AppInvite to FirebaseAppInvite [\#433](https://github.com/maxirosson/jdroid-android/issues/433)
+- Migrate Google Sign In from GoogleApiClient to GoogleClient [\#432](https://github.com/maxirosson/jdroid-android/issues/432)
+
+**Closed issues:**
+
+- Remove deprecated public api [\#437](https://github.com/maxirosson/jdroid-android/issues/437)
+
 ## [v1.0.0](https://github.com/maxirosson/jdroid-android/tree/v1.0.0) (2018-04-11)
 [Full Changelog](https://github.com/maxirosson/jdroid-android/compare/v0.14.0...v1.0.0)
 
@@ -40,7 +53,6 @@
 
 **Closed issues:**
 
-- DEPRECATED [\#405](https://github.com/maxirosson/jdroid-android/issues/405)
 - Upgrade to jdroid java http v0.14.0 [\#414](https://github.com/maxirosson/jdroid-android/issues/414)
 - Upgrade to jdroid java v0.14.0 [\#413](https://github.com/maxirosson/jdroid-android/issues/413)
 - Upgrade to jdroid gradle plugin v0.16.3 [\#412](https://github.com/maxirosson/jdroid-android/issues/412)

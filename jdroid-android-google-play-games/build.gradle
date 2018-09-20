@@ -1,7 +1,7 @@
 apply plugin: 'com.jdroid.android.library'
 
-ext.PROJECT_NAME = 'Jdroid Android - Firebase FCM'
-description = 'Jdroid dependency project for Firebase FCM'
+ext.PROJECT_NAME = 'Jdroid Android - Google Play Games'
+description = 'Jdroid dependency project for Google Play GAmes'
 
 configurations.all {
 	// check for updates every build
@@ -17,12 +17,13 @@ buildscript {
 dependencies {
 
 	api project(":jdroid-android-core")
+	api project(':jdroid-android-google-signin')
 
-	// https://firebase.google.com/support/release-notes/android
-	api "com.google.firebase:firebase-messaging:17.3.2"
+	api "com.google.android.gms:play-services-games:15.0.1"
 
 	testImplementation "junit:junit:${JUNIT_VERSION}"
 	testImplementation "org.robolectric:robolectric:${ROBOLECTRIC_VERSION}"
+
 }
 
 jdroid {

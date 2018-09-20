@@ -10,6 +10,8 @@ import com.jdroid.android.service.AbstractWorkerService;
 import com.jdroid.android.usecase.AbstractUseCase;
 import com.jdroid.java.concurrent.ExecutorUtils;
 
+import java.util.concurrent.TimeUnit;
+
 @SuppressLint("Registered")
 public class UseCaseService extends AbstractWorkerService {
 
@@ -40,7 +42,7 @@ public class UseCaseService extends AbstractWorkerService {
 			public void run() {
 				execute(useCase);
 			}
-		}, delaySeconds);
+		}, delaySeconds, TimeUnit.SECONDS);
 	}
 
 	public static void execute(AbstractUseCase useCase) {

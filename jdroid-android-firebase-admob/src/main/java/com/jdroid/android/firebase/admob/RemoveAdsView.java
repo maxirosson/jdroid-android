@@ -10,7 +10,8 @@ import android.widget.RelativeLayout;
 
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.context.UsageStats;
-import com.jdroid.java.date.DateUtils;
+
+import java.util.concurrent.TimeUnit;
 
 public class RemoveAdsView extends RelativeLayout {
 
@@ -48,6 +49,6 @@ public class RemoveAdsView extends RelativeLayout {
 
 	@WorkerThread
 	public static Boolean displayRemoveAdsView() {
-		return DateUtils.millisecondsToDays(UsageStats.getFirstAppLoadTimestamp()) > 3;
+		return TimeUnit.MILLISECONDS.toDays(UsageStats.getFirstAppLoadTimestamp()) > 3;
 	}
 }
