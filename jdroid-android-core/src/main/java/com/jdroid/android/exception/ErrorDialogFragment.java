@@ -1,8 +1,10 @@
 package com.jdroid.android.exception;
 
 import android.content.DialogInterface;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
+
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import com.jdroid.android.R;
 import com.jdroid.android.dialog.AlertDialogFragment;
@@ -56,7 +58,7 @@ public class ErrorDialogFragment extends AlertDialogFragment {
 	}
 
 	/**
-	 * @see android.support.v4.app.DialogFragment#onCancel(android.content.DialogInterface)
+	 * @see DialogFragment#onCancel(android.content.DialogInterface)
 	 */
 	@Override
 	public void onCancel(DialogInterface dialog) {

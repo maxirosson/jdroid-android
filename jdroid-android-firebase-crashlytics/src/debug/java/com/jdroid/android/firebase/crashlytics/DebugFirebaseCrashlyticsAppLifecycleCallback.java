@@ -1,8 +1,8 @@
 package com.jdroid.android.firebase.crashlytics;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v4.util.Pair;
+import androidx.annotation.NonNull;
+import androidx.core.util.Pair;
 
 import com.crashlytics.android.Crashlytics;
 import com.jdroid.android.debug.info.DebugInfoAppender;

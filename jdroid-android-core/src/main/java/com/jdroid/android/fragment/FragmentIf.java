@@ -2,10 +2,10 @@ package com.jdroid.android.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.annotation.IdRes;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.IdRes;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 
 import com.jdroid.android.activity.ActivityIf;

@@ -1,6 +1,6 @@
 package com.jdroid.android.sample.ui.navdrawer;
 
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 
 import com.jdroid.android.activity.AbstractFragmentActivity;

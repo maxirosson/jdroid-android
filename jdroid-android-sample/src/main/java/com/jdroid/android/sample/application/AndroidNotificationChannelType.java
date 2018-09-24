@@ -2,8 +2,8 @@ package com.jdroid.android.sample.application;
 
 import android.app.NotificationChannel;
 import android.os.Build;
-import android.support.annotation.StringRes;
-import android.support.v4.app.NotificationManagerCompat;
+import androidx.annotation.StringRes;
+import androidx.core.app.NotificationManagerCompat;
 
 import com.jdroid.android.notification.NotificationChannelType;
 import com.jdroid.android.sample.R;

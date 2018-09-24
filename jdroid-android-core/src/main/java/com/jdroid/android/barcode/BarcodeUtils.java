@@ -3,8 +3,8 @@ package com.jdroid.android.barcode;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 
 import com.jdroid.android.R;
 import com.jdroid.android.activity.ActivityLauncher;

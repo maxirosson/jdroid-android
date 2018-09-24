@@ -8,105 +8,105 @@
 				  android:orientation="vertical"
 				  android:padding="8dp">
 
-		<android.support.design.widget.TextInputLayout android:layout_width="match_parent"
-													   android:layout_height="wrap_content"
-													   android:layout_marginTop="20dp">
+		<com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent"
+															   android:layout_height="wrap_content"
+															   android:layout_marginTop="20dp">
 
 			<EditText android:id="@+id/linkUrl"
 					  android:layout_width="match_parent"
 					  android:layout_height="wrap_content"
 					  android:inputType="textUri"
 					  android:hint="@string/linkUrl" />
-		</android.support.design.widget.TextInputLayout>
+		</com.google.android.material.textfield.TextInputLayout>
 
-		<android.support.design.widget.TextInputLayout android:layout_width="match_parent"
-													   android:layout_height="wrap_content">
+		<com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent"
+															   android:layout_height="wrap_content">
 
 			<EditText android:id="@+id/minVersionCode"
 					  android:inputType="number"
 					  android:layout_width="match_parent"
 					  android:layout_height="wrap_content"
 					  android:hint="@string/minVersionCode" />
-		</android.support.design.widget.TextInputLayout>
+		</com.google.android.material.textfield.TextInputLayout>
 
-		<android.support.design.widget.TextInputLayout android:layout_width="match_parent"
-													   android:layout_height="wrap_content">
+		<com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent"
+															   android:layout_height="wrap_content">
 
 			<EditText android:id="@+id/fallbackLink"
 					  android:inputType="text"
 					  android:layout_width="match_parent"
 					  android:layout_height="wrap_content"
 					  android:hint="@string/fallbackLink" />
-		</android.support.design.widget.TextInputLayout>
+		</com.google.android.material.textfield.TextInputLayout>
 
-		<android.support.design.widget.TextInputLayout android:layout_width="match_parent"
-													   android:layout_height="wrap_content">
+		<com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent"
+															   android:layout_height="wrap_content">
 
 			<EditText android:id="@+id/customAppLocation"
 					  android:inputType="text"
 					  android:layout_width="match_parent"
 					  android:layout_height="wrap_content"
 					  android:hint="@string/customAppLocation" />
-		</android.support.design.widget.TextInputLayout>
+		</com.google.android.material.textfield.TextInputLayout>
 
-		<android.support.design.widget.TextInputLayout android:layout_width="match_parent"
-													   android:layout_height="wrap_content">
+		<com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent"
+															   android:layout_height="wrap_content">
 
 			<EditText android:id="@+id/utmSource"
 					  android:inputType="text"
 					  android:layout_width="match_parent"
 					  android:layout_height="wrap_content"
 					  android:hint="@string/utmSource" />
-		</android.support.design.widget.TextInputLayout>
+		</com.google.android.material.textfield.TextInputLayout>
 
-		<android.support.design.widget.TextInputLayout android:layout_width="match_parent"
-													   android:layout_height="wrap_content">
+		<com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent"
+															   android:layout_height="wrap_content">
 
 			<EditText android:id="@+id/utmMedium"
 					  android:inputType="text"
 					  android:layout_width="match_parent"
 					  android:layout_height="wrap_content"
 					  android:hint="@string/utmMedium" />
-		</android.support.design.widget.TextInputLayout>
+		</com.google.android.material.textfield.TextInputLayout>
 
-		<android.support.design.widget.TextInputLayout android:layout_width="match_parent"
-													   android:layout_height="wrap_content">
+		<com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent"
+															   android:layout_height="wrap_content">
 
 			<EditText android:id="@+id/utmCampaign"
 					  android:inputType="text"
 					  android:layout_width="match_parent"
 					  android:layout_height="wrap_content"
 					  android:hint="@string/utmCampaign" />
-		</android.support.design.widget.TextInputLayout>
+		</com.google.android.material.textfield.TextInputLayout>
 
-		<android.support.design.widget.TextInputLayout android:layout_width="match_parent"
-													   android:layout_height="wrap_content">
+		<com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent"
+															   android:layout_height="wrap_content">
 
 			<EditText android:id="@+id/utmTerm"
 					  android:inputType="text"
 					  android:layout_width="match_parent"
 					  android:layout_height="wrap_content"
 					  android:hint="@string/utmTerm" />
-		</android.support.design.widget.TextInputLayout>
+		</com.google.android.material.textfield.TextInputLayout>
 
-		<android.support.design.widget.TextInputLayout android:layout_width="match_parent"
-													   android:layout_height="wrap_content">
+		<com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent"
+															   android:layout_height="wrap_content">
 
 			<EditText android:id="@+id/utmContent"
 					  android:inputType="text"
 					  android:layout_width="match_parent"
 					  android:layout_height="wrap_content"
 					  android:hint="@string/utmContent" />
-		</android.support.design.widget.TextInputLayout>
+		</com.google.android.material.textfield.TextInputLayout>
 
-		<android.support.design.widget.TextInputLayout android:layout_width="wrap_content"
-													   android:layout_height="wrap_content">
+		<com.google.android.material.textfield.TextInputLayout android:layout_width="wrap_content"
+															   android:layout_height="wrap_content">
 
 			<CheckBox android:id="@+id/unguessable"
 					  android:layout_width="wrap_content"
 					  android:layout_height="wrap_content"
 					  android:hint="@string/unguessable" />
-		</android.support.design.widget.TextInputLayout>
+		</com.google.android.material.textfield.TextInputLayout>
 
 		<TextView android:layout_width="wrap_content"
 				  android:layout_height="wrap_content"

@@ -1,6 +1,6 @@
 package com.jdroid.android.dialog;
 
-import android.support.v4.app.FragmentActivity;
+import androidx.fragment.app.FragmentActivity;
 
 import com.jdroid.android.R;
 import com.jdroid.android.utils.ExternalAppsUtils;

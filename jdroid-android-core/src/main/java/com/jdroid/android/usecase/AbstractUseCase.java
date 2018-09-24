@@ -1,9 +1,9 @@
 package com.jdroid.android.usecase;
 
 import android.os.Handler;
-import android.support.annotation.Nullable;
-import android.support.annotation.RestrictTo;
-import android.support.annotation.WorkerThread;
+import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
+import androidx.annotation.WorkerThread;
 
 import com.google.firebase.perf.metrics.Trace;
 import com.jdroid.android.application.AbstractApplication;
@@ -20,7 +20,7 @@ import org.slf4j.Logger;
 import java.io.Serializable;
 import java.util.List;
 
-import static android.support.annotation.RestrictTo.Scope.LIBRARY;
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 
 public abstract class AbstractUseCase implements Runnable, Serializable {
 

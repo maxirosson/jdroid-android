@@ -1,6 +1,6 @@
 package com.jdroid.android.share;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 public class TelegramSharingItem extends AppSharingItem {
 

@@ -2,7 +2,7 @@ package com.jdroid.android.provider;
 
 import android.content.Context;
 import android.graphics.Rect;
-import android.support.v4.view.ActionProvider;
+import androidx.core.view.ActionProvider;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -77,7 +77,7 @@ public abstract class TwoStateActionProvider extends ActionProvider {
 	}
 
 	/**
-	 * @see android.support.v4.view.ActionProvider#onCreateActionView()
+	 * @see androidx.core.view.ActionProvider#onCreateActionView()
 	 */
 	@Override
 	public View onCreateActionView() {

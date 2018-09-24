@@ -2,7 +2,7 @@ package com.jdroid.android.sample.ui.leakcanary;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 import com.jdroid.android.activity.FragmentContainerActivity;
 import com.jdroid.android.application.AbstractApplication;

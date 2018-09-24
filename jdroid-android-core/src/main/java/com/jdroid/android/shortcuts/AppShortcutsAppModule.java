@@ -1,6 +1,6 @@
 package com.jdroid.android.shortcuts;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.jdroid.android.application.AbstractAppModule;
 import com.jdroid.android.application.AbstractApplication;

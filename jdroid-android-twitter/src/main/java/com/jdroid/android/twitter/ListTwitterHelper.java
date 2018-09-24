@@ -1,7 +1,7 @@
 package com.jdroid.android.twitter;
 
 import android.content.Context;
-import android.support.annotation.MainThread;
+import androidx.annotation.MainThread;
 
 import com.jdroid.android.fragment.AbstractFragment;
 import com.twitter.sdk.android.core.models.Tweet;

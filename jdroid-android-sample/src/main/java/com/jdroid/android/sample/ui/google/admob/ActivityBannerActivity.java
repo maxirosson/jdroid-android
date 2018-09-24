@@ -1,6 +1,6 @@
 package com.jdroid.android.sample.ui.google.admob;
 
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.ads.AdSize;
 import com.jdroid.android.activity.ActivityDelegate;

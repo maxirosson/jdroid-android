@@ -1,7 +1,7 @@
 package com.jdroid.android.sample.ui.recyclerview;
 
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 

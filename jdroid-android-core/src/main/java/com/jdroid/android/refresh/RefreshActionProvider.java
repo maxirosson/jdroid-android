@@ -2,7 +2,7 @@ package com.jdroid.android.refresh;
 
 import android.content.Context;
 import android.graphics.Rect;
-import android.support.v4.view.ActionProvider;
+import androidx.core.view.ActionProvider;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;

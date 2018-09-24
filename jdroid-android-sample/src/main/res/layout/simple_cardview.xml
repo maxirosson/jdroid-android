@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-									style="@style/jdroid_cardViewStyle">
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+								   style="@style/jdroid_cardViewStyle">
 
 	<LinearLayout style="@style/jdroid_cardViewInner"
 				  android:orientation="vertical">
@@ -12,5 +12,5 @@
 				  android:text="@string/cardViewContent" />
 	</LinearLayout>
 
-</android.support.v7.widget.CardView>
+</androidx.cardview.widget.CardView>
 

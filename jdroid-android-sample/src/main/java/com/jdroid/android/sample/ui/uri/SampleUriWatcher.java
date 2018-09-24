@@ -1,7 +1,7 @@
 package com.jdroid.android.sample.ui.uri;
 
 import android.net.Uri;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.jdroid.android.uri.UriWatcher;
 import com.jdroid.java.utils.LoggerUtils;

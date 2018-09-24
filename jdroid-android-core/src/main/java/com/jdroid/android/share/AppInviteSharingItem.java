@@ -2,7 +2,7 @@ package com.jdroid.android.share;
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
-import android.support.v4.graphics.drawable.DrawableCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 
 import com.jdroid.android.R;
 import com.jdroid.android.application.AbstractApplication;

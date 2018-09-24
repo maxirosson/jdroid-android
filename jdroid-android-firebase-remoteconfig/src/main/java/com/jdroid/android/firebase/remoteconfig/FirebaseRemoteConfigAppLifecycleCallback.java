@@ -1,7 +1,7 @@
 package com.jdroid.android.firebase.remoteconfig;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.lifecycle.ApplicationLifecycleCallback;

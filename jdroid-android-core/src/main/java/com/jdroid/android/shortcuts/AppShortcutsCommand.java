@@ -3,7 +3,7 @@ package com.jdroid.android.shortcuts;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
+import androidx.annotation.RequiresApi;
 
 import com.jdroid.android.firebase.jobdispatcher.ServiceCommand;
 import com.jdroid.android.utils.AndroidUtils;

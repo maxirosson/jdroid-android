@@ -1,9 +1,9 @@
 package com.jdroid.android.exception;
 
-import android.support.annotation.IdRes;
-import android.support.annotation.StringRes;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentActivity;
+import androidx.annotation.IdRes;
+import androidx.annotation.StringRes;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.fragment.app.FragmentActivity;
 import android.view.View;
 
 import com.jdroid.android.snackbar.SnackbarBuilder;

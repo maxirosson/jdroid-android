@@ -1,6 +1,6 @@
 package com.jdroid.android.google.inappbilling.ui;
 
-import android.support.annotation.MainThread;
+import androidx.annotation.MainThread;
 
 import com.jdroid.android.google.inappbilling.client.Product;
 

@@ -3,9 +3,9 @@ package com.jdroid.android.uri;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.RestrictTo;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
 
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.java.collections.Lists;
@@ -16,7 +16,7 @@ import org.slf4j.Logger;
 
 import java.util.List;
 
-import static android.support.annotation.RestrictTo.Scope.LIBRARY;
+import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 
 /**
  * Mapper which allows to navigate the application using a Uri.

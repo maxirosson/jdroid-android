@@ -2,7 +2,7 @@ package com.jdroid.android.notification;
 
 import android.app.NotificationChannel;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
+import androidx.annotation.RequiresApi;
 
 public class NotificationChannelFactory {
 

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
-import android.support.annotation.MainThread;
+import androidx.annotation.MainThread;
 
 import com.jdroid.java.utils.LoggerUtils;
 
