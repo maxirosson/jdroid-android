@@ -8,7 +8,7 @@ ext.JDROID_JAVA_VERSION = '2.0.0'
 ext.JDROID_JAVA_HTTP_VERSION = '2.0.0'
 
 // https://developers.facebook.com/docs/android
-ext.FACEBOOK_ANDROID = '4.34.0'
+ext.FACEBOOK_ANDROID = '4.36.1'
 
 // https://github.com/bumptech/glide/releases
 ext.GLIDE_VERSION = '4.8.0'

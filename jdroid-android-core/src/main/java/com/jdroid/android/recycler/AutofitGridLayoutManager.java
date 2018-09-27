@@ -1,10 +1,11 @@
 package com.jdroid.android.recycler;
 
 import android.content.Context;
+import android.util.AttributeSet;
+
 import androidx.annotation.CallSuper;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.util.AttributeSet;
 
 /**
  * A {@link GridLayoutManager} subclass that automatically calculates the spanCount using the specified columnWidth.
@@ -71,7 +72,7 @@ public class AutofitGridLayoutManager extends GridLayoutManager {
 		int height = getHeight();
 		if (recalculateSpanCount && columnWidth > 0 && width > 0 && height > 0) {
 			int totalSpace;
-			if (getOrientation() == VERTICAL) {
+			if (getOrientation() == RecyclerView.VERTICAL) {
 				totalSpace = width - getPaddingRight() - getPaddingLeft();
 			} else {
 				totalSpace = height - getPaddingTop() - getPaddingBottom();
