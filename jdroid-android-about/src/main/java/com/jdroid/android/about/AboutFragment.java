@@ -80,7 +80,7 @@ public class AboutFragment extends AbstractRecyclerFragment {
 		RemoteConfigParameter privacyPolicyUrlRemoteConfigParameter = AbstractApplication.get().getAppContext().getPrivacyPolicyUrl();
 		if (privacyPolicyUrlRemoteConfigParameter != null) {
 			String privacyPolicyUrl = AbstractApplication.get().getRemoteConfigLoader().getString(privacyPolicyUrlRemoteConfigParameter);
-			aboutItems.add(new AboutItem(R.drawable.ic_privacy_policy_black_24dp, R.string.jdroid_privacyPolicy) {
+			aboutItems.add(new AboutItem(R.drawable.jdroid_ic_privacy_policy_black_24dp, R.string.jdroid_privacyPolicy) {
 
 				@Override
 				public void onSelected(Activity activity) {
