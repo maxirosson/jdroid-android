@@ -6,6 +6,7 @@ import com.jdroid.android.utils.AppUtils;
 import com.jdroid.android.utils.LocalizationUtils;
 import com.jdroid.android.utils.SharedPreferencesHelper;
 import com.jdroid.java.http.Server;
+import com.jdroid.java.remoteconfig.RemoteConfigParameter;
 
 import java.util.Locale;
 
@@ -96,6 +97,10 @@ public class AppContext extends AbstractAppContext {
 	}
 
 	public String getGooglePlusCommunityId() {
+		return null;
+	}
+
+	public RemoteConfigParameter getPrivacyPolicyUrl() {
 		return null;
 	}
 
