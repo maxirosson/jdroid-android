@@ -3,8 +3,8 @@ package com.jdroid.android.firebase.invites;
 import android.accounts.Account;
 import android.app.Activity;
 import android.net.Uri;
-import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 
 import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.jdroid.android.activity.ActivityLauncher;

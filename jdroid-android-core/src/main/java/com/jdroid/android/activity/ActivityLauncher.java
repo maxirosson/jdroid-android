@@ -3,7 +3,7 @@ package com.jdroid.android.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.java.utils.LoggerUtils;

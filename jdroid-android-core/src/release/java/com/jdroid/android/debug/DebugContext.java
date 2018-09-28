@@ -1,7 +1,7 @@
 package com.jdroid.android.debug;
 
 import android.app.Activity;
-import android.support.v4.util.Pair;
+import androidx.core.util.Pair;
 
 import java.util.List;
 import java.util.Map;

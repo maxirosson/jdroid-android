@@ -1,6 +1,6 @@
 package com.jdroid.android.about;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.jdroid.android.about.analytics.AboutAnalyticsSender;
 import com.jdroid.android.about.analytics.AboutAnalyticsTracker;

@@ -2,7 +2,7 @@ package com.jdroid.android.sample.ui.service;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.jdroid.java.concurrent.ExecutorUtils;
 

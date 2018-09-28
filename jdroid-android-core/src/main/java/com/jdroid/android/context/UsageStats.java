@@ -1,7 +1,7 @@
 package com.jdroid.android.context;
 
-import android.support.annotation.MainThread;
-import android.support.annotation.WorkerThread;
+import androidx.annotation.MainThread;
+import androidx.annotation.WorkerThread;
 
 import com.jdroid.android.utils.SharedPreferencesHelper;
 import com.jdroid.java.concurrent.ExecutorUtils;

@@ -1,7 +1,7 @@
 package com.jdroid.android.firebase.admob;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.google.android.gms.ads.MobileAds;
 import com.jdroid.android.activity.AbstractFragmentActivity;

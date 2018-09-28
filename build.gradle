@@ -1,3 +1,14 @@
+File propsFile = new File("$project.rootDir/gradle-local.properties")
+if (propsFile.exists()) {
+	def props = new Properties()
+	props.load(new FileInputStream(propsFile))
+	props.each { key, val ->
+		project.allprojects {
+			project.ext.set(key, val)
+		}
+	}
+}
+
 version = '2.1.0'
 
 ext.JDROID_GITHUB_REPOSITORY_NAME = 'jdroid-android'

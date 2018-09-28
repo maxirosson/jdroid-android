@@ -1,7 +1,7 @@
 package com.jdroid.android.sample.ui;
 
 import android.content.Intent;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 
 import com.jdroid.android.about.AboutActivity;
 import com.jdroid.android.activity.AbstractFragmentActivity;

@@ -1,6 +1,6 @@
 package com.jdroid.android.recycler.pagination;
 
-import android.support.annotation.WorkerThread;
+import androidx.annotation.WorkerThread;
 
 import com.jdroid.android.search.SortingType;
 import com.jdroid.android.usecase.AbstractUseCase;

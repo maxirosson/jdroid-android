@@ -2,8 +2,8 @@ package com.jdroid.android.lifecycle;
 
 import android.content.Context;
 import android.content.res.Configuration;
-import android.support.annotation.MainThread;
-import android.support.annotation.NonNull;
+import androidx.annotation.MainThread;
+import androidx.annotation.NonNull;
 
 /**
  * Callback for monitoring application lifecycle events. These callbacks are invoked on the main

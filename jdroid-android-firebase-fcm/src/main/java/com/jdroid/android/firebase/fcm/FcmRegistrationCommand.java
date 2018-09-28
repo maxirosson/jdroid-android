@@ -2,8 +2,8 @@ package com.jdroid.android.firebase.fcm;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.annotation.WorkerThread;
+import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
 
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;

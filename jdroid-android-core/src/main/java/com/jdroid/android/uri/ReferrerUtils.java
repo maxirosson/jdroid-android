@@ -3,7 +3,7 @@ package com.jdroid.android.uri;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v4.app.ActivityCompat;
+import androidx.core.app.ActivityCompat;
 
 import com.google.firebase.appindexing.AndroidAppUri;
 import com.jdroid.java.utils.LoggerUtils;

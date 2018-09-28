@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
 import android.os.Build;
-import android.support.annotation.AnyRes;
+import androidx.annotation.AnyRes;
 
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.firebase.jobdispatcher.ServiceCommand;

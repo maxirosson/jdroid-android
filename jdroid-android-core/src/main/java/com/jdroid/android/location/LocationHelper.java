@@ -11,7 +11,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.support.annotation.RequiresPermission;
+import androidx.annotation.RequiresPermission;
 
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.utils.AlarmUtils;

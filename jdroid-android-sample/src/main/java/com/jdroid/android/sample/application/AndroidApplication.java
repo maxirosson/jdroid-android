@@ -5,9 +5,9 @@ import android.content.Intent;
 import android.content.pm.ShortcutInfo;
 import android.graphics.drawable.Icon;
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.multidex.MultiDex;
-import android.support.v4.app.Fragment;
+import androidx.annotation.NonNull;
+import androidx.multidex.MultiDex;
+import androidx.fragment.app.Fragment;
 
 import com.firebase.client.Firebase;
 import com.jdroid.android.about.AboutAppModule;

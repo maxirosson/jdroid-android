@@ -1,6 +1,6 @@
 package com.jdroid.android.sample.debug;
 
-import android.support.v4.util.Pair;
+import androidx.core.util.Pair;
 
 import com.jdroid.android.debug.DebugContext;
 import com.jdroid.android.sample.api.ApiServer;

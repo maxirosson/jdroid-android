@@ -1,7 +1,7 @@
 package com.jdroid.android.sample.ui.service;
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.notification.NotificationBuilder;

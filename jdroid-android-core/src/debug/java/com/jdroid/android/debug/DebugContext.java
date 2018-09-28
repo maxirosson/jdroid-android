@@ -1,7 +1,7 @@
 package com.jdroid.android.debug;
 
 import android.app.Activity;
-import android.support.v4.util.Pair;
+import androidx.core.util.Pair;
 
 import com.jdroid.android.activity.ActivityLauncher;
 import com.jdroid.android.debug.appenders.ExceptionHandlingDebugPrefsAppender;

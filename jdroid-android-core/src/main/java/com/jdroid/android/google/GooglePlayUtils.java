@@ -2,8 +2,8 @@ package com.jdroid.android.google;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 
 import com.jdroid.android.R;
 import com.jdroid.android.activity.ActivityLauncher;

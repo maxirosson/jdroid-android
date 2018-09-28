@@ -6,8 +6,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -60,7 +62,7 @@ public class PictureDialogFragment extends AbstractDialogFragment {
 	}
 
 	/**
-	 * @see android.support.v4.app.Fragment#onViewCreated(android.view.View, android.os.Bundle)
+	 * @see Fragment#onViewCreated(android.view.View, android.os.Bundle)
 	 */
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -100,7 +102,7 @@ public class PictureDialogFragment extends AbstractDialogFragment {
 	}
 
 	/**
-	 * @see android.support.v4.app.Fragment#onActivityResult(int, int, android.content.Intent)
+	 * @see Fragment#onActivityResult(int, int, android.content.Intent)
 	 */
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -126,7 +128,7 @@ public class PictureDialogFragment extends AbstractDialogFragment {
 	}
 
 	/**
-	 * @see android.support.v4.app.DialogFragment#onSaveInstanceState(android.os.Bundle)
+	 * @see DialogFragment#onSaveInstanceState(android.os.Bundle)
 	 */
 	@Override
 	public void onSaveInstanceState(Bundle bundle) {

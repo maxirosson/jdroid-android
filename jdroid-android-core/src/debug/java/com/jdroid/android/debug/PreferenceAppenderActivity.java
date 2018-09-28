@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.jdroid.android.R;
 import com.jdroid.android.activity.AbstractFragmentActivity;

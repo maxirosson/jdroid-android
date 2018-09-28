@@ -6,7 +6,7 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.telephony.TelephonyManager;
 
 import com.facebook.device.yearclass.YearClass;

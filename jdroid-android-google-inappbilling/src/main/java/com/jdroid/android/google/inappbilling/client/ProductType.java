@@ -1,7 +1,7 @@
 package com.jdroid.android.google.inappbilling.client;
 
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 public interface ProductType {
 

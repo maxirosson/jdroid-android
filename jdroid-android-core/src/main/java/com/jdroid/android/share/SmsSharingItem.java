@@ -1,6 +1,6 @@
 package com.jdroid.android.share;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.jdroid.android.utils.ExternalAppsUtils;
 

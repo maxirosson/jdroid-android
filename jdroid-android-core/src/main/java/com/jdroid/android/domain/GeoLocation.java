@@ -1,7 +1,7 @@
 package com.jdroid.android.domain;
 
 import android.location.Location;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import java.io.Serializable;
 

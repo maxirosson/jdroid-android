@@ -1,6 +1,6 @@
 package com.jdroid.android.sample.ui.google.maps;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.view.View;
 
 import com.google.android.gms.maps.CameraUpdateFactory;

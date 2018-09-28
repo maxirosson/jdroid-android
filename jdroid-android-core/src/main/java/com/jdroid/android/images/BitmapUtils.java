@@ -5,7 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapFactory.Options;
 import android.net.Uri;
-import android.support.annotation.DrawableRes;
+import androidx.annotation.DrawableRes;
 
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.java.utils.LoggerUtils;

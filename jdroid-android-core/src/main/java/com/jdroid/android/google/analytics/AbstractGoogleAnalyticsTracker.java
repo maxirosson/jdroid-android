@@ -1,6 +1,6 @@
 package com.jdroid.android.google.analytics;
 
-import android.support.annotation.WorkerThread;
+import androidx.annotation.WorkerThread;
 
 import com.jdroid.java.analytics.AnalyticsTracker;
 

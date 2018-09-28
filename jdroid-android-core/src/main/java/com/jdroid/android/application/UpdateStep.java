@@ -1,6 +1,6 @@
 package com.jdroid.android.application;
 
-import android.support.annotation.WorkerThread;
+import androidx.annotation.WorkerThread;
 
 public interface UpdateStep {
 

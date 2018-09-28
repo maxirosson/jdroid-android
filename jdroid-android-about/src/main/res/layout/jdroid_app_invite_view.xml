@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-									xmlns:tools="http://schemas.android.com/tools"
-									xmlns:app="http://schemas.android.com/apk/res-auto"
-									style="@style/jdroid_cardViewClickableStyle">
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+								   xmlns:tools="http://schemas.android.com/tools"
+								   xmlns:app="http://schemas.android.com/apk/res-auto"
+								   style="@style/jdroid_cardViewClickableStyle">
 
 	<LinearLayout android:orientation="horizontal"
 				  style="@style/jdroid_cardViewInner"
@@ -36,4 +36,4 @@
 
 	</LinearLayout>
 
-</android.support.v7.widget.CardView>
+</androidx.cardview.widget.CardView>

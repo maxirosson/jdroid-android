@@ -1,8 +1,8 @@
 package com.jdroid.android.firebase.jobdispatcher;
 
 
-import android.support.annotation.MainThread;
-import android.support.annotation.WorkerThread;
+import androidx.annotation.MainThread;
+import androidx.annotation.WorkerThread;
 
 import com.firebase.jobdispatcher.JobParameters;
 import com.firebase.jobdispatcher.JobService;

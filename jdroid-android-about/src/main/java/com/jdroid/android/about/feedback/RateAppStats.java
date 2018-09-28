@@ -1,6 +1,6 @@
 package com.jdroid.android.about.feedback;
 
-import android.support.annotation.WorkerThread;
+import androidx.annotation.WorkerThread;
 
 import com.jdroid.android.about.AboutRemoteConfigParameter;
 import com.jdroid.android.application.AbstractApplication;

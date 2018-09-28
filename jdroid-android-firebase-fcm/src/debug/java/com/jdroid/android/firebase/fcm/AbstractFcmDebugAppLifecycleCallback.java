@@ -1,7 +1,7 @@
 package com.jdroid.android.firebase.fcm;
 
 import android.content.Context;
-import android.support.v4.util.Pair;
+import androidx.core.util.Pair;
 
 import com.jdroid.android.debug.DebugSettingsHelper;
 import com.jdroid.android.debug.info.DebugInfoAppender;

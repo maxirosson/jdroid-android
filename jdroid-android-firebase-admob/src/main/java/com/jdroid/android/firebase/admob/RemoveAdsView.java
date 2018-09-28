@@ -1,7 +1,7 @@
 package com.jdroid.android.firebase.admob;
 
 import android.content.Context;
-import android.support.annotation.WorkerThread;
+import androidx.annotation.WorkerThread;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;

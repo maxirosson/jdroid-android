@@ -18,11 +18,7 @@ dependencies {
 
 	api project(":jdroid-android-core")
 
-	api("com.google.firebase:firebase-ads:15.0.1") {
-		exclude group: 'com.android.support', module: 'customtabs'
-	}
-
-	api "com.android.support:customtabs:${ANDROID_SUPPORT_VERSION}"
+	api "com.google.firebase:firebase-ads:15.0.1"
 
 	testImplementation "junit:junit:${JUNIT_VERSION}"
 	testImplementation "org.robolectric:robolectric:${ROBOLECTRIC_VERSION}"

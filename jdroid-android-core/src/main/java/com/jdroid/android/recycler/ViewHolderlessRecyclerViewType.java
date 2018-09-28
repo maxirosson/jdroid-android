@@ -1,6 +1,6 @@
 package com.jdroid.android.recycler;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 
 public abstract class ViewHolderlessRecyclerViewType<ITEM> extends RecyclerViewType<ITEM, EmptyViewHolder> {

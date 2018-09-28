@@ -1,7 +1,7 @@
 package com.jdroid.android.sample.ui.service;
 
 import android.os.Bundle;
-import android.support.annotation.MainThread;
+import androidx.annotation.MainThread;
 
 import com.firebase.jobdispatcher.FirebaseJobDispatcher;
 import com.firebase.jobdispatcher.GooglePlayDriver;

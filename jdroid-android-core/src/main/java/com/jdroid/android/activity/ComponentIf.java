@@ -1,10 +1,10 @@
 package com.jdroid.android.activity;
 
 import android.app.Activity;
-import android.support.annotation.IdRes;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.MenuRes;
-import android.support.v4.app.Fragment;
+import androidx.annotation.IdRes;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.MenuRes;
+import androidx.fragment.app.Fragment;
 import android.view.MenuItem;
 import android.view.View;
 
