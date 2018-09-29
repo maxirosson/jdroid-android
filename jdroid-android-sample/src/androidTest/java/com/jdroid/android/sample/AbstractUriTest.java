@@ -5,9 +5,10 @@ import android.app.Instrumentation;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.test.InstrumentationRegistry;
 
 import org.junit.After;
+
+import androidx.test.InstrumentationRegistry;
 
 public class AbstractUriTest {
 

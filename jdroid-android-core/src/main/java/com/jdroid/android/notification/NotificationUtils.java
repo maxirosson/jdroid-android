@@ -5,8 +5,6 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.os.Build;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.utils.ScreenUtils;
@@ -14,8 +12,13 @@ import com.jdroid.java.collections.Lists;
 
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+
 public class NotificationUtils {
 
+	@NonNull
 	private final static NotificationManager NOTIFICATION_MANAGER = (NotificationManager)AbstractApplication.get().getSystemService(
 		Context.NOTIFICATION_SERVICE);
 
@@ -53,13 +56,16 @@ public class NotificationUtils {
 	}
 
 	public static void createNotificationChannelsByType(List<NotificationChannelType> notificationChannelTypes) {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-			NOTIFICATION_CHANNEL_TYPES.clear();
-			NOTIFICATION_CHANNEL_TYPES.addAll(notificationChannelTypes);
-			for (NotificationChannelType notificationChannelType : notificationChannelTypes) {
-				if (notificationChannelType.isDeprecated()) {
+		NOTIFICATION_CHANNEL_TYPES.clear();
+		NOTIFICATION_CHANNEL_TYPES.addAll(notificationChannelTypes);
+		for (NotificationChannelType notificationChannelType : notificationChannelTypes) {
+			if (notificationChannelType.isDeprecated()) {
+				NOTIFICATION_CHANNEL_TYPES.remove(notificationChannelType);
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 					NOTIFICATION_MANAGER.deleteNotificationChannel(notificationChannelType.getChannelId());
-				} else {
+				}
+			} else {
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 					NotificationUtils.createNotificationChannel(NotificationChannelFactory.createNotificationChannel(notificationChannelType));
 				}
 			}
