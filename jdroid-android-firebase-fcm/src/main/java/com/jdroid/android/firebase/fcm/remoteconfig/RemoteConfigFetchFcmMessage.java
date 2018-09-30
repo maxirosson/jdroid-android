@@ -1,7 +1,7 @@
-package com.jdroid.android.firebase.fcm;
+package com.jdroid.android.firebase.fcm.remoteconfig;
 
 import com.google.firebase.messaging.RemoteMessage;
-import com.jdroid.android.application.AbstractApplication;
+import com.jdroid.android.firebase.fcm.FcmMessage;
 
 public class RemoteConfigFetchFcmMessage implements FcmMessage {
 
@@ -14,6 +14,6 @@ public class RemoteConfigFetchFcmMessage implements FcmMessage {
 
 	@Override
 	public void handle(RemoteMessage remoteMessage) {
-		AbstractApplication.get().getRemoteConfigLoader().fetch();
+		new RemoteConfigFetchCommand().start();
 	}
 }

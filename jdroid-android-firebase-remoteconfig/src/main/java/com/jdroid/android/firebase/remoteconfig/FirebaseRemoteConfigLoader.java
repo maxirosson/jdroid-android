@@ -1,11 +1,5 @@
 package com.jdroid.android.firebase.remoteconfig;
 
-import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RestrictTo;
-import androidx.annotation.WorkerThread;
-
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -27,6 +21,11 @@ import org.slf4j.Logger;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
+import androidx.annotation.WorkerThread;
 
 import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 
@@ -132,10 +131,7 @@ public class FirebaseRemoteConfigLoader implements RemoteConfigLoader {
 					retryCount++;
 
 					if (retryCount <= 3) {
-						Bundle bundle = new Bundle();
-						bundle.putLong(FirebaseRemoteConfigFetchCommand.CACHE_EXPIRATION_SECONDS, cacheExpirationSeconds);
-						bundle.putBoolean(FirebaseRemoteConfigFetchCommand.SET_EXPERIMENT_USER_PROPERTY, setExperimentUserProperty);
-						new FirebaseRemoteConfigFetchCommand().start(bundle);
+						new FirebaseRemoteConfigFetchCommand().start(cacheExpirationSeconds, setExperimentUserProperty);
 					}
 				}
 			});

@@ -7,8 +7,15 @@ import com.jdroid.android.firebase.jobdispatcher.ServiceCommand;
 
 public class FirebaseRemoteConfigFetchCommand extends ServiceCommand {
 
-	public static final String CACHE_EXPIRATION_SECONDS = "cacheExpirationSeconds";
-	public static final String SET_EXPERIMENT_USER_PROPERTY = "setExperimentUserProperty";
+	private static final String CACHE_EXPIRATION_SECONDS = "cacheExpirationSeconds";
+	private static final String SET_EXPERIMENT_USER_PROPERTY = "setExperimentUserProperty";
+
+	public void start(long cacheExpirationSeconds, final Boolean setExperimentUserProperty) {
+		Bundle bundle = new Bundle();
+		bundle.putLong(FirebaseRemoteConfigFetchCommand.CACHE_EXPIRATION_SECONDS, cacheExpirationSeconds);
+		bundle.putBoolean(FirebaseRemoteConfigFetchCommand.SET_EXPERIMENT_USER_PROPERTY, setExperimentUserProperty);
+		start(bundle);
+	}
 
 	@Override
 	protected boolean execute(Context context, Bundle bundle) {
