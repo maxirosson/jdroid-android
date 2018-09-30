@@ -1,9 +1,6 @@
 package com.jdroid.android.sample;
 
 
-import com.jdroid.android.sample.ui.home.HomeActivity;
-
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -22,9 +19,6 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 @RunWith(AndroidJUnit4.class)
 @LargeTest
 public class AnalyticsTest {
-
-	@Rule
-	public ActivityTestRule<HomeActivity> activityRule = new ActivityTestRule(HomeActivity.class);
 
 	@Test
 	public void listGoesOverTheFold() {
