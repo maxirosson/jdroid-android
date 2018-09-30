@@ -14,6 +14,8 @@ import org.slf4j.Logger;
 
 import java.util.List;
 
+import androidx.annotation.Nullable;
+
 public abstract class AbstractFcmMessageResolver implements FcmMessageResolver {
 
 	private final static Logger LOGGER = LoggerUtils.getLogger(AbstractFcmMessageResolver.class);
@@ -31,8 +33,15 @@ public abstract class AbstractFcmMessageResolver implements FcmMessageResolver {
 
 	public AbstractFcmMessageResolver(List<FcmMessage> fcmMessages) {
 		this.fcmMessages = fcmMessages;
-		if (includeNotificationFcmMessage()) {
-			this.fcmMessages.add(createNotificationFcmMessage());
+
+		NotificationFcmMessage notificationFcmMessage = createNotificationFcmMessage();
+		if (notificationFcmMessage != null) {
+			this.fcmMessages.add(notificationFcmMessage);
+		}
+
+		RemoteConfigFetchFcmMessage remoteConfigFetchFcmMessage = createRemoteConfigFetchFcmMessage();
+		if (remoteConfigFetchFcmMessage != null) {
+			this.fcmMessages.add(remoteConfigFetchFcmMessage);
 		}
 	}
 
@@ -40,12 +49,14 @@ public abstract class AbstractFcmMessageResolver implements FcmMessageResolver {
 		this(Lists.newArrayList(fcmMessages));
 	}
 
-	protected Boolean includeNotificationFcmMessage() {
-		return true;
-	}
-
+	@Nullable
 	protected NotificationFcmMessage createNotificationFcmMessage() {
 		return new NotificationFcmMessage();
+	}
+
+	@Nullable
+	protected RemoteConfigFetchFcmMessage createRemoteConfigFetchFcmMessage() {
+		return new RemoteConfigFetchFcmMessage();
 	}
 
 	@Override
