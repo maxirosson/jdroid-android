@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+		  xmlns:tools="http://schemas.android.com/tools"
 		  package="com.jdroid.android">
 
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-	<application>
+	<application android:networkSecurityConfig="@xml/jdroid_network_security_config"
+				 tools:targetApi="n">
 
 		<meta-data android:name="com.jdroid.android.debug.firebase.analytics.FirebaseAnalyticsDebugAppLifecycleCallback"
 				   android:value="ApplicationLifecycleCallback" />

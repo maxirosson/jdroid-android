@@ -4,9 +4,7 @@
 		  package="com.jdroid.android.sample">
 
 	<application android:allowBackup="false"
-				 tools:ignore="GoogleAppIndexingWarning"
-				 android:networkSecurityConfig="@xml/network_security_config"
-				 tools:targetApi="n">
+				 tools:ignore="GoogleAppIndexingWarning">
 
 		<meta-data android:name="firebase_crashlytics_collection_enabled"
 				   android:value="false" />
