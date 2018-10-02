@@ -4,6 +4,7 @@
 		xmlns:app="http://schemas.android.com/apk/res-auto"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
+		xmlns:tools="http://schemas.android.com/tools"
 		android:layout_gravity="start"
 		android:id="@+id/navDrawerHeader"
 		android:background="@android:color/white"
@@ -12,7 +13,8 @@
 
 	<LinearLayout android:layout_width="match_parent"
 				  android:layout_height="wrap_content"
-				  android:orientation="vertical">
+				  android:orientation="vertical"
+				  tools:background="@android:color/darker_gray">
 
 		<FrameLayout android:id="@+id/chosen_account_view"
 					 android:layout_width="match_parent"
@@ -49,6 +51,7 @@
 						android:layout_alignParentRight="true"
 						android:layout_alignParentBottom="true"
 						android:scaleType="center"
+						tools:visibility="visible"
 						app:srcCompat="@drawable/jdroid_ic_drawer_accounts_expand" />
 
 				<TextView
@@ -62,7 +65,8 @@
 						android:textSize="14sp"
 						android:textColor="@color/jdroid_navDrawerHeaderSubTitle"
 						android:maxLines="1"
-						android:ellipsize="end" />
+						android:ellipsize="end"
+						tools:text="Subtitle" />
 
 				<TextView
 						android:id="@+id/title"
@@ -72,9 +76,11 @@
 						android:layout_alignLeft="@id/photo"
 						android:layout_toLeftOf="@id/expand_account_box_indicator"
 						android:textSize="18sp"
+						android:textStyle="bold"
 						android:textColor="@color/jdroid_navDrawerHeaderTitle"
 						android:maxLines="1"
-						android:ellipsize="end" />
+						android:ellipsize="end"
+						tools:text="Title"/>
 
 			</RelativeLayout>
 

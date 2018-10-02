@@ -25,7 +25,7 @@
 	<!-- Nav Drawer -->
 
 	<dimen name="jdroid_navdrawerHeaderHorizontalPadding">16dp</dimen>
-	<dimen name="jdroid_navdrawerHeaderTopPadding">28dp</dimen>
+	<dimen name="jdroid_navdrawerHeaderTopPadding">32dp</dimen>
 	<dimen name="jdroid_navdrawerHeaderHeight">140dp</dimen>
 	<dimen name="jdroid_navdrawerHeaderImageSize">40dp</dimen>
 
