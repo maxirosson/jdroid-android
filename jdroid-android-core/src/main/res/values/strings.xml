@@ -48,9 +48,6 @@
 	<string name="jdroid_noResultsSearch">Your search did not match any result.</string>
 	<string name="jdroid_requiredSearchTerm">Search term is required</string>
 
-	<!-- Time Picker Dialog Fragment -->
-	<string name="jdroid_selectTime">Select Time</string>
-
 	<!-- Picture Dialog Fragment -->
 	<string name="jdroid_selectPhoto">Photo Source</string>
 	<string name="jdroid_camera">Camera</string>
@@ -61,7 +58,6 @@
 
 	<!-- Sharing -->
 	<string name="jdroid_share">Share</string>
-	<string name="jdroid_sharingFailed">The sharing failed</string>
 
 	<!-- Sign In -->
 	<string name="jdroid_logout">Logout</string>
