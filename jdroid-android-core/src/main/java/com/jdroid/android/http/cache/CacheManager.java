@@ -1,7 +1,7 @@
 package com.jdroid.android.http.cache;
 
 import android.content.Context;
-import android.support.annotation.WorkerThread;
+import androidx.annotation.WorkerThread;
 
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.application.AppLaunchStatus;

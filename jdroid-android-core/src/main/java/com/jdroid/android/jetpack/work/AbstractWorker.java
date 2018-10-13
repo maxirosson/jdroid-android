@@ -1,7 +1,6 @@
 package com.jdroid.android.jetpack.work;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 
 import com.google.firebase.perf.metrics.Trace;
 import com.jdroid.android.application.AbstractApplication;
@@ -10,6 +9,7 @@ import com.jdroid.java.date.DateUtils;
 import com.jdroid.java.http.exception.ConnectionException;
 import com.jdroid.java.utils.LoggerUtils;
 
+import androidx.annotation.NonNull;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 

@@ -1,6 +1,6 @@
 package com.jdroid.android.application;
 
-import android.support.annotation.WorkerThread;
+import androidx.annotation.WorkerThread;
 
 import com.jdroid.java.collections.Lists;
 import com.jdroid.java.utils.LoggerUtils;

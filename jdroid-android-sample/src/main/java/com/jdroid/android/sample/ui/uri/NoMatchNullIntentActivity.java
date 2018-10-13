@@ -1,6 +1,6 @@
 package com.jdroid.android.sample.ui.uri;
 
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 import com.jdroid.android.activity.FragmentContainerActivity;
 import com.jdroid.android.uri.UriHandler;

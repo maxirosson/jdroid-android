@@ -6,12 +6,12 @@ import android.app.Application;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.res.Configuration;
-import android.support.annotation.CallSuper;
-import android.support.annotation.MainThread;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.WorkerThread;
-import android.support.v4.app.Fragment;
+import androidx.annotation.CallSuper;
+import androidx.annotation.MainThread;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
+import androidx.fragment.app.Fragment;
 
 import com.jdroid.android.BuildConfig;
 import com.jdroid.android.R;
@@ -532,8 +532,14 @@ public abstract class AbstractApplication extends Application {
 		this.coreAnalyticsTrackers.add(coreAnalyticsTracker);
 	}
 
+	@NonNull
 	public List<NotificationChannelType> getNotificationChannelTypes() {
 		return Lists.newArrayList();
+	}
+
+	@Nullable
+	public NotificationChannelType getDefaultNotificationChannelType() {
+		return getNotificationChannelTypes().isEmpty() ? null : getNotificationChannelTypes().iterator().next();
 	}
 
 	public RemoteConfigLoader getRemoteConfigLoader() {

@@ -1,6 +1,6 @@
 package com.jdroid.android.concurrent;
 
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 /**
  * Runnable implementation to wrap runnables to run them safely in the UI thread from a fragment. This class only call

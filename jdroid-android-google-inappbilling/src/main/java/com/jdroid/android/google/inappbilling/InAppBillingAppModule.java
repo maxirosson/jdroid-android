@@ -1,6 +1,6 @@
 package com.jdroid.android.google.inappbilling;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.jdroid.android.activity.AbstractFragmentActivity;
 import com.jdroid.android.activity.ActivityDelegate;

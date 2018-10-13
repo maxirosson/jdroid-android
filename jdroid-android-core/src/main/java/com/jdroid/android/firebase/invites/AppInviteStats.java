@@ -1,7 +1,7 @@
 package com.jdroid.android.firebase.invites;
 
 import android.content.Context;
-import android.support.annotation.WorkerThread;
+import androidx.annotation.WorkerThread;
 
 import com.jdroid.android.context.UsageStats;
 import com.jdroid.android.google.GooglePlayServicesUtils;

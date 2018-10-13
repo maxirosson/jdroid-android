@@ -5,7 +5,7 @@ import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.os.Build;
 import android.os.Looper;
-import android.support.annotation.RequiresPermission;
+import androidx.annotation.RequiresPermission;
 
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.java.collections.Lists;

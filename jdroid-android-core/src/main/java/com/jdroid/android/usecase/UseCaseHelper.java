@@ -2,7 +2,7 @@ package com.jdroid.android.usecase;
 
 import android.os.Handler;
 import android.os.Looper;
-import android.support.annotation.MainThread;
+import androidx.annotation.MainThread;
 
 import com.jdroid.android.usecase.listener.UseCaseListener;
 import com.jdroid.java.concurrent.ExecutorUtils;

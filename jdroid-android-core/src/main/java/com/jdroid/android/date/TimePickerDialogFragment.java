@@ -3,10 +3,6 @@ package com.jdroid.android.date;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AlertDialog;
 import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.TimePicker;
@@ -16,6 +12,11 @@ import com.jdroid.android.dialog.AbstractDialogFragment;
 import com.jdroid.java.date.DateUtils;
 
 import java.util.Date;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 public class TimePickerDialogFragment extends AbstractDialogFragment {
 
@@ -44,9 +45,6 @@ public class TimePickerDialogFragment extends AbstractDialogFragment {
 		public void onTimeSet(Date time, int requestCode);
 	}
 
-	/**
-	 * @see com.jdroid.android.dialog.AbstractDialogFragment#onCreate(android.os.Bundle)
-	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

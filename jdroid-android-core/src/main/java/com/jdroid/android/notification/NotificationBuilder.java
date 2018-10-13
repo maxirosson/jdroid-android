@@ -9,12 +9,13 @@ import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.ColorRes;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.StringRes;
-import android.support.annotation.WorkerThread;
-import android.support.v4.app.NotificationCompat;
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.annotation.WorkerThread;
+import androidx.core.app.NotificationCompat;
 import android.widget.RemoteViews;
 
 import com.jdroid.android.R;
@@ -41,9 +42,14 @@ public class NotificationBuilder {
 		this(notificationName, notificationChannelType.getChannelId());
 	}
 
-	public NotificationBuilder(@NonNull String notificationName, @NonNull String channelId) {
+	public NotificationBuilder(@NonNull String notificationName, @Nullable String channelId) {
+
 		if (NotificationUtils.findNotificationChannelType(channelId) == null) {
 			AbstractApplication.get().getExceptionHandler().logHandledException("Channel id not found: " + channelId);
+			NotificationChannelType defaultNotificationChannelType = AbstractApplication.get().getDefaultNotificationChannelType();
+			if (defaultNotificationChannelType != null) {
+				channelId = defaultNotificationChannelType.getChannelId();
+			}
 		}
 
 		this.notificationName = notificationName;

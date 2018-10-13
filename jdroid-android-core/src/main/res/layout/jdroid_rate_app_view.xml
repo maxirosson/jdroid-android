@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-									style="@style/jdroid_cardViewFullMarginStyle">
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+								   style="@style/jdroid_cardViewFullMarginStyle">
 
 	<LinearLayout android:layout_height="wrap_content"
 				  android:layout_width="match_parent"
@@ -44,4 +44,4 @@
 		</LinearLayout>
 	</LinearLayout>
 
-</android.support.v7.widget.CardView>
+</androidx.cardview.widget.CardView>

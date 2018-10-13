@@ -2,7 +2,7 @@ package com.jdroid.android.firebase.crashlytics;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.crashlytics.android.Crashlytics;
 import com.jdroid.android.analytics.AbstractCoreAnalyticsTracker;

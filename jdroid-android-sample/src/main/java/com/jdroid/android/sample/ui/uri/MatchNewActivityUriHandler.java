@@ -3,7 +3,7 @@ package com.jdroid.android.sample.ui.uri;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.uri.AbstractUriHandler;

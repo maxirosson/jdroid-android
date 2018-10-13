@@ -1,9 +1,9 @@
 package com.jdroid.android.recycler.pagination;
 
 import android.os.Bundle;
-import android.support.annotation.MainThread;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.MainThread;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.jdroid.android.R;
 import com.jdroid.android.exception.DialogErrorDisplayer;

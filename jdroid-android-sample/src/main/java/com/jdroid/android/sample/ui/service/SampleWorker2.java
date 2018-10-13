@@ -1,7 +1,6 @@
 package com.jdroid.android.sample.ui.service;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.jetpack.work.AbstractWorker;
@@ -11,6 +10,7 @@ import com.jdroid.android.sample.application.AndroidNotificationChannelType;
 import com.jdroid.java.http.exception.ConnectionException;
 import com.jdroid.java.utils.IdGenerator;
 
+import androidx.annotation.NonNull;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 

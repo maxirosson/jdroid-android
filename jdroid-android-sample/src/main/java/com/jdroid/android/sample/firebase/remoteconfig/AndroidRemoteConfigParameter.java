@@ -7,7 +7,8 @@ public enum AndroidRemoteConfigParameter implements RemoteConfigParameter {
 	SAMPLE_CONFIG_1("defaultConfigValue1"),
 	SAMPLE_CONFIG_2("default"),
 	SAMPLE_CONFIG_3(null),
-	INTERSTITIAL_ENABLED(true);
+	INTERSTITIAL_ENABLED(true),
+	PRIVACY_POLICY_URL("https://google.com");
 
 	private Object defaultValue;
 

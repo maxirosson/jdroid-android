@@ -1,6 +1,6 @@
 package com.jdroid.android.twitter;
 
-import android.support.annotation.MainThread;
+import androidx.annotation.MainThread;
 import android.view.View;
 
 import com.jdroid.android.application.AbstractApplication;

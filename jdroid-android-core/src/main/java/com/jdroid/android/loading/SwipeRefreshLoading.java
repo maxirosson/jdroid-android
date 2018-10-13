@@ -1,7 +1,7 @@
 package com.jdroid.android.loading;
 
-import android.support.annotation.ColorRes;
-import android.support.v4.widget.SwipeRefreshLayout;
+import androidx.annotation.ColorRes;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.jdroid.android.R;
 import com.jdroid.android.fragment.FragmentIf;

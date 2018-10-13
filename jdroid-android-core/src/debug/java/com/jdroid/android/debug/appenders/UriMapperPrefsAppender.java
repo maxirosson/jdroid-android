@@ -6,7 +6,7 @@ import android.os.Environment;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceGroup;
-import android.support.v4.app.ShareCompat;
+import androidx.core.app.ShareCompat;
 
 import com.jdroid.android.R;
 import com.jdroid.android.activity.ActivityLauncher;

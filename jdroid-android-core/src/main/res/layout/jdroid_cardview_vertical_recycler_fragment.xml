@@ -4,18 +4,18 @@
 										  android:layout_height="match_parent"
 										  xmlns:android="http://schemas.android.com/apk/res/android">
 
-	<android.support.v7.widget.CardView android:layout_width="match_parent"
-										android:layout_height="wrap_content"
-										style="@style/jdroid_cardViewFullMarginStyle">
+	<androidx.cardview.widget.CardView android:layout_width="match_parent"
+									   android:layout_height="wrap_content"
+									   style="@style/jdroid_cardViewFullMarginStyle">
 
-		<android.support.v7.widget.RecyclerView android:id="@+id/recyclerView"
-												android:layout_width="match_parent"
-												android:layout_height="match_parent"
-												android:scrollbars="vertical" />
+		<androidx.recyclerview.widget.RecyclerView android:id="@+id/recyclerView"
+												   android:layout_width="match_parent"
+												   android:layout_height="match_parent"
+												   android:scrollbars="vertical" />
 
 		<FrameLayout android:id="@+id/emptyViewContainer"
 					 android:layout_width="match_parent"
 					 android:layout_height="match_parent"
 					 android:visibility="gone" />
-	</android.support.v7.widget.CardView>
+	</androidx.cardview.widget.CardView>
 </com.jdroid.android.loading.LoadingLayout>

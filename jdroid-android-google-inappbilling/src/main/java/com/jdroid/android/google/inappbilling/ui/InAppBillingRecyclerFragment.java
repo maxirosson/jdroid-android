@@ -2,7 +2,7 @@ package com.jdroid.android.google.inappbilling.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.view.View;
 
 import com.jdroid.android.google.inappbilling.client.Product;

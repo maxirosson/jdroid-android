@@ -1,7 +1,7 @@
 package com.jdroid.android.webview;
 
 import android.net.http.SslError;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.view.View;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebView;

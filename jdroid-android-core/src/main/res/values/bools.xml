@@ -4,6 +4,4 @@
 	<bool name="jdroid_isLessThan7Inches">true</bool>
 	<bool name="jdroid_isBetween7And10Inches">false</bool>
 	<bool name="jdroid_is10Inches">false</bool>
-
-	<bool name="jdroid_navDrawerHeaderCircleImage">false</bool>
 </resources>

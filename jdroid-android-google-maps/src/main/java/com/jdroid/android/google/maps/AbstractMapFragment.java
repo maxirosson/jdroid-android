@@ -3,10 +3,10 @@ package com.jdroid.android.google.maps;
 import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.MainThread;
-import android.support.annotation.NonNull;
-import android.support.annotation.RequiresPermission;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.MainThread;
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresPermission;
+import androidx.appcompat.widget.Toolbar;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -31,6 +31,8 @@ import com.jdroid.android.loading.FragmentLoading;
 import com.jdroid.android.permission.PermissionHelper;
 import com.jdroid.android.snackbar.SnackbarBuilder;
 import com.jdroid.java.exception.AbstractException;
+
+import androidx.fragment.app.Fragment;
 
 public abstract class AbstractMapFragment extends SupportMapFragment implements FragmentIf {
 
@@ -283,7 +285,7 @@ public abstract class AbstractMapFragment extends SupportMapFragment implements 
 	}
 
 	/**
-	 * @see android.support.v4.app.Fragment#onActivityCreated(android.os.Bundle)
+	 * @see Fragment#onActivityCreated(android.os.Bundle)
 	 */
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
@@ -292,7 +294,7 @@ public abstract class AbstractMapFragment extends SupportMapFragment implements 
 	}
 
 	/**
-	 * @see android.support.v4.app.Fragment#onPause()
+	 * @see Fragment#onPause()
 	 */
 	@Override
 	public void onPause() {
@@ -302,7 +304,7 @@ public abstract class AbstractMapFragment extends SupportMapFragment implements 
 	}
 
 	/**
-	 * @see android.support.v4.app.Fragment#onStop()
+	 * @see Fragment#onStop()
 	 */
 	@Override
 	public void onStop() {
@@ -311,7 +313,7 @@ public abstract class AbstractMapFragment extends SupportMapFragment implements 
 	}
 
 	/**
-	 * @see android.support.v4.app.Fragment#onDestroyView()
+	 * @see Fragment#onDestroyView()
 	 */
 	@Override
 	public void onDestroyView() {
@@ -320,7 +322,7 @@ public abstract class AbstractMapFragment extends SupportMapFragment implements 
 	}
 
 	/**
-	 * @see android.support.v4.app.Fragment#onDestroy()
+	 * @see Fragment#onDestroy()
 	 */
 	@Override
 	public void onDestroy() {

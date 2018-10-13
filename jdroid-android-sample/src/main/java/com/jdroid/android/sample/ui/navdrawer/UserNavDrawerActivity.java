@@ -1,7 +1,7 @@
 package com.jdroid.android.sample.ui.navdrawer;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 import com.jdroid.android.activity.FragmentContainerActivity;
 import com.jdroid.android.context.SecurityContext;

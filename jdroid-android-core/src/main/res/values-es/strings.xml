@@ -50,9 +50,6 @@
 	<string name="jdroid_noResultsSearch">Su búsqueda no devolvió resultados.</string>
 	<string name="jdroid_requiredSearchTerm">El campo a buscar es requerido</string>
 
-	<!-- Time Picker Dialog Fragment -->
-	<string name="jdroid_selectTime">Seleccione una hora</string>
-
 	<!-- Picture Dialog Fragment -->
 	<string name="jdroid_selectPhoto">Origen de la imagen</string>
 	<string name="jdroid_camera">Cámara</string>
@@ -63,7 +60,6 @@
 
 	<!-- Sharing -->
 	<string name="jdroid_share">Compartir</string>
-	<string name="jdroid_sharingFailed">Ha fallado la acción de compartir</string>
 
 	<!-- Sign In -->
 	<string name="jdroid_logout">Cerrar sesión</string>

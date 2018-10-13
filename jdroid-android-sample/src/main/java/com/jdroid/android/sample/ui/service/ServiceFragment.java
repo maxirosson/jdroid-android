@@ -1,9 +1,7 @@
 package com.jdroid.android.sample.ui.service;
 
-import android.arch.lifecycle.Observer;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.CheckBox;
@@ -19,6 +17,8 @@ import com.jdroid.java.utils.TypeUtils;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
+import androidx.annotation.Nullable;
+import androidx.lifecycle.Observer;
 import androidx.work.Constraints;
 import androidx.work.Data;
 import androidx.work.NetworkType;
@@ -157,7 +157,7 @@ public class ServiceFragment extends AbstractFragment {
 		
 		WorkManager.getInstance().getStatusById(uuid).observe(ServiceFragment.this, new Observer<WorkStatus>() {
 			@Override
-			public void onChanged(@Nullable final WorkStatus workStatus) {
+			public void onChanged(@Nullable WorkStatus workStatus) {
 				if (workStatus != null) {
 					if (workStatus.getState().isFinished()) {
 						status.setText("Result: " + workStatus.getOutputData().getString("result"));

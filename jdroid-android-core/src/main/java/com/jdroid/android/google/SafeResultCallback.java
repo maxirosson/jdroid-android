@@ -1,6 +1,6 @@
 package com.jdroid.android.google;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.google.android.gms.common.api.Result;
 import com.google.android.gms.common.api.ResultCallback;

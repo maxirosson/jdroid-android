@@ -2,12 +2,12 @@ package com.jdroid.android.shortcuts;
 
 import android.content.Context;
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 
 import com.jdroid.android.jetpack.work.AbstractWorker;
 import com.jdroid.android.utils.AndroidUtils;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.work.ExistingWorkPolicy;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;

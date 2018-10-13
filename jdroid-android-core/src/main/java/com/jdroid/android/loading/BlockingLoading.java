@@ -1,6 +1,6 @@
 package com.jdroid.android.loading;
 
-import android.support.annotation.IdRes;
+import androidx.annotation.IdRes;
 
 import com.jdroid.android.application.AbstractApplication;
 

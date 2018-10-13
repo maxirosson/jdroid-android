@@ -1,7 +1,7 @@
 package com.jdroid.android.images;
 
 import android.graphics.Bitmap;
-import android.support.v4.util.LruCache;
+import androidx.collection.LruCache;
 
 public class BitmapLruCache extends LruCache<String, Bitmap> {
 

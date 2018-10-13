@@ -1,7 +1,7 @@
 package com.jdroid.android.sample.ui.recyclerview;
 
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.jdroid.android.recycler.AutofitGridLayoutManager;
 import com.jdroid.android.sample.R;

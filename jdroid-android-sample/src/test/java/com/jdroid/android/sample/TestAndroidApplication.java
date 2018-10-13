@@ -1,7 +1,7 @@
 package com.jdroid.android.sample;
 
 import android.app.Activity;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.context.AppContext;

@@ -4,7 +4,9 @@ package com.jdroid.android.sample.application;
 import com.jdroid.android.context.AppContext;
 import com.jdroid.android.sample.BuildConfig;
 import com.jdroid.android.sample.api.ApiServer;
+import com.jdroid.android.sample.firebase.remoteconfig.AndroidRemoteConfigParameter;
 import com.jdroid.java.http.Server;
+import com.jdroid.java.remoteconfig.RemoteConfigParameter;
 
 public class AndroidAppContext extends AppContext {
 
@@ -34,6 +36,11 @@ public class AndroidAppContext extends AppContext {
 	@Override
 	public String getTwitterAccount() {
 		return "jdroidtools";
+	}
+
+	@Override
+	public RemoteConfigParameter getPrivacyPolicyUrl() {
+		return AndroidRemoteConfigParameter.PRIVACY_POLICY_URL;
 	}
 
 	public String getFirebaseAuthToken() {

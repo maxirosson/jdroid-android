@@ -4,6 +4,7 @@ import com.google.firebase.messaging.RemoteMessage;
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.context.SecurityContext;
 import com.jdroid.android.firebase.fcm.notification.NotificationFcmMessage;
+import com.jdroid.android.firebase.fcm.remoteconfig.RemoteConfigFetchFcmMessage;
 import com.jdroid.android.utils.AndroidUtils;
 import com.jdroid.android.utils.AppUtils;
 import com.jdroid.java.collections.Lists;
@@ -13,6 +14,8 @@ import com.jdroid.java.utils.TypeUtils;
 import org.slf4j.Logger;
 
 import java.util.List;
+
+import androidx.annotation.Nullable;
 
 public abstract class AbstractFcmMessageResolver implements FcmMessageResolver {
 
@@ -31,8 +34,15 @@ public abstract class AbstractFcmMessageResolver implements FcmMessageResolver {
 
 	public AbstractFcmMessageResolver(List<FcmMessage> fcmMessages) {
 		this.fcmMessages = fcmMessages;
-		if (includeNotificationFcmMessage()) {
-			this.fcmMessages.add(createNotificationFcmMessage());
+
+		NotificationFcmMessage notificationFcmMessage = createNotificationFcmMessage();
+		if (notificationFcmMessage != null) {
+			this.fcmMessages.add(notificationFcmMessage);
+		}
+
+		RemoteConfigFetchFcmMessage remoteConfigFetchFcmMessage = createRemoteConfigFetchFcmMessage();
+		if (remoteConfigFetchFcmMessage != null) {
+			this.fcmMessages.add(remoteConfigFetchFcmMessage);
 		}
 	}
 
@@ -40,12 +50,14 @@ public abstract class AbstractFcmMessageResolver implements FcmMessageResolver {
 		this(Lists.newArrayList(fcmMessages));
 	}
 
-	protected Boolean includeNotificationFcmMessage() {
-		return true;
-	}
-
+	@Nullable
 	protected NotificationFcmMessage createNotificationFcmMessage() {
 		return new NotificationFcmMessage();
+	}
+
+	@Nullable
+	protected RemoteConfigFetchFcmMessage createRemoteConfigFetchFcmMessage() {
+		return new RemoteConfigFetchFcmMessage();
 	}
 
 	@Override

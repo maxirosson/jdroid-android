@@ -1,19 +1,26 @@
 package com.jdroid.android.firebase.fcm;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.google.GooglePlayServicesUtils;
 import com.jdroid.android.jetpack.work.AbstractWorker;
+import com.jdroid.java.exception.UnexpectedException;
 import com.jdroid.java.utils.LoggerUtils;
 
 import org.slf4j.Logger;
 
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
 import androidx.work.Constraints;
 import androidx.work.Data;
 import androidx.work.ExistingPeriodicWorkPolicy;
@@ -78,9 +85,6 @@ public class FcmRegistrationWorker extends AbstractWorker {
 				String registrationToken;
 				try {
 					registrationToken = getRegistrationToken(fcmSender.getSenderId());
-				} catch (IOException e) {
-					LOGGER.warn("Error when getting registration token", e);
-					return Result.RETRY;
 				} catch (Exception e) {
 					AbstractApplication.get().getExceptionHandler().logHandledException("Error when getting FCM registration token. Will retry later.", e);
 					return Result.RETRY;
@@ -106,18 +110,25 @@ public class FcmRegistrationWorker extends AbstractWorker {
 			return Result.RETRY;
 		}
 	}
-	
 
-	
-	public static String getRegistrationToken(String senderId) throws IOException {
+	@WorkerThread
+	@Nullable
+	public static String getRegistrationToken(String senderId) {
 		if (GooglePlayServicesUtils.isGooglePlayServicesAvailable(AbstractApplication.get())) {
 			String registrationToken;
-			if (senderId != null) {
-				registrationToken = FirebaseInstanceId.getInstance().getToken(senderId, "FCM");
-				LOGGER.info("Registration token for sender id [" + senderId + "]: " + registrationToken);
-			} else {
-				registrationToken = FirebaseInstanceId.getInstance().getToken();
-				LOGGER.info("Registration token for default sender id: " + registrationToken);
+			try {
+				if (senderId != null) {
+					registrationToken = FirebaseInstanceId.getInstance().getToken(senderId, "FCM");
+					LOGGER.info("Registration token for sender id [" + senderId + "]: " + registrationToken);
+				} else {
+					Task<InstanceIdResult> task = FirebaseInstanceId.getInstance().getInstanceId();
+					// Block on the task and get the result synchronously
+					InstanceIdResult instanceIdResult = Tasks.await(task);
+					registrationToken = instanceIdResult.getToken();
+					LOGGER.info("Registration token for default sender id: " + registrationToken);
+				}
+			} catch (IOException | ExecutionException | InterruptedException e) {
+				throw new UnexpectedException(e);
 			}
 			return registrationToken;
 		}

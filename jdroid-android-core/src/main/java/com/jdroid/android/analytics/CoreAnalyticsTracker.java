@@ -3,7 +3,7 @@ package com.jdroid.android.analytics;
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.jdroid.android.social.SocialAction;
 import com.jdroid.java.analytics.AnalyticsTracker;

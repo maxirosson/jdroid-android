@@ -1,7 +1,7 @@
 package com.jdroid.android.navdrawer;
 
 import android.app.Activity;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.jdroid.android.activity.AbstractFragmentActivity;
 

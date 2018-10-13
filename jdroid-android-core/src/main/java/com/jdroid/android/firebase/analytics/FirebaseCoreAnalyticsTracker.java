@@ -3,7 +3,7 @@ package com.jdroid.android.firebase.analytics;
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.jdroid.android.analytics.CoreAnalyticsTracker;

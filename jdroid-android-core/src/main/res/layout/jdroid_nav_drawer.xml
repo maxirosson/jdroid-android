@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.NavigationView xmlns:app="http://schemas.android.com/apk/res-auto"
-											  style="@style/jdroid_leftNavDrawer"
-											  app:menu="@menu/jdroid_drawer" />
+<com.google.android.material.navigation.NavigationView xmlns:app="http://schemas.android.com/apk/res-auto"
+													   style="@style/jdroid_leftNavDrawer"
+													   app:menu="@menu/jdroid_drawer" />
 

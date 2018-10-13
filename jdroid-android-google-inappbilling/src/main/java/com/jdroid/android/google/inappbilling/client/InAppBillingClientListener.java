@@ -1,6 +1,6 @@
 package com.jdroid.android.google.inappbilling.client;
 
-import android.support.annotation.MainThread;
+import androidx.annotation.MainThread;
 
 import com.jdroid.java.exception.AbstractException;
 import com.jdroid.java.exception.ErrorCodeException;

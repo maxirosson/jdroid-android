@@ -1,6 +1,6 @@
 package com.jdroid.android.firebase.fcm;
 
-import android.support.annotation.WorkerThread;
+import androidx.annotation.WorkerThread;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.jdroid.android.application.AbstractApplication;

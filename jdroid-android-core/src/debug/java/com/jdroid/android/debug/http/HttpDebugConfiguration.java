@@ -1,6 +1,6 @@
 package com.jdroid.android.debug.http;
 
-import android.support.annotation.WorkerThread;
+import androidx.annotation.WorkerThread;
 
 import com.jdroid.android.debug.mocks.AndroidJsonMockHttpService;
 import com.jdroid.android.utils.SharedPreferencesHelper;

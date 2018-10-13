@@ -1,10 +1,10 @@
 package com.jdroid.android.firebase.remoteconfig;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 
 import com.jdroid.android.jetpack.work.AbstractWorker;
 
+import androidx.annotation.NonNull;
 import androidx.work.Constraints;
 import androidx.work.Data;
 import androidx.work.ExistingWorkPolicy;

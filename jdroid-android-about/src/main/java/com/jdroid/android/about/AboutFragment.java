@@ -2,9 +2,9 @@ package com.jdroid.android.about;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.annotation.MainThread;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.MainThread;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -20,6 +20,7 @@ import com.jdroid.android.recycler.RecyclerViewType;
 import com.jdroid.android.utils.AppUtils;
 import com.jdroid.android.utils.ExternalAppsUtils;
 import com.jdroid.java.collections.Lists;
+import com.jdroid.java.remoteconfig.RemoteConfigParameter;
 
 import java.util.List;
 
@@ -75,6 +76,19 @@ public class AboutFragment extends AbstractRecyclerFragment {
 				ActivityLauncher.startActivity(activity, LibrariesActivity.class);
 			}
 		});
+
+		RemoteConfigParameter privacyPolicyUrlRemoteConfigParameter = AbstractApplication.get().getAppContext().getPrivacyPolicyUrl();
+		if (privacyPolicyUrlRemoteConfigParameter != null) {
+			String privacyPolicyUrl = AbstractApplication.get().getRemoteConfigLoader().getString(privacyPolicyUrlRemoteConfigParameter);
+			aboutItems.add(new AboutItem(R.drawable.jdroid_ic_privacy_policy_black_24dp, R.string.jdroid_privacyPolicy) {
+
+				@Override
+				public void onSelected(Activity activity) {
+					ExternalAppsUtils.openUrl(privacyPolicyUrl);
+				}
+			});
+		}
+
 		if (AboutAppModule.get().getAboutContext().isBetaTestingEnabled()) {
 			aboutItems.add(new AboutItem(R.drawable.jdroid_ic_beta_black_24dp, R.string.jdroid_beta) {
 

@@ -4,12 +4,12 @@ import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.StringRes;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.content.ContextCompat;
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.core.content.ContextCompat;
 
 import com.jdroid.android.R;
 import com.jdroid.android.application.AbstractApplication;
@@ -24,8 +24,8 @@ import com.jdroid.android.dialog.AppInfoDialogFragment;
  * <p>
  * If you prefer to use the static methods to chek permissions like {@link #checkPermission(Fragment, int, int, String, int)},
  * Your activity/Fragment has to implement the "OnRequestPermissionsResultCallback" method (
- * {@link android.support.v4.app.ActivityCompat.OnRequestPermissionsResultCallback#onRequestPermissionsResult(int, String[], int[])} or
- * {@link android.support.v4.app.Fragment#onRequestPermissionsResult(int, String[], int[])})
+ * {@link androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback#onRequestPermissionsResult(int, String[], int[])} or
+ * {@link Fragment#onRequestPermissionsResult(int, String[], int[])})
  */
 public class PermissionHelper {
 

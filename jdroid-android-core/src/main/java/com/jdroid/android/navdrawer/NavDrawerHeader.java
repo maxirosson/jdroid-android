@@ -1,8 +1,8 @@
 package com.jdroid.android.navdrawer;
 
-import android.support.annotation.DrawableRes;
-import android.support.annotation.LayoutRes;
-import android.support.design.widget.NavigationView;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.LayoutRes;
+import com.google.android.material.navigation.NavigationView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;

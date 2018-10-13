@@ -1,6 +1,6 @@
 package com.jdroid.android.glide;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.HttpException;

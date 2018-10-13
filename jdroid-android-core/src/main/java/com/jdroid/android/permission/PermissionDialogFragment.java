@@ -1,9 +1,9 @@
 package com.jdroid.android.permission;
 
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import com.jdroid.android.R;
 import com.jdroid.android.dialog.AlertDialogFragment;

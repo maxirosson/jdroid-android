@@ -1,12 +1,11 @@
 package com.jdroid.android.google.inappbilling.ui;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTransaction;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.jdroid.android.activity.AbstractFragmentActivity;
-import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.exception.DefaultExceptionHandler;
 import com.jdroid.android.exception.DialogErrorDisplayer;
 import com.jdroid.android.fragment.AbstractFragment;
@@ -19,7 +18,6 @@ import com.jdroid.android.google.inappbilling.client.Inventory;
 import com.jdroid.android.google.inappbilling.client.ItemType;
 import com.jdroid.android.google.inappbilling.client.Product;
 import com.jdroid.java.exception.AbstractException;
-import com.jdroid.android.google.inappbilling.client.ProductType;
 import com.jdroid.java.exception.ErrorCodeException;
 import com.jdroid.java.utils.LoggerUtils;
 
