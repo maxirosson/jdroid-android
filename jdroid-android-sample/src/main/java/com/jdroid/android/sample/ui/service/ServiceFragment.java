@@ -155,7 +155,7 @@ public class ServiceFragment extends AbstractFragment {
 		
 		UUID uuid = oneTimeWorkRequest.getId();
 		
-		WorkManager.getInstance().getStatusById(uuid).observe(ServiceFragment.this, new Observer<WorkStatus>() {
+		WorkManager.getInstance().getStatusByIdLiveData(uuid).observe(ServiceFragment.this, new Observer<WorkStatus>() {
 			@Override
 			public void onChanged(@Nullable WorkStatus workStatus) {
 				if (workStatus != null) {
