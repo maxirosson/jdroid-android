@@ -79,7 +79,7 @@ dependencies {
 		}
 	}
 
-	annotationProcessor "android.arch.persistence.room:compiler:${ROOM}"
+	annotationProcessor "android.arch.persistence.room:compiler:${ROOM_VERSION}"
 
 	// TODO Remove this when Glide fix the androidx support: https://github.com/bumptech/glide/issues/3185
 	implementation "com.android.support:support-annotations:28.0.0"
