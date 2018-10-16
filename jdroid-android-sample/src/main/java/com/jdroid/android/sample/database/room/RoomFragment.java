@@ -10,6 +10,7 @@ import com.jdroid.android.room.RoomHelper;
 import com.jdroid.android.sample.R;
 import com.jdroid.java.collections.Lists;
 import com.jdroid.java.concurrent.ExecutorUtils;
+import com.jdroid.java.date.DateUtils;
 import com.jdroid.java.utils.RandomUtils;
 
 import java.util.List;
@@ -40,6 +41,8 @@ public class RoomFragment extends AbstractFragment {
 						lastId = RandomUtils.getLong().toString();
 						entity.setId(lastId);
 						entity.setField(RandomUtils.getLong().toString());
+						entity.setDate(DateUtils.now());
+						entity.setStringList(Lists.newArrayList("a", "b", "c"));
 						sampleEntityDao.insert(entity);
 					}
 				});
