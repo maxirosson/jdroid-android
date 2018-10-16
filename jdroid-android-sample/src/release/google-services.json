@@ -1,35 +1,43 @@
 {
   "project_info": {
-	"project_number": "527857945512",
-	"firebase_url": "https://jdroid-staging.firebaseio.com",
-	"project_id": "jdroid-staging",
-	"storage_bucket": "jdroid-staging.appspot.com"
+	"project_number": "361779001695",
+	"firebase_url": "https://fir-jdroid-production.firebaseio.com",
+	"project_id": "fir-jdroid-production",
+	"storage_bucket": "fir-jdroid-production.appspot.com"
   },
   "client": [
 	{
 	  "client_info": {
-		"mobilesdk_app_id": "1:527857945512:android:04da523460c0b69f",
+		"mobilesdk_app_id": "1:361779001695:android:85398d20b5634ada",
 		"android_client_info": {
 		  "package_name": "com.jdroid.android.sample"
 		}
 	  },
 	  "oauth_client": [
 		{
-		  "client_id": "527857945512-2u1l6qpmpd8v4hbdv8pomkm9r7k24fl9.apps.googleusercontent.com",
+		  "client_id": "361779001695-ae1d3k5nndd7775m5nmbrtv757g3kctj.apps.googleusercontent.com",
 		  "client_type": 1,
 		  "android_info": {
 			"package_name": "com.jdroid.android.sample",
-			"certificate_hash": "126d0ca1cdbf9772aea4d71206f75aba4cde9c2a"
+			"certificate_hash": "bd00cc2196cc31b5069d5a79df12b3abd342a2ea"
 		  }
 		},
 		{
-		  "client_id": "527857945512-qr7kk98nntlt44po5cblnrgq41ief65s.apps.googleusercontent.com",
+		  "client_id": "361779001695-dp6o734fb7jjra1t6n632msqj72mvtgl.apps.googleusercontent.com",
+		  "client_type": 1,
+		  "android_info": {
+			"package_name": "com.jdroid.android.sample",
+			"certificate_hash": "633ba18badd09ec576e4ee895ed340050e11f1f3"
+		  }
+		},
+		{
+		  "client_id": "361779001695-1h1mk78pnrvlfvti8mfpcs7hbgrpcddu.apps.googleusercontent.com",
 		  "client_type": 3
 		}
 	  ],
 	  "api_key": [
 		{
-		  "current_key": "AIzaSyDNAyitlL4PWxNCjf63Quf0ruvcFSzs6D0"
+		  "current_key": "AIzaSyDe-x-lkKP2VyeMYq8i0I5mbeDAElY6Pks"
 		}
 	  ],
 	  "services": {
@@ -37,13 +45,8 @@
 		  "status": 1
 		},
 		"appinvite_service": {
-		  "status": 2,
-		  "other_platform_oauth_client": [
-			{
-			  "client_id": "527857945512-qr7kk98nntlt44po5cblnrgq41ief65s.apps.googleusercontent.com",
-			  "client_type": 3
-			}
-		  ]
+		  "status": 1,
+		  "other_platform_oauth_client": []
 		},
 		"ads_service": {
 		  "status": 2
