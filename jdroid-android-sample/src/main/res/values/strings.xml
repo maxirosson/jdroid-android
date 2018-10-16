@@ -265,6 +265,7 @@
 	<string name="sqliteRemoveAll">Remove All</string>
 	<string name="sqliteGetAll">Get All</string>
 	<string name="sqliteReplaceAll">Replace All</string>
+	<string name="sqliteInsertAll">Insert All</string>
 
 	<!-- Service -->
 	<string name="service">Service</string>
@@ -298,5 +299,8 @@
 	<!-- About -->
 	<string name="shareMessage">Jdroid - Tools for Android and Java apps. Download the sample app on your Android.
 		%1$s</string>
+
+	<!-- Room -->
+	<string name="room">Room</string>
 
 </resources>

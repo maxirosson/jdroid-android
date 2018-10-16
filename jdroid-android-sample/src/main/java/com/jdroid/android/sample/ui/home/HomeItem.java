@@ -1,13 +1,12 @@
 package com.jdroid.android.sample.ui.home;
 
 import android.content.Intent;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 
 import com.jdroid.android.ActionItem;
 import com.jdroid.android.activity.ActivityLauncher;
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.sample.R;
+import com.jdroid.android.sample.database.room.RoomActivity;
 import com.jdroid.android.sample.ui.analytics.AnalyticsActivity;
 import com.jdroid.android.sample.ui.appinvite.AppInviteActivity;
 import com.jdroid.android.sample.ui.cardview.CardViewActivity;
@@ -47,6 +46,9 @@ import com.jdroid.android.sample.ui.webview.WebViewActivity;
 import com.jdroid.android.shortcuts.AppShortcutsHelper;
 import com.jdroid.android.utils.ScreenUtils;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+
 public enum HomeItem implements ActionItem {
 
 	ANALYTCS(R.string.analytics, R.drawable.ic_analytics, AnalyticsActivity.class),
@@ -74,6 +76,7 @@ public enum HomeItem implements ActionItem {
 	NOTIFICATIONS(R.string.notifications, R.drawable.ic_notifications, NotificationsActivity.class),
 	RATE_APP(R.string.rateApp, R.drawable.ic_rate, RateAppActivity.class),
 	RECYCLER_VIEW(R.string.recyclerView, R.drawable.ic_recycler_view, RecyclerViewActivity.class),
+	ROOM(R.string.room, R.drawable.ic_sqlite, RoomActivity.class),
 	SERVICE(R.string.service, R.drawable.ic_service, ServiceActivity.class),
 	SQLITE(R.string.sqlite, R.drawable.ic_sqlite, SQLiteActivity.class),
 	STRICT_MODE(R.string.strictMode, R.drawable.ic_exception_handling, StrictModeActivity.class),

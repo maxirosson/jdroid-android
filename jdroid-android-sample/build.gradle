@@ -43,6 +43,7 @@ dependencies {
 	implementation project(':jdroid-android-google-signin')
 	implementation project(':jdroid-android-google-play-games')
 	implementation project(':jdroid-android-sqlite')
+	implementation project(':jdroid-android-room')
 	implementation project(':jdroid-android-twitter')
 	implementation 'com.firebase:firebase-client-android:2.5.0'
 
@@ -77,6 +78,8 @@ dependencies {
 			exclude module: 'jdroid-java-core'
 		}
 	}
+
+	annotationProcessor "android.arch.persistence.room:compiler:${ROOM}"
 
 	// TODO Remove this when Glide fix the androidx support: https://github.com/bumptech/glide/issues/3185
 	implementation "com.android.support:support-annotations:28.0.0"
@@ -133,6 +136,12 @@ android {
 		]
 
 		multiDexEnabled true
+
+		javaCompileOptions {
+			annotationProcessorOptions {
+				arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+			}
+		}
 
 		testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 		testBuildType "automation"

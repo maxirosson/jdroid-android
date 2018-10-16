@@ -666,6 +666,12 @@
 				  android:label="@string/strictMode"
 				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" />
 
+		<!-- Room -->
+
+		<activity android:name="com.jdroid.android.sample.database.room.RoomActivity"
+				  android:label="@string/strictMode"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" />
+
 		<!-- WebView -->
 
 		<activity android:name="com.jdroid.android.sample.ui.webview.WebViewActivity"

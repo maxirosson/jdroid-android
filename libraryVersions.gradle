@@ -7,6 +7,9 @@ ext.JDROID_JAVA_VERSION = '2.0.0'
 // https://github.com/maxirosson/jdroid-java-http/blob/master/CHANGELOG.md
 ext.JDROID_JAVA_HTTP_VERSION = '2.0.0'
 
+// https://developer.android.com/topic/libraries/architecture/adding-components#room
+ext.ROOM = '1.1.1'
+
 // https://developers.facebook.com/docs/android
 ext.FACEBOOK_ANDROID = '4.37.0'
 

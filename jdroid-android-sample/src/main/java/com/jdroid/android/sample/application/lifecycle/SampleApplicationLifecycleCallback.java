@@ -1,12 +1,16 @@
 package com.jdroid.android.sample.application.lifecycle;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
 
 import com.jdroid.android.lifecycle.ApplicationLifecycleCallback;
+import com.jdroid.android.room.RoomHelper;
 import com.jdroid.java.utils.LoggerUtils;
 
 import org.slf4j.Logger;
+
+import androidx.annotation.NonNull;
+import androidx.room.migration.Migration;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 
 public class SampleApplicationLifecycleCallback extends ApplicationLifecycleCallback {
@@ -16,6 +20,12 @@ public class SampleApplicationLifecycleCallback extends ApplicationLifecycleCall
 	@Override
 	public void onProviderInit(Context context) {
 		LOGGER.debug("Executing sample onProviderInit");
+		RoomHelper.addMigration(new Migration(1, 2) {
+			@Override
+			public void migrate(@NonNull SupportSQLiteDatabase database) {
+				database.execSQL("CREATE TABLE IF NOT EXISTS `sample_2` (`id` TEXT NOT NULL, `field` TEXT, PRIMARY KEY(`id`))");
+			}
+		});
 	}
 
 	@Override
