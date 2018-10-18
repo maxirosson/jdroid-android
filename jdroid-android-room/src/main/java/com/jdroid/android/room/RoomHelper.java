@@ -15,7 +15,7 @@ import androidx.room.migration.Migration;
 
 public class RoomHelper {
 
-	private final static String DEFAULT_DATABASE_NAME = "application";
+	private final static String DEFAULT_DATABASE_NAME = "application.db";
 
 	private static Map<String, RoomDatabase> roomDatabasesMap = Maps.newHashMap();
 
