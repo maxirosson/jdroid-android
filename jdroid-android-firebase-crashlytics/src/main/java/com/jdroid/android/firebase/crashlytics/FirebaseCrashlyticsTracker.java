@@ -2,7 +2,6 @@ package com.jdroid.android.firebase.crashlytics;
 
 import android.app.Activity;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
 
 import com.crashlytics.android.Crashlytics;
 import com.jdroid.android.analytics.AbstractCoreAnalyticsTracker;
@@ -10,6 +9,8 @@ import com.jdroid.android.exception.DefaultExceptionHandler;
 import com.jdroid.android.uri.ReferrerUtils;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
 
 
 public class FirebaseCrashlyticsTracker extends AbstractCoreAnalyticsTracker {

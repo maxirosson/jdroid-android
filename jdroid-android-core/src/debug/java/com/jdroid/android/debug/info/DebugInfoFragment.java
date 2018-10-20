@@ -1,8 +1,6 @@
 package com.jdroid.android.debug.info;
 
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.core.util.Pair;
 import android.view.View;
 
 import com.jdroid.android.application.AbstractApplication;
@@ -18,11 +16,13 @@ import com.jdroid.android.utils.AppUtils;
 import com.jdroid.android.utils.DeviceUtils;
 import com.jdroid.android.utils.ScreenUtils;
 import com.jdroid.java.collections.Lists;
-import com.jdroid.java.utils.StringUtils;
 
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.core.util.Pair;
 
 
 public class DebugInfoFragment extends AbstractRecyclerFragment {
@@ -53,6 +53,7 @@ public class DebugInfoFragment extends AbstractRecyclerFragment {
 		properties.add(new Pair<>("Version Name", AppUtils.getVersionName()));
 		properties.add(new Pair<>("Version Code", AppUtils.getVersionCode()));
 		properties.add(new Pair<>("SO API Level", AndroidUtils.getApiLevel()));
+		properties.add(new Pair<>("Installer Package Name", AppUtils.getInstallerPackageName()));
 
 		properties.add(new Pair<>("Device Manufacturer", DeviceUtils.getDeviceManufacturer()));
 		properties.add(new Pair<>("Device Model", DeviceUtils.getDeviceModel()));
@@ -79,14 +80,7 @@ public class DebugInfoFragment extends AbstractRecyclerFragment {
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
-		List<Pair<String, Object>> filteredProperties = Lists.newArrayList();
-		for (Pair<String, Object> each : properties) {
-			if (each.second != null && StringUtils.isNotBlank(each.second.toString())) {
-				filteredProperties.add(each);
-			}
-		}
-
-		Collections.sort(filteredProperties, new Comparator<Pair<String, Object>>() {
+		Collections.sort(properties, new Comparator<Pair<String, Object>>() {
 			@Override
 			public int compare(Pair<String, Object> o1, Pair<String, Object> o2) {
 				return o1.first.compareTo(o2.first);
@@ -105,6 +99,6 @@ public class DebugInfoFragment extends AbstractRecyclerFragment {
 			public AbstractRecyclerFragment getAbstractRecyclerFragment() {
 				return DebugInfoFragment.this;
 			}
-		}, filteredProperties));
+		}, properties));
 	}
 }

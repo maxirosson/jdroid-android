@@ -13,6 +13,9 @@ import android.widget.ScrollView;
 import com.jdroid.android.context.BuildConfigUtils;
 import com.jdroid.android.lifecycle.AppContextContainer;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 public class AppUtils {
 
 	/**
@@ -122,5 +125,16 @@ public class AppUtils {
 
 	private static Context getContext() {
 		return AppContextContainer.getApplicationContext();
+	}
+
+	@Nullable
+	public static String getInstallerPackageName() {
+		return getContext().getPackageManager().getInstallerPackageName(getApplicationId());
+	}
+
+	@NonNull
+	public static String getSafeInstallerPackageName() {
+		String installedPackageName = getInstallerPackageName();
+		return installedPackageName != null ? installedPackageName : "unknown";
 	}
 }

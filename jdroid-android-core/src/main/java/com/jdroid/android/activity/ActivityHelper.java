@@ -11,13 +11,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import androidx.annotation.MainThread;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresPermission;
-import androidx.core.app.ActivityCompat;
-import androidx.core.app.TaskStackBuilder;
-import androidx.appcompat.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -59,6 +52,14 @@ import org.slf4j.Logger;
 
 import java.util.Map;
 import java.util.Set;
+
+import androidx.annotation.MainThread;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresPermission;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.TaskStackBuilder;
 
 public class ActivityHelper implements ActivityIf {
 
@@ -155,6 +156,7 @@ public class ActivityHelper implements ActivityIf {
 		if (firstActivityCreate == null) {
 			firstActivityCreate = true;
 			UsageStats.incrementAppLoadAsync();
+			AbstractApplication.get().getCoreAnalyticsSender().trackErrorCustomKey("installerPackageName", AppUtils.getSafeInstallerPackageName());
 			AbstractApplication.get().getCoreAnalyticsSender().onFirstActivityCreate(activity);
 		} else {
 			firstActivityCreate = false;

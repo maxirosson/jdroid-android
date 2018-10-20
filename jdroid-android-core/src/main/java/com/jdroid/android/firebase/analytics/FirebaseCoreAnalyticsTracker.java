@@ -3,16 +3,18 @@ package com.jdroid.android.firebase.analytics;
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.jdroid.android.analytics.CoreAnalyticsTracker;
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.social.SocialAction;
+import com.jdroid.android.utils.AppUtils;
 import com.jdroid.android.utils.DeviceUtils;
 import com.jdroid.android.utils.ScreenUtils;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
 
 public class FirebaseCoreAnalyticsTracker extends AbstractFirebaseAnalyticsTracker implements CoreAnalyticsTracker {
 
@@ -22,6 +24,7 @@ public class FirebaseCoreAnalyticsTracker extends AbstractFirebaseAnalyticsTrack
 	private static final String SCREEN_HEIGHT = "SCREEN_HEIGHT";
 	private static final String SCREEN_DENSITY = "SCREEN_DENSITY";
 	private static final String SCREEN_DENSITY_DPI = "SCREEN_DENSITY_DPI";
+	private static final String INSTALLER_PACKAGE_NAME = "INSTALLER_PACKAGE_NAME";
 
 	private Boolean firstTrackingSent = false;
 
@@ -59,6 +62,7 @@ public class FirebaseCoreAnalyticsTracker extends AbstractFirebaseAnalyticsTrack
 			getFirebaseAnalyticsHelper().setUserProperty(SCREEN_DENSITY, ScreenUtils.getScreenDensity());
 			getFirebaseAnalyticsHelper().setUserProperty(SCREEN_DENSITY_DPI, ScreenUtils.getDensityDpi().toString());
 			getFirebaseAnalyticsHelper().setUserProperty(INSTALLATION_SOURCE_USER_PROPERTY, AbstractApplication.get().getInstallationSource());
+			getFirebaseAnalyticsHelper().setUserProperty(INSTALLER_PACKAGE_NAME, AppUtils.getSafeInstallerPackageName());
 			firstTrackingSent = true;
 		}
 	}
