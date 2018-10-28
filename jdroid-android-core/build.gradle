@@ -45,7 +45,7 @@ dependencies {
 	api "com.google.firebase:firebase-core:16.0.4"
 	api "com.google.firebase:firebase-appindexing:16.0.2"
 	api "com.google.firebase:firebase-invites:16.0.4"
-	api "com.google.firebase:firebase-perf:16.1.2"
+	api "com.google.firebase:firebase-perf:16.2.0"
 
 	// https://github.com/firebase/firebase-jobdispatcher-android/releases
 	api 'com.firebase:firebase-jobdispatcher:0.8.5'
