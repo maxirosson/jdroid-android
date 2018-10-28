@@ -4,8 +4,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.jdroid.android.recycler.AbstractRecyclerFragment;
 import com.jdroid.android.recycler.RecyclerViewAdapter;
+import com.jdroid.android.recycler.RecyclerViewContainer;
 import com.jdroid.android.recycler.SwipeRecyclerFragment;
 import com.jdroid.android.sample.R;
 import com.jdroid.android.sample.ui.adapter.SampleRecyclerViewType;
@@ -13,6 +13,8 @@ import com.jdroid.android.sample.usecase.SampleItemsUseCase;
 import com.jdroid.android.usecase.UseCaseHelper;
 import com.jdroid.android.usecase.UseCaseTrigger;
 import com.jdroid.java.utils.IdGenerator;
+
+import androidx.annotation.NonNull;
 
 
 public class SwipeRefreshLoadingFragment extends SwipeRecyclerFragment {
@@ -51,11 +53,12 @@ public class SwipeRefreshLoadingFragment extends SwipeRecyclerFragment {
 
 			@Override
 			public void onItemSelected(String item, View view) {
-				getAdapter().removeItem(item);
+				getRecyclerViewAdapter().removeItem(item);
 			}
 
+			@NonNull
 			@Override
-			public AbstractRecyclerFragment getAbstractRecyclerFragment() {
+			public RecyclerViewContainer getRecyclerViewContainer() {
 				return SwipeRefreshLoadingFragment.this;
 			}
 		}, sampleItemsUseCase.getItems()));
@@ -71,7 +74,7 @@ public class SwipeRefreshLoadingFragment extends SwipeRecyclerFragment {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 			case R.id.add:
-				getAdapter().addItem(IdGenerator.getIntId().toString());
+				getRecyclerViewAdapter().addItem(IdGenerator.getIntId().toString());
 				return true;
 			default:
 				return super.onOptionsItemSelected(item);

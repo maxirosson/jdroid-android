@@ -1,7 +1,6 @@
 package com.jdroid.android.sample.ui.recyclerview;
 
 import android.os.Bundle;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -10,6 +9,7 @@ import com.jdroid.android.recycler.AbstractRecyclerFragment;
 import com.jdroid.android.recycler.FooterRecyclerViewType;
 import com.jdroid.android.recycler.HeaderRecyclerViewType;
 import com.jdroid.android.recycler.RecyclerViewAdapter;
+import com.jdroid.android.recycler.RecyclerViewContainer;
 import com.jdroid.android.recycler.RecyclerViewType;
 import com.jdroid.android.sample.R;
 import com.jdroid.android.sample.usecase.SampleItemsUseCase;
@@ -17,6 +17,9 @@ import com.jdroid.android.usecase.UseCaseHelper;
 import com.jdroid.android.usecase.UseCaseTrigger;
 import com.jdroid.java.collections.Lists;
 import com.jdroid.java.utils.IdGenerator;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class SimpleRecyclerFragment extends AbstractRecyclerFragment {
 
@@ -56,37 +59,37 @@ public class SimpleRecyclerFragment extends AbstractRecyclerFragment {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 			case R.id.addItem:
-				getAdapter().addItem(IdGenerator.getIntId().toString());
+				getRecyclerViewAdapter().addItem(IdGenerator.getIntId().toString());
 				return true;
 			case R.id.addItems:
-				getAdapter().addItems(Lists.newArrayList(IdGenerator.getIntId().toString(), IdGenerator.getIntId().toString(), IdGenerator.getIntId().toString()));
+				getRecyclerViewAdapter().addItems(Lists.newArrayList(IdGenerator.getIntId().toString(), IdGenerator.getIntId().toString(), IdGenerator.getIntId().toString()));
 				return true;
 			case R.id.clearItems:
-				getAdapter().clear();
+				getRecyclerViewAdapter().clear();
 				return true;
 			case R.id.removeFirstItem:
-				getAdapter().removeItemByPosition(0);
+				getRecyclerViewAdapter().removeItemByPosition(0);
 				return true;
 			case R.id.removeSecondItem:
-				getAdapter().removeItemByPosition(1);
+				getRecyclerViewAdapter().removeItemByPosition(1);
 				return true;
 			case R.id.addHeader:
-				getAdapter().setHeader(R.layout.header_item);
+				getRecyclerViewAdapter().setHeader(R.layout.header_item);
 				return true;
 			case R.id.addClickableHeader:
-				getAdapter().setHeader(new SampleHeaderRecyclerViewType());
+				getRecyclerViewAdapter().setHeader(new SampleHeaderRecyclerViewType());
 				return true;
 			case R.id.removeHeader:
-				getAdapter().removeHeader();
+				getRecyclerViewAdapter().removeHeader();
 				return true;
 			case R.id.addFooter:
-				getAdapter().setFooter(R.layout.footer_item);
+				getRecyclerViewAdapter().setFooter(R.layout.footer_item);
 				return true;
 			case R.id.addClickableFooter:
-				getAdapter().setFooter(new SampleFooterRecyclerViewType());
+				getRecyclerViewAdapter().setFooter(new SampleFooterRecyclerViewType());
 				return true;
 			case R.id.removeFooter:
-				getAdapter().removeFooter();
+				getRecyclerViewAdapter().removeFooter();
 				return true;
 			default:
 				return super.onOptionsItemSelected(item);
@@ -122,14 +125,15 @@ public class SimpleRecyclerFragment extends AbstractRecyclerFragment {
 			holder.textView.setText(item);
 		}
 
+		@NonNull
 		@Override
-		public AbstractRecyclerFragment getAbstractRecyclerFragment() {
+		public RecyclerViewContainer getRecyclerViewContainer() {
 			return SimpleRecyclerFragment.this;
 		}
 
 		@Override
 		public void onItemSelected(String item, View view) {
-			getAdapter().removeItem(item);
+			getRecyclerViewAdapter().removeItem(item);
 		}
 	}
 
@@ -156,11 +160,12 @@ public class SimpleRecyclerFragment extends AbstractRecyclerFragment {
 
 		@Override
 		public void onItemSelected(HeaderItem headerItem, View view) {
-			getAdapter().removeItem(headerItem);
+			getRecyclerViewAdapter().removeItem(headerItem);
 		}
 
+		@NonNull
 		@Override
-		public AbstractRecyclerFragment getAbstractRecyclerFragment() {
+		public RecyclerViewContainer getRecyclerViewContainer() {
 			return SimpleRecyclerFragment.this;
 		}
 	}
@@ -179,11 +184,12 @@ public class SimpleRecyclerFragment extends AbstractRecyclerFragment {
 
 		@Override
 		public void onItemSelected(FooterItem footerItem, View view) {
-			getAdapter().removeItem(footerItem);
+			getRecyclerViewAdapter().removeItem(footerItem);
 		}
 
+		@NonNull
 		@Override
-		public AbstractRecyclerFragment getAbstractRecyclerFragment() {
+		public RecyclerViewContainer getRecyclerViewContainer() {
 			return SimpleRecyclerFragment.this;
 		}
 	}

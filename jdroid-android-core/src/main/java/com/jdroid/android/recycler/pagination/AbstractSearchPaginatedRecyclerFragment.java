@@ -136,8 +136,8 @@ public abstract class AbstractSearchPaginatedRecyclerFragment extends AbstractPa
 		if (enoughToFilter()) {
 			search();
 		} else {
-			if (getAdapter() != null) {
-				getAdapter().clear();
+			if (getRecyclerViewAdapter() != null) {
+				getRecyclerViewAdapter().clear();
 			}
 			if (emptyViewContainer != null) {
 				emptyViewContainer.setVisibility(View.GONE);
@@ -176,8 +176,8 @@ public abstract class AbstractSearchPaginatedRecyclerFragment extends AbstractPa
 		getSearchUseCase().reset();
 		dismissLoading();
 
-		if (getAdapter() != null) {
-			getAdapter().clear();
+		if (getRecyclerViewAdapter() != null) {
+			getRecyclerViewAdapter().clear();
 		}
 		if (emptyViewContainer != null) {
 			emptyViewContainer.setVisibility(View.GONE);
@@ -188,8 +188,8 @@ public abstract class AbstractSearchPaginatedRecyclerFragment extends AbstractPa
 		getSearchUseCase().setSearchValue(searchValue);
 		getSearchUseCase().reset();
 
-		if (!isInstantSearchEnabled() && getAdapter() != null) {
-			getAdapter().clear();
+		if (!isInstantSearchEnabled() && getRecyclerViewAdapter() != null) {
+			getRecyclerViewAdapter().clear();
 		}
 		UseCaseHelper.executeUseCase(getSearchUseCase());
 	}

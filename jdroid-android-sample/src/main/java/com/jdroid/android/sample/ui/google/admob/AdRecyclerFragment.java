@@ -1,7 +1,6 @@
 package com.jdroid.android.sample.ui.google.admob;
 
 import android.os.Bundle;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 
 import com.google.android.gms.ads.AdSize;
@@ -10,6 +9,7 @@ import com.jdroid.android.firebase.admob.helpers.AdViewHelper;
 import com.jdroid.android.firebase.admob.helpers.BaseAdViewHelper;
 import com.jdroid.android.recycler.AbstractRecyclerFragment;
 import com.jdroid.android.recycler.RecyclerViewAdapter;
+import com.jdroid.android.recycler.RecyclerViewContainer;
 import com.jdroid.android.recycler.RecyclerViewType;
 import com.jdroid.android.sample.R;
 import com.jdroid.android.sample.application.AndroidAppContext;
@@ -20,6 +20,9 @@ import com.jdroid.android.usecase.UseCaseTrigger;
 import com.jdroid.java.collections.Lists;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class AdRecyclerFragment extends AbstractRecyclerFragment {
 
@@ -86,14 +89,15 @@ public class AdRecyclerFragment extends AbstractRecyclerFragment {
 			holder.textView.setText(item);
 		}
 
+		@NonNull
 		@Override
-		public AbstractRecyclerFragment getAbstractRecyclerFragment() {
+		public RecyclerViewContainer getRecyclerViewContainer() {
 			return AdRecyclerFragment.this;
 		}
 
 		@Override
 		public void onItemSelected(String item, View view) {
-			getAdapter().removeItem(item);
+			getRecyclerViewAdapter().removeItem(item);
 		}
 	}
 
@@ -104,8 +108,9 @@ public class AdRecyclerFragment extends AbstractRecyclerFragment {
 			return R.layout.ad;
 		}
 
+		@NonNull
 		@Override
-		public AbstractRecyclerFragment getAbstractRecyclerFragment() {
+		public RecyclerViewContainer getRecyclerViewContainer() {
 			return AdRecyclerFragment.this;
 		}
 	}

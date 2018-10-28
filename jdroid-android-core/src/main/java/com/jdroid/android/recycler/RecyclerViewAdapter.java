@@ -1,8 +1,5 @@
 package com.jdroid.android.recycler;
 
-import androidx.annotation.LayoutRes;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +12,11 @@ import org.slf4j.Logger;
 
 import java.util.List;
 import java.util.Map;
+
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -63,7 +65,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 			@Override
 			@Nullable
 			@SuppressWarnings("NullableProblems")
-			public AbstractRecyclerFragment getAbstractRecyclerFragment() {
+			public AbstractRecyclerFragment getRecyclerViewContainer() {
 				return null;
 			}
 		});
@@ -116,10 +118,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 				return footerResId;
 			}
 
+			@NonNull
 			@Override
-			@Nullable
 			@SuppressWarnings("NullableProblems")
-			public AbstractRecyclerFragment getAbstractRecyclerFragment() {
+			public RecyclerViewContainer getRecyclerViewContainer() {
 				return null;
 			}
 		});

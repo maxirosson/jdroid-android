@@ -1,7 +1,6 @@
 package com.jdroid.android.debug;
 
 import android.os.Bundle;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
@@ -9,10 +8,14 @@ import com.jdroid.android.R;
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.recycler.AbstractRecyclerFragment;
 import com.jdroid.android.recycler.RecyclerViewAdapter;
+import com.jdroid.android.recycler.RecyclerViewContainer;
 import com.jdroid.android.recycler.RecyclerViewType;
 import com.jdroid.java.collections.Lists;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class DebugSettingsFragment extends AbstractRecyclerFragment {
 
@@ -77,8 +80,9 @@ public class DebugSettingsFragment extends AbstractRecyclerFragment {
 			PreferenceAppenderActivity.startActivity(getActivity(), item);
 		}
 
+		@NonNull
 		@Override
-		public AbstractRecyclerFragment getAbstractRecyclerFragment() {
+		public RecyclerViewContainer getRecyclerViewContainer() {
 			return DebugSettingsFragment.this;
 		}
 	}

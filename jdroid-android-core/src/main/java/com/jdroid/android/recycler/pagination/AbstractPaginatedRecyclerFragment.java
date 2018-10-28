@@ -1,20 +1,23 @@
 package com.jdroid.android.recycler.pagination;
 
 import android.os.Bundle;
-import androidx.annotation.MainThread;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.jdroid.android.R;
 import com.jdroid.android.exception.DialogErrorDisplayer;
 import com.jdroid.android.recycler.AbstractRecyclerFragment;
 import com.jdroid.android.recycler.FooterRecyclerViewType;
 import com.jdroid.android.recycler.RecyclerViewAdapter;
+import com.jdroid.android.recycler.RecyclerViewContainer;
 import com.jdroid.android.usecase.UseCaseHelper;
 import com.jdroid.android.usecase.UseCaseTrigger;
 import com.jdroid.java.exception.AbstractException;
 
 import java.util.List;
+
+import androidx.annotation.MainThread;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public abstract class AbstractPaginatedRecyclerFragment extends AbstractRecyclerFragment {
 
@@ -51,8 +54,8 @@ public abstract class AbstractPaginatedRecyclerFragment extends AbstractRecycler
 	protected abstract RecyclerViewAdapter createAdapter(List<Object> items);
 
 	private void initAdapter() {
-		if (getAdapter() != null) {
-			getAdapter().clear();
+		if (getRecyclerViewAdapter() != null) {
+			getRecyclerViewAdapter().clear();
 		}
 		setAdapter(createAdapter(paginatedUseCase.getResults()));
 	}
@@ -61,7 +64,7 @@ public abstract class AbstractPaginatedRecyclerFragment extends AbstractRecycler
 	@Override
 	public void onStartUseCase() {
 		if (paginatedUseCase.isPaginating()) {
-			getAdapter().setFooter(new LoadingRecyclerViewType());
+			getRecyclerViewAdapter().setFooter(new LoadingRecyclerViewType());
 		} else {
 			super.onStartUseCase();
 		}
@@ -81,7 +84,7 @@ public abstract class AbstractPaginatedRecyclerFragment extends AbstractRecycler
 	}
 
 	private void dismissPaginationLoading() {
-		getAdapter().removeFooter();
+		getRecyclerViewAdapter().removeFooter();
 	}
 
 	@MainThread
@@ -92,7 +95,7 @@ public abstract class AbstractPaginatedRecyclerFragment extends AbstractRecycler
 
 			dismissPaginationLoading();
 
-			getAdapter().addItems(paginatedUseCase.getResults());
+			getRecyclerViewAdapter().addItems(paginatedUseCase.getResults());
 			dismissLoading();
 		} else {
 
@@ -122,7 +125,7 @@ public abstract class AbstractPaginatedRecyclerFragment extends AbstractRecycler
 			recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
 				@Override
-				public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+				public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
 					if (!paginationInProgress && !paginatedUseCase.isLastPage()) {
 
 						int visibleItemCount = getLayoutManager().getChildCount();
@@ -160,8 +163,9 @@ public abstract class AbstractPaginatedRecyclerFragment extends AbstractRecycler
 			return AbstractPaginatedRecyclerFragment.this.getPaginationFooterResId();
 		}
 
+		@NonNull
 		@Override
-		public AbstractRecyclerFragment getAbstractRecyclerFragment() {
+		public RecyclerViewContainer getRecyclerViewContainer() {
 			return AbstractPaginatedRecyclerFragment.this;
 		}
 	}

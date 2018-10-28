@@ -2,9 +2,6 @@ package com.jdroid.android.about;
 
 import android.app.Activity;
 import android.os.Bundle;
-import androidx.annotation.MainThread;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -16,6 +13,7 @@ import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.recycler.AbstractRecyclerFragment;
 import com.jdroid.android.recycler.FooterRecyclerViewType;
 import com.jdroid.android.recycler.RecyclerViewAdapter;
+import com.jdroid.android.recycler.RecyclerViewContainer;
 import com.jdroid.android.recycler.RecyclerViewType;
 import com.jdroid.android.utils.AppUtils;
 import com.jdroid.android.utils.ExternalAppsUtils;
@@ -23,6 +21,10 @@ import com.jdroid.java.collections.Lists;
 import com.jdroid.java.remoteconfig.RemoteConfigParameter;
 
 import java.util.List;
+
+import androidx.annotation.MainThread;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class AboutFragment extends AbstractRecyclerFragment {
 
@@ -172,7 +174,7 @@ public class AboutFragment extends AbstractRecyclerFragment {
 
 		@NonNull
 		@Override
-		public AbstractRecyclerFragment getAbstractRecyclerFragment() {
+		public RecyclerViewContainer getRecyclerViewContainer() {
 			return AboutFragment.this;
 		}
 	}
@@ -197,7 +199,7 @@ public class AboutFragment extends AbstractRecyclerFragment {
 
 		@NonNull
 		@Override
-		public AbstractRecyclerFragment getAbstractRecyclerFragment() {
+		public RecyclerViewContainer getRecyclerViewContainer() {
 			return AboutFragment.this;
 		}
 	}
@@ -235,7 +237,7 @@ public class AboutFragment extends AbstractRecyclerFragment {
 
 		@NonNull
 		@Override
-		public AbstractRecyclerFragment getAbstractRecyclerFragment() {
+		public RecyclerViewContainer getRecyclerViewContainer() {
 			return AboutFragment.this;
 		}
 	}

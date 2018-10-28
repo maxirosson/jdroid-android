@@ -9,7 +9,7 @@ public class GoogleInAppBillingFragment extends InAppBillingRecyclerFragment {
 
 	@Override
 	public void onPurchased(final Product product) {
-		getAdapter().notifyDataSetChanged();
+		getRecyclerViewAdapter().notifyDataSetChanged();
 		ToastUtils.showToast(R.string.jdroid_purchaseThanks);
 	}
 

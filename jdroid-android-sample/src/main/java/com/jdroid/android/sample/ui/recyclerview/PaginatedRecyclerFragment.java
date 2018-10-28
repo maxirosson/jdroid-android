@@ -1,17 +1,19 @@
 package com.jdroid.android.sample.ui.recyclerview;
 
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import com.jdroid.android.recycler.AbstractRecyclerFragment;
 import com.jdroid.android.recycler.RecyclerViewAdapter;
+import com.jdroid.android.recycler.RecyclerViewContainer;
 import com.jdroid.android.recycler.RecyclerViewType;
 import com.jdroid.android.recycler.pagination.AbstractPaginatedRecyclerFragment;
 import com.jdroid.android.recycler.pagination.PaginatedUseCase;
 import com.jdroid.android.sample.R;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class PaginatedRecyclerFragment extends AbstractPaginatedRecyclerFragment {
 
@@ -49,14 +51,15 @@ public class PaginatedRecyclerFragment extends AbstractPaginatedRecyclerFragment
 			holder.textView.setText(item);
 		}
 
+		@NonNull
 		@Override
-		public AbstractRecyclerFragment getAbstractRecyclerFragment() {
+		public RecyclerViewContainer getRecyclerViewContainer() {
 			return PaginatedRecyclerFragment.this;
 		}
 
 		@Override
 		public void onItemSelected(String item, View view) {
-			getAdapter().removeItem(item);
+			getRecyclerViewAdapter().removeItem(item);
 		}
 	}
 

@@ -1,12 +1,12 @@
 package com.jdroid.android.about;
 
 import android.os.Bundle;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
 import com.jdroid.android.recycler.AbstractRecyclerFragment;
 import com.jdroid.android.recycler.RecyclerViewAdapter;
+import com.jdroid.android.recycler.RecyclerViewContainer;
 import com.jdroid.android.recycler.RecyclerViewType;
 import com.jdroid.java.collections.Lists;
 import com.jdroid.java.utils.ReflectionUtils;
@@ -14,6 +14,9 @@ import com.jdroid.java.utils.ReflectionUtils;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class LibrariesFragment extends AbstractRecyclerFragment {
 
@@ -94,8 +97,9 @@ public class LibrariesFragment extends AbstractRecyclerFragment {
 			AboutAppModule.get().getModuleAnalyticsSender().trackAboutLibraryOpen(item.getLibraryKey());
 		}
 
+		@NonNull
 		@Override
-		public AbstractRecyclerFragment getAbstractRecyclerFragment() {
+		public RecyclerViewContainer getRecyclerViewContainer() {
 			return LibrariesFragment.this;
 		}
 	}

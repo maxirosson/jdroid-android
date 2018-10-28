@@ -1,8 +1,6 @@
 package com.jdroid.android.firebase.remoteconfig;
 
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -16,6 +14,7 @@ import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.application.AppModule;
 import com.jdroid.android.recycler.AbstractRecyclerFragment;
 import com.jdroid.android.recycler.RecyclerViewAdapter;
+import com.jdroid.android.recycler.RecyclerViewContainer;
 import com.jdroid.android.recycler.RecyclerViewType;
 import com.jdroid.java.collections.Lists;
 import com.jdroid.java.date.DateUtils;
@@ -24,6 +23,9 @@ import com.jdroid.java.utils.StringUtils;
 
 import java.util.Date;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class FirebaseRemoteConfigFragment extends AbstractRecyclerFragment {
 
@@ -76,7 +78,7 @@ public class FirebaseRemoteConfigFragment extends AbstractRecyclerFragment {
 							executeOnUIThread(new Runnable() {
 								@Override
 								public void run() {
-									getAdapter().notifyDataSetChanged();
+									getRecyclerViewAdapter().notifyDataSetChanged();
 								}
 							});
 						}
@@ -90,7 +92,7 @@ public class FirebaseRemoteConfigFragment extends AbstractRecyclerFragment {
 				@Override
 				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 					MockRemoteConfigLoader.setMocksEnabled(isChecked);
-					getAdapter().notifyDataSetChanged();
+					getRecyclerViewAdapter().notifyDataSetChanged();
 				}
 			});
 
@@ -117,7 +119,7 @@ public class FirebaseRemoteConfigFragment extends AbstractRecyclerFragment {
 
 		@NonNull
 		@Override
-		public AbstractRecyclerFragment getAbstractRecyclerFragment() {
+		public RecyclerViewContainer getRecyclerViewContainer() {
 			return FirebaseRemoteConfigFragment.this;
 		}
 	}
@@ -189,7 +191,7 @@ public class FirebaseRemoteConfigFragment extends AbstractRecyclerFragment {
 
 		@NonNull
 		@Override
-		public AbstractRecyclerFragment getAbstractRecyclerFragment() {
+		public AbstractRecyclerFragment getRecyclerViewContainer() {
 			return FirebaseRemoteConfigFragment.this;
 		}
 	}

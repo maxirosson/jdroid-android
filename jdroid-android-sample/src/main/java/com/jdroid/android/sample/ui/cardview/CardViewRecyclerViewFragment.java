@@ -1,16 +1,19 @@
 package com.jdroid.android.sample.ui.cardview;
 
 import android.os.Bundle;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 
 import com.jdroid.android.recycler.AbstractRecyclerFragment;
 import com.jdroid.android.recycler.RecyclerViewAdapter;
+import com.jdroid.android.recycler.RecyclerViewContainer;
 import com.jdroid.android.recycler.RecyclerViewType;
 import com.jdroid.android.sample.R;
 import com.jdroid.java.collections.Lists;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class CardViewRecyclerViewFragment extends AbstractRecyclerFragment {
 
@@ -43,8 +46,9 @@ public class CardViewRecyclerViewFragment extends AbstractRecyclerFragment {
 		public void fillHolderFromItem(Integer item, SampleViewHolder holder) {
 		}
 
+		@NonNull
 		@Override
-		public AbstractRecyclerFragment getAbstractRecyclerFragment() {
+		public RecyclerViewContainer getRecyclerViewContainer() {
 			return CardViewRecyclerViewFragment.this;
 		}
 
@@ -75,8 +79,9 @@ public class CardViewRecyclerViewFragment extends AbstractRecyclerFragment {
 		public void fillHolderFromItem(String item, SampleViewHolder holder) {
 		}
 
+		@NonNull
 		@Override
-		public AbstractRecyclerFragment getAbstractRecyclerFragment() {
+		public RecyclerViewContainer getRecyclerViewContainer() {
 			return CardViewRecyclerViewFragment.this;
 		}
 

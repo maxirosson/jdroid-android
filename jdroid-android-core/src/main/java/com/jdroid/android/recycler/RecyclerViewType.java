@@ -1,9 +1,6 @@
 package com.jdroid.android.recycler;
 
 import android.app.Activity;
-import android.content.Context;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +8,9 @@ import android.view.ViewGroup;
 import com.jdroid.java.utils.LoggerUtils;
 
 import org.slf4j.Logger;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 public abstract class RecyclerViewType<ITEM, VIEWHOLDER extends RecyclerView.ViewHolder> implements View.OnClickListener {
 
@@ -41,7 +41,7 @@ public abstract class RecyclerViewType<ITEM, VIEWHOLDER extends RecyclerView.Vie
 	public abstract void fillHolderFromItem(ITEM item, VIEWHOLDER holder);
 
 	@NonNull
-	public abstract AbstractRecyclerFragment getAbstractRecyclerFragment();
+	public abstract RecyclerViewContainer getRecyclerViewContainer();
 
 	protected Boolean isClickable() {
 		return true;
@@ -50,12 +50,12 @@ public abstract class RecyclerViewType<ITEM, VIEWHOLDER extends RecyclerView.Vie
 	@Override
 	@SuppressWarnings("unchecked")
 	public void onClick(View view) {
-		int itemPosition = getAbstractRecyclerFragment().getRecyclerView().getChildAdapterPosition(view);
+		int itemPosition = getRecyclerViewContainer().getRecyclerView().getChildAdapterPosition(view);
 		if (itemPosition != RecyclerView.NO_POSITION) {
 			if (recyclerViewTypeListener != null) {
 				recyclerViewTypeListener.onItemSelected(itemPosition);
 			}
-			onItemSelected((ITEM)getAbstractRecyclerFragment().getAdapter().getItem(itemPosition), view);
+			onItemSelected((ITEM)getRecyclerViewContainer().getRecyclerViewAdapter().getItem(itemPosition), view);
 		} else {
 			LOGGER.warn("Ignored onClick for item with no position");
 		}
@@ -78,12 +78,8 @@ public abstract class RecyclerViewType<ITEM, VIEWHOLDER extends RecyclerView.Vie
 		return (V)containerView.findViewById(id);
 	}
 
-	protected Context getContext() {
-		return getAbstractRecyclerFragment().getContext();
-	}
-
 	protected Activity getActivity() {
-		return getAbstractRecyclerFragment().getActivity();
+		return getRecyclerViewContainer().getActivity();
 	}
 
 	public Boolean matchViewType(Object item) {

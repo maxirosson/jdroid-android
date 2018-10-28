@@ -10,6 +10,7 @@ import com.jdroid.android.firebase.performance.FirebasePerformanceAppContext;
 import com.jdroid.android.leakcanary.LeakCanaryHelper;
 import com.jdroid.android.recycler.AbstractRecyclerFragment;
 import com.jdroid.android.recycler.RecyclerViewAdapter;
+import com.jdroid.android.recycler.RecyclerViewContainer;
 import com.jdroid.android.strictmode.StrictModeHelper;
 import com.jdroid.android.utils.AndroidUtils;
 import com.jdroid.android.utils.AppUtils;
@@ -96,7 +97,7 @@ public class DebugInfoFragment extends AbstractRecyclerFragment {
 
 			@NonNull
 			@Override
-			public AbstractRecyclerFragment getAbstractRecyclerFragment() {
+			public RecyclerViewContainer getRecyclerViewContainer() {
 				return DebugInfoFragment.this;
 			}
 		}, properties));

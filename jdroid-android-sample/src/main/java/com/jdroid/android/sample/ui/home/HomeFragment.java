@@ -1,16 +1,19 @@
 package com.jdroid.android.sample.ui.home;
 
 import android.os.Bundle;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jdroid.android.recycler.AbstractRecyclerFragment;
 import com.jdroid.android.recycler.RecyclerViewAdapter;
+import com.jdroid.android.recycler.RecyclerViewContainer;
 import com.jdroid.android.recycler.RecyclerViewType;
 import com.jdroid.android.sample.R;
 import com.jdroid.java.collections.Lists;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class HomeFragment extends AbstractRecyclerFragment {
 
@@ -61,8 +64,9 @@ public class HomeFragment extends AbstractRecyclerFragment {
 			item.startActivity(HomeFragment.this.getActivity());
 		}
 
+		@NonNull
 		@Override
-		public AbstractRecyclerFragment getAbstractRecyclerFragment() {
+		public RecyclerViewContainer getRecyclerViewContainer() {
 			return HomeFragment.this;
 		}
 	}
