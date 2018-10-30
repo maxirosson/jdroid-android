@@ -35,7 +35,7 @@ public class FcmListenerResolver {
 			LOGGER.info(builder.toString());
 		}
 
-		FcmMessageResolver fcmResolver = AbstractFcmAppModule.get().getFcmMessageResolver(remoteMessage.getFrom());
+		FcmMessageResolver fcmResolver = AbstractFcmAppModule.get().getFcmMessageResolver();
 		if (fcmResolver != null) {
 			FcmMessage fcmMessage = null;
 			try {
@@ -57,23 +57,66 @@ public class FcmListenerResolver {
 		} else {
 			LOGGER.warn("A FCM message was received, but not resolved is configured");
 		}
+
+		for (FcmEventsListener fcmEventsListener : FcmContext.getFcmEventsListeners()) {
+			try {
+				fcmEventsListener.onMessageReceived(remoteMessage);
+			} catch (Exception e) {
+				AbstractApplication.get().getExceptionHandler().logHandledException(e);
+			}
+		}
 	}
 
 	public void onMessageSent(String msgId) {
 		LOGGER.info("Message sent with id: " + msgId);
+
+		for (FcmEventsListener fcmEventsListener : FcmContext.getFcmEventsListeners()) {
+			try {
+				fcmEventsListener.onMessageSent(msgId);
+			} catch (Exception e) {
+				AbstractApplication.get().getExceptionHandler().logHandledException(e);
+			}
+		}
 	}
 
 	public void onSendError(String msgId, Exception exception) {
 		AbstractApplication.get().getExceptionHandler().logWarningException("Send error. Message id: " + msgId, exception);
+
+		for (FcmEventsListener fcmEventsListener : FcmContext.getFcmEventsListeners()) {
+			try {
+				fcmEventsListener.onSendError(msgId, exception);
+			} catch (Exception e) {
+				AbstractApplication.get().getExceptionHandler().logHandledException(e);
+			}
+		}
 	}
 
 	public void onDeletedMessages() {
 		LOGGER.info("Deleted messages");
+
+		for (FcmEventsListener fcmEventsListener : FcmContext.getFcmEventsListeners()) {
+			try {
+				fcmEventsListener.onDeletedMessages();
+			} catch (Exception e) {
+				AbstractApplication.get().getExceptionHandler().logHandledException(e);
+			}
+		}
 	}
 
 	public void onNewToken(String token) {
 		LOGGER.info("New token: " + token);
+
+		for (FcmEventsListener fcmEventsListener : FcmContext.getFcmEventsListeners()) {
+			try {
+				fcmEventsListener.onNewToken(token);
+			} catch (Exception e) {
+				AbstractApplication.get().getExceptionHandler().logHandledException(e);
+			}
+		}
+
 		AbstractFcmAppModule.get().startFcmRegistration(false);
 	}
+
+
 
 }

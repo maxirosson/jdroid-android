@@ -10,7 +10,7 @@ public class FirebaseRemoteConfigTracker extends AbstractCoreAnalyticsTracker {
 	@Override
 	public void onFirstActivityCreate(Activity activity) {
 		if (AbstractApplication.get().getRemoteConfigLoader() instanceof FirebaseRemoteConfigLoader) {
-			FirebaseRemoteConfigLoader.get().init();
+			FirebaseRemoteConfigLoader.get().fetch();
 		}
 	}
 }

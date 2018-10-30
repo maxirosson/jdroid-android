@@ -5,9 +5,6 @@ import android.content.Intent;
 import android.content.pm.ShortcutInfo;
 import android.graphics.drawable.Icon;
 import android.os.Build;
-import androidx.annotation.NonNull;
-import androidx.multidex.MultiDex;
-import androidx.fragment.app.Fragment;
 
 import com.firebase.client.Firebase;
 import com.jdroid.android.about.AboutAppModule;
@@ -19,6 +16,7 @@ import com.jdroid.android.context.AppContext;
 import com.jdroid.android.debug.DebugContext;
 import com.jdroid.android.firebase.admob.AdMobAppModule;
 import com.jdroid.android.firebase.fcm.AbstractFcmAppModule;
+import com.jdroid.android.firebase.fcm.FcmContext;
 import com.jdroid.android.fragment.FragmentHelper;
 import com.jdroid.android.google.analytics.GoogleAnalyticsAppContext;
 import com.jdroid.android.google.analytics.GoogleAnalyticsFactory;
@@ -30,6 +28,7 @@ import com.jdroid.android.repository.UserRepository;
 import com.jdroid.android.sample.R;
 import com.jdroid.android.sample.debug.AndroidDebugContext;
 import com.jdroid.android.sample.firebase.fcm.AndroidFcmAppModule;
+import com.jdroid.android.sample.firebase.fcm.SampleFcmMessage;
 import com.jdroid.android.sample.repository.UserRepositoryImpl;
 import com.jdroid.android.sample.ui.AndroidActivityHelper;
 import com.jdroid.android.sample.ui.AndroidFragmentHelper;
@@ -51,6 +50,10 @@ import com.jdroid.java.http.okhttp.OkHttpServiceFactory;
 import java.util.List;
 import java.util.Map;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.multidex.MultiDex;
+
 public class AndroidApplication extends AbstractApplication {
 
 	public static AndroidApplication get() {
@@ -66,6 +69,7 @@ public class AndroidApplication extends AbstractApplication {
 		super.onProviderInit();
 
 		AdMobAppModule.setAdMobAppContext(new SampleAdMobAppContext());
+		FcmContext.addFcmMessage(new SampleFcmMessage());
 	}
 
 	@Override

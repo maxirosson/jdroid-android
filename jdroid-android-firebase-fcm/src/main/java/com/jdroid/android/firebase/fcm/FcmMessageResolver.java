@@ -4,6 +4,6 @@ import com.google.firebase.messaging.RemoteMessage;
 
 public interface FcmMessageResolver {
 
-	public FcmMessage resolve(RemoteMessage remoteMessage);
+	FcmMessage resolve(RemoteMessage remoteMessage);
 
 }

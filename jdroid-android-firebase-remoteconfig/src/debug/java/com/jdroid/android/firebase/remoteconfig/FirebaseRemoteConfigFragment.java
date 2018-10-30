@@ -72,7 +72,7 @@ public class FirebaseRemoteConfigFragment extends AbstractRecyclerFragment {
 			holder.fetch.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					FirebaseRemoteConfigLoader.get().fetch(new OnSuccessListener<Void>() {
+					FirebaseRemoteConfigLoader.get().fetch(false, new OnSuccessListener<Void>() {
 						@Override
 						public void onSuccess(Void aVoid) {
 							executeOnUIThread(new Runnable() {

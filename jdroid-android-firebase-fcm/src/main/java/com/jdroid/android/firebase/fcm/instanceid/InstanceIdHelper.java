@@ -1,6 +1,4 @@
-package com.jdroid.android.firebase.fcm;
-
-import androidx.annotation.WorkerThread;
+package com.jdroid.android.firebase.fcm.instanceid;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.jdroid.android.application.AbstractApplication;
@@ -12,6 +10,8 @@ import org.slf4j.Logger;
 
 import java.io.IOException;
 import java.util.UUID;
+
+import androidx.annotation.WorkerThread;
 
 public class InstanceIdHelper {
 

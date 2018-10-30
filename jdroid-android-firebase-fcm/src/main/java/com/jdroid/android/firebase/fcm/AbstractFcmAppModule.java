@@ -26,13 +26,15 @@ public abstract class AbstractFcmAppModule extends AbstractAppModule {
 		fcmListenerResolver = createFcmListenerResolver();
 	}
 
-	public FcmMessageResolver getFcmMessageResolver(String from) {
+	public FcmMessageResolver getFcmMessageResolver() {
 		return fcmMessageResolver;
 	}
 
 	public abstract List<FcmSender> getFcmSenders();
 
-	public abstract FcmMessageResolver createFcmMessageResolver();
+	public FcmMessageResolver createFcmMessageResolver() {
+		return new DefaultFcmMessageResolver();
+	}
 
 	public FcmListenerResolver createFcmListenerResolver() {
 		return new FcmListenerResolver();

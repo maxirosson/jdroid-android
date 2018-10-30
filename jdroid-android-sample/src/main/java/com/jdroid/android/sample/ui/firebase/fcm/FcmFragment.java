@@ -6,9 +6,9 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.jdroid.android.firebase.fcm.AbstractFcmAppModule;
-import com.jdroid.android.firebase.fcm.AbstractFcmMessageResolver;
+import com.jdroid.android.firebase.fcm.DefaultFcmMessageResolver;
 import com.jdroid.android.firebase.fcm.FcmRegistrationCommand;
-import com.jdroid.android.firebase.fcm.InstanceIdHelper;
+import com.jdroid.android.firebase.fcm.instanceid.InstanceIdHelper;
 import com.jdroid.android.firebase.fcm.notification.NotificationFcmMessage;
 import com.jdroid.android.fragment.AbstractFragment;
 import com.jdroid.android.sample.R;
@@ -93,10 +93,10 @@ public class FcmFragment extends AbstractFragment {
 
 						Map<String, String> params = Maps.newHashMap();
 						if (minAppVersionCode.getText().length() > 0) {
-							params.put(AbstractFcmMessageResolver.MIN_APP_VERSION_CODE_KEY, minAppVersionCode.getText().toString());
+							params.put(DefaultFcmMessageResolver.MIN_APP_VERSION_CODE_KEY, minAppVersionCode.getText().toString());
 						}
 						if (minDeviceOsVersion.getText().length() > 0) {
-							params.put(AbstractFcmMessageResolver.MIN_DEVICE_OS_VERSION_KEY, minDeviceOsVersion.getText().toString());
+							params.put(DefaultFcmMessageResolver.MIN_DEVICE_OS_VERSION_KEY, minDeviceOsVersion.getText().toString());
 						}
 
 						String messageKey = messageKeyEditText.getText().toString();

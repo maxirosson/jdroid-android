@@ -2,7 +2,7 @@ package com.jdroid.android.firebase.fcm.notification;
 
 import com.google.firebase.messaging.RemoteMessage;
 import com.jdroid.android.application.AbstractApplication;
-import com.jdroid.android.firebase.fcm.FcmMessage;
+import com.jdroid.android.firebase.fcm.AbstractFcmMessage;
 import com.jdroid.android.images.loader.BitmapLoader;
 import com.jdroid.android.notification.NotificationBuilder;
 import com.jdroid.android.notification.NotificationUtils;
@@ -12,7 +12,7 @@ import com.jdroid.java.utils.IdGenerator;
 import com.jdroid.java.utils.StringUtils;
 import com.jdroid.java.utils.TypeUtils;
 
-public class NotificationFcmMessage implements FcmMessage {
+public class NotificationFcmMessage extends AbstractFcmMessage {
 
 	public static final String CHANNEL = "channel";
 	public static final String CONTENT_TITLE = "contentTitle";

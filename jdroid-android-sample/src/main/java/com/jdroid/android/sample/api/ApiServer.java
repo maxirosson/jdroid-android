@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.firebase.fcm.FcmSender;
-import com.jdroid.android.firebase.fcm.InstanceIdHeaderAppender;
+import com.jdroid.android.firebase.fcm.instanceid.InstanceIdHeaderAppender;
 import com.jdroid.android.firebase.fcm.device.Device;
 import com.jdroid.android.http.DefaultHeaderAppender;
 import com.jdroid.java.collections.Lists;

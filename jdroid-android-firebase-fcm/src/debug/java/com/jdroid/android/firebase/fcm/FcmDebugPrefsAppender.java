@@ -9,6 +9,7 @@ import android.preference.PreferenceGroup;
 import com.google.firebase.messaging.RemoteMessage;
 import com.jdroid.android.debug.PreferencesAppender;
 import com.jdroid.java.collections.Lists;
+import com.jdroid.java.collections.Maps;
 
 import java.util.List;
 import java.util.Map;
@@ -16,11 +17,7 @@ import java.util.Map.Entry;
 
 public class FcmDebugPrefsAppender extends PreferencesAppender {
 
-	private Map<FcmMessage, Map<String, String>> fcmMessagesMap;
-
-	public FcmDebugPrefsAppender(Map<FcmMessage, Map<String, String>> fcmMessagesMap) {
-		this.fcmMessagesMap = fcmMessagesMap;
-	}
+	private static Map<FcmMessage, Map<String, String>> fcmMessagesMap = Maps.newHashMap();
 
 	@Override
 	public int getNameResId() {
@@ -35,7 +32,7 @@ public class FcmDebugPrefsAppender extends PreferencesAppender {
 		preference.setSummary(R.string.jdroid_emulateFcmMessageDescription);
 		List<CharSequence> entries = Lists.newArrayList();
 		for (FcmMessage entry : fcmMessagesMap.keySet()) {
-			entries.add(entry.getMessageKey());
+			entries.add(entry.getClass().getSimpleName());
 		}
 		preference.setEntries(entries.toArray(new CharSequence[0]));
 		preference.setEntryValues(entries.toArray(new CharSequence[0]));
@@ -46,7 +43,7 @@ public class FcmDebugPrefsAppender extends PreferencesAppender {
 			public boolean onPreferenceChange(Preference preference, Object newValue) {
 
 				for (Entry<FcmMessage, Map<String, String>> entry : fcmMessagesMap.entrySet()) {
-					if (entry.getKey().getMessageKey().equals(newValue.toString())) {
+					if (entry.getKey().getClass().getSimpleName().equals(newValue.toString())) {
 						RemoteMessage.Builder builder = new RemoteMessage.Builder("to");
 						if (entry.getValue() != null) {
 							for (Map.Entry<String, String> each : entry.getValue().entrySet()) {
@@ -79,5 +76,9 @@ public class FcmDebugPrefsAppender extends PreferencesAppender {
 	@Override
 	public Boolean isEnabled() {
 		return (fcmMessagesMap != null) && !fcmMessagesMap.isEmpty();
+	}
+
+	public static void addFcmMessage(FcmMessage fcmMessage, Map<String, String> data) {
+		fcmMessagesMap.put(fcmMessage, data);
 	}
 }
