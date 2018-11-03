@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.jdroid.android.firebase.fcm.AbstractFcmAppModule;
 import com.jdroid.android.firebase.fcm.DefaultFcmMessageResolver;
 import com.jdroid.android.firebase.fcm.FcmRegistrationCommand;
@@ -67,8 +68,39 @@ public class FcmFragment extends AbstractFragment {
 			}
 		});
 
-		final EditText googleServerApiKeyEditText = findView(R.id.googleServerApiKey);
-		googleServerApiKeyEditText.setText("AIzaSyBhf3imq3mldsdlh65nJqIIjXxLYPjh9fs");
+		EditText topicToSubscribeEditText = findView(R.id.topicToSubscribe);
+
+		findView(R.id.subscribeToTopic).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				ExecutorUtils.execute(new Runnable() {
+					@Override
+					public void run() {
+						String topic = topicToSubscribeEditText.getText().length() > 0 ? topicToSubscribeEditText.getText().toString() : null;
+						if (topic != null) {
+							FirebaseMessaging.getInstance().subscribeToTopic(topic);
+						}
+					}
+				});
+			}
+		});
+
+		findView(R.id.unsubscribeFromTopic).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				ExecutorUtils.execute(new Runnable() {
+					@Override
+					public void run() {
+						String topic = topicToSubscribeEditText.getText().length() > 0 ? topicToSubscribeEditText.getText().toString() : null;
+						if (topic != null) {
+							FirebaseMessaging.getInstance().unsubscribeFromTopic(topic);
+						}
+					}
+				});
+			}
+		});
+
+		final EditText topicEditText = findView(R.id.topic);
 
 		final EditText messageKeyEditText = findView(R.id.messageKey);
 		messageKeyEditText.setText("sampleMessage");
@@ -88,7 +120,7 @@ public class FcmFragment extends AbstractFragment {
 				ExecutorUtils.execute(new Runnable() {
 					@Override
 					public void run() {
-						String googleServerApiKey = googleServerApiKeyEditText.getText().length() > 0 ? googleServerApiKeyEditText.getText().toString() : null;
+						String topic = topicEditText.getText().length() > 0 ? topicEditText.getText().toString() : null;
 						String registrationToken = FcmRegistrationCommand.getRegistrationToken(senderId.getText().toString());
 
 						Map<String, String> params = Maps.newHashMap();
@@ -110,7 +142,7 @@ public class FcmFragment extends AbstractFragment {
 							params.put(NotificationFcmMessage.LARGE_ICON_URL, "https://jdroidtools.com/images/gradle.png");
 						}
 
-						new SampleApiService().sendPush(googleServerApiKey, registrationToken, messageKey, params);
+						new SampleApiService().sendPush(topic, registrationToken, messageKey, params);
 					}
 				});
 			}

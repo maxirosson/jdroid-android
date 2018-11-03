@@ -24,19 +24,39 @@
 				android:text="@string/removeInstanceId" />
 
 		<Button android:id="@+id/removeDevice"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/removeDevice" />
+
+		<com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent"
+															   android:layout_height="wrap_content">
+
+			<EditText android:id="@+id/topicToSubscribe"
+					  android:layout_width="match_parent"
+					  android:layout_height="wrap_content"
+					  android:inputType="text"
+					  android:hint="@string/topic" />
+		</com.google.android.material.textfield.TextInputLayout>
+
+		<Button android:id="@+id/subscribeToTopic"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:text="@string/removeDevice" />
+				android:text="@string/subscribeToTopic" />
+
+		<Button android:id="@+id/unsubscribeFromTopic"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/unsubscribeFromTopic" />
 
 		<com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent"
 															   android:layout_height="wrap_content"
 															   android:layout_marginTop="20dp">
 
-			<EditText android:id="@+id/googleServerApiKey"
+			<EditText android:id="@+id/topic"
 					  android:layout_width="match_parent"
 					  android:layout_height="wrap_content"
 					  android:inputType="text"
-					  android:hint="@string/googleServerApiKey" />
+					  android:hint="@string/topic" />
 		</com.google.android.material.textfield.TextInputLayout>
 
 		<com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent"

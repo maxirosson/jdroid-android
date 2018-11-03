@@ -81,10 +81,12 @@ public class SampleApiService extends AndroidApiService {
 		httpService.execute();
 	}
 
-	public void sendPush(String googleServerApiKey, String registrationToken, String messageKey, Map<String, String> params) {
+	public void sendPush(String topic, String registrationToken, String messageKey, Map<String, String> params) {
 		HttpService httpService = newGetService("fcm", "send");
-		httpService.addQueryParameter("googleServerApiKey", googleServerApiKey);
-		httpService.addQueryParameter("registrationToken", registrationToken);
+		httpService.addQueryParameter("topic", topic);
+		if (topic == null) {
+			httpService.addQueryParameter("registrationToken", registrationToken);
+		}
 		httpService.addQueryParameter("messageKeyExtraName", AbstractFcmMessage.MESSAGE_KEY_EXTRA);
 		httpService.addQueryParameter(AbstractFcmMessage.MESSAGE_KEY_EXTRA, messageKey);
 		httpService.addQueryParameter("timestampEnabled", "true");

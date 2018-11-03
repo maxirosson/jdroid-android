@@ -100,12 +100,14 @@
 	<string name="registerDeviceAndUpdateLastActiveTimestamp">Register Device &amp; Update Last Active Timestamp</string>
 	<string name="removeInstanceId">Remove Instance Id</string>
 	<string name="removeDevice">Remove Device</string>
+	<string name="subscribeToTopic">Subscribe to Topic</string>
+	<string name="unsubscribeFromTopic">Unsubscribe from Topic</string>
 	<string name="sendPush">Send Push</string>
 	<string name="messageKey">Message Key</string>
 	<string name="minAppVersionCode">MinAppVersionCode</string>
 	<string name="minDeviceOsVersion">MinDeviceOsVersion</string>
 	<string name="senderId">Sender Id</string>
-	<string name="googleServerApiKey">Google Server Api Key</string>
+	<string name="topic">Topic</string>
 
 	<!-- Google Maps -->
 	<string name="googleMaps">Google Maps</string>
