@@ -36,25 +36,24 @@ public class AppShortcutsHelper {
 	public static final int MAX_SHORTCUT_COUNT_PER_ACTIVITY = 4;
 	private static final String REQUEST_PIN_SHORTCUT_ACTION = "requestPinShortcut";
 
-	private static List<ShortcutInfo> initialShortcutInfos;
+	private static DynamicShortcutsLoader dynamicShortcutsLoader;
 
 	// Dynamic Shortcuts
+
+	@TargetApi(Build.VERSION_CODES.N_MR1)
+	public static void setDynamicShortcutsLoader(DynamicShortcutsLoader dynamicShortcutsLoader) {
+		AppShortcutsHelper.dynamicShortcutsLoader = dynamicShortcutsLoader;
+	}
+
+	public static DynamicShortcutsLoader getDynamicShortcutsLoader() {
+		return dynamicShortcutsLoader;
+	}
 
 	public static void reportShortcutUsed(String shortcutId) {
 		if (Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N_MR1) {
 			ShortcutManager shortcutManager = AbstractApplication.get().getSystemService(ShortcutManager.class);
 			shortcutManager.reportShortcutUsed(shortcutId);
 		}
-	}
-
-	@TargetApi(Build.VERSION_CODES.N_MR1)
-	public static void setInitialShortcutInfos(List<ShortcutInfo> initialShortcutInfos) {
-		AppShortcutsHelper.initialShortcutInfos = initialShortcutInfos;
-	}
-
-	@TargetApi(Build.VERSION_CODES.N_MR1)
-	public static List<ShortcutInfo> getInitialShortcutInfos() {
-		return initialShortcutInfos;
 	}
 
 	@TargetApi(Build.VERSION_CODES.N_MR1)

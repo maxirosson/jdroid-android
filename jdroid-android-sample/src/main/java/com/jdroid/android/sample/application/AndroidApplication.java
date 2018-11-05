@@ -1,5 +1,6 @@
 package com.jdroid.android.sample.application;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ShortcutInfo;
@@ -42,6 +43,7 @@ import com.jdroid.android.sample.ui.sqlite.SampleSQLiteRepository;
 import com.jdroid.android.sample.ui.uri.SampleUriWatcher;
 import com.jdroid.android.shortcuts.AppShortcutsAppModule;
 import com.jdroid.android.shortcuts.AppShortcutsHelper;
+import com.jdroid.android.shortcuts.DynamicShortcutsLoader;
 import com.jdroid.android.sqlite.SQLiteHelper;
 import com.jdroid.android.utils.LocalizationUtils;
 import com.jdroid.java.collections.Lists;
@@ -91,24 +93,31 @@ public class AndroidApplication extends AbstractApplication {
 	}
 
 	private void initAppShortcuts() {
-		if (Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N_MR1) {
-			List<ShortcutInfo> shortcutInfos = Lists.newArrayList();
-			int rank = 0;
-			for (HomeItem item : HomeItem.values()) {
+		if (AppShortcutsHelper.isDynamicAppShortcutsSupported()) {
+			AppShortcutsHelper.setDynamicShortcutsLoader(new DynamicShortcutsLoader() {
 
-				Intent intent = item.getIntent();
-				intent.setAction(Intent.ACTION_VIEW);
+				@TargetApi(Build.VERSION_CODES.N_MR1)
+				@Override
+				public List<ShortcutInfo> loadDynamicShortcuts() {
+					List<ShortcutInfo> shortcutInfos = Lists.newArrayList();
+					int rank = 0;
+					for (HomeItem item : HomeItem.values()) {
 
-				ShortcutInfo.Builder shortcutInfoBuilder = new ShortcutInfo.Builder(AbstractApplication.get(), item.name());
-				shortcutInfoBuilder.setShortLabel(LocalizationUtils.getString(item.getNameResource()));
-				shortcutInfoBuilder.setLongLabel(LocalizationUtils.getString(item.getNameResource()));
-				shortcutInfoBuilder.setIcon(Icon.createWithResource(AbstractApplication.get(), item.getIconResource()));
-				shortcutInfoBuilder.setIntent(intent);
-				shortcutInfoBuilder.setRank(rank);
-				shortcutInfos.add(shortcutInfoBuilder.build());
-				rank++;
-			}
-			AppShortcutsHelper.setInitialShortcutInfos(shortcutInfos);
+						Intent intent = item.getIntent();
+						intent.setAction(Intent.ACTION_VIEW);
+
+						ShortcutInfo.Builder shortcutInfoBuilder = new ShortcutInfo.Builder(AbstractApplication.get(), item.name());
+						shortcutInfoBuilder.setShortLabel(LocalizationUtils.getString(item.getNameResource()));
+						shortcutInfoBuilder.setLongLabel(LocalizationUtils.getString(item.getNameResource()));
+						shortcutInfoBuilder.setIcon(Icon.createWithResource(AbstractApplication.get(), item.getIconResource()));
+						shortcutInfoBuilder.setIntent(intent);
+						shortcutInfoBuilder.setRank(rank);
+						shortcutInfos.add(shortcutInfoBuilder.build());
+						rank++;
+					}
+					return shortcutInfos;
+				}
+			});
 		}
 	}
 
