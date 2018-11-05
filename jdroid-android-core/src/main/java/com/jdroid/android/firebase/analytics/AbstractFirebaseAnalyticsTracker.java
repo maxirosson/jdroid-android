@@ -1,16 +1,16 @@
 package com.jdroid.android.firebase.analytics;
 
-import androidx.annotation.WorkerThread;
-
 import com.jdroid.java.analytics.AnalyticsTracker;
 
 import java.util.concurrent.Executor;
+
+import androidx.annotation.WorkerThread;
 
 public class AbstractFirebaseAnalyticsTracker implements AnalyticsTracker {
 
 	@Override
 	public Boolean isEnabled() {
-		return getFirebaseAnalyticsHelper().isFirebaseAnalyticsEnabled();
+		return true;
 	}
 
 	@WorkerThread

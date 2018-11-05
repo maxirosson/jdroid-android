@@ -19,6 +19,6 @@ public class AppShortcutsAppLifecycleCallback extends ApplicationLifecycleCallba
 
 	@Override
 	public Boolean isEnabled() {
-		return AppShortcutsHelper.isAppShortcutsAvailable();
+		return AppShortcutsHelper.isDynamicAppShortcutsSupported();
 	}
 }

@@ -677,6 +677,12 @@
 				  android:label="@string/strictMode"
 				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" />
 
+		<!-- AppShortcuts -->
+
+		<activity android:name="com.jdroid.android.sample.ui.shortcuts.AppShortcutsActivity"
+				  android:label="@string/appShortcuts"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" />
+
 		<!-- WebView -->
 
 		<activity android:name="com.jdroid.android.sample.ui.webview.WebViewActivity"

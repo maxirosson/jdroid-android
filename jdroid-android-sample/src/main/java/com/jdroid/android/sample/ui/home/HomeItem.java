@@ -33,6 +33,7 @@ import com.jdroid.android.sample.ui.notifications.NotificationsActivity;
 import com.jdroid.android.sample.ui.rateme.RateAppActivity;
 import com.jdroid.android.sample.ui.recyclerview.RecyclerViewActivity;
 import com.jdroid.android.sample.ui.service.ServiceActivity;
+import com.jdroid.android.sample.ui.shortcuts.AppShortcutsActivity;
 import com.jdroid.android.sample.ui.sqlite.SQLiteActivity;
 import com.jdroid.android.sample.ui.strictmode.StrictModeActivity;
 import com.jdroid.android.sample.ui.tablets.LeftTabletActivity;
@@ -52,6 +53,7 @@ import androidx.fragment.app.FragmentActivity;
 public enum HomeItem implements ActionItem {
 
 	ANALYTCS(R.string.analytics, R.drawable.ic_analytics, AnalyticsActivity.class),
+	APP_SHORTCUTS(R.string.appShortcuts, R.drawable.ic_analytics, AppShortcutsActivity.class),
 	CARD_VIEW(R.string.cardView, R.drawable.ic_cardview, CardViewActivity.class),
 	DATE_TIME(R.string.dateTime, R.drawable.ic_date_time, DateTimeActivity.class),
 	ERROR_DISPLAYER(R.string.errorDisplayer, R.drawable.ic_exception_handling, ErrorDisplayerActivity.class),

@@ -285,6 +285,11 @@
 	<string name="commandService3Description">Success after 30 seconds</string>
 	<string name="commandService4Description">Minimum time between executions: 1 minute</string>
 
+	<!-- AppShortcuts -->
+	<string name="appShortcuts">App Shortcuts</string>
+	<string name="requestPinShortcutWithoutCallback">requestPinShortcut without Callback</string>
+	<string name="requestPinShortcutWithCallback">requestPinShortcut with Callback</string>
+
 	<!-- StrictMode -->
 	<string name="strictMode">Strict Mode</string>
 	<string name="diskAccessOnMainThread">Disk Access on Main Thread</string>
