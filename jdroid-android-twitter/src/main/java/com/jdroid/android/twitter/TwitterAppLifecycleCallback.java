@@ -4,8 +4,8 @@ import android.content.Context;
 import android.util.Log;
 
 import com.jdroid.android.BuildConfig;
+import com.jdroid.android.concurrent.AppExecutors;
 import com.jdroid.android.lifecycle.ApplicationLifecycleCallback;
-import com.jdroid.java.concurrent.ExecutorUtils;
 import com.jdroid.java.utils.LoggerUtils;
 import com.twitter.sdk.android.core.DefaultLogger;
 import com.twitter.sdk.android.core.Twitter;
@@ -21,7 +21,7 @@ public class TwitterAppLifecycleCallback extends ApplicationLifecycleCallback {
 
 	@Override
 	public void onCreate(final Context context) {
-		ExecutorUtils.execute(new Runnable() {
+		AppExecutors.getNetworkIOExecutor().execute(new Runnable() {
 			@Override
 			public void run() {
 				String twitterOauthConsumerKey = TwitterAppContext.getTwitterOauthConsumerKey();

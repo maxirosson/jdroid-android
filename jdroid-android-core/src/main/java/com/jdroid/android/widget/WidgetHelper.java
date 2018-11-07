@@ -5,11 +5,11 @@ import android.content.Intent;
 import android.net.Uri;
 
 import com.jdroid.android.application.AbstractApplication;
+import com.jdroid.android.concurrent.AppExecutors;
 import com.jdroid.android.uri.ReferrerUtils;
 import com.jdroid.android.uri.UriUtils;
 import com.jdroid.android.utils.AppUtils;
 import com.jdroid.android.utils.SharedPreferencesHelper;
-import com.jdroid.java.concurrent.ExecutorUtils;
 import com.jdroid.java.utils.RandomUtils;
 import com.jdroid.java.utils.StringUtils;
 
@@ -22,7 +22,7 @@ public class WidgetHelper {
 	public static final String WIDGET_SCHEME = "widget";
 
 	public synchronized static void onWidgetRemoved(final String widgetName) {
-		ExecutorUtils.execute(new Runnable() {
+		AppExecutors.getDiskIOExecutor().execute(new Runnable() {
 			@Override
 			public void run() {
 				SharedPreferencesHelper sharedPreferencesHelper = SharedPreferencesHelper.get(WIDGET_PREFERENCES);
@@ -37,8 +37,7 @@ public class WidgetHelper {
 	}
 
 	public synchronized static void onWidgetAdded(final String widgetName) {
-
-		ExecutorUtils.execute(new Runnable() {
+		AppExecutors.getDiskIOExecutor().execute(new Runnable() {
 			@Override
 			public void run() {
 				SharedPreferencesHelper sharedPreferencesHelper = SharedPreferencesHelper.get(WIDGET_PREFERENCES);

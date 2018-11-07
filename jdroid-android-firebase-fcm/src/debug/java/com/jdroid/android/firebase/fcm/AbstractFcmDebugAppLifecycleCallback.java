@@ -2,13 +2,13 @@ package com.jdroid.android.firebase.fcm;
 
 import android.content.Context;
 
+import com.jdroid.android.concurrent.AppExecutors;
 import com.jdroid.android.debug.DebugSettingsHelper;
 import com.jdroid.android.debug.info.DebugInfoAppender;
 import com.jdroid.android.debug.info.DebugInfoHelper;
 import com.jdroid.android.firebase.fcm.instanceid.InstanceIdHelper;
 import com.jdroid.android.lifecycle.ApplicationLifecycleCallback;
 import com.jdroid.java.collections.Lists;
-import com.jdroid.java.concurrent.ExecutorUtils;
 
 import java.util.List;
 
@@ -32,7 +32,7 @@ public abstract class AbstractFcmDebugAppLifecycleCallback extends ApplicationLi
 			}
 		});
 		// Load properties on a worker thread
-		ExecutorUtils.execute(new Runnable() {
+		AppExecutors.getDiskIOExecutor().execute(new Runnable() {
 			@Override
 			public void run() {
 				InstanceIdHelper.getInstanceId();

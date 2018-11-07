@@ -6,11 +6,11 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import com.jdroid.android.concurrent.AppExecutors;
 import com.jdroid.android.firebase.dynamiclink.FirebaseDynamicLinksAppContext;
 import com.jdroid.android.fragment.AbstractFragment;
 import com.jdroid.android.sample.R;
 import com.jdroid.android.utils.AppUtils;
-import com.jdroid.java.concurrent.ExecutorUtils;
 import com.jdroid.java.firebase.dynamiclinks.ShortDynamicLinkService;
 import com.jdroid.java.firebase.dynamiclinks.domain.AnalyticsInfo;
 import com.jdroid.java.firebase.dynamiclinks.domain.AndroidInfo;
@@ -70,7 +70,7 @@ public class DynamicLinksFragment extends AbstractFragment {
 		findView(R.id.buildLink).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ExecutorUtils.execute(new Runnable() {
+				AppExecutors.getNetworkIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
 						final DynamicLink dynamicLink = new DynamicLink();
@@ -116,7 +116,7 @@ public class DynamicLinksFragment extends AbstractFragment {
 			public void onClick(View v) {
 				final String longLink = longLinkTextView.getText().toString();
 				if (StringUtils.isNotEmpty(longLink)) {
-					ExecutorUtils.execute(new Runnable() {
+					AppExecutors.getNetworkIOExecutor().execute(new Runnable() {
 						@Override
 						public void run() {
 							final DynamicLinkResponse dynamicLinkResponse = new ShortDynamicLinkService().getShortDynamicLink(

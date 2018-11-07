@@ -4,8 +4,8 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnKeyListener;
 
+import com.jdroid.android.concurrent.AppExecutors;
 import com.jdroid.android.utils.AppUtils;
-import com.jdroid.java.concurrent.ExecutorUtils;
 
 public abstract class OnEnterKeyListener implements OnKeyListener {
 
@@ -22,9 +22,6 @@ public abstract class OnEnterKeyListener implements OnKeyListener {
 		this.async = async;
 	}
 
-	/**
-	 * @see android.view.View.OnKeyListener#onKey(android.view.View, int, android.view.KeyEvent)
-	 */
 	@Override
 	public boolean onKey(final View v, int keyCode, KeyEvent event) {
 
@@ -38,7 +35,7 @@ public abstract class OnEnterKeyListener implements OnKeyListener {
 				}
 			};
 			if (async) {
-				ExecutorUtils.execute(runnable);
+				AppExecutors.getNetworkIOExecutor().execute(runnable);
 			} else {
 				runnable.run();
 			}

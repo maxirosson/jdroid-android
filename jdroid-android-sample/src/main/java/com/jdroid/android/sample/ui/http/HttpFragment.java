@@ -3,13 +3,13 @@ package com.jdroid.android.sample.ui.http;
 import android.os.Bundle;
 import android.view.View;
 
+import com.jdroid.android.concurrent.AppExecutors;
 import com.jdroid.android.exception.DialogErrorDisplayer;
 import com.jdroid.android.exception.ErrorDisplayer;
 import com.jdroid.android.fragment.AbstractFragment;
 import com.jdroid.android.sample.R;
 import com.jdroid.android.sample.api.SampleApiService;
 import com.jdroid.android.sample.api.SampleResponse;
-import com.jdroid.java.concurrent.ExecutorUtils;
 import com.jdroid.java.exception.AbstractException;
 import com.jdroid.java.utils.LoggerUtils;
 
@@ -31,7 +31,7 @@ public class HttpFragment extends AbstractFragment {
 		findView(R.id.httpGet).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ExecutorUtils.execute(new Runnable() {
+				AppExecutors.getNetworkIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
 						SampleResponse sampleResponse = new SampleApiService().httpGetSample();
@@ -44,7 +44,7 @@ public class HttpFragment extends AbstractFragment {
 		findView(R.id.httpPost).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ExecutorUtils.execute(new Runnable() {
+				AppExecutors.getNetworkIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
 						new SampleApiService().httpPostSample();
@@ -56,7 +56,7 @@ public class HttpFragment extends AbstractFragment {
 		findView(R.id.httpPut).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ExecutorUtils.execute(new Runnable() {
+				AppExecutors.getNetworkIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
 						new SampleApiService().httpPutSample();
@@ -68,7 +68,7 @@ public class HttpFragment extends AbstractFragment {
 		findView(R.id.httpDelete).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ExecutorUtils.execute(new Runnable() {
+				AppExecutors.getNetworkIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
 						new SampleApiService().httpDeleteSample();
@@ -80,7 +80,7 @@ public class HttpFragment extends AbstractFragment {
 		findView(R.id.httpPatch).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ExecutorUtils.execute(new Runnable() {
+				AppExecutors.getNetworkIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
 						new SampleApiService().httpPatchSample();
@@ -92,7 +92,7 @@ public class HttpFragment extends AbstractFragment {
 		findView(R.id.connectionExceptionParser).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ExecutorUtils.execute(new Runnable() {
+				AppExecutors.getNetworkIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
 						new SampleApiService().connectionExceptionParser();
@@ -104,7 +104,7 @@ public class HttpFragment extends AbstractFragment {
 		findView(R.id.unexpectedExceptionParser).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ExecutorUtils.execute(new Runnable() {
+				AppExecutors.getNetworkIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
 						new SampleApiService().unexpectedExceptionParser();

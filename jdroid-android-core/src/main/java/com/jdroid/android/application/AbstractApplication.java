@@ -6,12 +6,6 @@ import android.app.Application;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.res.Configuration;
-import androidx.annotation.CallSuper;
-import androidx.annotation.MainThread;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.WorkerThread;
-import androidx.fragment.app.Fragment;
 
 import com.jdroid.android.BuildConfig;
 import com.jdroid.android.R;
@@ -20,6 +14,7 @@ import com.jdroid.android.activity.ActivityHelper;
 import com.jdroid.android.activity.ActivityLifecycleHandler;
 import com.jdroid.android.analytics.CoreAnalyticsSender;
 import com.jdroid.android.analytics.CoreAnalyticsTracker;
+import com.jdroid.android.concurrent.AppExecutors;
 import com.jdroid.android.context.AndroidGitContext;
 import com.jdroid.android.context.AppContext;
 import com.jdroid.android.debug.DebugContext;
@@ -42,7 +37,6 @@ import com.jdroid.android.utils.SharedPreferencesHelper;
 import com.jdroid.android.utils.ToastUtils;
 import com.jdroid.java.collections.Lists;
 import com.jdroid.java.collections.Maps;
-import com.jdroid.java.concurrent.ExecutorUtils;
 import com.jdroid.java.context.GitContext;
 import com.jdroid.java.date.DateUtils;
 import com.jdroid.java.domain.Identifiable;
@@ -57,6 +51,13 @@ import org.slf4j.Logger;
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.List;
 import java.util.Map;
+
+import androidx.annotation.CallSuper;
+import androidx.annotation.MainThread;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
+import androidx.fragment.app.Fragment;
 
 public abstract class AbstractApplication extends Application {
 
@@ -182,7 +183,7 @@ public abstract class AbstractApplication extends Application {
 			ToastUtils.init();
 			DateUtils.init();
 
-			ExecutorUtils.execute(new Runnable() {
+			AppExecutors.getDiskIOExecutor().execute(new Runnable() {
 
 				@Override
 				public void run() {

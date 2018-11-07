@@ -5,11 +5,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
+import com.jdroid.android.concurrent.AppExecutors;
 import com.jdroid.android.fragment.AbstractFragment;
 import com.jdroid.android.sample.R;
 import com.jdroid.android.sample.application.AndroidApplication;
 import com.jdroid.java.collections.Lists;
-import com.jdroid.java.concurrent.ExecutorUtils;
 import com.jdroid.java.repository.Repository;
 import com.jdroid.java.utils.RandomUtils;
 
@@ -32,7 +32,7 @@ public class SQLiteFragment extends AbstractFragment {
 
 			@Override
 			public void onClick(View v) {
-				ExecutorUtils.execute(new Runnable() {
+				AppExecutors.getDiskIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
 						Repository<SampleSQLiteEntity> repository = AndroidApplication.get().getRepositoryInstance(SampleSQLiteEntity.class);
@@ -49,7 +49,7 @@ public class SQLiteFragment extends AbstractFragment {
 
 			@Override
 			public void onClick(View v) {
-				ExecutorUtils.execute(new Runnable() {
+				AppExecutors.getDiskIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
 						if (lastId != null) {
@@ -68,7 +68,7 @@ public class SQLiteFragment extends AbstractFragment {
 
 			@Override
 			public void onClick(View v) {
-				ExecutorUtils.execute(new Runnable() {
+				AppExecutors.getDiskIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
 						if (lastId != null) {
@@ -84,7 +84,7 @@ public class SQLiteFragment extends AbstractFragment {
 
 			@Override
 			public void onClick(View v) {
-				ExecutorUtils.execute(new Runnable() {
+				AppExecutors.getDiskIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
 						Repository<SampleSQLiteEntity> repository = AndroidApplication.get().getRepositoryInstance(SampleSQLiteEntity.class);
@@ -97,7 +97,7 @@ public class SQLiteFragment extends AbstractFragment {
 
 			@Override
 			public void onClick(View v) {
-				ExecutorUtils.execute(new Runnable() {
+				AppExecutors.getDiskIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
 						Repository<SampleSQLiteEntity> repository = AndroidApplication.get().getRepositoryInstance(SampleSQLiteEntity.class);
@@ -126,7 +126,7 @@ public class SQLiteFragment extends AbstractFragment {
 
 			@Override
 			public void onClick(View v) {
-				ExecutorUtils.execute(new Runnable() {
+				AppExecutors.getDiskIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
 						final Repository<SampleSQLiteEntity> repository = AndroidApplication.get().getRepositoryInstance(SampleSQLiteEntity.class);

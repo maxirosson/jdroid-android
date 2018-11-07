@@ -4,10 +4,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import com.jdroid.android.concurrent.AppExecutors;
 import com.jdroid.android.fragment.AbstractFragment;
 import com.jdroid.android.sample.R;
 import com.jdroid.android.utils.ToastUtils;
-import com.jdroid.java.concurrent.ExecutorUtils;
 
 public class ToastsFragment extends AbstractFragment {
 
@@ -34,7 +34,7 @@ public class ToastsFragment extends AbstractFragment {
 
 			@Override
 			public void onClick(View v) {
-				ExecutorUtils.execute(new Runnable() {
+				AppExecutors.getNetworkIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
 						ToastUtils.showToastOnUIThread(R.string.toastFromWorkerThread);

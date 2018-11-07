@@ -1,18 +1,18 @@
 package com.jdroid.android.firebase.jobdispatcher;
 
 
-import androidx.annotation.MainThread;
-import androidx.annotation.WorkerThread;
-
 import com.firebase.jobdispatcher.JobParameters;
 import com.firebase.jobdispatcher.JobService;
 import com.google.firebase.perf.metrics.Trace;
 import com.jdroid.android.application.AbstractApplication;
+import com.jdroid.android.concurrent.AppExecutors;
 import com.jdroid.android.firebase.performance.TraceHelper;
-import com.jdroid.java.concurrent.ExecutorUtils;
 import com.jdroid.java.date.DateUtils;
 import com.jdroid.java.http.exception.ConnectionException;
 import com.jdroid.java.utils.LoggerUtils;
+
+import androidx.annotation.MainThread;
+import androidx.annotation.WorkerThread;
 
 // TODO See if we should extend SimpleJobService
 // TODO Rename to AbstractFirebaseJobService
@@ -21,7 +21,7 @@ public abstract class AbstractJobService extends JobService {
 	@MainThread
 	@Override
 	public final boolean onStartJob(final JobParameters jobParameters) {
-		ExecutorUtils.execute(new Runnable() {
+		AppExecutors.getNetworkIOExecutor().execute(new Runnable() {
 			@Override
 			public void run() {
 				Boolean needsReschedule = false;

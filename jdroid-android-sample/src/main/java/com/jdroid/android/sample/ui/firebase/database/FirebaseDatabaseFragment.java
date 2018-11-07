@@ -4,9 +4,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.jdroid.android.concurrent.AppExecutors;
 import com.jdroid.android.fragment.AbstractFragment;
 import com.jdroid.android.sample.R;
-import com.jdroid.java.concurrent.ExecutorUtils;
 import com.jdroid.java.utils.LoggerUtils;
 import com.jdroid.java.utils.RandomUtils;
 
@@ -36,7 +36,7 @@ public class FirebaseDatabaseFragment extends AbstractFragment {
 		findView(R.id.firebaseCreate).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ExecutorUtils.execute(new Runnable() {
+				AppExecutors.getNetworkIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
 						SampleFirebaseEntity entity = new SampleFirebaseEntity();
@@ -52,7 +52,7 @@ public class FirebaseDatabaseFragment extends AbstractFragment {
 		findView(R.id.firebaseUpdate).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ExecutorUtils.execute(new Runnable() {
+				AppExecutors.getNetworkIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
 						SampleFirebaseEntity entity = new SampleFirebaseEntity();
@@ -67,7 +67,7 @@ public class FirebaseDatabaseFragment extends AbstractFragment {
 		findView(R.id.firebaseGetAll).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ExecutorUtils.execute(new Runnable() {
+				AppExecutors.getNetworkIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
 						final List<SampleFirebaseEntity> results = repository.getAll();
@@ -85,7 +85,7 @@ public class FirebaseDatabaseFragment extends AbstractFragment {
 		findView(R.id.firebaseRemove).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ExecutorUtils.execute(new Runnable() {
+				AppExecutors.getNetworkIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
 						repository.remove(lastId);

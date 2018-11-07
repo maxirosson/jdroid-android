@@ -8,11 +8,11 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigValue;
 import com.jdroid.android.application.AbstractApplication;
+import com.jdroid.android.concurrent.AppExecutors;
 import com.jdroid.android.firebase.analytics.FirebaseAnalyticsFactory;
 import com.jdroid.android.utils.AppUtils;
 import com.jdroid.android.utils.SharedPreferencesHelper;
 import com.jdroid.java.collections.Lists;
-import com.jdroid.java.concurrent.ExecutorUtils;
 import com.jdroid.java.remoteconfig.RemoteConfigLoader;
 import com.jdroid.java.remoteconfig.RemoteConfigParameter;
 import com.jdroid.java.utils.LoggerUtils;
@@ -110,7 +110,7 @@ public class FirebaseRemoteConfigLoader implements RemoteConfigLoader {
 				LOGGER.debug("Firebase Remote Config activate fetched result: " + result);
 
 				if (setExperimentUserProperty && !Lists.isNullOrEmpty(remoteConfigParametersAsUserProperties)) {
-					ExecutorUtils.execute(new Runnable() {
+					AppExecutors.getNetworkIOExecutor().execute(new Runnable() {
 						@Override
 						public void run() {
 							for (RemoteConfigParameter each : remoteConfigParametersAsUserProperties) {
@@ -122,7 +122,7 @@ public class FirebaseRemoteConfigLoader implements RemoteConfigLoader {
 				}
 
 				if (onSuccessListener != null) {
-					ExecutorUtils.execute(new Runnable() {
+					AppExecutors.getNetworkIOExecutor().execute(new Runnable() {
 						@Override
 						public void run() {
 							onSuccessListener.onSuccess(null);

@@ -2,12 +2,14 @@ package com.jdroid.android.usecase;
 
 import android.os.Handler;
 import android.os.Looper;
-import androidx.annotation.MainThread;
 
+import com.jdroid.android.concurrent.AppExecutors;
 import com.jdroid.android.usecase.listener.UseCaseListener;
 import com.jdroid.java.concurrent.ExecutorUtils;
 
 import java.util.concurrent.TimeUnit;
+
+import androidx.annotation.MainThread;
 
 public class UseCaseHelper {
 
@@ -60,7 +62,7 @@ public class UseCaseHelper {
 	}
 
 	public static void executeUseCase(AbstractUseCase useCase) {
-		ExecutorUtils.execute(useCase);
+		AppExecutors.getNetworkIOExecutor().execute(useCase);
 	}
 
 	public static void executeUseCase(AbstractUseCase useCase, Long delay, TimeUnit timeUnit) {

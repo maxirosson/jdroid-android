@@ -9,13 +9,13 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.jdroid.android.application.AbstractApplication;
+import com.jdroid.android.concurrent.AppExecutors;
 import com.jdroid.android.fragment.AbstractFragment;
 import com.jdroid.android.glide.GlideBitmapLoader;
 import com.jdroid.android.notification.NotificationBuilder;
 import com.jdroid.android.notification.NotificationUtils;
 import com.jdroid.android.sample.R;
 import com.jdroid.android.sample.application.AndroidNotificationChannelType;
-import com.jdroid.java.concurrent.ExecutorUtils;
 import com.jdroid.java.date.DateUtils;
 import com.jdroid.java.utils.IdGenerator;
 import com.jdroid.java.utils.StringUtils;
@@ -66,7 +66,7 @@ public class NotificationsFragment extends AbstractFragment {
 			@Override
 			public void onClick(View v) {
 
-				ExecutorUtils.execute(new Runnable() {
+				AppExecutors.getNetworkIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
 						NotificationBuilder builder = new NotificationBuilder(notificationName.getText().toString(), notificationChannel.getText().toString());

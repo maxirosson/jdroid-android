@@ -1,26 +1,24 @@
 package com.jdroid.android.firebase.analytics;
 
 import android.annotation.SuppressLint;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.jdroid.android.application.AbstractApplication;
+import com.jdroid.android.concurrent.AppExecutors;
 import com.jdroid.android.context.BuildConfigUtils;
 import com.jdroid.android.firebase.testlab.FirebaseTestLab;
-import com.jdroid.java.concurrent.LowPriorityThreadFactory;
 import com.jdroid.java.utils.LoggerUtils;
 
 import org.slf4j.Logger;
 
 import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public class FirebaseAnalyticsHelper {
 
 	static final Logger LOGGER = LoggerUtils.getLogger(FirebaseAnalyticsHelper.class);
-
-	private Executor executor = Executors.newSingleThreadExecutor(new LowPriorityThreadFactory("firebase-analytics"));
 
 	private static final int EVENT_NAME_MAX_CHARS_LONG = 40;
 
@@ -89,7 +87,7 @@ public class FirebaseAnalyticsHelper {
 	}
 
 	public Executor getExecutor() {
-		return executor;
+		return AppExecutors.getNetworkIOExecutor();
 	}
 
 	/**

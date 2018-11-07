@@ -2,18 +2,18 @@ package com.jdroid.android.glide;
 
 import android.app.Activity;
 import android.content.Context;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.jdroid.android.application.AbstractApplication;
-import com.jdroid.android.utils.AndroidUtils;
-import com.jdroid.java.concurrent.ExecutorUtils;
+import com.jdroid.android.concurrent.AppExecutors;
 import com.jdroid.java.utils.LoggerUtils;
 
 import org.slf4j.Logger;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 public class GlideHelper {
 
@@ -66,16 +66,12 @@ public class GlideHelper {
 	}
 
 	public static void clearDiskCache() {
-		if (AndroidUtils.isMainThread()) {
-			ExecutorUtils.execute(new Runnable() {
-				@Override
-				public void run() {
-					Glide.get(AbstractApplication.get()).clearDiskCache();
-				}
-			});
-		} else {
-			Glide.get(AbstractApplication.get()).clearDiskCache();
-		}
+		AppExecutors.getDiskIOExecutor().execute(new Runnable() {
+			@Override
+			public void run() {
+				Glide.get(AbstractApplication.get()).clearDiskCache();
+			}
+		});
 	}
 
 	public static void clearMemory() {

@@ -3,22 +3,20 @@ package com.jdroid.android.analytics;
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
 
+import com.jdroid.android.concurrent.AppExecutors;
 import com.jdroid.android.social.SocialAction;
-import com.jdroid.java.concurrent.LowPriorityThreadFactory;
 
 import java.util.List;
 import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
+
+import androidx.annotation.NonNull;
 
 public abstract class AbstractCoreAnalyticsTracker implements CoreAnalyticsTracker {
 
-	private Executor executor = Executors.newSingleThreadExecutor(new LowPriorityThreadFactory("analytics"));
-
 	@Override
 	public Executor getExecutor() {
-		return executor;
+		return AppExecutors.getNetworkIOExecutor();
 	}
 
 	@Override

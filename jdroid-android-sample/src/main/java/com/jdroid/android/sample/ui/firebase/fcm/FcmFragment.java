@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.jdroid.android.concurrent.AppExecutors;
 import com.jdroid.android.firebase.fcm.AbstractFcmAppModule;
 import com.jdroid.android.firebase.fcm.DefaultFcmMessageResolver;
 import com.jdroid.android.firebase.fcm.FcmRegistrationCommand;
@@ -15,7 +16,6 @@ import com.jdroid.android.fragment.AbstractFragment;
 import com.jdroid.android.sample.R;
 import com.jdroid.android.sample.api.SampleApiService;
 import com.jdroid.java.collections.Maps;
-import com.jdroid.java.concurrent.ExecutorUtils;
 
 import java.util.Map;
 
@@ -47,7 +47,7 @@ public class FcmFragment extends AbstractFragment {
 		findView(R.id.removeInstanceId).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ExecutorUtils.execute(new Runnable() {
+				AppExecutors.getNetworkIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
 						InstanceIdHelper.removeInstanceId();
@@ -59,7 +59,7 @@ public class FcmFragment extends AbstractFragment {
 		findView(R.id.removeDevice).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ExecutorUtils.execute(new Runnable() {
+				AppExecutors.getNetworkIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
 						new SampleApiService().removeDevice();
@@ -73,7 +73,7 @@ public class FcmFragment extends AbstractFragment {
 		findView(R.id.subscribeToTopic).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ExecutorUtils.execute(new Runnable() {
+				AppExecutors.getNetworkIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
 						String topic = topicToSubscribeEditText.getText().length() > 0 ? topicToSubscribeEditText.getText().toString() : null;
@@ -88,7 +88,7 @@ public class FcmFragment extends AbstractFragment {
 		findView(R.id.unsubscribeFromTopic).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ExecutorUtils.execute(new Runnable() {
+				AppExecutors.getNetworkIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
 						String topic = topicToSubscribeEditText.getText().length() > 0 ? topicToSubscribeEditText.getText().toString() : null;
@@ -117,7 +117,7 @@ public class FcmFragment extends AbstractFragment {
 		findView(R.id.sendPush).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ExecutorUtils.execute(new Runnable() {
+				AppExecutors.getNetworkIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
 						String topic = topicEditText.getText().length() > 0 ? topicEditText.getText().toString() : null;

@@ -1,11 +1,11 @@
 package com.jdroid.android.context;
 
+import com.jdroid.android.concurrent.AppExecutors;
+import com.jdroid.android.utils.SharedPreferencesHelper;
+import com.jdroid.java.date.DateUtils;
+
 import androidx.annotation.MainThread;
 import androidx.annotation.WorkerThread;
-
-import com.jdroid.android.utils.SharedPreferencesHelper;
-import com.jdroid.java.concurrent.ExecutorUtils;
-import com.jdroid.java.date.DateUtils;
 
 public class UsageStats {
 
@@ -21,7 +21,7 @@ public class UsageStats {
 
 	@MainThread
 	public static void incrementAppLoadAsync() {
-		ExecutorUtils.execute(new Runnable() {
+		AppExecutors.getDiskIOExecutor().execute(new Runnable() {
 			@Override
 			public void run() {
 				incrementAppLoad();

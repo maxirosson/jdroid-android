@@ -1,7 +1,7 @@
 package com.jdroid.android.debug.crash;
 
+import com.jdroid.android.concurrent.AppExecutors;
 import com.jdroid.android.exception.DialogErrorDisplayer;
-import com.jdroid.java.concurrent.ExecutorUtils;
 import com.jdroid.java.exception.AbstractException;
 
 public class CrashGenerator {
@@ -20,7 +20,7 @@ public class CrashGenerator {
 			}
 		};
 		if (executeOnNewThread) {
-			ExecutorUtils.execute(runnable);
+			AppExecutors.getNetworkIOExecutor().execute(runnable);
 		} else {
 			runnable.run();
 		}

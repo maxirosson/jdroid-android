@@ -2,10 +2,10 @@ package com.jdroid.android.firebase.admob;
 
 import android.content.Context;
 
+import com.jdroid.android.concurrent.AppExecutors;
 import com.jdroid.android.debug.DebugSettingsHelper;
 import com.jdroid.android.lifecycle.ApplicationLifecycleCallback;
 import com.jdroid.android.utils.SharedPreferencesHelper;
-import com.jdroid.java.concurrent.ExecutorUtils;
 
 import static com.jdroid.android.firebase.admob.AdMobAppContext.TEST_AD_UNIT_ID_ENABLED;
 
@@ -18,7 +18,7 @@ public class AdMobDebugAppLifecycleCallback extends ApplicationLifecycleCallback
 
 	@Override
 	public void onCreate(Context context) {
-		ExecutorUtils.execute(new Runnable() {
+		AppExecutors.getDiskIOExecutor().execute(new Runnable() {
 			@Override
 			public void run() {
 				// This is required to initialize the prefs to display on the debug settings
