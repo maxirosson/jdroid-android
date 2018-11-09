@@ -8,7 +8,7 @@ ext.JDROID_JAVA_VERSION = '2.0.0'
 ext.JDROID_JAVA_HTTP_VERSION = '2.0.0'
 
 // https://developer.android.com/topic/libraries/architecture/adding-components#room
-ext.ROOM_VERSION = '1.1.1'
+ext.ROOM_VERSION = '2.0.0'
 
 // https://developers.facebook.com/docs/android
 ext.FACEBOOK_ANDROID_VERSION = '4.37.0'

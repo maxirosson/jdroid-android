@@ -18,7 +18,7 @@ dependencies {
 
 	api project(":jdroid-android-core")
 
-	api "android.arch.persistence.room:runtime:${ROOM_VERSION}"
+	api "androidx.room:room-runtime:${ROOM_VERSION}"
 
 	testImplementation "junit:junit:${JUNIT_VERSION}"
 	testImplementation "org.robolectric:robolectric:${ROBOLECTRIC_VERSION}"
