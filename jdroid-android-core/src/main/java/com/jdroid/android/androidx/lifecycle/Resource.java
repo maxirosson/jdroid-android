@@ -10,18 +10,6 @@ import androidx.annotation.Nullable;
  */
 public class Resource<T> {
 
-	public static <T> Resource<T> success(@NonNull T data) {
-		return new Resource<>(Status.SUCCESS, data, null);
-	}
-
-	public static <T> Resource<T> error(AbstractException exception, @Nullable T data) {
-		return new Resource<>(Status.ERROR, data, exception);
-	}
-
-	public static <T> Resource<T> loading(@Nullable T data) {
-		return new Resource<>(Status.LOADING, data, null);
-	}
-
 	@NonNull
 	private Status status;
 
@@ -50,6 +38,18 @@ public class Resource<T> {
 	@Nullable
 	public AbstractException getException() {
 		return exception;
+	}
+
+	public static <T> Resource<T> success(@NonNull T data) {
+		return new Resource<>(Status.SUCCESS, data, null);
+	}
+
+	public static <T> Resource<T> error(AbstractException exception, @Nullable T data) {
+		return new Resource<>(Status.ERROR, data, exception);
+	}
+
+	public static <T> Resource<T> loading(@Nullable T data) {
+		return new Resource<>(Status.LOADING, data, null);
 	}
 
 	public enum Status {

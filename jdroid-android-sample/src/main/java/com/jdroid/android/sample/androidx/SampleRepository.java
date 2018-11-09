@@ -60,12 +60,6 @@ public class SampleRepository {
 					return new ApiSuccessResponse<>(networkResponse);
 				}
 			}
-
-			@Override
-			protected NetworkResponse processResponse(ApiSuccessResponse<NetworkResponse> response) {
-				return response.getBody();
-			}
-
 		}.getLiveData();
 	}
 

@@ -192,7 +192,9 @@ public abstract class NetworkBoundResource<DatabaseDataType, NetworkDataType> {
 	protected abstract ApiResponse<NetworkDataType> doLoadFromNetwork();
 
 	@WorkerThread
-	protected abstract NetworkDataType processResponse(ApiSuccessResponse<NetworkDataType> response);
+	protected NetworkDataType processResponse(ApiSuccessResponse<NetworkDataType> response) {
+		return response.getBody();
+	}
 
 	// Called when the fetch fails. The child class may want to reset components
 	// like rate limiter.
