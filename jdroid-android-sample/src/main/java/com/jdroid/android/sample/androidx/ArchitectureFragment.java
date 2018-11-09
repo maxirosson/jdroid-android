@@ -38,9 +38,9 @@ public class ArchitectureFragment extends AbstractFragment {
 		observer = new ResourceObserver<SampleEntity>() {
 
 			@Override
-			protected void onSuccess(Resource<SampleEntity> resource) {
+			protected void onSuccess(SampleEntity data) {
 				TextView result = findView(R.id.result);
-				result.setText(resource.getData().toString());
+				result.setText(data.toString());
 			}
 
 			@Override

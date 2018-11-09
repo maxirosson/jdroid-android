@@ -3,7 +3,9 @@ package com.jdroid.android.androidx.lifecycle;
 import com.jdroid.android.exception.AbstractErrorDisplayer;
 import com.jdroid.android.exception.DialogErrorDisplayer;
 import com.jdroid.android.fragment.AbstractFragment;
+import com.jdroid.java.exception.AbstractException;
 
+import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
 
 public abstract class ResourceObserver<T> implements Observer<Resource<T>> {
@@ -13,31 +15,31 @@ public abstract class ResourceObserver<T> implements Observer<Resource<T>> {
 		if (resource != null) {
 			if (resource.getStatus().equals(Resource.Status.LOADING)) {
 				if (resource.getData() != null) {
-					showLoading(resource);
+					showLoading(resource.getData());
 				}
 			} else if (resource.getStatus().equals(Resource.Status.SUCCESS)) {
-				onSuccess(resource);
-				dismissLoading(resource);
+				onSuccess(resource.getData());
+				dismissLoading(resource.getData());
 			} else if (resource.getStatus().equals(Resource.Status.ERROR)) {
-				dismissLoading(resource);
-				onError(resource);
+				dismissLoading(resource.getData());
+				onError(resource.getException(), resource.getData());
 			}
 		}
 	}
 
-	protected void showLoading(Resource<T> resource) {
+	protected void showLoading(@Nullable T data) {
 		getFragment().showLoading();
 	}
 
-	protected void dismissLoading(Resource<T> resource) {
+	protected void dismissLoading(@Nullable T data) {
 		getFragment().dismissLoading();
 	}
 
-	protected abstract void onSuccess(Resource<T> resource);
+	protected abstract void onSuccess(T data);
 
-	protected void onError(Resource<T> resource) {
-		DialogErrorDisplayer.markAsNotGoBackOnError(resource.getException());
-		AbstractErrorDisplayer.getErrorDisplayer(resource.getException()).displayError(getFragment().getActivity(), resource.getException());
+	protected void onError(AbstractException exception, @Nullable T data) {
+		DialogErrorDisplayer.markAsNotGoBackOnError(exception);
+		AbstractErrorDisplayer.getErrorDisplayer(exception).displayError(getFragment().getActivity(), exception);
 	}
 
 	protected abstract AbstractFragment getFragment();
