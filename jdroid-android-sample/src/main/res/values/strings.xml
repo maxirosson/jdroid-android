@@ -14,6 +14,9 @@
 	<string name="houseAds">House Ads</string>
 	<string name="houseAd">House ad</string>
 
+	<!-- Architecture -->
+	<string name="architecture">Architecture</string>
+
 	<!-- Firebase Invites -->
 	<string name="appInvite">Firebase Invites</string>
 

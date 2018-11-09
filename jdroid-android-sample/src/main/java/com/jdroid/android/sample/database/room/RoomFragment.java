@@ -57,7 +57,7 @@ public class RoomFragment extends AbstractFragment {
 					public void run() {
 						if (lastId != null) {
 							SampleEntityDao sampleEntityDao = RoomHelper.getDefaultDatabase(AppDatabase.class).sampleEntityDao();
-							SampleEntity entity = sampleEntityDao.get(lastId);
+							SampleEntity entity = sampleEntityDao.get2(lastId);
 							if (entity != null) {
 								entity.setField(RandomUtils.getLong().toString());
 								sampleEntityDao.update(entity);

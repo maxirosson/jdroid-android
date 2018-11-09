@@ -6,6 +6,7 @@ import com.jdroid.android.ActionItem;
 import com.jdroid.android.activity.ActivityLauncher;
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.sample.R;
+import com.jdroid.android.sample.androidx.ArchitectureActivity;
 import com.jdroid.android.sample.database.room.RoomActivity;
 import com.jdroid.android.sample.ui.analytics.AnalyticsActivity;
 import com.jdroid.android.sample.ui.appinvite.AppInviteActivity;
@@ -54,6 +55,7 @@ public enum HomeItem implements ActionItem {
 
 	ANALYTCS(R.string.analytics, R.drawable.ic_analytics, AnalyticsActivity.class),
 	APP_SHORTCUTS(R.string.appShortcuts, R.drawable.ic_analytics, AppShortcutsActivity.class),
+	ARCHITECTURE(R.string.architecture, R.drawable.ic_analytics, ArchitectureActivity.class),
 	CARD_VIEW(R.string.cardView, R.drawable.ic_cardview, CardViewActivity.class),
 	DATE_TIME(R.string.dateTime, R.drawable.ic_date_time, DateTimeActivity.class),
 	ERROR_DISPLAYER(R.string.errorDisplayer, R.drawable.ic_exception_handling, ErrorDisplayerActivity.class),
