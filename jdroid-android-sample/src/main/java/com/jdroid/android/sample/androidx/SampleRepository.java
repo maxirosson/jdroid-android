@@ -9,6 +9,7 @@ import com.jdroid.android.sample.database.room.AppDatabase;
 import com.jdroid.android.sample.database.room.SampleEntity;
 import com.jdroid.android.sample.database.room.SampleEntityDao;
 import com.jdroid.java.concurrent.ExecutorUtils;
+import com.jdroid.java.date.DateUtils;
 import com.jdroid.java.exception.UnexpectedException;
 import com.jdroid.java.utils.RandomUtils;
 
@@ -30,13 +31,13 @@ public class SampleRepository {
 				SampleEntity sampleEntity = new SampleEntity();
 				sampleEntity.setId(item.getId());
 				sampleEntity.setField(item.getValue());
+				sampleEntity.setDate(DateUtils.now());
 				getSampleEntityDao().insert(sampleEntity);
 			}
 
 			@Override
 			protected boolean shouldFetch(@Nullable SampleEntity data) {
-				// TODO See this
-				return forceRefresh || data == null;
+				return forceRefresh || data == null || (data.getDate() != null && DateUtils.nowMillis() - data.getDate().getTime() > 5000);
 			}
 
 			@NonNull

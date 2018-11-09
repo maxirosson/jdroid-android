@@ -7,8 +7,7 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.jdroid.android.androidx.lifecycle.Resource;
-import com.jdroid.android.exception.AbstractErrorDisplayer;
-import com.jdroid.android.exception.DialogErrorDisplayer;
+import com.jdroid.android.androidx.lifecycle.ResourceObserver;
 import com.jdroid.android.fragment.AbstractFragment;
 import com.jdroid.android.loading.FragmentLoading;
 import com.jdroid.android.loading.NonBlockingLoading;
@@ -36,23 +35,17 @@ public class ArchitectureFragment extends AbstractFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 
-		observer = new Observer<Resource<SampleEntity>>() {
+		observer = new ResourceObserver<SampleEntity>() {
 
 			@Override
-			public void onChanged(Resource<SampleEntity> resource) {
-				if (resource != null) {
-					TextView result = findView(R.id.result);
-					if (resource.getStatus().equals(Resource.Status.LOADING)) {
-						showLoading();
-					} else if (resource.getStatus().equals(Resource.Status.SUCCESS)) {
-						result.setText(resource.getData().toString());
-						dismissLoading();
-					} else if (resource.getStatus().equals(Resource.Status.ERROR)) {
-						dismissLoading();
-						DialogErrorDisplayer.markAsNotGoBackOnError(resource.getException());
-						AbstractErrorDisplayer.getErrorDisplayer(resource.getException()).displayError(getActivity(), resource.getException());
-					}
-				}
+			protected void onSuccess(Resource<SampleEntity> resource) {
+				TextView result = findView(R.id.result);
+				result.setText(resource.getData().toString());
+			}
+
+			@Override
+			protected AbstractFragment getFragment() {
+				return ArchitectureFragment.this;
 			}
 		};
 		sampleViewModel = ViewModelProviders.of(this).get(SampleViewModel.class);
