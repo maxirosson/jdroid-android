@@ -1,17 +1,18 @@
 package com.jdroid.android.sample.androidx;
 
-import com.jdroid.android.androidx.lifecycle.ApiErrorResponse;
 import com.jdroid.android.androidx.lifecycle.ApiResponse;
 import com.jdroid.android.androidx.lifecycle.ApiSuccessResponse;
 import com.jdroid.android.androidx.lifecycle.NetworkBoundResource;
 import com.jdroid.android.androidx.lifecycle.Resource;
 import com.jdroid.android.room.RoomHelper;
-import com.jdroid.android.sample.api.SampleApiService;
-import com.jdroid.android.sample.api.SampleResponse;
 import com.jdroid.android.sample.database.room.AppDatabase;
 import com.jdroid.android.sample.database.room.SampleEntity;
 import com.jdroid.android.sample.database.room.SampleEntityDao;
+import com.jdroid.java.concurrent.ExecutorUtils;
+import com.jdroid.java.exception.UnexpectedException;
 import com.jdroid.java.utils.RandomUtils;
+
+import java.util.concurrent.TimeUnit;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,19 +20,22 @@ import androidx.lifecycle.LiveData;
 
 public class SampleRepository {
 
-	public static LiveData<Resource<SampleEntity>> get(String id, boolean forceRefresh) {
-		return new NetworkBoundResource<SampleEntity, SampleResponse>() {
+	public static final String ID = "1";
+
+	public static LiveData<Resource<SampleEntity>> get(String id, Boolean forceRefresh, Boolean failExecution) {
+		return new NetworkBoundResource<SampleEntity, NetworkResponse>() {
 
 			@Override
-			protected void saveToDb(@NonNull SampleResponse item) {
+			protected void saveToDb(@NonNull NetworkResponse item) {
 				SampleEntity sampleEntity = new SampleEntity();
-				sampleEntity.setId(item.getSampleKey());
-				sampleEntity.setField(RandomUtils.getLong().toString());
+				sampleEntity.setId(item.getId());
+				sampleEntity.setField(item.getValue());
 				getSampleEntityDao().insert(sampleEntity);
 			}
 
 			@Override
 			protected boolean shouldFetch(@Nullable SampleEntity data) {
+				// TODO See this
 				return forceRefresh || data == null;
 			}
 
@@ -42,19 +46,22 @@ public class SampleRepository {
 			}
 
 			@Override
-			protected ApiResponse<SampleResponse> doLoadFromNetwork() {
-				try {
-					SampleApiService apiService = new SampleApiService();
-					SampleResponse sampleResponse = apiService.httpGetSample();
-					return new ApiSuccessResponse<>(sampleResponse);
-				} catch (Exception e) {
-					return new ApiErrorResponse<>(e);
-				}
+			protected ApiResponse<NetworkResponse> doLoadFromNetwork() {
+				// Simulate a request
+				ExecutorUtils.sleep(5, TimeUnit.SECONDS);
+				if (failExecution) {
+					throw new UnexpectedException("Sample network request failed");
+				} else {
+					NetworkResponse networkResponse = new NetworkResponse();
+					networkResponse.setId(ID);
+					networkResponse.setValue(RandomUtils.getLong().toString());
 
+					return new ApiSuccessResponse<>(networkResponse);
+				}
 			}
 
 			@Override
-			protected SampleResponse processResponse(ApiSuccessResponse<SampleResponse> response) {
+			protected NetworkResponse processResponse(ApiSuccessResponse<NetworkResponse> response) {
 				return response.getBody();
 			}
 

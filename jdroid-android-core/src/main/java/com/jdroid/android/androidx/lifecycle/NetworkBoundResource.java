@@ -1,6 +1,9 @@
 package com.jdroid.android.androidx.lifecycle;
 
+import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.concurrent.AppExecutors;
+import com.jdroid.java.exception.AbstractException;
+import com.jdroid.java.exception.UnexpectedException;
 import com.jdroid.java.utils.LoggerUtils;
 
 import org.slf4j.Logger;
@@ -146,11 +149,32 @@ public abstract class NetworkBoundResource<DatabaseDataType, NetworkDataType> {
 			@Override
 			public void run() {
 				LOGGER.info(getClass().getSimpleName() + ": Loading resource from network");
-				ApiResponse<NetworkDataType> apiResponse = doLoadFromNetwork();
+				ApiResponse<NetworkDataType> apiResponse;
+				try {
+					apiResponse = doLoadFromNetwork();
+				} catch (Exception e) {
+					AbstractException abstractException = wrapException(e);
+					logHandledException(abstractException);
+					apiResponse = new ApiErrorResponse<>(abstractException);
+				}
 				mutableLiveData.postValue(apiResponse);
 			}
 		});
 		return mutableLiveData;
+	}
+
+	private AbstractException wrapException(Exception e) {
+		final AbstractException abstractException;
+		if (e instanceof AbstractException) {
+			abstractException = (AbstractException)e;
+		} else {
+			abstractException = new UnexpectedException(e);
+		}
+		return abstractException;
+	}
+
+	protected void logHandledException(AbstractException abstractException) {
+		AbstractApplication.get().getExceptionHandler().logHandledException(abstractException);
 	}
 	
 	@WorkerThread

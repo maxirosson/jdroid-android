@@ -10,17 +10,14 @@ public class SampleViewModel extends ViewModel {
 
 	private LiveData<Resource<SampleEntity>> sampleEntity;
 
-	public void init(String id) {
-		if (sampleEntity == null) {
-			sampleEntity = SampleRepository.get(id, false);
+	public LiveData<Resource<SampleEntity>> load(String id, Boolean forceRefresh, Boolean failExecution) {
+		if (sampleEntity == null || forceRefresh) {
+			sampleEntity = SampleRepository.get(id, forceRefresh, failExecution);
 		}
+		return sampleEntity;
 	}
 
 	public LiveData<Resource<SampleEntity>> getSampleEntity() {
 		return sampleEntity;
-	}
-
-	public void refresh(String id) {
-		sampleEntity = SampleRepository.get(id, true);
 	}
 }

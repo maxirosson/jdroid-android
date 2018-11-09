@@ -18,7 +18,7 @@ public abstract class SampleEntityDao {
 	@Query("SELECT * FROM sampleEntity WHERE id = :id")
 	public abstract LiveData<SampleEntity> get(String id);
 
-	// TODO
+	// TODO See this
 	@WorkerThread
 	@Query("SELECT * FROM sampleEntity WHERE id = :id")
 	public abstract SampleEntity get2(String id);

@@ -1,14 +1,16 @@
 package com.jdroid.android.androidx.lifecycle;
 
+import com.jdroid.java.exception.AbstractException;
+
 public class ApiErrorResponse<T> extends ApiResponse<T> {
 
-	private Exception exception;
+	private AbstractException exception;
 
-	public ApiErrorResponse(Exception exception) {
+	public ApiErrorResponse(AbstractException exception) {
 		this.exception = exception;
 	}
 
-	public Exception getException() {
+	public AbstractException getException() {
 		return exception;
 	}
 }

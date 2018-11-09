@@ -1,5 +1,7 @@
 package com.jdroid.android.androidx.lifecycle;
 
+import com.jdroid.java.exception.AbstractException;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -12,7 +14,7 @@ public class Resource<T> {
 		return new Resource<>(Status.SUCCESS, data, null);
 	}
 
-	public static <T> Resource<T> error(Exception exception, @Nullable T data) {
+	public static <T> Resource<T> error(AbstractException exception, @Nullable T data) {
 		return new Resource<>(Status.ERROR, data, exception);
 	}
 
@@ -27,9 +29,9 @@ public class Resource<T> {
 	private T data;
 
 	@Nullable
-	private Exception exception;
+	private AbstractException exception;
 
-	private Resource(@NonNull Status status, @Nullable T data, @Nullable Exception exception) {
+	private Resource(@NonNull Status status, @Nullable T data, @Nullable AbstractException exception) {
 		this.status = status;
 		this.data = data;
 		this.exception = exception;
@@ -46,7 +48,7 @@ public class Resource<T> {
 	}
 
 	@Nullable
-	public Exception getException() {
+	public AbstractException getException() {
 		return exception;
 	}
 
