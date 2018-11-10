@@ -35,13 +35,13 @@ public abstract class NetworkBoundResource<DatabaseDataType, NetworkDataType> {
 			@Override
 			protected void onActive() {
 				super.onActive();
-				LOGGER.info(getTag() + ": LiveData active");
+				LOGGER.info(getTag() + ": " + toString() + " active");
 			}
 
 			@Override
 			protected void onInactive() {
 				super.onInactive();
-				LOGGER.info(getTag() + ": LiveData inactive");
+				LOGGER.info(getTag() + ": " + toString() + " inactive");
 			}
 		};
 		result.setValue(Resource.starting());
