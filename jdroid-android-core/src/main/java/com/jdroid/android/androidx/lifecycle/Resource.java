@@ -40,6 +40,16 @@ public class Resource<T> {
 		return exception;
 	}
 
+	@Override
+	public String toString() {
+		final StringBuffer sb = new StringBuffer("Resource{");
+		sb.append("status=").append(status);
+		sb.append(", data=").append(data);
+		sb.append(", exception=").append(exception);
+		sb.append('}');
+		return sb.toString();
+	}
+
 	public static <T> Resource<T> success(@NonNull T data) {
 		return new Resource<>(Status.SUCCESS, data, null);
 	}
@@ -52,9 +62,14 @@ public class Resource<T> {
 		return new Resource<>(Status.LOADING, data, null);
 	}
 
+	public static <T> Resource<T> starting() {
+		return new Resource<>(Status.STARTING, null, null);
+	}
+
 	public enum Status {
 		SUCCESS,
 		ERROR,
-		LOADING
+		LOADING,
+		STARTING
 	}
 }

@@ -30,7 +30,7 @@ public abstract class NetworkBoundResource<DatabaseDataType, NetworkDataType> {
 	private MediatorLiveData<Resource<DatabaseDataType>> result = new MediatorLiveData<>();
 
 	public NetworkBoundResource() {
-		result.setValue(Resource.loading(null));
+		result.setValue(Resource.starting());
 		LOGGER.info(getTag() + ": Loading resource from database");
 		LiveData<DatabaseDataType> dbSource = loadFromDb();
 		result.addSource(dbSource, new Observer<DatabaseDataType>() {
@@ -135,7 +135,6 @@ public abstract class NetworkBoundResource<DatabaseDataType, NetworkDataType> {
 		}
 		return tag;
 	}
-
 
 	// Called to save the result of the API response into the database.
 	@WorkerThread

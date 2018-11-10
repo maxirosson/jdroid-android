@@ -14,6 +14,7 @@ import com.jdroid.android.loading.NonBlockingLoading;
 import com.jdroid.android.sample.R;
 import com.jdroid.android.sample.database.room.SampleEntity;
 
+import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -38,9 +39,26 @@ public class ArchitectureFragment extends AbstractFragment {
 		observer = new ResourceObserver<SampleEntity>() {
 
 			@Override
-			protected void onSuccess(SampleEntity data) {
+			protected void onDataChanged(SampleEntity data) {
 				TextView result = findView(R.id.result);
 				result.setText(data.toString());
+			}
+
+			@Override
+			protected void onStarting() {
+				findView(R.id.internalLoading).setVisibility(View.VISIBLE);
+			}
+
+			@Override
+			protected void onStartLoading(@Nullable SampleEntity data) {
+				super.onStartLoading(data);
+				findView(R.id.internalLoading).setVisibility(View.VISIBLE);
+			}
+
+			@Override
+			protected void onStopLoading(@Nullable SampleEntity data) {
+				super.onStopLoading(data);
+				findView(R.id.internalLoading).setVisibility(View.GONE);
 			}
 
 			@Override
