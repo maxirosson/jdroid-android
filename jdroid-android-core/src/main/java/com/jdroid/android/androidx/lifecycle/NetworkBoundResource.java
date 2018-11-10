@@ -2,6 +2,7 @@ package com.jdroid.android.androidx.lifecycle;
 
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.concurrent.AppExecutors;
+import com.jdroid.android.utils.TagUtils;
 import com.jdroid.java.exception.AbstractException;
 import com.jdroid.java.exception.UnexpectedException;
 import com.jdroid.java.utils.LoggerUtils;
@@ -27,9 +28,22 @@ public abstract class NetworkBoundResource<DatabaseDataType, NetworkDataType> {
 
 	private static final Logger LOGGER = LoggerUtils.getLogger(NetworkBoundResource.class);
 
-	private MediatorLiveData<Resource<DatabaseDataType>> result = new MediatorLiveData<>();
+	private MediatorLiveData<Resource<DatabaseDataType>> result;
 
 	public NetworkBoundResource() {
+		result = new MediatorLiveData<Resource<DatabaseDataType>>() {
+			@Override
+			protected void onActive() {
+				super.onActive();
+				LOGGER.info(getTag() + ": LiveData active");
+			}
+
+			@Override
+			protected void onInactive() {
+				super.onInactive();
+				LOGGER.info(getTag() + ": LiveData inactive");
+			}
+		};
 		result.setValue(Resource.starting());
 		LOGGER.info(getTag() + ": Loading resource from database");
 		LiveData<DatabaseDataType> dbSource = loadFromDb();
@@ -126,14 +140,7 @@ public abstract class NetworkBoundResource<DatabaseDataType, NetworkDataType> {
 	}
 
 	protected String getTag() {
-		String tag;
-		Class clazz = getClass();
-		if (clazz.getEnclosingClass() != null) {
-			tag = clazz.getEnclosingClass().getSimpleName();
-		} else {
-			tag = clazz.getSimpleName();
-		}
-		return tag;
+		return TagUtils.getTag(getClass());
 	}
 
 	// Called to save the result of the API response into the database.

@@ -1,12 +1,12 @@
 package com.jdroid.android.sample.androidx;
 
 import com.jdroid.android.androidx.lifecycle.Resource;
+import com.jdroid.android.androidx.viewmodel.AbstractViewModel;
 import com.jdroid.android.sample.database.room.SampleEntity;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.ViewModel;
 
-public class SampleViewModel extends ViewModel {
+public class SampleViewModel extends AbstractViewModel {
 
 	private LiveData<Resource<SampleEntity>> sampleEntity;
 
