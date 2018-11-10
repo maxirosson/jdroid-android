@@ -37,7 +37,7 @@ public class SampleRepository {
 
 			@Override
 			protected boolean shouldFetch(@Nullable SampleEntity data) {
-				return forceRefresh || data == null || (data.getDate() != null && DateUtils.nowMillis() - data.getDate().getTime() > 5000);
+				return forceRefresh || data == null || (data.getDate() != null && DateUtils.nowMillis() - data.getDate().getTime() > 10000);
 			}
 
 			@NonNull

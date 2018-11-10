@@ -83,7 +83,7 @@ public class ArchitectureFragment extends AbstractFragment {
 	}
 
 	private void execute() {
-		if (sampleViewModel.getSampleEntity() != null) {
+		if (sampleViewModel.getSampleEntity() != null && forceRefresh) {
 			sampleViewModel.getSampleEntity().removeObserver(observer);
 		}
 		sampleViewModel.load(SampleRepository.ID, forceRefresh, failExecution).observe(this, observer);

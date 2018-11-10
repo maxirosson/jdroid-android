@@ -11,7 +11,9 @@ public class SampleViewModel extends ViewModel {
 	private LiveData<Resource<SampleEntity>> sampleEntity;
 
 	public LiveData<Resource<SampleEntity>> load(String id, Boolean forceRefresh, Boolean failExecution) {
-		sampleEntity = SampleRepository.get(id, forceRefresh, failExecution);
+		if (sampleEntity == null || forceRefresh) {
+			sampleEntity = SampleRepository.get(id, forceRefresh, failExecution);
+		}
 		return sampleEntity;
 	}
 
