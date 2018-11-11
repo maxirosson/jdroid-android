@@ -267,6 +267,7 @@
 	<string name="sqlite">SQLite</string>
 	<string name="sqliteAdd">Add</string>
 	<string name="sqliteUpdate">Update</string>
+	<string name="sqliteUpsert">Upsert</string>
 	<string name="sqliteRemove">Remove</string>
 	<string name="sqliteRemoveAll">Remove All</string>
 	<string name="sqliteGetAll">Get All</string>

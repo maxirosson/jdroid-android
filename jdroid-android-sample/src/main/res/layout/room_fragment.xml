@@ -15,6 +15,11 @@
 			android:layout_height="wrap_content"
 			android:text="@string/sqliteUpdate" />
 
+	<Button android:id="@+id/upsert"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/sqliteUpsert" />
+
 	<Button android:id="@+id/remove"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"

@@ -55,14 +55,32 @@ public class RoomFragment extends AbstractFragment {
 				AppExecutors.getDiskIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
-						if (lastId != null) {
-							SampleEntityDao sampleEntityDao = RoomHelper.getDefaultDatabase(AppDatabase.class).sampleEntityDao();
-							SampleEntity entity = sampleEntityDao.get2(lastId);
-							if (entity != null) {
-								entity.setField(RandomUtils.getLong().toString());
-								sampleEntityDao.update(entity);
-							}
-						}
+						SampleEntityDao sampleEntityDao = RoomHelper.getDefaultDatabase(AppDatabase.class).sampleEntityDao();
+						SampleEntity entity = new SampleEntity();
+						entity.setId(lastId);
+						entity.setField(RandomUtils.getLong().toString());
+						entity.setDate(DateUtils.now());
+						entity.setStringList(Lists.newArrayList("a", "b", "c"));
+						sampleEntityDao.update(entity);
+					}
+				});
+			}
+		});
+		findView(R.id.upsert).setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				AppExecutors.getDiskIOExecutor().execute(new Runnable() {
+					@Override
+					public void run() {
+						SampleEntityDao sampleEntityDao = RoomHelper.getDefaultDatabase(AppDatabase.class).sampleEntityDao();
+						SampleEntity entity = new SampleEntity();
+						lastId = RandomUtils.getLong().toString();
+						entity.setId(lastId);
+						entity.setField(RandomUtils.getLong().toString());
+						entity.setDate(DateUtils.now());
+						entity.setStringList(Lists.newArrayList("a", "b", "c"));
+						sampleEntityDao.upsert(entity);
 					}
 				});
 			}

@@ -1,27 +1,20 @@
 package com.jdroid.android.sample.database.room;
 
+import com.jdroid.android.room.AbstractDao;
+
 import java.util.List;
 
 import androidx.annotation.WorkerThread;
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
-import androidx.room.Delete;
-import androidx.room.Insert;
-import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
-import androidx.room.Update;
 
 
 @Dao
-public abstract class SampleEntityDao {
+public abstract class SampleEntityDao extends AbstractDao<SampleEntity> {
 
 	@Query("SELECT * FROM sampleEntity WHERE id = :id")
 	public abstract LiveData<SampleEntity> get(String id);
-
-	// TODO See this
-	@WorkerThread
-	@Query("SELECT * FROM sampleEntity WHERE id = :id")
-	public abstract SampleEntity get2(String id);
 
 	@WorkerThread
 	@Query("SELECT * FROM sampleEntity")
@@ -36,26 +29,8 @@ public abstract class SampleEntityDao {
 	public abstract SampleEntity findByName(String fieldValue);
 
 	@WorkerThread
-	@Insert(onConflict = OnConflictStrategy.REPLACE)
-	public abstract void insert(SampleEntity sampleEntity);
-
-	@WorkerThread
-	@Update
-	public abstract void update(SampleEntity sampleEntity);
-
-	@WorkerThread
-	@Insert
-	public abstract void insertAll(List<SampleEntity> sampleEntities);
-
-	@WorkerThread
-	@Delete
-	public abstract void delete(SampleEntity sampleEntity);
-
-	@WorkerThread
-	public void delete(String id) {
-		SampleEntity sampleEntity = get2(id);
-		delete(sampleEntity);
-	}
+	@Query("DELETE FROM sampleEntity WHERE id == :id")
+	public abstract void delete(String id);
 
 	@WorkerThread
 	@Query("DELETE FROM sampleEntity")
