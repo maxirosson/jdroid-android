@@ -9,7 +9,7 @@ public class AppShortcutsCommand extends ServiceCommand {
 
 	@Override
 	public void start() {
-		if (AppShortcutsHelper.isDynamicAppShortcutsSupported()) {
+		if (AppShortcutsHelper.isDynamicAppShortcutsSupported() && AppShortcutsHelper.getDynamicShortcutsLoader() != null) {
 			super.start();
 		}
 	}

@@ -6,7 +6,7 @@ import com.jdroid.java.exception.AbstractException;
 
 public class CrashGenerator {
 
-	public static void crash(final ExceptionType exceptionType, Boolean executeOnNewThread) {
+	public static void crash(ExceptionType exceptionType, Boolean executeOnNewThread) {
 		Runnable runnable = new Runnable() {
 
 			@Override
