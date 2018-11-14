@@ -9,7 +9,7 @@ import com.jdroid.android.application.AbstractAppModule;
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.firebase.admob.analytics.AdMobAnalyticsSender;
 import com.jdroid.android.firebase.admob.analytics.AdMobAnalyticsTracker;
-import com.jdroid.android.firebase.admob.analytics.GoogleAdMobAnalyticsTracker;
+import com.jdroid.android.firebase.admob.analytics.FirebaseAdMobAnalyticsTracker;
 import com.jdroid.android.fragment.FragmentDelegate;
 import com.jdroid.java.analytics.AnalyticsSender;
 import com.jdroid.java.analytics.AnalyticsTracker;
@@ -55,7 +55,7 @@ public class AdMobAppModule extends AbstractAppModule {
 
 	@Override
 	public List<? extends AnalyticsTracker> createModuleAnalyticsTrackers() {
-		return Lists.newArrayList(new GoogleAdMobAnalyticsTracker());
+		return Lists.newArrayList(new FirebaseAdMobAnalyticsTracker());
 	}
 
 	@NonNull

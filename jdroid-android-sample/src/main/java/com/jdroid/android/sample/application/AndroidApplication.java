@@ -19,9 +19,6 @@ import com.jdroid.android.firebase.admob.AdMobAppModule;
 import com.jdroid.android.firebase.fcm.AbstractFcmAppModule;
 import com.jdroid.android.firebase.fcm.FcmContext;
 import com.jdroid.android.fragment.FragmentHelper;
-import com.jdroid.android.google.analytics.GoogleAnalyticsAppContext;
-import com.jdroid.android.google.analytics.GoogleAnalyticsFactory;
-import com.jdroid.android.google.analytics.GoogleCoreAnalyticsTracker;
 import com.jdroid.android.google.inappbilling.InAppBillingAppModule;
 import com.jdroid.android.http.HttpConfiguration;
 import com.jdroid.android.notification.NotificationChannelType;
@@ -76,13 +73,6 @@ public class AndroidApplication extends AbstractApplication {
 
 	@Override
 	protected void onMainProcessCreate() {
-		if (GoogleAnalyticsAppContext.isGoogleAnalyticsEnabled()) {
-			GoogleAnalyticsFactory.getGoogleAnalyticsHelper().addCustomDimensionDefinition(GoogleCoreAnalyticsTracker.CustomDimension.INSTALLATION_SOURCE.name(), 1);
-			GoogleAnalyticsFactory.getGoogleAnalyticsHelper().addCustomDimensionDefinition(GoogleCoreAnalyticsTracker.CustomDimension.DEVICE_TYPE.name(), 2);
-			GoogleAnalyticsFactory.getGoogleAnalyticsHelper().addCustomDimensionDefinition(GoogleCoreAnalyticsTracker.CustomDimension.REFERRER.name(), 3);
-			GoogleAnalyticsFactory.getGoogleAnalyticsHelper().addCustomDimensionDefinition(GoogleCoreAnalyticsTracker.CustomDimension.DEVICE_YEAR_CLASS.name(), 4);
-		}
-
 		getUriMapper().addUriWatcher(new SampleUriWatcher());
 
 		Firebase.setAndroidContext(this);

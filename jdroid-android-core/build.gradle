@@ -40,7 +40,6 @@ dependencies {
 	api "androidx.lifecycle:lifecycle-extensions:2.0.0"
 
 	// https://developers.google.com/android/guides/releases
-	api "com.google.android.gms:play-services-analytics:16.0.4"
 	api "com.google.android.gms:play-services-base:16.0.1"
 
 	// https://firebase.google.com/support/release-notes/android

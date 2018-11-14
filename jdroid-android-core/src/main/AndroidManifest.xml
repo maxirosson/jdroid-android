@@ -25,8 +25,6 @@
 
 		<meta-data android:name="com.jdroid.android.application.AppLifecycleCallback"
 				   android:value="ApplicationLifecycleCallback" />
-		<meta-data android:name="com.jdroid.android.google.analytics.GoogleAnalyticsAppLifecycleCallback"
-				   android:value="ApplicationLifecycleCallback" />
 		<meta-data android:name="com.jdroid.android.firebase.analytics.FirebaseAnalyticsAppLifecycleCallback"
 				   android:value="ApplicationLifecycleCallback" />
 		<meta-data android:name="com.jdroid.android.firebase.performance.FirebasePerformanceAppLifecycleCallback"

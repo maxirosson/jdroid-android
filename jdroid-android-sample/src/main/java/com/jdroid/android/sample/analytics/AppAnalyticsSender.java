@@ -1,7 +1,6 @@
 package com.jdroid.android.sample.analytics;
 
 import com.jdroid.android.sample.firebase.analytics.FirebaseAppAnalyticsTracker;
-import com.jdroid.android.sample.google.analytics.AppGoogleAnalyticsTracker;
 import com.jdroid.java.analytics.AnalyticsSender;
 import com.jdroid.java.collections.Lists;
 
@@ -14,7 +13,7 @@ public class AppAnalyticsSender extends AnalyticsSender<AppAnalyticsTracker> imp
 	}
 
 	public AppAnalyticsSender() {
-		super(Lists.newArrayList(new FirebaseAppAnalyticsTracker(), new AppGoogleAnalyticsTracker()));
+		super(Lists.newArrayList(new FirebaseAppAnalyticsTracker()));
 	}
 
 	@Override

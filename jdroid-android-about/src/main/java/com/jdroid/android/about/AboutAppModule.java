@@ -1,11 +1,8 @@
 package com.jdroid.android.about;
 
-import androidx.annotation.NonNull;
-
 import com.jdroid.android.about.analytics.AboutAnalyticsSender;
 import com.jdroid.android.about.analytics.AboutAnalyticsTracker;
 import com.jdroid.android.about.analytics.FirebaseAboutAnalyticsTracker;
-import com.jdroid.android.about.analytics.GoogleAboutAnalyticsTracker;
 import com.jdroid.android.application.AbstractAppModule;
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.java.analytics.AnalyticsSender;
@@ -15,6 +12,8 @@ import com.jdroid.java.remoteconfig.RemoteConfigParameter;
 
 import java.util.Arrays;
 import java.util.List;
+
+import androidx.annotation.NonNull;
 
 public class AboutAppModule extends AbstractAppModule {
 
@@ -46,7 +45,7 @@ public class AboutAppModule extends AbstractAppModule {
 
 	@Override
 	public List<? extends AnalyticsTracker> createModuleAnalyticsTrackers() {
-		return Lists.newArrayList(new GoogleAboutAnalyticsTracker(), new FirebaseAboutAnalyticsTracker());
+		return Lists.newArrayList(new FirebaseAboutAnalyticsTracker());
 	}
 
 	@NonNull

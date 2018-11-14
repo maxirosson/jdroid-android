@@ -17,7 +17,6 @@ Libray for Android apps. Support for Android 4.0 (api level 15) and higher versi
 * Languages supported: english & spanish
 * Android M Permissions scheme support
 * [Navigation Drawer support](https://developer.android.com/design/patterns/navigation-drawer.html)
-* [Google Analytics v4 integration](https://developers.google.com/analytics/devguides/collection/android/v4/)
 * [Firebase Integration](https://firebase.google.com/docs/)
   * [Firebase Analytics](https://firebase.google.com/docs/analytics/)
   * [Firebase Dynamic Links](https://firebase.google.com/docs/dynamic-links/)

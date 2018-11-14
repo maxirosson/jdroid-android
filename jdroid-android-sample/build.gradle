@@ -107,9 +107,6 @@ android {
 		jdroid.setBuildConfigBoolean(defaultConfig, "FIREBASE_PERFORMANCE_MONITORING_ENABLED", true)
 		jdroid.setBuildConfigBoolean(defaultConfig, "FIREBASE_CRASHLYTICS_ENABLED", true)
 
-		jdroid.setBuildConfigBoolean(defaultConfig, "GOOGLE_ANALYTICS_ENABLED", true)
-		jdroid.setBuildConfigString(defaultConfig, "GOOGLE_ANALYTICS_TRACKING_ID", "UA-84573310-1")
-
 		jdroid.setBuildConfigString(defaultConfig, "GOOGLE_SERVER_CLIENT_ID", "527857945512-qr7kk98nntlt44po5cblnrgq41ief65s.apps.googleusercontent.com")
 
 		jdroid.setBuildConfigString(defaultConfig, "LOCAL_IP")
@@ -191,7 +188,6 @@ android {
 					jdroid.setBuildConfigString(buildTypes.release, "SERVER_NAME", "PROD")
 
 					// TODO Add GOOGLE_PLAY_PUBLIC_KEY
-					// TODO Add GOOGLE_ANALYTICS_TRACKING_ID
 					// TODO Add FIREBASE_AUTH_TOKEN
 					// TODO Add GOOGLE_SERVER_CLIENT_ID
 

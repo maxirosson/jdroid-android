@@ -3,17 +3,17 @@ package com.jdroid.android.firebase.invites;
 import android.accounts.Account;
 import android.app.Activity;
 import android.net.Uri;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 
 import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.jdroid.android.activity.ActivityLauncher;
 import com.jdroid.android.application.AbstractApplication;
-import com.jdroid.android.google.analytics.GoogleAnalyticsAppContext;
 import com.jdroid.android.utils.LocalizationUtils;
 import com.jdroid.java.exception.UnexpectedException;
 
 import java.util.Map;
+
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 
 public class AppInviteSender {
 
@@ -29,7 +29,6 @@ public class AppInviteSender {
 	private Account account;
 	private Map<String, String> additionalReferralParameters;
 	private Integer minimumVersionCode;
-	private String googleAnalyticsTrackingId = GoogleAnalyticsAppContext.getGoogleAnalyticsTrackingId();
 
 	private Activity activity;
 
@@ -88,11 +87,6 @@ public class AppInviteSender {
 			// Android minimum version code
 			if (minimumVersionCode != null) {
 				intentBuilder.setAndroidMinimumVersionCode(minimumVersionCode);
-			}
-
-			// Google Analytics Tracking id
-			if (googleAnalyticsTrackingId != null) {
-				intentBuilder.setGoogleAnalyticsTrackingId(googleAnalyticsTrackingId);
 			}
 
 			onInitIntentBuilder(intentBuilder);
@@ -169,10 +163,6 @@ public class AppInviteSender {
 
 	public void setMinimumVersionCode(Integer minimumVersionCode) {
 		this.minimumVersionCode = minimumVersionCode;
-	}
-
-	public void setGoogleAnalyticsTrackingId(String googleAnalyticsTrackingId) {
-		this.googleAnalyticsTrackingId = googleAnalyticsTrackingId;
 	}
 
 	public void setActivity(@Nullable Activity activity) {
