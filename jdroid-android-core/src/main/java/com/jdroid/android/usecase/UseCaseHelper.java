@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 import androidx.annotation.MainThread;
 
+@Deprecated
 public class UseCaseHelper {
 
 	@MainThread

@@ -699,8 +699,6 @@
 		<service android:name="com.jdroid.android.sample.ui.leakcanary.LeakCanaryService"
 				 android:exported="false" />
 
-		<service android:name="com.jdroid.android.usecase.service.UseCaseService"
-				 android:exported="false" />
 		<service android:name="com.jdroid.android.sample.ui.service.SampleWorkerService"
 				 android:exported="false" />
 		<service android:name="com.jdroid.android.sample.ui.service.SampleFirebaseJobService"

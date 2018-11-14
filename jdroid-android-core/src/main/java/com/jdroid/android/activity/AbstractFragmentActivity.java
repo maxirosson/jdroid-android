@@ -17,7 +17,6 @@ import android.view.View;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.application.AppModule;
-import com.jdroid.android.fragment.UseCaseFragment;
 import com.jdroid.android.loading.ActivityLoading;
 import com.jdroid.android.navdrawer.NavDrawer;
 import com.jdroid.android.uri.UriHandler;
@@ -143,31 +142,6 @@ public abstract class AbstractFragmentActivity extends AppCompatActivity impleme
 	@Override
 	public <E> E getExtra(String key) {
 		return activityHelper.getExtra(key);
-	}
-
-	public void loadUseCaseFragment(Bundle savedInstanceState, Class<? extends UseCaseFragment<?>> useCaseFragmentClass) {
-
-		if (savedInstanceState == null) {
-			try {
-				FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-				fragmentTransaction.add(useCaseFragmentClass.newInstance(), useCaseFragmentClass.getSimpleName());
-				fragmentTransaction.commit();
-			} catch (InstantiationException e) {
-				throw new UnexpectedException(e);
-			} catch (IllegalAccessException e) {
-				throw new UnexpectedException(e);
-			}
-		}
-	}
-
-	public void removeUseCaseFragment(Class<? extends UseCaseFragment<?>> useCaseFragmentClass) {
-		FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-		fragmentTransaction.remove(getUseCaseUseCaseFragment(useCaseFragmentClass));
-		fragmentTransaction.commit();
-	}
-
-	public UseCaseFragment<?> getUseCaseUseCaseFragment(Class<? extends UseCaseFragment<?>> useCaseFragmentClass) {
-		return (UseCaseFragment<?>)getSupportFragmentManager().findFragmentByTag(useCaseFragmentClass.getSimpleName());
 	}
 
 	@SuppressWarnings("unchecked")

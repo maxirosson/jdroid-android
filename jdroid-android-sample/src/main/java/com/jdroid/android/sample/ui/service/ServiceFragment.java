@@ -12,8 +12,6 @@ import com.firebase.jobdispatcher.GooglePlayDriver;
 import com.jdroid.android.firebase.jobdispatcher.ServiceCommand;
 import com.jdroid.android.fragment.AbstractFragment;
 import com.jdroid.android.sample.R;
-import com.jdroid.android.sample.ui.usecases.SampleUseCase;
-import com.jdroid.android.usecase.service.UseCaseService;
 import com.jdroid.java.utils.TypeUtils;
 
 public class ServiceFragment extends AbstractFragment {
@@ -41,15 +39,6 @@ public class ServiceFragment extends AbstractFragment {
 				intent.putExtra("a", "1");
 				intent.putExtra("fail", failCheckBox.isChecked());
 				SampleWorkerService.runIntentInService(intent);
-			}
-		});
-		findView(R.id.useCaseService).setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				SampleUseCase sampleUseCase = new SampleUseCase();
-				sampleUseCase.setFail(failCheckBox.isChecked());
-				UseCaseService.execute(sampleUseCase);
 			}
 		});
 		findView(R.id.firebaseJobService).setOnClickListener(new OnClickListener() {

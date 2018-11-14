@@ -5,6 +5,7 @@ import com.jdroid.java.exception.AbstractException;
 /**
  * Default Use Case Listener
  */
+@Deprecated
 public interface UseCaseListener {
 
 	/**

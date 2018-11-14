@@ -4,18 +4,22 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.jdroid.android.androidx.lifecycle.Resource;
+import com.jdroid.android.androidx.lifecycle.ResourceObserver;
 import com.jdroid.android.fragment.AbstractFragment;
-import com.jdroid.android.fragment.FragmentIf;
 import com.jdroid.android.sample.R;
-import com.jdroid.android.sample.ui.usecases.SampleUseCase;
-import com.jdroid.android.usecase.UseCaseHelper;
-import com.jdroid.android.usecase.UseCaseTrigger;
-import com.jdroid.android.usecase.listener.ActivityLoadingUseCaseListener;
+import com.jdroid.android.sample.androidx.SampleRepository;
+import com.jdroid.android.sample.androidx.SampleViewModel;
+import com.jdroid.android.sample.database.room.SampleEntity;
+
+import androidx.annotation.Nullable;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 public class BlockingLoadingFragment extends AbstractFragment {
 
-	private SampleUseCase sampleUseCase;
-	private ActivityLoadingUseCaseListener sampleUseCaseListener;
+	private SampleViewModel sampleViewModel;
+	private Observer<Resource<SampleEntity>> observer;
 
 	@Override
 	public Integer getContentFragmentLayout() {
@@ -23,17 +27,39 @@ public class BlockingLoadingFragment extends AbstractFragment {
 	}
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
 
-		sampleUseCase = new SampleUseCase();
-		sampleUseCase.setDelayInSeconds(5);
-		sampleUseCaseListener = new ActivityLoadingUseCaseListener() {
+		observer = new ResourceObserver<SampleEntity>() {
+
 			@Override
-			protected FragmentIf getFragmentIf() {
+			protected void onDataChanged(SampleEntity data) {
+			}
+
+			@Override
+			protected void onStarting() {
+
+			}
+
+			@Override
+			protected void onStartLoading(@Nullable SampleEntity data) {
+				super.onStartLoading(data);
+				getActivityIf().showLoading();
+			}
+
+			@Override
+			protected void onStopLoading(@Nullable SampleEntity data) {
+				super.onStopLoading(data);
+				getActivityIf().dismissLoading();
+			}
+
+			@Override
+			protected AbstractFragment getFragment() {
 				return BlockingLoadingFragment.this;
 			}
 		};
+		sampleViewModel = ViewModelProviders.of(this).get(SampleViewModel.class);
+		execute();
 	}
 
 	@Override
@@ -44,21 +70,16 @@ public class BlockingLoadingFragment extends AbstractFragment {
 		fail.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				sampleUseCase.setFail(true);
-				UseCaseHelper.executeUseCase(sampleUseCase);
+				execute();
 			}
 		});
 	}
 
-	@Override
-	public void onStart() {
-		super.onStart();
-		UseCaseHelper.registerUseCase(sampleUseCase, sampleUseCaseListener, UseCaseTrigger.ONCE);
+	private void execute() {
+		if (sampleViewModel.getSampleEntity() != null) {
+			sampleViewModel.getSampleEntity().removeObserver(observer);
+		}
+		sampleViewModel.load(SampleRepository.ID, true, true).observe(this, observer);
 	}
 
-	@Override
-	public void onStop() {
-		super.onStop();
-		UseCaseHelper.unregisterUseCase(sampleUseCase, sampleUseCaseListener);
-	}
 }

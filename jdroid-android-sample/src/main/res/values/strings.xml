@@ -277,7 +277,6 @@
 	<!-- Service -->
 	<string name="service">Service</string>
 	<string name="workerService">Worker Service</string>
-	<string name="useCaseService">Use Case Service</string>
 	<string name="firebaseJobService">Firebase Job Service</string>
 	<string name="commandService1">Command Service 1</string>
 	<string name="commandService2">Command Service 2</string>
