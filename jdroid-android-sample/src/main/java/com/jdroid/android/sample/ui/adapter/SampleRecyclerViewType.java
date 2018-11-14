@@ -1,17 +1,19 @@
 package com.jdroid.android.sample.ui.adapter;
 
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
 import com.jdroid.android.recycler.RecyclerViewType;
 import com.jdroid.android.sample.R;
+import com.jdroid.android.sample.database.room.SampleEntity;
 
-public abstract class SampleRecyclerViewType extends RecyclerViewType<String, SampleRecyclerViewType.SampleHolder> {
+import androidx.recyclerview.widget.RecyclerView;
+
+public abstract class SampleRecyclerViewType extends RecyclerViewType<SampleEntity, SampleRecyclerViewType.SampleHolder> {
 
 	@Override
-	protected Class<String> getItemClass() {
-		return String.class;
+	protected Class<SampleEntity> getItemClass() {
+		return SampleEntity.class;
 	}
 
 	@Override
@@ -27,8 +29,8 @@ public abstract class SampleRecyclerViewType extends RecyclerViewType<String, Sa
 	}
 
 	@Override
-	public void fillHolderFromItem(String item, SampleHolder holder) {
-		holder.name.setText(item);
+	public void fillHolderFromItem(SampleEntity item, SampleHolder holder) {
+		holder.name.setText(item.getField());
 	}
 
 	public static class SampleHolder extends RecyclerView.ViewHolder {

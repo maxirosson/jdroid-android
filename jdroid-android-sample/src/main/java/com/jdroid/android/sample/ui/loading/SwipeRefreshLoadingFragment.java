@@ -4,65 +4,83 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.jdroid.android.androidx.lifecycle.Resource;
+import com.jdroid.android.androidx.lifecycle.ResourceObserver;
+import com.jdroid.android.fragment.AbstractFragment;
 import com.jdroid.android.recycler.RecyclerViewAdapter;
 import com.jdroid.android.recycler.RecyclerViewContainer;
 import com.jdroid.android.recycler.SwipeRecyclerFragment;
 import com.jdroid.android.sample.R;
+import com.jdroid.android.sample.androidx.SampleListViewModel;
+import com.jdroid.android.sample.androidx.SampleRepository;
+import com.jdroid.android.sample.database.room.SampleEntity;
 import com.jdroid.android.sample.ui.adapter.SampleRecyclerViewType;
-import com.jdroid.android.sample.usecase.SampleItemsUseCase;
-import com.jdroid.android.usecase.UseCaseHelper;
-import com.jdroid.android.usecase.UseCaseTrigger;
-import com.jdroid.java.utils.IdGenerator;
+
+import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 
 public class SwipeRefreshLoadingFragment extends SwipeRecyclerFragment {
 
-	private SampleItemsUseCase sampleItemsUseCase;
+	private SampleListViewModel sampleListViewModel;
+	private Observer<Resource<List<SampleEntity>>> observer;
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
 
-		sampleItemsUseCase = new SampleItemsUseCase();
-	}
+		observer = new ResourceObserver<List<SampleEntity>>() {
 
-	@Override
-	public void onStart() {
-		super.onStart();
-		UseCaseHelper.registerUseCase(sampleItemsUseCase, this, UseCaseTrigger.ONCE);
-	}
+			@Override
+			protected void onDataChanged(List<SampleEntity> data) {
+				setAdapter(new RecyclerViewAdapter(new SampleRecyclerViewType() {
 
-	@Override
-	public void onStop() {
-		super.onStop();
-		UseCaseHelper.unregisterUseCase(sampleItemsUseCase, this);
+					@Override
+					public void onItemSelected(SampleEntity item, View view) {
+						sampleListViewModel.removeItem(item.getId());
+					}
+
+					@NonNull
+					@Override
+					public RecyclerViewContainer getRecyclerViewContainer() {
+						return SwipeRefreshLoadingFragment.this;
+					}
+				}, data));
+			}
+
+			@Override
+			protected void onStarting() {
+				showLoading();
+			}
+
+			@Override
+			protected void onStartLoading(@Nullable List<SampleEntity> data) {
+				showLoading();
+			}
+
+			@Override
+			protected AbstractFragment getFragment() {
+				return SwipeRefreshLoadingFragment.this;
+			}
+		};
+		sampleListViewModel = ViewModelProviders.of(this).get(SampleListViewModel.class);
+		execute(false);
 	}
 
 	@Override
 	public void onRefresh() {
-		if (!sampleItemsUseCase.isInProgress()) {
-			UseCaseHelper.executeUseCase(sampleItemsUseCase);
-		}
+		execute(true);
 	}
 
-	@Override
-	public void onFinishUseCase() {
-		setAdapter(new RecyclerViewAdapter(new SampleRecyclerViewType() {
-
-			@Override
-			public void onItemSelected(String item, View view) {
-				getRecyclerViewAdapter().removeItem(item);
-			}
-
-			@NonNull
-			@Override
-			public RecyclerViewContainer getRecyclerViewContainer() {
-				return SwipeRefreshLoadingFragment.this;
-			}
-		}, sampleItemsUseCase.getItems()));
-		dismissLoading();
+	private void execute(Boolean forceRefresh) {
+		if (sampleListViewModel.getSampleEntities() != null && forceRefresh) {
+			sampleListViewModel.getSampleEntities().removeObserver(observer);
+		}
+		sampleListViewModel.load(SampleRepository.ID, forceRefresh, false).observe(this, observer);
 	}
 
 	@Override
@@ -73,8 +91,8 @@ public class SwipeRefreshLoadingFragment extends SwipeRecyclerFragment {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-			case R.id.add:
-				getRecyclerViewAdapter().addItem(IdGenerator.getIntId().toString());
+			case R.id.addItem:
+				sampleListViewModel.addItem();
 				return true;
 			default:
 				return super.onOptionsItemSelected(item);
