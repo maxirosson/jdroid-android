@@ -3,20 +3,28 @@ package com.jdroid.android.sample.ui.exceptions;
 import android.os.Bundle;
 import android.view.View;
 
+import com.jdroid.android.androidx.lifecycle.Resource;
+import com.jdroid.android.androidx.lifecycle.ResourceObserver;
 import com.jdroid.android.exception.AbstractErrorDisplayer;
 import com.jdroid.android.exception.DialogErrorDisplayer;
 import com.jdroid.android.exception.ErrorDisplayer;
 import com.jdroid.android.exception.SnackbarErrorDisplayer;
 import com.jdroid.android.fragment.AbstractFragment;
 import com.jdroid.android.sample.R;
-import com.jdroid.android.sample.ui.usecases.SampleUseCase;
-import com.jdroid.android.usecase.UseCaseHelper;
+import com.jdroid.android.sample.androidx.SampleRepository;
+import com.jdroid.android.sample.androidx.SampleViewModel;
+import com.jdroid.android.sample.database.room.SampleEntity;
 import com.jdroid.java.exception.AbstractException;
+
+import androidx.annotation.Nullable;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 
 public class ErrorDisplayerFragment extends AbstractFragment {
 
-	private SampleUseCase failingUseCase;
+	private SampleViewModel sampleViewModel;
+	private Observer<Resource<SampleEntity>> observer;
 
 	private ErrorDisplayer errorDisplayer;
 	private Boolean goBackOnError = true;
@@ -27,11 +35,36 @@ public class ErrorDisplayerFragment extends AbstractFragment {
 	}
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
 
-		failingUseCase = new SampleUseCase();
-		failingUseCase.setFail(true);
+		observer = new ResourceObserver<SampleEntity>() {
+
+			@Override
+			protected void onDataChanged(SampleEntity data) {
+			}
+
+			@Override
+			protected void onStarting() {
+
+			}
+
+			@Override
+			protected void onStartLoading(@Nullable SampleEntity data) {
+
+			}
+
+			@Override
+			protected void onError(AbstractException exception, @Nullable SampleEntity data) {
+				getFragment().createErrorDisplayer(exception).displayError(getFragment().getActivity(), exception);
+			}
+
+			@Override
+			protected AbstractFragment getFragment() {
+				return ErrorDisplayerFragment.this;
+			}
+		};
+		sampleViewModel = ViewModelProviders.of(this).get(SampleViewModel.class);
 	}
 
 	@Override
@@ -43,7 +76,7 @@ public class ErrorDisplayerFragment extends AbstractFragment {
 			public void onClick(View v) {
 				ErrorDisplayerFragment.this.errorDisplayer = null;
 				ErrorDisplayerFragment.this.goBackOnError = true;
-				UseCaseHelper.executeUseCase(failingUseCase);
+				execute();
 			}
 		});
 
@@ -52,7 +85,7 @@ public class ErrorDisplayerFragment extends AbstractFragment {
 			public void onClick(View v) {
 				ErrorDisplayerFragment.this.errorDisplayer = null;
 				ErrorDisplayerFragment.this.goBackOnError = false;
-				UseCaseHelper.executeUseCase(failingUseCase);
+				execute();
 			}
 		});
 
@@ -66,32 +99,20 @@ public class ErrorDisplayerFragment extends AbstractFragment {
 				errorDisplayer.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						UseCaseHelper.executeUseCase(failingUseCase);
+						execute();
 					}
 				});
 				ErrorDisplayerFragment.this.errorDisplayer = errorDisplayer;
-				UseCaseHelper.executeUseCase(failingUseCase);
+				execute();
 			}
 		});
 	}
 
-	@Override
-	public void onStart() {
-		super.onStart();
-
-		UseCaseHelper.registerUseCase(failingUseCase, this);
-	}
-
-	@Override
-	public void onStop() {
-		super.onStop();
-
-		UseCaseHelper.unregisterUseCase(failingUseCase, this);
-	}
-
-	@Override
-	public void onStartUseCase() {
-		// Do nothing
+	private void execute() {
+		if (sampleViewModel.getSampleEntity() != null) {
+			sampleViewModel.getSampleEntity().removeObserver(observer);
+		}
+		sampleViewModel.load(SampleRepository.ID, true, true, 0).observe(this, observer);
 	}
 
 	@Override

@@ -43,7 +43,6 @@ import com.jdroid.android.sample.ui.timer.TimerActivity;
 import com.jdroid.android.sample.ui.toasts.ToastsActivity;
 import com.jdroid.android.sample.ui.twitter.TwitterActivity;
 import com.jdroid.android.sample.ui.uri.UriMapperActivity;
-import com.jdroid.android.sample.ui.usecases.UseCasesActivity;
 import com.jdroid.android.sample.ui.webview.WebViewActivity;
 import com.jdroid.android.shortcuts.AppShortcutsHelper;
 import com.jdroid.android.utils.ScreenUtils;
@@ -89,7 +88,6 @@ public enum HomeItem implements ActionItem {
 	TOASTS(R.string.toasts, R.drawable.ic_toasts, ToastsActivity.class),
 	TWITTER(R.string.jdroid_twitter, R.drawable.ic_twitter_black_24dp, TwitterActivity.class),
 	URI_MAPPER(R.string.uriMapper, R.drawable.ic_photo, UriMapperActivity.class),
-	USE_CASES(R.string.useCases, R.drawable.ic_service, UseCasesActivity.class),
 	WEBVIEW(R.string.webView, R.drawable.ic_http, WebViewActivity.class);
 
 	private Integer resourceId;

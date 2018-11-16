@@ -48,7 +48,7 @@ public class SampleRepository {
 		});
 	}
 
-	public static LiveData<Resource<SampleEntity>> get(String id, Boolean forceRefresh, Boolean failExecution) {
+	public static LiveData<Resource<SampleEntity>> get(String id, Boolean forceRefresh, Boolean failExecution, Integer delaySeconds) {
 		return new NetworkBoundResource<SampleEntity, NetworkResponse>() {
 
 			@Override
@@ -74,7 +74,7 @@ public class SampleRepository {
 			@Override
 			protected ApiResponse<NetworkResponse> doLoadFromNetwork() {
 				// Simulate a request
-				ExecutorUtils.sleep(5, TimeUnit.SECONDS);
+				ExecutorUtils.sleep(delaySeconds, TimeUnit.SECONDS);
 				if (failExecution) {
 					throw new UnexpectedException("Sample network request failed");
 				} else {

@@ -651,13 +651,6 @@
 			</intent-filter>
 		</activity>
 
-		<!-- Use Cases -->
-
-		<activity android:name="com.jdroid.android.sample.ui.usecases.UseCasesActivity"
-				  android:label="@string/useCases"
-				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
-				  tools:ignore="UnusedAttribute" />
-
 		<!-- Google Play Services -->
 
 		<activity android:name="com.jdroid.android.sample.ui.google.playservices.GooglePlayServicesActivity"

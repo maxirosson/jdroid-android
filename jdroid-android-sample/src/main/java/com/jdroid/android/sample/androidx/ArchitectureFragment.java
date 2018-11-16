@@ -104,7 +104,7 @@ public class ArchitectureFragment extends AbstractFragment {
 		if (sampleViewModel.getSampleEntity() != null && forceRefresh) {
 			sampleViewModel.getSampleEntity().removeObserver(observer);
 		}
-		sampleViewModel.load(SampleRepository.ID, forceRefresh, failExecution).observe(this, observer);
+		sampleViewModel.load(SampleRepository.ID, forceRefresh, failExecution, 5).observe(this, observer);
 	}
 
 	@Override

@@ -35,23 +35,9 @@
 	<string name="invalidResourceUrl">invalidResourceUrl</string>
 	<string name="outOfMemory">outOfMemory</string>
 
-	<!-- Use Cases -->
-	<string name="useCases">Use Cases</string>
 	<string name="execute">Execute</string>
 	<string name="failExecution">Fail Execution</string>
-	<string name="failStartNotification">Fail Start Notification</string>
-	<string name="failFinishNotification">Fail Finish Notification</string>
-	<string name="failFinishFailedNotification">Fail Finish Failed Notification</string>
-	<string name="noListener">No Listener (Reload fragment if you change this)</string>
-	<string name="onStartUseCase">Starting Use Case</string>
-	<string name="onFinishedUseCase">On Finished Use Case</string>
-	<string name="onFinishedFailUseCase">On Finished Fail Use Case</string>
-	<string name="manualUseCaseTrigger">Manual Use Case Trigger</string>
-	<string name="onceUseCaseTrigger">Once Use Case Trigger</string>
-	<string name="alwaysUseCaseTrigger">Always Use Case Trigger</string>
-	<string name="useCaseTrigger">Use Case Trigger (Reload fragment if you change this)</string>
 	<string name="delay">Delay (seconds)</string>
-
 	<!-- Floating Action Button -->
 
 	<string name="floatingActionButton">Floating Action Button</string>

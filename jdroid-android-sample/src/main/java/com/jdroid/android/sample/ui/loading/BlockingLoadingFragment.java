@@ -79,7 +79,7 @@ public class BlockingLoadingFragment extends AbstractFragment {
 		if (sampleViewModel.getSampleEntity() != null) {
 			sampleViewModel.getSampleEntity().removeObserver(observer);
 		}
-		sampleViewModel.load(SampleRepository.ID, true, true).observe(this, observer);
+		sampleViewModel.load(SampleRepository.ID, true, true, 5).observe(this, observer);
 	}
 
 }

@@ -10,9 +10,9 @@ public class SampleViewModel extends AbstractViewModel {
 
 	private LiveData<Resource<SampleEntity>> sampleEntity;
 
-	public LiveData<Resource<SampleEntity>> load(String id, Boolean forceRefresh, Boolean failExecution) {
+	public LiveData<Resource<SampleEntity>> load(String id, Boolean forceRefresh, Boolean failExecution, Integer delaySeconds) {
 		if (sampleEntity == null || forceRefresh) {
-			sampleEntity = SampleRepository.get(id, forceRefresh, failExecution);
+			sampleEntity = SampleRepository.get(id, forceRefresh, failExecution, delaySeconds);
 		}
 		return sampleEntity;
 	}
