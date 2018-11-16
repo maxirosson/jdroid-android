@@ -57,7 +57,7 @@ public class SampleRepository {
 				sampleEntity.setId(item.getId());
 				sampleEntity.setField(item.getValue());
 				sampleEntity.setDate(DateUtils.now());
-				getSampleEntityDao().insert(sampleEntity);
+				getSampleEntityDao().upsert(sampleEntity);
 			}
 
 			@Override

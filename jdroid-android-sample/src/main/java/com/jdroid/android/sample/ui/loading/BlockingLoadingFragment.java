@@ -37,19 +37,12 @@ public class BlockingLoadingFragment extends AbstractFragment {
 			}
 
 			@Override
-			protected void onStarting() {
-
-			}
-
-			@Override
 			protected void onStartLoading(@Nullable SampleEntity data) {
-				super.onStartLoading(data);
 				getActivityIf().showLoading();
 			}
 
 			@Override
 			protected void onStopLoading(@Nullable SampleEntity data) {
-				super.onStopLoading(data);
 				getActivityIf().dismissLoading();
 			}
 

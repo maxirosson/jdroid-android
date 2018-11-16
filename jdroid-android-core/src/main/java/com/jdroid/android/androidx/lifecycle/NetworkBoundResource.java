@@ -92,22 +92,38 @@ public abstract class NetworkBoundResource<DatabaseDataType, NetworkDataType> {
 						@Override
 						public void run() {
 							LOGGER.info(getTag() + ": Saving resource to database");
-							saveToDb((NetworkDataType)processResponse((ApiSuccessResponse)response));
-							AppExecutors.getMainThreadExecutor().execute(new Runnable() {
-								@Override
-								public void run() {
-									// we specially request a new live data,
-									// otherwise we will get immediately last cached value,
-									// which may not be updated with latest results received from network.
-									LOGGER.info(getTag() + ": Loading resource from database");
-									result.addSource(loadFromDb(), new Observer<DatabaseDataType>() {
-										@Override
-										public void onChanged(DatabaseDataType newData) {
-											setValue(Resource.success(newData));
-										}
-									});
-								}
-							});
+							try {
+								saveToDb((NetworkDataType)processResponse((ApiSuccessResponse)response));
+								AppExecutors.getMainThreadExecutor().execute(new Runnable() {
+									@Override
+									public void run() {
+										// we specially request a new live data,
+										// otherwise we will get immediately last cached value,
+										// which may not be updated with latest results received from network.
+										LOGGER.info(getTag() + ": Loading resource from database");
+										result.addSource(loadFromDb(), new Observer<DatabaseDataType>() {
+											@Override
+											public void onChanged(DatabaseDataType newData) {
+												setValue(Resource.success(newData));
+											}
+										});
+									}
+								});
+							} catch (Exception e) {
+								AbstractException abstractException = wrapException(e);
+								logHandledException(abstractException);
+								AppExecutors.getMainThreadExecutor().execute(new Runnable() {
+									 @Override
+									 public void run() {
+										 result.addSource(dbSource, new Observer<DatabaseDataType>() {
+											 @Override
+											 public void onChanged(DatabaseDataType newData) {
+												 setValue(Resource.error(abstractException, newData));
+											 }
+										 });
+									 }
+								 });
+							}
 						}
 					});
 				} else if (response instanceof ApiEmptyResponse) {
