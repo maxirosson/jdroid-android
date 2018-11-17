@@ -2,6 +2,7 @@ package com.jdroid.android.sample.androidx;
 
 import com.jdroid.android.androidx.lifecycle.ApiResponse;
 import com.jdroid.android.androidx.lifecycle.ApiSuccessResponse;
+import com.jdroid.android.androidx.lifecycle.DatabaseBoundResource;
 import com.jdroid.android.androidx.lifecycle.NetworkBoundResource;
 import com.jdroid.android.androidx.lifecycle.Resource;
 import com.jdroid.android.concurrent.AppExecutors;
@@ -21,6 +22,7 @@ import java.util.concurrent.TimeUnit;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 public class SampleRepository {
 
@@ -88,7 +90,7 @@ public class SampleRepository {
 		}.getLiveData();
 	}
 
-	public static LiveData<Resource<List<SampleEntity>>> getAll(String id, Boolean forceRefresh, Boolean failExecution) {
+	public static LiveData<Resource<List<SampleEntity>>> getAll(Boolean forceRefresh, Boolean failExecution) {
 		return new NetworkBoundResource<List<SampleEntity>, List<NetworkResponse>>() {
 
 			@Override
@@ -131,6 +133,36 @@ public class SampleRepository {
 					return new ApiSuccessResponse<List<NetworkResponse>>(networkResponses);
 				}
 			}
+		}.getLiveData();
+	}
+
+	public static LiveData<Resource<List<String>>> getStrings() {
+		return new DatabaseBoundResource<List<String>>() {
+
+			@NonNull
+			@Override
+			protected LiveData<List<String>> loadFromDb() {
+				List<String> items = Lists.newArrayList("one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen");;
+				MutableLiveData<List<String>> liveData = new MutableLiveData<>();
+				liveData.setValue(items);
+				return liveData;
+			}
+
+		}.getLiveData();
+	}
+
+	public static LiveData<Resource<List<Object>>> getMixedTypes() {
+		return new DatabaseBoundResource<List<Object>>() {
+
+			@NonNull
+			@Override
+			protected LiveData<List<Object>> loadFromDb() {
+				List<Object> items = Lists.newArrayList("one", "two", true, "three", 1, 2, "four", true, "five", "six", "seven", "eight", 3, "nine", "ten", "eleven", "twelve", 4, "thirteen", false, false, "fourteen", "fifteen", "sixteen");
+				MutableLiveData<List<Object>> liveData = new MutableLiveData<>();
+				liveData.setValue(items);
+				return liveData;
+			}
+
 		}.getLiveData();
 	}
 

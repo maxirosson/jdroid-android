@@ -12,7 +12,6 @@ import com.jdroid.android.recycler.RecyclerViewContainer;
 import com.jdroid.android.recycler.SwipeRecyclerFragment;
 import com.jdroid.android.sample.R;
 import com.jdroid.android.sample.androidx.SampleListViewModel;
-import com.jdroid.android.sample.androidx.SampleRepository;
 import com.jdroid.android.sample.database.room.SampleEntity;
 import com.jdroid.android.sample.ui.adapter.SampleRecyclerViewType;
 
@@ -80,7 +79,7 @@ public class SwipeRefreshLoadingFragment extends SwipeRecyclerFragment {
 		if (sampleListViewModel.getSampleEntities() != null && forceRefresh) {
 			sampleListViewModel.getSampleEntities().removeObserver(observer);
 		}
-		sampleListViewModel.load(SampleRepository.ID, forceRefresh, false).observe(this, observer);
+		sampleListViewModel.load(forceRefresh, false).observe(this, observer);
 	}
 
 	@Override

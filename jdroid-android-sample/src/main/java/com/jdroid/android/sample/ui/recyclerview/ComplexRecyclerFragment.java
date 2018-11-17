@@ -6,6 +6,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.jdroid.android.androidx.lifecycle.Resource;
+import com.jdroid.android.androidx.lifecycle.ResourceObserver;
+import com.jdroid.android.fragment.AbstractFragment;
 import com.jdroid.android.recycler.AbstractRecyclerFragment;
 import com.jdroid.android.recycler.FooterRecyclerViewType;
 import com.jdroid.android.recycler.HeaderRecyclerViewType;
@@ -13,45 +16,52 @@ import com.jdroid.android.recycler.RecyclerViewAdapter;
 import com.jdroid.android.recycler.RecyclerViewContainer;
 import com.jdroid.android.recycler.RecyclerViewType;
 import com.jdroid.android.sample.R;
-import com.jdroid.android.sample.usecase.SampleItemsUseCase;
-import com.jdroid.android.usecase.UseCaseHelper;
-import com.jdroid.android.usecase.UseCaseTrigger;
+import com.jdroid.android.sample.androidx.SampleListViewModel;
 import com.jdroid.java.collections.Lists;
 import com.jdroid.java.utils.IdGenerator;
 
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ComplexRecyclerFragment extends AbstractRecyclerFragment {
 
-	private SampleItemsUseCase sampleItemsUseCase;
+	private SampleListViewModel sampleListViewModel;
+	private Observer<Resource<List<Object>>> observer;
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
 
-		sampleItemsUseCase = new SampleItemsUseCase();
-	}
+		observer = new ResourceObserver<List<Object>>() {
 
-	@Override
-	public void onStart() {
-		super.onStart();
-		UseCaseHelper.registerUseCase(sampleItemsUseCase, this, UseCaseTrigger.ONCE);
-	}
+			@Override
+			protected void onDataChanged(List<Object> data) {
+				List<RecyclerViewType> recyclerViewTypes = Lists.<RecyclerViewType>newArrayList(new StringRecyclerViewType(), new IntegerRecyclerViewType(), new BooleanRecyclerViewType());
+				setAdapter(new RecyclerViewAdapter(recyclerViewTypes, data));
+			}
 
-	@Override
-	public void onStop() {
-		super.onStop();
-		UseCaseHelper.unregisterUseCase(sampleItemsUseCase, this);
-	}
+			@Override
+			protected void onStarting() {
+				showLoading();
+			}
 
-	@Override
-	public void onFinishUseCase() {
-		List<RecyclerViewType> recyclerViewTypes = Lists.<RecyclerViewType>newArrayList(new StringRecyclerViewType(), new IntegerRecyclerViewType(), new BooleanRecyclerViewType());
-		setAdapter(new RecyclerViewAdapter(recyclerViewTypes, sampleItemsUseCase.getComplexItems()));
-		dismissLoading();
+			@Override
+			protected void onStartLoading(@Nullable List<Object> data) {
+				showLoading();
+			}
+
+			@Override
+			protected AbstractFragment getFragment() {
+				return ComplexRecyclerFragment.this;
+			}
+		};
+		sampleListViewModel = ViewModelProviders.of(this).get(SampleListViewModel.class);
+		sampleListViewModel.loadMixedTypes().observe(this, observer);
 	}
 
 	@Override

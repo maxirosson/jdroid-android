@@ -11,12 +11,28 @@ import androidx.lifecycle.LiveData;
 public class SampleListViewModel extends AbstractViewModel {
 
 	private LiveData<Resource<List<SampleEntity>>> sampleEntities;
+	private LiveData<Resource<List<Object>>> mixedTypes;
+	private LiveData<Resource<List<String>>> strings;
 
-	public LiveData<Resource<List<SampleEntity>>> load(String id, Boolean forceRefresh, Boolean failExecution) {
+	public LiveData<Resource<List<SampleEntity>>> load(Boolean forceRefresh, Boolean failExecution) {
 		if (sampleEntities == null || forceRefresh) {
-			sampleEntities = SampleRepository.getAll(id, forceRefresh, failExecution);
+			sampleEntities = SampleRepository.getAll(forceRefresh, failExecution);
 		}
 		return sampleEntities;
+	}
+
+	public LiveData<Resource<List<Object>>> loadMixedTypes() {
+		if (mixedTypes == null) {
+			mixedTypes = SampleRepository.getMixedTypes();
+		}
+		return mixedTypes;
+	}
+
+	public LiveData<Resource<List<String>>> loadStrings() {
+		if (strings == null) {
+			strings = SampleRepository.getStrings();
+		}
+		return strings;
 	}
 
 	public LiveData<Resource<List<SampleEntity>>> getSampleEntities() {
