@@ -47,7 +47,8 @@ public class NonBlockingLoadingFragment extends AbstractFragment {
 			}
 		};
 		sampleViewModel = ViewModelProviders.of(this).get(SampleViewModel.class);
-		sampleViewModel.load(SampleRepository.ID, true, false, 5).observe(this, observer);
+		sampleViewModel.setLoadFromNetworkDelaySeconds(5);
+		sampleViewModel.load(SampleRepository.ID, true).observe(this, observer);
 	}
 
 	@Override

@@ -36,7 +36,12 @@
 	<string name="outOfMemory">outOfMemory</string>
 
 	<string name="execute">Execute</string>
-	<string name="failExecution">Fail Execution</string>
+	<string name="failLoadFromNetwork">Fail Load from Network</string>
+	<string name="loadFromNetworkDelaySeconds">Delay (seconds) Load from Network</string>
+	<string name="failLoadFromDb">Fail Load from Db</string>
+	<string name="saveToDbDelaySeconds">Delay (seconds) Load from Db</string>
+	<string name="failSaveToDb">Fail Save to Db</string>
+	<string name="loadFromDbDelaySeconds">Delay (seconds) Save to Db</string>
 	<string name="delay">Delay (seconds)</string>
 	<!-- Floating Action Button -->
 

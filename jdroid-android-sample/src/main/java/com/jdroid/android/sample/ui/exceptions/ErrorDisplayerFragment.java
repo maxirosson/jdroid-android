@@ -112,7 +112,8 @@ public class ErrorDisplayerFragment extends AbstractFragment {
 		if (sampleViewModel.getSampleEntity() != null) {
 			sampleViewModel.getSampleEntity().removeObserver(observer);
 		}
-		sampleViewModel.load(SampleRepository.ID, true, true, 0).observe(this, observer);
+		sampleViewModel.setFailLoadFromNetwork(true);
+		sampleViewModel.load(SampleRepository.ID, true).observe(this, observer);
 	}
 
 	@Override

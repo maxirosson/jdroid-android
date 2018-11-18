@@ -18,6 +18,9 @@ public abstract class SampleEntityDao extends AbstractDao<SampleEntity> {
 	@Query("SELECT * FROM sampleEntity WHERE id = :id")
 	public abstract LiveData<SampleEntity> get(String id);
 
+	@Query("SELECT * FROM sampleEntity WHERE id = :id")
+	public abstract SampleEntity getSync(String id);
+
 	@Query("SELECT * FROM sampleEntity")
 	public abstract LiveData<List<SampleEntity>> getAllLiveData();
 

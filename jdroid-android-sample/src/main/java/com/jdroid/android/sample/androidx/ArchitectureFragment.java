@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.jdroid.android.androidx.lifecycle.Resource;
@@ -13,6 +14,7 @@ import com.jdroid.android.loading.FragmentLoading;
 import com.jdroid.android.loading.NonBlockingLoading;
 import com.jdroid.android.sample.R;
 import com.jdroid.android.sample.database.room.SampleEntity;
+import com.jdroid.java.utils.TypeUtils;
 
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
@@ -21,11 +23,16 @@ import androidx.lifecycle.ViewModelProviders;
 
 public class ArchitectureFragment extends AbstractFragment {
 
-	private static Boolean failExecution = false;
-	private static Boolean forceRefresh = false;
+	private static Boolean failLoadFromNetwork = false;
+	private static Boolean failLoadFromDb = false;
+	private static Boolean failSaveToDb = false;
 
 	private SampleViewModel sampleViewModel;
 	private Observer<Resource<SampleEntity>> observer;
+
+	private EditText loadFromNetworkDelaySecondsEditText;
+	private EditText loadFromDbDelaySecondsEditText;
+	private EditText saveToDbDelaySecondsEditText;
 
 	@Override
 	public Integer getContentFragmentLayout() {
@@ -67,44 +74,68 @@ public class ArchitectureFragment extends AbstractFragment {
 			}
 		};
 		sampleViewModel = ViewModelProviders.of(this).get(SampleViewModel.class);
-		execute();
+		execute(false);
 	}
 
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
-		CheckBox failExecutionCheckBox = findView(R.id.failExecution);
-		failExecutionCheckBox.setChecked(failExecution);
-		failExecutionCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+		CheckBox failLoadFromNetworkCheckBox = findView(R.id.failLoadFromNetwork);
+		failLoadFromNetworkCheckBox.setChecked(failLoadFromNetwork);
+		failLoadFromNetworkCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				failExecution = isChecked;
+				failLoadFromNetwork = isChecked;
 			}
 		});
 
-		CheckBox forceRefreshCheckBox = findView(R.id.forceRefresh);
-		forceRefreshCheckBox.setChecked(forceRefresh);
-		forceRefreshCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+		loadFromNetworkDelaySecondsEditText = findView(R.id.loadFromNetworkDelaySeconds);
+		loadFromNetworkDelaySecondsEditText.setText("5");
+
+		CheckBox failLoadFromDbCheckBox = findView(R.id.failLoadFromDb);
+		failLoadFromDbCheckBox.setChecked(failLoadFromDb);
+		failLoadFromDbCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				forceRefresh = isChecked;
+				failLoadFromDb = isChecked;
 			}
 		});
+
+		loadFromDbDelaySecondsEditText = findView(R.id.loadFromDbDelaySeconds);
+		loadFromDbDelaySecondsEditText.setText("5");
+
+		CheckBox failSaveToDbCheckBox = findView(R.id.failSaveToDb);
+		failSaveToDbCheckBox.setChecked(failSaveToDb);
+		failSaveToDbCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				failSaveToDb = isChecked;
+			}
+		});
+
+		saveToDbDelaySecondsEditText = findView(R.id.saveToDbDelaySeconds);
+		saveToDbDelaySecondsEditText.setText("5");
 
 		findView(R.id.execute).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				execute();
+				execute(true);
 			}
 		});
 	}
 
-	private void execute() {
+	private void execute(Boolean forceRefresh) {
 		if (sampleViewModel.getSampleEntity() != null && forceRefresh) {
 			sampleViewModel.getSampleEntity().removeObserver(observer);
 		}
-		sampleViewModel.load(SampleRepository.ID, forceRefresh, failExecution, 5).observe(this, observer);
+		sampleViewModel.setFailLoadFromNetwork(failLoadFromNetwork);
+		sampleViewModel.setLoadFromNetworkDelaySeconds(TypeUtils.getInteger(loadFromNetworkDelaySecondsEditText.getText()));
+		sampleViewModel.setFailLoadFromDb(failLoadFromDb);
+		sampleViewModel.setLoadFromDbDelaySeconds(TypeUtils.getInteger(loadFromDbDelaySecondsEditText.getText()));
+		sampleViewModel.setFailSaveToDb(failSaveToDb);
+		sampleViewModel.setSaveToDbDelaySeconds(TypeUtils.getInteger(saveToDbDelaySecondsEditText.getText()));
+		sampleViewModel.load(SampleRepository.ID, forceRefresh).observe(this, observer);
 	}
 
 	@Override

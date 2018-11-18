@@ -19,8 +19,10 @@ import com.jdroid.java.utils.RandomUtils;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -50,16 +52,22 @@ public class SampleRepository {
 		});
 	}
 
-	public static LiveData<Resource<SampleEntity>> get(String id, Boolean forceRefresh, Boolean failExecution, Integer delaySeconds) {
+	public static LiveData<Resource<SampleEntity>> get(String id, Boolean forceRefresh, Boolean failLoadFromNetwork, Boolean failLoadFromDb, Boolean failSaveToDb, Integer loadFromNetworkDelaySeconds, Integer loadFromDbDelaySeconds, Integer saveToDbDelaySeconds) {
 		return new NetworkBoundResource<SampleEntity, NetworkResponse>() {
 
+			@WorkerThread
 			@Override
 			protected void saveToDb(@NonNull NetworkResponse item) {
-				SampleEntity sampleEntity = new SampleEntity();
-				sampleEntity.setId(item.getId());
-				sampleEntity.setField(item.getValue());
-				sampleEntity.setDate(DateUtils.now());
-				getSampleEntityDao().upsert(sampleEntity);
+				ExecutorUtils.sleep(saveToDbDelaySeconds, TimeUnit.SECONDS);
+				if (failSaveToDb) {
+					throw new UnexpectedException("Sample save to db failed");
+				} else {
+					SampleEntity sampleEntity = new SampleEntity();
+					sampleEntity.setId(item.getId());
+					sampleEntity.setField(item.getValue());
+					sampleEntity.setDate(DateUtils.now());
+					getSampleEntityDao().upsert(sampleEntity);
+				}
 			}
 
 			@Override
@@ -67,23 +75,52 @@ public class SampleRepository {
 				return forceRefresh || data == null || (data.getDate() != null && DateUtils.nowMillis() - data.getDate().getTime() > 10000);
 			}
 
+			@MainThread
 			@NonNull
 			@Override
 			protected LiveData<SampleEntity> loadFromDb() {
-				return getSampleEntityDao().get(id);
+				if (loadFromDbDelaySeconds > 0) {
+					MutableLiveData<SampleEntity> liveData = new MutableLiveData<>();
+					AppExecutors.getDiskIOExecutor().execute(new Runnable() {
+						@Override
+						public void run() {
+							ExecutorUtils.sleep(loadFromDbDelaySeconds, TimeUnit.SECONDS);
+							if (failLoadFromDb) {
+								// TODO This is not properly simulating on error when loading the database
+								throw new UnexpectedException("Sample load from db failed");
+							} else {
+								SampleEntity sampleEntity = getSampleEntityDao().getSync(id);
+								liveData.postValue(sampleEntity);
+							}
+						}
+					});
+					return liveData;
+				} else {
+					if (failLoadFromDb) {
+						AppExecutors.getDiskIOExecutor().execute(new Runnable() {
+							@Override
+							public void run() {
+								throw new UnexpectedException("Sample load from db failed");
+							}
+						});
+						return new MutableLiveData<>();
+					} else {
+						return getSampleEntityDao().get(id);
+					}
+				}
 			}
 
+			@WorkerThread
 			@Override
 			protected ApiResponse<NetworkResponse> doLoadFromNetwork() {
 				// Simulate a request
-				ExecutorUtils.sleep(delaySeconds, TimeUnit.SECONDS);
-				if (failExecution) {
+				ExecutorUtils.sleep(loadFromNetworkDelaySeconds, TimeUnit.SECONDS);
+				if (failLoadFromNetwork) {
 					throw new UnexpectedException("Sample network request failed");
 				} else {
 					NetworkResponse networkResponse = new NetworkResponse();
 					networkResponse.setId(ID);
 					networkResponse.setValue(RandomUtils.getLong().toString());
-
 					return new ApiSuccessResponse<>(networkResponse);
 				}
 			}
