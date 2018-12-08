@@ -51,6 +51,7 @@ public abstract class SpreadTheLoveFragment extends AbstractFragment {
 
 		Boolean followUsVisible = false;
 
+		// TODO Add support to customizae this list of follow us items
 		View facebook = findView(R.id.facebook);
 		if (getFacebookPageId() != null) {
 			facebook.setOnClickListener(new OnClickListener() {

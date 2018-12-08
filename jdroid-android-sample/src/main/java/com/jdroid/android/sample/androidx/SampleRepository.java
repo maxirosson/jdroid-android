@@ -53,7 +53,7 @@ public class SampleRepository {
 	}
 
 	public static LiveData<Resource<SampleEntity>> get(String id, Boolean forceRefresh, Boolean failLoadFromNetwork, Boolean failLoadFromDb, Boolean failSaveToDb, Integer loadFromNetworkDelaySeconds, Integer loadFromDbDelaySeconds, Integer saveToDbDelaySeconds) {
-		return new NetworkBoundResource<SampleEntity, NetworkResponse>() {
+		return new NetworkBoundResource<SampleEntity, SampleEntity, NetworkResponse>() {
 
 			@WorkerThread
 			@Override
@@ -128,7 +128,7 @@ public class SampleRepository {
 	}
 
 	public static LiveData<Resource<List<SampleEntity>>> getAll(Boolean forceRefresh, Boolean failExecution) {
-		return new NetworkBoundResource<List<SampleEntity>, List<NetworkResponse>>() {
+		return new NetworkBoundResource<List<SampleEntity>, List<SampleEntity>, List<NetworkResponse>>() {
 
 			@Override
 			protected void saveToDb(@NonNull List<NetworkResponse> items) {
