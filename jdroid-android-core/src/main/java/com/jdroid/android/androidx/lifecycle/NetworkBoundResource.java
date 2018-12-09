@@ -22,7 +22,7 @@ import androidx.lifecycle.Observer;
  * A generic class that can provide a resource backed by both the sqlite database and the network.
  *
  * @param <ViewDataType> Type for the View.
- * @param <DatabaseDataType> Type for the Resource data.
+ * @param <DatabaseDataType> Type for the Database model.
  * @param <NetworkDataType> Type for the API response.
  */
 public abstract class NetworkBoundResource<ViewDataType, DatabaseDataType, NetworkDataType> {
@@ -45,26 +45,26 @@ public abstract class NetworkBoundResource<ViewDataType, DatabaseDataType, Netwo
 				LOGGER.info(getTag() + ": LiveData " + toString() + " inactive");
 			}
 		};
-		result.setValue(Resource.starting());
+		setValue(Resource.starting());
 		LOGGER.info(getTag() + ": Loading resource from database");
 		LiveData<DatabaseDataType> dbSource = loadFromDb();
-		result.addSource(dbSource, new Observer<DatabaseDataType>() {
+		addSource(dbSource, new Observer<DatabaseDataType>() {
 			@Override
 			public void onChanged(DatabaseDataType data) {
-				result.removeSource(dbSource);
+				removeSource(dbSource);
 				if (shouldFetch(data)) {
 					fetchFromNetwork(dbSource, data);
 				} else {
 					LOGGER.info(getTag() + ": Network fetch not required");
-					dispatch(dbSource, data, null, Resource.Status.SUCCESS);
+					dispatch(dbSource, null, Resource.Status.SUCCESS);
 				}
 			}
 		});
 	}
 
 	@MainThread
-	protected void dispatch(LiveData<DatabaseDataType> source, DatabaseDataType data, AbstractException abstractException, Resource.Status status) {
-		result.addSource(source, new Observer<DatabaseDataType>() {
+	protected void dispatch(LiveData<DatabaseDataType> source, AbstractException abstractException, Resource.Status status) {
+		addSource(source, new Observer<DatabaseDataType>() {
 			@Override
 			public void onChanged(DatabaseDataType newData) {
 				ViewDataType viewDataType = toViewDataType(newData);
@@ -79,23 +79,16 @@ public abstract class NetworkBoundResource<ViewDataType, DatabaseDataType, Netwo
 		});
 	}
 
-	@MainThread
-	protected void setValue(Resource<ViewDataType> newValue) {
-		if (!result.getValue().equals(newValue)) {
-			result.setValue(newValue);
-		}
-	}
-
 	private void fetchFromNetwork(LiveData<DatabaseDataType> dbSource, DatabaseDataType data) {
 		LiveData<ApiResponse<NetworkDataType>> apiResponse = loadFromNetwork();
 		// we re-attach dbSource as a new source, it will dispatch its latest value quickly
-		dispatch(dbSource, data, null, Resource.Status.LOADING);
+		dispatch(dbSource, null, Resource.Status.LOADING);
 
-		result.addSource(apiResponse, new Observer<ApiResponse>() {
+		addSource(apiResponse, new Observer<ApiResponse>() {
 			@Override
 			public void onChanged(ApiResponse response) {
-				result.removeSource(apiResponse);
-				result.removeSource(dbSource);
+				removeSource(apiResponse);
+				removeSource(dbSource);
 				if (response instanceof ApiSuccessResponse) {
 					AppExecutors.getDiskIOExecutor().execute(new Runnable() {
 						@Override
@@ -110,7 +103,7 @@ public abstract class NetworkBoundResource<ViewDataType, DatabaseDataType, Netwo
 										// otherwise we will get immediately last cached value,
 										// which may not be updated with latest results received from network.
 										LOGGER.info(getTag() + ": Loading resource from database");
-										dispatch(loadFromDb(), data, null, Resource.Status.SUCCESS);
+										dispatch(loadFromDb(), null, Resource.Status.SUCCESS);
 
 									}
 								});
@@ -120,7 +113,7 @@ public abstract class NetworkBoundResource<ViewDataType, DatabaseDataType, Netwo
 								AppExecutors.getMainThreadExecutor().execute(new Runnable() {
 									 @Override
 									 public void run() {
-										 dispatch(dbSource, data, abstractException, Resource.Status.ERROR);
+										 dispatch(dbSource, abstractException, Resource.Status.ERROR);
 									 }
 								 });
 							}
@@ -133,12 +126,12 @@ public abstract class NetworkBoundResource<ViewDataType, DatabaseDataType, Netwo
 						public void run() {
 							// reload from disk whatever we had
 							LOGGER.info(getTag() + ": Loading resource from database");
-							dispatch(loadFromDb(), data, null, Resource.Status.SUCCESS);
+							dispatch(loadFromDb(), null, Resource.Status.SUCCESS);
 						}
 					});
 				} else if (response instanceof ApiErrorResponse) {
 					onFetchFailed();
-					dispatch(dbSource, data, ((ApiErrorResponse)response).getException(), Resource.Status.ERROR);
+					dispatch(dbSource, ((ApiErrorResponse)response).getException(), Resource.Status.ERROR);
 
 				}
 			}
@@ -217,6 +210,13 @@ public abstract class NetworkBoundResource<ViewDataType, DatabaseDataType, Netwo
 	@MainThread
 	protected void onFetchFailed() {
 		// Do nothing
+	}
+
+	@MainThread
+	protected void setValue(@NonNull Resource<ViewDataType> newValue) {
+		if (result.getValue() == null || !result.getValue().equals(newValue)) {
+			result.setValue(newValue);
+		}
 	}
 
 	@MainThread
