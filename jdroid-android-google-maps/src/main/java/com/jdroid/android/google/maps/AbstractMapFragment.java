@@ -331,27 +331,18 @@ public abstract class AbstractMapFragment extends SupportMapFragment implements 
 		fragmentHelper.onDestroy();
 	}
 
-	/**
-	 * @see com.jdroid.android.fragment.FragmentIf#findView(int)
-	 */
 	@Override
 	public <V extends View> V findView(int id) {
 		return fragmentHelper.findView(id);
 	}
 
-	/**
-	 * @see com.jdroid.android.fragment.FragmentIf#findViewOnActivity(int)
-	 */
 	@Override
 	public <V extends View> V findViewOnActivity(int id) {
 		return fragmentHelper.findViewOnActivity(id);
 	}
 
-	/**
-	 * @see com.jdroid.android.fragment.FragmentIf#inflate(int)
-	 */
 	@Override
-	public View inflate(int resource) {
+	public <V extends View> V inflate(int resource) {
 		return fragmentHelper.inflate(resource);
 	}
 

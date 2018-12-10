@@ -1,9 +1,14 @@
 package com.jdroid.android.about;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.gms.plus.PlusOneButton;
 import com.jdroid.android.application.AbstractApplication;
@@ -49,80 +54,24 @@ public abstract class SpreadTheLoveFragment extends AbstractFragment {
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
-		Boolean followUsVisible = false;
+		List<FollowUsItem> followUsItems = getFollowUsItems();
 
-		// TODO Add support to customizae this list of follow us items
-		View facebook = findView(R.id.facebook);
-		if (getFacebookPageId() != null) {
-			facebook.setOnClickListener(new OnClickListener() {
+		ViewGroup followUsContainer = findView(R.id.followUsContainer);
 
-				@Override
-				public void onClick(View v) {
-					FacebookHelper.openPage(getFacebookPageId());
-				}
-			});
-			followUsVisible = true;
-		} else {
-			facebook.setVisibility(View.GONE);
-		}
-
-		View googlePlus = findView(R.id.googlePlus);
-		if (getGooglePlusCommunityId() != null) {
-			googlePlus.setOnClickListener(new OnClickListener() {
+		for (FollowUsItem item : followUsItems) {
+			ViewGroup itemViewGroup = (ViewGroup)LayoutInflater.from(getActivity()).inflate(R.layout.jdroid_spread_the_love_follow_us_item, followUsContainer, false);
+			itemViewGroup.setOnClickListener(new OnClickListener() {
 
 				@Override
 				public void onClick(View v) {
-					GooglePlusHelperFragment.openCommunity(getActivity(), getGooglePlusCommunityId());
+					item.onSelected(getActivity());
 				}
 			});
-			followUsVisible = true;
-		} else {
-			googlePlus.setVisibility(View.GONE);
+			((ImageView)itemViewGroup.findViewById(R.id.image)).setImageResource(item.getImageResId());
+			((TextView)itemViewGroup.findViewById(R.id.title)).setText(item.getTitleResId());
+			followUsContainer.addView(itemViewGroup);
 		}
-
-		View twitter = findView(R.id.twitter);
-		if (getTwitterAccount() != null) {
-			twitter.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					TwitterHelper.openProfile(getTwitterAccount());
-				}
-			});
-			followUsVisible = true;
-		} else {
-			twitter.setVisibility(View.GONE);
-		}
-
-		View instagram = findView(R.id.instagram);
-		if (getInstagramAccount() != null) {
-			instagram.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					InstagramHelper.openProfile(getInstagramAccount());
-				}
-			});
-			followUsVisible = true;
-		} else {
-			instagram.setVisibility(View.GONE);
-		}
-
-		View linkedin = findView(R.id.linkedin);
-		if (getLinkedInCompanyPageId() != null) {
-			linkedin.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					LinkedInHelper.openCompanyPage(getLinkedInCompanyPageId());
-				}
-			});
-			followUsVisible = true;
-		} else {
-			linkedin.setVisibility(View.GONE);
-		}
-
-		findView(R.id.followUs).setVisibility(followUsVisible ? View.VISIBLE : View.GONE);
+		findView(R.id.followUs).setVisibility(followUsItems.isEmpty() ? View.GONE : View.VISIBLE);
 
 		Map<String, SharingDataItem> sharingDataItemsMap = Maps.newHashMap();
 		sharingDataItemsMap.put(SharingMedium.TWITTER.getName(), new SharingDataItem(getTwitterShareText()));
@@ -238,6 +187,55 @@ public abstract class SpreadTheLoveFragment extends AbstractFragment {
 
 	protected String getSmsShareText() {
 		return getDefaultShareText();
+	}
+
+	protected List<FollowUsItem> getFollowUsItems() {
+		List<FollowUsItem> items = Lists.newArrayList();
+		if (getFacebookPageId() != null) {
+			items.add(new FollowUsItem(R.drawable.jdroid_ic_facebook_24dp, R.string.jdroid_facebook) {
+				@Override
+				public void onSelected(Activity activity) {
+					FacebookHelper.openPage(getFacebookPageId());
+				}
+			});
+		}
+
+		if (getGooglePlusCommunityId() != null) {
+			items.add(new FollowUsItem(R.drawable.jdroid_ic_google_plus, R.string.jdroid_googlePlus) {
+				@Override
+				public void onSelected(Activity activity) {
+					GooglePlusHelperFragment.openCommunity(getActivity(), getGooglePlusCommunityId());
+				}
+			});
+		}
+
+		if (getTwitterAccount() != null) {
+			items.add(new FollowUsItem(R.drawable.jdroid_ic_twitter_24dp, R.string.jdroid_twitter) {
+				@Override
+				public void onSelected(Activity activity) {
+					TwitterHelper.openProfile(getTwitterAccount());
+				}
+			});
+		}
+
+		if (getInstagramAccount() != null) {
+			items.add(new FollowUsItem(R.drawable.jdroid_ic_instagram_24dp, R.string.jdroid_instagram) {
+				@Override
+				public void onSelected(Activity activity) {
+					InstagramHelper.openProfile(getInstagramAccount());
+				}
+			});
+		}
+
+		if (getLinkedInCompanyPageId() != null) {
+			items.add(new FollowUsItem(R.drawable.jdroid_ic_linkedin_24dp, R.string.jdroid_linkedin) {
+				@Override
+				public void onSelected(Activity activity) {
+					LinkedInHelper.openCompanyPage(getLinkedInCompanyPageId());
+				}
+			});
+		}
+		return items;
 	}
 
 	@Override

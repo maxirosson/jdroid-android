@@ -2,10 +2,6 @@ package com.jdroid.android.dialog;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.MainThread;
-import androidx.annotation.NonNull;
-import androidx.fragment.app.DialogFragment;
-import androidx.appcompat.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,6 +16,11 @@ import com.jdroid.android.fragment.FragmentHelper;
 import com.jdroid.android.fragment.FragmentIf;
 import com.jdroid.android.loading.FragmentLoading;
 import com.jdroid.java.exception.AbstractException;
+
+import androidx.annotation.MainThread;
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.DialogFragment;
 
 public class AbstractDialogFragment extends DialogFragment implements FragmentIf {
 
@@ -118,7 +119,7 @@ public class AbstractDialogFragment extends DialogFragment implements FragmentIf
 	}
 
 	@Override
-	public View inflate(int resource) {
+	public <V extends View> V inflate(int resource) {
 		return fragmentHelper.inflate(resource);
 	}
 

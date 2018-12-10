@@ -117,8 +117,8 @@ public class ActivityHelper implements ActivityIf {
 	}
 
 	@Override
-	public View inflate(int resource) {
-		return LayoutInflater.from(activity).inflate(resource, null);
+	public <V extends View> V inflate(int resource) {
+		return (V)LayoutInflater.from(activity).inflate(resource, null);
 	}
 
 

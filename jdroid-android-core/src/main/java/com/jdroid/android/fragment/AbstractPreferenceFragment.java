@@ -3,9 +3,6 @@ package com.jdroid.android.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
-import androidx.annotation.MainThread;
-import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +14,10 @@ import com.jdroid.android.application.AppModule;
 import com.jdroid.android.exception.ErrorDisplayer;
 import com.jdroid.android.loading.FragmentLoading;
 import com.jdroid.java.exception.AbstractException;
+
+import androidx.annotation.MainThread;
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 
 public abstract class AbstractPreferenceFragment extends PreferenceFragment implements FragmentIf {
 
@@ -76,7 +77,7 @@ public abstract class AbstractPreferenceFragment extends PreferenceFragment impl
 	}
 
 	@Override
-	public View inflate(int resource) {
+	public <V extends View> V inflate(int resource) {
 		return getFragmentIf().inflate(resource);
 	}
 

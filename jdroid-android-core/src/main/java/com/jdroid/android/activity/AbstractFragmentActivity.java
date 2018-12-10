@@ -135,7 +135,7 @@ public abstract class AbstractFragmentActivity extends AppCompatActivity impleme
 	}
 
 	@Override
-	public View inflate(int resource) {
+	public <V extends View> V inflate(int resource) {
 		return activityHelper.inflate(resource);
 	}
 

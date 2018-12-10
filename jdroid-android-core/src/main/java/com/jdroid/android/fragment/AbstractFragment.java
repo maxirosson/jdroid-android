@@ -3,11 +3,6 @@ package com.jdroid.android.fragment;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import androidx.annotation.MainThread;
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.core.widget.NestedScrollView;
-import androidx.appcompat.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +17,12 @@ import com.jdroid.android.loading.FragmentLoading;
 import com.jdroid.android.view.NotifyingScrollView;
 import com.jdroid.android.view.ParallaxScrollView;
 import com.jdroid.java.exception.AbstractException;
+
+import androidx.annotation.MainThread;
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.widget.NestedScrollView;
+import androidx.fragment.app.Fragment;
 
 /**
  * Base {@link Fragment}
@@ -202,7 +203,7 @@ public abstract class AbstractFragment extends Fragment implements FragmentIf {
 
 	@MainThread
 	@Override
-	public View inflate(int resource) {
+	public <V extends View> V inflate(int resource) {
 		return fragmentHelper.inflate(resource);
 	}
 

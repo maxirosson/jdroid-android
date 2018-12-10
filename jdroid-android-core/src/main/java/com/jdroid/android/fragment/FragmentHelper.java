@@ -89,7 +89,7 @@ public class FragmentHelper implements FragmentIf {
 	}
 
 	@Override
-	public View inflate(int resource) {
+	public <V extends View> V inflate(int resource) {
 		return getActivityIf().inflate(resource);
 	}
 

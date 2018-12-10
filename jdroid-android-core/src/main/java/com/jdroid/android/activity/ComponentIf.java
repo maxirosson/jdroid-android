@@ -1,12 +1,13 @@
 package com.jdroid.android.activity;
 
 import android.app.Activity;
+import android.view.MenuItem;
+import android.view.View;
+
 import androidx.annotation.IdRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.MenuRes;
 import androidx.fragment.app.Fragment;
-import android.view.MenuItem;
-import android.view.View;
 
 public interface ComponentIf {
 
@@ -28,7 +29,7 @@ public interface ComponentIf {
 	 * @param resource ID for an XML layout resource to load
 	 * @return The root View of the inflated XML file.
 	 */
-	public View inflate(@LayoutRes int resource);
+	public <V extends View> V inflate(@LayoutRes int resource);
 
 	// //////////////////////// Life cycle //////////////////////// //
 

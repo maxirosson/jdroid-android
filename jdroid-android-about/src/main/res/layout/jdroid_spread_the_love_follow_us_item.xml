@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+								   xmlns:tools="http://schemas.android.com/tools"
+								   style="@style/jdroid_cardViewClickableStyle">
+
+	<LinearLayout
+			android:orientation="horizontal"
+			style="@style/jdroid_cardViewInner"
+			android:gravity="center_vertical"
+			android:minHeight="@dimen/jdroid_itemMinHeight">
+
+		<ImageView
+				android:id="@+id/image"
+				android:layout_width="@dimen/jdroid_itemIconSize"
+				android:layout_height="@dimen/jdroid_itemIconSize"
+				android:layout_marginRight="12dp"
+				android:duplicateParentState="true"
+				tools:srcCompat="@drawable/jdroid_ic_facebook_24dp" />
+
+		<TextView
+				android:id="@+id/title"
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				style="@style/jdroid_spreadTheLoveFollowUsItemText"
+				android:duplicateParentState="true"
+				tools:text="@string/jdroid_facebook" />
+	</LinearLayout>
+
+</androidx.cardview.widget.CardView>
