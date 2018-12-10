@@ -1,6 +1,5 @@
 package com.jdroid.android.debug.appenders;
 
-import android.app.Activity;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceGroup;
@@ -16,6 +15,8 @@ import com.jdroid.java.utils.IdGenerator;
 
 import java.util.List;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 public class NotificationsDebugPrefsAppender extends PreferencesAppender {
 
 	private List<String> urlsToTest;
@@ -30,7 +31,7 @@ public class NotificationsDebugPrefsAppender extends PreferencesAppender {
 	}
 
 	@Override
-	public void initPreferences(Activity activity, PreferenceGroup preferenceGroup) {
+	public void initPreferences(AppCompatActivity activity, PreferenceGroup preferenceGroup) {
 		for (final String url : urlsToTest) {
 			Preference preference = new Preference(activity);
 			preference.setTitle(url);

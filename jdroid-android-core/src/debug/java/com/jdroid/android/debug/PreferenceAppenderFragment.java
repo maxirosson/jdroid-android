@@ -1,7 +1,6 @@
 package com.jdroid.android.debug;
 
 import android.os.Bundle;
-import androidx.fragment.app.FragmentActivity;
 import android.view.View;
 
 import com.jdroid.android.R;
@@ -10,6 +9,9 @@ import com.jdroid.android.permission.PermissionHelper;
 import com.jdroid.java.collections.Lists;
 
 import java.util.List;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 
 public class PreferenceAppenderFragment extends AbstractPreferenceFragment {
 
@@ -35,7 +37,7 @@ public class PreferenceAppenderFragment extends AbstractPreferenceFragment {
 		for (String each : preferencesAppender.getRequiredPermissions()) {
 			permissionHelpers.add(new PermissionHelper((FragmentActivity)getActivity(), each, 1));
 		}
-		preferencesAppender.initPreferences(getActivity(), getPreferenceScreen());
+		preferencesAppender.initPreferences((AppCompatActivity)getActivity(), getPreferenceScreen());
 
 		for (PermissionHelper each : permissionHelpers) {
 			each.checkPermission(true);

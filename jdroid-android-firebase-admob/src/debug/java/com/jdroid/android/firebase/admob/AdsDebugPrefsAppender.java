@@ -1,10 +1,11 @@
 package com.jdroid.android.firebase.admob;
 
-import android.app.Activity;
 import android.preference.CheckBoxPreference;
 import android.preference.PreferenceGroup;
 
 import com.jdroid.android.debug.PreferencesAppender;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class AdsDebugPrefsAppender extends PreferencesAppender {
 
@@ -14,7 +15,7 @@ public class AdsDebugPrefsAppender extends PreferencesAppender {
 	}
 
 	@Override
-	public void initPreferences(Activity activity, PreferenceGroup preferenceGroup) {
+	public void initPreferences(AppCompatActivity activity, PreferenceGroup preferenceGroup) {
 		CheckBoxPreference checkBoxPreference = new CheckBoxPreference(activity);
 		checkBoxPreference.setKey(AdMobRemoteConfigParameter.ADS_ENABLED.getKey());
 		checkBoxPreference.setTitle(R.string.jdroid_adsEnabledTitle);

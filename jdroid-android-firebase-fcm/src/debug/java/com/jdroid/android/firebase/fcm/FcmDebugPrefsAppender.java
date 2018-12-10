@@ -1,6 +1,5 @@
 package com.jdroid.android.firebase.fcm;
 
-import android.app.Activity;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
@@ -15,6 +14,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 public class FcmDebugPrefsAppender extends PreferencesAppender {
 
 	private static Map<FcmMessage, Map<String, String>> fcmMessagesMap = Maps.newHashMap();
@@ -25,7 +26,7 @@ public class FcmDebugPrefsAppender extends PreferencesAppender {
 	}
 
 	@Override
-	public void initPreferences(Activity activity, PreferenceGroup preferenceGroup) {
+	public void initPreferences(AppCompatActivity activity, PreferenceGroup preferenceGroup) {
 		ListPreference preference = new ListPreference(activity);
 		preference.setTitle(R.string.jdroid_emulateFcmMessageTitle);
 		preference.setDialogTitle(R.string.jdroid_emulateFcmMessageTitle);

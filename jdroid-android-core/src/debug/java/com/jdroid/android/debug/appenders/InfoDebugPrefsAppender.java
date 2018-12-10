@@ -1,6 +1,5 @@
 package com.jdroid.android.debug.appenders;
 
-import android.app.Activity;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceGroup;
@@ -10,6 +9,8 @@ import com.jdroid.android.activity.ActivityLauncher;
 import com.jdroid.android.debug.PreferencesAppender;
 import com.jdroid.android.debug.info.DebugInfoActivity;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 public class InfoDebugPrefsAppender extends PreferencesAppender {
 
 	@Override
@@ -18,7 +19,7 @@ public class InfoDebugPrefsAppender extends PreferencesAppender {
 	}
 
 	@Override
-	public void initPreferences(final Activity activity, PreferenceGroup preferenceGroup) {
+	public void initPreferences(AppCompatActivity activity, PreferenceGroup preferenceGroup) {
 		Preference crashPreference = new Preference(activity);
 		crashPreference.setTitle(R.string.jdroid_debugInfo);
 		crashPreference.setSummary(R.string.jdroid_debugInfo);

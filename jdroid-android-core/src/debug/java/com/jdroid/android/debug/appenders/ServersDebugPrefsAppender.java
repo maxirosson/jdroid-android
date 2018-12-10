@@ -1,6 +1,5 @@
 package com.jdroid.android.debug.appenders;
 
-import android.app.Activity;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
@@ -16,6 +15,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 public class ServersDebugPrefsAppender extends PreferencesAppender {
 
 	private Map<Class<? extends Server>, List<? extends Server>> serversMap = Maps.newHashMap();
@@ -30,7 +31,7 @@ public class ServersDebugPrefsAppender extends PreferencesAppender {
 	}
 
 	@Override
-	public void initPreferences(Activity activity, PreferenceGroup preferenceGroup) {
+	public void initPreferences(AppCompatActivity activity, PreferenceGroup preferenceGroup) {
 		for (final Entry<Class<? extends Server>, List<? extends Server>> entry : serversMap.entrySet()) {
 			ListPreference preference = new ListPreference(activity);
 			preference.setKey(entry.getKey().getSimpleName());

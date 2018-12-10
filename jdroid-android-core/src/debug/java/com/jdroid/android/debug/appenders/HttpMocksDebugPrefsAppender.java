@@ -14,6 +14,8 @@ import com.jdroid.java.collections.Lists;
 
 import java.util.List;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 public class HttpMocksDebugPrefsAppender extends PreferencesAppender {
 
 	@Override
@@ -22,7 +24,7 @@ public class HttpMocksDebugPrefsAppender extends PreferencesAppender {
 	}
 
 	@Override
-	public void initPreferences(Activity activity, PreferenceGroup preferenceGroup) {
+	public void initPreferences(AppCompatActivity activity, PreferenceGroup preferenceGroup) {
 		CheckBoxPreference checkBoxPreference = new CheckBoxPreference(activity);
 		checkBoxPreference.setKey(HttpDebugConfiguration.HTTP_MOCK_ENABLED);
 		checkBoxPreference.setTitle(R.string.jdroid_httpMockEnabledTitle);

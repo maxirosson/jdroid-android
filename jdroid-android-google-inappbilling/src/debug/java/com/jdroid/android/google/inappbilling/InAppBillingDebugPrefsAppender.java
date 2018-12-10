@@ -1,6 +1,5 @@
 package com.jdroid.android.google.inappbilling;
 
-import android.app.Activity;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -13,6 +12,8 @@ import com.jdroid.java.collections.Lists;
 
 import java.util.List;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 public class InAppBillingDebugPrefsAppender extends PreferencesAppender {
 
 	@Override
@@ -21,7 +22,7 @@ public class InAppBillingDebugPrefsAppender extends PreferencesAppender {
 	}
 
 	@Override
-	public void initPreferences(Activity activity, PreferenceGroup preferenceGroup) {
+	public void initPreferences(AppCompatActivity activity, PreferenceGroup preferenceGroup) {
 
 		CheckBoxPreference checkBoxPreference = new CheckBoxPreference(activity);
 		checkBoxPreference.setKey(InAppBillingContext.STATIC_RESPONSES_ENABLED);

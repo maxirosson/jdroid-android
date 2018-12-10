@@ -1,6 +1,5 @@
 package com.jdroid.android.debug.appenders;
 
-import android.app.Activity;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -18,6 +17,8 @@ import com.jdroid.java.utils.IdGenerator;
 
 import java.util.List;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 public class ExceptionHandlingDebugPrefsAppender extends PreferencesAppender {
 
 	private static final String UI_THREAD_KEY = "uiThread";
@@ -29,7 +30,7 @@ public class ExceptionHandlingDebugPrefsAppender extends PreferencesAppender {
 	}
 
 	@Override
-	public void initPreferences(Activity activity, PreferenceGroup preferenceGroup) {
+	public void initPreferences(AppCompatActivity activity, PreferenceGroup preferenceGroup) {
 
 		ListPreference preference = new ListPreference(activity);
 		preference.setKey(CRASH_TYPE_KEY);

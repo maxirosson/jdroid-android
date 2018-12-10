@@ -1,12 +1,13 @@
 package com.jdroid.android.firebase.remoteconfig;
 
-import android.app.Activity;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceGroup;
 
 import com.jdroid.android.activity.ActivityLauncher;
 import com.jdroid.android.debug.PreferencesAppender;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class FirebaseRemoteConfigPrefsAppender extends PreferencesAppender {
 
@@ -16,7 +17,7 @@ public class FirebaseRemoteConfigPrefsAppender extends PreferencesAppender {
 	}
 
 	@Override
-	public void initPreferences(final Activity activity, PreferenceGroup preferenceGroup) {
+	public void initPreferences(AppCompatActivity activity, PreferenceGroup preferenceGroup) {
 		Preference crashPreference = new Preference(activity);
 		crashPreference.setTitle(R.string.jdroid_firebaseRemoteConfigSettings);
 		crashPreference.setSummary(R.string.jdroid_firebaseRemoteConfigSettings);

@@ -1,6 +1,5 @@
 package com.jdroid.android.debug;
 
-import android.app.Activity;
 import android.preference.PreferenceGroup;
 
 import com.jdroid.java.collections.Lists;
@@ -8,11 +7,13 @@ import com.jdroid.java.collections.Lists;
 import java.io.Serializable;
 import java.util.List;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 public abstract class PreferencesAppender implements Serializable {
 
 	public abstract int getNameResId();
 
-	public abstract void initPreferences(Activity activity, PreferenceGroup preferenceGroup);
+	public abstract void initPreferences(AppCompatActivity activity, PreferenceGroup preferenceGroup);
 
 	public Boolean isEnabled() {
 		return true;

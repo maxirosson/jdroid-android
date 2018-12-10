@@ -1,6 +1,5 @@
 package com.jdroid.android.sqlite.debug;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
@@ -21,6 +20,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 public class DatabaseDebugPrefsAppender extends PreferencesAppender {
 
 	@Override
@@ -29,7 +30,7 @@ public class DatabaseDebugPrefsAppender extends PreferencesAppender {
 	}
 
 	@Override
-	public void initPreferences(final Activity activity, PreferenceGroup preferenceGroup) {
+	public void initPreferences(AppCompatActivity activity, PreferenceGroup preferenceGroup) {
 
 		Preference preference = new Preference(activity);
 		preference.setTitle(R.string.jdroid_downloadDatabase);

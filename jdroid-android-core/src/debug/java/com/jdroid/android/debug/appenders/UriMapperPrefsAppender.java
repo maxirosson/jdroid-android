@@ -1,12 +1,10 @@
 package com.jdroid.android.debug.appenders;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Environment;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceGroup;
-import androidx.core.app.ShareCompat;
 
 import com.jdroid.android.R;
 import com.jdroid.android.activity.ActivityLauncher;
@@ -23,6 +21,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ShareCompat;
 
 public class UriMapperPrefsAppender extends PreferencesAppender {
 
@@ -42,7 +43,7 @@ public class UriMapperPrefsAppender extends PreferencesAppender {
 	}
 
 	@Override
-	public void initPreferences(final Activity activity, PreferenceGroup preferenceGroup) {
+	public void initPreferences(AppCompatActivity activity, PreferenceGroup preferenceGroup) {
 
 		if (htmlRawId == null) {
 			htmlRawId = activity.getResources().getIdentifier("url_samples", "raw", AppUtils.getApplicationId());
