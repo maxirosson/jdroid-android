@@ -59,23 +59,6 @@
 
 		</androidx.cardview.widget.CardView>
 
-		<androidx.cardview.widget.CardView android:id="@+id/plusOneSection"
-										   style="@style/jdroid_cardViewClickableStyle"
-										   android:layout_marginBottom="4dp">
-
-			<com.google.android.gms.plus.PlusOneButton xmlns:plus="http://schemas.android.com/apk/lib/com.google.android.gms.plus"
-													   android:id="@+id/plusOneButton"
-													   android:layout_width="match_parent"
-													   android:layout_height="wrap_content"
-													   android:layout_marginTop="8dp"
-													   android:layout_marginBottom="8dp"
-													   android:layout_marginLeft="8dp"
-													   android:layout_marginRight="8dp"
-													   plus:size="standard"
-													   plus:annotation="inline" />
-
-		</androidx.cardview.widget.CardView>
-
 	</LinearLayout>
 
 </ScrollView>

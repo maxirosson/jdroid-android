@@ -96,10 +96,6 @@ public class AppContext extends AbstractAppContext {
 		return null;
 	}
 
-	public String getGooglePlusCommunityId() {
-		return null;
-	}
-
 	public RemoteConfigParameter getPrivacyPolicyUrl() {
 		return null;
 	}

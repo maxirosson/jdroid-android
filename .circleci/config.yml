@@ -109,10 +109,6 @@ jobs:
           destination: jdroid-android-google-play-games/tests
 
       - store_artifacts:
-          path: ./jdroid-android-google-plus/build/reports/tests/testDebugUnitTest
-          destination: jdroid-android-google-plus/tests
-
-      - store_artifacts:
           path: ./jdroid-android-google-signin/build/reports/tests/testDebugUnitTest
           destination: jdroid-android-google-signin/tests
 
@@ -218,10 +214,6 @@ jobs:
       - store_artifacts:
           path: ./jdroid-android-google-play-games/build/reports/lint-results-debug.html
           destination: jdroid-android-google-play-games/lint
-
-      - store_artifacts:
-          path: ./jdroid-android-google-plus/build/reports/lint-results-debug.html
-          destination: jdroid-android-google-plus/lint
 
       - store_artifacts:
           path: ./jdroid-android-google-signin/build/reports/lint-results-debug.html

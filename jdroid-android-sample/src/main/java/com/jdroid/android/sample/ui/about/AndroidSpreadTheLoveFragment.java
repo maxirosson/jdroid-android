@@ -35,33 +35,16 @@ public class AndroidSpreadTheLoveFragment extends SpreadTheLoveFragment {
 		return getString(R.string.shareMessage, TWITTER_SHARE_URL);
 	}
 
-	/**
-	 * @see com.jdroid.android.about.SpreadTheLoveFragment#getGooglePlusShareText()
-	 */
-	@Override
-	protected String getGooglePlusShareText() {
-		return getString(R.string.shareMessage, GOOGLE_PLUS_SHARE_URL);
-	}
-
-	/**
-	 * @see com.jdroid.android.about.SpreadTheLoveFragment#getSmsShareText()
-	 */
 	@Override
 	protected String getSmsShareText() {
 		return getString(R.string.shareMessage, SMS_SHARE_URL);
 	}
 
-	/**
-	 * @see com.jdroid.android.about.SpreadTheLoveFragment#getWhatsAppShareText()
-	 */
 	@Override
 	protected String getWhatsAppShareText() {
 		return getString(R.string.shareMessage, WHATSAPP_SHARE_URL);
 	}
 
-	/**
-	 * @see com.jdroid.android.about.SpreadTheLoveFragment#getHangoutsShareText()
-	 */
 	@Override
 	protected String getHangoutsShareText() {
 		return getString(R.string.shareMessage, HANGOUTS_SHARE_URL);

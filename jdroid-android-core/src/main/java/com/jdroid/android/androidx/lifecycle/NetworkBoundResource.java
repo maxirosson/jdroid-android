@@ -142,21 +142,28 @@ public abstract class NetworkBoundResource<ViewDataType, DatabaseDataType, Netwo
 		return TagUtils.getTag(getClass());
 	}
 
-	// Called to save the result of the API response into the database.
+	/*
+	 *  Called to save the result of the API response into the database.
+	 */
 	@WorkerThread
 	protected abstract void saveToDb(@NonNull NetworkDataType item);
 
-	// Called with the data in the database to decide whether to fetch
-	// potentially updated data from the network.
+	/*
+	 * Called with the data in the database to decide whether to fetch potentially updated data from the network.
+	 */
 	@MainThread
 	protected abstract boolean shouldFetch(@Nullable DatabaseDataType data);
 
-	// Called to get the cached data from the database.
+	/*
+	 * Called to get the cached data from the database.
+	 */
 	@NonNull
 	@MainThread
 	protected abstract LiveData<DatabaseDataType> loadFromDb();
 
-	// Called to create the API call.
+	/*
+	 * Called to create the API call.
+	 */
 	@NonNull
 	@MainThread
 	protected LiveData<ApiResponse<NetworkDataType>> loadFromNetwork() {
@@ -205,8 +212,9 @@ public abstract class NetworkBoundResource<ViewDataType, DatabaseDataType, Netwo
 		return response.getBody();
 	}
 
-	// Called when the fetch fails. The child class may want to reset components
-	// like rate limiter.
+	/*
+	 * Called when the fetch fails. The child class may want to reset components like rate limiter.
+	 */
 	@MainThread
 	protected void onFetchFailed() {
 		// Do nothing
@@ -229,8 +237,9 @@ public abstract class NetworkBoundResource<ViewDataType, DatabaseDataType, Netwo
 		result.removeSource(toRemote);
 	}
 
-	// Returns a LiveData object that represents the resource that's implemented
-	// in the base class.
+	/*
+	 * Returns a LiveData object that represents the resource that's implemented in the base class.
+	 */
 	public LiveData<Resource<ViewDataType>> getLiveData() {
 		return result;
 	}

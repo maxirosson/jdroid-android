@@ -2,7 +2,6 @@ package com.jdroid.android.social;
 
 public enum SocialNetwork {
 
-	GOOGLE_PLUS("googlePlus"),
 	FACEBOOK("facebook"),
 	TWITTER("twitter");
 

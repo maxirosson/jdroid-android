@@ -7,7 +7,6 @@ import com.jdroid.android.utils.ExternalAppsUtils;
 
 public enum SharingMedium {
 
-	GOOGLE_PLUS("googlePlus", ExternalAppsUtils.GOOGLE_PLUS_PACKAGE_NAME),
 	FACEBOOK("facebook", ExternalAppsUtils.FACEBOOK_PACKAGE_NAME),
 	TWITTER("twitter", ExternalAppsUtils.TWITTER_PACKAGE_NAME),
 	WHATSAPP("whatsapp", ExternalAppsUtils.WHATSAPP_PACKAGE_NAME),

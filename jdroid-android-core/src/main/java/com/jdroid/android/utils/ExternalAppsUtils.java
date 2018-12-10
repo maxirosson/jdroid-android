@@ -8,7 +8,6 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.Settings;
-import androidx.annotation.Nullable;
 
 import com.jdroid.android.activity.ActivityLauncher;
 import com.jdroid.android.application.AbstractApplication;
@@ -21,6 +20,8 @@ import org.slf4j.Logger;
 
 import java.io.File;
 
+import androidx.annotation.Nullable;
+
 public class ExternalAppsUtils {
 
 	private final static Logger LOGGER = LoggerUtils.getLogger(ExternalAppsUtils.class);
@@ -30,7 +31,6 @@ public class ExternalAppsUtils {
 	public static final String WHATSAPP_PACKAGE_NAME = "com.whatsapp";
 	public static final String TELEGRAM_PACKAGE_NAME = "org.telegram.messenger";
 	public static final String HANGOUTS_PACKAGE_NAME = "com.google.android.talk";
-	public static final String GOOGLE_PLUS_PACKAGE_NAME = "com.google.android.apps.plus";
 	public static final String GOOGLE_MAPS_PACKAGE_NAME = "com.google.android.apps.maps";
 
 	public static boolean isAppInstalled(String applicationId) {

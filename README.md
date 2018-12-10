@@ -101,11 +101,6 @@ Libray for Android apps. Support for Android 4.0 (api level 15) and higher versi
 ## [jdroid-android-google-play-games](https://github.com/maxirosson/jdroid/wiki/jdroid-Android)
  * [Google Play Games Services](https://developers.google.com/games/services/) integration
 
-## [jdroid-android-google-plus](https://github.com/maxirosson/jdroid/wiki/jdroid-Android)
-
- * [Google+ integration](http://developer.android.com/google/play-services/plus.html)
-   * +1 button, share
-
 ## [jdroid-android-google-signin](https://github.com/maxirosson/jdroid/wiki/jdroid-Android)
 
  * [Google Sign In integration](https://developers.google.com/identity/sign-in/android/)
