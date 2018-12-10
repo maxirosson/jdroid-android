@@ -81,6 +81,9 @@
 	<!-- Linkedin -->
 	<string name="jdroid_linkedin">LinkedIn</string>
 
+	<!-- CardView -->
+	<string name="jdroid_cardViewMore">More</string>
+
 	<!-- Rate App -->
 	<string name="jdroid_rateAppEnjoying">Enjoying %1$s?</string>
 	<string name="jdroid_rateAppGooglePlay">How about a rating on Google Play, then?</string>

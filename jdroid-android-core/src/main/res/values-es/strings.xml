@@ -83,6 +83,9 @@
 	<!-- Linkedin -->
 	<string name="jdroid_linkedin">LinkedIn</string>
 
+	<!-- CardView -->
+	<string name="jdroid_cardViewMore">Ver Más</string>
+
 	<!-- Rate App -->
 	<string name="jdroid_rateAppEnjoying">¿Disfrutando %1$s?</string>
 	<string name="jdroid_rateAppGooglePlay">¿Le gustaría calificarnos en Google Play?</string>

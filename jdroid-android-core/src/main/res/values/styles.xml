@@ -178,6 +178,15 @@
 		<item name="android:layout_marginBottom">8dp</item>
 	</style>
 
+	<style name="jdroid_cardViewMore" parent="@style/jdroid_cardViewTitle">
+		<item name="android:layout_alignParentRight">true</item>
+		<item name="android:layout_centerVertical">true</item>
+		<item name="android:text">@string/more</item>
+		<item name="android:textAllCaps">true</item>
+		<item name="android:textSize">@dimen/jdroid_textSmall</item>
+		<item name="android:textColor">@color/jdroid_colorPrimaryDark</item>
+	</style>
+
 	<!-- Ads -->
 
 	<style name="jdroid_adsViewContainer">
