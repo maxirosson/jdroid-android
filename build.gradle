@@ -23,6 +23,12 @@ buildscript {
 	repositories {
 		jcenter()
 		google()
+
+		// TODO Remove these two repositories once Google fix the issue
+		jcenter {url 'https://dl.bintray.com/android/android-tools'}
+		jcenter {url 'https://firebase.bintray.com/gradle'}
+		///////////////
+
 		maven { url 'https://maven.fabric.io/public' }
 		maven { url "https://plugins.gradle.org/m2/" }
 		String localMavenRepoEnabled = project.hasProperty('LOCAL_MAVEN_REPO_ENABLED') ? project.ext.get('LOCAL_MAVEN_REPO_ENABLED') : System.getenv('LOCAL_MAVEN_REPO_EMABLED')
@@ -56,6 +62,12 @@ allprojects {
 		repositories {
 			jcenter()
 			google()
+
+			// TODO Remove these two repositories once Google fix the issue
+			jcenter {url 'https://dl.bintray.com/android/android-tools'}
+			jcenter {url 'https://firebase.bintray.com/gradle'}
+			///////////////
+
 			maven { url 'https://maven.fabric.io/public' }
 			maven { url "https://plugins.gradle.org/m2/" }
 			String localMavenRepoEnabled = project.hasProperty('LOCAL_MAVEN_REPO_ENABLED') ? project.ext.get('LOCAL_MAVEN_REPO_ENABLED') : System.getenv('LOCAL_MAVEN_REPO_EMABLED')
