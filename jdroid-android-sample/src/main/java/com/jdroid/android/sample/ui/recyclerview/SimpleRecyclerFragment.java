@@ -25,6 +25,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class SimpleRecyclerFragment extends AbstractRecyclerFragment {
@@ -75,6 +76,55 @@ public class SimpleRecyclerFragment extends AbstractRecyclerFragment {
 				return true;
 			case R.id.addItems:
 				getRecyclerViewAdapter().addItems(Lists.newArrayList(IdGenerator.getIntId().toString(), IdGenerator.getIntId().toString(), IdGenerator.getIntId().toString()));
+				return true;
+			case R.id.replaceWithSameItems:
+				List<Object> items = Lists.newArrayList(getRecyclerViewAdapter().getItems());
+				getRecyclerViewAdapter().replaceItems(items, new DiffUtil.Callback() {
+					@Override
+					public int getOldListSize() {
+						return items.size();
+					}
+
+					@Override
+					public int getNewListSize() {
+						return items.size();
+					}
+
+					@Override
+					public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
+						return items.get(oldItemPosition).toString().equals(items.get(newItemPosition).toString());
+					}
+
+					@Override
+					public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
+						return items.get(oldItemPosition).equals(items.get(newItemPosition));
+					}
+				});
+				return true;
+			case R.id.replaceWithDifferentItems:
+				List<Object> oldItems = Lists.newArrayList(getRecyclerViewAdapter().getItems());
+				List<Object> newItems = Lists.newArrayList(IdGenerator.getIntId().toString(), IdGenerator.getIntId().toString(), IdGenerator.getIntId().toString());
+				getRecyclerViewAdapter().replaceItems(newItems, new DiffUtil.Callback() {
+					@Override
+					public int getOldListSize() {
+						return oldItems.size();
+					}
+
+					@Override
+					public int getNewListSize() {
+						return newItems.size();
+					}
+
+					@Override
+					public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
+						return oldItems.get(oldItemPosition).toString().equals(newItems.get(newItemPosition).toString());
+					}
+
+					@Override
+					public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
+						return oldItems.get(oldItemPosition).equals(newItems.get(newItemPosition));
+					}
+				});
 				return true;
 			case R.id.clearItems:
 				getRecyclerViewAdapter().clear();

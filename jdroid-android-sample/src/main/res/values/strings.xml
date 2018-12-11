@@ -240,6 +240,8 @@
 	<string name="noResults">No Results</string>
 	<string name="addItem">Add Item</string>
 	<string name="addItems">Add Items</string>
+	<string name="replaceWithSameItems">Replace with same Items</string>
+	<string name="replaceWithDifferentItems">Replace with different Items</string>
 	<string name="removeFirstItem">Remove First Item</string>
 	<string name="removeSecondItem">Remove Second Item</string>
 	<string name="addHeader">Add header</string>

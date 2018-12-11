@@ -16,6 +16,7 @@ import java.util.Map;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -230,6 +231,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 	public <T> void addItems(List<T> newItems) {
 		items.addAll(newItems);
 		notifyItemRangeInserted(getItemCount() - newItems.size(), newItems.size());
+	}
+
+	public <T> void replaceItems(List<T> newItems, @NonNull DiffUtil.Callback diffCallback) {
+		items.clear();
+		items.addAll(newItems);
+		DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallback);
+		diffResult.dispatchUpdatesTo(this);
 	}
 
 	public <T> void removeItem(T item) {
