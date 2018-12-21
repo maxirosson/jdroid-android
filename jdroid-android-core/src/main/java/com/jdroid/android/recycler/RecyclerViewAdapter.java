@@ -229,13 +229,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 	}
 
 	public <T> void addItems(List<T> newItems) {
-		items.addAll(newItems);
+		items.addAll(Lists.newArrayList(newItems));
 		notifyItemRangeInserted(getItemCount() - newItems.size(), newItems.size());
 	}
 
 	public <T> void replaceItems(List<T> newItems, @NonNull DiffUtil.Callback diffCallback) {
 		items.clear();
-		items.addAll(newItems);
+		items.addAll(Lists.newArrayList(newItems));
 		DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallback);
 		diffResult.dispatchUpdatesTo(this);
 	}
