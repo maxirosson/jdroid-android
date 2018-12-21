@@ -3,7 +3,6 @@ package com.jdroid.android.uri;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
-import androidx.annotation.NonNull;
 
 import com.google.firebase.appindexing.Action;
 import com.jdroid.android.application.AbstractApplication;
@@ -11,27 +10,29 @@ import com.jdroid.java.utils.LoggerUtils;
 
 import org.slf4j.Logger;
 
+import androidx.annotation.NonNull;
+
 public abstract class AbstractUriHandler<T extends Activity> implements UriHandler<T> {
 
 	private final static Logger LOGGER = LoggerUtils.getLogger(AbstractUriHandler.class);
 
 	@Override
-	public Boolean matches(Uri uri) {
+	public Boolean matches(@NonNull Uri uri) {
 		return true;
 	}
 
 	@Override
-	public void logUriNotMatch(Uri uri) {
+	public void logUriNotMatch(@NonNull Uri uri) {
 		AbstractApplication.get().getExceptionHandler().logWarningException(getClass().getSimpleName() + " matches the default intent: " + uri.toString());
 	}
 
 	@Override
-	public Intent createMainIntent(@NonNull Activity activity, Uri uri) {
+	public Intent createMainIntent(@NonNull Activity activity, @NonNull Uri uri) {
 		return null;
 	}
 
 	@Override
-	public Intent createDefaultIntent(@NonNull Activity activity, Uri uri) {
+	public Intent createDefaultIntent(@NonNull Activity activity, @NonNull Uri uri) {
 		return new Intent(activity, AbstractApplication.get().getHomeActivityClass());
 	}
 

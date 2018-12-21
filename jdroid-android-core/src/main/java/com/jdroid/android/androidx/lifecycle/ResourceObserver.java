@@ -30,6 +30,8 @@ public abstract class ResourceObserver<T> implements Observer<Resource<T>> {
 				onStopLoading(resource.getData());
 				onError(resource.getException(), resource.getData());
 			}
+		} else {
+			LoggerUtils.getLogger(getTag()).warn("ResourceObserver received null resource");
 		}
 	}
 

@@ -11,7 +11,6 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.SystemClock;
-import androidx.annotation.RequiresPermission;
 
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.utils.AlarmUtils;
@@ -22,6 +21,13 @@ import org.slf4j.Logger;
 
 import java.util.List;
 
+import androidx.annotation.RequiresPermission;
+
+// TODO Migrate to lifecycle-aware. See BoundLocationManager class. Switching between coarse and fine-grained location updates.
+// Use lifecycle-aware components to enable fine-grained location updates while your location app is
+// visible and switch to coarse-grained updates when the app is in the background. LiveData, a lifecycle-aware
+// component, allows your app to automatically update the UI when your user changes locations.
+// https://developer.android.com/topic/libraries/architecture/lifecycle
 public class LocationHelper implements LocationListener {
 
 	private static final Logger LOGGER = LoggerUtils.getLogger(LocationHelper.class);
