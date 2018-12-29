@@ -1,16 +1,16 @@
-apply plugin: 'com.jdroid.android.library'
+apply plugin: "com.jdroid.android.library"
 
-ext.PROJECT_NAME = 'Jdroid Android - Google AdMob'
-description = 'Jdroid dependency project for Google AdMob'
+ext.PROJECT_NAME = "Jdroid Android - Google AdMob"
+description = "Jdroid dependency project for Google AdMob"
 
 configurations.all {
 	// check for updates every build
-	resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+	resolutionStrategy.cacheChangingModulesFor 0, "seconds"
 }
 
 buildscript {
 	dependencies {
-		classpath "com.jdroidtools:jdroid-gradle-android-plugin:${JDROID_GRADLE_PLUGIN_VERSION}"
+		classpath("com.jdroidtools:jdroid-gradle-android-plugin:${JDROID_GRADLE_PLUGIN_VERSION}")
 	}
 }
 
@@ -18,14 +18,14 @@ dependencies {
 
 	api project(":jdroid-android-core")
 
-	api "com.google.firebase:firebase-ads:16.0.1"
+	api("com.google.firebase:firebase-ads:16.0.1")
 
-	testImplementation "junit:junit:${JUNIT_VERSION}"
-	testImplementation "org.robolectric:robolectric:${ROBOLECTRIC_VERSION}"
+	testImplementation("junit:junit:${JUNIT_VERSION}")
+	testImplementation("org.robolectric:robolectric:${ROBOLECTRIC_VERSION}")
 }
 
 jdroid {
-	notDefaultLanguages = ['es']
+	notDefaultLanguages = ["es"]
 }
 
 android {

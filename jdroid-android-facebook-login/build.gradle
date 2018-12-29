@@ -1,11 +1,11 @@
-apply plugin: 'com.jdroid.android.library'
+apply plugin: "com.jdroid.android.library"
 
-ext.PROJECT_NAME = 'Jdroid Android - Facebook Login SDK'
-description = 'Jdroid dependency project for Facebook Login SDK'
+ext.PROJECT_NAME = "Jdroid Android - Facebook Login SDK"
+description = "Jdroid dependency project for Facebook Login SDK"
 
 configurations.all {
 	// check for updates every build
-	resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+	resolutionStrategy.cacheChangingModulesFor 0, "seconds"
 }
 
 buildscript {
@@ -18,15 +18,15 @@ dependencies {
 
 	api project(":jdroid-android-core")
 
-	api "com.facebook.android:facebook-core:${FACEBOOK_ANDROID_VERSION}"
-	api "com.facebook.android:facebook-login:${FACEBOOK_ANDROID_VERSION}"
+	api("com.facebook.android:facebook-core:${FACEBOOK_ANDROID_VERSION}")
+	api("com.facebook.android:facebook-login:${FACEBOOK_ANDROID_VERSION}")
 
-	testImplementation "junit:junit:${JUNIT_VERSION}"
-	testImplementation "org.robolectric:robolectric:${ROBOLECTRIC_VERSION}"
+	testImplementation("junit:junit:${JUNIT_VERSION}")
+	testImplementation("org.robolectric:robolectric:${ROBOLECTRIC_VERSION}")
 }
 
 jdroid {
-	notDefaultLanguages = ['es']
+	notDefaultLanguages = ["es"]
 }
 
 android {

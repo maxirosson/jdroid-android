@@ -1,11 +1,11 @@
-apply plugin: 'com.jdroid.android.library'
+apply plugin: "com.jdroid.android.library"
 
-ext.PROJECT_NAME = 'Jdroid Android - Room'
-description = 'Jdroid dependency project for Room integration'
+ext.PROJECT_NAME = "Jdroid Android - Room"
+description = "Jdroid dependency project for Room integration"
 
 configurations.all {
 	// check for updates every build
-	resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+	resolutionStrategy.cacheChangingModulesFor 0, "seconds"
 }
 
 buildscript {
@@ -18,14 +18,14 @@ dependencies {
 
 	api project(":jdroid-android-core")
 
-	api "androidx.room:room-runtime:${ROOM_VERSION}"
+	api("androidx.room:room-runtime:${ROOM_VERSION}")
 
-	testImplementation "junit:junit:${JUNIT_VERSION}"
-	testImplementation "org.robolectric:robolectric:${ROBOLECTRIC_VERSION}"
+	testImplementation("junit:junit:${JUNIT_VERSION}")
+	testImplementation("org.robolectric:robolectric:${ROBOLECTRIC_VERSION}")
 }
 
 jdroid {
-	notDefaultLanguages = ['es']
+	notDefaultLanguages = ["es"]
 }
 
 android {

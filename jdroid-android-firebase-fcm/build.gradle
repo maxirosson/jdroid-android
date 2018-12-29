@@ -1,16 +1,16 @@
-apply plugin: 'com.jdroid.android.library'
+apply plugin: "com.jdroid.android.library"
 
-ext.PROJECT_NAME = 'Jdroid Android - Firebase FCM'
-description = 'Jdroid dependency project for Firebase FCM'
+ext.PROJECT_NAME = "Jdroid Android - Firebase FCM"
+description = "Jdroid dependency project for Firebase FCM"
 
 configurations.all {
 	// check for updates every build
-	resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+	resolutionStrategy.cacheChangingModulesFor 0, "seconds"
 }
 
 buildscript {
 	dependencies {
-		classpath "com.jdroidtools:jdroid-gradle-android-plugin:${JDROID_GRADLE_PLUGIN_VERSION}"
+		classpath("com.jdroidtools:jdroid-gradle-android-plugin:${JDROID_GRADLE_PLUGIN_VERSION}")
 	}
 }
 
@@ -19,14 +19,14 @@ dependencies {
 	api project(":jdroid-android-core")
 
 	// https://firebase.google.com/support/release-notes/android
-	api "com.google.firebase:firebase-messaging:17.3.4"
+	api("com.google.firebase:firebase-messaging:17.3.4")
 
-	testImplementation "junit:junit:${JUNIT_VERSION}"
-	testImplementation "org.robolectric:robolectric:${ROBOLECTRIC_VERSION}"
+	testImplementation("junit:junit:${JUNIT_VERSION}")
+	testImplementation("org.robolectric:robolectric:${ROBOLECTRIC_VERSION}")
 }
 
 jdroid {
-	notDefaultLanguages = ['es']
+	notDefaultLanguages = ["es"]
 }
 
 android {

@@ -1,10 +1,10 @@
-ext.COMPONENTS = ['jdroid-android', 'jdroid-java-okhttp']
-ext.RES_CONFIGS = ['en']
-ext.PROJECT_NAME = 'Jdroid Android - Sample'
+ext.COMPONENTS = ["jdroid-android", "jdroid-java-okhttp"]
+ext.RES_CONFIGS = ["en"]
+ext.PROJECT_NAME = "Jdroid Android - Sample"
 
-apply plugin: 'com.jdroid.android.application'
+apply plugin: "com.jdroid.android.application"
 
-description = 'Jdroid Sample Android'
+description = "Jdroid Sample Android"
 
 repositories {
 	jcenter()
@@ -13,7 +13,7 @@ repositories {
 
 configurations.all {
 	// check for updates every build
-	resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+	resolutionStrategy.cacheChangingModulesFor 0, "seconds"
 }
 
 configurations {
@@ -23,73 +23,73 @@ configurations {
 
 buildscript {
 	dependencies {
-		classpath "com.jdroidtools:jdroid-gradle-android-plugin:${JDROID_GRADLE_PLUGIN_VERSION}"
+		classpath("com.jdroidtools:jdroid-gradle-android-plugin:${JDROID_GRADLE_PLUGIN_VERSION}")
 	}
 }
 
 dependencies {
-	implementation 'androidx.multidex:multidex:2.0.0'
-	implementation project(':jdroid-android-core')
-	implementation project(':jdroid-android-about')
-	implementation project(':jdroid-android-facebook-login')
-	implementation project(':jdroid-android-firebase-admob')
-	implementation project(':jdroid-android-firebase-crashlytics')
-	implementation project(':jdroid-android-glide')
-	implementation project(':jdroid-android-google-maps')
-	implementation project(':jdroid-android-google-inappbilling')
-	implementation project(':jdroid-android-firebase-database')
-	implementation project(':jdroid-android-firebase-fcm')
-	implementation project(':jdroid-android-firebase-remoteconfig')
-	implementation project(':jdroid-android-google-signin')
-	implementation project(':jdroid-android-google-play-games')
-	implementation project(':jdroid-android-sqlite')
-	implementation project(':jdroid-android-room')
-	implementation project(':jdroid-android-twitter')
-	implementation 'com.firebase:firebase-client-android:2.5.0'
+	implementation "androidx.multidex:multidex:2.0.0"
+	implementation project(":jdroid-android-core")
+	implementation project(":jdroid-android-about")
+	implementation project(":jdroid-android-facebook-login")
+	implementation project(":jdroid-android-firebase-admob")
+	implementation project(":jdroid-android-firebase-crashlytics")
+	implementation project(":jdroid-android-glide")
+	implementation project(":jdroid-android-google-maps")
+	implementation project(":jdroid-android-google-inappbilling")
+	implementation project(":jdroid-android-firebase-database")
+	implementation project(":jdroid-android-firebase-fcm")
+	implementation project(":jdroid-android-firebase-remoteconfig")
+	implementation project(":jdroid-android-google-signin")
+	implementation project(":jdroid-android-google-play-games")
+	implementation project(":jdroid-android-sqlite")
+	implementation project(":jdroid-android-room")
+	implementation project(":jdroid-android-twitter")
+	implementation("com.firebase:firebase-client-android:2.5.0")
 
-	annotationProcessor "com.github.bumptech.glide:compiler:${GLIDE_VERSION}"
+	annotationProcessor("com.github.bumptech.glide:compiler:${GLIDE_VERSION}")
 
 	if (jdroid.propertyResolver.getBooleanProp("JDROID_JAVA_AS_PROJECT_DEPENDENCY", false)) {
-		implementation(project(':jdroid-java-firebase-database')) {
-			exclude module: 'slf4j-api'
-			exclude group: 'com.firebase', module: 'firebase-client-jvm'
-			exclude module: 'jdroid-java-core'
+		implementation(project(":jdroid-java-firebase-database")) {
+			exclude module: "slf4j-api"
+			exclude group: "com.firebase", module: "firebase-client-jvm"
+			exclude module: "jdroid-java-core"
 		}
 	} else {
 		implementation("com.jdroidtools:jdroid-java-firebase-database:${JDROID_JAVA_VERSION}") {
-			exclude module: 'slf4j-api'
-			exclude group: 'com.firebase', module: 'firebase-client-jvm'
-			exclude module: 'jdroid-java-core'
+			exclude module: "slf4j-api"
+			exclude group: "com.firebase", module: "firebase-client-jvm"
+			exclude module: "jdroid-java-core"
 		}
 	}
 	if (jdroid.propertyResolver.getBooleanProp("JDROID_JAVA_HTTP_AS_PROJECT_DEPENDENCY", false)) {
 		implementation project(":jdroid-java-http-okhttp")
 	} else {
 		implementation("com.jdroidtools:jdroid-java-http-okhttp:${JDROID_JAVA_HTTP_VERSION}") {
-			exclude module: 'slf4j-api'
-			exclude module: 'jdroid-java-core'
+			exclude module: "slf4j-api"
+			exclude module: "jdroid-java-core"
 		}
 	}
 	if (jdroid.propertyResolver.getBooleanProp("JDROID_JAVA_FIREBASE_DYNAMICLINKS_AS_PROJECT_DEPENDENCY", false)) {
 		implementation project(":jdroid-java-firebase-dynamiclink")
 	} else {
 		implementation("com.jdroidtools:jdroid-java-firebase-dynamiclinks:1.0.0") {
-			exclude module: 'slf4j-api'
-			exclude module: 'jdroid-java-core'
+			exclude module: "slf4j-api"
+			exclude module: "jdroid-java-core"
 		}
 	}
 
-	annotationProcessor "androidx.room:room-compiler:${ROOM_VERSION}"
+	annotationProcessor("androidx.room:room-compiler:${ROOM_VERSION}")
 
 	// TODO Remove this when Glide fix the androidx support: https://github.com/bumptech/glide/issues/3185
-	implementation "com.android.support:support-annotations:28.0.0"
-	annotationProcessor "com.android.support:support-annotations:28.0.0"
+	implementation("com.android.support:support-annotations:28.0.0")
+	annotationProcessor("com.android.support:support-annotations:28.0.0")
 
-	testImplementation "junit:junit:${JUNIT_VERSION}"
-	testImplementation "org.robolectric:robolectric:${ROBOLECTRIC_VERSION}"
-	androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
-	androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.1.0'
-	androidTestImplementation 'androidx.test:runner:1.1.0'
+	testImplementation("junit:junit:${JUNIT_VERSION}")
+	testImplementation("org.robolectric:robolectric:${ROBOLECTRIC_VERSION}")
+	androidTestImplementation("androidx.test.espresso:espresso-core:3.1.0")
+	androidTestImplementation("androidx.test.espresso:espresso-contrib:3.1.0")
+	androidTestImplementation("androidx.test:runner:1.1.0")
 }
 
 
@@ -97,7 +97,7 @@ android {
 
 	defaultConfig {
 
-		applicationId 'com.jdroid.android.sample'
+		applicationId = "com.jdroid.android.sample"
 
 		jdroid.setBuildConfigBoolean(defaultConfig, "DEBUG_SETTINGS_ENABLED", false)
 		jdroid.setBuildConfigBoolean(defaultConfig, "STRICT_MODE_ENABLED", false)
@@ -132,7 +132,7 @@ android {
 			facebookAppId   : "fb1048902711862195"
 		]
 
-		multiDexEnabled true
+		multiDexEnabled = true
 
 		javaCompileOptions {
 			annotationProcessorOptions {
@@ -140,36 +140,36 @@ android {
 			}
 		}
 
-		testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-		testBuildType "automation"
+		testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+		testBuildType = "automation"
 	}
 
 
 	buildTypes {
 
 		debug {
-			signingConfig signingConfigs.debug
+			signingConfig = signingConfigs.debug
 
-			applicationIdSuffix ".debug"
+			applicationIdSuffix = ".debug"
 
 			jdroid.setBuildConfigBoolean(buildTypes.debug, "DEBUG_SETTINGS_ENABLED", true)
 			jdroid.setBuildConfigString(buildTypes.debug, "SERVER_NAME", "DEV")
 		}
 
 		uat {
-			signingConfig signingConfigs.debug
-			applicationIdSuffix ".debug"
-			debuggable true
-			matchingFallbacks = ['debug']
+			signingConfig = signingConfigs.debug
+			applicationIdSuffix = ".debug"
+			debuggable = true
+			matchingFallbacks = ["debug"]
 
 			jdroid.setBuildConfigString(buildTypes.uat, "SERVER_NAME", "UAT")
 		}
 
 		automation {
-			signingConfig signingConfigs.debug
+			signingConfig = signingConfigs.debug
 			applicationIdSuffix ".debug"
-			debuggable true
-			matchingFallbacks = ['debug']
+			debuggable = true
+			matchingFallbacks = ["debug"]
 
 			jdroid.setBuildConfigString(buildTypes.automation, "SERVER_NAME", "UAT")
 		}
@@ -178,12 +178,12 @@ android {
 			release {
 
 				if (jdroid.isFakeReleaseBuildTypeEnabled()) {
-					signingConfig signingConfigs.debug
-					debuggable true
+					signingConfig = signingConfigs.debug
+					debuggable = true
 				} else {
 
-					signingConfig signingConfigs.release
-					debuggable jdroid.isReleaseBuildTypeDebuggable()
+					signingConfig = signingConfigs.release
+					debuggable = jdroid.isReleaseBuildTypeDebuggable()
 
 					jdroid.setBuildConfigString(buildTypes.release, "SERVER_NAME", "PROD")
 
@@ -201,15 +201,15 @@ android {
 	}
 
 	sourceSets.uat {
-		java.srcDirs = ['src/debug/java', 'src/uat/java']
-		resources.srcDirs = ['src/debug/resources', 'src/uat/resources']
-		res.srcDirs = ['src/debug/res', 'src/uat/res']
+		java.srcDirs = ["src/debug/java", "src/uat/java"]
+		resources.srcDirs = ["src/debug/resources", "src/uat/resources"]
+		res.srcDirs = ["src/debug/res", "src/uat/res"]
 	}
 
 	sourceSets.automation {
-		java.srcDirs = ['src/debug/java', 'src/automation/java']
-		resources.srcDirs = ['src/debug/resources', 'src/automation/resources']
-		res.srcDirs = ['src/debug/res', 'src/automation/res']
+		java.srcDirs = ["src/debug/java", "src/automation/java"]
+		resources.srcDirs = ["src/debug/resources", "src/automation/resources"]
+		res.srcDirs = ["src/debug/res", "src/automation/res"]
 	}
 
 	sourceSets.test.java.srcDirs += "build/generated/source/r/debug"
@@ -221,7 +221,7 @@ android {
 	sourceSets.test.res.srcDirs += sourceSets.debug.res.srcDirs
 }
 
-apply plugin: 'com.google.gms.google-services'
+apply plugin: "com.google.gms.google-services"
 
 // TODO Remove this when Firebase release the missing libs
 com.google.gms.googleservices.GoogleServicesPlugin.config.disableVersionCheck = true

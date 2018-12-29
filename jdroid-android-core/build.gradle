@@ -1,7 +1,7 @@
-apply plugin: 'com.jdroid.android.library'
+apply plugin: "com.jdroid.android.library"
 
-ext.PROJECT_NAME = 'Jdroid Android'
-description = 'Jdroid dependency project for Android apps'
+ext.PROJECT_NAME = "Jdroid Android"
+description = "Jdroid dependency project for Android apps"
 
 configurations {
 	compile.exclude group: "org.apache.httpcomponents", module: "httpclient"
@@ -10,53 +10,53 @@ configurations {
 
 configurations.all {
 	// check for updates every build
-	resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+	resolutionStrategy.cacheChangingModulesFor 0, "seconds"
 }
 
 buildscript {
 	dependencies {
-		classpath "com.jdroidtools:jdroid-gradle-android-plugin:${JDROID_GRADLE_PLUGIN_VERSION}"
+		classpath("com.jdroidtools:jdroid-gradle-android-plugin:${JDROID_GRADLE_PLUGIN_VERSION}")
 	}
 }
 
 dependencies {
 
-	api 'org.slf4j:slf4j-android:1.6.1-RC1'
+	api("org.slf4j:slf4j-android:1.6.1-RC1")
 
-	api 'com.google.android.material:material:1.0.0'
+	api("com.google.android.material:material:1.0.0")
 
 	// https://developer.android.com/topic/libraries/support-library/androidx-rn
-	api 'androidx.annotation:annotation:1.0.0'
-	api 'androidx.appcompat:appcompat:1.0.2'
-	api 'androidx.cardview:cardview:1.0.0'
-	api 'androidx.core:core:1.0.1'
-	api 'androidx.coordinatorlayout:coordinatorlayout:1.0.0'
-	api 'androidx.drawerlayout:drawerlayout:1.0.0'
-	api 'androidx.fragment:fragment:1.0.0'
-	api 'androidx.recyclerview:recyclerview:1.0.0'
-	api 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
-	api 'androidx.vectordrawable:vectordrawable:1.0.1'
+	api("androidx.annotation:annotation:1.0.0")
+	api("androidx.appcompat:appcompat:1.0.2")
+	api("androidx.cardview:cardview:1.0.0")
+	api("androidx.core:core:1.0.1")
+	api("androidx.coordinatorlayout:coordinatorlayout:1.0.0")
+	api("androidx.drawerlayout:drawerlayout:1.0.0")
+	api("androidx.fragment:fragment:1.0.0")
+	api("androidx.recyclerview:recyclerview:1.0.0")
+	api("androidx.swiperefreshlayout:swiperefreshlayout:1.0.0")
+	api("androidx.vectordrawable:vectordrawable:1.0.1")
 
-	api "androidx.lifecycle:lifecycle-extensions:2.0.0"
+	api("androidx.lifecycle:lifecycle-extensions:2.0.0")
 
 	// https://developers.google.com/android/guides/releases
-	api "com.google.android.gms:play-services-base:16.0.1"
+	api("com.google.android.gms:play-services-base:16.0.1")
 
 	// https://firebase.google.com/support/release-notes/android
-	api "com.google.firebase:firebase-core:16.0.4"
-	api "com.google.firebase:firebase-appindexing:16.0.2"
-	api "com.google.firebase:firebase-invites:16.0.4"
-	api "com.google.firebase:firebase-perf:16.2.0"
+	api("com.google.firebase:firebase-core:16.0.4")
+	api("com.google.firebase:firebase-appindexing:16.0.2")
+	api("com.google.firebase:firebase-invites:16.0.4")
+	api("com.google.firebase:firebase-perf:16.2.0")
 
 	// https://github.com/firebase/firebase-jobdispatcher-android/releases
-	api 'com.firebase:firebase-jobdispatcher:0.8.5'
+	api("com.firebase:firebase-jobdispatcher:0.8.5")
 
 	debugApi("com.squareup.leakcanary:leakcanary-android:${LEAK_CANARY_VERSION}") { force = true }
 	releaseApi("com.squareup.leakcanary:leakcanary-android-no-op:${LEAK_CANARY_VERSION}") { force = true }
 	testImplementation("com.squareup.leakcanary:leakcanary-android-no-op:${LEAK_CANARY_VERSION}") { force = true }
 
 	// https://github.com/facebook/device-year-class/blob/master/CHANGELOG.md
-	api 'com.facebook.device.yearclass:yearclass:2.1.0'
+	api("com.facebook.device.yearclass:yearclass:2.1.0")
 
 	// Jdroid dependencies
 
@@ -72,16 +72,16 @@ dependencies {
 		api project(":jdroid-java-http-core")
 	} else {
 		api("com.jdroidtools:jdroid-java-http-core:${JDROID_JAVA_HTTP_VERSION}") {
-			exclude module: 'jdroid-java-core'
+			exclude module: "jdroid-java-core"
 		}
 	}
 
-	testImplementation "junit:junit:${JUNIT_VERSION}"
-	testImplementation "org.robolectric:robolectric:${ROBOLECTRIC_VERSION}"
+	testImplementation("junit:junit:${JUNIT_VERSION}")
+	testImplementation("org.robolectric:robolectric:${ROBOLECTRIC_VERSION}")
 }
 
 jdroid {
-	notDefaultLanguages = ['es']
+	notDefaultLanguages = ["es"]
 }
 
 android {

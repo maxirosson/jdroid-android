@@ -1,11 +1,11 @@
-apply plugin: 'com.jdroid.android.library'
+apply plugin: "com.jdroid.android.library"
 
-ext.PROJECT_NAME = 'Jdroid Android - Firebase Remote Config'
-description = 'Jdroid dependency project for Firebase Remote Config'
+ext.PROJECT_NAME = "Jdroid Android - Firebase Remote Config"
+description = "Jdroid dependency project for Firebase Remote Config"
 
 configurations.all {
 	// check for updates every build
-	resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+	resolutionStrategy.cacheChangingModulesFor 0, "seconds"
 }
 
 buildscript {
@@ -19,14 +19,14 @@ dependencies {
 	api project(":jdroid-android-core")
 	api project(":jdroid-android-firebase-fcm")
 
-	api "com.google.firebase:firebase-config:16.1.0"
+	api("com.google.firebase:firebase-config:16.1.0")
 
-	testImplementation "junit:junit:${JUNIT_VERSION}"
-	testImplementation "org.robolectric:robolectric:${ROBOLECTRIC_VERSION}"
+	testImplementation("junit:junit:${JUNIT_VERSION}")
+	testImplementation("org.robolectric:robolectric:${ROBOLECTRIC_VERSION}")
 }
 
 jdroid {
-	notDefaultLanguages = ['es']
+	notDefaultLanguages = ["es"]
 }
 
 android {

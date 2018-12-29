@@ -1,16 +1,16 @@
-apply plugin: 'com.jdroid.android.library'
+apply plugin: "com.jdroid.android.library"
 
-ext.PROJECT_NAME = 'Jdroid Android - Twitter SDK'
-description = 'Jdroid dependency project for Twitter SDK'
+ext.PROJECT_NAME = "Jdroid Android - Twitter SDK"
+description = "Jdroid dependency project for Twitter SDK"
 
 configurations.all {
 	// check for updates every build
-	resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+	resolutionStrategy.cacheChangingModulesFor 0, "seconds"
 }
 
 buildscript {
 	dependencies {
-		classpath "com.jdroidtools:jdroid-gradle-android-plugin:${JDROID_GRADLE_PLUGIN_VERSION}"
+		classpath("com.jdroidtools:jdroid-gradle-android-plugin:${JDROID_GRADLE_PLUGIN_VERSION}")
 	}
 }
 
@@ -19,16 +19,16 @@ dependencies {
 	api project(":jdroid-android-core")
 
 	// https://dev.twitter.com/twitterkit/android/changelog
-	api('com.twitter.sdk.android:tweet-ui:3.1.1@aar') {
+	api("com.twitter.sdk.android:tweet-ui:3.1.1@aar") {
 		transitive = true;
 	}
 
-	testImplementation "junit:junit:${JUNIT_VERSION}"
-	testImplementation "org.robolectric:robolectric:${ROBOLECTRIC_VERSION}"
+	testImplementation("junit:junit:${JUNIT_VERSION}")
+	testImplementation("org.robolectric:robolectric:${ROBOLECTRIC_VERSION}")
 }
 
 jdroid {
-	notDefaultLanguages = ['es']
+	notDefaultLanguages = ["es"]
 }
 
 android {

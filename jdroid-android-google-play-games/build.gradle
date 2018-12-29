@@ -1,11 +1,11 @@
-apply plugin: 'com.jdroid.android.library'
+apply plugin: "com.jdroid.android.library"
 
-ext.PROJECT_NAME = 'Jdroid Android - Google Play Games'
-description = 'Jdroid dependency project for Google Play GAmes'
+ext.PROJECT_NAME = "Jdroid Android - Google Play Games"
+description = "Jdroid dependency project for Google Play GAmes"
 
 configurations.all {
 	// check for updates every build
-	resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+	resolutionStrategy.cacheChangingModulesFor 0, "seconds"
 }
 
 buildscript {
@@ -17,17 +17,17 @@ buildscript {
 dependencies {
 
 	api project(":jdroid-android-core")
-	api project(':jdroid-android-google-signin')
+	api project(":jdroid-android-google-signin")
 
-	api "com.google.android.gms:play-services-games:16.0.0"
+	api("com.google.android.gms:play-services-games:16.0.0")
 
-	testImplementation "junit:junit:${JUNIT_VERSION}"
-	testImplementation "org.robolectric:robolectric:${ROBOLECTRIC_VERSION}"
+	testImplementation("junit:junit:${JUNIT_VERSION}")
+	testImplementation("org.robolectric:robolectric:${ROBOLECTRIC_VERSION}")
 
 }
 
 jdroid {
-	notDefaultLanguages = ['es']
+	notDefaultLanguages = ["es"]
 }
 
 android {

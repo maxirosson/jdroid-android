@@ -1,11 +1,11 @@
-apply plugin: 'com.jdroid.android.library'
+apply plugin: "com.jdroid.android.library"
 
-ext.PROJECT_NAME = 'Jdroid Android - Google Maps'
-description = 'Jdroid dependency project for Google Maps'
+ext.PROJECT_NAME = "Jdroid Android - Google Maps"
+description = "Jdroid dependency project for Google Maps"
 
 configurations.all {
 	// check for updates every build
-	resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+	resolutionStrategy.cacheChangingModulesFor 0, "seconds"
 }
 
 buildscript {
@@ -18,24 +18,24 @@ dependencies {
 
 	api project(":jdroid-android-core")
 
-	api "com.google.android.gms:play-services-maps:16.0.0"
+	api("com.google.android.gms:play-services-maps:16.0.0")
 
 	if (jdroid.propertyResolver.getBooleanProp("JDROID_JAVA_HTTP_AS_PROJECT_DEPENDENCY", false)) {
 		testImplementation project(":jdroid-java-http-okhttp")
 	} else {
 		testImplementation("com.jdroidtools:jdroid-java-http-okhttp:${JDROID_JAVA_HTTP_VERSION}") {
-			exclude module: 'slf4j-api'
-			exclude module: 'jdroid-java-core'
+			exclude module: "slf4j-api"
+			exclude module: "jdroid-java-core"
 		}
 	}
 
 
-	testImplementation "junit:junit:${JUNIT_VERSION}"
-	testImplementation "org.robolectric:robolectric:${ROBOLECTRIC_VERSION}"
+	testImplementation("junit:junit:${JUNIT_VERSION}")
+	testImplementation("org.robolectric:robolectric:${ROBOLECTRIC_VERSION}")
 }
 
 jdroid {
-	notDefaultLanguages = ['es']
+	notDefaultLanguages = ["es"]
 }
 
 android {
