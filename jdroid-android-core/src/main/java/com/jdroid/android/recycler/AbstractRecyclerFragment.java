@@ -144,7 +144,7 @@ public abstract class AbstractRecyclerFragment extends AbstractFragment implemen
 
 	@MainThread
 	protected View createEmptyView() {
-		TextView emptyTextView = (TextView)inflate(R.layout.jdroid_empty_view);
+		TextView emptyTextView = inflate(R.layout.jdroid_empty_view);
 		emptyTextView.setText(getNoResultsResId());
 		return emptyTextView;
 	}

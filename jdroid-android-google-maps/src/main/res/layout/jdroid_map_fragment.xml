@@ -11,7 +11,8 @@
 				  android:layout_gravity="center_vertical|center_horizontal"
 				  android:gravity="center_vertical"
 				  android:padding="32dp"
-				  android:visibility="gone">
+				  android:visibility="gone"
+				  tools:visibility="visible">
 
 		<TextView android:id="@+id/legend"
 				  android:layout_width="wrap_content"

@@ -6,12 +6,14 @@ import com.jdroid.android.fragment.AbstractFragment;
 import com.jdroid.java.exception.AbstractException;
 import com.jdroid.java.utils.LoggerUtils;
 
+import androidx.annotation.MainThread;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 
 public abstract class ResourceObserver<T> implements Observer<Resource<T>> {
 
+	@MainThread
 	@Override
 	public void onChanged(Resource<T> resource) {
 		if (resource != null) {
@@ -35,22 +37,27 @@ public abstract class ResourceObserver<T> implements Observer<Resource<T>> {
 		}
 	}
 
+	@MainThread
 	protected void onStarting() {
 		// Do nothing
 	}
 
+	@MainThread
 	protected void onStartLoading(@Nullable T data) {
 		if (data == null) {
 			getFragment().showLoading();
 		}
 	}
 
+	@MainThread
 	protected void onStopLoading(@Nullable T data) {
 		getFragment().dismissLoading();
 	}
 
+	@MainThread
 	protected abstract void onDataChanged(T data);
 
+	@MainThread
 	protected void onError(AbstractException exception, @Nullable T data) {
 		DialogErrorDisplayer.markAsNotGoBackOnError(exception);
 		AbstractErrorDisplayer.getErrorDisplayer(exception).displayError(getFragment().getActivity(), exception);
