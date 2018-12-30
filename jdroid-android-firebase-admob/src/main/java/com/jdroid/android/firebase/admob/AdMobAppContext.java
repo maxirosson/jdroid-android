@@ -65,6 +65,6 @@ public class AdMobAppContext extends AbstractAppContext {
 	}
 
 	public String getAdMobAppId() {
-		return AbstractApplication.get().getRemoteConfigLoader().getString(AdMobRemoteConfigParameter.ADMOB_APP_ID);
+		return getBuildConfigValue("ADMOB_APP_ID");
 	}
 }

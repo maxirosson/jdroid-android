@@ -28,7 +28,7 @@ buildscript {
 }
 
 dependencies {
-	implementation "androidx.multidex:multidex:2.0.0"
+	implementation("androidx.multidex:multidex:2.0.1")
 	implementation project(":jdroid-android-core")
 	implementation project(":jdroid-android-about")
 	implementation project(":jdroid-android-facebook-login")
@@ -87,12 +87,12 @@ dependencies {
 
 	testImplementation("junit:junit:${JUNIT_VERSION}")
 	testImplementation("org.robolectric:robolectric:${ROBOLECTRIC_VERSION}")
-	androidTestImplementation("androidx.test.espresso:espresso-core:3.1.0")
-	androidTestImplementation("androidx.test.espresso:espresso-contrib:3.1.0")
-	androidTestImplementation("androidx.test:runner:1.1.0")
+	androidTestImplementation("androidx.test.espresso:espresso-core:3.1.1")
+	androidTestImplementation("androidx.test.espresso:espresso-contrib:3.1.1")
+	androidTestImplementation("androidx.test:runner:1.1.1")
 }
 
-
+String adMobAppId = "ca-app-pub-4654922738884963~4242524943"
 android {
 
 	defaultConfig {
@@ -114,7 +114,7 @@ android {
 		jdroid.setBuildConfigString(defaultConfig, "INSTALLATION_SOURCE", "GooglePlay")
 
 		jdroid.setBuildConfigBoolean(defaultConfig, "ADS_ENABLED", true)
-		jdroid.setBuildConfigString(defaultConfig, "ADMOB_APP_ID", "ca-app-pub-4654922738884963~4242524943")
+		jdroid.setBuildConfigString(defaultConfig, "ADMOB_APP_ID", adMobAppId)
 		jdroid.setBuildConfigString(defaultConfig, "DEFAULT_AD_UNIT_ID", "ca-app-pub-4654922738884963/8672724544")
 
 		jdroid.setBuildConfigString(defaultConfig, "GOOGLE_PLAY_PUBLIC_KEY")
@@ -129,7 +129,8 @@ android {
 
 		manifestPlaceholders = [
 			googleMapsApiKey: "AIzaSyA2UZNjUMaw7kFk9qvHeGLTppXxcgI3l1Y",
-			facebookAppId   : "fb1048902711862195"
+			facebookAppId   : "fb1048902711862195",
+			adMobAppId      : adMobAppId
 		]
 
 		multiDexEnabled = true
@@ -222,6 +223,3 @@ android {
 }
 
 apply plugin: "com.google.gms.google-services"
-
-// TODO Remove this when Firebase release the missing libs
-com.google.gms.googleservices.GoogleServicesPlugin.config.disableVersionCheck = true

@@ -37,6 +37,8 @@
 				   android:value="${googleMapsApiKey}" />
 		<meta-data android:name="com.facebook.sdk.ApplicationId"
 				   android:value="${facebookAppId}" />
+		<meta-data android:name="com.google.android.gms.ads.APPLICATION_ID"
+				   android:value="${adMobAppId}" />
 
 		<meta-data android:name="com.google.android.gms.games.APP_ID"
 				   android:value="361779001695" />

@@ -10,7 +10,6 @@ public enum AdMobRemoteConfigParameter implements RemoteConfigParameter {
 	MIN_APP_LOADS_TO_DISPLAY_ADS(5L),
 	MIN_DAYS_TO_DISPLAY_ADS(7L),
 	MIN_SECONDS_BETWEEN_INTERSTITIALS(TimeUnit.MINUTES.toSeconds(5)),
-	ADMOB_APP_ID,
 	DEFAULT_AD_UNIT_ID;
 
 	private Object defaultValue;
