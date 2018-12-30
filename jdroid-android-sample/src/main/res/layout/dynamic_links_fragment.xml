@@ -16,7 +16,8 @@
 					  android:layout_width="match_parent"
 					  android:layout_height="wrap_content"
 					  android:inputType="textUri"
-					  android:hint="@string/linkUrl" />
+					  android:hint="@string/linkUrl"
+					  android:importantForAutofill="no" />
 		</com.google.android.material.textfield.TextInputLayout>
 
 		<com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent"
@@ -26,7 +27,8 @@
 					  android:inputType="number"
 					  android:layout_width="match_parent"
 					  android:layout_height="wrap_content"
-					  android:hint="@string/minVersionCode" />
+					  android:hint="@string/minVersionCode"
+					  android:importantForAutofill="no" />
 		</com.google.android.material.textfield.TextInputLayout>
 
 		<com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent"
@@ -36,7 +38,8 @@
 					  android:inputType="text"
 					  android:layout_width="match_parent"
 					  android:layout_height="wrap_content"
-					  android:hint="@string/fallbackLink" />
+					  android:hint="@string/fallbackLink"
+					  android:importantForAutofill="no" />
 		</com.google.android.material.textfield.TextInputLayout>
 
 		<com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent"
@@ -46,7 +49,8 @@
 					  android:inputType="text"
 					  android:layout_width="match_parent"
 					  android:layout_height="wrap_content"
-					  android:hint="@string/customAppLocation" />
+					  android:hint="@string/customAppLocation"
+					  android:importantForAutofill="no" />
 		</com.google.android.material.textfield.TextInputLayout>
 
 		<com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent"
@@ -56,7 +60,8 @@
 					  android:inputType="text"
 					  android:layout_width="match_parent"
 					  android:layout_height="wrap_content"
-					  android:hint="@string/utmSource" />
+					  android:hint="@string/utmSource"
+					  android:importantForAutofill="no" />
 		</com.google.android.material.textfield.TextInputLayout>
 
 		<com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent"
@@ -66,7 +71,8 @@
 					  android:inputType="text"
 					  android:layout_width="match_parent"
 					  android:layout_height="wrap_content"
-					  android:hint="@string/utmMedium" />
+					  android:hint="@string/utmMedium"
+					  android:importantForAutofill="no" />
 		</com.google.android.material.textfield.TextInputLayout>
 
 		<com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent"
@@ -76,7 +82,8 @@
 					  android:inputType="text"
 					  android:layout_width="match_parent"
 					  android:layout_height="wrap_content"
-					  android:hint="@string/utmCampaign" />
+					  android:hint="@string/utmCampaign"
+					  android:importantForAutofill="no" />
 		</com.google.android.material.textfield.TextInputLayout>
 
 		<com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent"
@@ -86,7 +93,8 @@
 					  android:inputType="text"
 					  android:layout_width="match_parent"
 					  android:layout_height="wrap_content"
-					  android:hint="@string/utmTerm" />
+					  android:hint="@string/utmTerm"
+					  android:importantForAutofill="no" />
 		</com.google.android.material.textfield.TextInputLayout>
 
 		<com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent"
@@ -96,7 +104,8 @@
 					  android:inputType="text"
 					  android:layout_width="match_parent"
 					  android:layout_height="wrap_content"
-					  android:hint="@string/utmContent" />
+					  android:hint="@string/utmContent"
+					  android:importantForAutofill="no" />
 		</com.google.android.material.textfield.TextInputLayout>
 
 		<com.google.android.material.textfield.TextInputLayout android:layout_width="wrap_content"

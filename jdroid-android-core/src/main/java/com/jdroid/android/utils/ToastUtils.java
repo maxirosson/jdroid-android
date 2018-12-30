@@ -1,5 +1,6 @@
 package com.jdroid.android.utils;
 
+import android.annotation.SuppressLint;
 import android.os.Handler;
 import android.widget.Toast;
 
@@ -13,6 +14,7 @@ public final class ToastUtils {
 
 	private static WeakReference<Toast> currentToast;
 
+	@SuppressLint("HandlerLeak")
 	private static final Handler HANDLER = new Handler() {
 
 		@Override

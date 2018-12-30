@@ -35,7 +35,8 @@
 					  android:layout_width="match_parent"
 					  android:layout_height="wrap_content"
 					  android:inputType="text"
-					  android:hint="@string/topic" />
+					  android:hint="@string/topic"
+					  android:importantForAutofill="no" />
 		</com.google.android.material.textfield.TextInputLayout>
 
 		<Button android:id="@+id/subscribeToTopic"
@@ -56,7 +57,8 @@
 					  android:layout_width="match_parent"
 					  android:layout_height="wrap_content"
 					  android:inputType="text"
-					  android:hint="@string/topic" />
+					  android:hint="@string/topic"
+					  android:importantForAutofill="no" />
 		</com.google.android.material.textfield.TextInputLayout>
 
 		<com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent"
@@ -66,7 +68,8 @@
 					  android:layout_width="match_parent"
 					  android:layout_height="wrap_content"
 					  android:inputType="text"
-					  android:hint="@string/messageKey" />
+					  android:hint="@string/messageKey"
+					  android:importantForAutofill="no" />
 		</com.google.android.material.textfield.TextInputLayout>
 
 		<com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent"
@@ -76,7 +79,8 @@
 					  android:inputType="number"
 					  android:layout_width="match_parent"
 					  android:layout_height="wrap_content"
-					  android:hint="@string/minAppVersionCode" />
+					  android:hint="@string/minAppVersionCode"
+					  android:importantForAutofill="no" />
 		</com.google.android.material.textfield.TextInputLayout>
 
 		<com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent"
@@ -86,7 +90,8 @@
 					  android:inputType="number"
 					  android:layout_width="match_parent"
 					  android:layout_height="wrap_content"
-					  android:hint="@string/minDeviceOsVersion" />
+					  android:hint="@string/minDeviceOsVersion"
+					  android:importantForAutofill="no" />
 		</com.google.android.material.textfield.TextInputLayout>
 
 		<com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent"
@@ -96,7 +101,8 @@
 					  android:inputType="number"
 					  android:layout_width="match_parent"
 					  android:layout_height="wrap_content"
-					  android:hint="@string/senderId" />
+					  android:hint="@string/senderId"
+					  android:importantForAutofill="no" />
 		</com.google.android.material.textfield.TextInputLayout>
 
 		<Button android:id="@+id/sendPush"

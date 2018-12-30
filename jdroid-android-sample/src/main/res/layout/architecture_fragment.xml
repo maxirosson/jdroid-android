@@ -29,7 +29,8 @@
 					android:layout_height="wrap_content"
 					android:hint="@string/loadFromNetworkDelaySeconds"
 					android:width="200dp"
-					android:inputType="number"/>
+					android:inputType="number"
+					android:importantForAutofill="no" />
 		</com.google.android.material.textfield.TextInputLayout>
 
 		<CheckBox android:id="@+id/failLoadFromDb"
@@ -47,7 +48,8 @@
 					android:layout_height="wrap_content"
 					android:hint="@string/loadFromDbDelaySeconds"
 					android:width="200dp"
-					android:inputType="number"/>
+					android:inputType="number"
+					android:importantForAutofill="no" />
 		</com.google.android.material.textfield.TextInputLayout>
 
 		<CheckBox android:id="@+id/failSaveToDb"
@@ -65,7 +67,8 @@
 					android:layout_height="wrap_content"
 					android:hint="@string/saveToDbDelaySeconds"
 					android:width="200dp"
-					android:inputType="number"/>
+					android:inputType="number"
+					android:importantForAutofill="no" />
 		</com.google.android.material.textfield.TextInputLayout>
 
 		<Button
