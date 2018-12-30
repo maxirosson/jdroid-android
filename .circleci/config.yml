@@ -58,14 +58,14 @@ jobs:
           
       - store_test_results:
           path: ~/junit
-          
-      - store_artifacts:
-          path: ./jdroid-android/build/reports/tests/testDebugUnitTest
-          destination: jdroid-android/tests
-          
+
       - store_artifacts:
           path: ./jdroid-android-about/build/reports/tests/testDebugUnitTest
           destination: jdroid-android-about/tests
+
+      - store_artifacts:
+          path: ./jdroid-android-core/build/reports/tests/testDebugUnitTest
+          destination: jdroid-android-core/tests
 
       - store_artifacts:
           path: ./jdroid-android-facebook-login/build/reports/tests/testDebugUnitTest
@@ -110,6 +110,10 @@ jobs:
       - store_artifacts:
           path: ./jdroid-android-google-signin/build/reports/tests/testDebugUnitTest
           destination: jdroid-android-google-signin/tests
+
+      - store_artifacts:
+          path: ./jdroid-android-room/build/reports/tests/testDebugUnitTest
+          destination: jdroid-android-room/tests
 
       - store_artifacts:
           path: ./jdroid-android-sample/build/reports/tests/testDebugUnitTest
@@ -165,14 +169,14 @@ jobs:
       - run: 
           name: Linting
           command: ./gradlew lintDebug --stacktrace
-      
-      - store_artifacts:
-          path: ./jdroid-android/build/reports/lint-results-debug.html
-          destination: jdroid-android/lint
 
       - store_artifacts:
           path: ./jdroid-android-about/build/reports/lint-results-debug.html
           destination: jdroid-android-about/lint
+
+      - store_artifacts:
+          path: ./jdroid-android-core/build/reports/lint-results-debug.html
+          destination: jdroid-android-core/lint
 
       - store_artifacts:
           path: ./jdroid-android-facebook-login/build/reports/lint-results-debug.html
@@ -217,6 +221,10 @@ jobs:
       - store_artifacts:
           path: ./jdroid-android-google-signin/build/reports/lint-results-debug.html
           destination: jdroid-android-google-signin/lint
+
+      - store_artifacts:
+          path: ./jdroid-android-room/build/reports/lint-results-debug.html
+          destination: jdroid-android-room/lint
 
       - store_artifacts:
           path: ./jdroid-android-sample/build/reports/lint-results-debug.html
