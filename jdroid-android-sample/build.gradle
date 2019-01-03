@@ -7,7 +7,11 @@ apply plugin: "com.jdroid.android.application"
 description = "Jdroid Sample Android"
 
 repositories {
-	jcenter()
+	jcenter {
+		mavenContent {
+			releasesOnly()
+		}
+	}
 	mavenCentral()
 }
 
