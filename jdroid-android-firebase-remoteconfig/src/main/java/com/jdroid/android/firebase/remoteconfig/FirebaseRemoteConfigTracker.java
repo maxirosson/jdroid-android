@@ -13,4 +13,12 @@ public class FirebaseRemoteConfigTracker extends AbstractCoreAnalyticsTracker {
 			FirebaseRemoteConfigLoader.get().fetch();
 		}
 	}
+
+	@Override
+	public void onActivityResume(Activity activity) {
+		super.onActivityResume(activity);
+
+		// TODO We should fetch here only if it is stale
+
+	}
 }
