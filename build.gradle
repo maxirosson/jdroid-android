@@ -88,7 +88,6 @@ allprojects {
 					includeGroup("io.fabric.tools")
 				}
 			}
-			gradlePluginPortal()
 			String localMavenRepoEnabled = project.hasProperty("LOCAL_MAVEN_REPO_ENABLED") ? project.ext.get("LOCAL_MAVEN_REPO_ENABLED") : System.getenv("LOCAL_MAVEN_REPO_EMABLED")
 			boolean isLocalMavenRepoEnabled = localMavenRepoEnabled != null && localMavenRepoEnabled == "true"
 			if (isLocalMavenRepoEnabled) {
@@ -111,6 +110,7 @@ allprojects {
 					snapshotsOnly()
 				}
 			}
+			gradlePluginPortal()
 			mavenCentral()
 		}
 	}
