@@ -13,12 +13,6 @@
 	<string name="jdroid_retry">Retry</string>
 	<string name="jdroid_removeAdsNow">Remove ads now!</string>
 
-	<!-- App Invite -->
-	<string name="jdroid_appInviteButtonTitle">Invite Friends</string>
-	<string name="jdroid_appInviteButtonSubtitle">Recommend %1$s to your friends</string>
-	<string name="jdroid_appInviteTitle">Invite Friends to %1$s</string>
-	<string name="jdroid_appInviteMessage">Download %1$s on your android</string>
-
 	<!-- Permissions -->
 	<string name="jdroid_requiredPermission">Required Permission</string>
 	<string name="jdroid_allow">Allow</string>

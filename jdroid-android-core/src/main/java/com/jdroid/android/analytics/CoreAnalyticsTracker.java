@@ -3,12 +3,13 @@ package com.jdroid.android.analytics;
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
 
 import com.jdroid.android.social.SocialAction;
 import com.jdroid.java.analytics.AnalyticsTracker;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
 
 public interface CoreAnalyticsTracker extends AnalyticsTracker {
 
@@ -57,10 +58,6 @@ public interface CoreAnalyticsTracker extends AnalyticsTracker {
 	public void trackWidgetAdded(String widgetName);
 
 	public void trackWidgetRemoved(String widgetName);
-
-	// App Invitations
-
-	public void trackSendAppInvitation(String invitationId);
 
 	// More
 

@@ -9,7 +9,6 @@ import com.jdroid.android.sample.R;
 import com.jdroid.android.sample.androidx.ArchitectureActivity;
 import com.jdroid.android.sample.database.room.RoomActivity;
 import com.jdroid.android.sample.ui.analytics.AnalyticsActivity;
-import com.jdroid.android.sample.ui.appinvite.AppInviteActivity;
 import com.jdroid.android.sample.ui.cardview.CardViewActivity;
 import com.jdroid.android.sample.ui.datetime.DateTimeActivity;
 import com.jdroid.android.sample.ui.exceptions.ErrorDisplayerActivity;
@@ -63,7 +62,6 @@ public enum HomeItem implements ActionItem {
 	FIREBASE_FCM(R.string.fcm, R.drawable.ic_fcm, FcmActivity.class),
 	FIREBASE_DATABASE(R.string.firebaseDatabase, R.drawable.ic_firebase, FirebaseDatabaseActivity.class),
 	FIREBASE_DYNAMIC_LINKS(R.string.firebaseDynamicLinks, R.drawable.ic_fcm, DynamicLinksActivity.class),
-	FIREBASE_INVITES(R.string.appInvite, R.drawable.ic_admob, AppInviteActivity.class),
 	FAB(R.string.floatingActionButton, R.drawable.ic_firebase, FabActivity.class),
 	GLIDE(R.string.glide, R.drawable.ic_photo, GlideActivity.class),
 	GOOGLE_IN_APP_BILLING(R.string.inAppBilling, R.drawable.ic_inapp_billing, GoogleInAppBillingActivity.class),

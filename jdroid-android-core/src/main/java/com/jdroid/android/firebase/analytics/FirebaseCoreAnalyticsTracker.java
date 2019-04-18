@@ -158,11 +158,4 @@ public class FirebaseCoreAnalyticsTracker extends AbstractFirebaseAnalyticsTrack
 		params.put("social_target", socialTarget);
 		getFirebaseAnalyticsHelper().sendEvent(socialAction.getName(), params);
 	}
-
-	@Override
-	public void trackSendAppInvitation(String invitationId) {
-		FirebaseAnalyticsParams params = new FirebaseAnalyticsParams();
-		params.put(FirebaseAnalytics.Param.ITEM_ID, invitationId);
-		getFirebaseAnalyticsHelper().sendEvent("send_app_invitation", params);
-	}
 }

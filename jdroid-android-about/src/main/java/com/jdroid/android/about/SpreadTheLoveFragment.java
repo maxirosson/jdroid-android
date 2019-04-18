@@ -1,7 +1,6 @@
 package com.jdroid.android.about;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,10 +11,7 @@ import android.widget.TextView;
 
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.facebook.FacebookHelper;
-import com.jdroid.android.firebase.invites.AppInviteHelper;
-import com.jdroid.android.firebase.invites.AppInviteSender;
 import com.jdroid.android.fragment.AbstractFragment;
-import com.jdroid.android.google.GooglePlayServicesUtils;
 import com.jdroid.android.google.GooglePlayUtils;
 import com.jdroid.android.instagram.InstagramHelper;
 import com.jdroid.android.linkedin.LinkedInHelper;
@@ -83,21 +79,6 @@ public abstract class SpreadTheLoveFragment extends AbstractFragment {
 		sharingItems.add(new SmsSharingItem(sharingData));
 
 		Boolean displayShareTitle = ShareView.initShareSection(getActivity(), sharingItems, new MoreSharingItem(sharingData));
-
-		View appInvite = findView(R.id.appInvite);
-		if (displayAppInviteButton() && GooglePlayServicesUtils.isGooglePlayServicesAvailable(getActivity())) {
-			appInvite.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					createAppInviteSender().sendInvitation();
-				}
-			});
-			displayShareTitle = true;
-		} else {
-			appInvite.setVisibility(View.GONE);
-		}
-
 		if (!displayShareTitle) {
 			findView(R.id.shareSectionTitle).setVisibility(View.GONE);
 		}
@@ -121,10 +102,6 @@ public abstract class SpreadTheLoveFragment extends AbstractFragment {
 
 	protected Boolean displayAppInviteButton() {
 		return false;
-	}
-
-	protected AppInviteSender createAppInviteSender() {
-		return new AppInviteSender();
 	}
 
 	public String getShareKey() {
@@ -196,12 +173,4 @@ public abstract class SpreadTheLoveFragment extends AbstractFragment {
 		}
 		return items;
 	}
-
-	@Override
-	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
-
-		AppInviteHelper.onActivityResult(requestCode, resultCode, data);
-	}
-
 }

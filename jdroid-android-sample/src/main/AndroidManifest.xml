@@ -83,13 +83,6 @@
 				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
 				  tools:ignore="UnusedAttribute" />
 
-		<!-- App Invite -->
-
-		<activity android:name="com.jdroid.android.sample.ui.appinvite.AppInviteActivity"
-				  android:label="@string/appInvite"
-				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
-				  tools:ignore="UnusedAttribute" />
-
 		<!-- Ads -->
 
 		<activity android:name="com.jdroid.android.sample.ui.google.admob.AdsActivity"

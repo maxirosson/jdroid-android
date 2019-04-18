@@ -120,11 +120,6 @@ public abstract class AbstractCoreAnalyticsTracker implements CoreAnalyticsTrack
 	}
 
 	@Override
-	public void trackSendAppInvitation(String invitationId) {
-		// Do Nothing
-	}
-
-	@Override
 	public Boolean isEnabled() {
 		return true;
 	}

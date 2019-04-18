@@ -251,15 +251,4 @@ public class CoreAnalyticsSender<T extends CoreAnalyticsTracker> extends Analyti
 			}
 		});
 	}
-
-	@Override
-	public void trackSendAppInvitation(final String invitationId) {
-		execute(new TrackingCommand() {
-
-			@Override
-			protected void track(T tracker) {
-				tracker.trackSendAppInvitation(invitationId);
-			}
-		});
-	}
 }

@@ -9,7 +9,6 @@ public class AboutDebugAppLifecycleCallback extends ApplicationLifecycleCallback
 
 	@Override
 	public void onProviderInit(Context context) {
-		DebugSettingsHelper.addPreferencesAppender(new AppInviteDebugPrefsAppender());
 		DebugSettingsHelper.addPreferencesAppender(new RateAppDebugPrefsAppender());
 	}
 }

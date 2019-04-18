@@ -18,9 +18,6 @@
 	<string name="architecture">Architecture</string>
 	<string name="forceRefresh">Force Refresh</string>
 
-	<!-- Firebase Invites -->
-	<string name="appInvite">Firebase Invites</string>
-
 	<!-- Date & Time -->
 	<string name="dateTime">Date &amp; Time</string>
 	<string name="datePickerDialog">Date Picker Dialog</string>
