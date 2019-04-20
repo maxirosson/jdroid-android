@@ -24,7 +24,6 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.appindexing.Action;
 import com.google.firebase.appindexing.FirebaseUserActions;
-import com.google.firebase.appinvite.FirebaseAppInvite;
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
 import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
 import com.jdroid.android.application.AbstractApplication;
@@ -185,15 +184,6 @@ public class ActivityHelper implements ActivityIf {
 								Uri deepLink = pendingDynamicLinkData != null ? pendingDynamicLinkData.getLink() : null;
 								if (deepLink != null) {
 									LOGGER.debug("Pending dynamic link: " + deepLink);
-
-									// Extract invite
-									FirebaseAppInvite invite = FirebaseAppInvite.getInvitation(pendingDynamicLinkData);
-									if (invite != null) {
-										String invitationId = invite.getInvitationId();
-										LOGGER.debug("AppInvite invitation id: " + invitationId);
-										getActivityIf().onAppInvite(deepLink, invitationId);
-									}
-
 									redirect(deepLink.toString());
 								} else {
 									redirect(activity.getIntent().getStringExtra("url"));
@@ -283,11 +273,6 @@ public class ActivityHelper implements ActivityIf {
 
 	protected void onInitGoogleApiClientBuilder(GoogleApiClient.Builder builder) {
 		// Do nothing
-	}
-
-	@Override
-	public void onAppInvite(Uri deepLink, String invitationId) {
-		// Do Nothing
 	}
 
 	@TargetApi(Build.VERSION_CODES.LOLLIPOP)

@@ -28,7 +28,15 @@ public class NotificationFcmMessage extends AbstractFcmMessage {
 	@Override
 	public void handle(RemoteMessage remoteMessage) {
 
-		NotificationBuilder builder = new NotificationBuilder(getMessageKey(), remoteMessage.getData() != null ? remoteMessage.getData().get(CHANNEL) : null);
+		String channelId = null;
+		if (remoteMessage.getNotification() != null) {
+			channelId = remoteMessage.getNotification().getChannelId();
+		}
+		if (StringUtils.isEmpty(channelId) && remoteMessage.getData() != null) {
+			channelId = remoteMessage.getData().get(CHANNEL);
+		}
+
+		NotificationBuilder builder = new NotificationBuilder(getMessageKey(), channelId);
 
 		initContentTitle(remoteMessage, builder);
 		initContentText(remoteMessage, builder);

@@ -19,7 +19,7 @@ dependencies {
 	api project(":jdroid-android-core")
 	api project(":jdroid-android-google-signin")
 
-	api("com.google.android.gms:play-services-games:16.0.0")
+	api("com.google.android.gms:play-services-games:17.0.0")
 
 	testImplementation("junit:junit:${JUNIT_VERSION}")
 	testImplementation("org.robolectric:robolectric:${ROBOLECTRIC_VERSION}")

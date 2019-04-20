@@ -3,13 +3,7 @@ package com.jdroid.android.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.net.Uri;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +15,12 @@ import com.jdroid.android.loading.ActivityLoading;
 import com.jdroid.android.navdrawer.NavDrawer;
 import com.jdroid.android.uri.UriHandler;
 import com.jdroid.java.exception.UnexpectedException;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 /**
  * Base {@link Activity}
@@ -290,17 +290,14 @@ public abstract class AbstractFragmentActivity extends AppCompatActivity impleme
 		return activityHelper.getActivityDelegate(appModule);
 	}
 
-	// //////////////////////// Uri, Dynamic Links & App Invites //////////////////////// //
+	// //////////////////////// Uri //////////////////////// //
 
 	@Override
 	public UriHandler createUriHandler() {
 		return activityHelper.createUriHandler();
 	}
 
-	@Override
-	public void onAppInvite(Uri deepLink, String invitationId) {
-		activityHelper.onAppInvite(deepLink, invitationId);
-	}
+	// //////////////////////// Others //////////////////////// //
 
 	@Override
 	public GoogleApiClient getGoogleApiClient() {

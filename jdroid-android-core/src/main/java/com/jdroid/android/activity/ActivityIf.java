@@ -1,11 +1,6 @@
 package com.jdroid.android.activity;
 
-import android.net.Uri;
 import android.os.Bundle;
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 
@@ -14,6 +9,11 @@ import com.jdroid.android.application.AppModule;
 import com.jdroid.android.loading.ActivityLoading;
 import com.jdroid.android.navdrawer.NavDrawer;
 import com.jdroid.android.uri.UriHandler;
+
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 
 public interface ActivityIf extends ComponentIf {
 
@@ -62,12 +62,10 @@ public interface ActivityIf extends ComponentIf {
 	@Nullable
 	public Long getLocationFrequency();
 
-	// //////////////////////// Uri, Dynamic Links & App Invites //////////////////////// //
+	// //////////////////////// Uri //////////////////////// //
 
 	@Nullable
 	public UriHandler createUriHandler();
-
-	public void onAppInvite(Uri deepLink, String invitationId);
 
 	// //////////////////////// Others //////////////////////// //
 

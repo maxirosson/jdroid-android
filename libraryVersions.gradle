@@ -11,10 +11,10 @@ ext.JDROID_JAVA_HTTP_VERSION = '2.0.0'
 ext.ROOM_VERSION = '2.0.0'
 
 // https://developers.facebook.com/docs/android
-ext.FACEBOOK_ANDROID_VERSION = '4.37.0'
+ext.FACEBOOK_ANDROID_VERSION = '4.41.0'
 
 // https://github.com/bumptech/glide/releases
-ext.GLIDE_VERSION = '4.8.0'
+ext.GLIDE_VERSION = '4.9.0'
 
 ext.JUNIT_VERSION = '4.12'
 
@@ -22,4 +22,4 @@ ext.JUNIT_VERSION = '4.12'
 ext.ROBOLECTRIC_VERSION = '3.4.2'
 
 // https://github.com/square/leakcanary/blob/master/CHANGELOG.md
-ext.LEAK_CANARY_VERSION = '1.6.2'
+ext.LEAK_CANARY_VERSION = '1.6.3'

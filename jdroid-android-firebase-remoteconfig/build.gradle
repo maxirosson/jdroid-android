@@ -19,7 +19,7 @@ dependencies {
 	api project(":jdroid-android-core")
 	api project(":jdroid-android-firebase-fcm")
 
-	api("com.google.firebase:firebase-config:16.1.2")
+	api("com.google.firebase:firebase-config:16.5.0")
 
 	testImplementation("junit:junit:${JUNIT_VERSION}")
 	testImplementation("org.robolectric:robolectric:${ROBOLECTRIC_VERSION}")

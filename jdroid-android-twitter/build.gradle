@@ -18,8 +18,8 @@ dependencies {
 
 	api project(":jdroid-android-core")
 
-	// https://dev.twitter.com/twitterkit/android/changelog
-	api("com.twitter.sdk.android:tweet-ui:3.1.1@aar") {
+	// https://github.com/twitter/twitter-kit-android/wiki/Changelog
+	api("com.twitter.sdk.android:tweet-ui:3.3.0@aar") {
 		transitive = true;
 	}
 
