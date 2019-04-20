@@ -105,30 +105,46 @@ public class FirebaseRemoteConfigLoader implements RemoteConfigLoader {
 				LOGGER.debug("Firebase Remote Config fetch succeeded");
 				// Once the config is successfully fetched it must be activated before newly fetched values are returned.
 
-				Boolean result = firebaseRemoteConfig.activateFetched();
-				// true if there was a Fetched Config, and it was activated. false if no Fetched Config was found, or the Fetched Config was already activated.
-				LOGGER.debug("Firebase Remote Config activate fetched result: " + result);
+				Task<Boolean> activateTask = firebaseRemoteConfig.activate();
+				activateTask.addOnSuccessListener(new OnSuccessListener<Boolean>() {
+					@Override
+					public void onSuccess(Boolean result) {
+						// true if there was a Fetched Config, and it was activated. false if no Fetched Config was found, or the Fetched Config was already activated.
+						LOGGER.debug("Firebase Remote Config activate fetched result: " + result);
 
-				if (setExperimentUserProperty && !Lists.isNullOrEmpty(remoteConfigParametersAsUserProperties)) {
-					AppExecutors.getNetworkIOExecutor().execute(new Runnable() {
-						@Override
-						public void run() {
-							for (RemoteConfigParameter each : remoteConfigParametersAsUserProperties) {
-								String experimentVariant = FirebaseRemoteConfig.getInstance().getString(each.getKey());
-								FirebaseAnalyticsFactory.getFirebaseAnalyticsHelper().setUserProperty(each.getKey(), experimentVariant);
-							}
+						if (setExperimentUserProperty && !Lists.isNullOrEmpty(remoteConfigParametersAsUserProperties)) {
+							AppExecutors.getNetworkIOExecutor().execute(new Runnable() {
+								@Override
+								public void run() {
+									for (RemoteConfigParameter each : remoteConfigParametersAsUserProperties) {
+										String experimentVariant = FirebaseRemoteConfig.getInstance().getString(each.getKey());
+										FirebaseAnalyticsFactory.getFirebaseAnalyticsHelper().setUserProperty(each.getKey(), experimentVariant);
+									}
+								}
+							});
 						}
-					});
-				}
 
-				if (onSuccessListener != null) {
-					AppExecutors.getNetworkIOExecutor().execute(new Runnable() {
-						@Override
-						public void run() {
-							onSuccessListener.onSuccess(null);
+						if (onSuccessListener != null) {
+							AppExecutors.getNetworkIOExecutor().execute(new Runnable() {
+								@Override
+								public void run() {
+									onSuccessListener.onSuccess(null);
+								}
+							});
 						}
-					});
-				}
+					}
+				});
+				activateTask.addOnFailureListener(new OnFailureListener() {
+					@Override
+					public void onFailure(@NonNull Exception exception) {
+						AbstractApplication.get().getExceptionHandler().logHandledException("Firebase Remote Config activation failed", exception);
+						retryCount++;
+
+						if (retryCount <= 3) {
+							new FirebaseRemoteConfigFetchCommand().start(setExperimentUserProperty);
+						}
+					}
+				});
 			}
 		});
 		task.addOnFailureListener(new OnFailureListener() {
