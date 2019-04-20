@@ -19,7 +19,7 @@ ext.GLIDE_VERSION = '4.9.0'
 ext.JUNIT_VERSION = '4.12'
 
 // https://github.com/robolectric/robolectric
-ext.ROBOLECTRIC_VERSION = '3.4.2'
+ext.ROBOLECTRIC_VERSION = '4.2.1'
 
 // https://github.com/square/leakcanary/blob/master/CHANGELOG.md
 ext.LEAK_CANARY_VERSION = '1.6.3'
