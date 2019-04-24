@@ -12,7 +12,11 @@ repositories {
 			releasesOnly()
 		}
 	}
-	mavenCentral()
+	mavenCentral() {
+		mavenContent {
+			releasesOnly()
+		}
+	}
 }
 
 configurations.all {

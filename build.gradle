@@ -26,7 +26,11 @@ buildscript {
 				releasesOnly()
 			}
 		}
-		google()
+		google() {
+			mavenContent {
+				releasesOnly()
+			}
+		}
 		maven {
 			url = "https://maven.fabric.io/public"
 			content {
@@ -67,7 +71,11 @@ buildscript {
 			}
 		}
 		gradlePluginPortal()
-		mavenCentral()
+		mavenCentral() {
+			mavenContent {
+				releasesOnly()
+			}
+		}
 	}
 
 	dependencies {
@@ -92,7 +100,11 @@ allprojects {
 					releasesOnly()
 				}
 			}
-			google()
+			google() {
+				mavenContent {
+					releasesOnly()
+				}
+			}
 			maven {
 				url = "https://maven.fabric.io/public"
 				content {
@@ -122,7 +134,11 @@ allprojects {
 				}
 			}
 			gradlePluginPortal()
-			mavenCentral()
+			mavenCentral() {
+				mavenContent {
+					releasesOnly()
+				}
+			}
 		}
 	}
 
@@ -154,6 +170,10 @@ allprojects {
 				snapshotsOnly()
 			}
 		}
-		mavenCentral()
+		mavenCentral() {
+			mavenContent {
+				releasesOnly()
+			}
+		}
 	}
 }
