@@ -17,7 +17,7 @@ buildscript {
 dependencies {
 
 	api project(":jdroid-android-core")
-	api project(":jdroid-android-google-signin")
+	implementation project(":jdroid-android-google-signin")
 
 	api("com.google.android.gms:play-services-games:17.0.0")
 
