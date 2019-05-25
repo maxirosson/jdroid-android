@@ -3,6 +3,7 @@ package com.jdroid.android.firebase.remoteconfig;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
@@ -21,6 +22,7 @@ import com.jdroid.java.utils.StringUtils;
 import org.slf4j.Logger;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 import androidx.annotation.NonNull;
@@ -62,9 +64,19 @@ public class FirebaseRemoteConfigLoader implements RemoteConfigLoader {
 						firebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
 
 						FirebaseRemoteConfigSettings.Builder configSettingsBuilder = new FirebaseRemoteConfigSettings.Builder();
-						configSettingsBuilder.setDeveloperModeEnabled(!AppUtils.isReleaseBuildType());
+						if (!AppUtils.isReleaseBuildType()) {
+							configSettingsBuilder.setMinimumFetchIntervalInSeconds(0);
+						}
 
-						firebaseRemoteConfig.setConfigSettings(configSettingsBuilder.build());
+						Task<Void> task = firebaseRemoteConfig.setConfigSettingsAsync(configSettingsBuilder.build());
+
+						try {
+							Tasks.await(task);
+						} catch (ExecutionException e) {
+							AbstractApplication.get().getExceptionHandler().logHandledException("Error initializing Firebase Remote Config", e);
+						} catch (InterruptedException e) {
+							AbstractApplication.get().getExceptionHandler().logHandledException("Error initializing Firebase Remote Config", e);
+						}
 
 					} catch (Exception e) {
 						AbstractApplication.get().getExceptionHandler().logHandledException("Error initializing Firebase Remote Config", e);
@@ -75,11 +87,13 @@ public class FirebaseRemoteConfigLoader implements RemoteConfigLoader {
 
 	}
 
+	@WorkerThread
 	@Override
 	public void fetch() {
 		fetch(false, null);
 	}
 
+	@WorkerThread
 	@RestrictTo(LIBRARY)
 	public void fetch(@NonNull Boolean setExperimentUserProperty, @Nullable OnSuccessListener<Void> onSuccessListener) {
 		init();
@@ -87,7 +101,7 @@ public class FirebaseRemoteConfigLoader implements RemoteConfigLoader {
 		long cacheExpirationSeconds = defaultFetchExpiration;
 		// If the app is using developer mode or cache is stale, cacheExpiration is set to 0,
 		// so each fetch will retrieve values from the service.
-		if (firebaseRemoteConfig.getInfo().getConfigSettings().isDeveloperModeEnabled() ||
+		if (firebaseRemoteConfig.getInfo().getConfigSettings().getMinimumFetchIntervalInSeconds() == 0 ||
 			SharedPreferencesHelper.get().loadPreferenceAsBoolean(CONFIG_STALE, false)) {
 			cacheExpirationSeconds = 0;
 			SharedPreferencesHelper.get().savePreferenceAsync(FirebaseRemoteConfigLoader.CONFIG_STALE, false);

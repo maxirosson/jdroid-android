@@ -18,8 +18,8 @@ dependencies {
 
 	api project(":jdroid-android-core")
 
-	api("com.google.firebase:firebase-database:16.1.0")
-	api("com.google.firebase:firebase-auth:16.2.1")
+	api("com.google.firebase:firebase-database:17.0.0")
+	api("com.google.firebase:firebase-auth:17.0.0")
 
 	testImplementation("junit:junit:${JUNIT_VERSION}")
 	testImplementation("org.robolectric:robolectric:${ROBOLECTRIC_VERSION}")

@@ -29,6 +29,7 @@
 				 android:logo="@mipmap/ic_launcher"
 				 android:label="@string/jdroid_appName"
 				 android:allowBackup="false"
+				 android:supportsRtl="false"
 				 android:name="com.jdroid.android.sample.application.AndroidApplication"
 				 android:hardwareAccelerated="true"
 				 android:theme="@style/App.Theme">
