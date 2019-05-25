@@ -4,7 +4,7 @@ defaults: &defaults
     - image: circleci/android:api-28
   environment:
     LOCAL_MAVEN_REPO: ~/repo
-    GRADLE_OPTS: -Dorg.gradle.caching=true -Dorg.gradle.daemon=false -Dorg.gradle.jvmargs="-Xmx4g -Xms1g"
+    GRADLE_OPTS: -Dorg.gradle.caching=true -Dorg.gradle.daemon=false -Dorg.gradle.jvmargs="-Xmx6g -Xms1g"
     DEX_IN_PROCESS: true
 version: 2
 jobs:
@@ -19,7 +19,7 @@ jobs:
 
       - run: 
           name: Assembling
-          command: ./gradlew assemble -PRELEASE_BUILD_TYPE_ENABLED=true -PFAKE_RELEASE_BUILD_TYPE_ENABLED=true --stacktrace --scan
+          command: ./gradlew assemble -PRELEASE_BUILD_TYPE_ENABLED=true -PFAKE_RELEASE_BUILD_TYPE_ENABLED=true --stacktrace
 
       - save_cache:
           paths:
