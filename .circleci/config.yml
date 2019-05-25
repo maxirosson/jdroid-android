@@ -1,10 +1,10 @@
 defaults: &defaults
   working_directory: ~/jdroid
   docker:
-    - image: circleci/android:api-28-alpha
+    - image: circleci/android:api-28
   environment:
     LOCAL_MAVEN_REPO: ~/repo
-    GRADLE_OPTS: -Dorg.gradle.caching=true -Dorg.gradle.daemon=false -Dorg.gradle.jvmargs="-Xmx3g -Xms1g"
+    GRADLE_OPTS: -Dorg.gradle.caching=true -Dorg.gradle.daemon=false -Dorg.gradle.jvmargs="-Xmx4g -Xms1g"
     DEX_IN_PROCESS: true
 version: 2
 jobs:
