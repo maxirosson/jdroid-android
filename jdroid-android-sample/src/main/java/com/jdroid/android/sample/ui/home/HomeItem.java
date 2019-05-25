@@ -8,6 +8,7 @@ import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.sample.R;
 import com.jdroid.android.sample.androidx.ArchitectureActivity;
 import com.jdroid.android.sample.database.room.RoomActivity;
+import com.jdroid.android.sample.inappupdates.InAppUpdatesActivity;
 import com.jdroid.android.sample.ui.analytics.AnalyticsActivity;
 import com.jdroid.android.sample.ui.cardview.CardViewActivity;
 import com.jdroid.android.sample.ui.datetime.DateTimeActivity;
@@ -71,6 +72,7 @@ public enum HomeItem implements ActionItem {
 	GOOGLE_SIGN_IN(R.string.jdroid_googleSignIn, R.drawable.ic_sign_in_24dp, GoogleSignInActivity.class),
 	HERO(R.string.hero, R.drawable.ic_photo, HeroActivity.class),
 	HTTP(R.string.http, R.drawable.ic_http, HttpActivity.class),
+	IN_APP_UPDATES(R.string.inAppUpdates, R.drawable.ic_loading, InAppUpdatesActivity.class),
 	LEAK_CANARY(R.string.jdroid_leakCanary, R.drawable.ic_exception_handling, LeakCanaryActivity.class),
 	LOADING(R.string.loading, R.drawable.ic_loading, LoadingActivity.class),
 	NAVDRAWER(R.string.navDrawer, R.drawable.ic_nav_drawer, NavDrawerActivity.class),

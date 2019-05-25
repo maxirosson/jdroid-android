@@ -661,6 +661,12 @@
 				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
 				  tools:ignore="UnusedAttribute" />
 
+		<!-- In App Updates -->
+
+		<activity android:name="com.jdroid.android.sample.inappupdates.InAppUpdatesActivity"
+				  android:label="@string/inAppUpdates"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" />
+
 		<!-- Strict Mode -->
 
 		<activity android:name="com.jdroid.android.sample.ui.strictmode.StrictModeActivity"

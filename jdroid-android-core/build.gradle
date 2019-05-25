@@ -39,6 +39,8 @@ dependencies {
 
 	api("androidx.lifecycle:lifecycle-extensions:2.0.0")
 
+	api("com.google.android.play:core:1.5.0")
+
 	// https://developers.google.com/android/guides/releases
 	api("com.google.android.gms:play-services-base:16.1.0")
 

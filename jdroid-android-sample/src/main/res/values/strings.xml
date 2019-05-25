@@ -284,6 +284,11 @@
 	<string name="requestPinShortcutWithoutCallback">requestPinShortcut without Callback</string>
 	<string name="requestPinShortcutWithCallback">requestPinShortcut with Callback</string>
 
+	<!-- In-app Updates -->
+	<string name="inAppUpdates">In-app updates</string>
+	<string name="inAppUpdateFlexible">Flexible</string>
+	<string name="inAppUpdateImmediate">Immediate</string>
+
 	<!-- StrictMode -->
 	<string name="strictMode">Strict Mode</string>
 	<string name="diskAccessOnMainThread">Disk Access on Main Thread</string>
