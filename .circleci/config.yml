@@ -19,7 +19,7 @@ jobs:
 
       - run: 
           name: Assembling
-          command: ./gradlew assemble -PRELEASE_BUILD_TYPE_ENABLED=true -PFAKE_RELEASE_BUILD_TYPE_ENABLED=true --stacktrace --scan
+          command: ./gradlew assemble -PRELEASE_BUILD_TYPE_ENABLED=true -PFAKE_RELEASE_BUILD_TYPE_ENABLED=true --stacktrace --no-daemon --scan
 
       - save_cache:
           paths:
