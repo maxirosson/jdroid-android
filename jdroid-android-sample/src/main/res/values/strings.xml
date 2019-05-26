@@ -253,16 +253,15 @@
 	<string name="footer">footer</string>
 	<string name="header">header</string>
 
-	<!-- SQLite -->
-	<string name="sqlite">SQLite</string>
-	<string name="sqliteAdd">Add</string>
-	<string name="sqliteUpdate">Update</string>
-	<string name="sqliteUpsert">Upsert</string>
-	<string name="sqliteRemove">Remove</string>
-	<string name="sqliteRemoveAll">Remove All</string>
-	<string name="sqliteGetAll">Get All</string>
-	<string name="sqliteReplaceAll">Replace All</string>
-	<string name="sqliteInsertAll">Insert All</string>
+	<!-- Room -->
+	<string name="room">Room</string>
+	<string name="roomAdd">Add</string>
+	<string name="roomUpdate">Update</string>
+	<string name="roomUpsert">Upsert</string>
+	<string name="roomRemove">Remove</string>
+	<string name="roomRemoveAll">Remove All</string>
+	<string name="roomGetAll">Get All</string>
+	<string name="roomInsertAll">Insert All</string>
 
 	<!-- Service -->
 	<string name="service">Service</string>
@@ -300,8 +299,5 @@
 	<!-- About -->
 	<string name="shareMessage">Jdroid - Tools for Android and Java apps. Download the sample app on your Android.
 		%1$s</string>
-
-	<!-- Room -->
-	<string name="room">Room</string>
 
 </resources>

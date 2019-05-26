@@ -360,13 +360,6 @@
 				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
 				  tools:ignore="UnusedAttribute" />
 
-		<!-- SQLite -->
-
-		<activity android:name="com.jdroid.android.sample.ui.sqlite.SQLiteActivity"
-				  android:label="@string/sqlite"
-				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
-				  tools:ignore="UnusedAttribute" />
-
 		<!-- Service -->
 
 		<activity android:name="com.jdroid.android.sample.ui.service.ServiceActivity"
@@ -670,7 +663,7 @@
 		<!-- Room -->
 
 		<activity android:name="com.jdroid.android.sample.database.room.RoomActivity"
-				  android:label="@string/strictMode"
+				  android:label="@string/room"
 				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" />
 
 		<!-- AppShortcuts -->

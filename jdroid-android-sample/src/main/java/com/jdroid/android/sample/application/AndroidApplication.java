@@ -35,13 +35,10 @@ import com.jdroid.android.sample.ui.google.admob.SampleAdMobAppContext;
 import com.jdroid.android.sample.ui.google.inappbilling.AndroidInAppBillingAppModule;
 import com.jdroid.android.sample.ui.home.HomeActivity;
 import com.jdroid.android.sample.ui.home.HomeItem;
-import com.jdroid.android.sample.ui.sqlite.SampleSQLiteEntity;
-import com.jdroid.android.sample.ui.sqlite.SampleSQLiteRepository;
 import com.jdroid.android.sample.ui.uri.SampleUriWatcher;
 import com.jdroid.android.shortcuts.AppShortcutsAppModule;
 import com.jdroid.android.shortcuts.AppShortcutsHelper;
 import com.jdroid.android.shortcuts.DynamicShortcutsLoader;
-import com.jdroid.android.sqlite.SQLiteHelper;
 import com.jdroid.android.utils.LocalizationUtils;
 import com.jdroid.java.collections.Lists;
 import com.jdroid.java.http.okhttp.OkHttpServiceFactory;
@@ -78,8 +75,6 @@ public class AndroidApplication extends AbstractApplication {
 		Firebase.setAndroidContext(this);
 
 		initAppShortcuts();
-
-		addRepository(SampleSQLiteEntity.class, new SampleSQLiteRepository(SQLiteHelper.getDefaultInstance(this)));
 	}
 
 	private void initAppShortcuts() {

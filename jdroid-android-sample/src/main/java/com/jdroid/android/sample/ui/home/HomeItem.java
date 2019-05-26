@@ -34,7 +34,6 @@ import com.jdroid.android.sample.ui.rateme.RateAppActivity;
 import com.jdroid.android.sample.ui.recyclerview.RecyclerViewActivity;
 import com.jdroid.android.sample.ui.service.ServiceActivity;
 import com.jdroid.android.sample.ui.shortcuts.AppShortcutsActivity;
-import com.jdroid.android.sample.ui.sqlite.SQLiteActivity;
 import com.jdroid.android.sample.ui.strictmode.StrictModeActivity;
 import com.jdroid.android.sample.ui.tablets.LeftTabletActivity;
 import com.jdroid.android.sample.ui.tablets.TabletActivity;
@@ -77,9 +76,8 @@ public enum HomeItem implements ActionItem {
 	NOTIFICATIONS(R.string.notifications, R.drawable.ic_notifications, NotificationsActivity.class),
 	RATE_APP(R.string.rateApp, R.drawable.ic_rate, RateAppActivity.class),
 	RECYCLER_VIEW(R.string.recyclerView, R.drawable.ic_recycler_view, RecyclerViewActivity.class),
-	ROOM(R.string.room, R.drawable.ic_sqlite, RoomActivity.class),
+	ROOM(R.string.room, R.drawable.ic_room, RoomActivity.class),
 	SERVICE(R.string.service, R.drawable.ic_service, ServiceActivity.class),
-	SQLITE(R.string.sqlite, R.drawable.ic_sqlite, SQLiteActivity.class),
 	STRICT_MODE(R.string.strictMode, R.drawable.ic_exception_handling, StrictModeActivity.class),
 	TABLETS(R.string.tablets, R.drawable.ic_tablets, ScreenUtils.is10Inches() ? TabletActivity.class : LeftTabletActivity.class),
 	TIMER(R.string.timer, R.drawable.ic_toasts, TimerActivity.class),
