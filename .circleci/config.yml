@@ -22,7 +22,7 @@ jobs:
       - run:
           name: Assembling
           command: |
-            ./gradlew assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
+            ./gradlew clean assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
             ./gradlew assembleUat -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
             ./gradlew assembleAutomation --stacktrace
             ./gradlew assembleRelease -PRELEASE_BUILD_TYPE_ENABLED=true -PFAKE_RELEASE_BUILD_TYPE_ENABLED=true --stacktrace
