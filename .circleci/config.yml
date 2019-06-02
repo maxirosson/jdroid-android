@@ -20,9 +20,12 @@ jobs:
           key: app-{{ .Branch }}-{{ checksum "build.gradle" }}
 
       - run:
-          # TODO Firebase performance is disable because Circle CI has memory issues when enabled
           name: Assembling
-          command: ./gradlew assemble -PRELEASE_BUILD_TYPE_ENABLED=true -PFAKE_RELEASE_BUILD_TYPE_ENABLED=true -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
+          command: |
+            ./gradlew assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
+            ./gradlew assembleUat -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
+            ./gradlew assembleAutomation --stacktrace
+            ./gradlew assembleRelease -PRELEASE_BUILD_TYPE_ENABLED=true -PFAKE_RELEASE_BUILD_TYPE_ENABLED=true --stacktrace
 
       - save_cache:
           paths:
