@@ -4,7 +4,7 @@ defaults: &defaults
     - image: circleci/android:api-28
   environment:
     LOCAL_MAVEN_REPO: ~/repo
-    GRADLE_OPTS: -Dorg.gradle.caching=true -Dorg.gradle.daemon=false -Dorg.gradle.parallel=false -Dorg.gradle.jvmargs="-Xmx4g -Xms1g"
+    GRADLE_OPTS: -Dorg.gradle.caching=true -Dorg.gradle.daemon=true -Dorg.gradle.parallel=false -Dorg.gradle.jvmargs="-Xmx4g -Xms1g"
     DEX_IN_PROCESS: true
     PRE_DEX_LIBRARIES: false
     JAVA_MAX_HEAP_SIZE: 4096m
