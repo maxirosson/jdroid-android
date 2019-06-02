@@ -6,7 +6,7 @@ public interface NotificationChannelType {
 
 	String getChannelId();
 
-	String getName();
+	String getUserVisibleName();
 
 	int getImportance();
 
@@ -16,5 +16,5 @@ public interface NotificationChannelType {
 	 */
 	Boolean isDeprecated();
 
-	public void config(NotificationChannel notificationChannel);
+	void config(NotificationChannel notificationChannel);
 }

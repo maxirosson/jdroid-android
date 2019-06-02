@@ -2,12 +2,13 @@ package com.jdroid.android.sample.application;
 
 import android.app.NotificationChannel;
 import android.os.Build;
-import androidx.annotation.StringRes;
-import androidx.core.app.NotificationManagerCompat;
 
 import com.jdroid.android.notification.NotificationChannelType;
 import com.jdroid.android.sample.R;
 import com.jdroid.android.utils.LocalizationUtils;
+
+import androidx.annotation.StringRes;
+import androidx.core.app.NotificationManagerCompat;
 
 public enum AndroidNotificationChannelType implements NotificationChannelType {
 
@@ -60,7 +61,7 @@ public enum AndroidNotificationChannelType implements NotificationChannelType {
 	}
 
 	@Override
-	public String getName() {
+	public String getUserVisibleName() {
 		return LocalizationUtils.getString(nameResId);
 	}
 

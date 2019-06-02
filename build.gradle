@@ -70,12 +70,12 @@ buildscript {
 				snapshotsOnly()
 			}
 		}
-		gradlePluginPortal()
 		mavenCentral() {
 			mavenContent {
 				releasesOnly()
 			}
 		}
+		gradlePluginPortal()
 	}
 
 	dependencies {
@@ -133,12 +133,12 @@ allprojects {
 					snapshotsOnly()
 				}
 			}
-			gradlePluginPortal()
 			mavenCentral() {
 				mavenContent {
 					releasesOnly()
 				}
 			}
+			gradlePluginPortal()
 		}
 	}
 
