@@ -41,7 +41,7 @@ public class ServersDebugPrefsAppender extends PreferencesAppender {
 
 			List<CharSequence> entries = Lists.newArrayList();
 			for (Server each : entry.getValue()) {
-				entries.add(each.getName());
+				entries.add(each.getServerName());
 			}
 			preference.setEntries(entries.toArray(new CharSequence[0]));
 			preference.setEntryValues(entries.toArray(new CharSequence[0]));
@@ -50,7 +50,7 @@ public class ServersDebugPrefsAppender extends PreferencesAppender {
 				@Override
 				public boolean onPreferenceChange(Preference preference, Object newValue) {
 					for (Server each : entry.getValue()) {
-						if (each.getName().equals(newValue)) {
+						if (each.getServerName().equals(newValue)) {
 							onServerPreferenceChange(each);
 							break;
 						}
