@@ -41,7 +41,7 @@ public enum ApiServer implements FcmSender {
 	}
 
 	@Override
-	public String getName() {
+	public String getServerName() {
 		return name();
 	}
 

@@ -31,7 +31,7 @@ public class AppContext extends AbstractAppContext {
 			Class<?> clazz = defaultServer.getClass().getEnclosingClass() != null ? defaultServer.getClass().getEnclosingClass()
 				: defaultServer.getClass();
 			return (T)defaultServer.instance(SharedPreferencesHelper.get().loadPreference(
-				clazz.getSimpleName(), defaultServer.getName()).toUpperCase(Locale.US));
+				clazz.getSimpleName(), defaultServer.getServerName()).toUpperCase(Locale.US));
 		}
 	}
 
