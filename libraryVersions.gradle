@@ -1,25 +1,28 @@
 // https://github.com/maxirosson/jdroid-gradle-plugin/blob/master/CHANGELOG.md
-ext.JDROID_GRADLE_PLUGIN_VERSION = '2.0.0-SNAPSHOT'
+ext.JDROID_GRADLE_PLUGIN_VERSION = "2.0.0-SNAPSHOT"
 
 // https://github.com/maxirosson/jdroid-java/blob/master/CHANGELOG.md
-ext.JDROID_JAVA_VERSION = '2.0.0'
+ext.JDROID_JAVA_VERSION = "2.0.0"
 
 // https://github.com/maxirosson/jdroid-java-http/blob/master/CHANGELOG.md
-ext.JDROID_JAVA_HTTP_VERSION = '2.1.0-SNAPSHOT'
+ext.JDROID_JAVA_HTTP_VERSION = "2.1.0-SNAPSHOT"
 
 // https://developer.android.com/topic/libraries/architecture/adding-components#room
-ext.ROOM_VERSION = '2.0.0'
+ext.ROOM_VERSION = "2.0.0"
 
 // https://developers.facebook.com/docs/android
-ext.FACEBOOK_ANDROID_VERSION = '4.41.0'
+ext.FACEBOOK_ANDROID_VERSION = "4.41.0"
 
 // https://github.com/bumptech/glide/releases
-ext.GLIDE_VERSION = '4.9.0'
+ext.GLIDE_VERSION = "4.9.0"
 
-ext.JUNIT_VERSION = '4.12'
+// https://github.com/InsertKoinIO/koin/blob/master/CHANGELOG.md
+ext.KOIN_VERSION = "2.0.1"
+
+ext.JUNIT_VERSION = "4.12"
 
 // https://github.com/robolectric/robolectric
-ext.ROBOLECTRIC_VERSION = '4.3'
+ext.ROBOLECTRIC_VERSION = "4.3"
 
 // https://github.com/square/leakcanary/blob/master/CHANGELOG.md
-ext.LEAK_CANARY_VERSION = '1.6.3'
+ext.LEAK_CANARY_VERSION = "1.6.3"

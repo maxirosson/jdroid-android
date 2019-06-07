@@ -51,6 +51,9 @@ dependencies {
 	// https://github.com/firebase/firebase-jobdispatcher-android/releases
 	api("com.firebase:firebase-jobdispatcher:0.8.6")
 
+	api("org.koin:koin-android:${KOIN_VERSION}")
+	api("org.koin:koin-androidx-viewmodel:${KOIN_VERSION}")
+
 	debugApi("com.squareup.leakcanary:leakcanary-android:${LEAK_CANARY_VERSION}") { force = true }
 	releaseApi("com.squareup.leakcanary:leakcanary-android-no-op:${LEAK_CANARY_VERSION}") { force = true }
 	testImplementation("com.squareup.leakcanary:leakcanary-android-no-op:${LEAK_CANARY_VERSION}") { force = true }

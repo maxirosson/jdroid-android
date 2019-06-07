@@ -160,7 +160,7 @@ jobs:
             gcloud firebase test android run firebase_test_lab.yml:instrumentation-tests-physical --async --app ./jdroid-android-sample/build/outputs/apk/automation/jdroid-automation.apk --test ./jdroid-android-sample/build/outputs/apk/androidTest/automation/jdroid-android-sample-automation-androidTest.apk
             gcloud firebase test android run firebase_test_lab.yml:instrumentation-tests-virtual --async --app ./jdroid-android-sample/build/outputs/apk/automation/jdroid-automation.apk --test ./jdroid-android-sample/build/outputs/apk/androidTest/automation/jdroid-android-sample-automation-androidTest.apk
 
-  verify:
+  lint:
     <<: *defaults
     steps:
       - checkout
@@ -236,6 +236,12 @@ jobs:
           path: ./jdroid-android-twitter/build/reports/lint-results-debug.html
           destination: jdroid-android-twitter/lint
 
+  ktlint:
+    <<: *defaults
+    steps:
+      - checkout
+      - run: ./gradlew ktlint --stacktrace
+
   deploy:
     <<: *defaults
     steps:
@@ -252,17 +258,18 @@ workflows:
   version: 2
   commit:
     jobs:
+      - ktlint
       - build
       - test:
           requires:
             - build
-      - verify:
+      - lint:
           requires:
             - build
       - deploy:
           requires:
             - test
-            - verify
+            - lint
   nightly:
     triggers:
       - schedule:
