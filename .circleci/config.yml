@@ -292,15 +292,14 @@ workflows:
     jobs:
       - ktlint
       - build
+      - lint
       - buildSample:
           requires:
             - build
       - test:
           requires:
             - build
-      - lint:
-          requires:
-            - build
+      - lint
       - deploy:
           requires:
             - test
