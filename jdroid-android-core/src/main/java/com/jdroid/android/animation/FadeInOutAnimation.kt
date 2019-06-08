@@ -3,7 +3,7 @@ package com.jdroid.android.animation
 import android.view.View
 import android.view.animation.Animation
 
-class FadeInOutAnimation(view: View, fadeDurationMillis: Long, standByDurationMillis: Long): FadeInAnimation(view, fadeDurationMillis) {
+class FadeInOutAnimation(view: View, fadeDurationMillis: Long, standByDurationMillis: Long) : FadeInAnimation(view, fadeDurationMillis) {
 
     init {
         setAnimationListener(object : DefaultAnimationListener() {

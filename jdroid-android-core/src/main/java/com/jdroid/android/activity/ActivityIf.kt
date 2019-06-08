@@ -67,5 +67,4 @@ interface ActivityIf : ComponentIf {
     fun getGoogleApiClient(): GoogleApiClient?
 
     fun getActivity(): AbstractFragmentActivity
-
 }

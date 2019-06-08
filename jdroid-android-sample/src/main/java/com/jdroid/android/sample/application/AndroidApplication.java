@@ -57,7 +57,7 @@ public class AndroidApplication extends AbstractApplication {
 	}
 
 	public AndroidApplication() {
-		HttpConfiguration.setHttpServiceFactory(new OkHttpServiceFactory());
+		HttpConfiguration.INSTANCE.setHttpServiceFactory(new OkHttpServiceFactory());
 	}
 
 	@Override

@@ -16,17 +16,11 @@ import java.io.InputStream;
 
 public abstract class AbstractXmlPullParser implements Parser {
 
-	/**
-	 * @see Parser#parse(java.lang.String)
-	 */
 	@Override
 	public Object parse(String input) {
 		return parse(new ByteArrayInputStream(input.getBytes()));
 	}
 
-	/**
-	 * @see Parser#parse(java.io.InputStream)
-	 */
 	@Override
 	public Object parse(InputStream inputStream) {
 		try {

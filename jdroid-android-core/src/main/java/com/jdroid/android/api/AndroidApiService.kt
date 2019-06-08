@@ -30,6 +30,6 @@ abstract class AndroidApiService : AbstractApiService() {
     }
 
     override fun createHttpServiceFactory(): HttpServiceFactory {
-        return HttpConfiguration.getHttpServiceFactory()
+        return HttpConfiguration.httpServiceFactory!!
     }
 }

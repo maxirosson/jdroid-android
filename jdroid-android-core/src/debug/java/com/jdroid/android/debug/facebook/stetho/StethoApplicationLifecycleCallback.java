@@ -32,8 +32,8 @@ public class StethoApplicationLifecycleCallback extends ApplicationLifecycleCall
 				Class<?> interceptorClass = ReflectionUtils.getClass(OKHTTP_INTERCEPTOR);
 				Object stethoInterceptor = ReflectionUtils.newInstance(STETHO_OKHTTP_INTERCEPTOR);
 				ReflectionUtils.invokeMethod(OKHTTP_SERVICE_FACTORY, okhttpServiceFactory, ADD_NETWORK_INTERCEPTOR,
-					Lists.<Class<?>>newArrayList(interceptorClass), Lists.newArrayList(stethoInterceptor));
-				HttpConfiguration.setHttpServiceFactory(okhttpServiceFactory);
+					Lists.newArrayList(interceptorClass), Lists.newArrayList(stethoInterceptor));
+				HttpConfiguration.INSTANCE.setHttpServiceFactory(okhttpServiceFactory);
 				LOGGER.info("Stetho " + STETHO_OKHTTP_INTERCEPTOR + " initialized");
 			}
 		} catch (Exception e) {
@@ -45,7 +45,7 @@ public class StethoApplicationLifecycleCallback extends ApplicationLifecycleCall
 	public void onCreate(Context context) {
 		try {
 			ReflectionUtils.invokeStaticMethod(STETHO, INITIALIZE_WITH_DEFAULTS,
-				Lists.<Class<?>>newArrayList(Context.class), Lists.<Object>newArrayList(AbstractApplication.get()));
+				Lists.newArrayList(Context.class), Lists.newArrayList(AbstractApplication.get()));
 			LOGGER.info("Stetho initialized");
 		} catch (Exception e) {
 			LOGGER.error("Error initializing Stetho", e);

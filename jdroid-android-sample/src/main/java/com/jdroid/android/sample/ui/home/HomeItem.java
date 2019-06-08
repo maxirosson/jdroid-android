@@ -97,12 +97,12 @@ public enum HomeItem implements ActionItem {
 	}
 
 	@Override
-	public Integer getNameResource() {
+	public int getNameResource() {
 		return resourceId;
 	}
 
 	@Override
-	public Integer getIconResource() {
+	public int getIconResource() {
 		return iconId;
 	}
 
@@ -118,7 +118,7 @@ public enum HomeItem implements ActionItem {
 	}
 
 	@Override
-	public Boolean matchesActivity(FragmentActivity fragmentActivity) {
+	public boolean matchesActivity(FragmentActivity fragmentActivity) {
 		return activityClass.equals(fragmentActivity.getClass());
 	}
 
@@ -128,7 +128,7 @@ public enum HomeItem implements ActionItem {
 	}
 
 	@Override
-	public String getName() {
+	public String getId() {
 		return name();
 	}
 
