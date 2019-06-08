@@ -23,6 +23,19 @@ jobs:
           name: Assembling
           command: |
             ./gradlew clean jdroid-android-core:assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
+            ./gradlew jdroid-android-about:assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
+            ./gradlew jdroid-android-facebook-login:assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
+            ./gradlew jdroid-android-firebase-admob:assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
+            ./gradlew jdroid-android-firebase-crashlytics:assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
+            ./gradlew jdroid-android-firebase-database:assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
+            ./gradlew jdroid-android-firebase-fcm:assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
+            ./gradlew jdroid-android-firebase-remoteconfig:assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
+            ./gradlew jdroid-android-glide:assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
+            ./gradlew jdroid-android-google-inappbilling:assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
+            ./gradlew jdroid-android-google-maps:assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
+            ./gradlew jdroid-android-google-play-games:assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
+            ./gradlew jdroid-android-google-signin:assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
+            ./gradlew jdroid-android-room:assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
             ./gradlew assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
             ./gradlew assembleUat -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
             ./gradlew assembleAutomation --stacktrace
