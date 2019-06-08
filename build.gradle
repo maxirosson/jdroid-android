@@ -16,7 +16,7 @@ ext.JDROID_GITHUB_REPOSITORY_NAME = "jdroid-android"
 apply from: rootProject.file("libraryVersions.gradle")
 
 apply plugin: "com.jdroid.component.builder"
-apply plugin: "com.jdroid.root"
+apply plugin: "com.jdroid.android.root"
 
 buildscript {
 
@@ -84,7 +84,7 @@ buildscript {
 		classpath("com.jdroidtools:jdroid-component-builder:2.0.0-SNAPSHOT")
 
 		// https://github.com/maxirosson/jdroid-gradle-plugin/blob/master/CHANGELOG.md
-		classpath("com.jdroidtools:jdroid-gradle-root-plugin:2.0.0-SNAPSHOT")
+		classpath("com.jdroidtools:jdroid-gradle-android-plugin:2.0.0-SNAPSHOT")
 	}
 }
 
