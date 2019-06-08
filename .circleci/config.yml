@@ -4,7 +4,7 @@ defaults: &defaults
     - image: circleci/android:api-28
   environment:
     LOCAL_MAVEN_REPO: ~/repo
-    GRADLE_OPTS: -Dorg.gradle.caching=true -Dorg.gradle.daemon=true -Dorg.gradle.parallel=false -Dorg.gradle.jvmargs="-Xmx4g -Xms1g"
+    GRADLE_OPTS: -Dorg.gradle.caching=true -Dorg.gradle.daemon=false -Dorg.gradle.parallel=false -Dorg.gradle.jvmargs="-Xmx4g -Xms1g"
     DEX_IN_PROCESS: true
     PRE_DEX_LIBRARIES: false
     JAVA_MAX_HEAP_SIZE: 4096m
@@ -20,7 +20,7 @@ jobs:
           key: app-{{ .Branch }}-{{ checksum "build.gradle" }}
 
       - run:
-          name: Assembling
+          name: Assembling Components
           command: |
             ./gradlew clean jdroid-android-core:assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
             ./gradlew jdroid-android-about:assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
@@ -36,6 +36,24 @@ jobs:
             ./gradlew jdroid-android-google-play-games:assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
             ./gradlew jdroid-android-google-signin:assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
             ./gradlew jdroid-android-room:assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
+
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: app-{{ .Branch }}-{{ checksum "build.gradle" }}
+
+  buildSample:
+    <<: *defaults
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          key: app-{{ .Branch }}-{{ checksum "build.gradle" }}
+
+      - run:
+          name: Assembling Samples
+          command: |
             ./gradlew assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
             #./gradlew assembleUat -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
             ./gradlew assembleAutomation --stacktrace
@@ -52,7 +70,7 @@ jobs:
             mkdir -p ~/apks/
             find . -type f -regex ".*/build/outputs/apk/.*apk" -exec cp {} ~/apks/ \;
           when: always
-      
+
       - store_artifacts:
           path: ~/apks
           destination: apks
@@ -274,6 +292,9 @@ workflows:
     jobs:
       - ktlint
       - build
+      - buildSample:
+          requires:
+            - build
       - test:
           requires:
             - build
