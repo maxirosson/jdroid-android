@@ -3,10 +3,6 @@ package com.jdroid.android.google.maps;
 import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.MainThread;
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresPermission;
-import androidx.appcompat.widget.Toolbar;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -32,6 +28,10 @@ import com.jdroid.android.permission.PermissionHelper;
 import com.jdroid.android.snackbar.SnackbarBuilder;
 import com.jdroid.java.exception.AbstractException;
 
+import androidx.annotation.MainThread;
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresPermission;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 public abstract class AbstractMapFragment extends SupportMapFragment implements FragmentIf {
@@ -280,7 +280,7 @@ public abstract class AbstractMapFragment extends SupportMapFragment implements 
 	}
 
 	@Override
-	public Boolean shouldRetainInstance() {
+	public boolean shouldRetainInstance() {
 		return fragmentHelper.shouldRetainInstance();
 	}
 
@@ -480,7 +480,7 @@ public abstract class AbstractMapFragment extends SupportMapFragment implements 
 	}
 
 	@Override
-	public Boolean isSecondaryFragment() {
+	public boolean isSecondaryFragment() {
 		return fragmentHelper.isSecondaryFragment();
 	}
 
@@ -495,7 +495,7 @@ public abstract class AbstractMapFragment extends SupportMapFragment implements 
 	}
 
 	@Override
-	public Boolean onBackPressedHandled() {
+	public boolean onBackPressedHandled() {
 		return fragmentHelper.onBackPressedHandled();
 	}
 }

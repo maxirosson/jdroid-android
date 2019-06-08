@@ -1,8 +1,8 @@
 package com.jdroid.android.sample.ui.google.playservices;
 
-import androidx.fragment.app.Fragment;
-
 import com.jdroid.android.activity.FragmentContainerActivity;
+
+import androidx.fragment.app.Fragment;
 
 public class GooglePlayServicesActivity extends FragmentContainerActivity {
 
@@ -12,7 +12,7 @@ public class GooglePlayServicesActivity extends FragmentContainerActivity {
 	}
 
 	@Override
-	public Boolean isGooglePlayServicesVerificationEnabled() {
+	public boolean isGooglePlayServicesVerificationEnabled() {
 		return true;
 	}
 }

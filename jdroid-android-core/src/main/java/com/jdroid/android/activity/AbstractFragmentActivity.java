@@ -34,7 +34,7 @@ public abstract class AbstractFragmentActivity extends AppCompatActivity impleme
 	}
 
 	@Override
-	public Boolean onBeforeSetContentView() {
+	public boolean onBeforeSetContentView() {
 		return activityHelper.onBeforeSetContentView();
 	}
 
@@ -187,7 +187,7 @@ public abstract class AbstractFragmentActivity extends AppCompatActivity impleme
 	}
 
 	@Override
-	public Boolean isLauncherActivity() {
+	public boolean isLauncherActivity() {
 		return activityHelper.isLauncherActivity();
 	}
 
@@ -220,12 +220,12 @@ public abstract class AbstractFragmentActivity extends AppCompatActivity impleme
 	}
 
 	@Override
-	public Boolean isActivityDestroyed() {
+	public boolean isActivityDestroyed() {
 		return activityHelper.isActivityDestroyed();
 	}
 
 	@Override
-	public Boolean isGooglePlayServicesVerificationEnabled() {
+	public boolean isGooglePlayServicesVerificationEnabled() {
 		return activityHelper.isGooglePlayServicesVerificationEnabled();
 	}
 
@@ -259,7 +259,7 @@ public abstract class AbstractFragmentActivity extends AppCompatActivity impleme
 		}
 	}
 
-	public Boolean onBackPressedHandled() {
+	public boolean onBackPressedHandled() {
 		return activityHelper.onBackPressedHandled();
 	}
 
@@ -276,7 +276,7 @@ public abstract class AbstractFragmentActivity extends AppCompatActivity impleme
 	}
 
 	@Override
-	public Boolean isNavDrawerEnabled() {
+	public boolean isNavDrawerEnabled() {
 		return activityHelper.isNavDrawerEnabled();
 	}
 

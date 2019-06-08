@@ -27,7 +27,7 @@ public class AbstractDialogFragment extends DialogFragment implements FragmentIf
 	private FragmentHelper fragmentHelper;
 
 	@Override
-	public Boolean shouldRetainInstance() {
+	public boolean shouldRetainInstance() {
 		return fragmentHelper.shouldRetainInstance();
 	}
 
@@ -233,7 +233,7 @@ public class AbstractDialogFragment extends DialogFragment implements FragmentIf
 	}
 
 	@Override
-	public Boolean isSecondaryFragment() {
+	public boolean isSecondaryFragment() {
 		return fragmentHelper.isSecondaryFragment();
 	}
 
@@ -248,7 +248,7 @@ public class AbstractDialogFragment extends DialogFragment implements FragmentIf
 	}
 
 	@Override
-	public Boolean onBackPressedHandled() {
+	public boolean onBackPressedHandled() {
 		return fragmentHelper.onBackPressedHandled();
 	}
 }

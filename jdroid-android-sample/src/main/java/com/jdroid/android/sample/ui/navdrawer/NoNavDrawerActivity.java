@@ -1,8 +1,8 @@
 package com.jdroid.android.sample.ui.navdrawer;
 
-import androidx.fragment.app.Fragment;
-
 import com.jdroid.android.activity.FragmentContainerActivity;
+
+import androidx.fragment.app.Fragment;
 
 public class NoNavDrawerActivity extends FragmentContainerActivity {
 
@@ -12,7 +12,7 @@ public class NoNavDrawerActivity extends FragmentContainerActivity {
 	}
 
 	@Override
-	public Boolean isNavDrawerEnabled() {
+	public boolean isNavDrawerEnabled() {
 		return false;
 	}
 }

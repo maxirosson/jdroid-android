@@ -124,7 +124,7 @@ public class ActivityHelper implements ActivityIf {
 	// //////////////////////// Life cycle //////////////////////// //
 
 	@Override
-	public Boolean onBeforeSetContentView() {
+	public boolean onBeforeSetContentView() {
 		return true;
 	}
 
@@ -295,7 +295,7 @@ public class ActivityHelper implements ActivityIf {
 	}
 
 	@Override
-	public Boolean isLauncherActivity() {
+	public boolean isLauncherActivity() {
 		return false;
 	}
 
@@ -554,12 +554,12 @@ public class ActivityHelper implements ActivityIf {
 	}
 
 	@Override
-	public Boolean isActivityDestroyed() {
+	public boolean isActivityDestroyed() {
 		return isDestroyed;
 	}
 
 	@Override
-	public Boolean onBackPressedHandled() {
+	public boolean onBackPressedHandled() {
 		if (navDrawer != null) {
 			return navDrawer.onBackPressed();
 		}
@@ -627,7 +627,7 @@ public class ActivityHelper implements ActivityIf {
 	}
 
 	@Override
-	public Boolean isNavDrawerEnabled() {
+	public boolean isNavDrawerEnabled() {
 		return false;
 	}
 
@@ -658,7 +658,7 @@ public class ActivityHelper implements ActivityIf {
 	}
 
 	@Override
-	public Boolean isGooglePlayServicesVerificationEnabled() {
+	public boolean isGooglePlayServicesVerificationEnabled() {
 		return false;
 	}
 

@@ -36,7 +36,7 @@ public abstract class AbstractFragment extends Fragment implements FragmentIf {
 
 	@MainThread
 	@Override
-	public Boolean shouldRetainInstance() {
+	public boolean shouldRetainInstance() {
 		return fragmentHelper.shouldRetainInstance();
 	}
 
@@ -317,7 +317,7 @@ public abstract class AbstractFragment extends Fragment implements FragmentIf {
 	}
 
 	@Override
-	public Boolean isSecondaryFragment() {
+	public boolean isSecondaryFragment() {
 		return fragmentHelper.isSecondaryFragment();
 	}
 
@@ -332,7 +332,7 @@ public abstract class AbstractFragment extends Fragment implements FragmentIf {
 	}
 
 	@Override
-	public Boolean onBackPressedHandled() {
+	public boolean onBackPressedHandled() {
 		return fragmentHelper.onBackPressedHandled();
 	}
 }

@@ -3,10 +3,6 @@ package com.jdroid.android.fragment;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.MainThread;
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.appcompat.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,6 +25,11 @@ import com.squareup.leakcanary.LeakCanary;
 import org.slf4j.Logger;
 
 import java.util.Map;
+
+import androidx.annotation.MainThread;
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 
 public class FragmentHelper implements FragmentIf {
 
@@ -93,7 +94,7 @@ public class FragmentHelper implements FragmentIf {
 		return getActivityIf().inflate(resource);
 	}
 
-	public Boolean isSecondaryFragment() {
+	public boolean isSecondaryFragment() {
 		return false;
 	}
 
@@ -113,12 +114,13 @@ public class FragmentHelper implements FragmentIf {
 		}
 	}
 
+	@Override
 	public void onNewIntent(Intent intent) {
 		LOGGER.debug("Executing onNewIntent on " + fragment);
 	}
 
 	@Override
-	public Boolean shouldRetainInstance() {
+	public boolean shouldRetainInstance() {
 		return true;
 	}
 
@@ -245,7 +247,7 @@ public class FragmentHelper implements FragmentIf {
 	}
 
 	@Override
-	public Boolean onBackPressedHandled() {
+	public boolean onBackPressedHandled() {
 		return false;
 	}
 

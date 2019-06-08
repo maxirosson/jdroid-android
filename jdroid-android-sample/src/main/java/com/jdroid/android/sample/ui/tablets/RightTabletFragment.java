@@ -31,7 +31,7 @@ public class RightTabletFragment extends AbstractFragment {
 	}
 
 	@Override
-	public Boolean isSecondaryFragment() {
+	public boolean isSecondaryFragment() {
 		return ScreenUtils.is10Inches();
 	}
 }

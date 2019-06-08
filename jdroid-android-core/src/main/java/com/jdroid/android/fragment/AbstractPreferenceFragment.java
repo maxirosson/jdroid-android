@@ -50,7 +50,7 @@ public abstract class AbstractPreferenceFragment extends PreferenceFragment impl
 	}
 
 	@Override
-	public Boolean shouldRetainInstance() {
+	public boolean shouldRetainInstance() {
 		return true;
 	}
 
@@ -187,8 +187,8 @@ public abstract class AbstractPreferenceFragment extends PreferenceFragment impl
 	}
 
 	@Override
-	public Boolean isSecondaryFragment() {
-		return null;
+	public boolean isSecondaryFragment() {
+		return false;
 	}
 
 	@Override
@@ -202,7 +202,7 @@ public abstract class AbstractPreferenceFragment extends PreferenceFragment impl
 	}
 
 	@Override
-	public Boolean onBackPressedHandled() {
+	public boolean onBackPressedHandled() {
 		return false;
 	}
 }

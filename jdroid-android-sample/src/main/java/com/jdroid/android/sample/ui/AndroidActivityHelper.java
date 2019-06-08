@@ -23,7 +23,7 @@ public class AndroidActivityHelper extends ActivityHelper {
 	}
 
 	@Override
-	public Boolean isNavDrawerEnabled() {
+	public boolean isNavDrawerEnabled() {
 		return true;
 	}
 
