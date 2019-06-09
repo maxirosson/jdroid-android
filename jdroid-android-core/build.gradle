@@ -42,6 +42,8 @@ dependencies {
 	// https://developers.google.com/android/guides/releases
 	api("com.google.android.gms:play-services-base:16.1.0")
 
+	api("com.google.android.play:core:1.6.1")
+
 	// https://firebase.google.com/support/release-notes/android
 	api("com.google.firebase:firebase-core:16.0.9")
 	api("com.google.firebase:firebase-appindexing:18.0.0")

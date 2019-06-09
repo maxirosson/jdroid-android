@@ -3,8 +3,8 @@ package com.jdroid.android.analytics;
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
 
+import com.google.android.play.core.splitinstall.SplitInstallSessionState;
 import com.jdroid.android.social.SocialAction;
 import com.jdroid.java.analytics.AnalyticsSender;
 import com.jdroid.java.utils.LoggerUtils;
@@ -12,6 +12,8 @@ import com.jdroid.java.utils.LoggerUtils;
 import org.slf4j.Logger;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
 
 /**
  * @param <T>
@@ -248,6 +250,30 @@ public class CoreAnalyticsSender<T extends CoreAnalyticsTracker> extends Analyti
 			@Override
 			protected void track(T tracker) {
 				tracker.trackWidgetRemoved(widgetName);
+			}
+		});
+	}
+
+	// Split Install
+
+	@Override
+	public void trackSplitInstallStatus(String moduleName, SplitInstallSessionState state) {
+		execute(new TrackingCommand() {
+
+			@Override
+			protected void track(T tracker) {
+				tracker.trackSplitInstallStatus(moduleName, state);
+			}
+		});
+	}
+
+	@Override
+	public void trackSplitInstallUninstalled(String moduleName) {
+		execute(new TrackingCommand() {
+
+			@Override
+			protected void track(T tracker) {
+				tracker.trackSplitInstallUninstalled(moduleName);
 			}
 		});
 	}

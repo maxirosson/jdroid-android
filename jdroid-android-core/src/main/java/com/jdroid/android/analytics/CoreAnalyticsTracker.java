@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 
+import com.google.android.play.core.splitinstall.SplitInstallSessionState;
 import com.jdroid.android.social.SocialAction;
 import com.jdroid.java.analytics.AnalyticsTracker;
 
@@ -15,54 +16,60 @@ public interface CoreAnalyticsTracker extends AnalyticsTracker {
 
 	// Error handling
 
-	public void trackHandledException(Throwable throwable, List<String> tags);
+	void trackHandledException(Throwable throwable, List<String> tags);
 
-	public void trackErrorLog(@NonNull String message);
+	void trackErrorLog(@NonNull String message);
 
-	public void trackErrorCustomKey(@NonNull String key, @NonNull Object value);
+	void trackErrorCustomKey(@NonNull String key, @NonNull Object value);
 
 	// Activity/fragment life cycle
 
-	public void onFirstActivityCreate(Activity activity);
+	void onFirstActivityCreate(Activity activity);
 
-	public void onActivityCreate(Activity activity, Bundle savedInstanceState);
+	void onActivityCreate(Activity activity, Bundle savedInstanceState);
 
-	public void onActivityStart(Activity activity, String referrer, Object data);
+	void onActivityStart(Activity activity, String referrer, Object data);
 
-	public void onActivityResume(Activity activity);
+	void onActivityResume(Activity activity);
 
-	public void onActivityPause(Activity activity);
+	void onActivityPause(Activity activity);
 
-	public void onActivityStop(Activity activity);
+	void onActivityStop(Activity activity);
 
-	public void onActivityDestroy(Activity activity);
+	void onActivityDestroy(Activity activity);
 
-	public void onFragmentStart(String screenViewName);
+	void onFragmentStart(String screenViewName);
 
 	// Notifications
 
-	public void trackNotificationDisplayed(String notificationName);
+	void trackNotificationDisplayed(String notificationName);
 
-	public void trackNotificationOpened(String notificationName);
+	void trackNotificationOpened(String notificationName);
 
 	// Feedback
 
-	public void trackEnjoyingApp(Boolean enjoying);
+	void trackEnjoyingApp(Boolean enjoying);
 
-	public void trackRateOnGooglePlay(Boolean rate);
+	void trackRateOnGooglePlay(Boolean rate);
 
-	public void trackGiveFeedback(Boolean feedback);
+	void trackGiveFeedback(Boolean feedback);
 
 	// Widgets
 
-	public void trackWidgetAdded(String widgetName);
+	void trackWidgetAdded(String widgetName);
 
-	public void trackWidgetRemoved(String widgetName);
+	void trackWidgetRemoved(String widgetName);
+	
+	// Split Install
+
+	void trackSplitInstallStatus(String moduleName, SplitInstallSessionState state);
+
+	void trackSplitInstallUninstalled(String moduleName);
 
 	// More
 
-	public void trackUriOpened(String screenName, Uri uri, String referrer);
+	void trackUriOpened(String screenName, Uri uri, String referrer);
 
-	public void trackSocialInteraction(String network, SocialAction socialAction, String socialTarget);
+	void trackSocialInteraction(String network, SocialAction socialAction, String socialTarget);
 
 }

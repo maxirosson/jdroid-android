@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 
+import com.google.android.play.core.splitinstall.SplitInstallSessionState;
 import com.jdroid.android.concurrent.AppExecutors;
 import com.jdroid.android.social.SocialAction;
 
@@ -116,6 +117,18 @@ public abstract class AbstractCoreAnalyticsTracker implements CoreAnalyticsTrack
 	}
 
 	public void trackWidgetRemoved(String widgetName) {
+		// Do Nothing
+	}
+
+	// Split Install
+
+	@Override
+	public void trackSplitInstallStatus(String moduleName, SplitInstallSessionState state) {
+		// Do Nothing
+	}
+
+	@Override
+	public void trackSplitInstallUninstalled(String moduleName) {
 		// Do Nothing
 	}
 
