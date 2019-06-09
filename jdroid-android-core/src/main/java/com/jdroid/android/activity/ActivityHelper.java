@@ -112,7 +112,12 @@ public class ActivityHelper implements ActivityIf {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <V extends View> V findView(int id) {
-		return (V)activity.findViewById(id);
+		V view = (V)activity.findViewById(id);
+		if (view != null) {
+			return view;
+		} else {
+			throw new RuntimeException("View id not found");
+		}
 	}
 
 	@Override

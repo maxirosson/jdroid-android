@@ -20,7 +20,7 @@ interface ComponentIf {
      * @param <V> The [View] class
      * @return The view if found or null otherwise.
     </V> */
-    fun <V : View> findView(@IdRes id: Int): V?
+    fun <V : View> findView(@IdRes id: Int): V
 
     /**
      * Inflate a new view hierarchy from the specified xml resource.

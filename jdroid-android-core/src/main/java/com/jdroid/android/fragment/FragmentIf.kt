@@ -35,7 +35,7 @@ interface FragmentIf : ComponentIf, UseCaseListener {
      * @param <V> The [View] class
      * @return The view if found or null otherwise.
     </V> */
-    fun <V : View> findViewOnActivity(@IdRes id: Int): V?
+    fun <V : View> findViewOnActivity(@IdRes id: Int): V
 
     // //////////////////////// Life cycle //////////////////////// //
 

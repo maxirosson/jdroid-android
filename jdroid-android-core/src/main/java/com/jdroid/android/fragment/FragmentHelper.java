@@ -73,15 +73,26 @@ public class FragmentHelper implements FragmentIf {
 	}
 
 	@SuppressWarnings("unchecked")
+	@NonNull
 	@Override
 	public <V extends View> V findView(int id) {
-		return (V)fragment.getView().findViewById(id);
+		V view = (V)fragment.getView().findViewById(id);
+		if (view != null) {
+			return view;
+		} else {
+			throw new RuntimeException("View id not found");
+		}
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public <V extends View> V findViewOnActivity(int id) {
-		return (V)fragment.getActivity().findViewById(id);
+		V view = (V)fragment.getActivity().findViewById(id);
+		if (view != null) {
+			return view;
+		} else {
+			throw new RuntimeException("View id not found");
+		}
 	}
 
 	@Override

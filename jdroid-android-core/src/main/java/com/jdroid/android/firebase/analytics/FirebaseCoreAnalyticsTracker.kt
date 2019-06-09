@@ -149,7 +149,7 @@ class FirebaseCoreAnalyticsTracker : AbstractFirebaseAnalyticsTracker(), CoreAna
         val params = FirebaseAnalyticsParams()
         params.put("module_name", moduleName)
         var evenName: String? = null
-        when(state.status()) {
+        when (state.status()) {
             SplitInstallSessionStatus.REQUIRES_USER_CONFIRMATION -> {
                 evenName = "split_install_requires_user_confirmation"
             }
