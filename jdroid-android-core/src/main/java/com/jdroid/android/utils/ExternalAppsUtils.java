@@ -95,7 +95,7 @@ public class ExternalAppsUtils {
 	public static Boolean startSkypeCall(String username) {
 		Intent intent = new Intent(Intent.ACTION_VIEW);
 		intent.setData(Uri.parse("skype:" + username + "?call"));
-		if (IntentUtils.isIntentAvailable(intent)) {
+		if (IntentUtils.INSTANCE.isIntentAvailable(intent)) {
 			ActivityLauncher.startActivityNewTask(intent);
 			return true;
 		} else {
@@ -115,7 +115,7 @@ public class ExternalAppsUtils {
 			Intent intent = new Intent(Intent.ACTION_VIEW);
 			intent.setPackage(GOOGLE_MAPS_PACKAGE_NAME);
 			intent.setData(Uri.parse(mapUrl));
-			if (IntentUtils.isIntentAvailable(intent)) {
+			if (IntentUtils.INSTANCE.isIntentAvailable(intent)) {
 				ActivityLauncher.startActivity(activity, intent);
 			} else {
 				openUrl(mapUrl);
@@ -153,7 +153,7 @@ public class ExternalAppsUtils {
 		Intent intent = new Intent(Intent.ACTION_VIEW);
 		intent.setData(Uri.fromFile(file));
 		intent.setClassName("com.android.chrome", "com.google.android.apps.chrome.Main");
-		if (IntentUtils.isIntentAvailable(intent)) {
+		if (IntentUtils.INSTANCE.isIntentAvailable(intent)) {
 			ActivityLauncher.startActivityNewTask(intent);
 		} else {
 			intent = new Intent(Intent.ACTION_VIEW);
@@ -165,7 +165,7 @@ public class ExternalAppsUtils {
 
 	public static Boolean openYoutubeVideo(String videoUrl) {
 		Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(videoUrl));
-		if (IntentUtils.isIntentAvailable(intent)) {
+		if (IntentUtils.INSTANCE.isIntentAvailable(intent)) {
 			ActivityLauncher.startActivityNewTask(intent);
 			return true;
 		} else {
@@ -177,7 +177,7 @@ public class ExternalAppsUtils {
 	public static Boolean dialPhoneNumber(String phoneNumber) {
 		Intent intent = new Intent(Intent.ACTION_DIAL);
 		intent.setData(Uri.fromParts("tel", phoneNumber, null));
-		if (IntentUtils.isIntentAvailable(intent)) {
+		if (IntentUtils.INSTANCE.isIntentAvailable(intent)) {
 			ActivityLauncher.startActivityNewTask(intent);
 			return true;
 		} else {
@@ -193,7 +193,7 @@ public class ExternalAppsUtils {
 	public static Boolean openEmail(String mailto, String subject) {
 		Intent intent = new Intent(Intent.ACTION_SENDTO);
 		intent.setData(Uri.parse("mailto:" + mailto + (subject != null ? "?subject=" + EncodingUtils.encodeURL(subject) : "")));
-		if (IntentUtils.isIntentAvailable(intent)) {
+		if (IntentUtils.INSTANCE.isIntentAvailable(intent)) {
 			ActivityLauncher.startActivityNewTask(intent);
 			return true;
 		} else {

@@ -33,7 +33,7 @@ public class UriUtils {
 			intent.setAction(Intent.ACTION_VIEW);
 			intent.setData(UriUtils.addRandomParam(Uri.parse(url)));
 			intent.setPackage(AppUtils.getApplicationId());
-			if (!IntentUtils.isIntentAvailable(intent)) {
+			if (!IntentUtils.INSTANCE.isIntentAvailable(intent)) {
 				intent = new Intent(context, AbstractApplication.get().getHomeActivityClass());
 				AbstractApplication.get().getExceptionHandler().logHandledException("Url is not valid: " + url);
 			}

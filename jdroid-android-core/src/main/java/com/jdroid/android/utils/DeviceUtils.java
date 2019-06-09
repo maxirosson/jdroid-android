@@ -43,7 +43,7 @@ public class DeviceUtils {
 	}
 
 	public static Boolean hasCamera() {
-		return IntentUtils.isIntentAvailable(MediaStore.ACTION_IMAGE_CAPTURE);
+		return IntentUtils.INSTANCE.isIntentAvailable(MediaStore.ACTION_IMAGE_CAPTURE);
 	}
 
 	public static String getDeviceType() {

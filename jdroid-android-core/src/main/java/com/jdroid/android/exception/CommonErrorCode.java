@@ -41,57 +41,36 @@ public enum CommonErrorCode implements ErrorCode {
 		return errorCode;
 	}
 
-	/**
-	 * @see com.jdroid.java.exception.ErrorCode#newErrorCodeException(java.lang.Object[])
-	 */
 	@Override
 	public ErrorCodeException newErrorCodeException(Object... errorCodeParameters) {
 		return new ErrorCodeException(this, errorCodeParameters);
 	}
 
-	/**
-	 * @see com.jdroid.java.exception.ErrorCode#newErrorCodeException()
-	 */
 	@Override
 	public ErrorCodeException newErrorCodeException() {
 		return new ErrorCodeException(this);
 	}
 
-	/**
-	 * @see com.jdroid.java.exception.ErrorCode#newErrorCodeException(java.lang.Throwable)
-	 */
 	@Override
 	public ErrorCodeException newErrorCodeException(Throwable throwable) {
 		return new ErrorCodeException(this, throwable);
 	}
 
-	/**
-	 * @see com.jdroid.java.exception.ErrorCode#newErrorCodeException(java.lang.String)
-	 */
 	@Override
 	public ErrorCodeException newErrorCodeException(String message) {
 		return new ErrorCodeException(this, message);
 	}
 
-	/**
-	 * @see com.jdroid.java.exception.ErrorCode#getStatusCode()
-	 */
 	@Override
 	public String getStatusCode() {
 		return statusCode.toString();
 	}
 
-	/**
-	 * @see com.jdroid.java.exception.ErrorCode#getTitleResId()
-	 */
 	@Override
 	public Integer getTitleResId() {
 		return null;
 	}
 
-	/**
-	 * @see com.jdroid.java.exception.ErrorCode#getDescriptionResId()
-	 */
 	@Override
 	public Integer getDescriptionResId() {
 		return resourceId;

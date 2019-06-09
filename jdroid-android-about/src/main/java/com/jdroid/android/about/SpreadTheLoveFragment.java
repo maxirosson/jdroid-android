@@ -140,7 +140,7 @@ public abstract class SpreadTheLoveFragment extends AbstractFragment {
 			items.add(new FollowUsItem(R.drawable.jdroid_ic_facebook_24dp, R.string.jdroid_facebook) {
 				@Override
 				public void onSelected(Activity activity) {
-					FacebookHelper.openPage(getFacebookPageId());
+					FacebookHelper.INSTANCE.openPage(getFacebookPageId());
 				}
 			});
 		}
@@ -158,7 +158,7 @@ public abstract class SpreadTheLoveFragment extends AbstractFragment {
 			items.add(new FollowUsItem(R.drawable.jdroid_ic_instagram_24dp, R.string.jdroid_instagram) {
 				@Override
 				public void onSelected(Activity activity) {
-					InstagramHelper.openProfile(getInstagramAccount());
+					InstagramHelper.INSTANCE.openProfile(getInstagramAccount());
 				}
 			});
 		}

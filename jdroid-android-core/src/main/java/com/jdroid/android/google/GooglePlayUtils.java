@@ -66,7 +66,7 @@ public class GooglePlayUtils {
 	public static void launchAppDetails(String applicationId) {
 		Uri uri = Uri.parse("market://details?id=" + applicationId);
 		Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-		if (IntentUtils.isIntentAvailable(intent)) {
+		if (IntentUtils.INSTANCE.isIntentAvailable(intent)) {
 			ActivityLauncher.startActivityNewTask(intent);
 		} else {
 			intent = new Intent(Intent.ACTION_VIEW);
