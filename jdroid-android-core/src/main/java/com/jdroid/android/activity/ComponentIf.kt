@@ -28,7 +28,7 @@ interface ComponentIf {
      * @param resource ID for an XML layout resource to load
      * @return The root View of the inflated XML file.
      */
-    fun <V : View> inflate(@LayoutRes resource: Int): V?
+    fun <V : View> inflate(@LayoutRes resource: Int): V
 
     // //////////////////////// Life cycle //////////////////////// //
 
