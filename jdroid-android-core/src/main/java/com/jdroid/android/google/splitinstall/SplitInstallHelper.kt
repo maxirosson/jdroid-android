@@ -1,4 +1,4 @@
-package com.jdroid.android.google.dynamicfeature
+package com.jdroid.android.google.splitinstall
 
 import androidx.annotation.WorkerThread
 import com.google.android.play.core.splitinstall.SplitInstallException
@@ -12,7 +12,6 @@ import com.google.android.play.core.tasks.OnFailureListener
 import com.google.android.play.core.tasks.OnSuccessListener
 import com.jdroid.android.application.AbstractApplication
 import com.jdroid.java.utils.LoggerUtils
-import org.koin.core.get
 
 object SplitInstallHelper {
 

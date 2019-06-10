@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.res.Configuration;
 
+import com.google.android.play.core.splitcompat.SplitCompat;
 import com.jdroid.android.BuildConfig;
 import com.jdroid.android.R;
 import com.jdroid.android.activity.AbstractFragmentActivity;
@@ -118,6 +119,10 @@ public abstract class AbstractApplication extends Application {
 	protected final void attachBaseContext(Context base) {
 		super.attachBaseContext(base);
 
+		if (isSplitCompatEnabled()) {
+			SplitCompat.install(this);
+		}
+
 		onInitMultiDex();
 
 		if (!isMultiProcessSupportEnabled() || ProcessUtils.isMainProcess(this)) {
@@ -127,6 +132,10 @@ public abstract class AbstractApplication extends Application {
 		} else {
 			onSecondaryProcessAttachBaseContext(ProcessUtils.getProcessInfo(this));
 		}
+	}
+
+	protected boolean isSplitCompatEnabled() {
+		return false;
 	}
 
 	@MainThread
@@ -164,6 +173,8 @@ public abstract class AbstractApplication extends Application {
 			ApplicationLifecycleHelper.onCreate(this);
 
 			appContext = createAppContext();
+
+			// TODO init koin here
 
 			NotificationUtils.createNotificationChannelsByType(getNotificationChannelTypes());
 

@@ -175,4 +175,9 @@ public class AndroidApplication extends AbstractApplication {
 	public List<NotificationChannelType> getNotificationChannelTypes() {
 		return Lists.newArrayList(AndroidNotificationChannelType.values());
 	}
+
+	@Override
+	protected boolean isSplitCompatEnabled() {
+		return true;
+	}
 }

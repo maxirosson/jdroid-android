@@ -37,7 +37,7 @@ buildscript {
 
 dependencies {
 	implementation("androidx.multidex:multidex:2.0.1")
-	implementation project(":jdroid-android-core")
+	api project(":jdroid-android-core")
 	implementation project(":jdroid-android-about")
 	implementation project(":jdroid-android-facebook-login")
 	implementation project(":jdroid-android-firebase-admob")
