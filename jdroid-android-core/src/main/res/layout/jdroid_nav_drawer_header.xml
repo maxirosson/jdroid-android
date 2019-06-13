@@ -18,7 +18,8 @@
 
 		<FrameLayout android:id="@+id/chosen_account_view"
 					 android:layout_width="match_parent"
-					 android:layout_height="@dimen/jdroid_navdrawerHeaderHeight">
+					 android:layout_height="@dimen/jdroid_navdrawerHeaderHeight"
+					 tools:ignore="UselessParent">
 
 			<ImageView android:layout_width="match_parent"
 					   android:layout_height="match_parent"
