@@ -7,31 +7,30 @@ import org.koin.core.module.Module
 
 abstract class SplitKoinLoader {
 
-	companion object {
+    companion object {
 
-		fun loadKoinModule(moduleName: String) {
-			executeKoinLoaderMethod(moduleName, "loadKoinModule")
-		}
+        fun loadKoinModule(moduleName: String) {
+            executeKoinLoaderMethod(moduleName, "loadKoinModule")
+        }
 
-		fun unloadKoinModule(moduleName: String) {
-			executeKoinLoaderMethod(moduleName, "unloadKoinModule")
-		}
+        fun unloadKoinModule(moduleName: String) {
+            executeKoinLoaderMethod(moduleName, "unloadKoinModule")
+        }
 
-		private fun executeKoinLoaderMethod(moduleName: String, method: String) {
-			val modulePackage = moduleName.toLowerCase().replace("-", "")
-			val cls = Class.forName(AbstractApplication.get().manifestPackageName + ".$modulePackage.koin.SplitKoinLoaderImpl")
-			cls.getMethod(method).invoke(cls.kotlin.objectInstance)
-		}
-	}
+        private fun executeKoinLoaderMethod(moduleName: String, method: String) {
+            val modulePackage = moduleName.toLowerCase().replace("-", "")
+            val cls = Class.forName(AbstractApplication.get().manifestPackageName + ".$modulePackage.koin.SplitKoinLoaderImpl")
+            cls.getMethod(method).invoke(cls.kotlin.objectInstance)
+        }
+    }
 
-	fun loadKoinModule() {
-		loadKoinModules(createKoinModule())
-	}
+    fun loadKoinModule() {
+        loadKoinModules(createKoinModule())
+    }
 
-	fun unloadKoinModule() {
-		unloadKoinModules(createKoinModule())
-	}
+    fun unloadKoinModule() {
+        unloadKoinModules(createKoinModule())
+    }
 
-	protected abstract fun createKoinModule(): Module
-
+    protected abstract fun createKoinModule(): Module
 }

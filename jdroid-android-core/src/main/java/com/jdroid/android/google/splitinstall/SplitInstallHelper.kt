@@ -17,6 +17,11 @@ object SplitInstallHelper {
 
     private val LOGGER = LoggerUtils.getLogger("Split")
 
+    fun getInstalledModules(): Set<String> {
+        val splitInstallManager = SplitInstallManagerFactory.create(AbstractApplication.get())
+        return splitInstallManager.installedModules
+    }
+
     @WorkerThread
     fun installModuleSilently(moduleName: String, onSuccessListener: OnSuccessListener<Any>, onFailureListener: OnFailureListener) {
         val splitInstallManager = SplitInstallManagerFactory.create(AbstractApplication.get())
