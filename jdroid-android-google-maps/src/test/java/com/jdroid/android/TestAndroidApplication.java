@@ -31,6 +31,11 @@ public class TestAndroidApplication extends AbstractApplication {
 		ReflectionUtils.setStaticField(ApplicationLifecycleHelper.class, "applicationLifecycleCallbacks", createApplicationLifecycleCallbacks());
 	}
 
+	@Override
+	protected void initKoin() {
+		// Do nothing
+	}
+
 	/**
 	 * This method can be overridden in subclasses to provide the list of ApplicationLifecycleCallback to use in the tests.
 	 *

@@ -7,7 +7,7 @@ import org.koin.core.context.startKoin
 
 abstract class KotlinAbstractApplication : Application() {
 
-    protected fun initKoin() {
+    protected open fun initKoin() {
         startKoin {
             androidLogger()
             androidContext(this@KotlinAbstractApplication)
