@@ -6,11 +6,11 @@ import com.jdroid.android.sample.google.dynamicfeature.DynamicFeatureSampleApi
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
-object SplitKoinLoaderImpl: SplitKoinLoader() {
+object SplitKoinLoaderImpl : SplitKoinLoader() {
 
-	override fun createKoinModule(): Module {
-		return module {
-			single<DynamicFeatureSampleApi> { DynamicFeatureSampleSampleApiImpl() }
-		}
-	}
+    override fun createKoinModule(): Module {
+        return module {
+            single<DynamicFeatureSampleApi> { DynamicFeatureSampleSampleApiImpl() }
+        }
+    }
 }

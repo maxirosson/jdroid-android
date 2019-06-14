@@ -5,7 +5,7 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 
-abstract class KotlinAbstractApplication: Application() {
+abstract class KotlinAbstractApplication : Application() {
 
     protected fun initKoin() {
         startKoin {
@@ -13,5 +13,4 @@ abstract class KotlinAbstractApplication: Application() {
             androidContext(this@KotlinAbstractApplication)
         }
     }
-
 }

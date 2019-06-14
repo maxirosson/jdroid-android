@@ -169,7 +169,6 @@ object SplitInstallHelper {
     fun uninstallModule(moduleName: String) {
         SplitKoinLoader.unloadKoinModule(moduleName)
 
-
         val splitInstallManager = SplitInstallManagerFactory.create(AbstractApplication.get())
         splitInstallManager.deferredUninstall(listOf(moduleName))
         AbstractApplication.get().coreAnalyticsSender.trackSplitInstallUninstalled(moduleName)

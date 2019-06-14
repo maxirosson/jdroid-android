@@ -8,27 +8,26 @@ import com.jdroid.android.utils.ToastUtils
 
 interface DynamicFeatureSampleApi {
 
-	fun sampleCall()
+    fun sampleCall()
 }
 
-object DynamicFeatureSampleApiFacade: DynamicFeatureSampleApi {
+object DynamicFeatureSampleApiFacade : DynamicFeatureSampleApi {
 
-	const val MODULE_NAME = "dynamic_feature_sample"
+    const val MODULE_NAME = "dynamic_feature_sample"
 
-	override fun sampleCall() {
+    override fun sampleCall() {
 
-		val onSuccessListener = OnSuccessListener<Any> {
-			SplitInstallHelper.getFeatureApi<DynamicFeatureSampleApi>(MODULE_NAME).sampleCall()
-		}
-		val onFailureListener = OnFailureListener {
-			ToastUtils.showToastOnUIThread("FakeFeatureApiFacade onFailureListener called")
-		}
+        val onSuccessListener = OnSuccessListener<Any> {
+            SplitInstallHelper.getFeatureApi<DynamicFeatureSampleApi>(MODULE_NAME).sampleCall()
+        }
+        val onFailureListener = OnFailureListener {
+            ToastUtils.showToastOnUIThread("FakeFeatureApiFacade onFailureListener called")
+        }
 
-		AppExecutors.getNetworkIOExecutor().execute(object: Runnable {
-			override fun run() {
-				SplitInstallHelper.installModuleSilently(MODULE_NAME, onSuccessListener, onFailureListener)
-			}
-		})
-	}
-
+        AppExecutors.getNetworkIOExecutor().execute(object : Runnable {
+            override fun run() {
+                SplitInstallHelper.installModuleSilently(MODULE_NAME, onSuccessListener, onFailureListener)
+            }
+        })
+    }
 }

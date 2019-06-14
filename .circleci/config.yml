@@ -303,7 +303,6 @@ workflows:
       - deploy:
           requires:
             - test
-            - ktlint
             - lint
   nightly:
     triggers:
