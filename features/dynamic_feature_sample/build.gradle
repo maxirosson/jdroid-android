@@ -25,12 +25,14 @@ jdroid {
 
 android {
 
-	if (jdroid.isReleaseBuildTypeEnabled()) {
-		release {
-			if (jdroid.isFakeReleaseBuildTypeEnabled()) {
-				debuggable = true
-			} else {
-				debuggable = jdroid.isReleaseBuildTypeDebuggable()
+	buildTypes {
+		if (jdroid.isReleaseBuildTypeEnabled()) {
+			release {
+				if (jdroid.isFakeReleaseBuildTypeEnabled()) {
+					debuggable = true
+				} else {
+					debuggable = jdroid.isReleaseBuildTypeDebuggable()
+				}
 			}
 		}
 	}
