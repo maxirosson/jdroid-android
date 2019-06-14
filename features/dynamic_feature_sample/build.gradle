@@ -24,6 +24,17 @@ jdroid {
 }
 
 android {
+
+	if (jdroid.isReleaseBuildTypeEnabled()) {
+		release {
+			if (jdroid.isFakeReleaseBuildTypeEnabled()) {
+				debuggable = true
+			} else {
+				debuggable = jdroid.isReleaseBuildTypeDebuggable()
+			}
+		}
+	}
+
 	sourceSets.test.java.srcDirs += "build/generated/source/r/debug"
 	sourceSets.test.java.srcDirs += sourceSets.main.java.srcDirs
 	sourceSets.test.java.srcDirs += sourceSets.debug.java.srcDirs
