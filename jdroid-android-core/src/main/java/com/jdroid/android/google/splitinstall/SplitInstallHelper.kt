@@ -11,7 +11,9 @@ import com.google.android.play.core.splitinstall.model.SplitInstallSessionStatus
 import com.google.android.play.core.tasks.OnFailureListener
 import com.google.android.play.core.tasks.OnSuccessListener
 import com.jdroid.android.application.AbstractApplication
+import com.jdroid.android.koin.KoinHelper
 import com.jdroid.java.utils.LoggerUtils
+import org.koin.core.get
 
 object SplitInstallHelper {
 
@@ -165,8 +167,20 @@ object SplitInstallHelper {
     }
 
     fun uninstallModule(moduleName: String) {
+        SplitKoinLoader.unloadKoinModule(moduleName)
+
+
         val splitInstallManager = SplitInstallManagerFactory.create(AbstractApplication.get())
         splitInstallManager.deferredUninstall(listOf(moduleName))
         AbstractApplication.get().coreAnalyticsSender.trackSplitInstallUninstalled(moduleName)
+    }
+
+    inline fun <reified T> getFeatureApi(moduleName: String): T {
+        val featureApi: T? = KoinHelper.getKoin().getOrNull()
+        if (featureApi == null) {
+            SplitKoinLoader.loadKoinModule(moduleName)
+            return KoinHelper.get()
+        }
+        return featureApi
     }
 }

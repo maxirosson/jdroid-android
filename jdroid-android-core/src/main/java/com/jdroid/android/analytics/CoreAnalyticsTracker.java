@@ -11,6 +11,7 @@ import com.jdroid.java.analytics.AnalyticsTracker;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public interface CoreAnalyticsTracker extends AnalyticsTracker {
 
@@ -26,9 +27,9 @@ public interface CoreAnalyticsTracker extends AnalyticsTracker {
 
 	void onFirstActivityCreate(Activity activity);
 
-	void onActivityCreate(Activity activity, Bundle savedInstanceState);
+	void onActivityCreate(Activity activity, @Nullable Bundle savedInstanceState);
 
-	void onActivityStart(Activity activity, String referrer, Object data);
+	void onActivityStart(Activity activity, @Nullable String referrer, @Nullable Object data);
 
 	void onActivityResume(Activity activity);
 

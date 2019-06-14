@@ -223,6 +223,9 @@ android {
 	sourceSets.test.resources.srcDirs += sourceSets.debug.resources.srcDirs
 	sourceSets.test.res.srcDirs += sourceSets.main.res.srcDirs
 	sourceSets.test.res.srcDirs += sourceSets.debug.res.srcDirs
+
+	dynamicFeatures = [":features:dynamic_feature_sample"]
+
 }
 
 apply plugin: "com.google.gms.google-services"

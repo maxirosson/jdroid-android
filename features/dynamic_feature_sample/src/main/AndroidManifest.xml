@@ -1,0 +1,12 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+		  xmlns:dist="http://schemas.android.com/apk/distribution"
+		  package="com.jdroid.android.sample.dynamicfeaturesample">
+
+	<dist:module
+		dist:onDemand="true"
+		dist:instant="false"
+		dist:title="@string/module_jdroid_android_sample_dynamicfeature">
+		<dist:fusing dist:include="true" />
+	</dist:module>
+</manifest>
+

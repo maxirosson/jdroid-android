@@ -8,6 +8,7 @@ import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.sample.R;
 import com.jdroid.android.sample.androidx.ArchitectureActivity;
 import com.jdroid.android.sample.database.room.RoomActivity;
+import com.jdroid.android.sample.google.dynamicfeature.SplitInstallActivity;
 import com.jdroid.android.sample.ui.analytics.AnalyticsActivity;
 import com.jdroid.android.sample.ui.cardview.CardViewActivity;
 import com.jdroid.android.sample.ui.datetime.DateTimeActivity;
@@ -78,6 +79,7 @@ public enum HomeItem implements ActionItem {
 	RECYCLER_VIEW(R.string.recyclerView, R.drawable.ic_recycler_view, RecyclerViewActivity.class),
 	ROOM(R.string.room, R.drawable.ic_room, RoomActivity.class),
 	SERVICE(R.string.service, R.drawable.ic_service, ServiceActivity.class),
+	SPLIT_INSTALL(R.string.splitInstall, R.drawable.ic_exception_handling, SplitInstallActivity.class),
 	STRICT_MODE(R.string.strictMode, R.drawable.ic_exception_handling, StrictModeActivity.class),
 	TABLETS(R.string.tablets, R.drawable.ic_tablets, ScreenUtils.is10Inches() ? TabletActivity.class : LeftTabletActivity.class),
 	TIMER(R.string.timer, R.drawable.ic_toasts, TimerActivity.class),

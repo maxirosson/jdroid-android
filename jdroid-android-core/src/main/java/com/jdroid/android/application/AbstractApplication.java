@@ -2,7 +2,6 @@ package com.jdroid.android.application;
 
 import android.app.Activity;
 import android.app.ActivityManager;
-import android.app.Application;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.res.Configuration;
@@ -60,7 +59,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 import androidx.fragment.app.Fragment;
 
-public abstract class AbstractApplication extends Application {
+public abstract class AbstractApplication extends KotlinAbstractApplication {
 
 	/**
 	 * The LOGGER variable is initialized in the "OnCreate" method, after that "LoggerUtils" has been properly
@@ -174,7 +173,7 @@ public abstract class AbstractApplication extends Application {
 
 			appContext = createAppContext();
 
-			// TODO init koin here
+			initKoin();
 
 			NotificationUtils.createNotificationChannelsByType(getNotificationChannelTypes());
 

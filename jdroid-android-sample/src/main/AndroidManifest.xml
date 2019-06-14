@@ -666,6 +666,12 @@
 				  android:label="@string/room"
 				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" />
 
+		<!-- Split Install -->
+
+		<activity android:name="com.jdroid.android.sample.google.dynamicfeature.SplitInstallActivity"
+				  android:label="@string/room"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" />
+
 		<!-- AppShortcuts -->
 
 		<activity android:name="com.jdroid.android.sample.ui.shortcuts.AppShortcutsActivity"

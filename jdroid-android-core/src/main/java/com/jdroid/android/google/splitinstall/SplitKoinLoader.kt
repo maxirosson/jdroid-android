@@ -18,7 +18,7 @@ abstract class SplitKoinLoader {
         }
 
         private fun executeKoinLoaderMethod(moduleName: String, method: String) {
-            val modulePackage = moduleName.toLowerCase().replace("-", "")
+            val modulePackage = moduleName.toLowerCase().replace("_", "")
             val cls = Class.forName(AbstractApplication.get().manifestPackageName + ".$modulePackage.koin.SplitKoinLoaderImpl")
             cls.getMethod(method).invoke(cls.kotlin.objectInstance)
         }

@@ -42,11 +42,11 @@ class FirebaseCoreAnalyticsTracker : AbstractFirebaseAnalyticsTracker(), CoreAna
         // Do nothing
     }
 
-    override fun onActivityCreate(activity: Activity, savedInstanceState: Bundle) {
+    override fun onActivityCreate(activity: Activity, savedInstanceState: Bundle?) {
         // Do nothing
     }
 
-    override fun onActivityStart(activity: Activity, referrer: String, data: Any) {
+    override fun onActivityStart(activity: Activity, referrer: String?, data: Any?) {
         if ((!firstTrackingSent)) {
             firebaseAnalyticsHelper.setUserProperty(
                 DEVICE_YEAR_CLASS_USER_PROPERTY,

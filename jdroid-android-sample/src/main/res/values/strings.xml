@@ -263,6 +263,12 @@
 	<string name="roomGetAll">Get All</string>
 	<string name="roomInsertAll">Insert All</string>
 
+	<!-- Split Install -->
+	<string name="splitInstall">Split Install</string>
+	<string name="splitInstallInvokeDynamicFeatureSampleWithSilentInstall">Invoke dynamic feature sample with silent install</string>
+	<string name="splitInstallUninstallModule">Uninstall module</string>
+	<string name="splitInstallGetInstalledModules">Get installed modules</string>
+
 	<!-- Service -->
 	<string name="service">Service</string>
 	<string name="workerService">Worker Service</string>
