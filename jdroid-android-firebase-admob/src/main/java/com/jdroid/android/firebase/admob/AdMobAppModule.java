@@ -1,8 +1,5 @@
 package com.jdroid.android.firebase.admob;
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
 import com.jdroid.android.activity.AbstractFragmentActivity;
 import com.jdroid.android.activity.ActivityDelegate;
 import com.jdroid.android.application.AbstractAppModule;
@@ -18,6 +15,9 @@ import com.jdroid.java.remoteconfig.RemoteConfigParameter;
 
 import java.util.Arrays;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 public class AdMobAppModule extends AbstractAppModule {
 
@@ -54,7 +54,7 @@ public class AdMobAppModule extends AbstractAppModule {
 	}
 
 	@Override
-	public List<? extends AnalyticsTracker> createModuleAnalyticsTrackers() {
+	public List<AnalyticsTracker> createModuleAnalyticsTrackers() {
 		return Lists.newArrayList(new FirebaseAdMobAnalyticsTracker());
 	}
 

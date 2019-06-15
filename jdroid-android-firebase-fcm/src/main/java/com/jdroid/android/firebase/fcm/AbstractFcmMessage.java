@@ -9,7 +9,7 @@ public abstract class AbstractFcmMessage implements FcmMessage {
 	public abstract String getMessageKey();
 
 	@Override
-	public Boolean matches(RemoteMessage remoteMessage) {
+	public boolean matches(RemoteMessage remoteMessage) {
 		String messageKey = remoteMessage.getData().get(getMessageKeyExtraName());
 		return getMessageKey().equalsIgnoreCase(messageKey);
 	}

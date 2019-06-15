@@ -114,7 +114,7 @@ public class AppShortcutsHelper {
 			@Override
 			@RequiresPermission(anyOf = { Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION })
 			public void onReceive(Context context, Intent intent) {
-				AppShortcutsAppModule.get().getModuleAnalyticsSender().trackPinShortcut(shortcut.getId());
+				AppShortcutsAppModule.Companion.get().getModuleAnalyticsSender().trackPinShortcut(shortcut.getId());
 			}
 		};
 		AbstractApplication.get().registerReceiver(requestPinShortcutBroadcastReceiver, new IntentFilter(REQUEST_PIN_SHORTCUT_ACTION));

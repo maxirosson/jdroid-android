@@ -61,7 +61,7 @@ public class InAppBillingAppModule extends AbstractAppModule {
 	}
 
 	@Override
-	public List<? extends AnalyticsTracker> createModuleAnalyticsTrackers() {
+	public List<AnalyticsTracker> createModuleAnalyticsTrackers() {
 		return Lists.newArrayList(new FirebaseInAppBillingAnalyticsTracker());
 	}
 

@@ -54,7 +54,7 @@ public class AboutFragment extends AbstractRecyclerFragment {
 				@Override
 				public void onSelected(Activity activity) {
 					if (ExternalAppsUtils.openEmail(contactUsEmailAddress)) {
-						AboutAppModule.get().getModuleAnalyticsSender().trackContactUs();
+						AboutAppModule.Companion.get().getModuleAnalyticsSender().trackContactUs();
 					} else {
 						// TODO Improve this adding a toast or something
 					}
@@ -62,7 +62,7 @@ public class AboutFragment extends AbstractRecyclerFragment {
 			});
 		}
 
-		if (AboutAppModule.get().getAboutContext().getSpreadTheLoveFragmentClass() != null) {
+		if (AboutAppModule.Companion.get().getAboutContext().getSpreadTheLoveFragmentClass() != null) {
 			aboutItems.add(new AboutItem(R.drawable.jdroid_ic_spread_the_love_black_24dp, R.string.jdroid_spreadTheLove) {
 
 				@Override
@@ -91,12 +91,12 @@ public class AboutFragment extends AbstractRecyclerFragment {
 			});
 		}
 
-		if (AboutAppModule.get().getAboutContext().isBetaTestingEnabled()) {
+		if (AboutAppModule.Companion.get().getAboutContext().isBetaTestingEnabled()) {
 			aboutItems.add(new AboutItem(R.drawable.jdroid_ic_beta_black_24dp, R.string.jdroid_beta) {
 
 				@Override
 				public void onSelected(Activity activity) {
-					ExternalAppsUtils.openUrl(AboutAppModule.get().getAboutContext().getBetaTestingUrl());
+					ExternalAppsUtils.openUrl(AboutAppModule.Companion.get().getAboutContext().getBetaTestingUrl());
 				}
 			});
 		}

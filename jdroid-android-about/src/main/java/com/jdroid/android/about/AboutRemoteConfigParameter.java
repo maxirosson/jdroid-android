@@ -26,6 +26,6 @@ public enum AboutRemoteConfigParameter implements RemoteConfigParameter {
 
 	@Override
 	public Object getDefaultValue() {
-		return AboutAppModule.get().getAboutContext().getBuildConfigValue(name(), defaultValue);
+		return AboutAppModule.Companion.get().getAboutContext().getBuildConfigValue(name(), defaultValue);
 	}
 }

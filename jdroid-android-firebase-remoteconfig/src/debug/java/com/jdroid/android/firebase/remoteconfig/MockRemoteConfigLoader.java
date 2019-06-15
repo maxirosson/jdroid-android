@@ -1,7 +1,5 @@
 package com.jdroid.android.firebase.remoteconfig;
 
-import androidx.annotation.RestrictTo;
-
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.utils.SharedPreferencesHelper;
 import com.jdroid.java.collections.Maps;
@@ -15,6 +13,8 @@ import org.slf4j.Logger;
 
 import java.util.List;
 import java.util.Map;
+
+import androidx.annotation.RestrictTo;
 
 import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 
@@ -101,7 +101,7 @@ public class MockRemoteConfigLoader implements RemoteConfigLoader {
 	}
 
 	@RestrictTo(LIBRARY)
-	public static Boolean isMocksEnabled() {
+	public static boolean isMocksEnabled() {
 		if (mocksEnabled == null) {
 			mocksEnabled = SharedPreferencesHelper.get(MockRemoteConfigLoader.class).loadPreferenceAsBoolean(MOCKS_ENABLED, false);
 		}

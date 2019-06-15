@@ -11,6 +11,7 @@ import com.jdroid.java.utils.TypeUtils;
 
 import org.slf4j.Logger;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 public class DefaultFcmMessageResolver implements FcmMessageResolver {
@@ -35,7 +36,7 @@ public class DefaultFcmMessageResolver implements FcmMessageResolver {
 	}
 
 	@Override
-	public FcmMessage resolve(RemoteMessage remoteMessage) {
+	public FcmMessage resolve(@NonNull RemoteMessage remoteMessage) {
 		LOGGER.debug("FCM message received. " + remoteMessage.getData());
 		Long minAppVersionCode = TypeUtils.getLong(remoteMessage.getData().get(MIN_APP_VERSION_CODE_KEY), 0L);
 		if (AppUtils.getVersionCode() >= minAppVersionCode) {

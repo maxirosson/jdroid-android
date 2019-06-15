@@ -94,7 +94,7 @@ public class LibrariesFragment extends AbstractRecyclerFragment {
 		@Override
 		public void onItemSelected(Library item, View view) {
 			item.onSelected(getActivity());
-			AboutAppModule.get().getModuleAnalyticsSender().trackAboutLibraryOpen(item.getLibraryKey());
+			AboutAppModule.Companion.get().getModuleAnalyticsSender().trackAboutLibraryOpen(item.getLibraryKey());
 		}
 
 		@NonNull

@@ -8,6 +8,6 @@ public class LibrariesActivity extends FragmentContainerActivity {
 
 	@Override
 	protected Class<? extends Fragment> getFragmentClass() {
-		return AboutAppModule.get().getAboutContext().getLibrariesFragmentClass();
+		return AboutAppModule.Companion.get().getAboutContext().getLibrariesFragmentClass();
 	}
 }

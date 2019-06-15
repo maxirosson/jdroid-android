@@ -53,7 +53,7 @@ public class StethoApplicationLifecycleCallback extends ApplicationLifecycleCall
 	}
 
 	@Override
-	public Boolean isEnabled() {
+	public boolean isEnabled() {
 		return BuildConfigUtils.getBuildConfigBoolean("STETHO_ENABLED", false);
 	}
 }

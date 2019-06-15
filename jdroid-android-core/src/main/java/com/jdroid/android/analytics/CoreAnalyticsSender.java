@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 /**
  * @param <T>
@@ -164,7 +165,7 @@ public class CoreAnalyticsSender<T extends CoreAnalyticsTracker> extends Analyti
 	}
 
 	@Override
-	public void trackSocialInteraction(final String network, final SocialAction socialAction,
+	public void trackSocialInteraction(final @Nullable String network, final SocialAction socialAction,
 									   final String socialTarget) {
 		execute(new TrackingCommand() {
 
@@ -198,7 +199,7 @@ public class CoreAnalyticsSender<T extends CoreAnalyticsTracker> extends Analyti
 	}
 
 	@Override
-	public void trackEnjoyingApp(final Boolean enjoying) {
+	public void trackEnjoyingApp(final boolean enjoying) {
 		execute(new TrackingCommand() {
 
 			@Override
@@ -209,7 +210,7 @@ public class CoreAnalyticsSender<T extends CoreAnalyticsTracker> extends Analyti
 	}
 
 	@Override
-	public void trackRateOnGooglePlay(final Boolean rate) {
+	public void trackRateOnGooglePlay(final boolean rate) {
 		execute(new TrackingCommand() {
 
 			@Override
@@ -220,7 +221,7 @@ public class CoreAnalyticsSender<T extends CoreAnalyticsTracker> extends Analyti
 	}
 
 	@Override
-	public void trackGiveFeedback(final Boolean feedback) {
+	public void trackGiveFeedback(final boolean feedback) {
 		execute(new TrackingCommand() {
 
 			@Override

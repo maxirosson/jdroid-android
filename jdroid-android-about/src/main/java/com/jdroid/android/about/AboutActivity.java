@@ -8,7 +8,7 @@ public class AboutActivity extends FragmentContainerActivity {
 
 	@Override
 	protected Class<? extends Fragment> getFragmentClass() {
-		return AboutAppModule.get().getAboutContext().getAboutFragmentClass();
+		return AboutAppModule.Companion.get().getAboutContext().getAboutFragmentClass();
 	}
 
 }

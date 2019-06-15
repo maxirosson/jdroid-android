@@ -8,6 +8,6 @@ public class SpreadTheLoveActivity extends FragmentContainerActivity {
 
 	@Override
 	protected Class<? extends Fragment> getFragmentClass() {
-		return AboutAppModule.get().getAboutContext().getSpreadTheLoveFragmentClass();
+		return AboutAppModule.Companion.get().getAboutContext().getSpreadTheLoveFragmentClass();
 	}
 }

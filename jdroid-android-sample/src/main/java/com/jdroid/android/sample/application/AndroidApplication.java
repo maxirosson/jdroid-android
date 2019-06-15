@@ -151,8 +151,8 @@ public class AndroidApplication extends AbstractApplication {
 	protected void initAppModule(Map<String, AppModule> appModulesMap) {
 		appModulesMap.put(AdMobAppModule.MODULE_NAME, new AdMobAppModule());
 		appModulesMap.put(AbstractFcmAppModule.MODULE_NAME, new AndroidFcmAppModule());
-		appModulesMap.put(AboutAppModule.MODULE_NAME, new AndroidAboutAppModule());
-		appModulesMap.put(AppShortcutsAppModule.MODULE_NAME, new AppShortcutsAppModule());
+		appModulesMap.put(AboutAppModule.Companion.getMODULE_NAME(), new AndroidAboutAppModule());
+		appModulesMap.put(AppShortcutsAppModule.Companion.getMODULE_NAME(), new AppShortcutsAppModule());
 		appModulesMap.put(InAppBillingAppModule.MODULE_NAME, new AndroidInAppBillingAppModule());
 	}
 

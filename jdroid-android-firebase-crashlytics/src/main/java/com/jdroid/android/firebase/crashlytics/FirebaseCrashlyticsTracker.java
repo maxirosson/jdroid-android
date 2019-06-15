@@ -90,7 +90,7 @@ public class FirebaseCrashlyticsTracker extends AbstractCoreAnalyticsTracker {
 	}
 
 	@Override
-	public Boolean isEnabled() {
+	public boolean isEnabled() {
 		return FirebaseCrashlyticsContext.isFirebaseCrashlyticsEnabled();
 	}
 }
