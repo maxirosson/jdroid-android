@@ -71,7 +71,7 @@ public enum AndroidNotificationChannelType implements NotificationChannelType {
 	}
 
 	@Override
-	public Boolean isDeprecated() {
+	public boolean isDeprecated() {
 		return isDeprecated;
 	}
 }
