@@ -178,7 +178,7 @@ public class ActivityHelper implements ActivityIf {
 			referrer = ReferrerUtils.getReferrerCategory(activity);
 			if ((uriHandled && !UriUtils.isInternalReferrerCategory(referrer)) || isHomeActivity()) {
 
-				if (FirebaseDynamicLinksAppContext.isFirebaseDynamicLinksEnabled()) {
+				if (FirebaseDynamicLinksAppContext.INSTANCE.isFirebaseDynamicLinksEnabled()) {
 					FirebaseDynamicLinks.getInstance().getDynamicLink(activity.getIntent()).addOnSuccessListener(getActivity(), new OnSuccessListener<PendingDynamicLinkData>() {
 
 						@MainThread

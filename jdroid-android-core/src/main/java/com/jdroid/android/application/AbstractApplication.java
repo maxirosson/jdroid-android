@@ -315,7 +315,7 @@ public abstract class AbstractApplication extends KotlinAbstractApplication {
 	}
 
 	protected Boolean isMultiProcessSupportEnabled() {
-		return BuildConfig.DEBUG && LeakCanaryHelper.isLeakCanaryEnabled();
+		return BuildConfig.DEBUG && LeakCanaryHelper.INSTANCE.isLeakCanaryEnabled();
 	}
 
 	@WorkerThread

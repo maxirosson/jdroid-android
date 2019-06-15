@@ -76,7 +76,7 @@ public class DynamicLinksFragment extends AbstractFragment {
 						final DynamicLink dynamicLink = new DynamicLink();
 
 						DynamicLinkInfo dynamicLinkInfo = new DynamicLinkInfo();
-						dynamicLinkInfo.setDynamicLinkDomain(FirebaseDynamicLinksAppContext.getDynamicLinksDomain());
+						dynamicLinkInfo.setDynamicLinkDomain(FirebaseDynamicLinksAppContext.INSTANCE.getDynamicLinksDomain());
 						dynamicLinkInfo.setLink(linkUrlTextView.getText().toString());
 
 						AndroidInfo androidInfo = new AndroidInfo();
@@ -120,7 +120,7 @@ public class DynamicLinksFragment extends AbstractFragment {
 						@Override
 						public void run() {
 							final DynamicLinkResponse dynamicLinkResponse = new ShortDynamicLinkService().getShortDynamicLink(
-								FirebaseDynamicLinksAppContext.getWebApiKey(), longLink,
+								FirebaseDynamicLinksAppContext.INSTANCE.getWebApiKey(), longLink,
 								unguessableCheckBox.isChecked() ? SuffixOption.UNGUESSABLE : SuffixOption.SHORT);
 							executeOnUIThread(new Runnable() {
 								@Override

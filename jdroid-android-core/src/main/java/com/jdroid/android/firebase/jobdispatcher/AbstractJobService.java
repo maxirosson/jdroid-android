@@ -30,7 +30,7 @@ public abstract class AbstractJobService extends JobService {
 				try {
 					tag = getTag(jobParameters);
 					if (timingTrackingEnabled()) {
-						trace = TraceHelper.startTrace(tag);
+						trace = TraceHelper.INSTANCE.startTrace(tag);
 					}
 					LoggerUtils.getLogger(tag).info("Executing Firebase Job.");
 					long startTime = DateUtils.nowMillis();

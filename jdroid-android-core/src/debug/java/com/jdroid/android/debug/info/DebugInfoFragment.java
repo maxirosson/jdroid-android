@@ -66,9 +66,9 @@ public class DebugInfoFragment extends AbstractRecyclerFragment {
 		properties.add(new Pair<>("App Loads", UsageStats.getAppLoads()));
 
 		properties.add(new Pair<>("Strict Mode Enabled", StrictModeHelper.isStrictModeEnabled()));
-		properties.add(new Pair<>("Leak Canary Enabled", LeakCanaryHelper.isLeakCanaryEnabled()));
+		properties.add(new Pair<>("Leak Canary Enabled", LeakCanaryHelper.INSTANCE.isLeakCanaryEnabled()));
 
-		properties.add(new Pair<>("Firebase Performance Enabled", FirebasePerformanceAppContext.isFirebasePerformanceEnabled()));
+		properties.add(new Pair<>("Firebase Performance Enabled", FirebasePerformanceAppContext.INSTANCE.isFirebasePerformanceEnabled()));
 
 		for (DebugInfoAppender each : DebugInfoHelper.getDebugInfoAppenders()) {
 			properties.addAll(each.getDebugInfoProperties());

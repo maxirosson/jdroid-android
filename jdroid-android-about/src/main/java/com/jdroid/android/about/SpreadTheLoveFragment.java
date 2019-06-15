@@ -167,7 +167,7 @@ public abstract class SpreadTheLoveFragment extends AbstractFragment {
 			items.add(new FollowUsItem(R.drawable.jdroid_ic_linkedin_24dp, R.string.jdroid_linkedin) {
 				@Override
 				public void onSelected(Activity activity) {
-					LinkedInHelper.openCompanyPage(getLinkedInCompanyPageId());
+					LinkedInHelper.INSTANCE.openCompanyPage(getLinkedInCompanyPageId());
 				}
 			});
 		}

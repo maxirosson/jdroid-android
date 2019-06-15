@@ -24,7 +24,7 @@ class ExampleIntegrationTest : AbstractIntegrationTest() {
         assertEquals(TestAndroidApplication::class.java, AbstractApplication.get().javaClass)
         assertNull(AbstractApplication.get().homeActivityClass)
         assertEquals(TestAppContext::class.java, AbstractApplication.get().appContext.javaClass)
-        assertFalse(LeakCanaryHelper.isLeakCanaryEnabled())
+        assertFalse(LeakCanaryHelper.isLeakCanaryEnabled)
         assertFalse(StrictModeHelper.isStrictModeEnabled())
         assertFalse(AppUtils.isReleaseBuildType())
         assertTrue(FirebaseAnalyticsHelper.isFirebaseAnalyticsEnabled())

@@ -36,7 +36,7 @@ public abstract class AbstractWorkerService extends IntentService {
 			Trace trace = null;
 			try {
 				if (timingTrackingEnabled()) {
-					trace = TraceHelper.startTrace(tag);
+					trace = TraceHelper.INSTANCE.startTrace(tag);
 				}
 				logger.info("Executing service.");
 				long startTime = DateUtils.nowMillis();

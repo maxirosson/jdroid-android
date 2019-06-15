@@ -31,7 +31,7 @@ public class FirebasePerformanceLifecycleCallbacks implements Application.Activi
 	@Override
 	public void onActivityStarted(Activity activity) {
 		String name = activity.getClass().getSimpleName();
-		Trace trace = TraceHelper.startTrace(name);
+		Trace trace = TraceHelper.INSTANCE.startTrace(name);
 		if (trace != null) {
 			traces.put(activity, trace);
 		}
