@@ -11,10 +11,9 @@ import com.jdroid.android.activity.ComponentIf
 import com.jdroid.android.application.AppModule
 import com.jdroid.android.exception.ErrorDisplayer
 import com.jdroid.android.loading.FragmentLoading
-import com.jdroid.android.usecase.listener.UseCaseListener
 import com.jdroid.java.exception.AbstractException
 
-interface FragmentIf : ComponentIf, UseCaseListener {
+interface FragmentIf : ComponentIf {
 
     fun getActivityIf(): ActivityIf?
 

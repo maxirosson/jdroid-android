@@ -17,7 +17,6 @@ import com.jdroid.android.fragment.FragmentIf;
 import com.jdroid.android.loading.FragmentLoading;
 import com.jdroid.java.exception.AbstractException;
 
-import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
@@ -123,33 +122,9 @@ public class AbstractDialogFragment extends DialogFragment implements FragmentIf
 		return fragmentHelper.inflate(resource);
 	}
 
-	@MainThread
-	@Override
-	public void onStartUseCase() {
-		fragmentHelper.onStartUseCase();
-	}
-
-	@MainThread
-	@Override
-	public void onUpdateUseCase() {
-		fragmentHelper.onUpdateUseCase();
-	}
-
-	@MainThread
-	@Override
-	public void onFinishFailedUseCase(AbstractException abstractException) {
-		fragmentHelper.onFinishFailedUseCase(abstractException);
-	}
-
 	@Override
 	public ErrorDisplayer createErrorDisplayer(AbstractException abstractException) {
 		return fragmentHelper.createErrorDisplayer(abstractException);
-	}
-
-	@MainThread
-	@Override
-	public void onFinishUseCase() {
-		fragmentHelper.onFinishUseCase();
 	}
 
 	@Override

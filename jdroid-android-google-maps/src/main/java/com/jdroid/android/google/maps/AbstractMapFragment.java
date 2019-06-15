@@ -28,7 +28,6 @@ import com.jdroid.android.permission.PermissionHelper;
 import com.jdroid.android.snackbar.SnackbarBuilder;
 import com.jdroid.java.exception.AbstractException;
 
-import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresPermission;
 import androidx.appcompat.widget.Toolbar;
@@ -346,33 +345,9 @@ public abstract class AbstractMapFragment extends SupportMapFragment implements 
 		return fragmentHelper.inflate(resource);
 	}
 
-	@MainThread
-	@Override
-	public void onStartUseCase() {
-		fragmentHelper.onStartUseCase();
-	}
-
-	@MainThread
-	@Override
-	public void onUpdateUseCase() {
-		fragmentHelper.onUpdateUseCase();
-	}
-
-	@MainThread
-	@Override
-	public void onFinishFailedUseCase(AbstractException abstractException) {
-		fragmentHelper.onFinishFailedUseCase(abstractException);
-	}
-
 	@Override
 	public ErrorDisplayer createErrorDisplayer(AbstractException abstractException) {
 		return fragmentHelper.createErrorDisplayer(abstractException);
-	}
-
-	@MainThread
-	@Override
-	public void onFinishUseCase() {
-		fragmentHelper.onFinishUseCase();
 	}
 
 	@Override

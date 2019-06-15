@@ -207,33 +207,9 @@ public abstract class AbstractFragment extends Fragment implements FragmentIf {
 		return fragmentHelper.inflate(resource);
 	}
 
-	@MainThread
-	@Override
-	public void onStartUseCase() {
-		fragmentHelper.onStartUseCase();
-	}
-
-	@MainThread
-	@Override
-	public void onUpdateUseCase() {
-		fragmentHelper.onUpdateUseCase();
-	}
-
-	@MainThread
-	@Override
-	public void onFinishFailedUseCase(AbstractException abstractException) {
-		fragmentHelper.onFinishFailedUseCase(abstractException);
-	}
-
 	@Override
 	public ErrorDisplayer createErrorDisplayer(AbstractException abstractException) {
 		return fragmentHelper.createErrorDisplayer(abstractException);
-	}
-
-	@MainThread
-	@Override
-	public void onFinishUseCase() {
-		fragmentHelper.onFinishUseCase();
 	}
 
 	@Override

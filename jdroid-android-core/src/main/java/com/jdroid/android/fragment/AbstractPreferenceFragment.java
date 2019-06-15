@@ -15,7 +15,6 @@ import com.jdroid.android.exception.ErrorDisplayer;
 import com.jdroid.android.loading.FragmentLoading;
 import com.jdroid.java.exception.AbstractException;
 
-import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 
@@ -81,33 +80,9 @@ public abstract class AbstractPreferenceFragment extends PreferenceFragment impl
 		return getFragmentIf().inflate(resource);
 	}
 
-	@MainThread
-	@Override
-	public void onStartUseCase() {
-		getFragmentIf().onStartUseCase();
-	}
-
-	@MainThread
-	@Override
-	public void onUpdateUseCase() {
-		getFragmentIf().onUpdateUseCase();
-	}
-
-	@MainThread
-	@Override
-	public void onFinishFailedUseCase(AbstractException abstractException) {
-		getFragmentIf().onFinishFailedUseCase(abstractException);
-	}
-
 	@Override
 	public ErrorDisplayer createErrorDisplayer(AbstractException abstractException) {
 		return getFragmentIf().createErrorDisplayer(abstractException);
-	}
-
-	@MainThread
-	@Override
-	public void onFinishUseCase() {
-		getFragmentIf().onFinishUseCase();
 	}
 
 	@Override

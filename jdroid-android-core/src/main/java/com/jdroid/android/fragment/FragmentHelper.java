@@ -26,7 +26,6 @@ import org.slf4j.Logger;
 
 import java.util.Map;
 
-import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -284,34 +283,6 @@ public class FragmentHelper implements FragmentIf {
 	@Override
 	public ErrorDisplayer createErrorDisplayer(AbstractException abstractException) {
 		return AbstractErrorDisplayer.getErrorDisplayer(abstractException);
-	}
-
-	// //////////////////////// Use cases //////////////////////// //
-
-	@MainThread
-	@Override
-	public void onStartUseCase() {
-		getFragmentIf().showLoading();
-	}
-
-	@MainThread
-	@Override
-	public void onUpdateUseCase() {
-		// Do nothing by default
-	}
-
-	@MainThread
-	@Override
-	public void onFinishUseCase() {
-		getFragmentIf().dismissLoading();
-	}
-
-	@MainThread
-	@Override
-	public void onFinishFailedUseCase(AbstractException abstractException) {
-		getFragmentIf().dismissLoading();
-		// TODO This line shouldn't be executed outside the onStart/onStop cycle, to avoid IllegalStateException: Can not perform this action after onSaveInstanceState
-		getFragmentIf().createErrorDisplayer(abstractException).displayError(getFragment().getActivity(), abstractException);
 	}
 
 	// //////////////////////// Loading //////////////////////// //

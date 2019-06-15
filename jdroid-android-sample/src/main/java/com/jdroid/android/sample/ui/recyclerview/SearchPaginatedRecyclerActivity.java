@@ -1,13 +1,14 @@
 package com.jdroid.android.sample.ui.recyclerview;
 
-import androidx.fragment.app.Fragment;
-
 import com.jdroid.android.activity.FragmentContainerActivity;
+
+import androidx.fragment.app.Fragment;
 
 public class SearchPaginatedRecyclerActivity extends FragmentContainerActivity {
 
 	@Override
 	protected Class<? extends Fragment> getFragmentClass() {
-		return SearchPaginatedRecyclerFragment.class;
+		// TODO Implement SearchPaginatedRecyclerActivity sample
+		throw new RuntimeException("NOT IMPLEMENTED");
 	}
 }
