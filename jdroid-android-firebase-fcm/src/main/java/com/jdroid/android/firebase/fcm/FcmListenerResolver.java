@@ -58,7 +58,7 @@ public class FcmListenerResolver {
 			LOGGER.warn("A FCM message was received, but not resolved is configured");
 		}
 
-		for (FcmEventsListener fcmEventsListener : FcmContext.getFcmEventsListeners()) {
+		for (FcmEventsListener fcmEventsListener : FcmContext.INSTANCE.getFcmEventsListeners()) {
 			try {
 				fcmEventsListener.onMessageReceived(remoteMessage);
 			} catch (Exception e) {
@@ -70,7 +70,7 @@ public class FcmListenerResolver {
 	public void onMessageSent(String msgId) {
 		LOGGER.info("Message sent with id: " + msgId);
 
-		for (FcmEventsListener fcmEventsListener : FcmContext.getFcmEventsListeners()) {
+		for (FcmEventsListener fcmEventsListener : FcmContext.INSTANCE.getFcmEventsListeners()) {
 			try {
 				fcmEventsListener.onMessageSent(msgId);
 			} catch (Exception e) {
@@ -82,7 +82,7 @@ public class FcmListenerResolver {
 	public void onSendError(String msgId, Exception exception) {
 		AbstractApplication.get().getExceptionHandler().logWarningException("Send error. Message id: " + msgId, exception);
 
-		for (FcmEventsListener fcmEventsListener : FcmContext.getFcmEventsListeners()) {
+		for (FcmEventsListener fcmEventsListener : FcmContext.INSTANCE.getFcmEventsListeners()) {
 			try {
 				fcmEventsListener.onSendError(msgId, exception);
 			} catch (Exception e) {
@@ -94,7 +94,7 @@ public class FcmListenerResolver {
 	public void onDeletedMessages() {
 		LOGGER.info("Deleted messages");
 
-		for (FcmEventsListener fcmEventsListener : FcmContext.getFcmEventsListeners()) {
+		for (FcmEventsListener fcmEventsListener : FcmContext.INSTANCE.getFcmEventsListeners()) {
 			try {
 				fcmEventsListener.onDeletedMessages();
 			} catch (Exception e) {
@@ -106,7 +106,7 @@ public class FcmListenerResolver {
 	public void onNewToken(String token) {
 		LOGGER.info("New token: " + token);
 
-		for (FcmEventsListener fcmEventsListener : FcmContext.getFcmEventsListeners()) {
+		for (FcmEventsListener fcmEventsListener : FcmContext.INSTANCE.getFcmEventsListeners()) {
 			try {
 				fcmEventsListener.onNewToken(token);
 			} catch (Exception e) {

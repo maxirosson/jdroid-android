@@ -6,10 +6,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -21,6 +17,10 @@ import com.jdroid.android.utils.DeviceUtils;
 import com.jdroid.java.date.DateUtils;
 
 import java.io.File;
+
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 public class PictureDialogFragment extends AbstractDialogFragment {
 
@@ -34,7 +34,7 @@ public class PictureDialogFragment extends AbstractDialogFragment {
 	private Uri outputFileUri;
 
 	public static Boolean display() {
-		return DeviceUtils.hasCamera();
+		return DeviceUtils.INSTANCE.hasCamera();
 	}
 
 	public static void show(Fragment targetFragment) {
@@ -72,7 +72,7 @@ public class PictureDialogFragment extends AbstractDialogFragment {
 
 		// Configure the take photo button.
 		Button camera = findView(R.id.camera);
-		if (DeviceUtils.hasCamera()) {
+		if (DeviceUtils.INSTANCE.hasCamera()) {
 			camera.setOnClickListener(new OnClickListener() {
 
 				@Override

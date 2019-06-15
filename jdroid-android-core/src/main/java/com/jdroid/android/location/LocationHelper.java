@@ -95,7 +95,7 @@ public class LocationHelper implements LocationListener {
 					locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, LOCATION_MIN_TIME, 0, this);
 				}
 
-				AlarmUtils.scheduleElapsedRealtimeAlarm(SystemClock.elapsedRealtime() + LOCATION_MAX_TIME,
+				AlarmUtils.INSTANCE.scheduleElapsedRealtimeAlarm(SystemClock.elapsedRealtime() + LOCATION_MAX_TIME,
 					getCancelPendingIntent());
 
 				LOGGER.info("Localization started");
@@ -118,7 +118,7 @@ public class LocationHelper implements LocationListener {
 	@RequiresPermission(anyOf = { Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION })
 	public synchronized void stopLocalization() {
 		if (started) {
-			AlarmUtils.cancelAlarm(getCancelPendingIntent());
+			AlarmUtils.INSTANCE.cancelAlarm(getCancelPendingIntent());
 			locationManager.removeUpdates(this);
 			if (location == null) {
 				location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);

@@ -26,7 +26,7 @@ public class DefaultFcmMessageResolver implements FcmMessageResolver {
 
 		NotificationFcmMessage notificationFcmMessage = createNotificationFcmMessage();
 		if (notificationFcmMessage != null) {
-			FcmContext.addFcmMessage(notificationFcmMessage);
+			FcmContext.INSTANCE.addFcmMessage(notificationFcmMessage);
 		}
 	}
 
@@ -42,7 +42,7 @@ public class DefaultFcmMessageResolver implements FcmMessageResolver {
 		if (AppUtils.getVersionCode() >= minAppVersionCode) {
 			Long minDeviceOsVersion = TypeUtils.getLong(remoteMessage.getData().get(MIN_DEVICE_OS_VERSION_KEY), 0L);
 			if (AndroidUtils.getApiLevel() >= minDeviceOsVersion) {
-				for (FcmMessage each : FcmContext.getFcmMessages()) {
+				for (FcmMessage each : FcmContext.INSTANCE.getFcmMessages()) {
 					if (each.matches(remoteMessage)) {
 
 						Long userId = TypeUtils.getLong(remoteMessage.getData().get(USER_ID_KEY));

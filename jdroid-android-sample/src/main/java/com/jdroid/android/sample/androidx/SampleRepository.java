@@ -204,6 +204,6 @@ public class SampleRepository {
 	}
 
 	private static SampleEntityDao getSampleEntityDao() {
-		return RoomHelper.getDefaultDatabase(AppDatabase.class).sampleEntityDao();
+		return RoomHelper.INSTANCE.getDefaultDatabase(AppDatabase.class).sampleEntityDao();
 	}
 }

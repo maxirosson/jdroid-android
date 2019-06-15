@@ -74,7 +74,7 @@ public enum ApiServer implements FcmSender {
 
 	@Override
 	public List<HttpServiceProcessor> getHttpServiceProcessors() {
-		return Lists.newArrayList(DefaultHeaderAppender.get(), InstanceIdHeaderAppender.get(), HttpResponseValidator.get());
+		return Lists.newArrayList(DefaultHeaderAppender.get(), InstanceIdHeaderAppender.INSTANCE, HttpResponseValidator.get());
 	}
 
 	@Override

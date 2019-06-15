@@ -35,7 +35,7 @@ public abstract class DatabaseBoundResource<DatabaseDataType> {
 	}
 
 	protected String getTag() {
-		return TagUtils.getTag(getClass());
+		return TagUtils.INSTANCE.getTag(getClass());
 	}
 
 	// Called to get the cached data from the database.

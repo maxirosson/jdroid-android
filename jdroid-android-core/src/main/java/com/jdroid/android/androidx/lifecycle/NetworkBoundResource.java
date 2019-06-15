@@ -139,7 +139,7 @@ public abstract class NetworkBoundResource<ViewDataType, DatabaseDataType, Netwo
 	}
 
 	protected String getTag() {
-		return TagUtils.getTag(getClass());
+		return TagUtils.INSTANCE.getTag(getClass());
 	}
 
 	/*

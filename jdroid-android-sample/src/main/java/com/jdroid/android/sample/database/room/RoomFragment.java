@@ -36,7 +36,7 @@ public class RoomFragment extends AbstractFragment {
 				AppExecutors.getDiskIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
-						SampleEntityDao sampleEntityDao = RoomHelper.getDefaultDatabase(AppDatabase.class).sampleEntityDao();
+						SampleEntityDao sampleEntityDao = RoomHelper.INSTANCE.getDefaultDatabase(AppDatabase.class).sampleEntityDao();
 						SampleEntity entity = new SampleEntity();
 						lastId = RandomUtils.getLong().toString();
 						entity.setId(lastId);
@@ -55,7 +55,7 @@ public class RoomFragment extends AbstractFragment {
 				AppExecutors.getDiskIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
-						SampleEntityDao sampleEntityDao = RoomHelper.getDefaultDatabase(AppDatabase.class).sampleEntityDao();
+						SampleEntityDao sampleEntityDao = RoomHelper.INSTANCE.getDefaultDatabase(AppDatabase.class).sampleEntityDao();
 						SampleEntity entity = new SampleEntity();
 						entity.setId(lastId);
 						entity.setField(RandomUtils.getLong().toString());
@@ -73,7 +73,7 @@ public class RoomFragment extends AbstractFragment {
 				AppExecutors.getDiskIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
-						SampleEntityDao sampleEntityDao = RoomHelper.getDefaultDatabase(AppDatabase.class).sampleEntityDao();
+						SampleEntityDao sampleEntityDao = RoomHelper.INSTANCE.getDefaultDatabase(AppDatabase.class).sampleEntityDao();
 						SampleEntity entity = new SampleEntity();
 						lastId = RandomUtils.getLong().toString();
 						entity.setId(lastId);
@@ -93,7 +93,7 @@ public class RoomFragment extends AbstractFragment {
 					@Override
 					public void run() {
 						if (lastId != null) {
-							SampleEntityDao sampleEntityDao = RoomHelper.getDefaultDatabase(AppDatabase.class).sampleEntityDao();
+							SampleEntityDao sampleEntityDao = RoomHelper.INSTANCE.getDefaultDatabase(AppDatabase.class).sampleEntityDao();
 							sampleEntityDao.delete(lastId);
 							lastId = null;
 						}
@@ -108,7 +108,7 @@ public class RoomFragment extends AbstractFragment {
 				AppExecutors.getDiskIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
-						SampleEntityDao sampleEntityDao = RoomHelper.getDefaultDatabase(AppDatabase.class).sampleEntityDao();
+						SampleEntityDao sampleEntityDao = RoomHelper.INSTANCE.getDefaultDatabase(AppDatabase.class).sampleEntityDao();
 						sampleEntityDao.deleteAll();
 					}
 				});
@@ -121,7 +121,7 @@ public class RoomFragment extends AbstractFragment {
 				AppExecutors.getDiskIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
-						SampleEntityDao sampleEntityDao = RoomHelper.getDefaultDatabase(AppDatabase.class).sampleEntityDao();
+						SampleEntityDao sampleEntityDao = RoomHelper.INSTANCE.getDefaultDatabase(AppDatabase.class).sampleEntityDao();
 
 						List<SampleEntity> entities = Lists.newArrayList();
 
@@ -150,7 +150,7 @@ public class RoomFragment extends AbstractFragment {
 				AppExecutors.getDiskIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
-						SampleEntityDao sampleEntityDao = RoomHelper.getDefaultDatabase(AppDatabase.class).sampleEntityDao();
+						SampleEntityDao sampleEntityDao = RoomHelper.INSTANCE.getDefaultDatabase(AppDatabase.class).sampleEntityDao();
 						final List<SampleEntity> results = sampleEntityDao.getAll();
 						executeOnUIThread(new Runnable() {
 							@Override

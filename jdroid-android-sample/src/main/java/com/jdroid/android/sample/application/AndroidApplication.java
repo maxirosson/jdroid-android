@@ -65,7 +65,7 @@ public class AndroidApplication extends AbstractApplication {
 		super.onProviderInit();
 
 		AdMobAppModule.setAdMobAppContext(new SampleAdMobAppContext());
-		FcmContext.addFcmMessage(new SampleFcmMessage());
+		FcmContext.INSTANCE.addFcmMessage(new SampleFcmMessage());
 	}
 
 	@Override

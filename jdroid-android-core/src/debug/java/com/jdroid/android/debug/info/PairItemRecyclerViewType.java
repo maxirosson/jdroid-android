@@ -1,13 +1,14 @@
 package com.jdroid.android.debug.info;
 
 import android.annotation.SuppressLint;
-import androidx.core.util.Pair;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
 import com.jdroid.android.R;
 import com.jdroid.android.recycler.RecyclerViewType;
+
+import androidx.core.util.Pair;
+import androidx.recyclerview.widget.RecyclerView;
 
 public abstract class PairItemRecyclerViewType extends RecyclerViewType<Pair, PairItemRecyclerViewType.PairItemHolder> {
 
@@ -35,7 +36,7 @@ public abstract class PairItemRecyclerViewType extends RecyclerViewType<Pair, Pa
 		holder.name.setTextIsSelectable(isTextSelectable());
 	}
 
-	protected Boolean isTextSelectable() {
+	protected boolean isTextSelectable() {
 		return false;
 	}
 

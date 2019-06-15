@@ -4,10 +4,6 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.appcompat.app.AlertDialog;
 import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.DatePicker;
@@ -19,6 +15,11 @@ import com.jdroid.android.utils.AndroidUtils;
 import com.jdroid.android.utils.DeviceUtils;
 
 import java.util.Date;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 public class DatePickerDialogFragment extends AbstractDialogFragment implements OnDateChangedListener {
 
@@ -136,7 +137,7 @@ public class DatePickerDialogFragment extends AbstractDialogFragment implements 
 		// Disable the min/max date feature on devices where it crashes
 		if ((AndroidUtils.getApiLevel() >= Build.VERSION_CODES.JELLY_BEAN)
 			&& (AndroidUtils.getApiLevel() <= Build.VERSION_CODES.JELLY_BEAN_MR1)) {
-			String model = DeviceUtils.getDeviceModel();
+			String model = DeviceUtils.INSTANCE.getDeviceModel();
 			if ((model != null)
 				&& (model.equals("Nexus 7") || model.contains("ST26i") || model.contains("ST26a")
 				|| model.contains("Galaxy Nexus") || model.contains("Amazon Kindle Fire"))) {

@@ -69,7 +69,7 @@ public class InterstitialAdHelper implements AdHelper {
 
 				@Override
 				public void onAdOpened() {
-					AdsStats.onInterstitialOpened();
+					AdsStats.INSTANCE.onInterstitialOpened();
 				}
 			});
 			if (adListeners != null) {

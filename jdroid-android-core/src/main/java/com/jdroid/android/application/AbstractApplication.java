@@ -124,12 +124,12 @@ public abstract class AbstractApplication extends KotlinAbstractApplication {
 
 		onInitMultiDex();
 
-		if (!isMultiProcessSupportEnabled() || ProcessUtils.isMainProcess(this)) {
+		if (!isMultiProcessSupportEnabled() || ProcessUtils.INSTANCE.isMainProcess(this)) {
 			initLogging();
 			ApplicationLifecycleHelper.attachBaseContext(this);
 			onMainProcessAttachBaseContext();
 		} else {
-			onSecondaryProcessAttachBaseContext(ProcessUtils.getProcessInfo(this));
+			onSecondaryProcessAttachBaseContext(ProcessUtils.INSTANCE.getProcessInfo(this));
 		}
 	}
 
@@ -162,13 +162,13 @@ public abstract class AbstractApplication extends KotlinAbstractApplication {
 	@Override
 	public final void onCreate() {
 
-		if (!isMultiProcessSupportEnabled() || ProcessUtils.isMainProcess(this)) {
+		if (!isMultiProcessSupportEnabled() || ProcessUtils.INSTANCE.isMainProcess(this)) {
 			initStrictMode();
 		}
 
 		super.onCreate();
 
-		if (!isMultiProcessSupportEnabled() || ProcessUtils.isMainProcess(this)) {
+		if (!isMultiProcessSupportEnabled() || ProcessUtils.INSTANCE.isMainProcess(this)) {
 			ApplicationLifecycleHelper.onCreate(this);
 
 			appContext = createAppContext();
@@ -197,7 +197,7 @@ public abstract class AbstractApplication extends KotlinAbstractApplication {
 
 				@Override
 				public void run() {
-					DeviceUtils.getDeviceYearClass();
+					DeviceUtils.INSTANCE.getDeviceYearClass();
 					fetchInstallationSource();
 					verifyAppLaunchStatus();
 
@@ -212,7 +212,7 @@ public abstract class AbstractApplication extends KotlinAbstractApplication {
 
 			onMainProcessCreate();
 		} else {
-			onSecondaryProcessCreate(ProcessUtils.getProcessInfo(this));
+			onSecondaryProcessCreate(ProcessUtils.INSTANCE.getProcessInfo(this));
 		}
 	}
 
@@ -249,11 +249,11 @@ public abstract class AbstractApplication extends KotlinAbstractApplication {
 	public final void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
 
-		if (!isMultiProcessSupportEnabled() || ProcessUtils.isMainProcess(this)) {
+		if (!isMultiProcessSupportEnabled() || ProcessUtils.INSTANCE.isMainProcess(this)) {
 			ApplicationLifecycleHelper.onConfigurationChanged(this, newConfig);
 			onMainProcessConfigurationChanged();
 		} else {
-			onSecondaryProcessConfigurationChanged(ProcessUtils.getProcessInfo(this));
+			onSecondaryProcessConfigurationChanged(ProcessUtils.INSTANCE.getProcessInfo(this));
 		}
 	}
 
@@ -273,11 +273,11 @@ public abstract class AbstractApplication extends KotlinAbstractApplication {
 	public final void onLowMemory() {
 		super.onLowMemory();
 
-		if (!isMultiProcessSupportEnabled() || ProcessUtils.isMainProcess(this)) {
+		if (!isMultiProcessSupportEnabled() || ProcessUtils.INSTANCE.isMainProcess(this)) {
 			ApplicationLifecycleHelper.onLowMemory(this);
 			onMainProcessLowMemory();
 		} else {
-			onSecondaryProcessLowMemory(ProcessUtils.getProcessInfo(this));
+			onSecondaryProcessLowMemory(ProcessUtils.INSTANCE.getProcessInfo(this));
 		}
 	}
 
@@ -297,10 +297,10 @@ public abstract class AbstractApplication extends KotlinAbstractApplication {
 	public final void onTrimMemory(int level) {
 		super.onTrimMemory(level);
 
-		if (!isMultiProcessSupportEnabled() || ProcessUtils.isMainProcess(this)) {
+		if (!isMultiProcessSupportEnabled() || ProcessUtils.INSTANCE.isMainProcess(this)) {
 			onMainProcessTrimMemory();
 		} else {
-			onSecondaryProcessTrimMemory(ProcessUtils.getProcessInfo(this));
+			onSecondaryProcessTrimMemory(ProcessUtils.INSTANCE.getProcessInfo(this));
 		}
 	}
 

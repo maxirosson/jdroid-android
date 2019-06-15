@@ -17,8 +17,8 @@ public class Device {
 	public Device(String registrationToken, String deviceGroupId) {
 		this.deviceGroupId = deviceGroupId;
 		this.registrationToken = registrationToken;
-		deviceBrandName = DeviceUtils.getDeviceManufacturer();
-		deviceModelName = DeviceUtils.getDeviceModel();
+		deviceBrandName = DeviceUtils.INSTANCE.getDeviceManufacturer();
+		deviceModelName = DeviceUtils.INSTANCE.getDeviceModel();
 		deviceOsVersion = AndroidUtils.getPlatformVersion();
 		appVersionCode = AppUtils.getVersionCode().toString();
 	}

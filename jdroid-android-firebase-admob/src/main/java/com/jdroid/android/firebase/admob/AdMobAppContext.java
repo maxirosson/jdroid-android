@@ -30,7 +30,7 @@ public class AdMobAppContext extends AbstractAppContext {
 	}
 
 	public Boolean isInterstitialEnabled() {
-		return areAdsEnabled() && TimeUnit.MILLISECONDS.toSeconds(DateUtils.nowMillis() - AdsStats.getLastInterstitialOpenedTimestamp()) > getMinSecondsBetweenInterstitials();
+		return areAdsEnabled() && TimeUnit.MILLISECONDS.toSeconds(DateUtils.nowMillis() - AdsStats.INSTANCE.getLastInterstitialOpenedTimestamp()) > getMinSecondsBetweenInterstitials();
 	}
 
 	protected Long getMinAppLoadsToDisplayAds() {
