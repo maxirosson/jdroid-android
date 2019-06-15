@@ -9,6 +9,6 @@ class FirebaseAppShortcutsAnalyticsTracker : AbstractFirebaseAnalyticsTracker(),
     override fun trackPinShortcut(shortcutName: String) {
         val params = FirebaseAnalyticsParams()
         params.put(FirebaseAnalytics.Param.ITEM_ID, shortcutName)
-        getFirebaseAnalyticsHelper().sendEvent("pin_shortcut", params)
+        getFirebaseAnalyticsFacade().sendEvent("pin_shortcut", params)
     }
 }

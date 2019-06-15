@@ -16,9 +16,9 @@ import java.util.concurrent.Executor;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-public class FirebaseAnalyticsHelper {
+public class FirebaseAnalyticsFacade {
 
-	static final Logger LOGGER = LoggerUtils.getLogger(FirebaseAnalyticsHelper.class);
+	static final Logger LOGGER = LoggerUtils.getLogger(FirebaseAnalyticsFacade.class);
 
 	private static final int EVENT_NAME_MAX_CHARS_LONG = 40;
 
@@ -29,7 +29,7 @@ public class FirebaseAnalyticsHelper {
 			eventName = eventName.substring(0, EVENT_NAME_MAX_CHARS_LONG - 1);
 		}
 
-		if (isFirebaseAnalyticsEnabled()) {
+		if (FirebaseAnalyticsHelper.INSTANCE.isFirebaseAnalyticsEnabled()) {
 			getFirebaseAnalytics().logEvent(eventName, params != null ? params.getBundle() : null);
 			LOGGER.debug("Event [" + eventName + "] sent. " + (params != null ? params : ""));
 		} else {
@@ -45,7 +45,7 @@ public class FirebaseAnalyticsHelper {
 		if (value == null) {
 			removeUserProperty(name);
 		} else {
-			if (isFirebaseAnalyticsEnabled()) {
+			if (FirebaseAnalyticsHelper.INSTANCE.isFirebaseAnalyticsEnabled()) {
 				getFirebaseAnalytics().setUserProperty(name, value);
 				LOGGER.debug("User Property [" + name + "] added. Value [" + value + "]");
 			} else {
@@ -55,7 +55,7 @@ public class FirebaseAnalyticsHelper {
 	}
 
 	public void removeUserProperty(@NonNull String name) {
-		if (isFirebaseAnalyticsEnabled()) {
+		if (FirebaseAnalyticsHelper.INSTANCE.isFirebaseAnalyticsEnabled()) {
 			getFirebaseAnalytics().setUserProperty(name, null);
 			LOGGER.debug("User Property [" + name + "] removed.");
 		} else {
@@ -64,7 +64,7 @@ public class FirebaseAnalyticsHelper {
 	}
 
 	public void setUserId(String id) {
-		if (isFirebaseAnalyticsEnabled()) {
+		if (FirebaseAnalyticsHelper.INSTANCE.isFirebaseAnalyticsEnabled()) {
 			getFirebaseAnalytics().setUserId(id);
 			LOGGER.debug("User Id [" + id + "] added.");
 		} else {
@@ -73,7 +73,7 @@ public class FirebaseAnalyticsHelper {
 	}
 
 	public void removeUserId() {
-		if (isFirebaseAnalyticsEnabled()) {
+		if (FirebaseAnalyticsHelper.INSTANCE.isFirebaseAnalyticsEnabled()) {
 			getFirebaseAnalytics().setUserId(null);
 			LOGGER.debug("User Id removed.");
 		} else {

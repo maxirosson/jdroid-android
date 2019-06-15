@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
-import androidx.annotation.MainThread;
 
 import com.jdroid.java.utils.LoggerUtils;
 
@@ -13,6 +12,8 @@ import org.slf4j.Logger;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import androidx.annotation.MainThread;
 
 public class ApplicationLifecycleHelper {
 
@@ -45,7 +46,7 @@ public class ApplicationLifecycleHelper {
 
 		init(context);
 		for (ApplicationLifecycleCallback callback : applicationLifecycleCallbacks) {
-			if (callback.isEnabled()) {
+			if (callback.isAttachBaseContextCallbackEnabled() && callback.isEnabled()) {
 				LOGGER.debug("Executing attachBaseContext for " + callback.getClass().getName());
 				callback.attachBaseContext(context);
 			}

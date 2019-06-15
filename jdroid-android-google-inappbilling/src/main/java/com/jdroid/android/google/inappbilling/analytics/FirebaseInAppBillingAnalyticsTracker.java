@@ -11,7 +11,7 @@ public class FirebaseInAppBillingAnalyticsTracker extends AbstractFirebaseAnalyt
 	public void trackInAppBillingPurchaseTry(Product product) {
 		FirebaseAnalyticsParams params = new FirebaseAnalyticsParams();
 		params.put(FirebaseAnalytics.Param.ITEM_ID, product.getId());
-		getFirebaseAnalyticsHelper().sendEvent("in_app_purchase_try", params);
+		getFirebaseAnalyticsFacade().sendEvent("in_app_purchase_try", params);
 	}
 
 	@Override

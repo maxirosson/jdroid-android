@@ -2,10 +2,9 @@ package com.jdroid.android.debug.firebase.analytics
 
 import android.content.Context
 import androidx.core.util.Pair
-
 import com.jdroid.android.debug.info.DebugInfoAppender
 import com.jdroid.android.debug.info.DebugInfoHelper
-import com.jdroid.android.firebase.analytics.FirebaseAnalyticsFactory
+import com.jdroid.android.firebase.analytics.FirebaseAnalyticsHelper
 import com.jdroid.android.lifecycle.ApplicationLifecycleCallback
 import com.jdroid.java.collections.Lists
 
@@ -18,7 +17,7 @@ class FirebaseAnalyticsDebugAppLifecycleCallback : ApplicationLifecycleCallback(
                 properties.add(
                     Pair(
                         "Firebase Analytics Enabled",
-                        FirebaseAnalyticsFactory.getFirebaseAnalyticsHelper().isFirebaseAnalyticsEnabled
+                        FirebaseAnalyticsHelper.isFirebaseAnalyticsEnabled()
                     )
                 )
                 return properties

@@ -1,7 +1,8 @@
 package com.jdroid.android.firebase.analytics
 
-import androidx.annotation.WorkerThread
+import com.jdroid.android.koin.KoinHelper
 import com.jdroid.java.analytics.AnalyticsTracker
+import org.koin.core.get
 import java.util.concurrent.Executor
 
 open class AbstractFirebaseAnalyticsTracker : AnalyticsTracker {
@@ -10,12 +11,11 @@ open class AbstractFirebaseAnalyticsTracker : AnalyticsTracker {
         return true
     }
 
-    @WorkerThread
-    protected fun getFirebaseAnalyticsHelper(): FirebaseAnalyticsHelper {
-        return FirebaseAnalyticsFactory.getFirebaseAnalyticsHelper()
+    protected fun getFirebaseAnalyticsFacade(): FirebaseAnalyticsFacade {
+        return KoinHelper.get()
     }
 
     override fun getExecutor(): Executor {
-        return getFirebaseAnalyticsHelper().executor
+        return getFirebaseAnalyticsFacade().executor
     }
 }

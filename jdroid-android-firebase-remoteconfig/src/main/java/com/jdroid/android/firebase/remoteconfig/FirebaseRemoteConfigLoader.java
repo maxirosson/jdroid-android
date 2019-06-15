@@ -132,7 +132,7 @@ public class FirebaseRemoteConfigLoader implements RemoteConfigLoader {
 								public void run() {
 									for (RemoteConfigParameter each : remoteConfigParametersAsUserProperties) {
 										String experimentVariant = FirebaseRemoteConfig.getInstance().getString(each.getKey());
-										FirebaseAnalyticsFactory.getFirebaseAnalyticsHelper().setUserProperty(each.getKey(), experimentVariant);
+										FirebaseAnalyticsFactory.INSTANCE.getFirebaseAnalyticsFacade().setUserProperty(each.getKey(), experimentVariant);
 									}
 								}
 							});

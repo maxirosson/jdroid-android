@@ -14,9 +14,9 @@ public class FirebaseAppAnalyticsTracker extends AbstractFirebaseAnalyticsTracke
 		params.put("sample_key_3", 1);
 		params.put("sample_key_with_too_long_name_will_be_truncated", 1);
 		params.put("sample_key_with_too_long_value", "sample_value_with_too_long_name_will_be_truncated_and_log_a_warning_123456789012345678901234567890123456789");
-		getFirebaseAnalyticsHelper().sendEvent("sample_event_1", params);
-		getFirebaseAnalyticsHelper().sendEvent("sample_event_2");
-		getFirebaseAnalyticsHelper().sendEvent("sample_event_with_too_long_name");
+		getFirebaseAnalyticsFacade().sendEvent("sample_event_1", params);
+		getFirebaseAnalyticsFacade().sendEvent("sample_event_2");
+		getFirebaseAnalyticsFacade().sendEvent("sample_event_with_too_long_name");
 	}
 
 	@Override

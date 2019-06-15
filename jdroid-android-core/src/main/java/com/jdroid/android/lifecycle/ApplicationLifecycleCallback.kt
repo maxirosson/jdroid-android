@@ -15,6 +15,10 @@ abstract class ApplicationLifecycleCallback : Comparable<ApplicationLifecycleCal
         // Do nothing
     }
 
+    open fun isAttachBaseContextCallbackEnabled(): Boolean {
+        return false
+    }
+
     @MainThread
     open fun onProviderInit(context: Context) {
         // Do nothing

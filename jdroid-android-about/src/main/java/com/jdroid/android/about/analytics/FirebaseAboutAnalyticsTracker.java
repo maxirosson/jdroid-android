@@ -10,11 +10,11 @@ public class FirebaseAboutAnalyticsTracker extends AbstractFirebaseAnalyticsTrac
 	public void trackAboutLibraryOpen(String libraryKey) {
 		FirebaseAnalyticsParams params = new FirebaseAnalyticsParams();
 		params.put(FirebaseAnalytics.Param.ITEM_ID, libraryKey);
-		getFirebaseAnalyticsHelper().sendEvent("open_library", params);
+		getFirebaseAnalyticsFacade().sendEvent("open_library", params);
 	}
 
 	@Override
 	public void trackContactUs() {
-		getFirebaseAnalyticsHelper().sendEvent("contact_us");
+		getFirebaseAnalyticsFacade().sendEvent("contact_us");
 	}
 }

@@ -48,19 +48,19 @@ class FirebaseCoreAnalyticsTracker : AbstractFirebaseAnalyticsTracker(), CoreAna
 
     override fun onActivityStart(activity: Activity, referrer: String?, data: Any?) {
         if ((!firstTrackingSent)) {
-            getFirebaseAnalyticsHelper().setUserProperty(
+            getFirebaseAnalyticsFacade().setUserProperty(
                 DEVICE_YEAR_CLASS_USER_PROPERTY,
                 DeviceUtils.getDeviceYearClass().toString()
             )
-            getFirebaseAnalyticsHelper().setUserProperty(SCREEN_WIDTH, ScreenUtils.getScreenWidthDp()!!.toString())
-            getFirebaseAnalyticsHelper().setUserProperty(SCREEN_HEIGHT, ScreenUtils.getScreenHeightDp()!!.toString())
-            getFirebaseAnalyticsHelper().setUserProperty(SCREEN_DENSITY, ScreenUtils.getScreenDensity())
-            getFirebaseAnalyticsHelper().setUserProperty(SCREEN_DENSITY_DPI, ScreenUtils.getDensityDpi()!!.toString())
-            getFirebaseAnalyticsHelper().setUserProperty(
+            getFirebaseAnalyticsFacade().setUserProperty(SCREEN_WIDTH, ScreenUtils.getScreenWidthDp()!!.toString())
+            getFirebaseAnalyticsFacade().setUserProperty(SCREEN_HEIGHT, ScreenUtils.getScreenHeightDp()!!.toString())
+            getFirebaseAnalyticsFacade().setUserProperty(SCREEN_DENSITY, ScreenUtils.getScreenDensity())
+            getFirebaseAnalyticsFacade().setUserProperty(SCREEN_DENSITY_DPI, ScreenUtils.getDensityDpi()!!.toString())
+            getFirebaseAnalyticsFacade().setUserProperty(
                 INSTALLATION_SOURCE_USER_PROPERTY,
                 AbstractApplication.get().installationSource
             )
-            getFirebaseAnalyticsHelper().setUserProperty(INSTALLER_PACKAGE_NAME, AppUtils.getSafeInstallerPackageName())
+            getFirebaseAnalyticsFacade().setUserProperty(INSTALLER_PACKAGE_NAME, AppUtils.getSafeInstallerPackageName())
             firstTrackingSent = true
         }
     }
@@ -88,50 +88,50 @@ class FirebaseCoreAnalyticsTracker : AbstractFirebaseAnalyticsTracker(), CoreAna
     override fun trackNotificationDisplayed(notificationName: String) {
         val params = FirebaseAnalyticsParams()
         params.put("notification_name", notificationName)
-        getFirebaseAnalyticsHelper().sendEvent("display_notification", params)
+        getFirebaseAnalyticsFacade().sendEvent("display_notification", params)
     }
 
     override fun trackNotificationOpened(notificationName: String) {
         val params = FirebaseAnalyticsParams()
         params.put("notification_name", notificationName)
-        getFirebaseAnalyticsHelper().sendEvent("open_notification", params)
+        getFirebaseAnalyticsFacade().sendEvent("open_notification", params)
     }
 
     override fun trackEnjoyingApp(enjoying: Boolean) {
         val params = FirebaseAnalyticsParams()
         params.put("enjoying", enjoying)
-        getFirebaseAnalyticsHelper().sendEvent("enjoying_app", params)
+        getFirebaseAnalyticsFacade().sendEvent("enjoying_app", params)
     }
 
     override fun trackRateOnGooglePlay(rate: Boolean) {
         val params = FirebaseAnalyticsParams()
         params.put("rate", rate)
-        getFirebaseAnalyticsHelper().sendEvent("rate_on_google_play", params)
+        getFirebaseAnalyticsFacade().sendEvent("rate_on_google_play", params)
     }
 
     override fun trackGiveFeedback(feedback: Boolean) {
         val params = FirebaseAnalyticsParams()
         params.put("feedback", feedback)
-        getFirebaseAnalyticsHelper().sendEvent("give_feedback", params)
+        getFirebaseAnalyticsFacade().sendEvent("give_feedback", params)
     }
 
     override fun trackWidgetAdded(widgetName: String) {
         val params = FirebaseAnalyticsParams()
         params.put("widget_name", widgetName)
-        getFirebaseAnalyticsHelper().sendEvent("add_widget", params)
+        getFirebaseAnalyticsFacade().sendEvent("add_widget", params)
     }
 
     override fun trackWidgetRemoved(widgetName: String) {
         val params = FirebaseAnalyticsParams()
         params.put("widget_name", widgetName)
-        getFirebaseAnalyticsHelper().sendEvent("remove_widget", params)
+        getFirebaseAnalyticsFacade().sendEvent("remove_widget", params)
     }
 
     override fun trackUriOpened(screenName: String, uri: Uri, referrer: String) {
         val params = FirebaseAnalyticsParams()
         params.put("screen_name", screenName)
         params.put("referrer", referrer)
-        getFirebaseAnalyticsHelper().sendEvent("open_uri", params)
+        getFirebaseAnalyticsFacade().sendEvent("open_uri", params)
     }
 
     override fun trackSocialInteraction(network: String?, socialAction: SocialAction, socialTarget: String) {
@@ -140,7 +140,7 @@ class FirebaseCoreAnalyticsTracker : AbstractFirebaseAnalyticsTracker(), CoreAna
             params.put("network", network)
         }
         params.put("social_target", socialTarget)
-        getFirebaseAnalyticsHelper().sendEvent(socialAction.getName(), params)
+        getFirebaseAnalyticsFacade().sendEvent(socialAction.getName(), params)
     }
 
     // Split Install
@@ -168,13 +168,13 @@ class FirebaseCoreAnalyticsTracker : AbstractFirebaseAnalyticsTracker(), CoreAna
             }
         }
         if (evenName != null) {
-            getFirebaseAnalyticsHelper().sendEvent(evenName, params)
+            getFirebaseAnalyticsFacade().sendEvent(evenName, params)
         }
     }
 
     override fun trackSplitInstallUninstalled(moduleName: String) {
         val params = FirebaseAnalyticsParams()
         params.put("module_name", moduleName)
-        getFirebaseAnalyticsHelper().sendEvent("split_install_uninstalled", params)
+        getFirebaseAnalyticsFacade().sendEvent("split_install_uninstalled", params)
     }
 }

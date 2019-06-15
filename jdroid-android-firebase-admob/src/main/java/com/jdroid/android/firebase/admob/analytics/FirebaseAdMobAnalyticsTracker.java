@@ -6,6 +6,6 @@ public class FirebaseAdMobAnalyticsTracker extends AbstractFirebaseAnalyticsTrac
 
 	@Override
 	public void trackRemoveAdsBannerClicked() {
-		getFirebaseAnalyticsHelper().sendEvent("removed_ads");
+		getFirebaseAnalyticsFacade().sendEvent("removed_ads");
 	}
 }

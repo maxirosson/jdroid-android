@@ -24,7 +24,7 @@ public class FirebaseAnalyticsParams {
 		if (value != null) {
 			key = getSanitizedKey(key);
 			if (value.length() > PARAMETER_VALUE_MAX_CHARS_LONG) {
-				FirebaseAnalyticsHelper.LOGGER.warn("Parameter value [" + value + "] for key [" + key + "] must be " + PARAMETER_VALUE_MAX_CHARS_LONG + " chars long as maximum.");
+				FirebaseAnalyticsFacade.LOGGER.warn("Parameter value [" + value + "] for key [" + key + "] must be " + PARAMETER_VALUE_MAX_CHARS_LONG + " chars long as maximum.");
 				value = value.substring(0, PARAMETER_VALUE_MAX_CHARS_LONG - 1);
 			}
 			bundle.putString(key, value);
@@ -73,7 +73,7 @@ public class FirebaseAnalyticsParams {
 
 	private String getSanitizedKey(@NonNull String key) {
 		if (key.length() > PARAMETER_NAME_MAX_CHARS_LONG) {
-			FirebaseAnalyticsHelper.LOGGER.warn("Parameter key [" + key + "] must be " + PARAMETER_NAME_MAX_CHARS_LONG + " chars long as maximum.");
+			FirebaseAnalyticsFacade.LOGGER.warn("Parameter key [" + key + "] must be " + PARAMETER_NAME_MAX_CHARS_LONG + " chars long as maximum.");
 			key = key.substring(0, PARAMETER_NAME_MAX_CHARS_LONG - 1);
 		}
 		return key;
