@@ -75,7 +75,7 @@ public class FcmDebugPrefsAppender extends PreferencesAppender {
 	}
 
 	@Override
-	public Boolean isEnabled() {
+	public boolean isEnabled() {
 		return (fcmMessagesMap != null) && !fcmMessagesMap.isEmpty();
 	}
 

@@ -64,7 +64,7 @@ class DebugInfoFragment : AbstractRecyclerFragment() {
             properties.addAll(each.getDebugInfoProperties())
         }
 
-        properties.addAll(AbstractApplication.get().debugContext.customDebugInfoProperties)
+        properties.addAll(AbstractApplication.get().debugContext.getCustomDebugInfoProperties())
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

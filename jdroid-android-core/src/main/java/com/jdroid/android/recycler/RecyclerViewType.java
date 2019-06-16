@@ -22,6 +22,7 @@ public abstract class RecyclerViewType<ITEM, VIEWHOLDER extends RecyclerView.Vie
 		return inflater.inflate(getLayoutResourceId(), parent, false);
 	}
 
+	@NonNull
 	protected abstract Integer getLayoutResourceId();
 
 	/**

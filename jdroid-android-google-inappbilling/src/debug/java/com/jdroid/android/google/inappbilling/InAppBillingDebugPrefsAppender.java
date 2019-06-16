@@ -65,7 +65,7 @@ public class InAppBillingDebugPrefsAppender extends PreferencesAppender {
 	}
 
 	@Override
-	public Boolean isEnabled() {
+	public boolean isEnabled() {
 		return InAppBillingAppModule.get() != null && (!InAppBillingAppModule.get().getInAppBillingContext().getManagedProductTypes().isEmpty()
 			|| !InAppBillingAppModule.get().getInAppBillingContext().getSubscriptionsProductTypes().isEmpty());
 	}

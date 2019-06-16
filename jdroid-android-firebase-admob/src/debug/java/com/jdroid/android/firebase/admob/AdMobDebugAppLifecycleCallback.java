@@ -13,7 +13,7 @@ public class AdMobDebugAppLifecycleCallback extends ApplicationLifecycleCallback
 
 	@Override
 	public void onProviderInit(Context context) {
-		DebugSettingsHelper.addPreferencesAppender(new AdsDebugPrefsAppender());
+		DebugSettingsHelper.INSTANCE.addPreferencesAppender(new AdsDebugPrefsAppender());
 	}
 
 	@Override
