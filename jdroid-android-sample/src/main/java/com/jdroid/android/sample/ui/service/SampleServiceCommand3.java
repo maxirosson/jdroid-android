@@ -11,7 +11,7 @@ public class SampleServiceCommand3 extends AbstractSampleServiceCommand {
 
 	@Override
 	protected boolean execute(Context context, Bundle bundle) {
-		ExecutorUtils.sleep(30, TimeUnit.SECONDS);
+		ExecutorUtils.INSTANCE.sleep(30, TimeUnit.SECONDS);
 		return false;
 	}
 }

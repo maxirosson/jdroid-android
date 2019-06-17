@@ -109,7 +109,7 @@ public abstract class NavDrawer {
 		contentView = createContentView();
 
 		if (isNavDrawerOpenedOnFirstSession) {
-			ExecutorUtils.schedule(new Runnable() {
+			ExecutorUtils.INSTANCE.schedule(new Runnable() {
 
 				@Override
 				public void run() {

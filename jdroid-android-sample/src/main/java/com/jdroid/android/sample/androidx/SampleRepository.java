@@ -58,7 +58,7 @@ public class SampleRepository {
 			@WorkerThread
 			@Override
 			protected void saveToDb(@NonNull NetworkResponse item) {
-				ExecutorUtils.sleep(saveToDbDelaySeconds, TimeUnit.SECONDS);
+				ExecutorUtils.INSTANCE.sleep(saveToDbDelaySeconds, TimeUnit.SECONDS);
 				if (failSaveToDb) {
 					throw new UnexpectedException("Sample save to db failed");
 				} else {
@@ -84,7 +84,7 @@ public class SampleRepository {
 					AppExecutors.getDiskIOExecutor().execute(new Runnable() {
 						@Override
 						public void run() {
-							ExecutorUtils.sleep(loadFromDbDelaySeconds, TimeUnit.SECONDS);
+							ExecutorUtils.INSTANCE.sleep(loadFromDbDelaySeconds, TimeUnit.SECONDS);
 							if (failLoadFromDb) {
 								// TODO This is not properly simulating on error when loading the database
 								throw new UnexpectedException("Sample load from db failed");
@@ -114,7 +114,7 @@ public class SampleRepository {
 			@Override
 			protected ApiResponse<NetworkResponse> doLoadFromNetwork() {
 				// Simulate a request
-				ExecutorUtils.sleep(loadFromNetworkDelaySeconds, TimeUnit.SECONDS);
+				ExecutorUtils.INSTANCE.sleep(loadFromNetworkDelaySeconds, TimeUnit.SECONDS);
 				if (failLoadFromNetwork) {
 					throw new UnexpectedException("Sample network request failed");
 				} else {
@@ -157,7 +157,7 @@ public class SampleRepository {
 			@Override
 			protected ApiResponse<List<NetworkResponse>> doLoadFromNetwork() {
 				// Simulate a request
-				ExecutorUtils.sleep(5, TimeUnit.SECONDS);
+				ExecutorUtils.INSTANCE.sleep(5, TimeUnit.SECONDS);
 				if (failExecution) {
 					throw new UnexpectedException("Sample network request failed");
 				} else {

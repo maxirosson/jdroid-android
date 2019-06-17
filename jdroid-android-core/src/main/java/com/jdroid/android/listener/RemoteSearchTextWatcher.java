@@ -73,7 +73,7 @@ public abstract class RemoteSearchTextWatcher implements TextWatcher {
 				try {
 					String searchValue = queue.take();
 					if (queue.isEmpty()) {
-						ExecutorUtils.sleep(SEARCH_FREQUENCY, TimeUnit.MILLISECONDS);
+						ExecutorUtils.INSTANCE.sleep(SEARCH_FREQUENCY, TimeUnit.MILLISECONDS);
 						// If after waiting for a SEARCH_FREQUENCY, no more input was added, the search is performed.
 						if (queue.isEmpty()) {
 							RemoteSearchTextWatcher.this.onPerformSearch(searchValue);
