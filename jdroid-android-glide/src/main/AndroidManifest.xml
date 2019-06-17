@@ -8,8 +8,8 @@
 		a disconnected to a connected network state. -->
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-	<application>
-
+	<application
+			android:supportsRtl="false">
 	</application>
 
 </manifest>
