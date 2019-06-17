@@ -2,8 +2,6 @@ package com.jdroid.android.firebase.fcm;
 
 import android.content.Context;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.annotation.WorkerThread;
 
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
@@ -19,6 +17,9 @@ import org.slf4j.Logger;
 
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
+
+import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
 
 // TODO By Google recommendation, we should execute this command every 2 weeks, to have always fresh tokens on server side
 public class FcmRegistrationCommand extends ServiceCommand {
@@ -52,7 +53,7 @@ public class FcmRegistrationCommand extends ServiceCommand {
 
 				try {
 					LOGGER.info("Registering FCM token on server");
-					Boolean updateLastActiveTimestamp = bundle.getBoolean(UPDATE_LAST_ACTIVE_TIMESTAMP_EXTRA, false);
+					boolean updateLastActiveTimestamp = bundle.getBoolean(UPDATE_LAST_ACTIVE_TIMESTAMP_EXTRA, false);
 					fcmSender.onRegisterOnServer(registrationToken, updateLastActiveTimestamp, bundle);
 				} catch (Exception e) {
 					AbstractApplication.get().getExceptionHandler().logHandledException("Failed to register the device on server. Will retry later.", e);
