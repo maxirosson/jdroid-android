@@ -26,14 +26,14 @@ class ServersDebugPrefsAppender(val serversMap: Map<Class<out Server>, List<Serv
 
             val entries = Lists.newArrayList<CharSequence>()
             for (each in value) {
-                entries.add(each.serverName)
+                entries.add(each.getServerName())
             }
             preference.entries = entries.toTypedArray()
             preference.entryValues = entries.toTypedArray()
             preference.onPreferenceChangeListener = object : OnPreferenceChangeListener {
                 override fun onPreferenceChange(preference: Preference, newValue: Any): Boolean {
                     for (each in value) {
-                        if (each.serverName == newValue) {
+                        if (each.getServerName() == newValue) {
                             onServerPreferenceChange(each)
                             break
                         }
