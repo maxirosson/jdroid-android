@@ -31,13 +31,13 @@ class SplitInstallFragment : AbstractFragment() {
                 }
             }
             featureApi.invokeFeatureAsync({
-                executeOnUIThread(object: Runnable {
+                executeOnUIThread(object : Runnable {
                     override fun run() {
                         result.setText(R.string.splitInstallSuccessfulFeatureInvocation)
                     }
                 })
             }, {
-                executeOnUIThread(object: Runnable {
+                executeOnUIThread(object : Runnable {
                     override fun run() {
                         result.text = it.message
                     }
