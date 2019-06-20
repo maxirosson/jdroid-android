@@ -15,8 +15,8 @@ enum class ApiServer private constructor(
     private val domain: String?,
     private val port: String?,
     private val segment: String?,
-    private val supportsSsl: Boolean?,
-    private val isProduction: Boolean?
+    private val supportsSsl: Boolean,
+    private val isProduction: Boolean
 ) : FcmSender {
 
     PROD("url", ":8080", "/api", true, true) {
@@ -49,11 +49,11 @@ enum class ApiServer private constructor(
         }
     }
 
-    override fun supportsSsl(): Boolean? {
+    override fun supportsSsl(): Boolean {
         return supportsSsl
     }
 
-    override fun isProduction(): Boolean? {
+    override fun isProduction(): Boolean {
         return isProduction
     }
 
