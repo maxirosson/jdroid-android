@@ -5,25 +5,47 @@
 			  android:orientation="vertical"
 			  android:padding="8dp">
 
+
 	<Button
 			android:id="@+id/splitInstallInvokeDynamicFeatureSampleWithSilentInstall"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="@string/splitInstallInvokeDynamicFeatureSampleWithSilentInstall"/>
+			android:text="@string/splitInstallInvokeDynamicFeatureSampleWithSilentInstall" />
 
-	<Button android:id="@+id/splitInstallUninstallModule"
+	<com.google.android.material.textfield.TextInputLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="20dp">
+
+		<EditText
+				android:id="@+id/splitInstallModuleName"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:inputType="text"
+				android:hint="@string/splitInstallModuleName"
+				android:importantForAutofill="no" />
+	</com.google.android.material.textfield.TextInputLayout>
+
+	<Button
+			android:id="@+id/splitInstallInstallModule"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="@string/splitInstallUninstallModule" />
+			android:text="@string/splitInstallInstallModule" />
+
+	<Button
+			android:id="@+id/splitInstallDeferredUninstallModule"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/splitInstallDeferredUninstallModule" />
 
 	<Button
 			android:id="@+id/splitInstallGetInstalledModules"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="@string/splitInstallGetInstalledModules"/>
+			android:text="@string/splitInstallGetInstalledModules" />
 
 	<TextView
-			android:id="@+id/splitInstalledModules"
+			android:id="@+id/result"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content" />
 

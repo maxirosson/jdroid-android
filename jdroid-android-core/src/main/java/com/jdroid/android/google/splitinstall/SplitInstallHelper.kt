@@ -14,10 +14,11 @@ import com.jdroid.android.application.AbstractApplication
 import com.jdroid.android.koin.KoinHelper
 import com.jdroid.java.utils.LoggerUtils
 import org.koin.core.get
+import org.slf4j.Logger
 
 object SplitInstallHelper {
 
-    private val LOGGER = LoggerUtils.getLogger("Split")
+    val LOGGER: Logger = LoggerUtils.getLogger("Split")
 
     fun getInstalledModules(): Set<String> {
         val splitInstallManager = SplitInstallManagerFactory.create(AbstractApplication.get())
@@ -109,56 +110,47 @@ object SplitInstallHelper {
                 // an on demand module, it binds it to the following session ID.
                 // You use this ID to track further status updates for the request.
                 .addOnSuccessListener { sessionId -> mySessionId = sessionId }
-                // You should also add the following listener to handle any errors
-                // processing the request.
+                // Handle any errors processing the request
                 .addOnFailureListener { exception ->
                     when ((exception as SplitInstallException).errorCode) {
                         // The request is rejected because there is at least one existing request that is currently downloading.
                         SplitInstallErrorCode.ACTIVE_SESSIONS_LIMIT_EXCEEDED -> {
-                            AbstractApplication.get().exceptionHandler.logHandledException("Split install [$moduleName] installation failed. Active sessions limit exceeded")
+                            handleError(moduleName, exception, "ACTIVE_SESSIONS_LIMIT_EXCEEDED")
                         }
-
                         // Google Play is unable to find the requested module based on the current installed version of the app, device, and user’s Google Play account.
                         SplitInstallErrorCode.MODULE_UNAVAILABLE -> {
-                            // TODO
-                            AbstractApplication.get().exceptionHandler.logHandledException("Split install [$moduleName] installation failed. Module unavailable")
+                            handleError(moduleName, exception, "MODULE_UNAVAILABLE")
                         }
                         // Google Play received the request, but the request is not valid.
                         SplitInstallErrorCode.INVALID_REQUEST -> {
-                            // TODO
-                            AbstractApplication.get().exceptionHandler.logHandledException("Split install [$moduleName] installation failed. Request invalid")
+                            handleError(moduleName, exception, "INVALID_REQUEST")
                         }
                         // A session for a given session ID was not found.
                         SplitInstallErrorCode.SESSION_NOT_FOUND -> {
-                            // TODO
-                            AbstractApplication.get().exceptionHandler.logHandledException("Split install [$moduleName] installation failed. Session ID not found")
+                            handleError(moduleName, exception, "SESSION_NOT_FOUND")
                         }
                         // The Play Core Library is not supported on the current device. That is, the device is not able to download and install features on demand.
                         SplitInstallErrorCode.API_NOT_AVAILABLE -> {
-                            // TODO
-                            AbstractApplication.get().exceptionHandler.logHandledException("Split install [$moduleName] installation failed. Api not available")
+                            handleError(moduleName, exception, "API_NOT_AVAILABLE")
                         }
                         // The app is unable to register the request because of insufficient permissions.
                         SplitInstallErrorCode.ACCESS_DENIED -> {
-                            // TODO
-                            AbstractApplication.get().exceptionHandler.logHandledException("Split install [$moduleName] installation failed. Access denied")
+                            handleError(moduleName, exception, "ACCESS_DENIED")
                         }
                         // The request failed because of a network error.
                         SplitInstallErrorCode.NETWORK_ERROR -> {
-                            // TODO Display a message that requests the user to establish a network connection.
-                            AbstractApplication.get().exceptionHandler.logHandledException("Split install [$moduleName] installation failed. Network error")
+                            handleError(moduleName, exception, "NETWORK_ERROR")
                         }
                         // The request contains one or more modules that have already been requested but have not yet been installed.
                         SplitInstallErrorCode.INCOMPATIBLE_WITH_EXISTING_SESSION -> {
-                            // TODO
-                            AbstractApplication.get().exceptionHandler.logHandledException("Split install [$moduleName] installation failed. Incompatible with existing session")
+                            handleError(moduleName, exception, "INCOMPATIBLE_WITH_EXISTING_SESSION")
                         }
                         // The service responsible for handling the request has died.
                         SplitInstallErrorCode.SERVICE_DIED -> {
-                            // TODO
-                            AbstractApplication.get().exceptionHandler.logHandledException("Split install [$moduleName] installation failed. Service died")
+                            handleError(moduleName, exception, "SERVICE_DIED")
                         }
                     }
+                    onFailureListener.onFailure(exception)
                 }
         } else {
             LOGGER.debug("Split install [$moduleName] already installed")
@@ -166,12 +158,20 @@ object SplitInstallHelper {
         }
     }
 
-    fun uninstallModule(moduleName: String) {
+    private fun handleError(moduleName: String, exception: Exception, error: String) {
+        AbstractApplication.get().exceptionHandler.logHandledException("Split install [$moduleName] installation failed. $error", exception)
+    }
+
+    fun deferredUninstallModule(moduleName: String) {
         SplitKoinLoader.unloadKoinModule(moduleName)
 
         val splitInstallManager = SplitInstallManagerFactory.create(AbstractApplication.get())
-        splitInstallManager.deferredUninstall(listOf(moduleName))
-        AbstractApplication.get().coreAnalyticsSender.trackSplitInstallUninstalled(moduleName)
+        splitInstallManager.deferredUninstall(listOf(moduleName)).addOnSuccessListener {
+            LOGGER.debug("Split deferred uninstall [$moduleName] requested")
+            AbstractApplication.get().coreAnalyticsSender.trackSplitInstallDeferredUninstall(moduleName)
+        }.addOnFailureListener {
+            AbstractApplication.get().exceptionHandler.logHandledException("Split deferred uninstall [$moduleName] failed", it)
+        }
     }
 
     inline fun <reified T> getFeatureApi(moduleName: String): T {

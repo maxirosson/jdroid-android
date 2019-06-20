@@ -103,7 +103,7 @@ abstract class AbstractCoreAnalyticsTracker : CoreAnalyticsTracker {
         // Do Nothing
     }
 
-    override fun trackSplitInstallUninstalled(moduleName: String) {
+    override fun trackSplitInstallDeferredUninstall(moduleName: String) {
         // Do Nothing
     }
 

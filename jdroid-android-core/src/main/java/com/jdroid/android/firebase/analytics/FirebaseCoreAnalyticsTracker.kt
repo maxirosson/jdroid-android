@@ -172,9 +172,9 @@ class FirebaseCoreAnalyticsTracker : AbstractFirebaseAnalyticsTracker(), CoreAna
         }
     }
 
-    override fun trackSplitInstallUninstalled(moduleName: String) {
+    override fun trackSplitInstallDeferredUninstall(moduleName: String) {
         val params = FirebaseAnalyticsParams()
         params.put("module_name", moduleName)
-        getFirebaseAnalyticsFacade().sendEvent("split_install_uninstalled", params)
+        getFirebaseAnalyticsFacade().sendEvent("split_deferred_uninstall", params)
     }
 }

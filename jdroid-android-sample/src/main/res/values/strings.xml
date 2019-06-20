@@ -266,8 +266,11 @@
 	<!-- Split Install -->
 	<string name="splitInstall">Split Install</string>
 	<string name="splitInstallInvokeDynamicFeatureSampleWithSilentInstall">Invoke dynamic feature sample with silent install</string>
-	<string name="splitInstallUninstallModule">Uninstall module</string>
+	<string name="splitInstallInstallModule">Install module</string>
+	<string name="splitInstallDeferredUninstallModule">Deferred Uninstall module</string>
 	<string name="splitInstallGetInstalledModules">Get installed modules</string>
+	<string name="splitInstallModuleName">Module name</string>
+	<string name="splitInstallSuccessfulFeatureInvocation">Successful feature invocation</string>
 
 	<!-- Service -->
 	<string name="service">Service</string>

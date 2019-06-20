@@ -60,7 +60,7 @@ interface CoreAnalyticsTracker : AnalyticsTracker {
 
     fun trackSplitInstallStatus(moduleName: String, state: SplitInstallSessionState)
 
-    fun trackSplitInstallUninstalled(moduleName: String)
+    fun trackSplitInstallDeferredUninstall(moduleName: String)
 
     // More
 

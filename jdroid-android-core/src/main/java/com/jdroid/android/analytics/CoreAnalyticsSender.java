@@ -269,12 +269,12 @@ public class CoreAnalyticsSender<T extends CoreAnalyticsTracker> extends Analyti
 	}
 
 	@Override
-	public void trackSplitInstallUninstalled(String moduleName) {
+	public void trackSplitInstallDeferredUninstall(String moduleName) {
 		execute(new TrackingCommand() {
 
 			@Override
 			protected void track(T tracker) {
-				tracker.trackSplitInstallUninstalled(moduleName);
+				tracker.trackSplitInstallDeferredUninstall(moduleName);
 			}
 		});
 	}
