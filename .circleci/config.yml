@@ -1,28 +1,70 @@
-defaults: &defaults
-  working_directory: ~/jdroid
-  docker:
-    - image: circleci/android:api-28
-  environment:
-    LOCAL_MAVEN_REPO: ~/repo
-    GRADLE_OPTS: -Dorg.gradle.caching=true -Dorg.gradle.daemon=false -Dorg.gradle.parallel=false -Dorg.gradle.jvmargs="-Xmx4g -Xms1g"
-    DEX_IN_PROCESS: true
-    PRE_DEX_LIBRARIES: false
-    JAVA_MAX_HEAP_SIZE: 4096m
 version: 2
+
+references:
+
+  ## Workspace
+
+  workspace: &workspace
+    ~/workspace
+
+  ## Cache
+
+  cache_key: &cache_key
+    key: cache-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}-{{ checksum "build.gradle" }}
+  restore_cache: &restore_cache
+    restore_cache:
+      <<: *cache_key
+  save_cache: &save_cache
+    save_cache:
+      <<: *cache_key
+      paths:
+        - ~/.gradle
+        - ~/.m2
+
+  ## Docker image configurations
+
+  android_config: &android_config
+    working_directory: *workspace
+    docker:
+      - image: circleci/android:api-28
+    environment:
+      LOCAL_MAVEN_REPO: ~/repo
+      GRADLE_OPTS: -Dorg.gradle.caching=true -Dorg.gradle.daemon=false -Dorg.gradle.parallel=false -Dorg.gradle.jvmargs="-Xmx4g -Xms1g"
+      DEX_IN_PROCESS: true
+      PRE_DEX_LIBRARIES: false
+      JAVA_MAX_HEAP_SIZE: 4096m
+
+  gcloud_config: &gcloud_config
+    working_directory: *workspace
+    docker:
+      - image: google/cloud-sdk:latest
+
+
+  # Commands
+
+  gcloud_auth: &gcloud_auth
+    run:
+      name: Authenticating on gcloud
+      command: |
+        echo "$GOOGLE_SERVICE_ACCOUNT" > /tmp/service-account.json
+        gcloud auth activate-service-account --key-file=/tmp/service-account.json --project=jdroid-staging
+
 jobs:
   build:
-    <<: *defaults
+    <<: *android_config
     steps:
       - checkout
 
-      # Download and cache dependencies
-      - restore_cache:
-          key: app-{{ .Branch }}-{{ checksum "build.gradle" }}
+      - *restore_cache
+      - run:
+          name: Download dependencies
+          command: ./gradlew androidDependencies
+      - *save_cache
 
       - run:
           name: Assembling Components
           command: |
-            ./gradlew clean jdroid-android-core:assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
+            ./gradlew jdroid-android-core:assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
             ./gradlew jdroid-android-about:assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
             ./gradlew jdroid-android-facebook-login:assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
             ./gradlew jdroid-android-firebase-admob:assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
@@ -37,19 +79,11 @@ jobs:
             ./gradlew jdroid-android-google-signin:assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
             ./gradlew jdroid-android-room:assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
 
-      - save_cache:
-          paths:
-            - ~/.gradle
-          key: app-{{ .Branch }}-{{ checksum "build.gradle" }}
-
   buildSample:
-    <<: *defaults
+    <<: *android_config
     steps:
       - checkout
-
-      # Download and cache dependencies
-      - restore_cache:
-          key: app-{{ .Branch }}-{{ checksum "build.gradle" }}
+      - *restore_cache
 
       - run:
           name: Assembling Samples
@@ -59,29 +93,22 @@ jobs:
             ./gradlew assembleAutomation --stacktrace
             ./gradlew assembleRelease -PRELEASE_BUILD_TYPE_ENABLED=true -PFAKE_RELEASE_BUILD_TYPE_ENABLED=true --stacktrace
 
-      - save_cache:
-          paths:
-            - ~/.gradle
-          key: app-{{ .Branch }}-{{ checksum "build.gradle" }}
-
       - run:
           name: Saving apks
           command: |
             mkdir -p ~/apks/
-            find . -type f -regex ".*/build/outputs/apk/.*apk" -exec cp {} ~/apks/ \;
+            find . -type f -regex ".*/build/outputs/apk/jdroid-.*apk" -exec cp {} ~/apks/ \;
           when: always
 
       - store_artifacts:
           path: ~/apks
           destination: apks
 
-  test:
-    <<: *defaults
+  unitTest:
+    <<: *android_config
     steps:
       - checkout
-
-      - restore_cache:
-          key: app-{{ .Branch }}-{{ checksum "build.gradle" }}
+      - *restore_cache
 
       - run: 
           name: Testing
@@ -161,44 +188,11 @@ jobs:
           path: ./jdroid-android-twitter/build/reports/tests/testDebugUnitTest
           destination: jdroid-android-twitter/tests
 
-
-  testUI:
-    <<: *defaults
-    steps:
-      - checkout
-
-      - restore_cache:
-          key: app-{{ .Branch }}-{{ checksum "build.gradle" }}
-
-      - run:
-          name: Assembling automation & android test APKs
-          command: |
-            ./gradlew :jdroid-android-sample:assembleAutomation :jdroid-android-sample:assembleAndroidTest
-            for file in "./jdroid-android-sample/build/outputs/apk/automation"/*.apk; do mv ${file} ./jdroid-android-sample/build/outputs/apk/automation/jdroid-automation.apk; done
-
-      - run:
-          name: Authenticating on gcloud
-          command: |
-            echo "$GOOGLE_SERVICE_ACCOUNT" > /tmp/service-account.json
-            gcloud auth activate-service-account --key-file=/tmp/service-account.json --project=jdroid-staging
-
-      - run:
-          name: Running Robo tests
-          command: gcloud firebase test android run firebase_test_lab.yml:robo-tests-virtual --async --app ./jdroid-android-sample/build/outputs/apk/automation/jdroid-automation.apk
-
-      - run:
-          name: Running Instrumentation tests
-          command: |
-            gcloud firebase test android run firebase_test_lab.yml:instrumentation-tests-physical --async --app ./jdroid-android-sample/build/outputs/apk/automation/jdroid-automation.apk --test ./jdroid-android-sample/build/outputs/apk/androidTest/automation/jdroid-android-sample-automation-androidTest.apk
-            gcloud firebase test android run firebase_test_lab.yml:instrumentation-tests-virtual --async --app ./jdroid-android-sample/build/outputs/apk/automation/jdroid-automation.apk --test ./jdroid-android-sample/build/outputs/apk/androidTest/automation/jdroid-android-sample-automation-androidTest.apk
-
   lint:
-    <<: *defaults
+    <<: *android_config
     steps:
       - checkout
-
-      - restore_cache:
-          key: app-{{ .Branch }}-{{ checksum "build.gradle" }}
+      - *restore_cache
 
       - run: 
           name: Linting
@@ -269,23 +263,80 @@ jobs:
           destination: jdroid-android-twitter/lint
 
   ktlint:
-    <<: *defaults
+    <<: *android_config
     steps:
       - checkout
+      - *restore_cache
+
       - run: ./gradlew ktlint --stacktrace
 
   deploy:
-    <<: *defaults
+    <<: *android_config
     steps:
       - checkout
-      
-      - restore_cache:
-          key: app-{{ .Branch }}-{{ checksum "build.gradle" }}
+      - *restore_cache
 
       - run:
           name: Uploading to Nexus Sonatype
           command: ./gradlew publish -PLOCAL_UPLOAD=false -PRELEASE_BUILD_TYPE_ENABLED=true -PFAKE_RELEASE_BUILD_TYPE_ENABLED=true --info --stacktrace
-  
+
+  buildAutomationTest:
+    <<: *android_config
+    steps:
+    - checkout
+    - *restore_cache
+
+    - run:
+      name: Assembling automation & android test APKs
+      command: |
+        ./gradlew :jdroid-android-sample:assembleAutomation :jdroid-android-sample:assembleAndroidTest
+        for file in "./jdroid-android-sample/build/outputs/apk/automation"/*.apk; do mv ${file} ./jdroid-android-sample/build/outputs/apk/automation/jdroid-automation.apk; done
+
+    - persist_to_workspace:
+        root: jdroid-android-sample/build/outputs/apk
+        paths:
+          - automation/jdroid-automation.apk
+          - androidTest/automation/jdroid-android-sample-automation-androidTest.apk
+
+    - store_artifacts:
+        path: ./jdroid-android-sample/build/outputs/apk/automation/jdroid-automation.apk
+        destination: jdroid-automation.apk
+    - store_artifacts:
+        path: ./jdroid-android-sample/build/outputs/apk/androidTest/automation/jdroid-android-sample-automation-androidTest.apk
+        destination: jdroid-android-sample-automation-androidTest.apk
+
+  runRoboTest:
+    <<: *gcloud_config
+    steps:
+    - checkout
+
+    - attach_workspace:
+        at: jdroid-android-sample/build/outputs/apk
+
+    - *gcloud_auth
+
+    - run:
+      name: Running Robo tests
+      command: gcloud firebase test android run firebase_test_lab.yml:robo-tests-virtual --async --app ./jdroid-android-sample/build/outputs/apk/automation/jdroid-automation.apk
+      no_output_timeout: 30m
+
+  runInstrumentationTest:
+    <<: *gcloud_config
+    steps:
+    - checkout
+
+    - attach_workspace:
+        at: jdroid-android-sample/build/outputs/apk
+
+    - *gcloud_auth
+
+    - run:
+      name: Running Instrumentation tests
+      command: |
+        gcloud firebase test android run firebase_test_lab.yml:instrumentation-tests-physical --async --app ./jdroid-android-sample/build/outputs/apk/automation/jdroid-automation.apk --test ./jdroid-android-sample/build/outputs/apk/androidTest/automation/jdroid-android-sample-automation-androidTest.apk
+        gcloud firebase test android run firebase_test_lab.yml:instrumentation-tests-virtual --async --app ./jdroid-android-sample/build/outputs/apk/automation/jdroid-automation.apk --test ./jdroid-android-sample/build/outputs/apk/androidTest/automation/jdroid-android-sample-automation-androidTest.apk
+      no_output_timeout: 30m
+
 workflows:
   version: 2
   commit:
@@ -296,13 +347,12 @@ workflows:
       - buildSample:
           requires:
             - build
-      - test:
+      - unitTest:
           requires:
             - build
-      - lint
       - deploy:
           requires:
-            - test
+            - unitTest
             - lint
   nightly:
     triggers:
@@ -313,4 +363,10 @@ workflows:
               only:
                 - master
     jobs:
-      - testUI
+      - buildAutomationTest
+      - runRoboTest:
+          requires:
+            - buildAutomationTest
+      - runInstrumentationTest:
+          requires:
+            - buildAutomationTest
