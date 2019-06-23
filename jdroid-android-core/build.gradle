@@ -5,7 +5,6 @@ description = "Jdroid dependency project for Android apps"
 
 configurations {
 	compile.exclude group: "org.apache.httpcomponents", module: "httpclient"
-	compile.exclude group: "org.slf4j", module: "slf4j-api"
 }
 
 configurations.all {
@@ -66,11 +65,19 @@ dependencies {
 	// Jdroid dependencies
 
 	if (jdroid.propertyResolver.getBooleanProp("JDROID_JAVA_AS_PROJECT_DEPENDENCY", false)) {
-		api project(":jdroid-java-core")
-		api project(":jdroid-java-remote-config")
+		api project(":jdroid-java-core") {
+			exclude group: "org.slf4j", module: "slf4j-api"
+		}
+		api project(":jdroid-java-remote-config") {
+			exclude group: "org.slf4j", module: "slf4j-api"
+		}
 	} else {
-		api("com.jdroidtools:jdroid-java-core:${JDROID_JAVA_VERSION}")
-		api("com.jdroidtools:jdroid-java-remote-config:${JDROID_JAVA_VERSION}")
+		api("com.jdroidtools:jdroid-java-core:${JDROID_JAVA_VERSION}") {
+			exclude group: "org.slf4j", module: "slf4j-api"
+		}
+		api("com.jdroidtools:jdroid-java-remote-config:${JDROID_JAVA_VERSION}") {
+			exclude group: "org.slf4j", module: "slf4j-api"
+		}
 	}
 
 	if (jdroid.propertyResolver.getBooleanProp("JDROID_JAVA_HTTP_AS_PROJECT_DEPENDENCY", false)) {
