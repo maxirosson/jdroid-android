@@ -58,7 +58,7 @@ jobs:
       - *restore_cache
       - run:
           name: Download dependencies
-          command: ./gradlew androidDependencies
+          command: ./gradlew androidDependencies --refresh-dependencies --stacktrace
       - *save_cache
 
       - run:
