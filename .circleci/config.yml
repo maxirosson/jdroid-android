@@ -29,7 +29,7 @@ references:
       - image: circleci/android:api-28
     environment:
       LOCAL_MAVEN_REPO: ~/repo
-      GRADLE_OPTS: -Dorg.gradle.caching=true -Dorg.gradle.daemon=false -Dorg.gradle.parallel=false -Dorg.gradle.jvmargs="-Xmx4g -Xms1g"
+      GRADLE_OPTS: -Dorg.gradle.caching=false -Dorg.gradle.daemon=false -Dorg.gradle.parallel=false -Dorg.gradle.jvmargs="-Xmx4g -Xms1g"
       DEX_IN_PROCESS: true
       PRE_DEX_LIBRARIES: false
       JAVA_MAX_HEAP_SIZE: 4096m
@@ -288,10 +288,10 @@ jobs:
     - *restore_cache
 
     - run:
-      name: Assembling automation & android test APKs
-      command: |
-        ./gradlew :jdroid-android-sample:assembleAutomation :jdroid-android-sample:assembleAndroidTest
-        for file in "./jdroid-android-sample/build/outputs/apk/automation"/*.apk; do mv ${file} ./jdroid-android-sample/build/outputs/apk/automation/jdroid-automation.apk; done
+        name: Assembling automation & android test APKs
+        command: |
+          ./gradlew :jdroid-android-sample:assembleAutomation :jdroid-android-sample:assembleAndroidTest
+          for file in "./jdroid-android-sample/build/outputs/apk/automation"/*.apk; do mv ${file} ./jdroid-android-sample/build/outputs/apk/automation/jdroid-automation.apk; done
 
     - persist_to_workspace:
         root: jdroid-android-sample/build/outputs/apk
@@ -317,9 +317,9 @@ jobs:
     - *gcloud_auth
 
     - run:
-      name: Running Robo tests
-      command: gcloud firebase test android run firebase_test_lab.yml:robo-tests-virtual --async --app ./jdroid-android-sample/build/outputs/apk/automation/jdroid-automation.apk
-      no_output_timeout: 30m
+        name: Running Robo tests
+        command: gcloud firebase test android run firebase_test_lab.yml:robo-tests-virtual --async --app ./jdroid-android-sample/build/outputs/apk/automation/jdroid-automation.apk
+        no_output_timeout: 30m
 
   runInstrumentationTest:
     <<: *gcloud_config
@@ -332,11 +332,11 @@ jobs:
     - *gcloud_auth
 
     - run:
-      name: Running Instrumentation tests
-      command: |
-        gcloud firebase test android run firebase_test_lab.yml:instrumentation-tests-physical --async --app ./jdroid-android-sample/build/outputs/apk/automation/jdroid-automation.apk --test ./jdroid-android-sample/build/outputs/apk/androidTest/automation/jdroid-android-sample-automation-androidTest.apk
-        gcloud firebase test android run firebase_test_lab.yml:instrumentation-tests-virtual --async --app ./jdroid-android-sample/build/outputs/apk/automation/jdroid-automation.apk --test ./jdroid-android-sample/build/outputs/apk/androidTest/automation/jdroid-android-sample-automation-androidTest.apk
-      no_output_timeout: 30m
+        name: Running Instrumentation tests
+        command: |
+          gcloud firebase test android run firebase_test_lab.yml:instrumentation-tests-physical --async --app ./jdroid-android-sample/build/outputs/apk/automation/jdroid-automation.apk --test ./jdroid-android-sample/build/outputs/apk/androidTest/automation/jdroid-android-sample-automation-androidTest.apk
+          gcloud firebase test android run firebase_test_lab.yml:instrumentation-tests-virtual --async --app ./jdroid-android-sample/build/outputs/apk/automation/jdroid-automation.apk --test ./jdroid-android-sample/build/outputs/apk/androidTest/automation/jdroid-android-sample-automation-androidTest.apk
+        no_output_timeout: 30m
 
 workflows:
   version: 2
