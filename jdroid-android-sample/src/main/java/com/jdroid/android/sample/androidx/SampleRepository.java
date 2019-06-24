@@ -31,7 +31,7 @@ public class SampleRepository {
 	public static final String ID = "1";
 
 	public static void removeItem(String id) {
-		AppExecutors.getDiskIOExecutor().execute(new Runnable() {
+		AppExecutors.INSTANCE.getDiskIOExecutor().execute(new Runnable() {
 			@Override
 			public void run() {
 				getSampleEntityDao().delete(id);
@@ -40,7 +40,7 @@ public class SampleRepository {
 	}
 
 	public static void addItem() {
-		AppExecutors.getDiskIOExecutor().execute(new Runnable() {
+		AppExecutors.INSTANCE.getDiskIOExecutor().execute(new Runnable() {
 			@Override
 			public void run() {
 				SampleEntity sampleEntity = new SampleEntity();
@@ -81,7 +81,7 @@ public class SampleRepository {
 			protected LiveData<SampleEntity> loadFromDb() {
 				if (loadFromDbDelaySeconds > 0) {
 					MutableLiveData<SampleEntity> liveData = new MutableLiveData<>();
-					AppExecutors.getDiskIOExecutor().execute(new Runnable() {
+					AppExecutors.INSTANCE.getDiskIOExecutor().execute(new Runnable() {
 						@Override
 						public void run() {
 							ExecutorUtils.INSTANCE.sleep(loadFromDbDelaySeconds, TimeUnit.SECONDS);
@@ -97,7 +97,7 @@ public class SampleRepository {
 					return liveData;
 				} else {
 					if (failLoadFromDb) {
-						AppExecutors.getDiskIOExecutor().execute(new Runnable() {
+						AppExecutors.INSTANCE.getDiskIOExecutor().execute(new Runnable() {
 							@Override
 							public void run() {
 								throw new UnexpectedException("Sample load from db failed");

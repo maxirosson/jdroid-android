@@ -66,7 +66,7 @@ public class GlideHelper {
 	}
 
 	public static void clearDiskCache() {
-		AppExecutors.getDiskIOExecutor().execute(new Runnable() {
+		AppExecutors.INSTANCE.getDiskIOExecutor().execute(new Runnable() {
 			@Override
 			public void run() {
 				Glide.get(AbstractApplication.get()).clearDiskCache();

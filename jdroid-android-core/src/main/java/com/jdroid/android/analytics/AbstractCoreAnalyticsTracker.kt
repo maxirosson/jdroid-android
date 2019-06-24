@@ -12,7 +12,7 @@ import java.util.concurrent.Executor
 abstract class AbstractCoreAnalyticsTracker : CoreAnalyticsTracker {
 
     override fun getExecutor(): Executor {
-        return AppExecutors.getNetworkIOExecutor()
+        return AppExecutors.networkIOExecutor
     }
 
     override fun trackErrorLog(message: String) {

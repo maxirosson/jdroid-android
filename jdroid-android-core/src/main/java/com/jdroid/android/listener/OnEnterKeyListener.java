@@ -35,7 +35,7 @@ public abstract class OnEnterKeyListener implements OnKeyListener {
 				}
 			};
 			if (async) {
-				AppExecutors.getNetworkIOExecutor().execute(runnable);
+				AppExecutors.INSTANCE.getNetworkIOExecutor().execute(runnable);
 			} else {
 				runnable.run();
 			}

@@ -34,7 +34,7 @@ public class ToastsFragment extends AbstractFragment {
 
 			@Override
 			public void onClick(View v) {
-				AppExecutors.getNetworkIOExecutor().execute(new Runnable() {
+				AppExecutors.INSTANCE.getNetworkIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
 						ToastUtils.showToastOnUIThread(R.string.toastFromWorkerThread);

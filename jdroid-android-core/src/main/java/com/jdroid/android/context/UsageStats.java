@@ -21,7 +21,7 @@ public class UsageStats {
 
 	@MainThread
 	public static void incrementAppLoadAsync() {
-		AppExecutors.getDiskIOExecutor().execute(new Runnable() {
+		AppExecutors.INSTANCE.getDiskIOExecutor().execute(new Runnable() {
 			@Override
 			public void run() {
 				incrementAppLoad();

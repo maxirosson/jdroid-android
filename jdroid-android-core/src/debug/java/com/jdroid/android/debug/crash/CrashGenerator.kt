@@ -16,7 +16,7 @@ object CrashGenerator {
             }
         }
         if (executeOnNewThread) {
-            AppExecutors.getNetworkIOExecutor().execute(runnable)
+            AppExecutors.networkIOExecutor.execute(runnable)
         } else {
             runnable.run()
         }

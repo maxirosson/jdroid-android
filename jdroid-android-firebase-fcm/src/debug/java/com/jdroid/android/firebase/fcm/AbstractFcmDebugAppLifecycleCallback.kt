@@ -25,6 +25,6 @@ abstract class AbstractFcmDebugAppLifecycleCallback : ApplicationLifecycleCallba
             }
         })
         // Load properties on a worker thread
-        AppExecutors.getDiskIOExecutor().execute { InstanceIdHelper.getInstanceId() }
+        AppExecutors.diskIOExecutor.execute { InstanceIdHelper.getInstanceId() }
     }
 }

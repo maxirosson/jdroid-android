@@ -90,13 +90,13 @@ public abstract class NetworkBoundResource<ViewDataType, DatabaseDataType, Netwo
 				removeSource(apiResponse);
 				removeSource(dbSource);
 				if (response instanceof ApiSuccessResponse) {
-					AppExecutors.getDiskIOExecutor().execute(new Runnable() {
+					AppExecutors.INSTANCE.getDiskIOExecutor().execute(new Runnable() {
 						@Override
 						public void run() {
 							LOGGER.info(getTag() + ": Saving resource to database");
 							try {
 								saveToDb((NetworkDataType)processResponse((ApiSuccessResponse)response));
-								AppExecutors.getMainThreadExecutor().execute(new Runnable() {
+								AppExecutors.INSTANCE.getMainThreadExecutor().execute(new Runnable() {
 									@Override
 									public void run() {
 										// we specially request a new live data,
@@ -110,7 +110,7 @@ public abstract class NetworkBoundResource<ViewDataType, DatabaseDataType, Netwo
 							} catch (Exception e) {
 								AbstractException abstractException = wrapException(e);
 								logHandledException(abstractException);
-								AppExecutors.getMainThreadExecutor().execute(new Runnable() {
+								AppExecutors.INSTANCE.getMainThreadExecutor().execute(new Runnable() {
 									 @Override
 									 public void run() {
 										 dispatch(dbSource, abstractException, Resource.Status.ERROR);
@@ -121,7 +121,7 @@ public abstract class NetworkBoundResource<ViewDataType, DatabaseDataType, Netwo
 					});
 				} else if (response instanceof ApiEmptyResponse) {
 					// TODO See this
-					AppExecutors.getMainThreadExecutor().execute(new Runnable() {
+					AppExecutors.INSTANCE.getMainThreadExecutor().execute(new Runnable() {
 						@Override
 						public void run() {
 							// reload from disk whatever we had
@@ -168,7 +168,7 @@ public abstract class NetworkBoundResource<ViewDataType, DatabaseDataType, Netwo
 	@MainThread
 	protected LiveData<ApiResponse<NetworkDataType>> loadFromNetwork() {
 		MutableLiveData<ApiResponse<NetworkDataType>> mutableLiveData = new MutableLiveData<>();
-		AppExecutors.getNetworkIOExecutor().execute(new Runnable() {
+		AppExecutors.INSTANCE.getNetworkIOExecutor().execute(new Runnable() {
 			@Override
 			public void run() {
 				LOGGER.info(getTag() + ": Loading resource from network");

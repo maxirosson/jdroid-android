@@ -70,7 +70,7 @@ public class DynamicLinksFragment extends AbstractFragment {
 		findView(R.id.buildLink).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				AppExecutors.getNetworkIOExecutor().execute(new Runnable() {
+				AppExecutors.INSTANCE.getNetworkIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
 						final DynamicLink dynamicLink = new DynamicLink();
@@ -116,7 +116,7 @@ public class DynamicLinksFragment extends AbstractFragment {
 			public void onClick(View v) {
 				final String longLink = longLinkTextView.getText().toString();
 				if (StringUtils.isNotEmpty(longLink)) {
-					AppExecutors.getNetworkIOExecutor().execute(new Runnable() {
+					AppExecutors.INSTANCE.getNetworkIOExecutor().execute(new Runnable() {
 						@Override
 						public void run() {
 							final DynamicLinkResponse dynamicLinkResponse = new ShortDynamicLinkService().getShortDynamicLink(

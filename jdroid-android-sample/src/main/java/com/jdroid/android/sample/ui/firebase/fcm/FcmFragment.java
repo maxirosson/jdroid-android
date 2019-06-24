@@ -47,7 +47,7 @@ public class FcmFragment extends AbstractFragment {
 		findView(R.id.removeInstanceId).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				AppExecutors.getNetworkIOExecutor().execute(new Runnable() {
+				AppExecutors.INSTANCE.getNetworkIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
 						InstanceIdHelper.removeInstanceId();
@@ -59,7 +59,7 @@ public class FcmFragment extends AbstractFragment {
 		findView(R.id.removeDevice).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				AppExecutors.getNetworkIOExecutor().execute(new Runnable() {
+				AppExecutors.INSTANCE.getNetworkIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
 						new SampleApiService().removeDevice();
@@ -73,7 +73,7 @@ public class FcmFragment extends AbstractFragment {
 		findView(R.id.subscribeToTopic).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				AppExecutors.getNetworkIOExecutor().execute(new Runnable() {
+				AppExecutors.INSTANCE.getNetworkIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
 						String topic = topicToSubscribeEditText.getText().length() > 0 ? topicToSubscribeEditText.getText().toString() : null;
@@ -88,7 +88,7 @@ public class FcmFragment extends AbstractFragment {
 		findView(R.id.unsubscribeFromTopic).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				AppExecutors.getNetworkIOExecutor().execute(new Runnable() {
+				AppExecutors.INSTANCE.getNetworkIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
 						String topic = topicToSubscribeEditText.getText().length() > 0 ? topicToSubscribeEditText.getText().toString() : null;
@@ -117,7 +117,7 @@ public class FcmFragment extends AbstractFragment {
 		findView(R.id.sendPush).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				AppExecutors.getNetworkIOExecutor().execute(new Runnable() {
+				AppExecutors.INSTANCE.getNetworkIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
 						String topic = topicEditText.getText().length() > 0 ? topicEditText.getText().toString() : null;

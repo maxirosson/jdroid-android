@@ -89,6 +89,6 @@ public class StrictModeHelper {
 	}
 
 	public static Boolean isStrictModeOnFirebaseTestLabEnabled() {
-		return FirebaseTestLab.isRunningInstrumentedTests() && BuildConfigUtils.getBuildConfigBoolean("STRICT_MODE_ON_FIREBASE_TEST_LAB_ENABLED", true);
+		return FirebaseTestLab.INSTANCE.isRunningInstrumentedTests() && BuildConfigUtils.getBuildConfigBoolean("STRICT_MODE_ON_FIREBASE_TEST_LAB_ENABLED", true);
 	}
 }

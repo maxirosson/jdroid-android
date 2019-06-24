@@ -21,7 +21,7 @@ public abstract class AbstractJobService extends JobService {
 	@MainThread
 	@Override
 	public final boolean onStartJob(final JobParameters jobParameters) {
-		AppExecutors.getNetworkIOExecutor().execute(new Runnable() {
+		AppExecutors.INSTANCE.getNetworkIOExecutor().execute(new Runnable() {
 			@Override
 			public void run() {
 				Boolean needsReschedule = false;

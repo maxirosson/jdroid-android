@@ -87,13 +87,13 @@ public class FirebaseAnalyticsFacade {
 	}
 
 	public Executor getExecutor() {
-		return AppExecutors.getNetworkIOExecutor();
+		return AppExecutors.INSTANCE.getNetworkIOExecutor();
 	}
 
 	/**
 	 * @return Whether the application has Firebase Analytics enabled or not
 	 */
 	public Boolean isFirebaseAnalyticsEnabled() {
-		return BuildConfigUtils.getBuildConfigBoolean("FIREBASE_ANALYTICS_ENABLED", true) && !FirebaseTestLab.isRunningInstrumentedTests();
+		return BuildConfigUtils.getBuildConfigBoolean("FIREBASE_ANALYTICS_ENABLED", true) && !FirebaseTestLab.INSTANCE.isRunningInstrumentedTests();
 	}
 }

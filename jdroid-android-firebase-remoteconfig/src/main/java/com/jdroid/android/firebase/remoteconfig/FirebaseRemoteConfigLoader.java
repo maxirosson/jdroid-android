@@ -127,7 +127,7 @@ public class FirebaseRemoteConfigLoader implements RemoteConfigLoader {
 						LOGGER.debug("Firebase Remote Config activate fetched result: " + result);
 
 						if (setExperimentUserProperty && !Lists.isNullOrEmpty(remoteConfigParametersAsUserProperties)) {
-							AppExecutors.getNetworkIOExecutor().execute(new Runnable() {
+							AppExecutors.INSTANCE.getNetworkIOExecutor().execute(new Runnable() {
 								@Override
 								public void run() {
 									for (RemoteConfigParameter each : remoteConfigParametersAsUserProperties) {
@@ -139,7 +139,7 @@ public class FirebaseRemoteConfigLoader implements RemoteConfigLoader {
 						}
 
 						if (onSuccessListener != null) {
-							AppExecutors.getNetworkIOExecutor().execute(new Runnable() {
+							AppExecutors.INSTANCE.getNetworkIOExecutor().execute(new Runnable() {
 								@Override
 								public void run() {
 									onSuccessListener.onSuccess(null);

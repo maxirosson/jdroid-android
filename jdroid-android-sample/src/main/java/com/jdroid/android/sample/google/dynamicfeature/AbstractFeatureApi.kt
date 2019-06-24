@@ -24,7 +24,7 @@ abstract class AbstractFeatureApi {
                 onFailureListener.onFailure(e)
             }
         }
-        AppExecutors.getNetworkIOExecutor().execute(object : Runnable {
+        AppExecutors.networkIOExecutor.execute(object : Runnable {
             override fun run() {
                 SplitInstallHelper.installModuleSilently(getModuleName(), onSuccessListener, onFailureListener)
             }

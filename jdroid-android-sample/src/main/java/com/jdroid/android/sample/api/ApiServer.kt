@@ -58,7 +58,7 @@ enum class ApiServer private constructor(
     }
 
     override fun getHttpServiceProcessors(): List<HttpServiceProcessor> {
-        return Lists.newArrayList(DefaultHeaderAppender.get(), InstanceIdHeaderAppender, HttpResponseValidator.get())
+        return Lists.newArrayList(DefaultHeaderAppender(), InstanceIdHeaderAppender, HttpResponseValidator.get())
     }
 
     override fun instance(name: String): Server {

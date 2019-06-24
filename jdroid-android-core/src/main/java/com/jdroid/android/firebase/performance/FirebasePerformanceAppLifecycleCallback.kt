@@ -11,7 +11,7 @@ class FirebasePerformanceAppLifecycleCallback : ApplicationLifecycleCallback() {
     override fun onProviderInit(context: Context) {
         FirebasePerformance.getInstance().isPerformanceCollectionEnabled = FirebasePerformanceAppContext.isFirebasePerformanceEnabled()
         if (FirebasePerformanceAppContext.isFirebasePerformanceEnabled()) {
-            AbstractApplication.get().registerActivityLifecycleCallbacks(FirebasePerformanceLifecycleCallbacks.get())
+            AbstractApplication.get().registerActivityLifecycleCallbacks(FirebasePerformanceLifecycleCallbacks)
         }
     }
 }

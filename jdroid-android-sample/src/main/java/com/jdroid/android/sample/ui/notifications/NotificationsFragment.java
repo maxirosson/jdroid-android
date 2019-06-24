@@ -66,7 +66,7 @@ public class NotificationsFragment extends AbstractFragment {
 			@Override
 			public void onClick(View v) {
 
-				AppExecutors.getNetworkIOExecutor().execute(new Runnable() {
+				AppExecutors.INSTANCE.getNetworkIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
 						NotificationBuilder builder = new NotificationBuilder(notificationName.getText().toString(), notificationChannel.getText().toString());

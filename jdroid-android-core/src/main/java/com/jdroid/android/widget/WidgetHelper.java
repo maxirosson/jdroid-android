@@ -22,7 +22,7 @@ public class WidgetHelper {
 	public static final String WIDGET_SCHEME = "widget";
 
 	public synchronized static void onWidgetRemoved(final String widgetName) {
-		AppExecutors.getDiskIOExecutor().execute(new Runnable() {
+		AppExecutors.INSTANCE.getDiskIOExecutor().execute(new Runnable() {
 			@Override
 			public void run() {
 				SharedPreferencesHelper sharedPreferencesHelper = SharedPreferencesHelper.get(WIDGET_PREFERENCES);
@@ -37,7 +37,7 @@ public class WidgetHelper {
 	}
 
 	public synchronized static void onWidgetAdded(final String widgetName) {
-		AppExecutors.getDiskIOExecutor().execute(new Runnable() {
+		AppExecutors.INSTANCE.getDiskIOExecutor().execute(new Runnable() {
 			@Override
 			public void run() {
 				SharedPreferencesHelper sharedPreferencesHelper = SharedPreferencesHelper.get(WIDGET_PREFERENCES);

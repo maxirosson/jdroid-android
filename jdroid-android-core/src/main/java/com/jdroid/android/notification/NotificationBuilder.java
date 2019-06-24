@@ -172,7 +172,7 @@ public class NotificationBuilder {
 	}
 
 	public void setLargeIcon(@DrawableRes int resId) {
-		builder.setLargeIcon(BitmapUtils.toBitmap(resId));
+		builder.setLargeIcon(BitmapUtils.INSTANCE.toBitmap(resId));
 	}
 
 	public void setLargeIcon(Bitmap largeIcon) {

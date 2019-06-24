@@ -114,7 +114,7 @@ public abstract class NavDrawer {
 				@Override
 				public void run() {
 					navDrawerManuallyUsed = SharedPreferencesHelper.get().loadPreferenceAsBoolean(NAV_DRAWER_MANUALLY_USED, false);
-					AppExecutors.getMainThreadExecutor().execute(new Runnable() {
+					AppExecutors.INSTANCE.getMainThreadExecutor().execute(new Runnable() {
 
 						@Override
 						public void run() {
@@ -131,7 +131,7 @@ public abstract class NavDrawer {
 
 	private void saveNavDrawerManuallyUsed() {
 		if ((navDrawerManuallyUsed == null) || !navDrawerManuallyUsed) {
-			AppExecutors.getDiskIOExecutor().execute(new Runnable() {
+			AppExecutors.INSTANCE.getDiskIOExecutor().execute(new Runnable() {
 
 				@Override
 				public void run() {

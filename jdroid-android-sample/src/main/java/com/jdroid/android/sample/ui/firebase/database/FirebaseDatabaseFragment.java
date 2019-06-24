@@ -36,7 +36,7 @@ public class FirebaseDatabaseFragment extends AbstractFragment {
 		findView(R.id.firebaseCreate).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				AppExecutors.getNetworkIOExecutor().execute(new Runnable() {
+				AppExecutors.INSTANCE.getNetworkIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
 						SampleFirebaseEntity entity = new SampleFirebaseEntity();
@@ -52,7 +52,7 @@ public class FirebaseDatabaseFragment extends AbstractFragment {
 		findView(R.id.firebaseUpdate).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				AppExecutors.getNetworkIOExecutor().execute(new Runnable() {
+				AppExecutors.INSTANCE.getNetworkIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
 						SampleFirebaseEntity entity = new SampleFirebaseEntity();
@@ -67,7 +67,7 @@ public class FirebaseDatabaseFragment extends AbstractFragment {
 		findView(R.id.firebaseGetAll).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				AppExecutors.getNetworkIOExecutor().execute(new Runnable() {
+				AppExecutors.INSTANCE.getNetworkIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
 						final List<SampleFirebaseEntity> results = repository.getAll();
@@ -85,7 +85,7 @@ public class FirebaseDatabaseFragment extends AbstractFragment {
 		findView(R.id.firebaseRemove).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				AppExecutors.getNetworkIOExecutor().execute(new Runnable() {
+				AppExecutors.INSTANCE.getNetworkIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
 						repository.remove(lastId);

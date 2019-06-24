@@ -33,7 +33,7 @@ public class RoomFragment extends AbstractFragment {
 
 			@Override
 			public void onClick(View v) {
-				AppExecutors.getDiskIOExecutor().execute(new Runnable() {
+				AppExecutors.INSTANCE.getDiskIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
 						SampleEntityDao sampleEntityDao = RoomHelper.INSTANCE.getDefaultDatabase(AppDatabase.class).sampleEntityDao();
@@ -52,7 +52,7 @@ public class RoomFragment extends AbstractFragment {
 
 			@Override
 			public void onClick(View v) {
-				AppExecutors.getDiskIOExecutor().execute(new Runnable() {
+				AppExecutors.INSTANCE.getDiskIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
 						SampleEntityDao sampleEntityDao = RoomHelper.INSTANCE.getDefaultDatabase(AppDatabase.class).sampleEntityDao();
@@ -70,7 +70,7 @@ public class RoomFragment extends AbstractFragment {
 
 			@Override
 			public void onClick(View v) {
-				AppExecutors.getDiskIOExecutor().execute(new Runnable() {
+				AppExecutors.INSTANCE.getDiskIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
 						SampleEntityDao sampleEntityDao = RoomHelper.INSTANCE.getDefaultDatabase(AppDatabase.class).sampleEntityDao();
@@ -89,7 +89,7 @@ public class RoomFragment extends AbstractFragment {
 
 			@Override
 			public void onClick(View v) {
-				AppExecutors.getDiskIOExecutor().execute(new Runnable() {
+				AppExecutors.INSTANCE.getDiskIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
 						if (lastId != null) {
@@ -105,7 +105,7 @@ public class RoomFragment extends AbstractFragment {
 
 			@Override
 			public void onClick(View v) {
-				AppExecutors.getDiskIOExecutor().execute(new Runnable() {
+				AppExecutors.INSTANCE.getDiskIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
 						SampleEntityDao sampleEntityDao = RoomHelper.INSTANCE.getDefaultDatabase(AppDatabase.class).sampleEntityDao();
@@ -118,7 +118,7 @@ public class RoomFragment extends AbstractFragment {
 
 			@Override
 			public void onClick(View v) {
-				AppExecutors.getDiskIOExecutor().execute(new Runnable() {
+				AppExecutors.INSTANCE.getDiskIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
 						SampleEntityDao sampleEntityDao = RoomHelper.INSTANCE.getDefaultDatabase(AppDatabase.class).sampleEntityDao();
@@ -147,7 +147,7 @@ public class RoomFragment extends AbstractFragment {
 
 			@Override
 			public void onClick(View v) {
-				AppExecutors.getDiskIOExecutor().execute(new Runnable() {
+				AppExecutors.INSTANCE.getDiskIOExecutor().execute(new Runnable() {
 					@Override
 					public void run() {
 						SampleEntityDao sampleEntityDao = RoomHelper.INSTANCE.getDefaultDatabase(AppDatabase.class).sampleEntityDao();

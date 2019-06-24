@@ -4,9 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.appcompat.widget.AppCompatButton;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.DatePicker;
@@ -14,6 +11,10 @@ import android.widget.DatePicker;
 import com.jdroid.java.date.DateUtils;
 
 import java.util.Date;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.fragment.app.Fragment;
 
 public class TimeButton extends AppCompatButton {
 
@@ -48,7 +49,7 @@ public class TimeButton extends AppCompatButton {
 
 	public void setTime(Date time) {
 		this.time = time;
-		setText(AndroidDateUtils.formatTime(time));
+		setText(AndroidDateUtils.INSTANCE.formatTime(time));
 	}
 
 	public Date getTime() {

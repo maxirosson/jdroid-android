@@ -18,7 +18,7 @@ public class AdMobDebugAppLifecycleCallback extends ApplicationLifecycleCallback
 
 	@Override
 	public void onCreate(Context context) {
-		AppExecutors.getDiskIOExecutor().execute(new Runnable() {
+		AppExecutors.INSTANCE.getDiskIOExecutor().execute(new Runnable() {
 			@Override
 			public void run() {
 				// This is required to initialize the prefs to display on the debug settings

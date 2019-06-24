@@ -193,7 +193,7 @@ public abstract class AbstractApplication extends KotlinAbstractApplication {
 			ToastUtils.init();
 			DateUtils.init();
 
-			AppExecutors.getDiskIOExecutor().execute(new Runnable() {
+			AppExecutors.INSTANCE.getDiskIOExecutor().execute(new Runnable() {
 
 				@Override
 				public void run() {
@@ -232,7 +232,7 @@ public abstract class AbstractApplication extends KotlinAbstractApplication {
 	}
 
 	protected Boolean isLoggingEnabled() {
-		return isDebuggable() || (isFirebaseTestLabLoggingEnabled() && FirebaseTestLab.isRunningInstrumentedTests());
+		return isDebuggable() || (isFirebaseTestLabLoggingEnabled() && FirebaseTestLab.INSTANCE.isRunningInstrumentedTests());
 	}
 
 	protected Boolean isFirebaseTestLabLoggingEnabled() {

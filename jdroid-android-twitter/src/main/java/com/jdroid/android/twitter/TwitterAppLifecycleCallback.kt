@@ -19,7 +19,7 @@ class TwitterAppLifecycleCallback : ApplicationLifecycleCallback() {
     }
 
     override fun onCreate(context: Context) {
-        AppExecutors.getNetworkIOExecutor().execute {
+        AppExecutors.networkIOExecutor.execute {
             val twitterOauthConsumerKey = TwitterAppContext.getTwitterOauthConsumerKey()
             val twitterOauthConsumerSecret = TwitterAppContext.getTwitterOauthConsumerSecret()
             if (twitterOauthConsumerKey == null || twitterOauthConsumerSecret == null) {
