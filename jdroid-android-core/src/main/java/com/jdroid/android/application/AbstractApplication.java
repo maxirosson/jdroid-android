@@ -527,6 +527,7 @@ public abstract class AbstractApplication extends KotlinAbstractApplication {
 
 	public abstract int getNotificationIconResId();
 
+	@NonNull
 	public abstract String getManifestPackageName();
 
 	public void addAppModulesMap(String name, AppModule appModule) {
