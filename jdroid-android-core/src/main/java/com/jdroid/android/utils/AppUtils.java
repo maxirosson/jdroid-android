@@ -74,7 +74,7 @@ public class AppUtils {
 	public static PackageInfo getPackageInfo() {
 		PackageInfo info = null;
 		try {
-			info = getContext().getPackageManager().getPackageInfo(AppContextContainer.getApplicationContext().getPackageName(), 0);
+			info = getContext().getPackageManager().getPackageInfo(AppContextContainer.INSTANCE.getApplicationContext().getPackageName(), 0);
 		} catch (PackageManager.NameNotFoundException e) {
 			// Do Nothing
 		}
@@ -124,7 +124,7 @@ public class AppUtils {
 	}
 
 	private static Context getContext() {
-		return AppContextContainer.getApplicationContext();
+		return AppContextContainer.INSTANCE.getApplicationContext();
 	}
 
 	@Nullable

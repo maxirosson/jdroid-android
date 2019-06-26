@@ -2,20 +2,21 @@ package com.jdroid.android.navdrawer;
 
 import android.app.Activity;
 import android.content.Intent;
-import androidx.annotation.Nullable;
 
 import com.jdroid.android.activity.AbstractFragmentActivity;
 
-public class AbstractNavDrawerItem implements NavDrawerItem {
+import androidx.annotation.Nullable;
 
-	private Integer itemId;
+public class DefaultNavDrawerItem implements NavDrawerItem {
+
+	private int itemId;
 	private Class<? extends Activity> activityClass;
 
-	public AbstractNavDrawerItem(Integer itemId) {
+	public DefaultNavDrawerItem(int itemId) {
 		this(itemId, null);
 	}
 
-	public AbstractNavDrawerItem(Integer itemId, Class<? extends Activity> activityClass) {
+	public DefaultNavDrawerItem(int itemId, Class<? extends Activity> activityClass) {
 		this.itemId = itemId;
 		this.activityClass = activityClass;
 	}
@@ -29,12 +30,12 @@ public class AbstractNavDrawerItem implements NavDrawerItem {
 	}
 
 	@Override
-	public Boolean matchesActivity(Activity activity) {
+	public boolean matchesActivity(Activity activity) {
 		return activity.getClass().equals(activityClass);
 	}
 
 	@Override
-	public Integer getItemId() {
+	public int getItemId() {
 		return itemId;
 	}
 

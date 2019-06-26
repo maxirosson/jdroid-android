@@ -66,7 +66,7 @@ public abstract class DefaultNavDrawer extends NavDrawer {
 
 	private NavDrawerItem findNavDrawerByMenu(MenuItem menuItem) {
 		for (NavDrawerItem each : navDrawerItems) {
-			if (each.getItemId().equals(menuItem.getItemId())) {
+			if (each.getItemId() == menuItem.getItemId()) {
 				return each;
 			}
 		}

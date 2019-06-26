@@ -3,7 +3,7 @@ package com.jdroid.android.sample.ui;
 import com.jdroid.android.about.AboutActivity;
 import com.jdroid.android.activity.AbstractFragmentActivity;
 import com.jdroid.android.activity.ActivityHelper;
-import com.jdroid.android.navdrawer.AbstractNavDrawerItem;
+import com.jdroid.android.navdrawer.DefaultNavDrawerItem;
 import com.jdroid.android.navdrawer.DefaultNavDrawer;
 import com.jdroid.android.navdrawer.NavDrawer;
 import com.jdroid.android.navdrawer.NavDrawerHeader;
@@ -34,8 +34,8 @@ public class AndroidActivityHelper extends ActivityHelper {
 			@Override
 			protected List<NavDrawerItem> createNavDrawerItems() {
 				List<NavDrawerItem> navDrawerItems = Lists.newArrayList();
-				navDrawerItems.add(new AbstractNavDrawerItem(R.id.home, HomeActivity.class));
-				navDrawerItems.add(new AbstractNavDrawerItem(R.id.about, AboutActivity.class));
+				navDrawerItems.add(new DefaultNavDrawerItem(R.id.home, HomeActivity.class));
+				navDrawerItems.add(new DefaultNavDrawerItem(R.id.about, AboutActivity.class));
 				return navDrawerItems;
 			}
 

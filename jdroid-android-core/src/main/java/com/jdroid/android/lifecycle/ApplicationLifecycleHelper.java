@@ -40,7 +40,7 @@ public class ApplicationLifecycleHelper {
 	@MainThread
 	public static void attachBaseContext(Context context) {
 
-		AppContextContainer.setApplicationContext(context);
+		AppContextContainer.INSTANCE.setApplicationContext(context);
 
 		LOGGER.debug("Executing attachBaseContext on application");
 
