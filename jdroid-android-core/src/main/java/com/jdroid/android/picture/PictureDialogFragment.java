@@ -18,7 +18,6 @@ import com.jdroid.java.date.DateUtils;
 
 import java.io.File;
 
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -44,9 +43,6 @@ public class PictureDialogFragment extends AbstractDialogFragment {
 		pictureDialogFragment.show(fm, PictureDialogFragment.class.getSimpleName());
 	}
 
-	/**
-	 * @see com.jdroid.android.dialog.AbstractDialogFragment#onCreate(android.os.Bundle)
-	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -61,9 +57,6 @@ public class PictureDialogFragment extends AbstractDialogFragment {
 		return R.layout.jdroid_picture_dialog_fragment;
 	}
 
-	/**
-	 * @see Fragment#onViewCreated(android.view.View, android.os.Bundle)
-	 */
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
@@ -101,9 +94,6 @@ public class PictureDialogFragment extends AbstractDialogFragment {
 		});
 	}
 
-	/**
-	 * @see Fragment#onActivityResult(int, int, android.content.Intent)
-	 */
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
@@ -127,9 +117,6 @@ public class PictureDialogFragment extends AbstractDialogFragment {
 		}
 	}
 
-	/**
-	 * @see DialogFragment#onSaveInstanceState(android.os.Bundle)
-	 */
 	@Override
 	public void onSaveInstanceState(Bundle bundle) {
 		super.onSaveInstanceState(bundle);

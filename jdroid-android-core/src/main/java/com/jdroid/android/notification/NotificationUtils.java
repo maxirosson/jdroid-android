@@ -66,7 +66,7 @@ public class NotificationUtils {
 				}
 			} else {
 				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-					NotificationUtils.createNotificationChannel(NotificationChannelFactory.createNotificationChannel(notificationChannelType));
+					NotificationUtils.createNotificationChannel(NotificationChannelFactory.INSTANCE.createNotificationChannel(notificationChannelType));
 				}
 			}
 		}

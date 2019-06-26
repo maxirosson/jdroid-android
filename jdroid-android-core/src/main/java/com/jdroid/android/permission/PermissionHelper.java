@@ -4,16 +4,17 @@ import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.StringRes;
-import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.core.content.ContextCompat;
 
 import com.jdroid.android.R;
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.dialog.AppInfoDialogFragment;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 /**
  * Helper class for permissions.
@@ -450,7 +451,7 @@ public class PermissionHelper {
 
 		@Override
 		public void showPermissionDialogFragment(String title, CharSequence message, String permission, int permissionRequestCode) {
-			PermissionDialogFragment.show(fragmentActivity, title, message, permission, permissionRequestCode);
+			PermissionDialogFragment.Companion.show(fragmentActivity, title, message, permission, permissionRequestCode);
 		}
 
 	}
@@ -479,7 +480,7 @@ public class PermissionHelper {
 
 		@Override
 		public void showPermissionDialogFragment(String title, CharSequence message, String permission, int permissionRequestCode) {
-			PermissionDialogFragment.show(fragment, title, message, permission, permissionRequestCode);
+			PermissionDialogFragment.Companion.show(fragment, title, message, permission, permissionRequestCode);
 		}
 
 	}
