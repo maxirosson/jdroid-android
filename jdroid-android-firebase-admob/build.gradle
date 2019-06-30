@@ -18,7 +18,7 @@ dependencies {
 
 	api project(":jdroid-android-core")
 
-	api("com.google.firebase:firebase-ads:17.2.0")
+	api("com.google.firebase:firebase-ads:18.0.0")
 
 	testImplementation("junit:junit:${JUNIT_VERSION}")
 	testImplementation("org.robolectric:robolectric:${ROBOLECTRIC_VERSION}")

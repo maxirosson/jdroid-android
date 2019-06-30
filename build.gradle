@@ -92,7 +92,7 @@ buildscript {
 		classpath("com.jdroidtools:jdroid-component-builder:2.0.0")
 
 		// https://github.com/maxirosson/jdroid-gradle-plugin/blob/master/CHANGELOG.md
-		classpath("com.jdroidtools:jdroid-gradle-android-plugin:2.0.0")
+		classpath("com.jdroidtools:jdroid-gradle-android-plugin:2.1.0-SNAPSHOT")
 	}
 }
 
