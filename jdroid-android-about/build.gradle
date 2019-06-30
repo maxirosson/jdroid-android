@@ -1,4 +1,4 @@
-apply plugin: "com.jdroid.android.library"
+apply plugin: "com.jdroidtools.android.library"
 
 ext.PROJECT_NAME = "Jdroid Android - About"
 description = "Jdroid dependency project for About feature"

@@ -1,4 +1,4 @@
-apply plugin: "com.jdroid.android.dynamic-feature"
+apply plugin: "com.jdroidtools.android.dynamic-feature"
 
 ext.PROJECT_NAME = "Jdroid Android Sample - Dynamic Feature"
 
