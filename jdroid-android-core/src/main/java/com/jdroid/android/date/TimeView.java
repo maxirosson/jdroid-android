@@ -5,18 +5,19 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Handler.Callback;
 import android.os.Message;
-import androidx.appcompat.widget.AppCompatTextView;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
 import com.jdroid.java.utils.IdGenerator;
+
+import androidx.appcompat.widget.AppCompatTextView;
 
 /**
  * A {@link TextView} that displays the current time
  */
 public class TimeView extends AppCompatTextView implements Callback {
 
-	private static final int MESSAGE_CODE = IdGenerator.getIntId();
+	private static final int MESSAGE_CODE = IdGenerator.INSTANCE.getIntId();
 	private static final int HANDLER_DELAY = 1000;
 
 	private Handler handler;
