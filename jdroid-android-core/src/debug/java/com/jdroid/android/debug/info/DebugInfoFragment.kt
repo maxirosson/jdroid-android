@@ -43,7 +43,7 @@ class DebugInfoFragment : AbstractRecyclerFragment() {
         properties.add(Pair("Package Name", AbstractApplication.get().manifestPackageName))
         properties.add(Pair("Version Name", AppUtils.getVersionName()))
         properties.add(Pair("Version Code", AppUtils.getVersionCode()))
-        properties.add(Pair("SO API Level", AndroidUtils.apiLevel))
+        properties.add(Pair("SO API Level", AndroidUtils.getApiLevel()))
         properties.add(Pair("Installer Package Name", AppUtils.getInstallerPackageName()))
 
         properties.add(Pair("Device Manufacturer", DeviceUtils.getDeviceManufacturer()))

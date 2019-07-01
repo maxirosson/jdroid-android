@@ -8,11 +8,11 @@ object MultiWindowUtils {
 
     @SuppressLint("NewApi")
     fun isInMultiWindowMode(activity: Activity): Boolean {
-        return AndroidUtils.apiLevel >= Build.VERSION_CODES.N && activity.isInMultiWindowMode
+        return AndroidUtils.getApiLevel() >= Build.VERSION_CODES.N && activity.isInMultiWindowMode
     }
 
     @SuppressLint("NewApi")
     fun isInPictureInPictureMode(activity: Activity): Boolean {
-        return AndroidUtils.apiLevel >= Build.VERSION_CODES.N && activity.isInPictureInPictureMode
+        return AndroidUtils.getApiLevel() >= Build.VERSION_CODES.N && activity.isInPictureInPictureMode
     }
 }
