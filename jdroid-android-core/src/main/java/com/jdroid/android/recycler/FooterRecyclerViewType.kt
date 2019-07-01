@@ -6,7 +6,7 @@ abstract class FooterRecyclerViewType : ViewHolderlessRecyclerViewType<FooterRec
         return FooterItem::class.java
     }
 
-    override fun isClickable(): Boolean? {
+    override fun isClickable(): Boolean {
         return false
     }
 

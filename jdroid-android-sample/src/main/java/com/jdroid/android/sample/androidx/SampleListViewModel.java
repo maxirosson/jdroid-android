@@ -16,21 +16,21 @@ public class SampleListViewModel extends AbstractViewModel {
 
 	public LiveData<Resource<List<SampleEntity>>> load(Boolean forceRefresh, Boolean failExecution) {
 		if (sampleEntities == null || forceRefresh) {
-			sampleEntities = SampleRepository.getAll(forceRefresh, failExecution);
+			sampleEntities = SampleRepository.INSTANCE.getAll(forceRefresh, failExecution);
 		}
 		return sampleEntities;
 	}
 
 	public LiveData<Resource<List<Object>>> loadMixedTypes() {
 		if (mixedTypes == null) {
-			mixedTypes = SampleRepository.getMixedTypes();
+			mixedTypes = SampleRepository.INSTANCE.getMixedTypes();
 		}
 		return mixedTypes;
 	}
 
 	public LiveData<Resource<List<String>>> loadStrings() {
 		if (strings == null) {
-			strings = SampleRepository.getStrings();
+			strings = SampleRepository.INSTANCE.getStrings();
 		}
 		return strings;
 	}
@@ -40,10 +40,10 @@ public class SampleListViewModel extends AbstractViewModel {
 	}
 
 	public void removeItem(String id) {
-		SampleRepository.removeItem(id);
+		SampleRepository.INSTANCE.removeItem(id);
 	}
 
 	public void addItem() {
-		SampleRepository.addItem();
+		SampleRepository.INSTANCE.addItem();
 	}
 }

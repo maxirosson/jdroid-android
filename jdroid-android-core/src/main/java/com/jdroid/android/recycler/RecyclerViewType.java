@@ -44,7 +44,7 @@ public abstract class RecyclerViewType<ITEM, VIEWHOLDER extends RecyclerView.Vie
 	@NonNull
 	public abstract RecyclerViewContainer getRecyclerViewContainer();
 
-	protected Boolean isClickable() {
+	protected boolean isClickable() {
 		return true;
 	}
 

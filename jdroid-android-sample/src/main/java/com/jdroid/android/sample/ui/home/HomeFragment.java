@@ -29,7 +29,7 @@ public class HomeFragment extends AbstractRecyclerFragment {
 	}
 
 	@Override
-	protected Boolean isDividerItemDecorationEnabled() {
+	protected boolean isDividerItemDecorationEnabled() {
 		return true;
 	}
 

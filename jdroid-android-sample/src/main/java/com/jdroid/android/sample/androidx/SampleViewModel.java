@@ -19,7 +19,7 @@ public class SampleViewModel extends AbstractViewModel {
 
 	public LiveData<Resource<SampleEntity>> load(String id, Boolean forceRefresh) {
 		if (sampleEntity == null || forceRefresh) {
-			sampleEntity = SampleRepository.get(id, forceRefresh, failLoadFromNetwork, failLoadFromDb, failSaveToDb, loadFromNetworkDelaySeconds, loadFromDbDelaySeconds, saveToDbDelaySeconds);
+			sampleEntity = SampleRepository.INSTANCE.getItem(id, forceRefresh, failLoadFromNetwork, failLoadFromDb, failSaveToDb, loadFromNetworkDelaySeconds, loadFromDbDelaySeconds, saveToDbDelaySeconds);
 		}
 		return sampleEntity;
 	}

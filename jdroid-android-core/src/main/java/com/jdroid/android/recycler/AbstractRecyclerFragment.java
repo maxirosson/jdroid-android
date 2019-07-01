@@ -77,7 +77,7 @@ public abstract class AbstractRecyclerFragment extends AbstractFragment implemen
 	}
 
 	@MainThread
-	protected Boolean isDividerItemDecorationEnabled() {
+	protected boolean isDividerItemDecorationEnabled() {
 		return false;
 	}
 

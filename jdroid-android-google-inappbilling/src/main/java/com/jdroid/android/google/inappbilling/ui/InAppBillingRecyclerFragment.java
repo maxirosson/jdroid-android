@@ -78,7 +78,7 @@ public abstract class InAppBillingRecyclerFragment extends AbstractRecyclerFragm
 	}
 
 	@Override
-	protected Boolean isDividerItemDecorationEnabled() {
+	protected boolean isDividerItemDecorationEnabled() {
 		return true;
 	}
 }

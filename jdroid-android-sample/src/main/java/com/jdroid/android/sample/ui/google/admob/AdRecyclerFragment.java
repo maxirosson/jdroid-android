@@ -89,13 +89,13 @@ public class AdRecyclerFragment extends AbstractRecyclerFragment {
 		@Override
 		public RecyclerView.ViewHolder createViewHolderFromView(View view) {
 			SimpleRecyclerFragment.StringViewHolder viewHolder = new SimpleRecyclerFragment.StringViewHolder(view);
-			viewHolder.textView = findView(view, R.id.name);
+			viewHolder.setTextView(findView(view, R.id.name));
 			return viewHolder;
 		}
 
 		@Override
 		public void fillHolderFromItem(String item, SimpleRecyclerFragment.StringViewHolder holder) {
-			holder.textView.setText(item);
+			holder.getTextView().setText(item);
 		}
 
 		@NonNull

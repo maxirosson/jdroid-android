@@ -53,7 +53,7 @@ public class CardViewRecyclerViewFragment extends AbstractRecyclerFragment {
 		}
 
 		@Override
-		protected Boolean isClickable() {
+		protected boolean isClickable() {
 			return false;
 		}
 	}

@@ -6,7 +6,7 @@ abstract class HeaderRecyclerViewType : ViewHolderlessRecyclerViewType<HeaderRec
         return HeaderItem::class.java
     }
 
-    override fun isClickable(): Boolean? {
+    override fun isClickable(): Boolean {
         return false
     }
 
