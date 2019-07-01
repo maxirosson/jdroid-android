@@ -140,7 +140,7 @@ public class PictureDialogFragment extends AbstractDialogFragment {
 		}
 
 		// Create a media file name
-		String timeStamp = DateUtils.format(DateUtils.now(), "yyyyMMdd_HHmmss");
+		String timeStamp = DateUtils.INSTANCE.format(DateUtils.INSTANCE.now(), "yyyyMMdd_HHmmss");
 		File mediaFile = new File(mediaStorageDir.getPath() + File.separator + "IMG_" + timeStamp + ".png");
 
 		return Uri.fromFile(mediaFile);

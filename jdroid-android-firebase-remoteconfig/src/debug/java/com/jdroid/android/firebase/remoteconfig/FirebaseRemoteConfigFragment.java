@@ -99,7 +99,7 @@ public class FirebaseRemoteConfigFragment extends AbstractRecyclerFragment {
 			if (!MockRemoteConfigLoader.isMocksEnabled()) {
 				FirebaseRemoteConfig firebaseRemoteConfig = FirebaseRemoteConfigLoader.get().getFirebaseRemoteConfig();
 				if (firebaseRemoteConfig != null) {
-					String fetchDate = DateUtils.formatDateTime(new Date(firebaseRemoteConfig.getInfo().getFetchTimeMillis()));
+					String fetchDate = DateUtils.INSTANCE.formatDateTime(new Date(firebaseRemoteConfig.getInfo().getFetchTimeMillis()));
 					holder.fetchTimeMillis.setText(getString(R.string.jdroid_firebaseRemoteConfigFetchDate, fetchDate));
 					int status = firebaseRemoteConfig.getInfo().getLastFetchStatus();
 					String statusValue = "Unknown";

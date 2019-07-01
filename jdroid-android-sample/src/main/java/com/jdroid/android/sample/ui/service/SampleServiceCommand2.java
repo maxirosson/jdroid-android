@@ -24,7 +24,7 @@ public class SampleServiceCommand2 extends AbstractSampleServiceCommand {
 			builder.setContentTitle(getClass().getSimpleName());
 			builder.setContentText(bundle.get("a").toString());
 
-			NotificationUtils.sendNotification(IdGenerator.getIntId(), builder);
+			NotificationUtils.sendNotification(IdGenerator.INSTANCE.getIntId(), builder);
 			return false;
 		}
 	}

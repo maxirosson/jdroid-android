@@ -4,8 +4,6 @@ import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.google.firebase.perf.metrics.Trace;
 import com.jdroid.android.application.AbstractApplication;
@@ -15,6 +13,9 @@ import com.jdroid.java.utils.LoggerUtils;
 import com.squareup.leakcanary.LeakCanary;
 
 import org.slf4j.Logger;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public abstract class AbstractWorkerService extends IntentService {
 
@@ -39,10 +40,10 @@ public abstract class AbstractWorkerService extends IntentService {
 					trace = TraceHelper.INSTANCE.startTrace(tag);
 				}
 				logger.info("Executing service.");
-				long startTime = DateUtils.nowMillis();
+				long startTime = DateUtils.INSTANCE.nowMillis();
 				doExecute(intent);
-				long executionTime = DateUtils.nowMillis() - startTime;
-				logger.info("Service finished. Execution time: " + DateUtils.formatDuration(executionTime));
+				long executionTime = DateUtils.INSTANCE.nowMillis() - startTime;
+				logger.info("Service finished. Execution time: " + DateUtils.INSTANCE.formatDuration(executionTime));
 
 				if (trace != null) {
 					trace.putAttribute("result", "success");

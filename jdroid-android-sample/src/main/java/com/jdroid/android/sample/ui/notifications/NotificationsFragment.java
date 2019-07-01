@@ -92,11 +92,11 @@ public class NotificationsFragment extends AbstractFragment {
 							builder.setContentIntent(intent);
 						}
 
-						builder.setWhen(DateUtils.nowMillis());
+						builder.setWhen(DateUtils.INSTANCE.nowMillis());
 						builder.setBlueLight();
 						builder.setDefaultSound();
 
-						NotificationUtils.sendNotification(IdGenerator.getIntId(), builder);
+						NotificationUtils.sendNotification(IdGenerator.INSTANCE.getIntId(), builder);
 					}
 				});
 			}

@@ -125,7 +125,7 @@ public class LocationHelper implements LocationListener {
 				if (location == null) {
 					location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 				}
-				locationTime = DateUtils.nowMillis();
+				locationTime = DateUtils.INSTANCE.nowMillis();
 			}
 			started = false;
 			LOGGER.info("Localization stopped");
@@ -140,7 +140,7 @@ public class LocationHelper implements LocationListener {
 		if (isBetterLocation(location, this.location)) {
 			LOGGER.info("Location changed");
 			this.location = location;
-			locationTime = DateUtils.nowMillis();
+			locationTime = DateUtils.INSTANCE.nowMillis();
 		} else {
 			LOGGER.info("Location discarded");
 		}
@@ -150,7 +150,7 @@ public class LocationHelper implements LocationListener {
 		if (location != null) {
 			LOGGER.info("Location changed");
 			this.location = location;
-			locationTime = DateUtils.nowMillis();
+			locationTime = DateUtils.INSTANCE.nowMillis();
 		} else {
 			LOGGER.info("Location discarded");
 		}
@@ -252,7 +252,7 @@ public class LocationHelper implements LocationListener {
 
 	public Boolean hasSignificantlyOlderLocation() {
 		if (location != null) {
-			long timeDelta = DateUtils.nowMillis() - locationTime;
+			long timeDelta = DateUtils.INSTANCE.nowMillis() - locationTime;
 			return timeDelta > MAXIMUM_TIME_DELTA;
 		}
 		return true;

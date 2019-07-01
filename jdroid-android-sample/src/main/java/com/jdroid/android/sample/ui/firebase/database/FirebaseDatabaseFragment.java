@@ -40,9 +40,9 @@ public class FirebaseDatabaseFragment extends AbstractFragment {
 					@Override
 					public void run() {
 						SampleFirebaseEntity entity = new SampleFirebaseEntity();
-						lastId = RandomUtils.getLong().toString();
+						lastId = RandomUtils.INSTANCE.getLong().toString();
 						entity.setId(lastId);
-						entity.setField(RandomUtils.getLong().toString());
+						entity.setField(RandomUtils.INSTANCE.getLong().toString());
 						repository.add(entity);
 					}
 				});
@@ -57,7 +57,7 @@ public class FirebaseDatabaseFragment extends AbstractFragment {
 					public void run() {
 						SampleFirebaseEntity entity = new SampleFirebaseEntity();
 						entity.setId(lastId);
-						entity.setField(RandomUtils.getLong().toString());
+						entity.setField(RandomUtils.INSTANCE.getLong().toString());
 						repository.update(entity);
 					}
 				});

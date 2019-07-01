@@ -98,7 +98,7 @@ public class TimerView extends AppCompatTextView implements Handler.Callback {
 		if (status.equals(Status.INITIAL)) {
 			LOGGER.info("Starting timer");
 			durationBeforePause = 0L;
-			startTime = DateUtils.nowMillis();
+			startTime = DateUtils.INSTANCE.nowMillis();
 			stopTime = 0L;
 			status = Status.STARTED;
 			updateTime();
@@ -110,7 +110,7 @@ public class TimerView extends AppCompatTextView implements Handler.Callback {
 	public void pause() {
 		if (status.equals(Status.STARTED)) {
 			LOGGER.info("Pausing timer");
-			stopTime = DateUtils.nowMillis();
+			stopTime = DateUtils.INSTANCE.nowMillis();
 			if (startTime > 0) {
 				durationBeforePause = durationBeforePause + stopTime - startTime;
 				startTime = 0L;
@@ -126,7 +126,7 @@ public class TimerView extends AppCompatTextView implements Handler.Callback {
 	public void unpause() {
 		if (status.equals(Status.PAUSED)) {
 			LOGGER.info("Unpausing timer");
-			startTime = DateUtils.nowMillis();
+			startTime = DateUtils.INSTANCE.nowMillis();
 			stopTime = 0L;
 			status = Status.STARTED;
 			updateTime();
@@ -138,7 +138,7 @@ public class TimerView extends AppCompatTextView implements Handler.Callback {
 	public void stop() {
 		if (status.equals(Status.STARTED)) {
 			LOGGER.info("Stopped timer");
-			stopTime = DateUtils.nowMillis();
+			stopTime = DateUtils.INSTANCE.nowMillis();
 			status = Status.STOPPED;
 			updateTime();
 		} else {
@@ -159,7 +159,7 @@ public class TimerView extends AppCompatTextView implements Handler.Callback {
 		if (startTime > 0 && stopTime > 0) {
 			return durationBeforePause + stopTime - startTime;
 		} else if (startTime > 0) {
-			return durationBeforePause + DateUtils.nowMillis() - startTime;
+			return durationBeforePause + DateUtils.INSTANCE.nowMillis() - startTime;
 		} else {
 			return 0L;
 		}

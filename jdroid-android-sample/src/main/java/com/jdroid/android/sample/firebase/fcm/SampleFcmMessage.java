@@ -29,11 +29,11 @@ public class SampleFcmMessage extends AbstractFcmMessage {
 		String description = "Sample Content Description";
 		Long timestamp = TypeUtils.getLong(remoteMessage.getData().get("timestamp"));
 		if (timestamp != null) {
-			description = DateUtils.format(new Date(timestamp), DateTimeFormat.YYYYMMDDHHMMSSSSS);
+			description = DateUtils.INSTANCE.format(new Date(timestamp), DateTimeFormat.YYYYMMDDHHMMSSSSS);
 		}
 		builder.setContentText(description);
-		builder.setWhen(DateUtils.nowMillis());
+		builder.setWhen(DateUtils.INSTANCE.nowMillis());
 
-		NotificationUtils.sendNotification(IdGenerator.getIntId(), builder);
+		NotificationUtils.sendNotification(IdGenerator.INSTANCE.getIntId(), builder);
 	}
 }

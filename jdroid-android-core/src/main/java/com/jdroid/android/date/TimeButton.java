@@ -44,7 +44,7 @@ public class TimeButton extends AppCompatButton {
 	}
 
 	public void setTime(Long timestamp) {
-		setTime(DateUtils.getDate(timestamp));
+		setTime(DateUtils.INSTANCE.getDate(timestamp));
 	}
 
 	public void setTime(Date time) {
@@ -89,14 +89,14 @@ public class TimeButton extends AppCompatButton {
 		 */
 		private SavedState(Parcel in) {
 			super(in);
-			time = DateUtils.getTime(in.readInt(), in.readInt());
+			time = DateUtils.INSTANCE.getTime(in.readInt(), in.readInt());
 		}
 
 		@Override
 		public void writeToParcel(@NonNull Parcel dest, int flags) {
 			super.writeToParcel(dest, flags);
-			dest.writeInt(DateUtils.getHour(time, true));
-			dest.writeInt(DateUtils.getMinute(time));
+			dest.writeInt(DateUtils.INSTANCE.getHour(time, true));
+			dest.writeInt(DateUtils.INSTANCE.getMinute(time));
 		}
 
 		@SuppressWarnings({ "hiding", "unused" })

@@ -72,10 +72,10 @@ public class SimpleRecyclerFragment extends AbstractRecyclerFragment {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 			case R.id.addItem:
-				getRecyclerViewAdapter().addItem(IdGenerator.getIntId().toString());
+				getRecyclerViewAdapter().addItem(IdGenerator.INSTANCE.getIntId().toString());
 				return true;
 			case R.id.addItems:
-				getRecyclerViewAdapter().addItems(Lists.newArrayList(IdGenerator.getIntId().toString(), IdGenerator.getIntId().toString(), IdGenerator.getIntId().toString()));
+				getRecyclerViewAdapter().addItems(Lists.newArrayList(IdGenerator.INSTANCE.getIntId().toString(), IdGenerator.INSTANCE.getIntId().toString(), IdGenerator.INSTANCE.getIntId().toString()));
 				return true;
 			case R.id.replaceWithSameItems:
 				List<Object> items = Lists.newArrayList(getRecyclerViewAdapter().getItems());
@@ -103,7 +103,7 @@ public class SimpleRecyclerFragment extends AbstractRecyclerFragment {
 				return true;
 			case R.id.replaceWithDifferentItems:
 				List<Object> oldItems = Lists.newArrayList(getRecyclerViewAdapter().getItems());
-				List<Object> newItems = Lists.newArrayList(IdGenerator.getIntId().toString(), IdGenerator.getIntId().toString(), IdGenerator.getIntId().toString());
+				List<Object> newItems = Lists.newArrayList(IdGenerator.INSTANCE.getIntId().toString(), IdGenerator.INSTANCE.getIntId().toString(), IdGenerator.INSTANCE.getIntId().toString());
 				getRecyclerViewAdapter().replaceItems(newItems, new DiffUtil.Callback() {
 					@Override
 					public int getOldListSize() {

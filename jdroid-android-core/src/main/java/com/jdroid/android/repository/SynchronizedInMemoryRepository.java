@@ -19,13 +19,13 @@ public class SynchronizedInMemoryRepository<T extends Identifiable> extends InMe
 
 	@Override
 	public void refreshUpdateTimestamp() {
-		lastUpdateTimestamp = DateUtils.nowMillis();
+		lastUpdateTimestamp = DateUtils.INSTANCE.nowMillis();
 	}
 
 	@Override
 	public Boolean isOutdated() {
 		return (lastUpdateTimestamp == null)
-			|| ((lastUpdateTimestamp + getRefreshFrequency()) < DateUtils.nowMillis());
+			|| ((lastUpdateTimestamp + getRefreshFrequency()) < DateUtils.INSTANCE.nowMillis());
 	}
 
 	@Override

@@ -51,10 +51,10 @@ public class NotificationFcmMessage extends AbstractFcmMessage {
 		initContentIntent(remoteMessage, builder);
 
 		builder.setPublicVisibility();
-		builder.setWhen(DateUtils.nowMillis());
+		builder.setWhen(DateUtils.INSTANCE.nowMillis());
 		configureBuilder(remoteMessage, builder);
 
-		NotificationUtils.sendNotification(IdGenerator.getIntId(), builder);
+		NotificationUtils.sendNotification(IdGenerator.INSTANCE.getIntId(), builder);
 	}
 
 	protected void initContentTitle(RemoteMessage remoteMessage, NotificationBuilder builder) {

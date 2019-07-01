@@ -62,14 +62,14 @@ public class TimePickerDialogFragment extends AbstractDialogFragment {
 
 		final TimePicker timePicker = (TimePicker)view.findViewById(R.id.timePicker);
 		timePicker.setIs24HourView(DateFormat.is24HourFormat(getActivity()));
-		timePicker.setCurrentHour(DateUtils.getHour(defaultTime, true));
-		timePicker.setCurrentMinute(DateUtils.getMinute(defaultTime));
+		timePicker.setCurrentHour(DateUtils.INSTANCE.getHour(defaultTime, true));
+		timePicker.setCurrentMinute(DateUtils.INSTANCE.getMinute(defaultTime));
 
 		dialogBuilder.setPositiveButton(getString(R.string.jdroid_ok), new DialogInterface.OnClickListener() {
 
 			@Override
 			public void onClick(DialogInterface dialog, int whichButton) {
-				Date time = DateUtils.getTime(timePicker.getCurrentHour(), timePicker.getCurrentMinute());
+				Date time = DateUtils.INSTANCE.getTime(timePicker.getCurrentHour(), timePicker.getCurrentMinute());
 				int requestCode = getTargetRequestCode();
 				((OnTimeSetListener)getTargetFragment()).onTimeSet(time, requestCode);
 			}

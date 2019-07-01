@@ -1,7 +1,6 @@
 package com.jdroid.android.sample.ui.service;
 
 import android.content.Intent;
-import androidx.annotation.NonNull;
 
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.notification.NotificationBuilder;
@@ -10,6 +9,8 @@ import com.jdroid.android.sample.application.AndroidNotificationChannelType;
 import com.jdroid.android.service.AbstractWorkerService;
 import com.jdroid.java.exception.UnexpectedException;
 import com.jdroid.java.utils.IdGenerator;
+
+import androidx.annotation.NonNull;
 
 public class SampleWorkerService extends AbstractWorkerService {
 
@@ -27,7 +28,7 @@ public class SampleWorkerService extends AbstractWorkerService {
 			builder.setContentTitle(getClass().getSimpleName());
 			builder.setContentText(intent.getExtras().get("a").toString());
 
-			NotificationUtils.sendNotification(IdGenerator.getIntId(), builder);
+			NotificationUtils.sendNotification(IdGenerator.INSTANCE.getIntId(), builder);
 		}
 	}
 

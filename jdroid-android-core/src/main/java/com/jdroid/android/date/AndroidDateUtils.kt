@@ -12,7 +12,7 @@ object AndroidDateUtils {
     /**
      * @return The formatted time
      */
-    fun formatTime(): String {
+    fun formatTime(): String? {
         return formatTime(DateUtils.now())
     }
 
@@ -20,7 +20,7 @@ object AndroidDateUtils {
      * @param date The [Date] to format
      * @return The formatted time
      */
-    fun formatTime(date: Date): String {
+    fun formatTime(date: Date?): String? {
         val timeFormat = android.text.format.DateFormat.getTimeFormat(AbstractApplication.get())
         return DateUtils.format(date, timeFormat)
     }
@@ -28,7 +28,7 @@ object AndroidDateUtils {
     /**
      * @return The formatted date
      */
-    fun formatDate(): String {
+    fun formatDate(): String? {
         return formatDate(DateUtils.now())
     }
 
@@ -36,7 +36,7 @@ object AndroidDateUtils {
      * @param date The [Date] to format
      * @return The formatted date
      */
-    fun formatDate(date: Date): String {
+    fun formatDate(date: Date?): String? {
         val dateFormat = android.text.format.DateFormat.getDateFormat(AbstractApplication.get())
         return DateUtils.format(date, dateFormat)
     }

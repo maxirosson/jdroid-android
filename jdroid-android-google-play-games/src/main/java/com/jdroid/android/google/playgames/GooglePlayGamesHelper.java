@@ -1,7 +1,6 @@
 package com.jdroid.android.google.playgames;
 
 import android.content.Intent;
-import androidx.annotation.NonNull;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -33,11 +32,13 @@ import org.slf4j.Logger;
 
 import java.util.List;
 
+import androidx.annotation.NonNull;
+
 public class GooglePlayGamesHelper extends GoogleSignInHelper {
 
 	private static Logger LOGGER = LoggerUtils.getLogger(GooglePlayGamesHelper.class);
 
-	private static final int UNUSED_REQUEST_CODE = RandomUtils.get16BitsInt();
+	private static final int UNUSED_REQUEST_CODE = RandomUtils.INSTANCE.get16BitsInt();
 
 	private LeaderboardsClient leaderboardsClient;
 	private AchievementsClient achievementsClient;

@@ -8,25 +8,25 @@ class StaticFirebaseRemoteConfigValue(private val remoteConfigParameter: RemoteC
 
     @Throws(IllegalArgumentException::class)
     override fun asLong(): Long {
-        return remoteConfigParameter.defaultValue as Long
+        return remoteConfigParameter.getDefaultValue() as Long
     }
 
     @Throws(IllegalArgumentException::class)
     override fun asDouble(): Double {
-        return remoteConfigParameter.defaultValue as Double
+        return remoteConfigParameter.getDefaultValue() as Double
     }
 
     override fun asString(): String {
-        return remoteConfigParameter.defaultValue.toString()
+        return remoteConfigParameter.getDefaultValue().toString()
     }
 
     override fun asByteArray(): ByteArray {
-        return remoteConfigParameter.defaultValue as ByteArray
+        return remoteConfigParameter.getDefaultValue() as ByteArray
     }
 
     @Throws(IllegalArgumentException::class)
     override fun asBoolean(): Boolean {
-        return remoteConfigParameter.defaultValue as Boolean
+        return remoteConfigParameter.getDefaultValue() as Boolean
     }
 
     override fun getSource(): Int {

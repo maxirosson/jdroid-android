@@ -1,8 +1,6 @@
 package com.jdroid.android.google.signin;
 
 import android.content.Intent;
-import androidx.annotation.CallSuper;
-import androidx.annotation.NonNull;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -19,11 +17,14 @@ import com.jdroid.java.utils.RandomUtils;
 
 import org.slf4j.Logger;
 
+import androidx.annotation.CallSuper;
+import androidx.annotation.NonNull;
+
 public class GoogleSignInHelper {
 
 	private static Logger LOGGER = LoggerUtils.getLogger(GoogleSignInHelper.class);
 
-	private static final int SIGN_IN_REQUEST_CODE = RandomUtils.get16BitsInt();
+	private static final int SIGN_IN_REQUEST_CODE = RandomUtils.INSTANCE.get16BitsInt();
 
 	private GoogleSignInClient googleSignInClient;
 

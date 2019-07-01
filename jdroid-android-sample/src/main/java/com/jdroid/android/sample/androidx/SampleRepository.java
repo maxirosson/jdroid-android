@@ -44,9 +44,9 @@ public class SampleRepository {
 			@Override
 			public void run() {
 				SampleEntity sampleEntity = new SampleEntity();
-				sampleEntity.setId(RandomUtils.getLong().toString());
-				sampleEntity.setField(RandomUtils.getLong().toString());
-				sampleEntity.setDate(DateUtils.now());
+				sampleEntity.setId(RandomUtils.INSTANCE.getLong().toString());
+				sampleEntity.setField(RandomUtils.INSTANCE.getLong().toString());
+				sampleEntity.setDate(DateUtils.INSTANCE.now());
 				getSampleEntityDao().upsert(sampleEntity);
 			}
 		});
@@ -65,14 +65,14 @@ public class SampleRepository {
 					SampleEntity sampleEntity = new SampleEntity();
 					sampleEntity.setId(item.getId());
 					sampleEntity.setField(item.getValue());
-					sampleEntity.setDate(DateUtils.now());
+					sampleEntity.setDate(DateUtils.INSTANCE.now());
 					getSampleEntityDao().upsert(sampleEntity);
 				}
 			}
 
 			@Override
 			protected boolean shouldFetch(@Nullable SampleEntity data) {
-				return forceRefresh || data == null || (data.getDate() != null && DateUtils.nowMillis() - data.getDate().getTime() > 10000);
+				return forceRefresh || data == null || (data.getDate() != null && DateUtils.INSTANCE.nowMillis() - data.getDate().getTime() > 10000);
 			}
 
 			@MainThread
@@ -120,7 +120,7 @@ public class SampleRepository {
 				} else {
 					NetworkResponse networkResponse = new NetworkResponse();
 					networkResponse.setId(ID);
-					networkResponse.setValue(RandomUtils.getLong().toString());
+					networkResponse.setValue(RandomUtils.INSTANCE.getLong().toString());
 					return new ApiSuccessResponse<>(networkResponse);
 				}
 			}
@@ -137,7 +137,7 @@ public class SampleRepository {
 					SampleEntity sampleEntity = new SampleEntity();
 					sampleEntity.setId(networkResponse.getId());
 					sampleEntity.setField(networkResponse.getValue());
-					sampleEntity.setDate(DateUtils.now());
+					sampleEntity.setDate(DateUtils.INSTANCE.now());
 					entities.add(sampleEntity);
 				}
 				getSampleEntityDao().replaceAll(entities);
@@ -164,7 +164,7 @@ public class SampleRepository {
 					List<NetworkResponse> networkResponses = Lists.newArrayList();
 					NetworkResponse networkResponse = new NetworkResponse();
 					networkResponse.setId(ID);
-					networkResponse.setValue(RandomUtils.getLong().toString());
+					networkResponse.setValue(RandomUtils.INSTANCE.getLong().toString());
 					networkResponses.add(networkResponse);
 
 					return new ApiSuccessResponse<List<NetworkResponse>>(networkResponses);

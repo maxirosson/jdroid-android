@@ -1,12 +1,13 @@
 package com.jdroid.android.sample.ui.navdrawer;
 
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
 
 import com.jdroid.android.activity.FragmentContainerActivity;
 import com.jdroid.android.context.SecurityContext;
 import com.jdroid.android.domain.User;
 import com.jdroid.java.utils.RandomUtils;
+
+import androidx.fragment.app.Fragment;
 
 public class UserNavDrawerActivity extends FragmentContainerActivity {
 
@@ -19,7 +20,7 @@ public class UserNavDrawerActivity extends FragmentContainerActivity {
 		user = new User() {
 			@Override
 			public Long getId() {
-				return RandomUtils.getLong();
+				return RandomUtils.INSTANCE.getLong();
 			}
 
 			@Override

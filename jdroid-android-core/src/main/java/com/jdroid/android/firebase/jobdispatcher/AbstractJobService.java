@@ -33,10 +33,10 @@ public abstract class AbstractJobService extends JobService {
 						trace = TraceHelper.INSTANCE.startTrace(tag);
 					}
 					LoggerUtils.getLogger(tag).info("Executing Firebase Job.");
-					long startTime = DateUtils.nowMillis();
+					long startTime = DateUtils.INSTANCE.nowMillis();
 					needsReschedule = onRunJob(jobParameters);
-					long executionTime = DateUtils.nowMillis() - startTime;
-					LoggerUtils.getLogger(tag).info("Firebase Job finished successfully. NeedsReschedule: " + needsReschedule + " - Execution time: " + DateUtils.formatDuration(executionTime));
+					long executionTime = DateUtils.INSTANCE.nowMillis() - startTime;
+					LoggerUtils.getLogger(tag).info("Firebase Job finished successfully. NeedsReschedule: " + needsReschedule + " - Execution time: " + DateUtils.INSTANCE.formatDuration(executionTime));
 
 					if (trace != null) {
 						if (!needsReschedule) {

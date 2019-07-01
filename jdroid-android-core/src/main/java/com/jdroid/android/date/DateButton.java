@@ -4,9 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.appcompat.widget.AppCompatButton;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.DatePicker;
@@ -15,6 +12,10 @@ import com.jdroid.java.date.DateTimeFormat;
 import com.jdroid.java.date.DateUtils;
 
 import java.util.Date;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.fragment.app.Fragment;
 
 public class DateButton extends AppCompatButton {
 
@@ -57,12 +58,12 @@ public class DateButton extends AppCompatButton {
 	}
 
 	public void setDate(Long timestamp) {
-		setDate(DateUtils.getDate(timestamp));
+		setDate(DateUtils.INSTANCE.getDate(timestamp));
 	}
 
 	public void setDate(Date date) {
 		this.date = date;
-		setText(DateUtils.format(date, DateTimeFormat.EEMMMDYYYY));
+		setText(DateUtils.INSTANCE.format(date, DateTimeFormat.EEMMMDYYYY));
 	}
 
 	public Date getDate() {
@@ -102,15 +103,15 @@ public class DateButton extends AppCompatButton {
 		 */
 		private SavedState(Parcel in) {
 			super(in);
-			date = DateUtils.getDate(in.readInt(), in.readInt(), in.readInt());
+			date = DateUtils.INSTANCE.getDate(in.readInt(), in.readInt(), in.readInt());
 		}
 
 		@Override
 		public void writeToParcel(@NonNull Parcel dest, int flags) {
 			super.writeToParcel(dest, flags);
-			dest.writeInt(DateUtils.getYear(date));
-			dest.writeInt(DateUtils.getMonth(date));
-			dest.writeInt(DateUtils.getDayOfMonth(date));
+			dest.writeInt(DateUtils.INSTANCE.getYear(date));
+			dest.writeInt(DateUtils.INSTANCE.getMonth(date));
+			dest.writeInt(DateUtils.INSTANCE.getDayOfMonth(date));
 		}
 
 		@SuppressWarnings({ "hiding", "unused" })

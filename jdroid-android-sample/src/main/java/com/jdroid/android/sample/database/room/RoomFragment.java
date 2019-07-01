@@ -38,10 +38,10 @@ public class RoomFragment extends AbstractFragment {
 					public void run() {
 						SampleEntityDao sampleEntityDao = RoomHelper.INSTANCE.getDefaultDatabase(AppDatabase.class).sampleEntityDao();
 						SampleEntity entity = new SampleEntity();
-						lastId = RandomUtils.getLong().toString();
+						lastId = RandomUtils.INSTANCE.getLong().toString();
 						entity.setId(lastId);
-						entity.setField(RandomUtils.getLong().toString());
-						entity.setDate(DateUtils.now());
+						entity.setField(RandomUtils.INSTANCE.getLong().toString());
+						entity.setDate(DateUtils.INSTANCE.now());
 						entity.setStringList(Lists.newArrayList("a", "b", "c"));
 						sampleEntityDao.insert(entity);
 					}
@@ -58,8 +58,8 @@ public class RoomFragment extends AbstractFragment {
 						SampleEntityDao sampleEntityDao = RoomHelper.INSTANCE.getDefaultDatabase(AppDatabase.class).sampleEntityDao();
 						SampleEntity entity = new SampleEntity();
 						entity.setId(lastId);
-						entity.setField(RandomUtils.getLong().toString());
-						entity.setDate(DateUtils.now());
+						entity.setField(RandomUtils.INSTANCE.getLong().toString());
+						entity.setDate(DateUtils.INSTANCE.now());
 						entity.setStringList(Lists.newArrayList("a", "b", "c"));
 						sampleEntityDao.update(entity);
 					}
@@ -75,10 +75,10 @@ public class RoomFragment extends AbstractFragment {
 					public void run() {
 						SampleEntityDao sampleEntityDao = RoomHelper.INSTANCE.getDefaultDatabase(AppDatabase.class).sampleEntityDao();
 						SampleEntity entity = new SampleEntity();
-						lastId = RandomUtils.getLong().toString();
+						lastId = RandomUtils.INSTANCE.getLong().toString();
 						entity.setId(lastId);
-						entity.setField(RandomUtils.getLong().toString());
-						entity.setDate(DateUtils.now());
+						entity.setField(RandomUtils.INSTANCE.getLong().toString());
+						entity.setDate(DateUtils.INSTANCE.now());
 						entity.setStringList(Lists.newArrayList("a", "b", "c"));
 						sampleEntityDao.upsert(entity);
 					}
@@ -126,15 +126,15 @@ public class RoomFragment extends AbstractFragment {
 						List<SampleEntity> entities = Lists.newArrayList();
 
 						SampleEntity entity = new SampleEntity();
-						lastId = RandomUtils.getLong().toString();
+						lastId = RandomUtils.INSTANCE.getLong().toString();
 						entity.setId(lastId);
-						entity.setField(RandomUtils.getLong().toString());
+						entity.setField(RandomUtils.INSTANCE.getLong().toString());
 						entities.add(entity);
 
 						entity = new SampleEntity();
-						lastId = RandomUtils.getLong().toString();
+						lastId = RandomUtils.INSTANCE.getLong().toString();
 						entity.setId(lastId);
-						entity.setField(RandomUtils.getLong().toString());
+						entity.setField(RandomUtils.INSTANCE.getLong().toString());
 						entities.add(entity);
 
 						sampleEntityDao.insertAll(entities);

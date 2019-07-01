@@ -191,7 +191,7 @@ public abstract class AbstractApplication extends KotlinAbstractApplication {
 
 			// This is required to initialize the statics fields of the utils classes.
 			ToastUtils.init();
-			DateUtils.init();
+			DateUtils.INSTANCE.init();
 
 			AppExecutors.INSTANCE.getDiskIOExecutor().execute(new Runnable() {
 

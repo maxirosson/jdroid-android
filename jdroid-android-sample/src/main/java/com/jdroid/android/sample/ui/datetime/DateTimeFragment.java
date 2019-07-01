@@ -28,10 +28,10 @@ public class DateTimeFragment extends AbstractFragment implements DatePickerDial
 		super.onViewCreated(view, savedInstanceState);
 
 		dateButton = findView(R.id.datePickerDialog);
-		dateButton.init(this, DateUtils.now());
+		dateButton.init(this, DateUtils.INSTANCE.now());
 
 		timeButton = findView(R.id.timePickerDialog);
-		timeButton.init(this, DateUtils.now());
+		timeButton.init(this, DateUtils.INSTANCE.now());
 	}
 
 	@Override

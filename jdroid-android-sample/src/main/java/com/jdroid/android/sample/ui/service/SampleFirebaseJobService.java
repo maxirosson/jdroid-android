@@ -1,7 +1,6 @@
 package com.jdroid.android.sample.ui.service;
 
 import android.os.Bundle;
-import androidx.annotation.MainThread;
 
 import com.firebase.jobdispatcher.FirebaseJobDispatcher;
 import com.firebase.jobdispatcher.GooglePlayDriver;
@@ -18,6 +17,8 @@ import com.jdroid.android.sample.application.AndroidNotificationChannelType;
 import com.jdroid.java.exception.UnexpectedException;
 import com.jdroid.java.utils.IdGenerator;
 
+import androidx.annotation.MainThread;
+
 public class SampleFirebaseJobService extends AbstractJobService {
 
 	@MainThread
@@ -33,7 +34,7 @@ public class SampleFirebaseJobService extends AbstractJobService {
 			builder.setContentTitle(getClass().getSimpleName());
 			builder.setContentText(jobParameters.getExtras().get("a").toString());
 
-			NotificationUtils.sendNotification(IdGenerator.getIntId(), builder);
+			NotificationUtils.sendNotification(IdGenerator.INSTANCE.getIntId(), builder);
 			return false;
 		}
 	}
