@@ -43,7 +43,7 @@ open class DefaultHeaderAppender : HttpServiceProcessor {
         httpService.addHeader(HttpService.ACCEPT_ENCODING_HEADER, HttpService.GZIP_ENCODING)
 
         httpService.addHeader(CLIENT_APP_VERSION_HEADER, AppUtils.getVersionCode()!!.toString())
-        httpService.addHeader(CLIENT_OS_VERSION_HEADER, AndroidUtils.getApiLevel()!!.toString())
+        httpService.addHeader(CLIENT_OS_VERSION_HEADER, AndroidUtils.apiLevel!!.toString())
     }
 
     protected open fun addLanguageHeader(httpService: HttpService) {

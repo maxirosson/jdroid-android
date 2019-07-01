@@ -6,8 +6,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.Parcel;
 import android.os.Parcelable;
-import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatTextView;
 import android.util.AttributeSet;
 
 import com.jdroid.android.application.AbstractApplication;
@@ -19,9 +17,12 @@ import org.slf4j.Logger;
 
 import java.util.concurrent.TimeUnit;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatTextView;
+
 public class TimerView extends AppCompatTextView implements Handler.Callback {
 
-	private static final int MESSAGE_CODE = IdGenerator.getIntId();
+	private static final int MESSAGE_CODE = IdGenerator.INSTANCE.getIntId();
 	private static final long HANDLER_DELAY = TimeUnit.SECONDS.toMillis(1);
 
 	private static final Logger LOGGER = LoggerUtils.getLogger(TimerView.class);

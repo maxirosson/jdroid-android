@@ -22,7 +22,7 @@ public class UriUtilsTest extends AbstractUnitTest {
 	}
 
 	private void verifyRandomParam(String originalUrl, String expectedUrl) {
-		String newUrl = UriUtils.addRandomParam(Uri.parse(originalUrl)).toString();
+		String newUrl = UriUtils.INSTANCE.addRandomParam(Uri.parse(originalUrl)).toString();
 		assertTrue("Transformed url: " + newUrl, newUrl.startsWith(expectedUrl));
 	}
 }

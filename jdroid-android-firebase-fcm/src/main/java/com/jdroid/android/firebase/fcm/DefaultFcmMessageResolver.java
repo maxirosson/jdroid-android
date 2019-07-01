@@ -41,7 +41,7 @@ public class DefaultFcmMessageResolver implements FcmMessageResolver {
 		Long minAppVersionCode = TypeUtils.getLong(remoteMessage.getData().get(MIN_APP_VERSION_CODE_KEY), 0L);
 		if (AppUtils.getVersionCode() >= minAppVersionCode) {
 			Long minDeviceOsVersion = TypeUtils.getLong(remoteMessage.getData().get(MIN_DEVICE_OS_VERSION_KEY), 0L);
-			if (AndroidUtils.getApiLevel() >= minDeviceOsVersion) {
+			if (AndroidUtils.INSTANCE.getApiLevel() >= minDeviceOsVersion) {
 				for (FcmMessage each : FcmContext.INSTANCE.getFcmMessages()) {
 					if (each.matches(remoteMessage)) {
 

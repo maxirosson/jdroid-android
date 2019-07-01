@@ -29,7 +29,7 @@ public class UriMapper {
 
 	@RestrictTo(LIBRARY)
 	public Boolean handleUri(@NonNull Activity activity, Intent intent, @Nullable UriHandler uriHandler, Boolean onActivityCreation) {
-		Uri uri = UriUtils.getUri(intent);
+		Uri uri = UriUtils.INSTANCE.getUri(intent);
 		if (uri != null) {
 			notifyToUriWatchers(uri);
 			if (uriHandler != null) {
@@ -69,7 +69,7 @@ public class UriMapper {
 			if (dot != -1) {
 				className = className.substring(dot + 1);
 			}
-			if (!UriUtils.isInternalReferrerCategory(referrerCategory)) {
+			if (!UriUtils.INSTANCE.isInternalReferrerCategory(referrerCategory)) {
 				AbstractApplication.get().getCoreAnalyticsSender().trackUriOpened(className, uri, referrerCategory);
 			}
 			if (activity.getIntent().getComponent().equals(intent.getComponent())) {
@@ -82,7 +82,7 @@ public class UriMapper {
 				activity.startActivity(intent);
 			}
 		} else {
-			if (!UriUtils.isInternalReferrerCategory(referrerCategory)) {
+			if (!UriUtils.INSTANCE.isInternalReferrerCategory(referrerCategory)) {
 				AbstractApplication.get().getCoreAnalyticsSender().trackUriOpened(activity.getClass().getSimpleName(), uri, referrerCategory);
 			}
 		}

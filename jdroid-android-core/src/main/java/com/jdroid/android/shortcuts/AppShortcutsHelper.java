@@ -94,7 +94,7 @@ public class AppShortcutsHelper {
 	}
 
 	public static Boolean isDynamicAppShortcutsSupported() {
-		return AndroidUtils.getApiLevel() >= Build.VERSION_CODES.N_MR1;
+		return AndroidUtils.INSTANCE.getApiLevel() >= Build.VERSION_CODES.N_MR1;
 	}
 
 	// Pinned Shortcuts

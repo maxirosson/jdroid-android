@@ -66,7 +66,7 @@ public class ActivityHelper implements ActivityIf {
 
 	private static final String REFERRER = "referrer";
 
-	private static final int LOCATION_UPDATE_TIMER_CODE = IdGenerator.getIntId();
+	private static final int LOCATION_UPDATE_TIMER_CODE = IdGenerator.INSTANCE.getIntId();
 
 	private AbstractFragmentActivity activity;
 	private Handler locationHandler;
@@ -176,7 +176,7 @@ public class ActivityHelper implements ActivityIf {
 			uriHandler = getActivityIf().createUriHandler();
 			uriHandled = AbstractApplication.get().getUriMapper().handleUri(activity, activity.getIntent(), uriHandler, true);
 			referrer = ReferrerUtils.getReferrerCategory(activity);
-			if ((uriHandled && !UriUtils.isInternalReferrerCategory(referrer)) || isHomeActivity()) {
+			if ((uriHandled && !UriUtils.INSTANCE.isInternalReferrerCategory(referrer)) || isHomeActivity()) {
 
 				if (FirebaseDynamicLinksAppContext.INSTANCE.isFirebaseDynamicLinksEnabled()) {
 					FirebaseDynamicLinks.getInstance().getDynamicLink(activity.getIntent()).addOnSuccessListener(getActivity(), new OnSuccessListener<PendingDynamicLinkData>() {
@@ -282,7 +282,7 @@ public class ActivityHelper implements ActivityIf {
 
 	@TargetApi(Build.VERSION_CODES.LOLLIPOP)
 	protected void overrideStatusBarColor() {
-		if (!AndroidUtils.isPreLollipop()) {
+		if (!AndroidUtils.INSTANCE.isPreLollipop()) {
 			activity.getWindow().setStatusBarColor(activity.getResources().getColor(android.R.color.transparent));
 		}
 	}

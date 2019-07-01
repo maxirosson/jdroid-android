@@ -135,8 +135,8 @@ public class DatePickerDialogFragment extends AbstractDialogFragment implements 
 	private Boolean disableMinMaxDate() {
 
 		// Disable the min/max date feature on devices where it crashes
-		if ((AndroidUtils.getApiLevel() >= Build.VERSION_CODES.JELLY_BEAN)
-			&& (AndroidUtils.getApiLevel() <= Build.VERSION_CODES.JELLY_BEAN_MR1)) {
+		if ((AndroidUtils.INSTANCE.getApiLevel() >= Build.VERSION_CODES.JELLY_BEAN)
+			&& (AndroidUtils.INSTANCE.getApiLevel() <= Build.VERSION_CODES.JELLY_BEAN_MR1)) {
 			String model = DeviceUtils.INSTANCE.getDeviceModel();
 			if ((model != null)
 				&& (model.equals("Nexus 7") || model.contains("ST26i") || model.contains("ST26a")
@@ -160,7 +160,7 @@ public class DatePickerDialogFragment extends AbstractDialogFragment implements 
 	}
 
 	private void updateTitle(Dialog dialog, Date date) {
-		if (dialog != null && AndroidUtils.isPreLollipop()) {
+		if (dialog != null && AndroidUtils.INSTANCE.isPreLollipop()) {
 			String title = DateUtils.formatDateTime(getActivity(), date.getTime(), DateUtils.FORMAT_SHOW_DATE
 				| DateUtils.FORMAT_SHOW_WEEKDAY | DateUtils.FORMAT_SHOW_YEAR | DateUtils.FORMAT_ABBREV_MONTH
 				| DateUtils.FORMAT_ABBREV_WEEKDAY);

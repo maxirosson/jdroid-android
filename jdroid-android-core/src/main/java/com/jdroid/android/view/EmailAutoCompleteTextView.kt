@@ -34,7 +34,7 @@ class EmailAutoCompleteTextView : AppCompatAutoCompleteTextView {
         if (!isInEditMode) {
             val adapter = ArrayAdapter(
                 context,
-                android.R.layout.simple_dropdown_item_1line, AndroidUtils.getAccountsEmails()
+                android.R.layout.simple_dropdown_item_1line, AndroidUtils.accountsEmails
             )
             setAdapter(adapter)
             inputType = (InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS

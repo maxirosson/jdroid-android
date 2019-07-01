@@ -9,13 +9,6 @@ import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.annotation.ColorRes;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.annotation.WorkerThread;
-import androidx.core.app.NotificationCompat;
 import android.widget.RemoteViews;
 
 import com.jdroid.android.R;
@@ -28,6 +21,14 @@ import com.jdroid.android.utils.AppUtils;
 import com.jdroid.android.utils.LocalizationUtils;
 import com.jdroid.java.utils.RandomUtils;
 import com.jdroid.java.utils.StringUtils;
+
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.annotation.WorkerThread;
+import androidx.core.app.NotificationCompat;
 
 public class NotificationBuilder {
 
@@ -131,7 +132,7 @@ public class NotificationBuilder {
 
 		ReferrerUtils.setReferrer(notificationIntent, generateNotificationsReferrer());
 
-		builder.setContentIntent(PendingIntent.getActivity(AbstractApplication.get(), RandomUtils.get16BitsInt(),
+		builder.setContentIntent(PendingIntent.getActivity(AbstractApplication.get(), RandomUtils.INSTANCE.get16BitsInt(),
 			notificationIntent, 0));
 	}
 
@@ -149,7 +150,7 @@ public class NotificationBuilder {
 
 	public void setUrl(@NonNull String url, Integer flags) {
 		if (StringUtils.isNotEmpty(url)) {
-			Intent notificationIntent = UriUtils.createIntent(AbstractApplication.get(), url, generateNotificationsReferrer());
+			Intent notificationIntent = UriUtils.INSTANCE.createIntent(AbstractApplication.get(), url, generateNotificationsReferrer());
 			if (flags != null) {
 				notificationIntent.setFlags(flags);
 			}
@@ -162,7 +163,7 @@ public class NotificationBuilder {
 	}
 
 	protected Uri createUniqueNotificationUri() {
-		return Uri.parse(NOTIFICATION_SCHEME + "://" + RandomUtils.getInt());
+		return Uri.parse(NOTIFICATION_SCHEME + "://" + RandomUtils.INSTANCE.getInt());
 	}
 
 	public void setWhen(Long when) {
@@ -296,7 +297,7 @@ public class NotificationBuilder {
 
 	public void addStartActivityAction(@DrawableRes int icon, String title, Intent intent) {
 		PendingIntent pendingIntent = PendingIntent.getActivity(AbstractApplication.get(),
-			RandomUtils.get16BitsInt(), intent, 0);
+			RandomUtils.INSTANCE.get16BitsInt(), intent, 0);
 		builder.addAction(icon, title, pendingIntent);
 	}
 
@@ -305,7 +306,7 @@ public class NotificationBuilder {
 	}
 
 	public void addStartServiceAction(@DrawableRes int icon, String title, Intent intent) {
-		PendingIntent pendingIntent = PendingIntent.getService(AbstractApplication.get(), RandomUtils.getInt(),
+		PendingIntent pendingIntent = PendingIntent.getService(AbstractApplication.get(), RandomUtils.INSTANCE.getInt(),
 			intent, 0);
 		builder.addAction(icon, title, pendingIntent);
 	}
