@@ -2,12 +2,10 @@ package com.jdroid.android.activity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -39,7 +37,6 @@ import com.jdroid.android.notification.NotificationBuilder;
 import com.jdroid.android.uri.ReferrerUtils;
 import com.jdroid.android.uri.UriHandler;
 import com.jdroid.android.uri.UriUtils;
-import com.jdroid.android.utils.AndroidUtils;
 import com.jdroid.android.utils.AppUtils;
 import com.jdroid.android.utils.ToastUtils;
 import com.jdroid.java.collections.Maps;
@@ -280,11 +277,8 @@ public class ActivityHelper implements ActivityIf {
 		// Do nothing
 	}
 
-	@TargetApi(Build.VERSION_CODES.LOLLIPOP)
 	protected void overrideStatusBarColor() {
-		if (!AndroidUtils.INSTANCE.isPreLollipop()) {
-			activity.getWindow().setStatusBarColor(activity.getResources().getColor(android.R.color.transparent));
-		}
+		activity.getWindow().setStatusBarColor(activity.getResources().getColor(android.R.color.transparent));
 	}
 
 	public void onPostCreate(Bundle savedInstanceState) {

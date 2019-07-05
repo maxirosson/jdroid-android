@@ -4,15 +4,14 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.DatePicker;
-import android.widget.DatePicker.OnDateChangedListener;
 
 import com.jdroid.android.R;
 import com.jdroid.android.dialog.AbstractDialogFragment;
 import com.jdroid.android.utils.AndroidUtils;
 import com.jdroid.android.utils.DeviceUtils;
+import com.jdroid.java.date.DateUtils;
 
 import java.util.Date;
 
@@ -21,7 +20,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-public class DatePickerDialogFragment extends AbstractDialogFragment implements OnDateChangedListener {
+public class DatePickerDialogFragment extends AbstractDialogFragment implements DatePicker.OnDateChangedListener {
 
 	private static final String DEFAULT_DATE_EXTRA = "defaultDate";
 	private static final String MIN_DATE_EXTRA = "minDate";
@@ -75,9 +74,6 @@ public class DatePickerDialogFragment extends AbstractDialogFragment implements 
 		public void onDateSet(Date date, int requestCode);
 	}
 
-	/**
-	 * @see com.jdroid.android.dialog.AbstractDialogFragment#onCreate(android.os.Bundle)
-	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -96,10 +92,8 @@ public class DatePickerDialogFragment extends AbstractDialogFragment implements 
 		View view = inflate(R.layout.jdroid_date_picker_dialog_fragment);
 		dialogBuilder.setView(view);
 
-		final DatePicker datePicker = (DatePicker)view.findViewById(R.id.datePicker);
-		datePicker.init(com.jdroid.java.date.DateUtils.INSTANCE.getYear(defaultDate),
-			com.jdroid.java.date.DateUtils.INSTANCE.getMonth(defaultDate),
-			com.jdroid.java.date.DateUtils.INSTANCE.getDayOfMonth(defaultDate), this);
+		final DatePicker datePicker = view.findViewById(R.id.datePicker);
+		datePicker.init(DateUtils.INSTANCE.getYear(defaultDate), DateUtils.INSTANCE.getMonth(defaultDate), DateUtils.INSTANCE.getDayOfMonth(defaultDate), this);
 
 		if (titleResId != null) {
 			dialogBuilder.setTitle(titleResId);
@@ -127,9 +121,7 @@ public class DatePickerDialogFragment extends AbstractDialogFragment implements 
 
 		dialogBuilder.setNegativeButton(getString(R.string.jdroid_cancel), null);
 
-		Dialog dialog = dialogBuilder.create();
-		updateTitle(dialog, defaultDate);
-		return dialog;
+		return dialogBuilder.create();
 	}
 
 	private Boolean disableMinMaxDate() {
@@ -149,22 +141,6 @@ public class DatePickerDialogFragment extends AbstractDialogFragment implements 
 
 	@Override
 	public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-		if (titleResId == null) {
-			updateTitle(year, monthOfYear, dayOfMonth);
-		}
-	}
-
-	private void updateTitle(int year, int month, int day) {
-		Date date = com.jdroid.java.date.DateUtils.INSTANCE.getDate(year, month, day);
-		updateTitle(getDialog(), date);
-	}
-
-	private void updateTitle(Dialog dialog, Date date) {
-		if (dialog != null && AndroidUtils.INSTANCE.isPreLollipop()) {
-			String title = DateUtils.formatDateTime(getActivity(), date.getTime(), DateUtils.FORMAT_SHOW_DATE
-				| DateUtils.FORMAT_SHOW_WEEKDAY | DateUtils.FORMAT_SHOW_YEAR | DateUtils.FORMAT_ABBREV_MONTH
-				| DateUtils.FORMAT_ABBREV_WEEKDAY);
-			dialog.setTitle(title);
-		}
+		// Do nothing
 	}
 }

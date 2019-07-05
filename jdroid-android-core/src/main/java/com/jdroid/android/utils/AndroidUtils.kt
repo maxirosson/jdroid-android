@@ -15,10 +15,6 @@ object AndroidUtils {
         return Build.VERSION.SDK_INT
     }
 
-    fun isPreLollipop(): Boolean {
-        return Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP
-    }
-
     fun getPlatformVersion(): String {
         return Build.VERSION.RELEASE
     }
