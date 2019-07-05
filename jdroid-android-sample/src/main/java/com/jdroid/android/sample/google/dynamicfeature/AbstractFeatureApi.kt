@@ -9,7 +9,7 @@ import com.jdroid.android.google.splitinstall.SplitInstallHelper.LOGGER
 
 abstract class AbstractFeatureApi {
 
-    fun invokeFeatureAsync(action: () -> Unit, onFailure: (Exception) -> Unit = { }) {
+    fun invokeFeatureAsync(action: () -> Unit, onFailure: (Exception?) -> Unit = { }) {
 
         val onFailureListener = OnFailureListener {
             LOGGER.debug(getModuleName() + " onFailureListener called when installing it")

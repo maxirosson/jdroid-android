@@ -39,7 +39,7 @@ class SplitInstallFragment : AbstractFragment() {
             }, {
                 executeOnUIThread(object : Runnable {
                     override fun run() {
-                        result.text = it.message
+                        result.text = it?.message
                     }
                 })
             })
