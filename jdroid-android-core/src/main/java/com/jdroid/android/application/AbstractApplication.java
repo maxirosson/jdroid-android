@@ -356,7 +356,7 @@ public abstract class AbstractApplication extends KotlinAbstractApplication {
 	}
 
 	protected void initStrictMode() {
-		StrictModeHelper.initStrictMode();
+		StrictModeHelper.INSTANCE.initStrictMode();
 	}
 
 	public void initExceptionHandlers() {
