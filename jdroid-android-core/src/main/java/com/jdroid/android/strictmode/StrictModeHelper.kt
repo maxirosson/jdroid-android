@@ -29,7 +29,7 @@ object StrictModeHelper {
         if (isStrictModeEnabled()) {
             LOGGER.debug("Initializing strict mode")
             innerInitStrictMode()
-            //restore strict mode after onCreate() returns.
+            // restore strict mode after onCreate() returns.
             Handler().postAtFrontOfQueue { innerInitStrictMode() }
         }
     }
