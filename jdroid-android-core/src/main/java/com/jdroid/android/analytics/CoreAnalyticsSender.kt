@@ -52,7 +52,8 @@ class CoreAnalyticsSender<T : CoreAnalyticsTracker> : AnalyticsSender<T>, CoreAn
     }
 
     override fun onActivityStart(
-        activity: Activity, referrer: String?,
+        activity: Activity,
+        referrer: String?,
         data: Any?
     ) {
         execute(object : TrackingCommand() {
@@ -126,7 +127,8 @@ class CoreAnalyticsSender<T : CoreAnalyticsTracker> : AnalyticsSender<T>, CoreAn
     }
 
     override fun trackSocialInteraction(
-        network: String?, socialAction: SocialAction,
+        network: String?,
+        socialAction: SocialAction,
         socialTarget: String
     ) {
         execute(object : TrackingCommand() {
