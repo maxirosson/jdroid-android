@@ -60,7 +60,7 @@ public class HomeFragment extends AbstractRecyclerFragment {
 		}
 
 		@Override
-		public void onItemSelected(HomeItem item, View view) {
+		public void onItemSelected(@NonNull HomeItem item, View view) {
 			item.startActivity(HomeFragment.this.getActivity());
 		}
 

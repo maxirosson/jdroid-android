@@ -39,7 +39,7 @@ public class SwipeRefreshLoadingFragment extends SwipeRecyclerFragment {
 				setAdapter(new RecyclerViewAdapter(new SampleRecyclerViewType() {
 
 					@Override
-					public void onItemSelected(SampleEntity item, View view) {
+					public void onItemSelected(@NonNull SampleEntity item, View view) {
 						sampleListViewModel.removeItem(item.getId());
 					}
 

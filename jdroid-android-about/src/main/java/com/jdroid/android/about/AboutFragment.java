@@ -231,7 +231,7 @@ public class AboutFragment extends AbstractRecyclerFragment {
 		}
 
 		@Override
-		public void onItemSelected(AboutItem item, View view) {
+		public void onItemSelected(@NonNull AboutItem item, View view) {
 			item.onSelected(getActivity());
 		}
 

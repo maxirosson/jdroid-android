@@ -225,7 +225,7 @@ class ComplexRecyclerFragment : AbstractRecyclerFragment() {
             return true
         }
 
-        override fun onItemSelected(headerItem: HeaderRecyclerViewType.HeaderItem, view: View) {
+        override fun onItemSelected(headerItem: HeaderItem, view: View) {
             getRecyclerViewAdapter().removeItem(headerItem)
         }
 
@@ -244,7 +244,7 @@ class ComplexRecyclerFragment : AbstractRecyclerFragment() {
             return true
         }
 
-        override fun onItemSelected(footerItem: FooterRecyclerViewType.FooterItem, view: View) {
+        override fun onItemSelected(footerItem: FooterItem, view: View) {
             getRecyclerViewAdapter().removeItem(footerItem)
         }
 

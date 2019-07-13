@@ -56,13 +56,22 @@ public abstract class RecyclerViewType<ITEM, VIEWHOLDER extends RecyclerView.Vie
 			if (recyclerViewTypeListener != null) {
 				recyclerViewTypeListener.onItemSelected(itemPosition);
 			}
-			onItemSelected((ITEM)getRecyclerViewContainer().getRecyclerViewAdapter().getItem(itemPosition), view);
+			ITEM item = (ITEM)getRecyclerViewContainer().getRecyclerViewAdapter().getItem(itemPosition);
+			if (item != null) {
+				onItemSelected(item, view);
+			} else {
+				onNullItemSelected(view);
+			}
 		} else {
 			LOGGER.warn("Ignored onClick for item with no position");
 		}
 	}
 
-	public void onItemSelected(ITEM item, View view) {
+	protected void onNullItemSelected(View view) {
+		LOGGER.warn("Ignored onClick for null item");
+	}
+
+	protected void onItemSelected(@NonNull ITEM item, View view) {
 		// Do Nothing
 	}
 

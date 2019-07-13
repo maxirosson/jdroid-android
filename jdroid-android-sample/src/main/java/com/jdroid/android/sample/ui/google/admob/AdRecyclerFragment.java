@@ -105,7 +105,7 @@ public class AdRecyclerFragment extends AbstractRecyclerFragment {
 		}
 
 		@Override
-		public void onItemSelected(String item, View view) {
+		public void onItemSelected(@NonNull String item, View view) {
 			getRecyclerViewAdapter().removeItem(item);
 		}
 	}
