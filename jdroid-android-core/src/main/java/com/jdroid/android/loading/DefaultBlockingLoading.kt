@@ -12,15 +12,13 @@ class DefaultBlockingLoading : BlockingLoading() {
     override fun show(activityIf: ActivityIf) {
         if (!activityIf.isActivityDestroyed() && (loadingDialog == null || !loadingDialog!!.isShowing)) {
             loadingDialog = LoadingDialog(activityIf as Context)
-            loadingDialog!!.setCancelable(isCancelable!!)
-            loadingDialog!!.show()
+            loadingDialog?.setCancelable(isCancelable!!)
+            loadingDialog?.show()
         }
     }
 
     override fun dismiss(activityIf: ActivityIf) {
-        if (loadingDialog != null) {
-            loadingDialog!!.dismiss()
-            loadingDialog = null
-        }
+        loadingDialog?.dismiss()
+        loadingDialog = null
     }
 }

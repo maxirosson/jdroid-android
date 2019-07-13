@@ -35,7 +35,7 @@ class NotificationsDebugPrefsAppender : PreferencesAppender() {
                     builder.setSmallIcon(AbstractApplication.get().notificationIconResId)
                     builder.setWhen(DateUtils.nowMillis())
 
-                    NotificationUtils.sendNotification(IdGenerator.getIntId()!!, builder)
+                    NotificationUtils.sendNotification(IdGenerator.getIntId(), builder)
                     return true
                 }
             }

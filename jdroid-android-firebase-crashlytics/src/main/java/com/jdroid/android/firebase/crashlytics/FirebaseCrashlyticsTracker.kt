@@ -75,6 +75,6 @@ class FirebaseCrashlyticsTracker : AbstractCoreAnalyticsTracker() {
     }
 
     override fun isEnabled(): Boolean {
-        return FirebaseCrashlyticsContext.isFirebaseCrashlyticsEnabled()!!
+        return FirebaseCrashlyticsContext.isFirebaseCrashlyticsEnabled()
     }
 }

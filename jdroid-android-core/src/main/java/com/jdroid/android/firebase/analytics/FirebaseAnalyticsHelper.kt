@@ -8,6 +8,6 @@ object FirebaseAnalyticsHelper {
      * @return Whether the application has Firebase Analytics enabled or not
      */
     fun isFirebaseAnalyticsEnabled(): Boolean {
-        return BuildConfigUtils.getBuildConfigBoolean("FIREBASE_ANALYTICS_ENABLED", true)!! && !FirebaseTestLab.isRunningInstrumentedTests()
+        return BuildConfigUtils.getBuildConfigBoolean("FIREBASE_ANALYTICS_ENABLED", true)!! && !FirebaseTestLab.isRunningInstrumentedTests
     }
 }

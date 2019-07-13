@@ -15,7 +15,7 @@ abstract class OnEnterKeyListener
 
     override fun onKey(v: View, keyCode: Int, event: KeyEvent): Boolean {
 
-        if (matchKeyCode(keyCode)!! && event.action == KeyEvent.ACTION_UP) {
+        if (matchKeyCode(keyCode) && event.action == KeyEvent.ACTION_UP) {
             val runnable = Runnable {
                 AppUtils.hideSoftInput(v)
                 onRun(v)
@@ -30,7 +30,7 @@ abstract class OnEnterKeyListener
         return false
     }
 
-    protected fun matchKeyCode(keyCode: Int): Boolean? {
+    protected fun matchKeyCode(keyCode: Int): Boolean {
         return keyCode == KeyEvent.KEYCODE_ENTER
     }
 

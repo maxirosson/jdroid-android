@@ -9,8 +9,11 @@ import androidx.fragment.app.Fragment
 class SafeExecuteWrapperRunnable(private val fragment: Fragment, private val runnable: Runnable) : Runnable {
 
     override fun run() {
-        if (fragment.activity != null && !fragment.activity!!.isDestroyed && !fragment.isDetached) {
-            runnable.run()
+        val activity = fragment.activity
+        activity?.let {
+            if (!it.isDestroyed && !fragment.isDetached) {
+                runnable.run()
+            }
         }
     }
 }

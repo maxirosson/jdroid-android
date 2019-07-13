@@ -324,7 +324,7 @@ public abstract class AbstractApplication extends KotlinAbstractApplication {
 		if (fromVersionCode == null) {
 			appLaunchStatus = AppLaunchStatus.NEW_INSTALLATION;
 		} else {
-			if (AppUtils.getVersionCode().equals(fromVersionCode)) {
+			if (fromVersionCode.equals(AppUtils.getVersionCode())) {
 				appLaunchStatus = AppLaunchStatus.NORMAL;
 			} else {
 				appLaunchStatus = AppLaunchStatus.VERSION_UPGRADE;

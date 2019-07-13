@@ -45,7 +45,7 @@ object UriUtils {
     fun addRandomParam(uri: Uri): Uri {
         val uriString = uri.toString()
         val builder = StringBuilder(uriString)
-        if (uri.pathSegments.isEmpty() && StringUtils.isEmpty(uri.query)!! && !uriString.endsWith("/")) {
+        if (uri.pathSegments.isEmpty() && StringUtils.isEmpty(uri.query) && !uriString.endsWith("/")) {
             builder.append("/")
         }
         if (StringUtils.isEmpty(uri.query)) {

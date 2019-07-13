@@ -91,10 +91,10 @@ abstract class TwitterHelper {
                                 connectionError = true
                             } else if (e.cause is IOException) {
                                 connectionError = true
-                            } else if (e.cause!!.message != null) {
-                                if (e.cause!!.message!!.startsWith("Failed to connect to api.twitter.com")) {
+                            } else if (e.cause?.message != null) {
+                                if (e.cause?.message!!.startsWith("Failed to connect to api.twitter.com")) {
                                     connectionError = true
-                                } else if (e.cause!!.message == "Unable to resolve host \"api.twitter.com\": No address associated with hostname") {
+                                } else if (e.cause?.message == "Unable to resolve host \"api.twitter.com\": No address associated with hostname") {
                                     connectionError = true
                                 }
                             }

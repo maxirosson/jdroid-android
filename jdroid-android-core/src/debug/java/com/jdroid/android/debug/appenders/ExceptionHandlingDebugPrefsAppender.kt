@@ -71,7 +71,7 @@ class ExceptionHandlingDebugPrefsAppender : PreferencesAppender() {
         errorLogPreference.onPreferenceClickListener = object : OnPreferenceClickListener {
             override fun onPreferenceClick(it: Preference): Boolean {
                 AbstractApplication.get()
-                    .coreAnalyticsSender.trackErrorLog("Sample message " + IdGenerator.getIntId()!!)
+                    .coreAnalyticsSender.trackErrorLog("Sample message " + IdGenerator.getIntId())
                 return true
             }
         }
@@ -82,10 +82,7 @@ class ExceptionHandlingDebugPrefsAppender : PreferencesAppender() {
         customKeyPreference.setSummary(R.string.jdroid_trackErrorCustomKey)
         customKeyPreference.onPreferenceClickListener = object : OnPreferenceClickListener {
             override fun onPreferenceClick(it: Preference): Boolean {
-                AbstractApplication.get().coreAnalyticsSender.trackErrorCustomKey(
-                    "Sample key",
-                    IdGenerator.getIntId()!!
-                )
+                AbstractApplication.get().coreAnalyticsSender.trackErrorCustomKey("Sample key", IdGenerator.getIntId())
                 return true
             }
         }

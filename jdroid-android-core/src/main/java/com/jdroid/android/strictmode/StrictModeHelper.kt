@@ -81,6 +81,6 @@ object StrictModeHelper {
     }
 
     fun isStrictModeOnFirebaseTestLabEnabled(): Boolean {
-        return FirebaseTestLab.isRunningInstrumentedTests() && BuildConfigUtils.getBuildConfigBoolean("STRICT_MODE_ON_FIREBASE_TEST_LAB_ENABLED", true)
+        return FirebaseTestLab.isRunningInstrumentedTests && BuildConfigUtils.getBuildConfigBoolean("STRICT_MODE_ON_FIREBASE_TEST_LAB_ENABLED", true)
     }
 }

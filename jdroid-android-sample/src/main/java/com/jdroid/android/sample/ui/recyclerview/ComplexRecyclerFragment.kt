@@ -165,8 +165,8 @@ class ComplexRecyclerFragment : AbstractRecyclerFragment() {
         }
 
         @SuppressLint("SetTextI18n")
-        override fun fillHolderFromItem(item: Int?, holder: IntegerViewHolder) {
-            holder.textView.text = item!!.toString()
+        override fun fillHolderFromItem(item: Int, holder: IntegerViewHolder) {
+            holder.textView.text = item.toString()
         }
 
         override fun isSelectable(): Boolean {
@@ -198,8 +198,8 @@ class ComplexRecyclerFragment : AbstractRecyclerFragment() {
             return viewHolder
         }
 
-        override fun fillHolderFromItem(item: Boolean?, holder: BooleanViewHolder) {
-            holder.textView.text = item!!.toString()
+        override fun fillHolderFromItem(item: Boolean, holder: BooleanViewHolder) {
+            holder.textView.text = item.toString()
         }
 
         override fun isClickable(): Boolean {

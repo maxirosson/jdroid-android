@@ -50,6 +50,6 @@ class ServersDebugPrefsAppender(val serversMap: Map<Class<out Server>, List<Serv
     }
 
     override fun isEnabled(): Boolean {
-        return serversMap != null && serversMap.isNotEmpty()
+        return !serversMap.isNullOrEmpty()
     }
 }

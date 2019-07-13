@@ -11,7 +11,7 @@ import com.jdroid.android.loading.SwipeRefreshLoading
 // TODO Add no results (or error) support
 abstract class TwitterListFragment : AbstractFragment(), SwipeRefreshLayout.OnRefreshListener {
 
-    protected var twitterHelper: TwitterHelper? = null
+    protected lateinit var twitterHelper: TwitterHelper
         private set
 
     override fun getContentFragmentLayout(): Int? {
@@ -27,19 +27,19 @@ abstract class TwitterListFragment : AbstractFragment(), SwipeRefreshLayout.OnRe
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        twitterHelper!!.tweetContainer = findView<View>(R.id.tweetContainer) as ViewGroup
+        twitterHelper.tweetContainer = findView<View>(R.id.tweetContainer) as ViewGroup
         if (loadTweetsOnViewCreated()) {
-            twitterHelper!!.loadTweets()
+            twitterHelper.loadTweets()
         }
     }
 
     override fun onResume() {
         super.onResume()
-        twitterHelper!!.onResume()
+        twitterHelper.onResume()
     }
 
     override fun onRefresh() {
-        twitterHelper!!.loadTweets()
+        twitterHelper.loadTweets()
     }
 
     override fun getDefaultLoading(): FragmentLoading? {

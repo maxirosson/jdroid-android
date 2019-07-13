@@ -14,10 +14,10 @@ class SnackbarBuilder {
     private var duration = Snackbar.LENGTH_LONG
     private var actionTextResId: Int? = null
     private var onClickListener: View.OnClickListener? = null
-    private var description: String? = null
+    private lateinit var description: String
 
     fun build(activity: Activity): Snackbar {
-        val snackbar = Snackbar.make(activity.findViewById(parentLayoutId), description!!, duration)
+        val snackbar = Snackbar.make(activity.findViewById(parentLayoutId), description, duration)
         if (actionTextResId != null && onClickListener != null) {
             snackbar.setAction(actionTextResId!!, onClickListener)
         }

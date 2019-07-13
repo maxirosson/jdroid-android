@@ -11,26 +11,24 @@ object FirebaseTestLab {
 
     private val TAG = FirebaseTestLab::class.java.simpleName
 
-    private var isRunningInstrumentedTests: Boolean? = null
+    val isRunningInstrumentedTests: Boolean by lazy { fetchIsRunningInstrumentedTests() }
 
     @SuppressLint("LogCall")
-    fun isRunningInstrumentedTests(): Boolean {
-        if (isRunningInstrumentedTests == null) {
-            try {
-                val testLabSetting =
-                    Settings.System.getString(AbstractApplication.get().contentResolver, "firebase.test.lab")
-                isRunningInstrumentedTests = "true" == testLabSetting
-            } catch (e: Exception) {
-                isRunningInstrumentedTests = false
-                if (BuildConfig.DEBUG) {
-                    Log.w(TAG, "Error when getting firebase.test.lab system property", e)
-                }
-            } finally {
-                if (BuildConfig.DEBUG) {
-                    Log.d(TAG, "Running Firebase Tests Labs: " + isRunningInstrumentedTests!!)
-                }
+    private fun fetchIsRunningInstrumentedTests(): Boolean {
+        var runningInstrumentedTests = false
+        try {
+            val testLabSetting = Settings.System.getString(AbstractApplication.get().contentResolver, "firebase.test.lab")
+            runningInstrumentedTests = "true" == testLabSetting
+        } catch (e: Exception) {
+            if (BuildConfig.DEBUG) {
+                Log.w(TAG, "Error when getting firebase.test.lab system property", e)
+            }
+            runningInstrumentedTests = false
+        } finally {
+            if (BuildConfig.DEBUG) {
+                Log.d(TAG, "Running Firebase Tests Labs: $runningInstrumentedTests")
             }
         }
-        return isRunningInstrumentedTests!!
+        return runningInstrumentedTests
     }
 }

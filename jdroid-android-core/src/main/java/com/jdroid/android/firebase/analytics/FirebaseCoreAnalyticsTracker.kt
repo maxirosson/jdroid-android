@@ -52,10 +52,10 @@ class FirebaseCoreAnalyticsTracker : AbstractFirebaseAnalyticsTracker(), CoreAna
                 DEVICE_YEAR_CLASS_USER_PROPERTY,
                 DeviceUtils.getDeviceYearClass().toString()
             )
-            getFirebaseAnalyticsFacade().setUserProperty(SCREEN_WIDTH, ScreenUtils.getScreenWidthDp()!!.toString())
-            getFirebaseAnalyticsFacade().setUserProperty(SCREEN_HEIGHT, ScreenUtils.getScreenHeightDp()!!.toString())
+            getFirebaseAnalyticsFacade().setUserProperty(SCREEN_WIDTH, ScreenUtils.getScreenWidthDp().toString())
+            getFirebaseAnalyticsFacade().setUserProperty(SCREEN_HEIGHT, ScreenUtils.getScreenHeightDp().toString())
             getFirebaseAnalyticsFacade().setUserProperty(SCREEN_DENSITY, ScreenUtils.getScreenDensity())
-            getFirebaseAnalyticsFacade().setUserProperty(SCREEN_DENSITY_DPI, ScreenUtils.getDensityDpi()!!.toString())
+            getFirebaseAnalyticsFacade().setUserProperty(SCREEN_DENSITY_DPI, ScreenUtils.getDensityDpi().toString())
             getFirebaseAnalyticsFacade().setUserProperty(
                 INSTALLATION_SOURCE_USER_PROPERTY,
                 AbstractApplication.get().installationSource

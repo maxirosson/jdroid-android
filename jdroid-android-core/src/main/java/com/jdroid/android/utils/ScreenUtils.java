@@ -72,17 +72,17 @@ public class ScreenUtils {
 		return config.smallestScreenWidthDp;
 	}
 
-	public static Integer getScreenWidthDp() {
+	public static int getScreenWidthDp() {
 		Configuration config = AbstractApplication.get().getResources().getConfiguration();
 		return config.screenWidthDp;
 	}
 
-	public static Integer getScreenHeightDp() {
+	public static int getScreenHeightDp() {
 		Configuration config = AbstractApplication.get().getResources().getConfiguration();
 		return config.screenHeightDp;
 	}
 
-	public static Integer getDensityDpi() {
+	public static int getDensityDpi() {
 		DisplayMetrics metrics = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(metrics);
 		return metrics.densityDpi;

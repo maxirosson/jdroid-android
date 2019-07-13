@@ -25,7 +25,7 @@ class PermissionDialogFragment : AlertDialogFragment() {
         if (targetFragment != null) {
             targetFragment.requestPermissions(arrayOf(permission), permissionRequestCode)
         } else {
-            ActivityCompat.requestPermissions(activity!!, arrayOf(permission), permissionRequestCode)
+            ActivityCompat.requestPermissions(requireActivity(), arrayOf(permission), permissionRequestCode)
         }
     }
 

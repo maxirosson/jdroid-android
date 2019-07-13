@@ -20,8 +20,8 @@ abstract class FilterListTextWatcher<T> : TextWatcher {
     }
 
     override fun afterTextChanged(prefix: Editable) {
-        if (getFilterableArrayAdapter() != null) {
-            getFilterableArrayAdapter()!!.filter.filter(prefix)
+        getFilterableArrayAdapter()?.let {
+            it.filter.filter(prefix)
             doAfterTextChanged(prefix.toString())
         }
     }

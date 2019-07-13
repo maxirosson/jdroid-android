@@ -28,7 +28,7 @@ public class AppUtils {
 	/**
 	 * @return The version code of the application
 	 */
-	public static Integer getVersionCode() {
+	public static int getVersionCode() {
 		return getPackageInfo().versionCode;
 	}
 
