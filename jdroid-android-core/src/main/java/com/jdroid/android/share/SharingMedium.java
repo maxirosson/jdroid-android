@@ -19,16 +19,16 @@ public enum SharingMedium {
 		}
 	};
 
-	private String name;
+	private String mediumName;
 	private String applicationId;
 
-	SharingMedium(String name, String applicationId) {
-		this.name = name;
+	SharingMedium(String mediumName, String applicationId) {
+		this.mediumName = mediumName;
 		this.applicationId = applicationId;
 	}
 
-	public String getName() {
-		return name;
+	public String getMediumName() {
+		return mediumName;
 	}
 
 	public String getApplicationId() {

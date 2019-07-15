@@ -19,7 +19,7 @@ object FacebookHelper {
             ActivityLauncher.startActivityNewTask(Intent(Intent.ACTION_VIEW, Uri.parse("http://www.facebook.com/$pageId"))
             )
         } finally {
-            AbstractApplication.get().coreAnalyticsSender.trackSocialInteraction(SocialNetwork.FACEBOOK.getName(), SocialAction.OPEN_PROFILE, pageId)
+            AbstractApplication.get().coreAnalyticsSender.trackSocialInteraction(SocialNetwork.FACEBOOK.networkName, SocialAction.OPEN_PROFILE, pageId)
         }
     }
 }

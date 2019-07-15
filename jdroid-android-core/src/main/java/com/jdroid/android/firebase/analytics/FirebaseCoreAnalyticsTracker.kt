@@ -140,7 +140,7 @@ class FirebaseCoreAnalyticsTracker : AbstractFirebaseAnalyticsTracker(), CoreAna
             params.put("network", network)
         }
         params.put("social_target", socialTarget)
-        getFirebaseAnalyticsFacade().sendEvent(socialAction.getName(), params)
+        getFirebaseAnalyticsFacade().sendEvent(socialAction.actionName, params)
     }
 
     // Split Install

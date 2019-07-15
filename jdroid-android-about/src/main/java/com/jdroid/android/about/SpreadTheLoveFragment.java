@@ -64,11 +64,11 @@ public abstract class SpreadTheLoveFragment extends AbstractFragment {
 		findView(R.id.followUs).setVisibility(followUsItems.isEmpty() ? View.GONE : View.VISIBLE);
 
 		Map<String, SharingDataItem> sharingDataItemsMap = Maps.newHashMap();
-		sharingDataItemsMap.put(SharingMedium.TWITTER.getName(), new SharingDataItem(getTwitterShareText()));
-		sharingDataItemsMap.put(SharingMedium.WHATSAPP.getName(), new SharingDataItem(getWhatsAppShareText()));
-		sharingDataItemsMap.put(SharingMedium.TELEGRAM.getName(), new SharingDataItem(getTelegramShareText()));
-		sharingDataItemsMap.put(SharingMedium.HANGOUTS.getName(), new SharingDataItem(getHangoutsShareText()));
-		sharingDataItemsMap.put(SharingMedium.SMS.getName(), new SharingDataItem(getSmsShareText()));
+		sharingDataItemsMap.put(SharingMedium.TWITTER.getMediumName(), new SharingDataItem(getTwitterShareText()));
+		sharingDataItemsMap.put(SharingMedium.WHATSAPP.getMediumName(), new SharingDataItem(getWhatsAppShareText()));
+		sharingDataItemsMap.put(SharingMedium.TELEGRAM.getMediumName(), new SharingDataItem(getTelegramShareText()));
+		sharingDataItemsMap.put(SharingMedium.HANGOUTS.getMediumName(), new SharingDataItem(getHangoutsShareText()));
+		sharingDataItemsMap.put(SharingMedium.SMS.getMediumName(), new SharingDataItem(getSmsShareText()));
 		SharingData sharingData = new SharingData(getShareKey(), sharingDataItemsMap, new SharingDataItem(getDefaultShareSubject(), getDefaultShareText()));
 
 		List<SharingItem> sharingItems = Lists.newArrayList();
@@ -78,7 +78,7 @@ public abstract class SpreadTheLoveFragment extends AbstractFragment {
 		sharingItems.add(new HangoutsSharingItem(sharingData));
 		sharingItems.add(new SmsSharingItem(sharingData));
 
-		Boolean displayShareTitle = ShareView.initShareSection(getActivity(), sharingItems, new MoreSharingItem(sharingData));
+		Boolean displayShareTitle = ShareView.Companion.initShareSection(getActivity(), sharingItems, new MoreSharingItem(sharingData));
 		if (!displayShareTitle) {
 			findView(R.id.shareSectionTitle).setVisibility(View.GONE);
 		}
@@ -149,7 +149,7 @@ public abstract class SpreadTheLoveFragment extends AbstractFragment {
 			items.add(new FollowUsItem(R.drawable.jdroid_ic_twitter_24dp, R.string.jdroid_twitter) {
 				@Override
 				public void onSelected(Activity activity) {
-					TwitterHelper.openProfile(getTwitterAccount());
+					TwitterHelper.INSTANCE.openProfile(getTwitterAccount());
 				}
 			});
 		}

@@ -77,9 +77,6 @@ public abstract class TwoStateActionProvider extends ActionProvider {
 		return LocalizationUtils.INSTANCE.getString(getSecondStateCheatSheetResId());
 	}
 
-	/**
-	 * @see androidx.core.view.ActionProvider#onCreateActionView()
-	 */
 	@Override
 	public View onCreateActionView() {
 		return viewFlipper;
