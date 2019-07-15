@@ -33,11 +33,12 @@ class ScrimInsetsScrollView : ScrollView {
     }
 
     private fun init(context: Context, attrs: AttributeSet?, defStyle: Int) {
-        val a = context.obtainStyledAttributes(attrs, R.styleable.jdroid_scrimInsetsView, defStyle, 0) ?: return
-        insetForeground = a.getDrawable(R.styleable.jdroid_scrimInsetsView_jdroid_insetScrollForeground)
-        a.recycle()
-
-        setWillNotDraw(true)
+        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.jdroid_scrimInsetsView, defStyle, 0)
+        if (typedArray != null) {
+            insetForeground = typedArray.getDrawable(R.styleable.jdroid_scrimInsetsView_jdroid_insetScrollForeground)
+            typedArray.recycle()
+            setWillNotDraw(true)
+        }
     }
 
     override fun fitSystemWindows(insets: Rect): Boolean {

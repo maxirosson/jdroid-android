@@ -198,69 +198,24 @@ jobs:
           name: Linting
           command: ./gradlew lintDebug --stacktrace
 
+      - run:
+          name: Save lint results
+          command: |
+            destination="lint-results"
+            while read line
+            do
+              module=$(echo "$line" | sed -E "s/include ':(.+)'/\1/g")
+              module="${module//://}" #replace ':' by "/"
+              file_name="lint-results.html"
+              lint_result="./${module}/build/reports/${file_name}"
+              if [[ ! -d "${destination}/${module}" ]]; then
+                mkdir -p "${destination}/${module}"
+              fi
+              cp "$lint_result" "${destination}/${module}/${file_name}"
+            done < "settings.gradle"
       - store_artifacts:
-          path: ./jdroid-android-about/build/reports/lint-results-debug.html
-          destination: jdroid-android-about/lint
-
-      - store_artifacts:
-          path: ./jdroid-android-core/build/reports/lint-results-debug.html
-          destination: jdroid-android-core/lint
-
-      - store_artifacts:
-          path: ./jdroid-android-facebook-login/build/reports/lint-results-debug.html
-          destination: jdroid-android-facebook-login/lint
-
-      - store_artifacts:
-          path: ./jdroid-android-firebase-admob/build/reports/lint-results-debug.html
-          destination: jdroid-android-firebase-admob/lint
-
-      - store_artifacts:
-          path: ./jdroid-android-firebase-crashlytics/build/reports/lint-results-debug.html
-          destination: jdroid-android-firebase-crashlytics/lint
-
-      - store_artifacts:
-          path: ./jdroid-android-firebase-database/build/reports/lint-results-debug.html
-          destination: jdroid-android-firebase-database/lint
-
-      - store_artifacts:
-          path: ./jdroid-android-firebase-fcm/build/reports/lint-results-debug.html
-          destination: jdroid-android-firebase-fcm/lint
-
-      - store_artifacts:
-          path: ./jdroid-android-firebase-remoteconfig/build/reports/lint-results-debug.html
-          destination: jdroid-android-firebase-remoteconfig/lint
-
-      - store_artifacts:
-          path: ./jdroid-android-firebase-glide/build/reports/lint-results-debug.html
-          destination: jdroid-android-firebase-glide/lint
-
-      - store_artifacts:
-          path: ./jdroid-android-google-inappbilling/build/reports/lint-results-debug.html
-          destination: jdroid-android-google-inappbilling/lint
-
-      - store_artifacts:
-          path: ./jdroid-android-google-maps/build/reports/lint-results-debug.html
-          destination: jdroid-android-google-maps/lint
-
-      - store_artifacts:
-          path: ./jdroid-android-google-play-games/build/reports/lint-results-debug.html
-          destination: jdroid-android-google-play-games/lint
-
-      - store_artifacts:
-          path: ./jdroid-android-google-signin/build/reports/lint-results-debug.html
-          destination: jdroid-android-google-signin/lint
-
-      - store_artifacts:
-          path: ./jdroid-android-room/build/reports/lint-results-debug.html
-          destination: jdroid-android-room/lint
-
-      - store_artifacts:
-          path: ./jdroid-android-sample/build/reports/lint-results-debug.html
-          destination: jdroid-android-sample/lint
-
-      - store_artifacts:
-          path: ./jdroid-android-twitter/build/reports/lint-results-debug.html
-          destination: jdroid-android-twitter/lint
+          path: ./lint-results
+          destination: lint-results
 
   ktlint:
     <<: *android_config
