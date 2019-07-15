@@ -40,7 +40,7 @@ public class TestAndroidApplication extends AbstractApplication {
 	}
 
 	@Override
-	protected Boolean isMultiProcessSupportEnabled() {
+	protected boolean isMultiProcessSupportEnabled() {
 		return false;
 	}
 

@@ -38,7 +38,7 @@ class TestAndroidApplication : AbstractApplication() {
         return ArrayList()
     }
 
-    override fun isMultiProcessSupportEnabled(): Boolean? {
+    override fun isMultiProcessSupportEnabled(): Boolean {
         return false
     }
 
