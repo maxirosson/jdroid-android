@@ -25,7 +25,7 @@ public class FirebaseRemoteConfigPrefsAppender extends PreferencesAppender {
 
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
-				ActivityLauncher.startActivity(activity, FirebaseRemoteConfigActivity.class);
+				ActivityLauncher.INSTANCE.startActivity(activity, FirebaseRemoteConfigActivity.class);
 				return true;
 			}
 		});

@@ -2,12 +2,7 @@ package com.jdroid.android.application;
 
 import android.app.Activity;
 import android.app.ActivityManager;
-import android.content.Context;
-import android.content.pm.ApplicationInfo;
-import android.content.res.Configuration;
 
-import com.google.android.play.core.splitcompat.SplitCompat;
-import com.jdroid.android.BuildConfig;
 import com.jdroid.android.R;
 import com.jdroid.android.activity.AbstractFragmentActivity;
 import com.jdroid.android.activity.ActivityHelper;
@@ -20,10 +15,8 @@ import com.jdroid.android.context.AppContext;
 import com.jdroid.android.debug.DebugContext;
 import com.jdroid.android.exception.DefaultExceptionHandler;
 import com.jdroid.android.exception.ExceptionHandler;
-import com.jdroid.android.firebase.testlab.FirebaseTestLab;
 import com.jdroid.android.fragment.FragmentHelper;
 import com.jdroid.android.http.cache.CacheManager;
-import com.jdroid.android.leakcanary.LeakCanaryHelper;
 import com.jdroid.android.lifecycle.ApplicationLifecycleHelper;
 import com.jdroid.android.notification.NotificationChannelType;
 import com.jdroid.android.notification.NotificationUtils;
@@ -46,8 +39,6 @@ import com.jdroid.java.utils.LoggerUtils;
 import com.jdroid.java.utils.ReflectionUtils;
 import com.jdroid.java.utils.StringUtils;
 
-import org.slf4j.Logger;
-
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.List;
 import java.util.Map;
@@ -60,12 +51,6 @@ import androidx.annotation.WorkerThread;
 import androidx.fragment.app.Fragment;
 
 public abstract class AbstractApplication extends KotlinAbstractApplication {
-
-	/**
-	 * The LOGGER variable is initialized in the "OnCreate" method, after that "LoggerUtils" has been properly
-	 * configured by the superclass.
-	 */
-	protected static Logger LOGGER;
 
 	private static final String INSTALLATION_SOURCE = "installationSource";
 	private static final String VERSION_CODE_KEY = "versionCodeKey";
@@ -103,58 +88,6 @@ public abstract class AbstractApplication extends KotlinAbstractApplication {
 
 	public static AbstractApplication get() {
 		return INSTANCE;
-	}
-
-	private void initLogging() {
-		if (LOGGER == null) {
-			LoggerUtils.setEnabled(isLoggingEnabled());
-			LOGGER = LoggerUtils.getLogger(AbstractApplication.class);
-		}
-	}
-
-	@MainThread
-	@CallSuper
-	@Override
-	protected final void attachBaseContext(Context base) {
-		super.attachBaseContext(base);
-
-		if (isSplitCompatEnabled()) {
-			SplitCompat.install(this);
-		}
-
-		onInitMultiDex();
-
-		if (!isMultiProcessSupportEnabled() || ProcessUtils.INSTANCE.isMainProcess(this)) {
-			initLogging();
-			ApplicationLifecycleHelper.attachBaseContext(this);
-			onMainProcessAttachBaseContext();
-		} else {
-			onSecondaryProcessAttachBaseContext(ProcessUtils.INSTANCE.getProcessInfo(this));
-		}
-	}
-
-	protected boolean isSplitCompatEnabled() {
-		return false;
-	}
-
-	@MainThread
-	protected void onInitMultiDex() {
-		// Do nothing
-	}
-
-	@MainThread
-	protected void onMainProcessAttachBaseContext() {
-		// Do nothing
-	}
-
-	@MainThread
-	protected void onSecondaryProcessAttachBaseContext(ActivityManager.RunningAppProcessInfo processInfo) {
-		// Do nothing
-	}
-
-	@MainThread
-	public void onProviderInit() {
-		// Do nothing
 	}
 
 	@MainThread
@@ -216,54 +149,7 @@ public abstract class AbstractApplication extends KotlinAbstractApplication {
 		}
 	}
 
-	@MainThread
-	protected void onMainProcessCreate() {
-		// Do nothing
-	}
-
-	@MainThread
-	protected void onSecondaryProcessCreate(ActivityManager.RunningAppProcessInfo processInfo) {
-		// Do nothing
-	}
-
-	private boolean isDebuggable() {
-		int flags = this.getApplicationInfo().flags;
-		return (flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
-	}
-
-	protected Boolean isLoggingEnabled() {
-		return isDebuggable() || (isFirebaseTestLabLoggingEnabled() && FirebaseTestLab.INSTANCE.isRunningInstrumentedTests());
-	}
-
-	protected Boolean isFirebaseTestLabLoggingEnabled() {
-		return true;
-	}
-
 	protected void initAppModule(Map<String, AppModule> appModulesMap) {
-		// Do nothing
-	}
-
-	@MainThread
-	@CallSuper
-	@Override
-	public final void onConfigurationChanged(Configuration newConfig) {
-		super.onConfigurationChanged(newConfig);
-
-		if (!isMultiProcessSupportEnabled() || ProcessUtils.INSTANCE.isMainProcess(this)) {
-			ApplicationLifecycleHelper.onConfigurationChanged(this, newConfig);
-			onMainProcessConfigurationChanged();
-		} else {
-			onSecondaryProcessConfigurationChanged(ProcessUtils.INSTANCE.getProcessInfo(this));
-		}
-	}
-
-	@MainThread
-	protected void onMainProcessConfigurationChanged() {
-		// Do nothing
-	}
-
-	@MainThread
-	protected void onSecondaryProcessConfigurationChanged(ActivityManager.RunningAppProcessInfo processInfo) {
 		// Do nothing
 	}
 
@@ -314,10 +200,6 @@ public abstract class AbstractApplication extends KotlinAbstractApplication {
 		// Do nothing
 	}
 
-	protected Boolean isMultiProcessSupportEnabled() {
-		return BuildConfig.DEBUG && LeakCanaryHelper.INSTANCE.isLeakCanaryEnabled();
-	}
-
 	@WorkerThread
 	protected void verifyAppLaunchStatus() {
 		Integer fromVersionCode = SharedPreferencesHelper.get().loadPreferenceAsInteger(VERSION_CODE_KEY);
@@ -330,7 +212,7 @@ public abstract class AbstractApplication extends KotlinAbstractApplication {
 				appLaunchStatus = AppLaunchStatus.VERSION_UPGRADE;
 			}
 		}
-		LOGGER.debug("App launch status: " + appLaunchStatus);
+		KotlinAbstractApplication.Companion.getLOGGER().debug("App launch status: " + appLaunchStatus);
 		if (!appLaunchStatus.equals(AppLaunchStatus.NORMAL)) {
 			SharedPreferencesHelper.get().savePreferenceAsync(VERSION_CODE_KEY, AppUtils.getVersionCode());
 		}
@@ -371,7 +253,7 @@ public abstract class AbstractApplication extends KotlinAbstractApplication {
 				builder.append(exceptionHandlerClass.getCanonicalName());
 				builder.append(" initialized, wrapping ");
 				builder.append(currentExceptionHandler.getClass().getCanonicalName());
-				LOGGER.info(builder.toString());
+				KotlinAbstractApplication.Companion.getLOGGER().info(builder.toString());
 				getCoreAnalyticsSender().trackErrorLog(builder.toString());
 			}
 		}

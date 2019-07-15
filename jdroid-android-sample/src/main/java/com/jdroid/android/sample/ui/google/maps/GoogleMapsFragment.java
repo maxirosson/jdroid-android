@@ -23,7 +23,7 @@ public class GoogleMapsFragment extends AbstractFragment {
 
 			@Override
 			public void onClick(View v) {
-				ActivityLauncher.startActivity(getActivity(), MapActivity.class);
+				ActivityLauncher.INSTANCE.startActivity(getActivity(), MapActivity.class);
 			}
 		});
 
@@ -31,7 +31,7 @@ public class GoogleMapsFragment extends AbstractFragment {
 
 			@Override
 			public void onClick(View v) {
-				ActivityLauncher.startActivity(getActivity(), LiteModeMapActivity.class);
+				ActivityLauncher.INSTANCE.startActivity(getActivity(), LiteModeMapActivity.class);
 			}
 		});
 
@@ -39,7 +39,7 @@ public class GoogleMapsFragment extends AbstractFragment {
 
 			@Override
 			public void onClick(View v) {
-				ActivityLauncher.startActivity(getActivity(), StreetViewActivity.class);
+				ActivityLauncher.INSTANCE.startActivity(getActivity(), StreetViewActivity.class);
 			}
 		});
 	}

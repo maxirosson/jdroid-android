@@ -23,42 +23,42 @@ public class RecyclerViewFragment extends AbstractFragment {
 
 			@Override
 			public void onClick(View v) {
-				ActivityLauncher.startActivity(getActivity(), new Intent(getActivity(), SimpleRecyclerActivity.class));
+				ActivityLauncher.INSTANCE.startActivity(getActivity(), new Intent(getActivity(), SimpleRecyclerActivity.class));
 			}
 		});
 		findView(R.id.complexRecycler).setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				ActivityLauncher.startActivity(getActivity(), new Intent(getActivity(), ComplexRecyclerActivity.class));
+				ActivityLauncher.INSTANCE.startActivity(getActivity(), new Intent(getActivity(), ComplexRecyclerActivity.class));
 			}
 		});
 		findView(R.id.paginatedRecycler).setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				ActivityLauncher.startActivity(getActivity(), new Intent(getActivity(), PaginatedRecyclerActivity.class));
+				ActivityLauncher.INSTANCE.startActivity(getActivity(), new Intent(getActivity(), PaginatedRecyclerActivity.class));
 			}
 		});
 		findView(R.id.paginatedGridRecycler).setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				ActivityLauncher.startActivity(getActivity(), new Intent(getActivity(), PaginatedGridRecyclerActivity.class));
+				ActivityLauncher.INSTANCE.startActivity(getActivity(), new Intent(getActivity(), PaginatedGridRecyclerActivity.class));
 			}
 		});
 		findView(R.id.searchPaginatedRecycler).setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				ActivityLauncher.startActivity(getActivity(), new Intent(getActivity(), SearchPaginatedRecyclerActivity.class));
+				ActivityLauncher.INSTANCE.startActivity(getActivity(), new Intent(getActivity(), SearchPaginatedRecyclerActivity.class));
 			}
 		});
 		findView(R.id.autofitGridLayoutRecycler).setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				ActivityLauncher.startActivity(getActivity(), new Intent(getActivity(), AutofitGridLayoutRecyclerActivity.class));
+				ActivityLauncher.INSTANCE.startActivity(getActivity(), new Intent(getActivity(), AutofitGridLayoutRecyclerActivity.class));
 			}
 		});
 	}

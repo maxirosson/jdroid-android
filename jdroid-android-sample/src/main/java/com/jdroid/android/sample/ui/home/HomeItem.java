@@ -110,7 +110,7 @@ public enum HomeItem implements ActionItem {
 
 	@Override
 	public void startActivity(FragmentActivity fragmentActivity) {
-		ActivityLauncher.startActivity(fragmentActivity, getIntent());
+		ActivityLauncher.INSTANCE.startActivity(fragmentActivity, getIntent());
 	}
 
 	@Override

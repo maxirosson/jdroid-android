@@ -86,7 +86,7 @@ public class ExternalAppsUtils {
 	public static void launchExternalApp(String applicationId) {
 		Intent launchIntent = AbstractApplication.get().getPackageManager().getLaunchIntentForPackage(applicationId);
 		if (launchIntent != null) {
-			ActivityLauncher.startActivityNewTask(launchIntent);
+			ActivityLauncher.INSTANCE.startActivityNewTask(launchIntent);
 		} else {
 			LOGGER.info("Could not open launch intent for applicationId: " + applicationId);
 		}
@@ -96,7 +96,7 @@ public class ExternalAppsUtils {
 		Intent intent = new Intent(Intent.ACTION_VIEW);
 		intent.setData(Uri.parse("skype:" + username + "?call"));
 		if (IntentUtils.INSTANCE.isIntentAvailable(intent)) {
-			ActivityLauncher.startActivityNewTask(intent);
+			ActivityLauncher.INSTANCE.startActivityNewTask(intent);
 			return true;
 		} else {
 			LOGGER.info("Skype call intent not supported");
@@ -116,7 +116,7 @@ public class ExternalAppsUtils {
 			intent.setPackage(GOOGLE_MAPS_PACKAGE_NAME);
 			intent.setData(Uri.parse(mapUrl));
 			if (IntentUtils.INSTANCE.isIntentAvailable(intent)) {
-				ActivityLauncher.startActivity(activity, intent);
+				ActivityLauncher.INSTANCE.startActivity(activity, intent);
 			} else {
 				openUrl(mapUrl);
 			}
@@ -132,7 +132,7 @@ public class ExternalAppsUtils {
 	public static void openUrl(String url) {
 		Intent intent = new Intent(Intent.ACTION_VIEW);
 		intent.setData(Uri.parse(url));
-		ActivityLauncher.startActivityNewTask(intent);
+		ActivityLauncher.INSTANCE.startActivityNewTask(intent);
 	}
 
 	public static Drawable getAppIcon(String applicationId) {
@@ -146,7 +146,7 @@ public class ExternalAppsUtils {
 	public static void openAppInfo() {
 		Uri packageURI = Uri.parse("package:" + AppUtils.getApplicationId());
 		Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, packageURI);
-		ActivityLauncher.startActivityNewTask(intent);
+		ActivityLauncher.INSTANCE.startActivityNewTask(intent);
 	}
 
 	public static void openOnBrowser(File file) {
@@ -154,19 +154,19 @@ public class ExternalAppsUtils {
 		intent.setData(Uri.fromFile(file));
 		intent.setClassName("com.android.chrome", "com.google.android.apps.chrome.Main");
 		if (IntentUtils.INSTANCE.isIntentAvailable(intent)) {
-			ActivityLauncher.startActivityNewTask(intent);
+			ActivityLauncher.INSTANCE.startActivityNewTask(intent);
 		} else {
 			intent = new Intent(Intent.ACTION_VIEW);
 			intent.setData(Uri.fromFile(file));
 			intent.setClassName("com.android.browser", "com.android.browser.BrowserActivity");
-			ActivityLauncher.startActivityNewTask(intent);
+			ActivityLauncher.INSTANCE.startActivityNewTask(intent);
 		}
 	}
 
 	public static Boolean openYoutubeVideo(String videoUrl) {
 		Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(videoUrl));
 		if (IntentUtils.INSTANCE.isIntentAvailable(intent)) {
-			ActivityLauncher.startActivityNewTask(intent);
+			ActivityLauncher.INSTANCE.startActivityNewTask(intent);
 			return true;
 		} else {
 			LOGGER.info("Youtube video intent not supported");
@@ -178,7 +178,7 @@ public class ExternalAppsUtils {
 		Intent intent = new Intent(Intent.ACTION_DIAL);
 		intent.setData(Uri.fromParts("tel", phoneNumber, null));
 		if (IntentUtils.INSTANCE.isIntentAvailable(intent)) {
-			ActivityLauncher.startActivityNewTask(intent);
+			ActivityLauncher.INSTANCE.startActivityNewTask(intent);
 			return true;
 		} else {
 			LOGGER.info("Dial phone intent not supported");
@@ -194,7 +194,7 @@ public class ExternalAppsUtils {
 		Intent intent = new Intent(Intent.ACTION_SENDTO);
 		intent.setData(Uri.parse("mailto:" + mailto + (subject != null ? "?subject=" + EncodingUtils.encodeURL(subject) : "")));
 		if (IntentUtils.INSTANCE.isIntentAvailable(intent)) {
-			ActivityLauncher.startActivityNewTask(intent);
+			ActivityLauncher.INSTANCE.startActivityNewTask(intent);
 			return true;
 		} else {
 			LOGGER.info("Open email intent not supported");

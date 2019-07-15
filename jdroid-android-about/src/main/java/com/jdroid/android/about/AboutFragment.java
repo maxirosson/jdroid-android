@@ -67,7 +67,7 @@ public class AboutFragment extends AbstractRecyclerFragment {
 
 				@Override
 				public void onSelected(Activity activity) {
-					ActivityLauncher.startActivity(activity, SpreadTheLoveActivity.class);
+					ActivityLauncher.INSTANCE.startActivity(activity, SpreadTheLoveActivity.class);
 				}
 			});
 		}
@@ -75,7 +75,7 @@ public class AboutFragment extends AbstractRecyclerFragment {
 
 			@Override
 			public void onSelected(Activity activity) {
-				ActivityLauncher.startActivity(activity, LibrariesActivity.class);
+				ActivityLauncher.INSTANCE.startActivity(activity, LibrariesActivity.class);
 			}
 		});
 

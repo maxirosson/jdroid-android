@@ -28,7 +28,7 @@ public class AdsFragment extends AbstractFragment {
 
 			@Override
 			public void onClick(View v) {
-				ActivityLauncher.startActivity(getActivity(), FragmentBannerActivity.class);
+				ActivityLauncher.INSTANCE.startActivity(getActivity(), FragmentBannerActivity.class);
 			}
 		});
 
@@ -36,7 +36,7 @@ public class AdsFragment extends AbstractFragment {
 
 			@Override
 			public void onClick(View v) {
-				ActivityLauncher.startActivity(getActivity(), AdRecyclerActivity.class);
+				ActivityLauncher.INSTANCE.startActivity(getActivity(), AdRecyclerActivity.class);
 			}
 		});
 
@@ -44,7 +44,7 @@ public class AdsFragment extends AbstractFragment {
 
 			@Override
 			public void onClick(View v) {
-				ActivityLauncher.startActivity(getActivity(), ActivityBannerActivity.class);
+				ActivityLauncher.INSTANCE.startActivity(getActivity(), ActivityBannerActivity.class);
 			}
 		});
 
@@ -71,7 +71,7 @@ public class AdsFragment extends AbstractFragment {
 
 			@Override
 			public void onClick(View v) {
-				ActivityLauncher.startActivity(getActivity(), HouseAdsActivity.class);
+				ActivityLauncher.INSTANCE.startActivity(getActivity(), HouseAdsActivity.class);
 			}
 		});
 	}

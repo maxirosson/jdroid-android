@@ -99,7 +99,7 @@ public class GooglePlayGamesHelper extends GoogleSignInHelper {
 			leaderboardsClient.getLeaderboardIntent(leaderboardId).addOnSuccessListener(new OnSuccessListener<Intent>() {
 				@Override
 				public void onSuccess(Intent intent) {
-					ActivityLauncher.startActivityForResult(getAbstractFragment().getActivity(), intent, UNUSED_REQUEST_CODE);
+					ActivityLauncher.INSTANCE.startActivityForResult(getAbstractFragment().getActivity(), intent, UNUSED_REQUEST_CODE);
 				}
 			}).addOnFailureListener(new OnFailureListener() {
 				@Override
@@ -115,7 +115,7 @@ public class GooglePlayGamesHelper extends GoogleSignInHelper {
 			leaderboardsClient.getAllLeaderboardsIntent().addOnSuccessListener(new OnSuccessListener<Intent>() {
 				@Override
 				public void onSuccess(Intent intent) {
-					ActivityLauncher.startActivityForResult(getAbstractFragment().getActivity(), intent, UNUSED_REQUEST_CODE);
+					ActivityLauncher.INSTANCE.startActivityForResult(getAbstractFragment().getActivity(), intent, UNUSED_REQUEST_CODE);
 				}
 			}).addOnFailureListener(new OnFailureListener() {
 				@Override
@@ -143,7 +143,7 @@ public class GooglePlayGamesHelper extends GoogleSignInHelper {
 			achievementsClient.getAchievementsIntent().addOnSuccessListener(new OnSuccessListener<Intent>() {
 				@Override
 				public void onSuccess(Intent intent) {
-					ActivityLauncher.startActivityForResult(getAbstractFragment().getActivity(), intent, UNUSED_REQUEST_CODE);
+					ActivityLauncher.INSTANCE.startActivityForResult(getAbstractFragment().getActivity(), intent, UNUSED_REQUEST_CODE);
 				}
 			}).addOnFailureListener(new OnFailureListener() {
 				@Override

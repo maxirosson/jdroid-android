@@ -110,7 +110,7 @@ public class GoogleSignInHelper {
 
 	public void signIn() {
 		Intent signInIntent = googleSignInClient.getSignInIntent();
-		ActivityLauncher.startActivityForResult(abstractFragment.getActivity(), signInIntent, SIGN_IN_REQUEST_CODE);
+		ActivityLauncher.INSTANCE.startActivityForResult(abstractFragment.getActivity(), signInIntent, SIGN_IN_REQUEST_CODE);
 	}
 
 	public void signOut() {

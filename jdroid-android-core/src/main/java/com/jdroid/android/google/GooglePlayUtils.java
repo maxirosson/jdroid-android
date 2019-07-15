@@ -67,11 +67,11 @@ public class GooglePlayUtils {
 		Uri uri = Uri.parse("market://details?id=" + applicationId);
 		Intent intent = new Intent(Intent.ACTION_VIEW, uri);
 		if (IntentUtils.INSTANCE.isIntentAvailable(intent)) {
-			ActivityLauncher.startActivityNewTask(intent);
+			ActivityLauncher.INSTANCE.startActivityNewTask(intent);
 		} else {
 			intent = new Intent(Intent.ACTION_VIEW);
 			intent.setData(Uri.parse(getGooglePlayLink(applicationId)));
-			ActivityLauncher.startActivityNewTask(intent);
+			ActivityLauncher.INSTANCE.startActivityNewTask(intent);
 		}
 	}
 

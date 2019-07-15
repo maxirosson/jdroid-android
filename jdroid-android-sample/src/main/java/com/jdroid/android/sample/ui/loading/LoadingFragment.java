@@ -24,28 +24,28 @@ public class LoadingFragment extends AbstractFragment {
 
 			@Override
 			public void onClick(View v) {
-				ActivityLauncher.startActivity(getActivity(), new Intent(getActivity(), BlockingLoadingActivity.class));
+				ActivityLauncher.INSTANCE.startActivity(getActivity(), new Intent(getActivity(), BlockingLoadingActivity.class));
 			}
 		});
 		findView(R.id.customBlockingLoading).setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				ActivityLauncher.startActivity(getActivity(), new Intent(getActivity(), CustomActivityLoadingActivity.class));
+				ActivityLauncher.INSTANCE.startActivity(getActivity(), new Intent(getActivity(), CustomActivityLoadingActivity.class));
 			}
 		});
 		findView(R.id.nonBlockingLoading).setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				ActivityLauncher.startActivity(getActivity(), new Intent(getActivity(), NonBlockingLoadingActivity.class));
+				ActivityLauncher.INSTANCE.startActivity(getActivity(), new Intent(getActivity(), NonBlockingLoadingActivity.class));
 			}
 		});
 		findView(R.id.swipeRefresLoading).setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				ActivityLauncher.startActivity(getActivity(), new Intent(getActivity(), SwipeRefreshLoadingActivity.class));
+				ActivityLauncher.INSTANCE.startActivity(getActivity(), new Intent(getActivity(), SwipeRefreshLoadingActivity.class));
 			}
 		});
 	}

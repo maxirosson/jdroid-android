@@ -19,11 +19,11 @@ public class TwitterHelper {
 			Intent intent = new Intent();
 			intent.setClassName("com.twitter.android", "com.twitter.android.ProfileActivity");
 			intent.putExtra("screen_name", account);
-			ActivityLauncher.startActivityNewTask(intent);
+			ActivityLauncher.INSTANCE.startActivityNewTask(intent);
 		} catch (ActivityNotFoundException e) {
 			Intent intent =
 				new Intent(Intent.ACTION_VIEW, Uri.parse("http://twitter.com/" + account));
-			ActivityLauncher.startActivityNewTask(intent);
+			ActivityLauncher.INSTANCE.startActivityNewTask(intent);
 		} finally {
 			AbstractApplication.get().getCoreAnalyticsSender().trackSocialInteraction(SocialNetwork.TWITTER.getName(),
 				SocialAction.OPEN_PROFILE, account);

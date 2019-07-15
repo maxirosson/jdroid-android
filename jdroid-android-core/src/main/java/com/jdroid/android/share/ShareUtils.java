@@ -29,7 +29,7 @@ public class ShareUtils {
 
 	public static void shareHtmlContent(Activity activity, String shareKey, String shareTitle, String shareSubject, String shareText) {
 		Intent intent = createShareHtmlContentIntent(shareSubject, shareText);
-		ActivityLauncher.startActivity(activity, Intent.createChooser(intent, shareTitle));
+		ActivityLauncher.INSTANCE.startActivity(activity, Intent.createChooser(intent, shareTitle));
 
 		AbstractApplication.get().getCoreAnalyticsSender().trackSocialInteraction(null, SocialAction.SHARE, shareKey);
 	}
@@ -40,7 +40,7 @@ public class ShareUtils {
 		Intent intent = createShareTextContentIntent(null, shareText);
 		intent.setPackage(applicationId);
 		try {
-			ActivityLauncher.startActivity(activity, intent);
+			ActivityLauncher.INSTANCE.startActivity(activity, intent);
 			AbstractApplication.get().getCoreAnalyticsSender().trackSocialInteraction(sharingMedium.getName(), SocialAction.SHARE, shareKey);
 		} catch (ActivityNotFoundException e) {
 			Integer installedAppVersionCode = ExternalAppsUtils.getInstalledAppVersionCode(applicationId);
