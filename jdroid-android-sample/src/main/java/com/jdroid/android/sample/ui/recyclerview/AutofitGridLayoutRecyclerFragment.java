@@ -12,7 +12,7 @@ public class AutofitGridLayoutRecyclerFragment extends SimpleRecyclerFragment {
 	@NonNull
 	@Override
 	protected RecyclerView.LayoutManager createLayoutManager() {
-		return new AutofitGridLayoutManager(getActivity(), ScreenUtils.convertDimenToPixel(R.dimen.autoGridItemWidth));
+		return new AutofitGridLayoutManager(getActivity(), ScreenUtils.INSTANCE.convertDimenToPixel(R.dimen.autoGridItemWidth));
 	}
 
 }

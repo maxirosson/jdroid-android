@@ -55,7 +55,7 @@ public final class ToastUtils {
 	 * @param messageId The id of the text to show.
 	 */
 	public static void showToastOnUIThread(int messageId) {
-		showToastOnUIThread(LocalizationUtils.getString(messageId));
+		showToastOnUIThread(LocalizationUtils.INSTANCE.getString(messageId));
 	}
 
 	/**
@@ -64,7 +64,7 @@ public final class ToastUtils {
 	 * @param messageId The id of the text to show.
 	 */
 	public static void showToast(int messageId) {
-		showToast(LocalizationUtils.getString(messageId), DEFAULT_DURATION);
+		showToast(LocalizationUtils.INSTANCE.getString(messageId), DEFAULT_DURATION);
 	}
 
 	/**

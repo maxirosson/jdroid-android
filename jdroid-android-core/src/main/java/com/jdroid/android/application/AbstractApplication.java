@@ -206,7 +206,7 @@ public abstract class AbstractApplication extends KotlinAbstractApplication {
 		if (fromVersionCode == null) {
 			appLaunchStatus = AppLaunchStatus.NEW_INSTALLATION;
 		} else {
-			if (fromVersionCode.equals(AppUtils.getVersionCode())) {
+			if (fromVersionCode.equals(AppUtils.INSTANCE.getVersionCode())) {
 				appLaunchStatus = AppLaunchStatus.NORMAL;
 			} else {
 				appLaunchStatus = AppLaunchStatus.VERSION_UPGRADE;
@@ -214,7 +214,7 @@ public abstract class AbstractApplication extends KotlinAbstractApplication {
 		}
 		KotlinAbstractApplication.Companion.getLOGGER().debug("App launch status: " + appLaunchStatus);
 		if (!appLaunchStatus.equals(AppLaunchStatus.NORMAL)) {
-			SharedPreferencesHelper.get().savePreferenceAsync(VERSION_CODE_KEY, AppUtils.getVersionCode());
+			SharedPreferencesHelper.get().savePreferenceAsync(VERSION_CODE_KEY, AppUtils.INSTANCE.getVersionCode());
 		}
 
 		if (appLaunchStatus.equals(AppLaunchStatus.VERSION_UPGRADE) && updateManager != null) {

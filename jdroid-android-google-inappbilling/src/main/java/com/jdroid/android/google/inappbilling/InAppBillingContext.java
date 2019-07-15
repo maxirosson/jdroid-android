@@ -39,7 +39,7 @@ public class InAppBillingContext extends AbstractAppContext {
 	}
 
 	public Boolean isStaticResponsesEnabled() {
-		return !AppUtils.isReleaseBuildType() && getSharedPreferencesHelper().loadPreferenceAsBoolean(STATIC_RESPONSES_ENABLED, false);
+		return !AppUtils.INSTANCE.isReleaseBuildType() && getSharedPreferencesHelper().loadPreferenceAsBoolean(STATIC_RESPONSES_ENABLED, false);
 	}
 
 	public synchronized void setPurchasedProductTypes(Inventory inventory) {

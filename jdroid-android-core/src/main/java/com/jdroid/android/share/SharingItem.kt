@@ -14,12 +14,12 @@ abstract class SharingItem {
     }
 
     open fun getAppIcon(): Drawable? {
-        return ExternalAppsUtils.getAppIcon(getApplicationId())
+        return ExternalAppsUtils.getAppIcon(getApplicationId()!!)
     }
 
     abstract fun share(activity: Activity)
 
-    open fun isEnabled(): Boolean? {
+    open fun isEnabled(): Boolean {
         val applicationId = getApplicationId()
         return applicationId != null && ExternalAppsUtils.isAppInstalled(applicationId, getMinimumVersionCode())
     }

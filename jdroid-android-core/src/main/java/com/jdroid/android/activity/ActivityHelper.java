@@ -157,7 +157,7 @@ public class ActivityHelper implements ActivityIf {
 		if (firstActivityCreate == null) {
 			firstActivityCreate = true;
 			UsageStats.incrementAppLoadAsync();
-			AbstractApplication.get().getCoreAnalyticsSender().trackErrorCustomKey("installerPackageName", AppUtils.getSafeInstallerPackageName());
+			AbstractApplication.get().getCoreAnalyticsSender().trackErrorCustomKey("installerPackageName", AppUtils.INSTANCE.getSafeInstallerPackageName());
 			AbstractApplication.get().getCoreAnalyticsSender().onFirstActivityCreate(activity);
 		} else {
 			firstActivityCreate = false;
@@ -232,7 +232,7 @@ public class ActivityHelper implements ActivityIf {
 			} else {
 				Intent targetIntent = new Intent();
 				targetIntent.setData(Uri.parse(uri));
-				targetIntent.setPackage(AppUtils.getApplicationId());
+				targetIntent.setPackage(AppUtils.INSTANCE.getApplicationId());
 				ReferrerUtils.setReferrer(targetIntent, ActivityCompat.getReferrer(activity));
 				try {
 					activity.startActivity(targetIntent);

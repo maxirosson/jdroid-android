@@ -64,7 +64,7 @@ public class FirebaseRemoteConfigLoader implements RemoteConfigLoader {
 						firebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
 
 						FirebaseRemoteConfigSettings.Builder configSettingsBuilder = new FirebaseRemoteConfigSettings.Builder();
-						if (!AppUtils.isReleaseBuildType()) {
+						if (!AppUtils.INSTANCE.isReleaseBuildType()) {
 							configSettingsBuilder.setMinimumFetchIntervalInSeconds(0);
 						}
 

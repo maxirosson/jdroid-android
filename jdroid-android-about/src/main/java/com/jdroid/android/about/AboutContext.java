@@ -32,6 +32,6 @@ public class AboutContext extends AbstractAppContext {
 	}
 
 	public String getBetaTestingUrl() {
-		return "https://play.google.com/apps/testing/" + AppUtils.getReleaseApplicationId();
+		return "https://play.google.com/apps/testing/" + AppUtils.INSTANCE.getReleaseApplicationId();
 	}
 }

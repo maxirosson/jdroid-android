@@ -35,8 +35,8 @@ public class AppShortcutsFragment extends AbstractFragment {
 					intent.setAction(Intent.ACTION_VIEW);
 
 					ShortcutInfoCompat.Builder shortcutInfoBuilder = new ShortcutInfoCompat.Builder(AbstractApplication.get(), item.name());
-					shortcutInfoBuilder.setShortLabel(LocalizationUtils.getString(item.getNameResource()));
-					shortcutInfoBuilder.setLongLabel(LocalizationUtils.getString(item.getNameResource()));
+					shortcutInfoBuilder.setShortLabel(LocalizationUtils.INSTANCE.getString(item.getNameResource()));
+					shortcutInfoBuilder.setLongLabel(LocalizationUtils.INSTANCE.getString(item.getNameResource()));
 					shortcutInfoBuilder.setIcon(IconCompat.createWithResource(AbstractApplication.get(), item.getIconResource()));
 					shortcutInfoBuilder.setIntent(intent);
 
@@ -54,8 +54,8 @@ public class AppShortcutsFragment extends AbstractFragment {
 					intent.setAction(Intent.ACTION_VIEW);
 
 					ShortcutInfoCompat.Builder shortcutInfoBuilder = new ShortcutInfoCompat.Builder(AbstractApplication.get(), item.name());
-					shortcutInfoBuilder.setShortLabel(LocalizationUtils.getString(item.getNameResource()));
-					shortcutInfoBuilder.setLongLabel(LocalizationUtils.getString(item.getNameResource()));
+					shortcutInfoBuilder.setShortLabel(LocalizationUtils.INSTANCE.getString(item.getNameResource()));
+					shortcutInfoBuilder.setLongLabel(LocalizationUtils.INSTANCE.getString(item.getNameResource()));
 					shortcutInfoBuilder.setIcon(IconCompat.createWithResource(AbstractApplication.get(), item.getIconResource()));
 					shortcutInfoBuilder.setIntent(intent);
 

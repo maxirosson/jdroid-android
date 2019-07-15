@@ -25,7 +25,7 @@ public class AppContext extends AbstractAppContext {
 
 	@SuppressWarnings("unchecked")
 	protected <T extends Server> T getServer(Server defaultServer) {
-		if (AppUtils.isReleaseBuildType() || !isDebugSettingsEnabled()) {
+		if (AppUtils.INSTANCE.isReleaseBuildType() || !isDebugSettingsEnabled()) {
 			return (T)defaultServer;
 		} else {
 			Class<?> clazz = defaultServer.getClass().getEnclosingClass() != null ? defaultServer.getClass().getEnclosingClass()

@@ -42,7 +42,7 @@ public abstract class BaseAdViewHelper implements AdHelper {
 
 					baseAdViewWrapper = createBaseAdViewWrapper(activity);
 
-					if (!AppUtils.isReleaseBuildType() && AdMobAppModule.getAdMobAppContext().isTestAdUnitIdEnabled()) {
+					if (!AppUtils.INSTANCE.isReleaseBuildType() && AdMobAppModule.getAdMobAppContext().isTestAdUnitIdEnabled()) {
 						baseAdViewWrapper.setAdUnitId(BaseAdViewHelper.TEST_AD_UNIT_ID);
 					} else {
 						baseAdViewWrapper.setAdUnitId(adUnitId);
@@ -141,7 +141,7 @@ public abstract class BaseAdViewHelper implements AdHelper {
 
 	protected AdRequest.Builder createBuilder() {
 		final AdRequest.Builder builder = new AdRequest.Builder();
-		if (!AppUtils.isReleaseBuildType()) {
+		if (!AppUtils.INSTANCE.isReleaseBuildType()) {
 			builder.addTestDevice(AdRequest.DEVICE_ID_EMULATOR);
 			for (String deviceId : AdMobAppModule.getAdMobAppContext().getTestDevicesIds()) {
 				builder.addTestDevice(deviceId);

@@ -92,8 +92,8 @@ public class AndroidApplication extends AbstractApplication {
 						intent.setAction(Intent.ACTION_VIEW);
 
 						ShortcutInfo.Builder shortcutInfoBuilder = new ShortcutInfo.Builder(AbstractApplication.get(), item.name());
-						shortcutInfoBuilder.setShortLabel(LocalizationUtils.getString(item.getNameResource()));
-						shortcutInfoBuilder.setLongLabel(LocalizationUtils.getString(item.getNameResource()));
+						shortcutInfoBuilder.setShortLabel(LocalizationUtils.INSTANCE.getString(item.getNameResource()));
+						shortcutInfoBuilder.setLongLabel(LocalizationUtils.INSTANCE.getString(item.getNameResource()));
 						shortcutInfoBuilder.setIcon(Icon.createWithResource(AbstractApplication.get(), item.getIconResource()));
 						shortcutInfoBuilder.setIntent(intent);
 						shortcutInfoBuilder.setRank(rank);

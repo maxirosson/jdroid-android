@@ -73,8 +73,8 @@ public class ShareView extends FrameLayout {
 		ViewGroup shareSection = activity.findViewById(R.id.shareSection);
 		ViewGroup shareItemsContainer = activity.findViewById(R.id.shareItemsContainer);
 
-		int itemWidth = ScreenUtils.convertDimenToPixel(R.dimen.jdroid_shareItemWidth);
-		int itemsToDisplay = (ScreenUtils.getScreenWidthPx() / itemWidth) - 1;
+		int itemWidth = ScreenUtils.INSTANCE.convertDimenToPixel(R.dimen.jdroid_shareItemWidth);
+		int itemsToDisplay = (ScreenUtils.INSTANCE.getScreenWidthPx() / itemWidth) - 1;
 		for (SharingItem each : sharingItems) {
 			if (each.isEnabled() && (itemsToDisplay > 0)) {
 				ShareView shareView = new ShareView(activity);

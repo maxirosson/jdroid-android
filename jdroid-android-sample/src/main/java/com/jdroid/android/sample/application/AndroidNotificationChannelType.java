@@ -62,7 +62,7 @@ public enum AndroidNotificationChannelType implements NotificationChannelType {
 
 	@Override
 	public String getUserVisibleName() {
-		return LocalizationUtils.getString(nameResId);
+		return LocalizationUtils.INSTANCE.getString(nameResId);
 	}
 
 	@Override

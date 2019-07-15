@@ -81,7 +81,7 @@ public enum HomeItem implements ActionItem {
 	SERVICE(R.string.service, R.drawable.ic_service, ServiceActivity.class),
 	SPLIT_INSTALL(R.string.splitInstall, R.drawable.ic_exception_handling, SplitInstallActivity.class),
 	STRICT_MODE(R.string.strictMode, R.drawable.ic_exception_handling, StrictModeActivity.class),
-	TABLETS(R.string.tablets, R.drawable.ic_tablets, ScreenUtils.is10Inches() ? TabletActivity.class : LeftTabletActivity.class),
+	TABLETS(R.string.tablets, R.drawable.ic_tablets, ScreenUtils.INSTANCE.is10Inches() ? TabletActivity.class : LeftTabletActivity.class),
 	TIMER(R.string.timer, R.drawable.ic_toasts, TimerActivity.class),
 	TOASTS(R.string.toasts, R.drawable.ic_toasts, ToastsActivity.class),
 	TWITTER(R.string.jdroid_twitter, R.drawable.ic_twitter_black_24dp, TwitterActivity.class),

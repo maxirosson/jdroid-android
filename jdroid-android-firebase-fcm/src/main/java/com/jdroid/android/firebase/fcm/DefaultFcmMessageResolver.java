@@ -39,7 +39,7 @@ public class DefaultFcmMessageResolver implements FcmMessageResolver {
 	public FcmMessage resolve(@NonNull RemoteMessage remoteMessage) {
 		LOGGER.debug("FCM message received. " + remoteMessage.getData());
 		Long minAppVersionCode = TypeUtils.getLong(remoteMessage.getData().get(MIN_APP_VERSION_CODE_KEY), 0L);
-		if (AppUtils.getVersionCode() >= minAppVersionCode) {
+		if (AppUtils.INSTANCE.getVersionCode() >= minAppVersionCode) {
 			Long minDeviceOsVersion = TypeUtils.getLong(remoteMessage.getData().get(MIN_DEVICE_OS_VERSION_KEY), 0L);
 			if (AndroidUtils.INSTANCE.getApiLevel() >= minDeviceOsVersion) {
 				for (FcmMessage each : FcmContext.INSTANCE.getFcmMessages()) {

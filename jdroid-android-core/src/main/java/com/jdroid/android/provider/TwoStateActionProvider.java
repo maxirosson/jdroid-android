@@ -2,7 +2,6 @@ package com.jdroid.android.provider;
 
 import android.content.Context;
 import android.graphics.Rect;
-import androidx.core.view.ActionProvider;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +13,8 @@ import android.widget.ViewFlipper;
 
 import com.jdroid.android.R;
 import com.jdroid.android.utils.LocalizationUtils;
+
+import androidx.core.view.ActionProvider;
 
 public abstract class TwoStateActionProvider extends ActionProvider {
 
@@ -69,11 +70,11 @@ public abstract class TwoStateActionProvider extends ActionProvider {
 	}
 
 	protected String getFirstStateCheatSheet() {
-		return LocalizationUtils.getString(getFirstStateCheatSheetResId());
+		return LocalizationUtils.INSTANCE.getString(getFirstStateCheatSheetResId());
 	}
 
 	protected String getSecondStateCheatSheet() {
-		return LocalizationUtils.getString(getSecondStateCheatSheetResId());
+		return LocalizationUtils.INSTANCE.getString(getSecondStateCheatSheetResId());
 	}
 
 	/**

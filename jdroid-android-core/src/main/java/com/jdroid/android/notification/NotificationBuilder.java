@@ -75,7 +75,7 @@ public class NotificationBuilder {
 	}
 
 	public void setTicker(int tickerId, Object... args) {
-		setTicker(LocalizationUtils.getString(tickerId, args));
+		setTicker(LocalizationUtils.INSTANCE.getString(tickerId, args));
 	}
 
 	public void setTicker(String tickerText) {
@@ -83,7 +83,7 @@ public class NotificationBuilder {
 	}
 
 	public void setContentTitle(@StringRes int contentTitleId, Object... args) {
-		setContentTitle(LocalizationUtils.getString(contentTitleId, args));
+		setContentTitle(LocalizationUtils.INSTANCE.getString(contentTitleId, args));
 	}
 
 	public void setContentTitle(String contentTitle) {
@@ -91,7 +91,7 @@ public class NotificationBuilder {
 	}
 
 	public void setContentText(@StringRes int contentTextId, Object... args) {
-		setContentText(LocalizationUtils.getString(contentTextId, args));
+		setContentText(LocalizationUtils.INSTANCE.getString(contentTextId, args));
 	}
 
 	public void setContentText(String contentText) {
@@ -159,7 +159,7 @@ public class NotificationBuilder {
 	}
 
 	public static String generateNotificationsReferrer() {
-		return NOTIFICATION_SCHEME + "://" + AppUtils.getApplicationId();
+		return NOTIFICATION_SCHEME + "://" + AppUtils.INSTANCE.getApplicationId();
 	}
 
 	protected Uri createUniqueNotificationUri() {
@@ -228,7 +228,7 @@ public class NotificationBuilder {
 	}
 
 	public void setSound(int soundResId) {
-		Uri notificationSound = Uri.parse("android.resource://" + AppUtils.getApplicationId() + "/" + soundResId);
+		Uri notificationSound = Uri.parse("android.resource://" + AppUtils.INSTANCE.getApplicationId() + "/" + soundResId);
 		if (notificationSound != null) {
 			builder.setSound(notificationSound);
 		}
@@ -292,7 +292,7 @@ public class NotificationBuilder {
 	}
 
 	public void addStartActivityAction(@DrawableRes int icon, @StringRes int titleId, Intent intent) {
-		addStartActivityAction(icon, LocalizationUtils.getString(titleId), intent);
+		addStartActivityAction(icon, LocalizationUtils.INSTANCE.getString(titleId), intent);
 	}
 
 	public void addStartActivityAction(@DrawableRes int icon, String title, Intent intent) {
@@ -302,7 +302,7 @@ public class NotificationBuilder {
 	}
 
 	public void addStartServiceAction(@DrawableRes int icon, @StringRes int titleId, Intent intent) {
-		addStartServiceAction(icon, LocalizationUtils.getString(titleId), intent);
+		addStartServiceAction(icon, LocalizationUtils.INSTANCE.getString(titleId), intent);
 	}
 
 	public void addStartServiceAction(@DrawableRes int icon, String title, Intent intent) {

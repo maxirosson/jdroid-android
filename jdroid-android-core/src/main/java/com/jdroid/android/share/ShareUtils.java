@@ -43,7 +43,7 @@ public class ShareUtils {
 			ActivityLauncher.INSTANCE.startActivity(activity, intent);
 			AbstractApplication.get().getCoreAnalyticsSender().trackSocialInteraction(sharingMedium.getName(), SocialAction.SHARE, shareKey);
 		} catch (ActivityNotFoundException e) {
-			Integer installedAppVersionCode = ExternalAppsUtils.getInstalledAppVersionCode(applicationId);
+			Integer installedAppVersionCode = ExternalAppsUtils.INSTANCE.getInstalledAppVersionCode(applicationId);
 			String message = "ACTION_SEND not supported by " + applicationId;
 			if (installedAppVersionCode != null) {
 				message += " version " + installedAppVersionCode;

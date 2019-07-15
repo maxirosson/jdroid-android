@@ -51,7 +51,7 @@ public class RateAppView extends RelativeLayout {
 	}
 
 	private void enjoyingAppView() {
-		rateAppTitle.setText(LocalizationUtils.getString(R.string.jdroid_rateAppEnjoying, LocalizationUtils.getString(R.string.jdroid_appName)));
+		rateAppTitle.setText(LocalizationUtils.INSTANCE.getString(R.string.jdroid_rateAppEnjoying, LocalizationUtils.INSTANCE.getString(R.string.jdroid_appName)));
 		positiveButton.setText(R.string.jdroid_rateAppYes);
 		positiveButton.setOnClickListener(new OnClickListener() {
 
@@ -76,7 +76,7 @@ public class RateAppView extends RelativeLayout {
 	}
 
 	private void feedbackView() {
-		rateAppTitle.setText(LocalizationUtils.getString(R.string.jdroid_rateAppFeedback));
+		rateAppTitle.setText(LocalizationUtils.INSTANCE.getString(R.string.jdroid_rateAppFeedback));
 		positiveButton.setText(R.string.jdroid_rateAppOkSure);
 		positiveButton.setOnClickListener(new OnClickListener() {
 
@@ -84,7 +84,7 @@ public class RateAppView extends RelativeLayout {
 			public void onClick(View v) {
 
 				String contactUsEmailAddress = AbstractApplication.get().getAppContext().getContactUsEmail();
-				if (ExternalAppsUtils.openEmail(contactUsEmailAddress, AbstractApplication.get().getAppName())) {
+				if (ExternalAppsUtils.INSTANCE.openEmail(contactUsEmailAddress, AbstractApplication.get().getAppName())) {
 					AbstractApplication.get().getCoreAnalyticsSender().trackGiveFeedback(true);
 					RateAppStats.setGiveFeedback(true);
 				} else {
@@ -108,7 +108,7 @@ public class RateAppView extends RelativeLayout {
 	}
 
 	private void googlePlayView() {
-		rateAppTitle.setText(LocalizationUtils.getString(R.string.jdroid_rateAppGooglePlay));
+		rateAppTitle.setText(LocalizationUtils.INSTANCE.getString(R.string.jdroid_rateAppGooglePlay));
 		positiveButton.setText(R.string.jdroid_rateAppOkSure);
 		positiveButton.setOnClickListener(new OnClickListener() {
 

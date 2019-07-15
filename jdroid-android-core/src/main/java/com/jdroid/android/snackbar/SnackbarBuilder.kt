@@ -45,6 +45,6 @@ class SnackbarBuilder {
     }
 
     fun setDescription(@StringRes descriptionResId: Int) {
-        this.description = LocalizationUtils.getString(descriptionResId)
+        this.description = LocalizationUtils.getRequiredString(descriptionResId)
     }
 }

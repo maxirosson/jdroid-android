@@ -42,7 +42,7 @@ public class AboutFragment extends AbstractRecyclerFragment {
 			aboutItems.add(new AboutItem(R.drawable.jdroid_ic_website_black_24dp, R.string.jdroid_website) {
 				@Override
 				public void onSelected(Activity activity) {
-					ExternalAppsUtils.openUrl(website);
+					ExternalAppsUtils.INSTANCE.openUrl(website);
 				}
 			});
 		}
@@ -53,7 +53,7 @@ public class AboutFragment extends AbstractRecyclerFragment {
 
 				@Override
 				public void onSelected(Activity activity) {
-					if (ExternalAppsUtils.openEmail(contactUsEmailAddress)) {
+					if (ExternalAppsUtils.INSTANCE.openEmail(contactUsEmailAddress)) {
 						AboutAppModule.Companion.get().getModuleAnalyticsSender().trackContactUs();
 					} else {
 						// TODO Improve this adding a toast or something
@@ -86,7 +86,7 @@ public class AboutFragment extends AbstractRecyclerFragment {
 
 				@Override
 				public void onSelected(Activity activity) {
-					ExternalAppsUtils.openUrl(privacyPolicyUrl);
+					ExternalAppsUtils.INSTANCE.openUrl(privacyPolicyUrl);
 				}
 			});
 		}
@@ -96,7 +96,7 @@ public class AboutFragment extends AbstractRecyclerFragment {
 
 				@Override
 				public void onSelected(Activity activity) {
-					ExternalAppsUtils.openUrl(AboutAppModule.Companion.get().getAboutContext().getBetaTestingUrl());
+					ExternalAppsUtils.INSTANCE.openUrl(AboutAppModule.Companion.get().getAboutContext().getBetaTestingUrl());
 				}
 			});
 		}
@@ -160,7 +160,7 @@ public class AboutFragment extends AbstractRecyclerFragment {
 		public void fillHolderFromItem(String item, HeaderItemHolder holder) {
 			holder.appIcon.setImageResource(AbstractApplication.get().getLauncherIconResId());
 			holder.appName.setText(AbstractApplication.get().getAppName());
-			holder.version.setText(getString(R.string.jdroid_version, AppUtils.getVersionName()));
+			holder.version.setText(getString(R.string.jdroid_version, AppUtils.INSTANCE.getVersionName()));
 			if (AbstractApplication.get().getAppContext().isDebugSettingsEnabled()) {
 				holder.appIcon.setOnClickListener(new OnClickListener() {
 

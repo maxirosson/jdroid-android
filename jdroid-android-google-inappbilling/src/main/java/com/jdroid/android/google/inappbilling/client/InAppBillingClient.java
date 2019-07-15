@@ -343,8 +343,8 @@ public class InAppBillingClient implements PurchasesUpdatedListener {
 								for (SkuDetails skuDetails : skuDetailsList) {
 									Product product = inventory.getProduct(skuDetails.getSku());
 									ProductType productType = product.getProductType();
-									product.setTitle(productType.getTitleId() != null ? LocalizationUtils.getString(productType.getTitleId()) : skuDetails.getTitle());
-									product.setDescription(productType.getDescriptionId() != null ? LocalizationUtils.getString(productType.getDescriptionId()) : skuDetails.getDescription());
+									product.setTitle(productType.getTitleId() != null ? LocalizationUtils.INSTANCE.getString(productType.getTitleId()) : skuDetails.getTitle());
+									product.setDescription(productType.getDescriptionId() != null ? LocalizationUtils.INSTANCE.getString(productType.getDescriptionId()) : skuDetails.getDescription());
 									product.setCurrencyCode(skuDetails.getPriceCurrencyCode());
 									product.setFormattedPrice(skuDetails.getPrice());
 									product.setPrice((double)skuDetails.getPriceAmountMicros() / 1000000);

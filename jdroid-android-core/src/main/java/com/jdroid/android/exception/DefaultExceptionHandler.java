@@ -180,7 +180,7 @@ public class DefaultExceptionHandler implements ExceptionHandler {
 	}
 
 	public static void setMessageOnConnectionTimeout(RuntimeException runtimeException, int resId) {
-		setMessageOnConnectionTimeout(runtimeException, LocalizationUtils.getString(resId));
+		setMessageOnConnectionTimeout(runtimeException, LocalizationUtils.INSTANCE.getString(resId));
 	}
 
 	public static void setMessageOnConnectionTimeout(RuntimeException runtimeException, String text) {

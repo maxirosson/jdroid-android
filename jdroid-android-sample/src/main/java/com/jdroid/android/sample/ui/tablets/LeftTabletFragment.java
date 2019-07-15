@@ -28,7 +28,7 @@ public class LeftTabletFragment extends AbstractFragment {
 		super.onViewCreated(view, savedInstanceState);
 
 		Button openDetail = findView(R.id.openDetail);
-		if (ScreenUtils.is10Inches()) {
+		if (ScreenUtils.INSTANCE.is10Inches()) {
 			openDetail.setVisibility(View.GONE);
 		} else {
 			openDetail.setVisibility(View.VISIBLE);

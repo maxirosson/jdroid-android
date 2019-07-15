@@ -82,10 +82,10 @@ public class NotificationUtils {
 	}
 
 	public static int getNotificationLargeIconWidthPx() {
-		return ScreenUtils.convertDimenToPixel(android.R.dimen.notification_large_icon_width);
+		return ScreenUtils.INSTANCE.convertDimenToPixel(android.R.dimen.notification_large_icon_width);
 	}
 
 	public static int getNotificationLargeIconHeightPx() {
-		return ScreenUtils.convertDimenToPixel(android.R.dimen.notification_large_icon_height);
+		return ScreenUtils.INSTANCE.convertDimenToPixel(android.R.dimen.notification_large_icon_height);
 	}
 }

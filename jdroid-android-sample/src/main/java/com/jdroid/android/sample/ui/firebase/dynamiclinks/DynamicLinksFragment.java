@@ -80,7 +80,7 @@ public class DynamicLinksFragment extends AbstractFragment {
 						dynamicLinkInfo.setLink(linkUrlTextView.getText().toString());
 
 						AndroidInfo androidInfo = new AndroidInfo();
-						androidInfo.setAndroidPackageName(AppUtils.getApplicationId());
+						androidInfo.setAndroidPackageName(AppUtils.INSTANCE.getApplicationId());
 						if (minVersionCodeTextView.getText().length() > 0) {
 							androidInfo.setAndroidMinPackageVersionCode(TypeUtils.getInteger(minVersionCodeTextView.getText().toString()));
 						}

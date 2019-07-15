@@ -29,7 +29,7 @@ public class InterstitialAdHelper implements AdHelper {
 
 	private AdRequest.Builder createBuilder() {
 		final AdRequest.Builder builder = new AdRequest.Builder();
-		if (!AppUtils.isReleaseBuildType()) {
+		if (!AppUtils.INSTANCE.isReleaseBuildType()) {
 			builder.addTestDevice(AdRequest.DEVICE_ID_EMULATOR);
 			for (String deviceId : AdMobAppModule.getAdMobAppContext().getTestDevicesIds()) {
 				builder.addTestDevice(deviceId);
@@ -48,7 +48,7 @@ public class InterstitialAdHelper implements AdHelper {
 				throw new UnexpectedException("Missing interstitial ad unit ID");
 			}
 
-			if (!AppUtils.isReleaseBuildType() && AdMobAppModule.getAdMobAppContext().isTestAdUnitIdEnabled()) {
+			if (!AppUtils.INSTANCE.isReleaseBuildType() && AdMobAppModule.getAdMobAppContext().isTestAdUnitIdEnabled()) {
 				interstitial.setAdUnitId(TEST_AD_UNIT_ID);
 			} else {
 				interstitial.setAdUnitId(interstitialAdUnitId);

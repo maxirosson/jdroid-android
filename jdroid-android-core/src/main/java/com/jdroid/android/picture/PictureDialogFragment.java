@@ -130,7 +130,7 @@ public class PictureDialogFragment extends AbstractDialogFragment {
 
 		// This location works best if you want the created images to be shared between applications and persist after
 		// your app has been uninstalled.
-		String appName = AppUtils.getApplicationName().trim().replace(" ", "_");
+		String appName = AppUtils.INSTANCE.getApplicationName().trim().replace(" ", "_");
 		File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
 			appName);
 

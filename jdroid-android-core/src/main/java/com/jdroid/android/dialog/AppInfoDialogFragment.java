@@ -16,6 +16,6 @@ public class AppInfoDialogFragment extends AlertDialogFragment {
 
 	@Override
 	protected void onPositiveClick() {
-		ExternalAppsUtils.openAppInfo();
+		ExternalAppsUtils.INSTANCE.openAppInfo();
 	}
 }
