@@ -1,7 +1,7 @@
 package com.jdroid.android.http
 
 import com.jdroid.android.application.AbstractApplication
-import com.jdroid.android.context.SecurityContext
+import com.jdroid.android.auth.SecurityContext
 import com.jdroid.android.utils.AndroidUtils
 import com.jdroid.android.utils.AppUtils
 import com.jdroid.java.http.HttpResponseWrapper
@@ -55,7 +55,7 @@ open class DefaultHeaderAppender : HttpServiceProcessor {
     }
 
     protected open fun addUserTokenHeader(httpService: HttpService) {
-        val user = SecurityContext.get().user
+        val user = SecurityContext.user
         if (user != null) {
             httpService.addHeader(USER_TOKEN_HEADER, user.userToken)
         }

@@ -27,7 +27,7 @@ class NotificationsDebugPrefsAppender : PreferencesAppender() {
             preference.summary = url
             preference.onPreferenceClickListener = object : OnPreferenceClickListener {
                 override fun onPreferenceClick(it: Preference): Boolean {
-                    val builder = NotificationBuilder("notificationFromBundle", AbstractApplication.get().notificationChannelTypes[0])
+                    val builder = NotificationBuilder("notificationFromBundle", AbstractApplication.get().getNotificationChannelTypes()[0])
                     builder.setTicker("Sample Ticker")
                     builder.setContentTitle("Sample Content Title")
                     builder.setContentText(url)

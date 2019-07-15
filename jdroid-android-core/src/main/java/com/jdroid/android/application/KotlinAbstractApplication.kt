@@ -13,7 +13,11 @@ import com.jdroid.android.firebase.analytics.FirebaseAnalyticsFacade
 import com.jdroid.android.firebase.testlab.FirebaseTestLab
 import com.jdroid.android.leakcanary.LeakCanaryHelper
 import com.jdroid.android.lifecycle.ApplicationLifecycleHelper
+import com.jdroid.android.notification.NotificationChannelType
+import com.jdroid.android.notification.NotificationUtils
 import com.jdroid.android.utils.ProcessUtils
+import com.jdroid.java.collections.Lists
+import com.jdroid.java.remoteconfig.RemoteConfigLoader
 import com.jdroid.java.utils.LoggerUtils
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -31,6 +35,8 @@ abstract class KotlinAbstractApplication : Application() {
          */
         protected var LOGGER: Logger? = null
     }
+
+    var remoteConfigLoader: RemoteConfigLoader? = null
 
     private fun initLogging() {
         if (LOGGER == null) {
@@ -143,5 +149,19 @@ abstract class KotlinAbstractApplication : Application() {
     @MainThread
     protected open fun onSecondaryProcessConfigurationChanged(processInfo: ActivityManager.RunningAppProcessInfo?) {
         // Do nothing
+    }
+
+    @MainThread
+    @CallSuper
+    fun onLocaleChanged() {
+        NotificationUtils.createNotificationChannelsByType(getNotificationChannelTypes())
+    }
+
+    open fun getNotificationChannelTypes(): List<NotificationChannelType> {
+        return Lists.newArrayList()
+    }
+
+    open fun getDefaultNotificationChannelType(): NotificationChannelType? {
+        return if (getNotificationChannelTypes().isEmpty()) null else getNotificationChannelTypes().iterator().next()
     }
 }

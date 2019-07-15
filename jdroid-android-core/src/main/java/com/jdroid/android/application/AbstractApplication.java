@@ -18,7 +18,6 @@ import com.jdroid.android.exception.ExceptionHandler;
 import com.jdroid.android.fragment.FragmentHelper;
 import com.jdroid.android.http.cache.CacheManager;
 import com.jdroid.android.lifecycle.ApplicationLifecycleHelper;
-import com.jdroid.android.notification.NotificationChannelType;
 import com.jdroid.android.notification.NotificationUtils;
 import com.jdroid.android.repository.UserRepository;
 import com.jdroid.android.strictmode.StrictModeHelper;
@@ -33,7 +32,6 @@ import com.jdroid.java.collections.Maps;
 import com.jdroid.java.context.GitContext;
 import com.jdroid.java.date.DateUtils;
 import com.jdroid.java.domain.Identifiable;
-import com.jdroid.java.remoteconfig.RemoteConfigLoader;
 import com.jdroid.java.repository.Repository;
 import com.jdroid.java.utils.LoggerUtils;
 import com.jdroid.java.utils.ReflectionUtils;
@@ -80,7 +78,7 @@ public abstract class AbstractApplication extends KotlinAbstractApplication {
 
 	private ActivityLifecycleHandler activityLifecycleHandler;
 
-	private RemoteConfigLoader remoteConfigLoader;
+
 
 	public AbstractApplication() {
 		INSTANCE = this;
@@ -416,31 +414,7 @@ public abstract class AbstractApplication extends KotlinAbstractApplication {
 		this.appModulesMap.put(name, appModule);
 	}
 
-	@MainThread
-	@CallSuper
-	public void onLocaleChanged() {
-		NotificationUtils.createNotificationChannelsByType(getNotificationChannelTypes());
-	}
-
 	public void addCoreAnalyticsTracker(CoreAnalyticsTracker coreAnalyticsTracker) {
 		this.coreAnalyticsTrackers.add(coreAnalyticsTracker);
-	}
-
-	@NonNull
-	public List<NotificationChannelType> getNotificationChannelTypes() {
-		return Lists.newArrayList();
-	}
-
-	@Nullable
-	public NotificationChannelType getDefaultNotificationChannelType() {
-		return getNotificationChannelTypes().isEmpty() ? null : getNotificationChannelTypes().iterator().next();
-	}
-
-	public RemoteConfigLoader getRemoteConfigLoader() {
-		return remoteConfigLoader;
-	}
-
-	public void setRemoteConfigLoader(RemoteConfigLoader remoteConfigLoader) {
-		this.remoteConfigLoader = remoteConfigLoader;
 	}
 }

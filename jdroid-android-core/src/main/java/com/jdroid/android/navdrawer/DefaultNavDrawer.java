@@ -7,7 +7,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.jdroid.android.R;
 import com.jdroid.android.activity.AbstractFragmentActivity;
 import com.jdroid.android.application.AbstractApplication;
-import com.jdroid.android.context.SecurityContext;
+import com.jdroid.android.auth.SecurityContext;
 import com.jdroid.android.domain.User;
 import com.jdroid.android.images.loader.ImageViewLoader;
 
@@ -76,7 +76,7 @@ public abstract class DefaultNavDrawer extends NavDrawer {
 	protected abstract List<NavDrawerItem> createNavDrawerItems();
 
 	protected void initNavDrawerHeader(NavDrawerHeader navDrawerHeader) {
-		User user = SecurityContext.get().getUser();
+		User user = SecurityContext.INSTANCE.getUser();
 		if (user != null) {
 			String coverPictureUrl = user.getCoverPictureUrl();
 			String profilePictureUrl = user.getProfilePictureUrl();

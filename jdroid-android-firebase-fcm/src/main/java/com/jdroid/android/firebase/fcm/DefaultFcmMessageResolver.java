@@ -2,7 +2,7 @@ package com.jdroid.android.firebase.fcm;
 
 import com.google.firebase.messaging.RemoteMessage;
 import com.jdroid.android.application.AbstractApplication;
-import com.jdroid.android.context.SecurityContext;
+import com.jdroid.android.auth.SecurityContext;
 import com.jdroid.android.firebase.fcm.notification.NotificationFcmMessage;
 import com.jdroid.android.utils.AndroidUtils;
 import com.jdroid.android.utils.AppUtils;
@@ -48,7 +48,7 @@ public class DefaultFcmMessageResolver implements FcmMessageResolver {
 						Long userId = TypeUtils.getLong(remoteMessage.getData().get(USER_ID_KEY));
 
 						// We should ignore messages received for previously logged users
-						if ((userId != null) && (!SecurityContext.get().isAuthenticated() || !SecurityContext.get().getUser().getId().equals(userId))) {
+						if ((userId != null) && (!SecurityContext.INSTANCE.isAuthenticated() || !SecurityContext.INSTANCE.getUser().getId().equals(userId))) {
 							LOGGER.warn("The FCM message is ignored because it was sent to another user: " + userId);
 							onNotAuthenticatedUser(userId);
 							return null;

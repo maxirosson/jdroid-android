@@ -3,7 +3,7 @@ package com.jdroid.android.sample.ui.navdrawer;
 import android.os.Bundle;
 
 import com.jdroid.android.activity.FragmentContainerActivity;
-import com.jdroid.android.context.SecurityContext;
+import com.jdroid.android.auth.SecurityContext;
 import com.jdroid.android.domain.User;
 import com.jdroid.java.utils.RandomUtils;
 
@@ -63,21 +63,21 @@ public class UserNavDrawerActivity extends FragmentContainerActivity {
 				return null;
 			}
 		};
-		SecurityContext.get().attach(user);
+		SecurityContext.INSTANCE.attach(user);
 	}
 
 	@Override
 	protected void onStart() {
 		super.onStart();
 
-		SecurityContext.get().attach(user);
+		SecurityContext.INSTANCE.attach(user);
 	}
 
 	@Override
 	protected void onStop() {
 		super.onStop();
 
-		SecurityContext.get().detachUser();
+		SecurityContext.INSTANCE.detachUser();
 	}
 
 	@Override
