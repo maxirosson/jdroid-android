@@ -100,7 +100,7 @@ public abstract class SpreadTheLoveFragment extends AbstractFragment {
 		return AbstractApplication.get().getAppContext().getLinkedInCompanyPageId();
 	}
 
-	protected Boolean displayAppInviteButton() {
+	protected boolean displayAppInviteButton() {
 		return false;
 	}
 

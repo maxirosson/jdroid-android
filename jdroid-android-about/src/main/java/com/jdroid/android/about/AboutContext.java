@@ -1,12 +1,12 @@
 package com.jdroid.android.about;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import com.jdroid.android.context.AbstractAppContext;
 import com.jdroid.android.fragment.AbstractFragment;
 import com.jdroid.android.utils.AppUtils;
 import com.jdroid.java.utils.ReflectionUtils;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public class AboutContext extends AbstractAppContext {
 
@@ -27,7 +27,7 @@ public class AboutContext extends AbstractAppContext {
 		return null;
 	}
 
-	public Boolean isBetaTestingEnabled() {
+	public boolean isBetaTestingEnabled() {
 		return false;
 	}
 

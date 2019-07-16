@@ -1,12 +1,12 @@
-package com.jdroid.android.debug
+package com.jdroid.android.sample.ui.google.maps
 
 import androidx.fragment.app.Fragment
 
 import com.jdroid.android.activity.FragmentContainerActivity
 
-class DebugSettingsActivity : FragmentContainerActivity() {
+class StreetViewActivity : FragmentContainerActivity() {
 
     override fun getFragmentClass(): Class<out Fragment> {
-        return DebugSettingsFragment::class.java
+        return StreetViewFragment::class.java
     }
 }

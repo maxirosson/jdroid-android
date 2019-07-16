@@ -6,7 +6,7 @@ import com.jdroid.android.activity.FragmentContainerActivity
 
 class DebugInfoActivity : FragmentContainerActivity() {
 
-    override fun getFragmentClass(): Class<out Fragment>? {
+    override fun getFragmentClass(): Class<out Fragment> {
         return DebugInfoFragment::class.java
     }
 }

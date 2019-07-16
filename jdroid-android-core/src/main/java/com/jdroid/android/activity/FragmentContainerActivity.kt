@@ -49,9 +49,7 @@ abstract class FragmentContainerActivity : AbstractFragmentActivity() {
         return intent.extras ?: Bundle()
     }
 
-    protected open fun getFragmentClass(): Class<out Fragment>? {
-        return null
-    }
+    protected abstract fun getFragmentClass(): Class<out Fragment>
 
     fun getFragment(): Fragment? {
         return supportFragmentManager.findFragmentById(getFragmentContainerId())
