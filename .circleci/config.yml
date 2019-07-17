@@ -112,81 +112,38 @@ jobs:
 
       - run: 
           name: Testing
-          command: ./gradlew testDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
-      
+          command: ./gradlew testDebugUnitTest -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
+
       - run:
-          name: Saving test results 
+          name: Save test XML results
           command: |
             mkdir -p ~/junit/
             find . -type f -regex ".*/build/test-results/testDebugUnitTest/.*xml" -exec cp {} ~/junit/ \;
           when: always
-          
+
       - store_test_results:
           path: ~/junit
 
-      - store_artifacts:
-          path: ./jdroid-android-about/build/reports/tests/testDebugUnitTest
-          destination: jdroid-android-about/tests
+      - run:
+          name: Save test results
+          command: |
+            destination="test-results"
+            while read line
+            do
+              module=$(echo "$line" | sed -E "s/include ':(.+)'/\1/g")
+              module="${module//://}" #replace ':' by "/"
+              reports_dir="./${module}/build/reports/tests/testDebugUnitTest"
+              if [[ -d "${reports_dir}" ]]; then
+                if [[ ! -d "${destination}/${module}" ]]; then
+                  mkdir -p "${destination}/${module}"
+                fi
+                cp -R "${reports_dir}/." "${destination}/${module}/"
+              fi
+            done < "settings.gradle"
 
       - store_artifacts:
-          path: ./jdroid-android-core/build/reports/tests/testDebugUnitTest
-          destination: jdroid-android-core/tests
-
-      - store_artifacts:
-          path: ./jdroid-android-facebook-login/build/reports/tests/testDebugUnitTest
-          destination: jdroid-android-facebook-login/tests
-
-      - store_artifacts:
-          path: ./jdroid-android-firebase-admob/build/reports/tests/testDebugUnitTest
-          destination: jdroid-android-firebase-admob/tests
-
-      - store_artifacts:
-          path: ./jdroid-android-firebase-crashlytics/build/reports/tests/testDebugUnitTest
-          destination: jdroid-android-firebase-crashlytics/tests
-
-      - store_artifacts:
-          path: ./jdroid-android-firebase-database/build/reports/tests/testDebugUnitTest
-          destination: jdroid-android-firebase-database/tests
-
-      - store_artifacts:
-          path: ./jdroid-android-firebase-fcm/build/reports/tests/testDebugUnitTest
-          destination: jdroid-android-firebase-fcm/tests
-
-      - store_artifacts:
-          path: ./jdroid-android-firebase-remoteconfig/build/reports/tests/testDebugUnitTest
-          destination: jdroid-android-firebase-remoteconfig/tests
-
-      - store_artifacts:
-          path: ./jdroid-android-firebase-glide/build/reports/tests/testDebugUnitTest
-          destination: jdroid-android-firebase-glide/tests
-
-      - store_artifacts:
-          path: ./jdroid-android-google-inappbilling/build/reports/tests/testDebugUnitTest
-          destination: jdroid-android-google-inappbilling/tests
-
-      - store_artifacts:
-          path: ./jdroid-android-google-maps/build/reports/tests/testDebugUnitTest
-          destination: jdroid-android-google-maps/tests
-
-      - store_artifacts:
-          path: ./jdroid-android-google-play-games/build/reports/tests/testDebugUnitTest
-          destination: jdroid-android-google-play-games/tests
-
-      - store_artifacts:
-          path: ./jdroid-android-google-signin/build/reports/tests/testDebugUnitTest
-          destination: jdroid-android-google-signin/tests
-
-      - store_artifacts:
-          path: ./jdroid-android-room/build/reports/tests/testDebugUnitTest
-          destination: jdroid-android-room/tests
-
-      - store_artifacts:
-          path: ./jdroid-android-sample/build/reports/tests/testDebugUnitTest
-          destination: jdroid-android-sample/tests
-
-      - store_artifacts:
-          path: ./jdroid-android-twitter/build/reports/tests/testDebugUnitTest
-          destination: jdroid-android-twitter/tests
+          path: ./test-results
+          destination: test-results
 
   lint:
     <<: *android_config
