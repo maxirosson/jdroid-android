@@ -130,7 +130,7 @@ jobs:
             destination="test-results"
             while read line
             do
-              module=$(echo "$line" | sed -E "s/include ':(.+)'/\1/g")
+              module=$(echo "$line" | sed -E "s/include \":(.+)\"/\1/g")
               module="${module//://}" #replace ':' by "/"
               reports_dir="./${module}/build/reports/tests/testDebugUnitTest"
               if [[ -d "${reports_dir}" ]]; then
@@ -159,11 +159,11 @@ jobs:
           name: Save lint results
           command: |
             destination="lint-results"
+            file_name="lint-results.html"
             while read line
             do
-              module=$(echo "$line" | sed -E "s/include ':(.+)'/\1/g")
+              module=$(echo "$line" | sed -E "s/include \":(.+)\"/\1/g")
               module="${module//://}" #replace ':' by "/"
-              file_name="lint-results.html"
               lint_result="./${module}/build/reports/${file_name}"
               if [[ ! -d "${destination}/${module}" ]]; then
                 mkdir -p "${destination}/${module}"
