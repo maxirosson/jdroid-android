@@ -2,12 +2,12 @@ package com.jdroid.android.sample.ui.google.signin;
 
 import android.content.Intent;
 import android.os.Bundle;
-import com.google.android.material.snackbar.Snackbar;
 import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.common.SignInButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.jdroid.android.fragment.AbstractFragment;
 import com.jdroid.android.google.signin.GoogleSignInHelper;
 import com.jdroid.android.google.signin.GoogleSignInListener;
@@ -71,12 +71,12 @@ public class GoogleSignInFragment extends AbstractFragment implements GoogleSign
 
 		googleSignInHelper = new GoogleSignInHelper(this, this) {
 			@Override
-			protected Boolean isRequestIdTokenEnabled() {
+			protected boolean isRequestIdTokenEnabled() {
 				return true;
 			}
 
 			@Override
-			protected Boolean isServerAuthCodeEnabled() {
+			protected boolean isServerAuthCodeEnabled() {
 				return true;
 			}
 		};

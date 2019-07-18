@@ -27,7 +27,7 @@ public class LiteModeFragment extends AbstractFragment {
 
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
-		AbstractMapFragment.doMapToolbarWorkaround(savedInstanceState);
+		AbstractMapFragment.Companion.doMapToolbarWorkaround(savedInstanceState);
 
 		super.onViewCreated(view, savedInstanceState);
 

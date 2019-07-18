@@ -1,6 +1,5 @@
 package com.jdroid.android.sample.ui.google.maps;
 
-import androidx.annotation.NonNull;
 import android.view.View;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -14,6 +13,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.jdroid.android.google.maps.AbstractMapFragment;
 import com.jdroid.android.sample.R;
+
+import androidx.annotation.NonNull;
 
 public class MapFragment extends AbstractMapFragment {
 
@@ -66,7 +67,7 @@ public class MapFragment extends AbstractMapFragment {
 	}
 
 	@Override
-	protected Boolean isLocationEnabled() {
+	protected boolean isLocationEnabled() {
 		return true;
 	}
 }

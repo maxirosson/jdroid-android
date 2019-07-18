@@ -31,7 +31,7 @@ public class MapActivity extends FragmentContainerActivity {
 		GoogleMapOptions options = new GoogleMapOptions();
 		options.camera(CameraPosition.fromLatLngZoom(boundsBuilder.build().getCenter(), 12));
 
-		AbstractMapFragment.setGoogleMapOptions(bundle, options);
+		AbstractMapFragment.Companion.setGoogleMapOptions(bundle, options);
 
 		return bundle;
 	}
