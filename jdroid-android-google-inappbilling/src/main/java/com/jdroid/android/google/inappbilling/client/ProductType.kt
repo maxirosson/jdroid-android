@@ -1,21 +1,18 @@
-package com.jdroid.android.google.inappbilling.client;
+package com.jdroid.android.google.inappbilling.client
 
+interface ProductType {
 
-import androidx.annotation.Nullable;
-
-public interface ProductType {
-
-	/*
+    /*
 	 * @return A unique, human readable ID for your product. Product IDs are also called SKUs
 	 */
-	public String getProductId();
+    fun getProductId(): String
 
-	/*
+    /*
 	 * @return The product ID for the product used when the static responses is enabled
 	 */
-	public String getTestProductId();
+    fun getTestProductId(): String
 
-	/*
+    /*
 	 * Non-consumable Items. Once purchased, these items will be permanently associated to the user's Google account.
 	 * A one-time product that can be used indefinitely is called a non-consumable.
 	 * An example of a non-consumable in-app product is a premium upgrade or a level pack.
@@ -23,15 +20,13 @@ public interface ProductType {
 	 * Consumable items. Items that can be made available for purchase multiple times.
 	 * A one-time product with non-infinite use is called a consumable.
 	 */
-	public Boolean isConsumable();
+    fun isConsumable(): Boolean?
 
-	public ItemType getItemType();
+    fun getItemType(): ItemType
 
-	public Integer getTitleId();
+    fun getTitleId(): Int?
 
-	public Integer getDescriptionId();
+    fun getDescriptionId(): Int?
 
-	@Nullable
-	public Integer getIconId();
-	
+    fun getIconId(): Int?
 }

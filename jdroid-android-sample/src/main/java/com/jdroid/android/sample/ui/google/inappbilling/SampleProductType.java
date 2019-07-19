@@ -8,9 +8,9 @@ import com.jdroid.android.sample.R;
 
 public enum SampleProductType implements ProductType {
 
-	CONSUMABLE_PURCHASED("sample.consumable.purchased.id", TestProductType.PURCHASED, true, null, null),
-	CONSUMABLE_CANCELED("sample.consumable.canceled.id", TestProductType.CANCELED, true, null, null),
-	CONSUMABLE_UNAVAILABLED("sample.consumable.unavailable.id", TestProductType.UNAVAILABLE, true, null, null) {
+	CONSUMABLE_PURCHASED("sample.consumable.purchased.id", TestProductType.INSTANCE.getPURCHASED(), true, null, null),
+	CONSUMABLE_CANCELED("sample.consumable.canceled.id", TestProductType.INSTANCE.getCANCELED(), true, null, null),
+	CONSUMABLE_UNAVAILABLED("sample.consumable.unavailable.id", TestProductType.INSTANCE.getUNAVAILABLE(), true, null, null) {
 		@Override
 		public Integer getIconId() {
 			return null;

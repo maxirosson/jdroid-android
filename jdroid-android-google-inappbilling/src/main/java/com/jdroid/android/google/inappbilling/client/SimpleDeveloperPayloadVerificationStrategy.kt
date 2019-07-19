@@ -1,10 +1,9 @@
-package com.jdroid.android.google.inappbilling.client;
+package com.jdroid.android.google.inappbilling.client
 
-public class SimpleDeveloperPayloadVerificationStrategy implements DeveloperPayloadVerificationStrategy {
+class SimpleDeveloperPayloadVerificationStrategy : DeveloperPayloadVerificationStrategy {
 
-	@Override
-	public Boolean verify(Product product) {
-		/*
+    override fun verify(product: Product): Boolean {
+        /*
 		 * TODO verify that the developer payload of the purchase is correct. It will be the same one that you sent
 		 * when initiating the purchase. WARNING: Locally generating a random string when starting a purchase and
 		 * verifying it here might seem like a good approach, but this will fail in the case where the user purchases an
@@ -17,7 +16,6 @@ public class SimpleDeveloperPayloadVerificationStrategy implements DeveloperPayl
 		 * across app installations is recommended.
 		 */
 
-		return product.getDeveloperPayload().equals(product.getPurchase().getDeveloperPayload());
-	}
-
+        return product.developerPayload == product.purchase.developerPayload
+    }
 }
