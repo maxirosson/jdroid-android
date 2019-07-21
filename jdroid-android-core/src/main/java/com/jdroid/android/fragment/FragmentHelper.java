@@ -114,7 +114,7 @@ public class FragmentHelper implements FragmentIf {
 		LOGGER.debug("Executing onCreate on " + fragment);
 		fragment.setRetainInstance(getFragmentIf().shouldRetainInstance());
 
-		fragmentDelegatesMap = Maps.newHashMap();
+		fragmentDelegatesMap = Maps.INSTANCE.newHashMap();
 		for (AppModule appModule : AbstractApplication.get().getAppModules()) {
 			FragmentDelegate fragmentDelegate = getFragmentIf().createFragmentDelegate(appModule);
 			if (fragmentDelegate != null) {

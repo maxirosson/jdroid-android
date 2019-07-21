@@ -59,15 +59,15 @@ public abstract class AbstractApplication extends KotlinAbstractApplication {
 	private GitContext gitContext;
 	private DebugContext debugContext;
 
-	private List<CoreAnalyticsTracker> coreAnalyticsTrackers = Lists.newArrayList();
+	private List<CoreAnalyticsTracker> coreAnalyticsTrackers = Lists.INSTANCE.newArrayList();
 	private CoreAnalyticsSender<? extends CoreAnalyticsTracker> coreAnalyticsSender;
 	private UriMapper uriMapper;
 
 	private AppLaunchStatus appLaunchStatus;
 
-	private Map<Class<? extends Identifiable>, Repository<? extends Identifiable>> repositories = Maps.newHashMap();
+	private Map<Class<? extends Identifiable>, Repository<? extends Identifiable>> repositories = Maps.INSTANCE.newHashMap();
 
-	private Map<String, AppModule> appModulesMap = Maps.newLinkedHashMap();
+	private Map<String, AppModule> appModulesMap = Maps.INSTANCE.newLinkedHashMap();
 
 	private UpdateManager updateManager;
 	private CacheManager cacheManager;
@@ -226,7 +226,7 @@ public abstract class AbstractApplication extends KotlinAbstractApplication {
 	}
 
 	protected List<? extends CoreAnalyticsTracker> createCoreAnalyticsTrackers() {
-		return Lists.newArrayList();
+		return Lists.INSTANCE.newArrayList();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -396,7 +396,7 @@ public abstract class AbstractApplication extends KotlinAbstractApplication {
 	}
 
 	public List<AppModule> getAppModules() {
-		return Lists.newArrayList(appModulesMap.values());
+		return Lists.INSTANCE.newArrayList(appModulesMap.values());
 	}
 
 	public AppModule getAppModule(String appModuleName) {

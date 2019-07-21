@@ -1,7 +1,6 @@
 package com.jdroid.android.http.cache;
 
 import android.content.Context;
-import androidx.annotation.WorkerThread;
 
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.application.AppLaunchStatus;
@@ -20,6 +19,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+
+import androidx.annotation.WorkerThread;
 
 public class CacheManager {
 
@@ -84,7 +85,7 @@ public class CacheManager {
 				LOGGER.info("Cache " + cache.getName() + " size: " + dirSize + " MB");
 				if (dirSize > cache.getMaximumSize()) {
 					// Sort the files by modification date, so we remove the not used files first
-					List<File> files = Lists.newArrayList(dir.listFiles());
+					List<File> files = Lists.INSTANCE.newArrayList(dir.listFiles());
 					Collections.sort(files, new Comparator<File>() {
 
 						@Override
@@ -108,7 +109,7 @@ public class CacheManager {
 	}
 
 	protected List<Cache> getFileSystemCaches() {
-		return Lists.newArrayList();
+		return Lists.INSTANCE.newArrayList();
 	}
 
 	public void cleanFileSystemCache() {

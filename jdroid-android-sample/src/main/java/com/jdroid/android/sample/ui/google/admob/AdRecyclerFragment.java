@@ -41,9 +41,9 @@ public class AdRecyclerFragment extends AbstractRecyclerFragment {
 
 			@Override
 			protected void onDataChanged(List<String> data) {
-				List<RecyclerViewType> recyclerViewTypes = Lists.newArrayList(new StringRecyclerViewType(), new MyAdViewType());
+				List<RecyclerViewType> recyclerViewTypes = Lists.INSTANCE.newArrayList(new StringRecyclerViewType(), new MyAdViewType());
 
-				List<Object> items = Lists.newArrayList();
+				List<Object> items = Lists.INSTANCE.newArrayList();
 				for (String each : data) {
 					items.add(each);
 					if (each.equals("three")) {

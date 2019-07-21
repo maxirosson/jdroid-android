@@ -11,6 +11,6 @@ public class AndroidFcmAppModule extends AbstractFcmAppModule {
 
 	@Override
 	public List<FcmSender> getFcmSenders() {
-		return Lists.newArrayList((FcmSender)AndroidApplication.get().getAppContext().getServer());
+		return Lists.INSTANCE.newArrayList((FcmSender)AndroidApplication.get().getAppContext().getServer());
 	}
 }

@@ -33,7 +33,7 @@ public class AndroidActivityHelper extends ActivityHelper {
 
 			@Override
 			protected List<NavDrawerItem> createNavDrawerItems() {
-				List<NavDrawerItem> navDrawerItems = Lists.newArrayList();
+				List<NavDrawerItem> navDrawerItems = Lists.INSTANCE.newArrayList();
 				navDrawerItems.add(new DefaultNavDrawerItem(R.id.home, HomeActivity.class));
 				navDrawerItems.add(new DefaultNavDrawerItem(R.id.about, AboutActivity.class));
 				return navDrawerItems;

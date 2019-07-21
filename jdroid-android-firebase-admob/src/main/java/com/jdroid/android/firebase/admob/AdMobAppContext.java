@@ -54,7 +54,7 @@ public class AdMobAppContext extends AbstractAppContext {
 	 */
 	public Set<String> getTestDevicesIds() {
 		String testDevicesIds = getBuildConfigValue("ADS_TEST_DEVICES_IDS");
-		return testDevicesIds != null ? Sets.newHashSet(StringUtils.splitWithCommaSeparator(testDevicesIds)) : Sets.<String>newHashSet();
+		return testDevicesIds != null ? Sets.INSTANCE.newHashSet(StringUtils.splitWithCommaSeparator(testDevicesIds)) : Sets.INSTANCE.newHashSet();
 	}
 
 	/**

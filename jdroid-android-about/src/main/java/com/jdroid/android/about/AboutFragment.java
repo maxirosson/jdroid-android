@@ -28,7 +28,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class AboutFragment extends AbstractRecyclerFragment {
 
-	private List<Object> aboutItems = Lists.newArrayList();
+	private List<Object> aboutItems = Lists.INSTANCE.newArrayList();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -106,7 +106,7 @@ public class AboutFragment extends AbstractRecyclerFragment {
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(Lists.newArrayList(new HeaderRecyclerViewType(), new AboutRecyclerViewType()), aboutItems);
+		RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(Lists.INSTANCE.newArrayList(new HeaderRecyclerViewType(), new AboutRecyclerViewType()), aboutItems);
 		if (rateAppViewEnabled()) {
 			recyclerViewAdapter.setFooter(new AboutFooterRecyclerViewType());
 		}
@@ -122,7 +122,7 @@ public class AboutFragment extends AbstractRecyclerFragment {
 	}
 
 	protected List<AboutItem> getCustomAboutItems() {
-		return Lists.newArrayList();
+		return Lists.INSTANCE.newArrayList();
 	}
 
 	@MainThread

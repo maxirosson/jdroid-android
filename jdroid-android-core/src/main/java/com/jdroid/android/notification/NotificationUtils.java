@@ -22,7 +22,7 @@ public class NotificationUtils {
 	private final static NotificationManager NOTIFICATION_MANAGER = (NotificationManager)AbstractApplication.get().getSystemService(
 		Context.NOTIFICATION_SERVICE);
 
-	private static final List<NotificationChannelType> NOTIFICATION_CHANNEL_TYPES = Lists.newArrayList();
+	private static final List<NotificationChannelType> NOTIFICATION_CHANNEL_TYPES = Lists.INSTANCE.newArrayList();
 
 	public static void sendNotification(int id, NotificationBuilder notificationBuilder) {
 		sendNotification(id, notificationBuilder.build());

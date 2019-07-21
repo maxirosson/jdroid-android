@@ -49,7 +49,7 @@ public abstract class SampleEntityDao extends AbstractDao<SampleEntity> {
 	public void replaceAll(List<SampleEntity> items) {
 
 		// Remove items from database
-		List<String> excludedIds = Lists.newArrayList();
+		List<String> excludedIds = Lists.INSTANCE.newArrayList();
 		for (SampleEntity item : items) {
 			excludedIds.add(item.getId());
 		}

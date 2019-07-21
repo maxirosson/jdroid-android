@@ -63,7 +63,7 @@ public abstract class SpreadTheLoveFragment extends AbstractFragment {
 		}
 		findView(R.id.followUs).setVisibility(followUsItems.isEmpty() ? View.GONE : View.VISIBLE);
 
-		Map<String, SharingDataItem> sharingDataItemsMap = Maps.newHashMap();
+		Map<String, SharingDataItem> sharingDataItemsMap = Maps.INSTANCE.newHashMap();
 		sharingDataItemsMap.put(SharingMedium.TWITTER.getMediumName(), new SharingDataItem(getTwitterShareText()));
 		sharingDataItemsMap.put(SharingMedium.WHATSAPP.getMediumName(), new SharingDataItem(getWhatsAppShareText()));
 		sharingDataItemsMap.put(SharingMedium.TELEGRAM.getMediumName(), new SharingDataItem(getTelegramShareText()));
@@ -71,7 +71,7 @@ public abstract class SpreadTheLoveFragment extends AbstractFragment {
 		sharingDataItemsMap.put(SharingMedium.SMS.getMediumName(), new SharingDataItem(getSmsShareText()));
 		SharingData sharingData = new SharingData(getShareKey(), sharingDataItemsMap, new SharingDataItem(getDefaultShareSubject(), getDefaultShareText()));
 
-		List<SharingItem> sharingItems = Lists.newArrayList();
+		List<SharingItem> sharingItems = Lists.INSTANCE.newArrayList();
 		sharingItems.add(new TwitterSharingItem(sharingData));
 		sharingItems.add(new WhatsAppSharingItem(sharingData));
 		sharingItems.add(new TelegramSharingItem(sharingData));
@@ -135,7 +135,7 @@ public abstract class SpreadTheLoveFragment extends AbstractFragment {
 	}
 
 	protected List<FollowUsItem> getFollowUsItems() {
-		List<FollowUsItem> items = Lists.newArrayList();
+		List<FollowUsItem> items = Lists.INSTANCE.newArrayList();
 		if (getFacebookPageId() != null) {
 			items.add(new FollowUsItem(R.drawable.jdroid_ic_facebook_24dp, R.string.jdroid_facebook) {
 				@Override

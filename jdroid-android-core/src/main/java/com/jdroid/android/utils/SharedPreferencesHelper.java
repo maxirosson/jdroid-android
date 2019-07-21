@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.preference.PreferenceManager;
-import androidx.annotation.WorkerThread;
 
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.java.collections.Lists;
@@ -15,6 +14,8 @@ import org.slf4j.Logger;
 
 import java.util.List;
 import java.util.Map;
+
+import androidx.annotation.WorkerThread;
 
 /**
  * Helper to work with the shared preferences
@@ -302,7 +303,7 @@ public class SharedPreferencesHelper {
 		if (value != null) {
 			return StringUtils.splitWithCommaSeparator(value);
 		}
-		return Lists.newArrayList();
+		return Lists.INSTANCE.newArrayList();
 	}
 
 	public boolean hasPreference(String key) {

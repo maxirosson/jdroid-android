@@ -3,11 +3,6 @@ package com.jdroid.android.dialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.appcompat.app.AlertDialog;
 import android.text.Html;
 import android.text.Spanned;
 import android.view.View;
@@ -18,6 +13,12 @@ import com.jdroid.java.utils.StringUtils;
 
 import java.io.Serializable;
 import java.util.Map;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 public class AlertDialogFragment extends AbstractDialogFragment {
 
@@ -35,7 +36,7 @@ public class AlertDialogFragment extends AbstractDialogFragment {
 	private String negativeButtonText;
 	private String neutralButtonText;
 	private String positiveButtonText;
-	private Map<String, Serializable> parameters = Maps.newHashMap();
+	private Map<String, Serializable> parameters = Maps.INSTANCE.newHashMap();
 	private String screenViewName = null;
 
 	public static void show(Fragment fragment, String title, CharSequence message, String negativeButtonText,

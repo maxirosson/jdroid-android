@@ -12,8 +12,8 @@ public class AdListenerWrapper extends AdListener {
 
 	private Logger LOGGER = LoggerUtils.getLogger(AdListenerWrapper.class);
 
-	private List<AdListener> wrappedAdListeners = Lists.newArrayList();
-	private List<AdListener> transientAdListeners = Lists.newArrayList();
+	private List<AdListener> wrappedAdListeners = Lists.INSTANCE.newArrayList();
+	private List<AdListener> transientAdListeners = Lists.INSTANCE.newArrayList();
 
 	@Override
 	public void onAdLoaded() {

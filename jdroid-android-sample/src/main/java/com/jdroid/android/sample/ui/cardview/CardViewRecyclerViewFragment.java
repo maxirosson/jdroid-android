@@ -21,8 +21,8 @@ public class CardViewRecyclerViewFragment extends AbstractRecyclerFragment {
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
-		List<RecyclerViewType> recyclerViewTypes = Lists.<RecyclerViewType>newArrayList(new CardViewRecyclerViewType(), new CardViewClickableRecyclerViewType());
-		setAdapter(new RecyclerViewAdapter(recyclerViewTypes, Lists.newArrayList("1", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13)));
+		List<RecyclerViewType> recyclerViewTypes = Lists.INSTANCE.newArrayList(new CardViewRecyclerViewType(), new CardViewClickableRecyclerViewType());
+		setAdapter(new RecyclerViewAdapter(recyclerViewTypes, Lists.INSTANCE.newArrayList("1", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13)));
 	}
 
 	public class CardViewRecyclerViewType extends RecyclerViewType<Integer, SampleViewHolder> {

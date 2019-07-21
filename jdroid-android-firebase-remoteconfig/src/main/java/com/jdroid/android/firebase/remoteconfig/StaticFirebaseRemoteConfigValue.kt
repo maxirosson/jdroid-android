@@ -4,6 +4,7 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigValue
 import com.jdroid.java.remoteconfig.RemoteConfigParameter
 
+// TODO See if defaultValue should be nullable or not
 class StaticFirebaseRemoteConfigValue(private val remoteConfigParameter: RemoteConfigParameter) : FirebaseRemoteConfigValue {
 
     @Throws(IllegalArgumentException::class)

@@ -123,7 +123,7 @@ public class FcmFragment extends AbstractFragment {
 						String topic = topicEditText.getText().length() > 0 ? topicEditText.getText().toString() : null;
 						String registrationToken = FcmRegistrationCommand.getRegistrationToken(senderId.getText().toString());
 
-						Map<String, String> params = Maps.newHashMap();
+						Map<String, String> params = Maps.INSTANCE.newHashMap();
 						if (minAppVersionCode.getText().length() > 0) {
 							params.put(DefaultFcmMessageResolver.MIN_APP_VERSION_CODE_KEY, minAppVersionCode.getText().toString());
 						}

@@ -84,7 +84,7 @@ public class AndroidApplication extends AbstractApplication {
 				@TargetApi(Build.VERSION_CODES.N_MR1)
 				@Override
 				public List<ShortcutInfo> loadDynamicShortcuts() {
-					List<ShortcutInfo> shortcutInfos = Lists.newArrayList();
+					List<ShortcutInfo> shortcutInfos = Lists.INSTANCE.newArrayList();
 					int rank = 0;
 					for (HomeItem item : HomeItem.values()) {
 
@@ -173,7 +173,7 @@ public class AndroidApplication extends AbstractApplication {
 
 	@Override
 	public List<NotificationChannelType> getNotificationChannelTypes() {
-		return Lists.newArrayList(AndroidNotificationChannelType.values());
+		return Lists.INSTANCE.newArrayList(AndroidNotificationChannelType.values());
 	}
 
 	@Override

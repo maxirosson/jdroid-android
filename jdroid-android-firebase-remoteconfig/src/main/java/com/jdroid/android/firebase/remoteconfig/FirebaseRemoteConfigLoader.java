@@ -43,7 +43,7 @@ public class FirebaseRemoteConfigLoader implements RemoteConfigLoader {
 	private int retryCount = 0;
 	private long defaultFetchExpiration = TimeUnit.HOURS.toSeconds(12);
 
-	private List<RemoteConfigParameter> remoteConfigParametersAsUserProperties = Lists.newArrayList();
+	private List<RemoteConfigParameter> remoteConfigParametersAsUserProperties = Lists.INSTANCE.newArrayList();
 
 	public static FirebaseRemoteConfigLoader get() {
 		return ((FirebaseRemoteConfigLoader)AbstractApplication.get().getRemoteConfigLoader());
@@ -126,7 +126,7 @@ public class FirebaseRemoteConfigLoader implements RemoteConfigLoader {
 						// true if there was a Fetched Config, and it was activated. false if no Fetched Config was found, or the Fetched Config was already activated.
 						LOGGER.debug("Firebase Remote Config activate fetched result: " + result);
 
-						if (setExperimentUserProperty && !Lists.isNullOrEmpty(remoteConfigParametersAsUserProperties)) {
+						if (setExperimentUserProperty && !Lists.INSTANCE.isNullOrEmpty(remoteConfigParametersAsUserProperties)) {
 							AppExecutors.INSTANCE.getNetworkIOExecutor().execute(new Runnable() {
 								@Override
 								public void run() {

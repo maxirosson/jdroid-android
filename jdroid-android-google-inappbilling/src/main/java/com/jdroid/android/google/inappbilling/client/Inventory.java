@@ -21,10 +21,10 @@ import java.util.Map;
  */
 public class Inventory {
 
-	private Map<String, Product> productsMap = Maps.newLinkedHashMap();
+	private Map<String, Product> productsMap = Maps.INSTANCE.newLinkedHashMap();
 
 	public List<Product> getProducts() {
-		return Lists.newArrayList(productsMap.values());
+		return Lists.INSTANCE.newArrayList(productsMap.values());
 	}
 
 	/**
@@ -32,7 +32,7 @@ public class Inventory {
 	 * @return The list of products defined locally and also on Google Play
 	 */
 	public List<Product> getAvailableProducts() {
-		List<Product> availableProducts = Lists.newArrayList();
+		List<Product> availableProducts = Lists.INSTANCE.newArrayList();
 		for (Product product : productsMap.values()) {
 			if (product.getPrice() != null) {
 				availableProducts.add(product);
@@ -46,7 +46,7 @@ public class Inventory {
 	}
 
 	public List<Product> getProductsWaitingToConsume() {
-		List<Product> productsToConsume = Lists.newArrayList();
+		List<Product> productsToConsume = Lists.INSTANCE.newArrayList();
 		for (Product product : getProducts()) {
 			if (product.isWaitingToConsume()) {
 				productsToConsume.add(product);
@@ -56,10 +56,10 @@ public class Inventory {
 	}
 
 	public List<Product> getSupportedPurchasedProducts() {
-		List<ProductType> supportedProductTypes = Lists.newArrayList();
+		List<ProductType> supportedProductTypes = Lists.INSTANCE.newArrayList();
 		supportedProductTypes.addAll(InAppBillingAppModule.get().getInAppBillingContext().getManagedProductTypes());
 		supportedProductTypes.addAll(InAppBillingAppModule.get().getInAppBillingContext().getSubscriptionsProductTypes());
-		List<Product> purchasedProducts = Lists.newArrayList();
+		List<Product> purchasedProducts = Lists.INSTANCE.newArrayList();
 		for (Product each : productsMap.values()) {
 			if (each.hasVerifiedPurchase() && supportedProductTypes.contains(each.getProductType())) {
 				purchasedProducts.add(each);
@@ -86,7 +86,7 @@ public class Inventory {
  	}
  	
  	public List<String> getAllProductIds() {
-		List<String> productsIds = Lists.newArrayList();
+		List<String> productsIds = Lists.INSTANCE.newArrayList();
 		for (Product each : productsMap.values()) {
 			String productId = InAppBillingAppModule.get().getInAppBillingContext().isStaticResponsesEnabled() ? each.getProductType().getTestProductId() : each.getProductType().getProductId();
 			if (!productsIds.contains(productId)) {

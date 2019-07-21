@@ -146,7 +146,7 @@ public class ActivityHelper implements ActivityIf {
 
 		verifyGooglePlayServicesAvailability();
 
-		activityDelegatesMap = Maps.newHashMap();
+		activityDelegatesMap = Maps.INSTANCE.newHashMap();
 		for (AppModule appModule : AbstractApplication.get().getAppModules()) {
 			ActivityDelegate activityDelegate = getActivityIf().createActivityDelegate(appModule);
 			if (activityDelegate != null) {
@@ -250,7 +250,7 @@ public class ActivityHelper implements ActivityIf {
 
 	private void initGoogleApiClient() {
 		if (isGooglePlayServicesAvailable) {
-			Set<Api<? extends Api.ApiOptions.NotRequiredOptions>> googleApis = Sets.newHashSet();
+			Set<Api<? extends Api.ApiOptions.NotRequiredOptions>> googleApis = Sets.INSTANCE.newHashSet();
 			googleApis.addAll(getCustomGoogleApis());
 			if (!googleApis.isEmpty()) {
 				GoogleApiClient.Builder builder = new GoogleApiClient.Builder(activity);
@@ -270,7 +270,7 @@ public class ActivityHelper implements ActivityIf {
 	}
 
 	protected Set<Api<? extends Api.ApiOptions.NotRequiredOptions>> getCustomGoogleApis() {
-		return Sets.newHashSet();
+		return Sets.INSTANCE.newHashSet();
 	}
 
 	protected void onInitGoogleApiClientBuilder(GoogleApiClient.Builder builder) {

@@ -55,7 +55,7 @@ public class AdMobAppModule extends AbstractAppModule {
 
 	@Override
 	public List<AnalyticsTracker> createModuleAnalyticsTrackers() {
-		return Lists.newArrayList(new FirebaseAdMobAnalyticsTracker());
+		return Lists.INSTANCE.newArrayList(new FirebaseAdMobAnalyticsTracker());
 	}
 
 	@NonNull

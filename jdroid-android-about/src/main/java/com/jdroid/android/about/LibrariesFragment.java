@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class LibrariesFragment extends AbstractRecyclerFragment {
 
-	private List<Library> libraries = Lists.newArrayList();
+	private List<Library> libraries = Lists.INSTANCE.newArrayList();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -62,7 +62,7 @@ public class LibrariesFragment extends AbstractRecyclerFragment {
 	}
 
 	protected List<Library> getCustomLibraries() {
-		return Lists.newArrayList();
+		return Lists.INSTANCE.newArrayList();
 	}
 
 	public class LibraryRecyclerViewType extends RecyclerViewType<Library, LibrariesHolder> {
