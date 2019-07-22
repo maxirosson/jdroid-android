@@ -48,7 +48,6 @@ import java.util.Map;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.multidex.MultiDex;
 
 public class AndroidApplication extends AbstractApplication {
 
@@ -104,11 +103,6 @@ public class AndroidApplication extends AbstractApplication {
 				}
 			});
 		}
-	}
-
-	@Override
-	protected void onInitMultiDex() {
-		MultiDex.install(this);
 	}
 
 	@Override

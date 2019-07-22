@@ -1,23 +1,9 @@
-apply plugin: "com.jdroidtools.android.dynamic-feature"
-
-ext.PROJECT_NAME = "Jdroid Android Sample - Dynamic Feature"
+apply plugin: "com.jdroidtools.android.library"
+apply from: "$rootDir/dependencies.gradle"
 
 configurations.all {
 	// check for updates every build
 	resolutionStrategy.cacheChangingModulesFor 0, "seconds"
-}
-
-buildscript {
-	apply from: "$rootDir/build_dependencies.gradle"
-	dependencies {
-		classpath(libs.jdroid_gradle_android_plugin)
-	}
-}
-
-dependencies {
-
-	api project(":jdroid-android-sample")
-
 }
 
 jdroid {
@@ -25,19 +11,6 @@ jdroid {
 }
 
 android {
-
-	buildTypes {
-		if (jdroid.isReleaseBuildTypeEnabled()) {
-			release {
-				if (jdroid.isFakeReleaseBuildTypeEnabled()) {
-					debuggable = true
-				} else {
-					debuggable = jdroid.isReleaseBuildTypeDebuggable()
-				}
-			}
-		}
-	}
-
 	sourceSets.test.java.srcDirs += "build/generated/source/r/debug"
 	sourceSets.test.java.srcDirs += sourceSets.main.java.srcDirs
 	sourceSets.test.java.srcDirs += sourceSets.debug.java.srcDirs

@@ -3,6 +3,7 @@ ext.RES_CONFIGS = ["en"]
 ext.PROJECT_NAME = "Jdroid Android - Sample"
 
 apply plugin: "com.jdroidtools.android.application"
+apply from: "$rootDir/dependencies.gradle"
 
 description = "Jdroid Sample Android"
 
@@ -30,13 +31,13 @@ configurations {
 }
 
 buildscript {
+	apply from: "$rootDir/build_dependencies.gradle"
 	dependencies {
-		classpath("com.jdroidtools:jdroid-gradle-android-plugin:${JDROID_GRADLE_PLUGIN_VERSION}")
+		classpath(libs.jdroid_gradle_android_plugin)
 	}
 }
 
 dependencies {
-	implementation("androidx.multidex:multidex:2.0.1")
 	api project(":jdroid-android-core")
 	implementation project(":jdroid-android-about")
 	implementation project(":jdroid-android-facebook-login")
@@ -52,9 +53,9 @@ dependencies {
 	implementation project(":jdroid-android-google-play-games")
 	implementation project(":jdroid-android-room")
 	implementation project(":jdroid-android-twitter")
-	implementation("com.firebase:firebase-client-android:2.5.0")
+	implementation(libs.firebase_client_android)
 
-	kapt("com.github.bumptech.glide:compiler:${GLIDE_VERSION}")
+	kapt(libs.glide_compiler)
 
 	if (jdroid.propertyResolver.getBooleanProp("JDROID_JAVA_AS_PROJECT_DEPENDENCY", false)) {
 		implementation(project(":jdroid-java-firebase-database")) {
@@ -63,7 +64,7 @@ dependencies {
 			exclude module: "jdroid-java-core"
 		}
 	} else {
-		implementation("com.jdroidtools:jdroid-java-firebase-database:${JDROID_JAVA_VERSION}") {
+		implementation(libs.jdroid_java_firebase_database) {
 			exclude module: "slf4j-api"
 			exclude group: "com.firebase", module: "firebase-client-jvm"
 			exclude module: "jdroid-java-core"
@@ -72,7 +73,7 @@ dependencies {
 	if (jdroid.propertyResolver.getBooleanProp("JDROID_JAVA_HTTP_AS_PROJECT_DEPENDENCY", false)) {
 		implementation project(":jdroid-java-http-okhttp")
 	} else {
-		implementation("com.jdroidtools:jdroid-java-http-okhttp:${JDROID_JAVA_HTTP_VERSION}") {
+		implementation(libs.jdroid_java_http_okhttp) {
 			exclude module: "slf4j-api"
 			exclude module: "jdroid-java-core"
 		}
@@ -80,19 +81,19 @@ dependencies {
 	if (jdroid.propertyResolver.getBooleanProp("JDROID_JAVA_FIREBASE_DYNAMICLINKS_AS_PROJECT_DEPENDENCY", false)) {
 		implementation project(":jdroid-java-firebase-dynamiclink")
 	} else {
-		implementation("com.jdroidtools:jdroid-java-firebase-dynamiclinks:1.0.0") {
+		implementation(libs.firebase_dynamiclinks) {
 			exclude module: "slf4j-api"
 			exclude module: "jdroid-java-core"
 		}
 	}
 
-	kapt("androidx.room:room-compiler:${ROOM_VERSION}")
+	kapt(libs.androidx_room_compiler)
 
-	testImplementation("junit:junit:${JUNIT_VERSION}")
-	testImplementation("org.robolectric:robolectric:${ROBOLECTRIC_VERSION}")
-	androidTestImplementation("androidx.test.espresso:espresso-core:3.1.1")
-	androidTestImplementation("androidx.test.espresso:espresso-contrib:3.1.1")
-	androidTestImplementation("androidx.test:runner:1.1.1")
+	testImplementation(libs.junit)
+	testImplementation(libs.robolectric)
+	androidTestImplementation(libs.espresso_core)
+	androidTestImplementation(libs.espresso_contrib)
+	androidTestImplementation(libs.test_runner)
 }
 
 String adMobAppId = "ca-app-pub-4654922738884963~4242524943"

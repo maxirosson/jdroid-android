@@ -1,16 +1,12 @@
-apply plugin: "com.jdroidtools.android.library"
+apply from: "$rootDir/module.gradle"
 
 ext.PROJECT_NAME = "Jdroid Android - Google Maps"
 description = "Jdroid dependency project for Google Maps"
 
-configurations.all {
-	// check for updates every build
-	resolutionStrategy.cacheChangingModulesFor 0, "seconds"
-}
-
 buildscript {
+	apply from: "$rootDir/build_dependencies.gradle"
 	dependencies {
-		classpath "com.jdroidtools:jdroid-gradle-android-plugin:${JDROID_GRADLE_PLUGIN_VERSION}"
+		classpath(libs.jdroid_gradle_android_plugin)
 	}
 }
 
@@ -18,24 +14,19 @@ dependencies {
 
 	api project(":jdroid-android-core")
 
-	api("com.google.android.gms:play-services-maps:16.1.0")
+	api(libs.play_services_maps)
 
 	if (jdroid.propertyResolver.getBooleanProp("JDROID_JAVA_HTTP_AS_PROJECT_DEPENDENCY", false)) {
 		testImplementation project(":jdroid-java-http-okhttp")
 	} else {
-		testImplementation("com.jdroidtools:jdroid-java-http-okhttp:${JDROID_JAVA_HTTP_VERSION}") {
+		testImplementation(libs.jdroid_java_http_okhttp) {
 			exclude module: "slf4j-api"
 			exclude module: "jdroid-java-core"
 		}
 	}
 
-
-	testImplementation("junit:junit:${JUNIT_VERSION}")
-	testImplementation("org.robolectric:robolectric:${ROBOLECTRIC_VERSION}")
-}
-
-jdroid {
-	notDefaultLanguages = ["es"]
+	testImplementation(libs.junit)
+	testImplementation(libs.robolectric)
 }
 
 android {
@@ -45,12 +36,4 @@ android {
 			googleMapsApiKey: ""
 		]
 	}
-
-	sourceSets.test.java.srcDirs += "build/generated/source/r/debug"
-	sourceSets.test.java.srcDirs += sourceSets.main.java.srcDirs
-	sourceSets.test.java.srcDirs += sourceSets.debug.java.srcDirs
-	sourceSets.test.resources.srcDirs += sourceSets.main.resources.srcDirs
-	sourceSets.test.resources.srcDirs += sourceSets.debug.resources.srcDirs
-	sourceSets.test.res.srcDirs += sourceSets.main.res.srcDirs
-	sourceSets.test.res.srcDirs += sourceSets.debug.res.srcDirs
 }

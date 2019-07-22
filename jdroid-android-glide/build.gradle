@@ -1,16 +1,12 @@
-apply plugin: "com.jdroidtools.android.library"
+apply from: "$rootDir/module.gradle"
 
 ext.PROJECT_NAME = "Jdroid Android - Glide"
 description = "Jdroid dependency project for Glide integration"
 
-configurations.all {
-	// check for updates every build
-	resolutionStrategy.cacheChangingModulesFor 0, "seconds"
-}
-
 buildscript {
+	apply from: "$rootDir/build_dependencies.gradle"
 	dependencies {
-		classpath("com.jdroidtools:jdroid-gradle-android-plugin:${JDROID_GRADLE_PLUGIN_VERSION}")
+		classpath(libs.jdroid_gradle_android_plugin)
 	}
 }
 
@@ -18,25 +14,11 @@ dependencies {
 
 	api project(":jdroid-android-core")
 
-	api("com.github.bumptech.glide:glide:${GLIDE_VERSION}")
-	implementation("com.github.bumptech.glide:okhttp3-integration:${GLIDE_VERSION}") {
+	api(libs.glide)
+	implementation(libs.glide_okhttp3) {
 		exclude group: "com.squareup.okhttp3", module: "okhttp"
 	}
 
-	testImplementation("junit:junit:${JUNIT_VERSION}")
-	testImplementation("org.robolectric:robolectric:${ROBOLECTRIC_VERSION}")
-}
-
-jdroid {
-	notDefaultLanguages = ["es"]
-}
-
-android {
-	sourceSets.test.java.srcDirs += "build/generated/source/r/debug"
-	sourceSets.test.java.srcDirs += sourceSets.main.java.srcDirs
-	sourceSets.test.java.srcDirs += sourceSets.debug.java.srcDirs
-	sourceSets.test.resources.srcDirs += sourceSets.main.resources.srcDirs
-	sourceSets.test.resources.srcDirs += sourceSets.debug.resources.srcDirs
-	sourceSets.test.res.srcDirs += sourceSets.main.res.srcDirs
-	sourceSets.test.res.srcDirs += sourceSets.debug.res.srcDirs
+	testImplementation(libs.junit)
+	testImplementation(libs.robolectric)
 }
