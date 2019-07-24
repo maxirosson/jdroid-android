@@ -16,6 +16,8 @@ function configure_hook {
         current_dir=$(pwd)
         ln -s "${current_dir}/scripts/git/$1" $commit_msg_link
 
+        chmod +x "${current_dir}/scripts/git/$1"
+
     fi
 }
 
