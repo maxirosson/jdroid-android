@@ -235,7 +235,7 @@ abstract class AbstractMapFragment : SupportMapFragment(), FragmentIf {
         return fragmentHelper.findView(id)
     }
 
-    override fun <V : View> findViewOnActivity(id: Int): V {
+    override fun <V : View> findViewOnActivity(id: Int): V? {
         return fragmentHelper.findViewOnActivity(id)
     }
 
@@ -255,11 +255,11 @@ abstract class AbstractMapFragment : SupportMapFragment(), FragmentIf {
         return fragmentHelper.getExtra(key)
     }
 
-    override fun <E> getArgument(key: String): E {
+    override fun <E> getArgument(key: String): E? {
         return fragmentHelper.getArgument(key)
     }
 
-    override fun <E> getArgument(key: String, defaultValue: E): E {
+    override fun <E> getArgument(key: String, defaultValue: E?): E? {
         return fragmentHelper.getArgument(key, defaultValue)
     }
 

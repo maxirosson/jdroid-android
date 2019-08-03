@@ -27,6 +27,7 @@ import org.slf4j.Logger;
 import java.util.Map;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
@@ -238,6 +239,7 @@ public class FragmentHelper implements FragmentIf {
 		return getActivityIf().getExtra(key);
 	}
 
+	@Nullable
 	@Override
 	public <E> E getArgument(String key) {
 		return getArgument(key, null);

@@ -117,7 +117,7 @@ public class HttpFragment extends AbstractFragment {
 
 	@Override
 	public ErrorDisplayer createErrorDisplayer(AbstractException abstractException) {
-		DialogErrorDisplayer.markAsNotGoBackOnError(abstractException);
+		DialogErrorDisplayer.Companion.markAsNotGoBackOnError(abstractException);
 		return super.createErrorDisplayer(abstractException);
 	}
 }

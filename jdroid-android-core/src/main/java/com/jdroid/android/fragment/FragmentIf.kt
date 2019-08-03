@@ -34,7 +34,7 @@ interface FragmentIf : ComponentIf {
      * @param <V> The [View] class
      * @return The view if found or null otherwise.
     </V> */
-    fun <V : View> findViewOnActivity(@IdRes id: Int): V
+    fun <V : View> findViewOnActivity(@IdRes id: Int): V?
 
     // //////////////////////// Life cycle //////////////////////// //
 
@@ -45,9 +45,9 @@ interface FragmentIf : ComponentIf {
      * @param <E> The instance type
      * @return the entry with the given key as an object.
     </E> */
-    fun <E> getArgument(key: String): E
+    fun <E> getArgument(key: String): E?
 
-    fun <E> getArgument(key: String, defaultValue: E): E
+    fun <E> getArgument(key: String, defaultValue: E?): E?
 
     fun shouldRetainInstance(): Boolean
 

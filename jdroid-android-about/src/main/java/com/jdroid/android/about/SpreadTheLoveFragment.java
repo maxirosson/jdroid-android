@@ -105,7 +105,7 @@ public abstract class SpreadTheLoveFragment extends AbstractFragment {
 	}
 
 	public String getShareKey() {
-		return GooglePlayUtils.getGooglePlayLink();
+		return GooglePlayUtils.INSTANCE.getGooglePlayLink();
 	}
 
 	protected String getDefaultShareSubject() {

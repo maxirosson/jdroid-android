@@ -7,6 +7,8 @@ import androidx.fragment.app.FragmentActivity
 
 import com.jdroid.android.R
 import com.jdroid.android.dialog.AlertDialogFragment
+import com.jdroid.android.kotlin.getRequiredIntArgument
+import com.jdroid.android.kotlin.getRequiredStringArgument
 
 class PermissionDialogFragment : AlertDialogFragment() {
 
@@ -16,8 +18,8 @@ class PermissionDialogFragment : AlertDialogFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        permission = getArgument<String>(PERMISSION_EXTRA)
-        permissionRequestCode = getArgument(PERMISSION_REQUEST_CODE_EXTRA)
+        permission = getRequiredStringArgument(PERMISSION_EXTRA)
+        permissionRequestCode = getRequiredIntArgument(PERMISSION_REQUEST_CODE_EXTRA)
     }
 
     override fun onPositiveClick() {

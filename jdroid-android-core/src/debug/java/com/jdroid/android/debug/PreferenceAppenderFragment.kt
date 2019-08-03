@@ -7,7 +7,6 @@ import androidx.fragment.app.FragmentActivity
 import com.jdroid.android.R
 import com.jdroid.android.fragment.AbstractPreferenceFragment
 import com.jdroid.android.permission.PermissionHelper
-import com.jdroid.java.collections.Lists
 
 class PreferenceAppenderFragment : AbstractPreferenceFragment() {
 
@@ -19,7 +18,7 @@ class PreferenceAppenderFragment : AbstractPreferenceFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val preferencesAppender = getArgument<PreferencesAppender>(PreferenceAppenderActivity.APPENDER_EXTRA)
+        val preferencesAppender = getArgument<PreferencesAppender>(PreferenceAppenderActivity.APPENDER_EXTRA)!!
         activity.setTitle(preferencesAppender.getNameResId())
 
         val sharedPreferencesName = preferencesAppender.getSharedPreferencesName()
@@ -27,7 +26,7 @@ class PreferenceAppenderFragment : AbstractPreferenceFragment() {
             preferenceManager.sharedPreferencesName = sharedPreferencesName
         }
 
-        val permissionHelpers = Lists.newArrayList<PermissionHelper>()
+        val permissionHelpers = mutableListOf<PermissionHelper>()
         for (each in preferencesAppender.getRequiredPermissions()) {
             permissionHelpers.add(PermissionHelper(activity as FragmentActivity, each, 1))
         }

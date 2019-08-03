@@ -59,7 +59,7 @@ public abstract class AbstractErrorDisplayer implements ErrorDisplayer {
 	}
 
 	protected void handleInvalidApiVersionError(FragmentActivity activity) {
-		GooglePlayUtils.showUpdateDialog(activity);
+		GooglePlayUtils.INSTANCE.showUpdateDialog(activity);
 	}
 
 	protected abstract void onDisplayError(FragmentActivity activity, String title, String description, Throwable throwable);

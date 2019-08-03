@@ -140,6 +140,7 @@ jobs:
                 cp -R "${reports_dir}/." "${destination}/${module}/"
               fi
             done < "settings.gradle"
+          when: always
 
       - store_artifacts:
           path: ./test-results
@@ -170,6 +171,8 @@ jobs:
               fi
               cp "$lint_result" "${destination}/${module}/${file_name}"
             done < "settings.gradle"
+          when: always
+
       - store_artifacts:
           path: ./lint-results
           destination: lint-results

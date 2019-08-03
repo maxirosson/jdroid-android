@@ -68,3 +68,7 @@ fun <T : Parcelable> Fragment.getParcelableArgument(key: String?): T? {
 fun <T : Parcelable> Fragment.getRequiredParcelableArgument(key: String?): T {
     return arguments?.getParcelable(key)!!
 }
+
+fun <T : Any> Fragment.getRequiredArgument(key: String?): T {
+    return arguments?.get(key)!! as T
+}

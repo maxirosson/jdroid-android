@@ -6,11 +6,9 @@ import com.google.android.gms.maps.model.PolylineOptions
 import com.jdroid.android.application.AbstractApplication
 import com.jdroid.android.domain.GeoLocation
 
-import java.util.ArrayList
-
 class Route {
 
-    val points: MutableList<GeoLocation> = ArrayList()
+    val points = mutableListOf<GeoLocation>()
     var length: Int? = null
     var mode: RouteMode? = null
 
@@ -25,7 +23,7 @@ class Route {
     fun toPolyline(builder: Builder): PolylineOptions {
         val polylineOptions = PolylineOptions()
         for (gp in points) {
-            val latLong = LatLng(gp.latitude, gp.longitude)
+            val latLong = LatLng(gp.requireLatitude(), gp.requireLongitude())
             polylineOptions.add(latLong)
             builder.include(latLong)
         }

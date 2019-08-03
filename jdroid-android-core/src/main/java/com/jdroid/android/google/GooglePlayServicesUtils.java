@@ -57,7 +57,7 @@ public class GooglePlayServicesUtils {
 	}
 
 	public static void launchGooglePlayServicesUpdate() {
-		GooglePlayUtils.launchAppDetails(GOOGLE_PLAY_SERVICES);
+		GooglePlayUtils.INSTANCE.launchAppDetails(GOOGLE_PLAY_SERVICES);
 	}
 
 	@WorkerThread

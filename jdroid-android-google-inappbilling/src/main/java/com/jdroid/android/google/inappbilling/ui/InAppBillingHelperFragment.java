@@ -130,7 +130,7 @@ public class InAppBillingHelperFragment extends AbstractFragment implements InAp
 	@Override
 	public void onPurchaseFailed(ErrorCodeException errorCodeException) {
 		if (!silentMode && !DefaultExceptionHandler.matchAnyErrorCode(errorCodeException, InAppBillingErrorCode.USER_CANCELED)) {
-			DialogErrorDisplayer.markAsNotGoBackOnError(errorCodeException);
+			DialogErrorDisplayer.Companion.markAsNotGoBackOnError(errorCodeException);
 			createErrorDisplayer(errorCodeException).displayError(getActivity(), errorCodeException);
 		}
 	}

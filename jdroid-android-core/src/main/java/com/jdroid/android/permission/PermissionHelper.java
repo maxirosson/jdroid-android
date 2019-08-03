@@ -385,7 +385,7 @@ public class PermissionHelper {
 	private void showAppInfoDialog() {
 		int appInfoDialogMessageResId = getAppInfoDialogMessageResId();
 		if (appInfoDialogMessageResId != 0) {
-			AppInfoDialogFragment.show(permissionDelegate.getActivity(), getAppInfoDialogTitleResId(), appInfoDialogMessageResId, permission);
+			AppInfoDialogFragment.Companion.show(permissionDelegate.getActivity(), getAppInfoDialogTitleResId(), appInfoDialogMessageResId, permission);
 		}
 	}
 

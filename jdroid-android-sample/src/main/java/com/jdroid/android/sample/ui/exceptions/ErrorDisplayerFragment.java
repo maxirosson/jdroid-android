@@ -120,7 +120,7 @@ public class ErrorDisplayerFragment extends AbstractFragment {
 	public ErrorDisplayer createErrorDisplayer(AbstractException abstractException) {
 		AbstractErrorDisplayer.setErrorDisplayer(abstractException, errorDisplayer);
 		if (errorDisplayer == null && !goBackOnError) {
-			DialogErrorDisplayer.markAsNotGoBackOnError(abstractException);
+			DialogErrorDisplayer.Companion.markAsNotGoBackOnError(abstractException);
 		}
 		return super.createErrorDisplayer(abstractException);
 	}

@@ -59,7 +59,7 @@ public abstract class ResourceObserver<T> implements Observer<Resource<T>> {
 
 	@MainThread
 	protected void onError(AbstractException exception, @Nullable T data) {
-		DialogErrorDisplayer.markAsNotGoBackOnError(exception);
+		DialogErrorDisplayer.Companion.markAsNotGoBackOnError(exception);
 		AbstractErrorDisplayer.getErrorDisplayer(exception).displayError(getFragment().getActivity(), exception);
 	}
 

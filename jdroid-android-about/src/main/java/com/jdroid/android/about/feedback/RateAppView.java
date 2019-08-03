@@ -114,7 +114,7 @@ public class RateAppView extends RelativeLayout {
 
 			@Override
 			public void onClick(View v) {
-				GooglePlayUtils.launchAppDetails();
+				GooglePlayUtils.INSTANCE.launchAppDetails();
 				setVisibility(View.GONE);
 				AbstractApplication.get().getCoreAnalyticsSender().trackRateOnGooglePlay(true);
 				RateAppStats.setRateOnGooglePlay(true);

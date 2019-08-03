@@ -38,6 +38,6 @@ object MapUtils {
     }
 
     fun createLatLng(geoLocation: GeoLocation?): LatLng? {
-        return if (geoLocation != null) LatLng(geoLocation.latitude, geoLocation.longitude) else null
+        return if (geoLocation != null) LatLng(geoLocation.requireLatitude(), geoLocation.requireLongitude()) else null
     }
 }
