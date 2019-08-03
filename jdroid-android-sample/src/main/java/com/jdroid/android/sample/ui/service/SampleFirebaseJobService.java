@@ -34,7 +34,7 @@ public class SampleFirebaseJobService extends AbstractJobService {
 			builder.setContentTitle(getClass().getSimpleName());
 			builder.setContentText(jobParameters.getExtras().get("a").toString());
 
-			NotificationUtils.sendNotification(IdGenerator.INSTANCE.getIntId(), builder);
+			NotificationUtils.INSTANCE.sendNotification(IdGenerator.INSTANCE.getIntId(), builder);
 			return false;
 		}
 	}

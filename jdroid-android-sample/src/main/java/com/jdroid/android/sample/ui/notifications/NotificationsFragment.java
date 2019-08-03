@@ -96,7 +96,7 @@ public class NotificationsFragment extends AbstractFragment {
 						builder.setBlueLight();
 						builder.setDefaultSound();
 
-						NotificationUtils.sendNotification(IdGenerator.INSTANCE.getIntId(), builder);
+						NotificationUtils.INSTANCE.sendNotification(IdGenerator.INSTANCE.getIntId(), builder);
 					}
 				});
 			}
@@ -106,7 +106,7 @@ public class NotificationsFragment extends AbstractFragment {
 
 			@Override
 			public void onClick(View v) {
-				NotificationUtils.cancelAllNotifications();
+				NotificationUtils.INSTANCE.cancelAllNotifications();
 			}
 		});
 	}

@@ -180,7 +180,7 @@ abstract class AbstractMapFragment : SupportMapFragment(), FragmentIf {
         fragmentHelper.onResume()
         locationPermissionHelper?.onResume()
 
-        if (GooglePlayServicesUtils.isGooglePlayServicesAvailable(activity)) {
+        if (GooglePlayServicesUtils.isGooglePlayServicesAvailable(requireActivity())) {
             displayMap()
         } else {
             showUpdateGooglePlayServices()

@@ -371,7 +371,7 @@ public class ActivityHelper implements ActivityIf {
 
 	private void verifyGooglePlayServicesAvailability(Boolean displayDialog) {
 		Boolean oldIsGooglePlayServicesAvailable = isGooglePlayServicesAvailable;
-		isGooglePlayServicesAvailable = displayDialog && !isGooglePlayServicesDialogDisplayed ? GooglePlayServicesUtils.verifyGooglePlayServices(activity).isAvailable() : GooglePlayServicesUtils.isGooglePlayServicesAvailable(activity);
+		isGooglePlayServicesAvailable = displayDialog && !isGooglePlayServicesDialogDisplayed ? GooglePlayServicesUtils.INSTANCE.verifyGooglePlayServices(activity).isAvailable() : GooglePlayServicesUtils.INSTANCE.isGooglePlayServicesAvailable(activity);
 		if (!isGooglePlayServicesAvailable && displayDialog) {
 			isGooglePlayServicesDialogDisplayed = true;
 		}

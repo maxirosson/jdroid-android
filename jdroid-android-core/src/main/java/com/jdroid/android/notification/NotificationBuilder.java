@@ -45,7 +45,7 @@ public class NotificationBuilder {
 
 	public NotificationBuilder(@NonNull String notificationName, @Nullable String channelId) {
 
-		if (NotificationUtils.findNotificationChannelType(channelId) == null) {
+		if (NotificationUtils.INSTANCE.findNotificationChannelType(channelId) == null) {
 			AbstractApplication.get().getExceptionHandler().logHandledException("Channel id not found: " + channelId);
 			NotificationChannelType defaultNotificationChannelType = AbstractApplication.get().getDefaultNotificationChannelType();
 			if (defaultNotificationChannelType != null) {
@@ -190,7 +190,7 @@ public class NotificationBuilder {
 	}
 
 	private Bitmap createLargeIconBitmap(BitmapLoader bitmapLoader) {
-		return bitmapLoader.load(NotificationUtils.getNotificationLargeIconHeightPx(), NotificationUtils.getNotificationLargeIconWidthPx());
+		return bitmapLoader.load(NotificationUtils.INSTANCE.getNotificationLargeIconHeightPx(), NotificationUtils.INSTANCE.getNotificationLargeIconWidthPx());
 	}
 
 	public void setInProgress(@DrawableRes int notificationIcon, int progress, int contentTitle, int actionText) {

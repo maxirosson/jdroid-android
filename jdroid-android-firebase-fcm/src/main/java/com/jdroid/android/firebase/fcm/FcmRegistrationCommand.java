@@ -36,7 +36,7 @@ public class FcmRegistrationCommand extends ServiceCommand {
 
 	@Override
 	protected boolean execute(Context context, Bundle bundle) {
-		if (GooglePlayServicesUtils.isGooglePlayServicesAvailable(context)) {
+		if (GooglePlayServicesUtils.INSTANCE.isGooglePlayServicesAvailable(context)) {
 			for (FcmSender fcmSender : AbstractFcmAppModule.get().getFcmSenders()) {
 				String registrationToken;
 				try {
@@ -70,7 +70,7 @@ public class FcmRegistrationCommand extends ServiceCommand {
 	@WorkerThread
 	@Nullable
 	public static String getRegistrationToken(String senderId) {
-		if (GooglePlayServicesUtils.isGooglePlayServicesAvailable(AbstractApplication.get())) {
+		if (GooglePlayServicesUtils.INSTANCE.isGooglePlayServicesAvailable(AbstractApplication.get())) {
 			String registrationToken;
 			try {
 				if (senderId != null) {

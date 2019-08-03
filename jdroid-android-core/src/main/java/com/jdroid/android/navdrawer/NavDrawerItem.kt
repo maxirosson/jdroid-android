@@ -12,5 +12,5 @@ interface NavDrawerItem {
 
     fun matchesActivity(activity: Activity): Boolean
 
-    fun getActivityClass(): Class<out Activity>
+    fun getActivityClass(): Class<out Activity>?
 }

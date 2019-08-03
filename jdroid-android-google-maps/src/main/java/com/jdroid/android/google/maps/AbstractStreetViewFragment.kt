@@ -34,7 +34,7 @@ open class AbstractStreetViewFragment : AbstractFragment(), OnStreetViewPanorama
     }
 
     private fun initStreetViewPanoramaView(savedInstanceState: Bundle?) {
-        if (GooglePlayServicesUtils.isGooglePlayServicesAvailable(activity)) {
+        if (GooglePlayServicesUtils.isGooglePlayServicesAvailable(requireActivity())) {
             streetViewPanoramaView = StreetViewPanoramaView(activity, createStreetViewPanoramaOptions())
             streetViewPanoramaView!!.getStreetViewPanoramaAsync(this)
 
@@ -66,7 +66,7 @@ open class AbstractStreetViewFragment : AbstractFragment(), OnStreetViewPanorama
         streetViewPanoramaView?.onResume()
         super.onResume()
 
-        if (GooglePlayServicesUtils.isGooglePlayServicesAvailable(activity)) {
+        if (GooglePlayServicesUtils.isGooglePlayServicesAvailable(requireActivity())) {
             if (!googlePlayServicesEnabled) {
                 initStreetViewPanoramaView(null)
                 streetViewPanoramaView!!.onResume()

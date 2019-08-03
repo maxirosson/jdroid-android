@@ -28,7 +28,7 @@ public class SampleWorkerService extends AbstractWorkerService {
 			builder.setContentTitle(getClass().getSimpleName());
 			builder.setContentText(intent.getExtras().get("a").toString());
 
-			NotificationUtils.sendNotification(IdGenerator.INSTANCE.getIntId(), builder);
+			NotificationUtils.INSTANCE.sendNotification(IdGenerator.INSTANCE.getIntId(), builder);
 		}
 	}
 

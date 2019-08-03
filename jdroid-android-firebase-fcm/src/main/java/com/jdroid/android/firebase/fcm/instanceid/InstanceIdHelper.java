@@ -54,7 +54,7 @@ public class InstanceIdHelper {
 
 	@WorkerThread
 	public static void removeInstanceId() {
-		if (GooglePlayServicesUtils.isGooglePlayServicesAvailable(AbstractApplication.get())) {
+		if (GooglePlayServicesUtils.INSTANCE.isGooglePlayServicesAvailable(AbstractApplication.get())) {
 			try {
 				FirebaseInstanceId.getInstance().deleteInstanceId();
 				instanceId = null;

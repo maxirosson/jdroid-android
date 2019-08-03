@@ -31,7 +31,7 @@ public class LiteModeFragment extends AbstractFragment {
 
 		super.onViewCreated(view, savedInstanceState);
 
-		if (GooglePlayServicesUtils.isGooglePlayServicesAvailable(getActivity())) {
+		if (GooglePlayServicesUtils.INSTANCE.isGooglePlayServicesAvailable(getActivity())) {
 			LatLngBounds.Builder boundsBuilder = new LatLngBounds.Builder();
 			LatLng latLng1 = new LatLng(-34.608861, -58.370833);
 			boundsBuilder.include(latLng1);

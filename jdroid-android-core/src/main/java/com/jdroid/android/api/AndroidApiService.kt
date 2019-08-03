@@ -13,7 +13,7 @@ import java.io.File
 
 abstract class AndroidApiService : AbstractApiService() {
 
-    override fun getHttpCacheDirectory(cache: Cache?): File {
+    override fun getHttpCacheDirectory(cache: Cache): File {
         return AbstractApplication.get().cacheManager!!.getFileSystemCacheDirectory(cache)
     }
 

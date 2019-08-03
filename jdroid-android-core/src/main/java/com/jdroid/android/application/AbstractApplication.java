@@ -106,7 +106,7 @@ public abstract class AbstractApplication extends KotlinAbstractApplication {
 
 			initKoin();
 
-			NotificationUtils.createNotificationChannelsByType(getNotificationChannelTypes());
+			NotificationUtils.INSTANCE.createNotificationChannelsByType(getNotificationChannelTypes());
 
 			initAppModule(appModulesMap);
 
