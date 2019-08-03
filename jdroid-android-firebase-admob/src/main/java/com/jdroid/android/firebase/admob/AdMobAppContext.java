@@ -11,6 +11,8 @@ import com.jdroid.java.utils.StringUtils;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import androidx.annotation.NonNull;
+
 public class AdMobAppContext extends AbstractAppContext {
 
 	public static final String TEST_AD_UNIT_ID_ENABLED = "TEST_AD_UNIT_ID_ENABLED";
@@ -22,6 +24,7 @@ public class AdMobAppContext extends AbstractAppContext {
 	/**
 	 * @return Whether the application has ads enabled or not
 	 */
+	@NonNull
 	public Boolean areAdsEnabled() {
 		Boolean prefEnabled = SharedPreferencesHelper.get().loadPreferenceAsBoolean(AdMobRemoteConfigParameter.ADS_ENABLED.getKey(), areAdsEnabledByDefault());
 		Boolean enoughDaysSinceFirstAppLoad = TimeUnit.MILLISECONDS.toDays(DateUtils.INSTANCE.nowMillis() - UsageStats.getFirstAppLoadTimestamp()) >= getMinDaysSinceFirstAppLoad();
