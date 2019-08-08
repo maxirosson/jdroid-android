@@ -13,8 +13,8 @@ class ChoiceItemDialogFragment : AbstractDialogFragment() {
     private lateinit var values: List<ChoiceItem>
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        values = getRequiredSerializableArgument(ITEMS_EXTRA) as List<ChoiceItem>
-        val selectedItem = getRequiredSerializableArgument(CURRENT_ITEM_EXTRA) as ChoiceItem
+        values = getRequiredSerializableArgument(ITEMS_EXTRA)
+        val selectedItem = getRequiredSerializableArgument<ChoiceItem>(CURRENT_ITEM_EXTRA)
         val resourceTitleId = getRequiredIntArgument(RESOURCE_TITLE_ID_EXTRA)
 
         val builder = AlertDialog.Builder(requireActivity())
@@ -40,8 +40,8 @@ class ChoiceItemDialogFragment : AbstractDialogFragment() {
 
     override fun onDestroyView() {
         // This is for rotation change, to preserve the dialog
-        if (dialog != null && retainInstance) {
-            dialog.setDismissMessage(null)
+        if (retainInstance) {
+            dialog?.setDismissMessage(null)
         }
         super.onDestroyView()
     }
@@ -66,8 +66,8 @@ class ChoiceItemDialogFragment : AbstractDialogFragment() {
             bundle.putInt(RESOURCE_TITLE_ID_EXTRA, resourceTitleId)
             fragment.arguments = bundle
             fragment.setTargetFragment(targetFragment, 0)
-            val fragmentManager = targetFragment.fragmentManager
-            if (fragmentManager!!.findFragmentByTag(ChoiceItemDialogFragment::class.java.simpleName) == null) {
+            val fragmentManager = targetFragment.requireFragmentManager()
+            if (fragmentManager.findFragmentByTag(ChoiceItemDialogFragment::class.java.simpleName) == null) {
                 fragment.show(fragmentManager, ChoiceItemDialogFragment::class.java.simpleName)
             }
         }

@@ -259,7 +259,9 @@ workflows:
     jobs:
       - ktlint
       - build
-      - lint
+      - lint:
+        - requires:
+            - build
       - buildSample:
           requires:
             - build
