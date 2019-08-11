@@ -253,6 +253,14 @@ jobs:
           gcloud firebase test android run firebase_test_lab.yml:instrumentation-tests-virtual --async --app ./jdroid-android-sample/build/outputs/apk/automation/jdroid-automation.apk --test ./jdroid-android-sample/build/outputs/apk/androidTest/automation/jdroid-android-sample-automation-androidTest.apk
         no_output_timeout: 30m
 
+  upgradeDependencies:
+    <<: *android_config
+    steps:
+    - checkout
+    - run:
+        name: Upgrade Dependencies
+        command: ./gradlew upgradeDependencies --stacktrace
+
 workflows:
   version: 2
   commit:
@@ -288,3 +296,13 @@ workflows:
       - runInstrumentationTest:
           requires:
             - buildAutomationTest
+  weekly:
+    triggers:
+      - schedule:
+          cron: "0 0 * * 0"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - upgradeDependencies
