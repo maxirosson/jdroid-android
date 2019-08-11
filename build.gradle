@@ -188,3 +188,7 @@ allprojects {
 		}
 	}
 }
+
+releasesHub {
+	excludes = ["com.android.billingclient:billing"]
+}
