@@ -13,7 +13,7 @@ class ChoiceItemDialogFragment : AbstractDialogFragment() {
     private lateinit var values: List<ChoiceItem>
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        values = getRequiredSerializableArgument(ITEMS_EXTRA)
+        values = arguments?.getSerializable(ITEMS_EXTRA)!! as List<ChoiceItem>
         val selectedItem = getRequiredSerializableArgument<ChoiceItem>(CURRENT_ITEM_EXTRA)
         val resourceTitleId = getRequiredIntArgument(RESOURCE_TITLE_ID_EXTRA)
 
