@@ -11,7 +11,7 @@ if (propsFile.exists()) {
 
 version = "3.0.0"
 
-ext.JDROID_GITHUB_REPOSITORY_NAME = "jdroid-android"
+ext.GITHUB_REPOSITORY_NAME = "jdroid-android"
 
 apply plugin: "com.jdroidtools.component.builder"
 apply plugin: "com.jdroidtools.android.root"
