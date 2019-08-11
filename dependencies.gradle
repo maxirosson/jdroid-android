@@ -5,7 +5,7 @@ libs.google_material = "com.google.android.material:material:1.0.0"
 libs.play_core = "com.google.android.play:core:1.6.1"
 
 // https://firebase.google.com/support/release-notes/android
-libs.firebase_core = "com.google.firebase:firebase-core:17.0.0"
+libs.firebase_core = "com.google.firebase:firebase-core:17.0.1"
 libs.firebase_appindexing = "com.google.firebase:firebase-appindexing:19.0.0"
 libs.firebase_perf = "com.google.firebase:firebase-perf:18.0.1"
 libs.firebase_dynamic_links = "com.google.firebase:firebase-dynamic-links:18.0.0"
@@ -40,10 +40,10 @@ libs.jdroid_java_remote_config = "com.jdroidtools:jdroid-java-remote-config:3.0.
 libs.jdroid_java_firebase_database = "com.jdroidtools:jdroid-java-firebase-database:3.0.0-SNAPSHOT"
 
 
-libs.firebase_ads = "com.google.firebase:firebase-ads:18.0.0"
-libs.firebase_auth = "com.google.firebase:firebase-auth:18.0.0"
+libs.firebase_ads = "com.google.firebase:firebase-ads:18.1.1"
+libs.firebase_auth = "com.google.firebase:firebase-auth:18.1.0"
 libs.firebase_config = "com.google.firebase:firebase-config:18.0.0"
-libs.firebase_database = "com.google.firebase:firebase-database:18.0.0"
+libs.firebase_database = "com.google.firebase:firebase-database:18.0.1"
 
 // https://firebase.google.com/support/release-notes/android
 libs.firebase_messaging = "com.google.firebase:firebase-messaging:19.0.1"
@@ -55,13 +55,13 @@ libs.crashlytics = "com.crashlytics.sdk.android:crashlytics:2.10.1"
 
 // https://developers.google.com/android/guides/releases
 libs.play_services_base = "com.google.android.gms:play-services-base:17.0.0"
-libs.play_services_maps = "com.google.android.gms:play-services-maps:16.1.0"
-libs.play_services_games = "com.google.android.gms:play-services-games:17.0.0"
-libs.play_services_auth = "com.google.android.gms:play-services-auth:16.0.1"
+libs.play_services_maps = "com.google.android.gms:play-services-maps:17.0.0"
+libs.play_services_games = "com.google.android.gms:play-services-games:18.0.0"
+libs.play_services_auth = "com.google.android.gms:play-services-auth:17.0.0"
 
 // https://jcenter.bintray.com/com/android/billingclient/billing/
 // https://developer.android.com/google/play/billing/billing_library_releases_notes
-libs.billing = "com.android.billingclient:billing:1.2.2"
+libs.billing = "com.android.billingclient:billing:2.0.2"
 
 // https://github.com/facebook/device-year-class/blob/master/CHANGELOG.md
 libs.facebook_yearclass = "com.facebook.device.yearclass:yearclass:2.1.0"
@@ -93,8 +93,8 @@ libs.junit = "junit:junit:4.12"
 // https://github.com/robolectric/robolectric
 libs.robolectric = "org.robolectric:robolectric:4.3"
 
-libs.espresso_core = "androidx.test.espresso:espresso-core:3.1.1"
+libs.espresso_core = "androidx.test.espresso:espresso-core:3.2.0"
 libs.espresso_contrib = "androidx.test.espresso:espresso-contrib:3.1.1"
-libs.test_runner = "androidx.test:runner:1.1.1"
+libs.test_runner = "androidx.test:runner:1.2.0"
 
 rootProject.ext['libs'] = libs
