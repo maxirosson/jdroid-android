@@ -260,7 +260,7 @@ workflows:
       - ktlint
       - build
       - lint:
-        - requires:
+          requires:
             - build
       - buildSample:
           requires:
