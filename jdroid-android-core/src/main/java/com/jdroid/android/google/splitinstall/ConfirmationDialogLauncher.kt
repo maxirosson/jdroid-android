@@ -5,10 +5,11 @@ import com.google.android.play.core.splitinstall.SplitInstallManager
 import com.google.android.play.core.splitinstall.SplitInstallSessionState
 
 class ConfirmationDialogLauncher(
-    private val splitInstallManager : SplitInstallManager,
-    private val splitInstallSessionState : SplitInstallSessionState) {
+    private val splitInstallManager: SplitInstallManager,
+    private val splitInstallSessionState: SplitInstallSessionState
+) {
 
-    fun startConfirmationDialogForResult(activity : Activity, requestCode : Int) {
+    fun startConfirmationDialogForResult(activity: Activity, requestCode: Int) {
         splitInstallManager.startConfirmationDialogForResult(splitInstallSessionState, activity, requestCode)
     }
 }

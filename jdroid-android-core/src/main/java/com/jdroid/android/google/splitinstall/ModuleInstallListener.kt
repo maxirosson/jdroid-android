@@ -7,13 +7,13 @@ interface ModuleInstallListener {
 
     fun onSuccess()
 
-    fun onFailure(exception : Exception? = null)
+    fun onFailure(exception: Exception? = null)
 
     fun onRequiresUserConfirmation(confirmationDialogLauncher: ConfirmationDialogLauncher) {
         // Optional implementation
     }
 
-    fun onDownloadInProgress(progress : Long, totalBytes : Long) {
+    fun onDownloadInProgress(progress: Long, totalBytes: Long) {
         // Optional implementation
     }
 }
