@@ -7,10 +7,10 @@
 
 
 	<Button
-			android:id="@+id/splitInstallInvokeDynamicFeatureSampleWithSilentInstall"
+			android:id="@+id/splitInstallInvokeDynamicFeatureSample"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="@string/splitInstallInvokeDynamicFeatureSampleWithSilentInstall" />
+			android:text="@string/splitInstallInvokeDynamicFeatureSample" />
 
 	<com.google.android.material.textfield.TextInputLayout
 			android:layout_width="match_parent"

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import com.jdroid.android.fragment.AbstractFragment
+import com.jdroid.android.google.splitinstall.ModuleInstallListener
 import com.jdroid.android.google.splitinstall.SplitInstallHelper
 import com.jdroid.android.sample.R
 import kotlinx.android.synthetic.main.split_install_fragment.*
@@ -17,31 +18,35 @@ class SplitInstallFragment : AbstractFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        findView<View>(R.id.splitInstallInvokeDynamicFeatureSampleWithSilentInstall).setOnClickListener {
-            DynamicFeatureSampleApiFacade.sampleCall()
+        findView<View>(R.id.splitInstallInvokeDynamicFeatureSample).setOnClickListener {
+            DynamicFeatureSampleApiFacade.installModule(object : ModuleInstallListener {
+                override fun onSuccess() {
+                    DynamicFeatureSampleApiFacade.sampleCall()
+                }
+
+                override fun onFailure(exception: Exception?) {
+                    result.text = exception?.message
+                }
+            })
         }
 
         val moduleName = findView<TextView>(R.id.splitInstallModuleName)
-        moduleName.text = DynamicFeatureSampleApiFacade.MODULE_NAME
+        moduleName.text = DynamicFeatureSampleApiFacade.moduleName
 
         findView<View>(R.id.splitInstallInstallModule).setOnClickListener {
+
             val featureApi = object : AbstractFeatureApi() {
-                override fun getModuleName(): String {
-                    return moduleName.text.toString()
-                }
+                override val moduleName = splitInstallModuleName.text.toString()
             }
-            featureApi.invokeFeatureAsync({
-                executeOnUIThread(object : Runnable {
-                    override fun run() {
-                        result.setText(R.string.splitInstallSuccessfulFeatureInvocation)
-                    }
-                })
-            }, {
-                executeOnUIThread(object : Runnable {
-                    override fun run() {
-                        result.text = it?.message
-                    }
-                })
+
+            featureApi.installModule(object : ModuleInstallListener {
+                override fun onSuccess() {
+                    result.setText(R.string.splitInstallSuccessfulFeatureInstallation)
+                }
+
+                override fun onFailure(exception: Exception?) {
+                    result.text = exception?.message
+                }
             })
         }
 

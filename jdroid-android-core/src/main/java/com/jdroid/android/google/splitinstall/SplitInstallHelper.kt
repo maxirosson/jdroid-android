@@ -1,6 +1,5 @@
 package com.jdroid.android.google.splitinstall
 
-import androidx.annotation.WorkerThread
 import com.google.android.play.core.splitinstall.SplitInstallException
 import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
 import com.google.android.play.core.splitinstall.SplitInstallRequest
@@ -8,8 +7,6 @@ import com.google.android.play.core.splitinstall.SplitInstallSessionState
 import com.google.android.play.core.splitinstall.SplitInstallStateUpdatedListener
 import com.google.android.play.core.splitinstall.model.SplitInstallErrorCode
 import com.google.android.play.core.splitinstall.model.SplitInstallSessionStatus
-import com.google.android.play.core.tasks.OnFailureListener
-import com.google.android.play.core.tasks.OnSuccessListener
 import com.jdroid.android.application.AbstractApplication
 import com.jdroid.android.koin.KoinHelper
 import com.jdroid.java.utils.LoggerUtils
@@ -25,8 +22,7 @@ object SplitInstallHelper {
         return splitInstallManager.installedModules
     }
 
-    @WorkerThread
-    fun installModuleSilently(moduleName: String, onSuccessListener: OnSuccessListener<Any>, onFailureListener: OnFailureListener) {
+    fun installModule(moduleName: String, moduleInstallListener: ModuleInstallListener) {
         val splitInstallManager = SplitInstallManagerFactory.create(AbstractApplication.get())
         if (!splitInstallManager.installedModules.contains(moduleName)) {
 
@@ -43,9 +39,11 @@ object SplitInstallHelper {
                     if (state.status() == SplitInstallSessionStatus.FAILED &&
                         state.errorCode() == SplitInstallErrorCode.SERVICE_DIED) {
                         // Retry the request.
-                        onFailureListener.onFailure(null)
+                        moduleInstallListener.onFailure()
                         splitInstallManager.unregisterListener(this)
                     } else if (state.sessionId() == mySessionId) {
+
+                        splitInstallManager.startConfirmationDialogForResult(state, null, 1)
                         when (state.status()) {
 
                             // The request has been accepted and the download should start soon.
@@ -56,12 +54,14 @@ object SplitInstallHelper {
                             SplitInstallSessionStatus.REQUIRES_USER_CONFIRMATION -> {
                                 LOGGER.debug("Split install [$moduleName] requires user confirmation")
                                 AbstractApplication.get().coreAnalyticsSender.trackSplitInstallStatus(moduleName, state)
+                                moduleInstallListener.onRequiresUserConfirmation(ConfirmationDialogLauncher(splitInstallManager, state))
                             }
                             // Download is in progress.
                             SplitInstallSessionStatus.DOWNLOADING -> {
                                 val totalBytes = state.totalBytesToDownload()
                                 val progress = state.bytesDownloaded()
                                 LOGGER.debug("Split install [$moduleName] downloading $progress/$totalBytes bytes")
+                                moduleInstallListener.onDownloadInProgress(progress, totalBytes)
                             }
                             // The device has downloaded the module but installation has no yet begun.
                             SplitInstallSessionStatus.DOWNLOADED -> {
@@ -76,14 +76,14 @@ object SplitInstallHelper {
                             SplitInstallSessionStatus.INSTALLED -> {
                                 LOGGER.debug("Split install [$moduleName] installed")
                                 AbstractApplication.get().coreAnalyticsSender.trackSplitInstallStatus(moduleName, state)
-                                onSuccessListener.onSuccess(null)
+                                moduleInstallListener.onSuccess()
                                 splitInstallManager.unregisterListener(this)
                             }
                             // The request failed before the module was installed on the device.
                             SplitInstallSessionStatus.FAILED -> {
                                 LOGGER.debug("Split install [$moduleName] failed: " + state.errorCode())
                                 AbstractApplication.get().coreAnalyticsSender.trackSplitInstallStatus(moduleName, state)
-                                onFailureListener.onFailure(null)
+                                moduleInstallListener.onFailure()
                                 splitInstallManager.unregisterListener(this)
                             }
                             // The device is in the process of cancelling the request.
@@ -94,7 +94,7 @@ object SplitInstallHelper {
                             SplitInstallSessionStatus.CANCELED -> {
                                 LOGGER.debug("Split install [$moduleName] canceled")
                                 AbstractApplication.get().coreAnalyticsSender.trackSplitInstallStatus(moduleName, state)
-                                onFailureListener.onFailure(null)
+                                moduleInstallListener.onFailure()
                                 splitInstallManager.unregisterListener(this)
                             }
                         }
@@ -134,6 +134,7 @@ object SplitInstallHelper {
                             handleError(moduleName, exception, "API_NOT_AVAILABLE")
                         }
                         // The app is unable to register the request because of insufficient permissions.
+                        // This typically occurs when the app is in the background. Attempt the request when the app returns to the foreground.
                         SplitInstallErrorCode.ACCESS_DENIED -> {
                             handleError(moduleName, exception, "ACCESS_DENIED")
                         }
@@ -150,11 +151,11 @@ object SplitInstallHelper {
                             handleError(moduleName, exception, "SERVICE_DIED")
                         }
                     }
-                    onFailureListener.onFailure(exception)
+                    moduleInstallListener.onFailure(exception)
                 }
         } else {
             LOGGER.debug("Split install [$moduleName] already installed")
-            onSuccessListener.onSuccess(null)
+            moduleInstallListener.onSuccess()
         }
     }
 
