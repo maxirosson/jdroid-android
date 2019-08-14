@@ -43,7 +43,6 @@ object SplitInstallHelper {
                         splitInstallManager.unregisterListener(this)
                     } else if (state.sessionId() == mySessionId) {
 
-                        splitInstallManager.startConfirmationDialogForResult(state, null, 1)
                         when (state.status()) {
 
                             // The request has been accepted and the download should start soon.
