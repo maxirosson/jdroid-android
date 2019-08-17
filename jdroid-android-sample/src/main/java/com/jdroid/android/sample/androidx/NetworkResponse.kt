@@ -2,7 +2,7 @@ package com.jdroid.android.sample.androidx
 
 class NetworkResponse {
 
-    var id: String? = null
+    lateinit var id: String
     var value: String? = null
 
     override fun toString(): String {

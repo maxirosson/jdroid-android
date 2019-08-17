@@ -29,7 +29,7 @@ class RoomFragment : AbstractFragment() {
                 val sampleEntityDao = RoomHelper.getDefaultDatabase(AppDatabase::class.java).sampleEntityDao()
                 val entity = SampleEntity()
                 lastId = RandomUtils.getLong().toString()
-                entity.id = lastId
+                entity.id = lastId!!
                 entity.field = RandomUtils.getLong().toString()
                 entity.date = DateUtils.now()
                 entity.stringList = Lists.newArrayList("a", "b", "c")
@@ -40,7 +40,7 @@ class RoomFragment : AbstractFragment() {
             AppExecutors.diskIOExecutor.execute {
                 val sampleEntityDao = RoomHelper.getDefaultDatabase(AppDatabase::class.java).sampleEntityDao()
                 val entity = SampleEntity()
-                entity.id = lastId
+                entity.id = lastId!!
                 entity.field = RandomUtils.getLong().toString()
                 entity.date = DateUtils.now()
                 entity.stringList = Lists.newArrayList("a", "b", "c")
@@ -52,7 +52,7 @@ class RoomFragment : AbstractFragment() {
                 val sampleEntityDao = RoomHelper.getDefaultDatabase(AppDatabase::class.java).sampleEntityDao()
                 val entity = SampleEntity()
                 lastId = RandomUtils.getLong().toString()
-                entity.id = lastId
+                entity.id = lastId!!
                 entity.field = RandomUtils.getLong().toString()
                 entity.date = DateUtils.now()
                 entity.stringList = Lists.newArrayList("a", "b", "c")
@@ -63,7 +63,7 @@ class RoomFragment : AbstractFragment() {
             AppExecutors.diskIOExecutor.execute {
                 if (lastId != null) {
                     val sampleEntityDao = RoomHelper.getDefaultDatabase(AppDatabase::class.java).sampleEntityDao()
-                    sampleEntityDao.delete(lastId)
+                    sampleEntityDao.delete(lastId!!)
                     lastId = null
                 }
             }
@@ -82,13 +82,13 @@ class RoomFragment : AbstractFragment() {
 
                 var entity = SampleEntity()
                 lastId = RandomUtils.getLong().toString()
-                entity.id = lastId
+                entity.id = lastId!!
                 entity.field = RandomUtils.getLong().toString()
                 entities.add(entity)
 
                 entity = SampleEntity()
                 lastId = RandomUtils.getLong().toString()
-                entity.id = lastId
+                entity.id = lastId!!
                 entity.field = RandomUtils.getLong().toString()
                 entities.add(entity)
 
@@ -99,7 +99,7 @@ class RoomFragment : AbstractFragment() {
         findView<View>(R.id.getAll).setOnClickListener {
             AppExecutors.diskIOExecutor.execute {
                 val sampleEntityDao = RoomHelper.getDefaultDatabase(AppDatabase::class.java).sampleEntityDao()
-                val results = sampleEntityDao.all
+                val results = sampleEntityDao.getAll()
                 executeOnUIThread(Runnable { (findView<View>(R.id.results) as TextView).text = results.toString() })
             }
         }

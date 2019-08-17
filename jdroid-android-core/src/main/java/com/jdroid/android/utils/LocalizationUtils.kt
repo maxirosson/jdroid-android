@@ -17,10 +17,10 @@ object LocalizationUtils {
      * @return The localized and formatted string
      */
     fun getString(resId: Int?, vararg args: Any): String? {
-        if (resId != null) {
-            return AbstractApplication.get().getString(resId, *args)
+        return if (resId != null) {
+            AbstractApplication.get().getString(resId, *args)
         } else {
-            return null
+            null
         }
     }
 

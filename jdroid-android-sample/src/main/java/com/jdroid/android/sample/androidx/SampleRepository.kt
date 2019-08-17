@@ -66,7 +66,7 @@ object SampleRepository {
             }
 
             override fun shouldFetch(data: SampleEntity?): Boolean {
-                return forceRefresh || data == null || data.date != null && DateUtils.nowMillis() - data.date.time > 10000
+                return forceRefresh || data == null || data.date != null && DateUtils.nowMillis() - data.date?.time!! > 10000
             }
 
             @MainThread
@@ -130,7 +130,7 @@ object SampleRepository {
             }
 
             override fun loadFromDb(): LiveData<List<SampleEntity>> {
-                return getSampleEntityDao().allLiveData
+                return getSampleEntityDao().getAllLiveData()
             }
 
             override fun doLoadFromNetwork(): ApiResponse<List<NetworkResponse>> {
@@ -139,7 +139,7 @@ object SampleRepository {
                 if (failExecution) {
                     throw UnexpectedException("Sample network request failed")
                 } else {
-                    val networkResponses = Lists.newArrayList<NetworkResponse>()
+                    val networkResponses = mutableListOf<NetworkResponse>()
                     val networkResponse = NetworkResponse()
                     networkResponse.id = ID
                     networkResponse.value = RandomUtils.getLong().toString()
