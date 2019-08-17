@@ -20,7 +20,7 @@ interface ProductType {
 	 * Consumable items. Items that can be made available for purchase multiple times.
 	 * A one-time product with non-infinite use is called a consumable.
 	 */
-    fun isConsumable(): Boolean?
+    fun isConsumable(): Boolean
 
     fun getItemType(): ItemType
 

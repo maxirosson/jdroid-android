@@ -14,7 +14,7 @@ class RightCustomNavDrawerActivity : FragmentContainerActivity() {
     }
 
     override fun getFragmentClass(): Class<out Fragment> {
-        return LeftCustomNavDrawerFragment::class.java
+        return RightCustomNavDrawerFragment::class.java
     }
 
     override fun createNavDrawer(activity: AbstractFragmentActivity, appBar: Toolbar): NavDrawer {
