@@ -26,7 +26,7 @@ public class RateAppDebugPrefsAppender extends PreferencesAppender {
 
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
-				RateAppStats.reset();
+				RateAppStats.INSTANCE.reset();
 				return true;
 			}
 		});

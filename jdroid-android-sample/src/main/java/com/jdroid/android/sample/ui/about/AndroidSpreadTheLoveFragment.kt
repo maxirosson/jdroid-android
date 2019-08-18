@@ -16,10 +16,6 @@ class AndroidSpreadTheLoveFragment : SpreadTheLoveFragment() {
         const val UNKNOWN_SHARE_URL = "http://goo.gl/6kex8n"
     }
 
-    override fun displayAppInviteButton(): Boolean {
-        return true
-    }
-
     override fun getDefaultShareText(): String {
         return getString(R.string.shareMessage, UNKNOWN_SHARE_URL)
     }
