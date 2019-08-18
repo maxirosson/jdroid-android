@@ -7,7 +7,6 @@ class AndroidSpreadTheLoveFragment : SpreadTheLoveFragment() {
 
     companion object {
         const val TWITTER_SHARE_URL = "http://goo.gl/XcxvIh"
-        const val GOOGLE_PLUS_SHARE_URL = "http://goo.gl/6BloFX"
         const val FACEBOOK_SHARE_URL = "http://goo.gl/ogJoNX"
         const val WHATSAPP_SHARE_URL = "http://goo.gl/6KGhXn"
         const val TELEGRAM_SHARE_URL = "http://goo.gl/P4t4v0"

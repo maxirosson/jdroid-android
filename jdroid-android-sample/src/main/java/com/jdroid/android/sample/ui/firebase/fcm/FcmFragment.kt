@@ -68,7 +68,7 @@ class FcmFragment : AbstractFragment() {
         minDeviceOsVersion.setText("0")
 
         val senderId = findView<EditText>(R.id.senderId)
-        senderId.setText(AbstractFcmAppModule.get().fcmSenders[0].getSenderId())
+        senderId.setText(AbstractFcmAppModule.get().getFcmSenders()[0].getSenderId())
 
         findView<View>(R.id.sendPush).setOnClickListener {
             AppExecutors.networkIOExecutor.execute {
