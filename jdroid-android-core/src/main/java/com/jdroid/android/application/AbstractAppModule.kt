@@ -2,13 +2,11 @@ package com.jdroid.android.application
 
 import androidx.annotation.MainThread
 import androidx.fragment.app.Fragment
-
 import com.jdroid.android.activity.AbstractFragmentActivity
 import com.jdroid.android.activity.ActivityDelegate
 import com.jdroid.android.fragment.FragmentDelegate
 import com.jdroid.java.analytics.AnalyticsSender
 import com.jdroid.java.analytics.AnalyticsTracker
-import com.jdroid.java.collections.Lists
 import com.jdroid.java.remoteconfig.RemoteConfigParameter
 
 abstract class AbstractAppModule : AppModule {
@@ -20,7 +18,7 @@ abstract class AbstractAppModule : AppModule {
     }
 
     override fun createModuleAnalyticsTrackers(): List<AnalyticsTracker> {
-        return Lists.newArrayList()
+        return listOf()
     }
 
     @Synchronized
@@ -47,6 +45,6 @@ abstract class AbstractAppModule : AppModule {
     }
 
     override fun getRemoteConfigParameters(): List<RemoteConfigParameter> {
-        return Lists.newArrayList()
+        return listOf()
     }
 }

@@ -16,9 +16,9 @@ class AdsActivity : FragmentContainerActivity() {
         return AdsFragment::class.java
     }
 
-    override fun createActivityDelegate(appModule: AppModule): ActivityDelegate {
+    override fun createActivityDelegate(appModule: AppModule): ActivityDelegate? {
         return if (appModule is AdMobAppModule) {
-            object : AdMobActivityDelegate(this) {
+            object : AdMobActivityDelegate(this@AdsActivity) {
 
                 override fun createInterstitialAdHelper(): InterstitialAdHelper? {
                     return InterstitialAdHelper()

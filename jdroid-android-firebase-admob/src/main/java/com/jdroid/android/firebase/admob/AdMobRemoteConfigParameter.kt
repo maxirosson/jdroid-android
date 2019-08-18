@@ -18,6 +18,6 @@ enum class AdMobRemoteConfigParameter private constructor(private val defaultVal
     }
 
     override fun getDefaultValue(): Any {
-        return AdMobAppModule.getAdMobAppContext().getBuildConfigValue(name, defaultValue)!!
+        return AdMobAppModule.adMobAppContext.getBuildConfigValue(name, defaultValue)!!
     }
 }

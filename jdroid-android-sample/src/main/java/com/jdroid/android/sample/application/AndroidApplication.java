@@ -63,7 +63,7 @@ public class AndroidApplication extends AbstractApplication {
 	public void onProviderInit() {
 		super.onProviderInit();
 
-		AdMobAppModule.setAdMobAppContext(new SampleAdMobAppContext());
+		AdMobAppModule.Companion.setAdMobAppContext(new SampleAdMobAppContext());
 		FcmContext.INSTANCE.addFcmMessage(new SampleFcmMessage());
 	}
 
@@ -143,7 +143,7 @@ public class AndroidApplication extends AbstractApplication {
 
 	@Override
 	protected void initAppModule(@NonNull Map<String, AppModule> appModulesMap) {
-		appModulesMap.put(AdMobAppModule.MODULE_NAME, new AdMobAppModule());
+		appModulesMap.put(AdMobAppModule.Companion.getMODULE_NAME(), new AdMobAppModule());
 		appModulesMap.put(AbstractFcmAppModule.Companion.getMODULE_NAME(), new AndroidFcmAppModule());
 		appModulesMap.put(AboutAppModule.Companion.getMODULE_NAME(), new AndroidAboutAppModule());
 		appModulesMap.put(AppShortcutsAppModule.Companion.getMODULE_NAME(), new AppShortcutsAppModule());

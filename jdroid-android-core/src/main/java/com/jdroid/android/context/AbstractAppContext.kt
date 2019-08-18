@@ -2,7 +2,7 @@ package com.jdroid.android.context
 
 abstract class AbstractAppContext {
 
-    fun <T> getBuildConfigValue(property: String): T {
+    fun <T> getBuildConfigValue(property: String): T? {
         return BuildConfigUtils.getBuildConfigValue(property)
     }
 

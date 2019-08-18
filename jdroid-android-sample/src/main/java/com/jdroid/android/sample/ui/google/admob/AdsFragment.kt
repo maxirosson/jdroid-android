@@ -34,7 +34,7 @@ class AdsFragment : AbstractFragment() {
                 override fun getEnabledRemoteConfigParameter(): RemoteConfigParameter {
                     return AndroidRemoteConfigParameter.INTERSTITIAL_ENABLED
                 }
-            }.start(getActivityIf())
+            }.start(getActivityIf()!!)
         }
 
         findView<View>(R.id.houseAds).setOnClickListener { ActivityLauncher.startActivity(activity, HouseAdsActivity::class.java) }

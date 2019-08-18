@@ -6,11 +6,11 @@ import androidx.fragment.app.Fragment
 
 abstract class FragmentDelegate(val fragment: Fragment) {
 
-    open fun onCreate(savedInstanceState: Bundle) {
+    open fun onCreate(savedInstanceState: Bundle?) {
         // Do Nothing
     }
 
-    open fun onViewCreated(view: View, savedInstanceState: Bundle) {
+    open fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         // Do Nothing
     }
 

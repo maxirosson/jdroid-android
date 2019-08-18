@@ -34,9 +34,9 @@ interface ActivityIf : ComponentIf {
 
     // //////////////////////// Delegates //////////////////////// //
 
-    fun createActivityDelegate(appModule: AppModule): ActivityDelegate
+    fun createActivityDelegate(appModule: AppModule): ActivityDelegate?
 
-    fun getActivityDelegate(appModule: AppModule): ActivityDelegate
+    fun getActivityDelegate(appModule: AppModule): ActivityDelegate?
 
     // //////////////////////// Loading //////////////////////// //
 

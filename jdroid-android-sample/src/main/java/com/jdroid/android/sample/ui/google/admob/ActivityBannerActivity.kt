@@ -22,9 +22,9 @@ class ActivityBannerActivity : FragmentContainerActivity() {
         return ActivityBannerFragment::class.java
     }
 
-    override fun createActivityDelegate(appModule: AppModule): ActivityDelegate {
+    override fun createActivityDelegate(appModule: AppModule): ActivityDelegate? {
         return if (appModule is AdMobAppModule) {
-            object : AdMobActivityDelegate(this) {
+            object : AdMobActivityDelegate(this@ActivityBannerActivity) {
 
                 override fun initBaseAdViewHelper(baseAdViewHelper: BaseAdViewHelper) {
                     baseAdViewHelper.adSize = AdSize.BANNER
