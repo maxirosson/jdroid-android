@@ -259,7 +259,7 @@ jobs:
     - checkout
     - run:
         name: Upgrade Dependencies
-        command: ./gradlew upgradeDependencies --stacktrace
+        command: ./gradlew upgradeDependencies --refresh-dependencies --stacktrace
 
 workflows:
   version: 2
