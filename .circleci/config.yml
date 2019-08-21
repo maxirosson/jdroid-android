@@ -194,7 +194,7 @@ jobs:
       # TODO We shouldn't need the --refresh-dependencies if we persist the workspace
       - run:
           name: Uploading to Nexus Sonatype
-          command: ./gradlew publish -PLOCAL_UPLOAD=false -PRELEASE_BUILD_TYPE_ENABLED=true -PFAKE_RELEASE_BUILD_TYPE_ENABLED=true --info --stacktrace --refresh-dependencies
+          command: ./gradlew publish -PLOCAL_UPLOAD=false -PRELEASE_BUILD_TYPE_ENABLED=true -PFAKE_RELEASE_BUILD_TYPE_ENABLED=true --stacktrace --refresh-dependencies
 
   buildAutomationTest:
     <<: *android_config
