@@ -4,6 +4,7 @@ import com.jdroid.android.application.AbstractApplication
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
 import org.koin.core.module.Module
+import java.util.Locale
 
 abstract class SplitKoinLoader {
 
@@ -19,7 +20,7 @@ abstract class SplitKoinLoader {
 
         private fun executeKoinLoaderMethod(moduleName: String, method: String) {
             try {
-                val modulePackage = moduleName.toLowerCase().replace("_", "")
+                val modulePackage = moduleName.toLowerCase(Locale.US).replace("_", "")
                 val cls = Class.forName(AbstractApplication.get().manifestPackageName + ".$modulePackage.koin.SplitKoinLoaderImpl")
                 cls.getMethod(method).invoke(cls.kotlin.objectInstance)
             } catch (e: Exception) {
