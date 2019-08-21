@@ -116,7 +116,7 @@ abstract class SpreadTheLoveFragment : AbstractFragment() {
         return getDefaultShareText()
     }
 
-    protected fun getFollowUsItems(): List<FollowUsItem> {
+    protected open fun getFollowUsItems(): List<FollowUsItem> {
         val items = mutableListOf<FollowUsItem>()
         if (getFacebookPageId() != null) {
             items.add(object : FollowUsItem(R.drawable.jdroid_ic_facebook_24dp, R.string.jdroid_facebook) {
