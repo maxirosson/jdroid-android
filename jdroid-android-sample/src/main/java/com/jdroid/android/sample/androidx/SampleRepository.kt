@@ -14,7 +14,6 @@ import com.jdroid.android.room.RoomHelper
 import com.jdroid.android.sample.database.room.AppDatabase
 import com.jdroid.android.sample.database.room.SampleEntity
 import com.jdroid.android.sample.database.room.SampleEntityDao
-import com.jdroid.java.collections.Lists
 import com.jdroid.java.concurrent.ExecutorUtils
 import com.jdroid.java.date.DateUtils
 import com.jdroid.java.exception.UnexpectedException
@@ -114,7 +113,7 @@ object SampleRepository {
         return object : NetworkBoundResource<List<SampleEntity>, List<SampleEntity>, List<NetworkResponse>>() {
 
             override fun saveToDb(items: List<NetworkResponse>) {
-                val entities = Lists.newArrayList<SampleEntity>()
+                val entities = mutableListOf<SampleEntity>()
                 for (networkResponse in items) {
                     val sampleEntity = SampleEntity()
                     sampleEntity.id = networkResponse.id
@@ -155,7 +154,7 @@ object SampleRepository {
         return object : DatabaseBoundResource<List<String>>() {
 
             override fun loadFromDb(): LiveData<List<String>> {
-                val items = Lists.newArrayList("one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen")
+                val items = listOf("one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen")
                 val liveData = MutableLiveData<List<String>>()
                 liveData.value = items
                 return liveData
@@ -167,7 +166,7 @@ object SampleRepository {
         return object : DatabaseBoundResource<List<Any>>() {
 
             override fun loadFromDb(): LiveData<List<Any>> {
-                val items = Lists.newArrayList<Any>("one", "two", true, "three", 1, 2, "four", true, "five", "six", "seven", "eight", 3, "nine", "ten", "eleven", "twelve", 4, "thirteen", false, false, "fourteen", "fifteen", "sixteen")
+                val items = listOf<Any>("one", "two", true, "three", 1, 2, "four", true, "five", "six", "seven", "eight", 3, "nine", "ten", "eleven", "twelve", 4, "thirteen", false, false, "fourteen", "fifteen", "sixteen")
                 val liveData = MutableLiveData<List<Any>>()
                 liveData.value = items
                 return liveData

@@ -23,9 +23,9 @@ class HouseAdsFragment : AbstractFragment() {
     override fun createFragmentDelegate(appModule: AppModule): FragmentDelegate? {
         return if (appModule is AdMobAppModule) {
             object : AdMobFragmentDelegate(this) {
-                override fun initBaseAdViewHelper(baseAdViewHelper: BaseAdViewHelper) {
-                    baseAdViewHelper.adSize = AdSize.BANNER
-                    baseAdViewHelper.houseAdBuilder = object : HouseAdBuilder() {
+                override fun initBaseAdViewHelper(adHelper: BaseAdViewHelper) {
+                    adHelper.adSize = AdSize.BANNER
+                    adHelper.houseAdBuilder = object : HouseAdBuilder() {
                         override fun build(activity: Activity): View? {
                             var view = super.build(activity)
                             if (view == null) {

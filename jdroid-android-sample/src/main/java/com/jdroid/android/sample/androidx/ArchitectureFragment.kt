@@ -72,7 +72,7 @@ class ArchitectureFragment : AbstractFragment() {
 
         val failLoadFromNetworkCheckBox = findView<CheckBox>(R.id.failLoadFromNetwork)
         failLoadFromNetworkCheckBox.isChecked = failLoadFromNetwork
-        failLoadFromNetworkCheckBox.setOnCheckedChangeListener { buttonView, isChecked ->
+        failLoadFromNetworkCheckBox.setOnCheckedChangeListener { _, isChecked ->
             failLoadFromNetwork = isChecked
         }
 
@@ -81,14 +81,14 @@ class ArchitectureFragment : AbstractFragment() {
 
         val failLoadFromDbCheckBox = findView<CheckBox>(R.id.failLoadFromDb)
         failLoadFromDbCheckBox.isChecked = failLoadFromDb
-        failLoadFromDbCheckBox.setOnCheckedChangeListener { buttonView, isChecked -> failLoadFromDb = isChecked }
+        failLoadFromDbCheckBox.setOnCheckedChangeListener { _, isChecked -> failLoadFromDb = isChecked }
 
         loadFromDbDelaySecondsEditText = findView(R.id.loadFromDbDelaySeconds)
         loadFromDbDelaySecondsEditText.setText("5")
 
         val failSaveToDbCheckBox = findView<CheckBox>(R.id.failSaveToDb)
         failSaveToDbCheckBox.isChecked = failSaveToDb
-        failSaveToDbCheckBox.setOnCheckedChangeListener { buttonView, isChecked -> failSaveToDb = isChecked }
+        failSaveToDbCheckBox.setOnCheckedChangeListener { _, isChecked -> failSaveToDb = isChecked }
 
         saveToDbDelaySecondsEditText = findView(R.id.saveToDbDelaySeconds)
         saveToDbDelaySecondsEditText.setText("5")

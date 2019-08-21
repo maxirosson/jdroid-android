@@ -1,15 +1,12 @@
 package com.jdroid.android.sample.debug
 
 import androidx.core.util.Pair
-
 import com.jdroid.android.debug.DebugContext
 import com.jdroid.android.sample.api.ApiServer
 import com.jdroid.android.sample.firebase.remoteconfig.AndroidRemoteConfigParameter
-import com.jdroid.java.collections.Lists
 import com.jdroid.java.collections.Maps
 import com.jdroid.java.http.Server
 import com.jdroid.java.remoteconfig.RemoteConfigParameter
-
 import java.util.Arrays
 
 class AndroidDebugContext : DebugContext() {
@@ -19,12 +16,12 @@ class AndroidDebugContext : DebugContext() {
 
     override fun getServersMap(): Map<Class<out Server>, List<Server>> {
         val serversMap = Maps.newHashMap<Class<out Server>, List<Server>>()
-        serversMap[ApiServer::class.java] = Lists.newArrayList(*ApiServer.values())
+        serversMap[ApiServer::class.java] = listOf(*ApiServer.values())
         return serversMap
     }
 
     override fun getUrlsToTest(): List<String> {
-        val urls = Lists.newArrayList<String>()
+        val urls = mutableListOf<String>()
         urls.add("http://jdroidtools.com")
         urls.add("http://jdroidtools.com/")
         urls.add("http://jdroidtools.com/uri")

@@ -19,9 +19,9 @@ class FragmentBannerFragment : AbstractFragment() {
     override fun createFragmentDelegate(appModule: AppModule): FragmentDelegate? {
         return if (appModule is AdMobAppModule) {
             object : AdMobFragmentDelegate(this) {
-                override fun initBaseAdViewHelper(baseAdViewHelper: BaseAdViewHelper) {
-                    baseAdViewHelper.adSize = AdSize.BANNER
-                    baseAdViewHelper.setAdUnitId(AndroidAppContext.SAMPLE_BANNER_AD_UNIT_ID)
+                override fun initBaseAdViewHelper(adHelper: BaseAdViewHelper) {
+                    adHelper.adSize = AdSize.BANNER
+                    adHelper.setAdUnitId(AndroidAppContext.SAMPLE_BANNER_AD_UNIT_ID)
                 }
             }
         } else {

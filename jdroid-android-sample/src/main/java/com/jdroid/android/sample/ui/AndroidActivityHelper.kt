@@ -11,7 +11,6 @@ import com.jdroid.android.navdrawer.NavDrawerHeader
 import com.jdroid.android.navdrawer.NavDrawerItem
 import com.jdroid.android.sample.R
 import com.jdroid.android.sample.ui.home.HomeActivity
-import com.jdroid.java.collections.Lists
 
 class AndroidActivityHelper(activity: AbstractFragmentActivity) : ActivityHelper(activity) {
 
@@ -23,7 +22,7 @@ class AndroidActivityHelper(activity: AbstractFragmentActivity) : ActivityHelper
         return object : DefaultNavDrawer(activity, appBar) {
 
             override fun createNavDrawerItems(): List<NavDrawerItem> {
-                val navDrawerItems = Lists.newArrayList<NavDrawerItem>()
+                val navDrawerItems = mutableListOf<NavDrawerItem>()
                 navDrawerItems.add(DefaultNavDrawerItem(R.id.home, HomeActivity::class.java))
                 navDrawerItems.add(DefaultNavDrawerItem(R.id.about, AboutActivity::class.java))
                 return navDrawerItems

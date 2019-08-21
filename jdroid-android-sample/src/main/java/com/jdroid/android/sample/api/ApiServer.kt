@@ -1,13 +1,11 @@
 package com.jdroid.android.sample.api
 
 import android.os.Bundle
-
 import com.jdroid.android.application.AbstractApplication
 import com.jdroid.android.firebase.fcm.FcmSender
 import com.jdroid.android.firebase.fcm.device.Device
 import com.jdroid.android.firebase.fcm.instanceid.InstanceIdHeaderAppender
 import com.jdroid.android.http.DefaultHeaderAppender
-import com.jdroid.java.collections.Lists
 import com.jdroid.java.http.HttpServiceProcessor
 import com.jdroid.java.http.Server
 
@@ -58,7 +56,7 @@ enum class ApiServer private constructor(
     }
 
     override fun getHttpServiceProcessors(): List<HttpServiceProcessor> {
-        return Lists.newArrayList(DefaultHeaderAppender(), InstanceIdHeaderAppender, HttpResponseValidator)
+        return listOf(DefaultHeaderAppender(), InstanceIdHeaderAppender, HttpResponseValidator)
     }
 
     override fun instance(name: String): Server {

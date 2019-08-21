@@ -19,7 +19,6 @@ import com.jdroid.android.recycler.RecyclerViewContainer
 import com.jdroid.android.recycler.RecyclerViewType
 import com.jdroid.android.sample.R
 import com.jdroid.android.sample.androidx.SampleListViewModel
-import com.jdroid.java.collections.Lists
 import com.jdroid.java.utils.IdGenerator
 
 class ComplexRecyclerFragment : AbstractRecyclerFragment() {
@@ -33,7 +32,7 @@ class ComplexRecyclerFragment : AbstractRecyclerFragment() {
         observer = object : ResourceObserver<List<Any>>() {
 
             override fun onDataChanged(data: List<Any>) {
-                val recyclerViewTypes = Lists.newArrayList<RecyclerViewType<*, *>>(
+                val recyclerViewTypes = listOf<RecyclerViewType<*, *>>(
                     StringRecyclerViewType(),
                     IntegerRecyclerViewType(),
                     BooleanRecyclerViewType()
@@ -68,7 +67,7 @@ class ComplexRecyclerFragment : AbstractRecyclerFragment() {
                 return true
             }
             R.id.addItems -> {
-                getRecyclerViewAdapter().addItems(Lists.newArrayList(IdGenerator.getIntId().toString(), IdGenerator.getIntId().toString(), IdGenerator.getIntId().toString()))
+                getRecyclerViewAdapter().addItems(listOf(IdGenerator.getIntId().toString(), IdGenerator.getIntId().toString(), IdGenerator.getIntId().toString()))
                 return true
             }
             R.id.clearItems -> {

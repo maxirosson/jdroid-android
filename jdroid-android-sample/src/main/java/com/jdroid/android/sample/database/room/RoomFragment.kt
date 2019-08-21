@@ -7,7 +7,6 @@ import com.jdroid.android.concurrent.AppExecutors
 import com.jdroid.android.fragment.AbstractFragment
 import com.jdroid.android.room.RoomHelper
 import com.jdroid.android.sample.R
-import com.jdroid.java.collections.Lists
 import com.jdroid.java.date.DateUtils
 import com.jdroid.java.utils.RandomUtils
 
@@ -32,7 +31,7 @@ class RoomFragment : AbstractFragment() {
                 entity.id = lastId!!
                 entity.field = RandomUtils.getLong().toString()
                 entity.date = DateUtils.now()
-                entity.stringList = Lists.newArrayList("a", "b", "c")
+                entity.stringList = listOf("a", "b", "c")
                 sampleEntityDao.insert(entity)
             }
         }
@@ -43,7 +42,7 @@ class RoomFragment : AbstractFragment() {
                 entity.id = lastId!!
                 entity.field = RandomUtils.getLong().toString()
                 entity.date = DateUtils.now()
-                entity.stringList = Lists.newArrayList("a", "b", "c")
+                entity.stringList = listOf("a", "b", "c")
                 sampleEntityDao.update(entity)
             }
         }
@@ -55,7 +54,7 @@ class RoomFragment : AbstractFragment() {
                 entity.id = lastId!!
                 entity.field = RandomUtils.getLong().toString()
                 entity.date = DateUtils.now()
-                entity.stringList = Lists.newArrayList("a", "b", "c")
+                entity.stringList = listOf("a", "b", "c")
                 sampleEntityDao.upsert(entity)
             }
         }
@@ -78,7 +77,7 @@ class RoomFragment : AbstractFragment() {
             AppExecutors.diskIOExecutor.execute {
                 val sampleEntityDao = RoomHelper.getDefaultDatabase(AppDatabase::class.java).sampleEntityDao()
 
-                val entities = Lists.newArrayList<SampleEntity>()
+                val entities = mutableListOf<SampleEntity>()
 
                 var entity = SampleEntity()
                 lastId = RandomUtils.getLong().toString()

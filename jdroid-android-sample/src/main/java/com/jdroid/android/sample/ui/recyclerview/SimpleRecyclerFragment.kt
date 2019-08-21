@@ -63,7 +63,7 @@ open class SimpleRecyclerFragment : AbstractRecyclerFragment() {
                 return true
             }
             R.id.addItems -> {
-                getRecyclerViewAdapter().addItems(Lists.newArrayList(IdGenerator.getIntId().toString(), IdGenerator.getIntId().toString(), IdGenerator.getIntId().toString()))
+                getRecyclerViewAdapter().addItems(listOf(IdGenerator.getIntId().toString(), IdGenerator.getIntId().toString(), IdGenerator.getIntId().toString()))
                 return true
             }
             R.id.replaceWithSameItems -> {
@@ -88,8 +88,8 @@ open class SimpleRecyclerFragment : AbstractRecyclerFragment() {
                 return true
             }
             R.id.replaceWithDifferentItems -> {
-                val oldItems = Lists.newArrayList(getRecyclerViewAdapter().items)
-                val newItems = Lists.newArrayList<Any>(IdGenerator.getIntId().toString(), IdGenerator.getIntId().toString(), IdGenerator.getIntId().toString())
+                val oldItems = listOf(getRecyclerViewAdapter().items)
+                val newItems = listOf<Any>(IdGenerator.getIntId().toString(), IdGenerator.getIntId().toString(), IdGenerator.getIntId().toString())
                 getRecyclerViewAdapter().replaceItems(newItems, object : DiffUtil.Callback() {
                     override fun getOldListSize(): Int {
                         return oldItems.size

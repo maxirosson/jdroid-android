@@ -2,9 +2,8 @@ package com.jdroid.android.sample.analytics
 
 import com.jdroid.android.sample.firebase.analytics.FirebaseAppAnalyticsTracker
 import com.jdroid.java.analytics.AnalyticsSender
-import com.jdroid.java.collections.Lists
 
-object AppAnalyticsSender : AnalyticsSender<AppAnalyticsTracker>(Lists.newArrayList(FirebaseAppAnalyticsTracker())), AppAnalyticsTracker {
+object AppAnalyticsSender : AnalyticsSender<AppAnalyticsTracker>(listOf(FirebaseAppAnalyticsTracker())), AppAnalyticsTracker {
 
     override fun trackExampleEvent() {
         execute(object : TrackingCommand() {

@@ -19,7 +19,6 @@ import com.jdroid.android.sample.R
 import com.jdroid.android.sample.androidx.SampleListViewModel
 import com.jdroid.android.sample.application.AndroidAppContext
 import com.jdroid.android.sample.ui.recyclerview.SimpleRecyclerFragment
-import com.jdroid.java.collections.Lists
 
 class AdRecyclerFragment : AbstractRecyclerFragment() {
 
@@ -32,7 +31,7 @@ class AdRecyclerFragment : AbstractRecyclerFragment() {
         observer = object : ResourceObserver<List<String>>() {
 
             override fun onDataChanged(data: List<String>) {
-                val recyclerViewTypes = Lists.newArrayList(StringRecyclerViewType(), MyAdViewType())
+                val recyclerViewTypes = listOf(StringRecyclerViewType(), MyAdViewType())
 
                 val items = mutableListOf<Any>()
                 for (each in data) {

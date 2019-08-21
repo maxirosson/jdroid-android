@@ -10,13 +10,12 @@ import com.jdroid.android.recycler.RecyclerViewAdapter
 import com.jdroid.android.recycler.RecyclerViewContainer
 import com.jdroid.android.recycler.RecyclerViewType
 import com.jdroid.android.sample.R
-import com.jdroid.java.collections.Lists
 
 class HomeFragment : AbstractRecyclerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setAdapter(RecyclerViewAdapter(HomeRecyclerViewType(), Lists.newArrayList(*HomeItem.values())))
+        setAdapter(RecyclerViewAdapter(HomeRecyclerViewType(), listOf(*HomeItem.values())))
     }
 
     override fun isCardViewDecorationEnabled(): Boolean? {
