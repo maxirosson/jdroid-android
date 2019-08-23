@@ -4,9 +4,8 @@ ext.PROJECT_NAME = "Jdroid Android - Twitter SDK"
 description = "Jdroid dependency project for Twitter SDK"
 
 buildscript {
-	apply from: "$rootDir/build_dependencies.gradle"
 	dependencies {
-		classpath(libs.jdroid_gradle_android_plugin)
+		classpath(BuildLibs.jdroid_gradle_android_plugin)
 	}
 }
 
@@ -14,10 +13,10 @@ dependencies {
 
 	api project(":jdroid-android-core")
 
-	api(libs.twitter + "@aar") {
+	api(Libs.twitter + "@aar") {
 		transitive = true;
 	}
 
-	testImplementation(libs.junit)
-	testImplementation(libs.robolectric)
+	testImplementation(Libs.junit)
+	testImplementation(Libs.robolectric)
 }

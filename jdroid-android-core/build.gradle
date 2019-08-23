@@ -8,52 +8,51 @@ configurations {
 }
 
 buildscript {
-	apply from: "$rootDir/build_dependencies.gradle"
 	dependencies {
-		classpath(libs.jdroid_gradle_android_plugin)
+		classpath(BuildLibs.jdroid_gradle_android_plugin)
 	}
 }
 
 dependencies {
 
-	api(libs.slf4j_android)
+	api(Libs.slf4j_android)
 
-	api(libs.google_material)
+	api(Libs.google_material)
 
 	// https://developer.android.com/topic/libraries/support-library/androidx-rn
-	api(libs.androidx_annotation)
-	api(libs.androidx_appcompat)
-	api(libs.androidx_cardview)
-	api(libs.androidx_core)
-	api(libs.androidx_coordinatorlayout)
-	api(libs.androidx_drawerlayout)
-	api(libs.androidx_fragment)
-	api(libs.androidx_recyclerview)
-	api(libs.androidx_swiperefreshlayout)
-	api(libs.androidx_vectordrawable)
-	api(libs.androidx_lifecycle)
+	api(Libs.androidx_annotation)
+	api(Libs.androidx_appcompat)
+	api(Libs.androidx_cardview)
+	api(Libs.androidx_core)
+	api(Libs.androidx_coordinatorlayout)
+	api(Libs.androidx_drawerlayout)
+	api(Libs.androidx_fragment)
+	api(Libs.androidx_recyclerview)
+	api(Libs.androidx_swiperefreshlayout)
+	api(Libs.androidx_vectordrawable)
+	api(Libs.androidx_lifecycle)
 
 	// https://developers.google.com/android/guides/releases
-	api(libs.play_services_base)
+	api(Libs.play_services_base)
 
-	api(libs.play_core)
+	api(Libs.play_core)
 
 	// https://firebase.google.com/support/release-notes/android
-	api(libs.firebase_core)
-	api(libs.firebase_appindexing)
-	api(libs.firebase_perf)
-	api(libs.firebase_dynamic_links)
+	api(Libs.firebase_core)
+	api(Libs.firebase_appindexing)
+	api(Libs.firebase_perf)
+	api(Libs.firebase_dynamic_links)
 
-	api(libs.firebase_jobdispatcher)
+	api(Libs.firebase_jobdispatcher)
 
-	api(libs.koin)
-	api(libs.koin_viewmodel)
+	api(Libs.koin)
+	api(Libs.koin_viewmodel)
 
-	debugApi(libs.leakcanary) { force = true }
-	releaseApi(libs.leakcanary_no_op) { force = true }
-	testImplementation(libs.leakcanary_no_op) { force = true }
+	debugApi(Libs.leakcanary) { force = true }
+	releaseApi(Libs.leakcanary_no_op) { force = true }
+	testImplementation(Libs.leakcanary_no_op) { force = true }
 
-	api(libs.facebook_yearclass)
+	api(Libs.facebook_yearclass)
 
 	// Jdroid dependencies
 
@@ -65,10 +64,10 @@ dependencies {
 			exclude group: "org.slf4j", module: "slf4j-api"
 		}
 	} else {
-		api(libs.jdroid_java_core) {
+		api(Libs.jdroid_java_core) {
 			exclude group: "org.slf4j", module: "slf4j-api"
 		}
-		api(libs.jdroid_java_remote_config) {
+		api(Libs.jdroid_java_remote_config) {
 			exclude group: "org.slf4j", module: "slf4j-api"
 		}
 	}
@@ -76,11 +75,11 @@ dependencies {
 	if (jdroid.propertyResolver.getBooleanProp("JDROID_JAVA_HTTP_AS_PROJECT_DEPENDENCY", false)) {
 		api project(":jdroid-java-http-core")
 	} else {
-		api(libs.jdroid_java_http_core) {
+		api(Libs.jdroid_java_http_core) {
 			exclude module: "jdroid-java-core"
 		}
 	}
 
-	testImplementation(libs.junit)
-	testImplementation(libs.robolectric)
+	testImplementation(Libs.junit)
+	testImplementation(Libs.robolectric)
 }

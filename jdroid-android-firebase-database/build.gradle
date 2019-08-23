@@ -4,9 +4,8 @@ ext.PROJECT_NAME = "Jdroid Android - Firebase Database"
 description = "Jdroid dependency project for Firebase Database"
 
 buildscript {
-	apply from: "$rootDir/build_dependencies.gradle"
 	dependencies {
-		classpath(libs.jdroid_gradle_android_plugin)
+		classpath(BuildLibs.jdroid_gradle_android_plugin)
 	}
 }
 
@@ -14,9 +13,9 @@ dependencies {
 
 	api project(":jdroid-android-core")
 
-	api(libs.firebase_database)
-	api(libs.firebase_auth)
+	api(Libs.firebase_database)
+	api(Libs.firebase_auth)
 
-	testImplementation(libs.junit)
-	testImplementation(libs.robolectric)
+	testImplementation(Libs.junit)
+	testImplementation(Libs.robolectric)
 }

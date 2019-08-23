@@ -8,9 +8,8 @@ configurations.all {
 }
 
 buildscript {
-	apply from: "$rootDir/build_dependencies.gradle"
 	dependencies {
-		classpath(libs.jdroid_gradle_android_plugin)
+		classpath(BuildLibs.jdroid_gradle_android_plugin)
 	}
 }
 

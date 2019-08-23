@@ -4,9 +4,8 @@ ext.PROJECT_NAME = "Jdroid Android - Firebase FCM"
 description = "Jdroid dependency project for Firebase FCM"
 
 buildscript {
-	apply from: "$rootDir/build_dependencies.gradle"
 	dependencies {
-		classpath(libs.jdroid_gradle_android_plugin)
+		classpath(BuildLibs.jdroid_gradle_android_plugin)
 	}
 }
 
@@ -15,8 +14,8 @@ dependencies {
 	api project(":jdroid-android-core")
 
 	// https://firebase.google.com/support/release-notes/android
-	api(libs.firebase_messaging)
+	api(Libs.firebase_messaging)
 
-	testImplementation(libs.junit)
-	testImplementation(libs.robolectric)
+	testImplementation(Libs.junit)
+	testImplementation(Libs.robolectric)
 }

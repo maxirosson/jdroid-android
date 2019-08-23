@@ -1,5 +1,4 @@
 apply plugin: "com.jdroidtools.android.library"
-apply from: "$rootDir/dependencies.gradle"
 
 configurations.all {
 	// check for updates every build

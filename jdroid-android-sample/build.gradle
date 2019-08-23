@@ -3,7 +3,6 @@ ext.RES_CONFIGS = ["en"]
 ext.PROJECT_NAME = "Jdroid Android - Sample"
 
 apply plugin: "com.jdroidtools.android.application"
-apply from: "$rootDir/dependencies.gradle"
 
 description = "Jdroid Sample Android"
 
@@ -31,9 +30,8 @@ configurations {
 }
 
 buildscript {
-	apply from: "$rootDir/build_dependencies.gradle"
 	dependencies {
-		classpath(libs.jdroid_gradle_android_plugin)
+		classpath(BuildLibs.jdroid_gradle_android_plugin)
 	}
 }
 
@@ -53,9 +51,9 @@ dependencies {
 	implementation project(":jdroid-android-google-play-games")
 	implementation project(":jdroid-android-room")
 	implementation project(":jdroid-android-twitter")
-	implementation(libs.firebase_client_android)
+	implementation(Libs.firebase_client_android)
 
-	kapt(libs.glide_compiler)
+	kapt(Libs.glide_compiler)
 
 	if (jdroid.propertyResolver.getBooleanProp("JDROID_JAVA_AS_PROJECT_DEPENDENCY", false)) {
 		implementation(project(":jdroid-java-firebase-database")) {
@@ -64,7 +62,7 @@ dependencies {
 			exclude module: "jdroid-java-core"
 		}
 	} else {
-		implementation(libs.jdroid_java_firebase_database) {
+		implementation(Libs.jdroid_java_firebase_database) {
 			exclude module: "slf4j-api"
 			exclude group: "com.firebase", module: "firebase-client-jvm"
 			exclude module: "jdroid-java-core"
@@ -73,7 +71,7 @@ dependencies {
 	if (jdroid.propertyResolver.getBooleanProp("JDROID_JAVA_HTTP_AS_PROJECT_DEPENDENCY", false)) {
 		implementation project(":jdroid-java-http-okhttp")
 	} else {
-		implementation(libs.jdroid_java_http_okhttp) {
+		implementation(Libs.jdroid_java_http_okhttp) {
 			exclude module: "slf4j-api"
 			exclude module: "jdroid-java-core"
 		}
@@ -81,19 +79,19 @@ dependencies {
 	if (jdroid.propertyResolver.getBooleanProp("JDROID_JAVA_FIREBASE_DYNAMICLINKS_AS_PROJECT_DEPENDENCY", false)) {
 		implementation project(":jdroid-java-firebase-dynamiclink")
 	} else {
-		implementation(libs.firebase_dynamiclinks) {
+		implementation(Libs.firebase_dynamiclinks) {
 			exclude module: "slf4j-api"
 			exclude module: "jdroid-java-core"
 		}
 	}
 
-	kapt(libs.androidx_room_compiler)
+	kapt(Libs.androidx_room_compiler)
 
-	testImplementation(libs.junit)
-	testImplementation(libs.robolectric)
-	androidTestImplementation(libs.espresso_core)
-	androidTestImplementation(libs.espresso_contrib)
-	androidTestImplementation(libs.test_runner)
+	testImplementation(Libs.junit)
+	testImplementation(Libs.robolectric)
+	androidTestImplementation(Libs.espresso_core)
+	androidTestImplementation(Libs.espresso_contrib)
+	androidTestImplementation(Libs.test_runner)
 }
 
 String adMobAppId = "ca-app-pub-4654922738884963~4242524943"

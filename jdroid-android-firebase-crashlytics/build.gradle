@@ -4,9 +4,8 @@ ext.PROJECT_NAME = "Jdroid Android - Firebase Crashlytics"
 description = "Jdroid dependency project for Firebase Crashlytics"
 
 buildscript {
-	apply from: "$rootDir/build_dependencies.gradle"
 	dependencies {
-		classpath(libs.jdroid_gradle_android_plugin)
+		classpath(BuildLibs.jdroid_gradle_android_plugin)
 	}
 }
 
@@ -15,10 +14,10 @@ dependencies {
 	api project(":jdroid-android-core")
 
 	// https://docs.fabric.io/android/changelog.html#crashlytics
-	api(libs.crashlytics + "@aar") {
+	api(Libs.crashlytics + "@aar") {
 		transitive = true
 	}
 
-	testImplementation(libs.junit)
-	testImplementation(libs.robolectric)
+	testImplementation(Libs.junit)
+	testImplementation(Libs.robolectric)
 }

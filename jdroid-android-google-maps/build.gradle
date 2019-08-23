@@ -4,9 +4,8 @@ ext.PROJECT_NAME = "Jdroid Android - Google Maps"
 description = "Jdroid dependency project for Google Maps"
 
 buildscript {
-	apply from: "$rootDir/build_dependencies.gradle"
 	dependencies {
-		classpath(libs.jdroid_gradle_android_plugin)
+		classpath(BuildLibs.jdroid_gradle_android_plugin)
 	}
 }
 
@@ -14,19 +13,19 @@ dependencies {
 
 	api project(":jdroid-android-core")
 
-	api(libs.play_services_maps)
+	api(Libs.play_services_maps)
 
 	if (jdroid.propertyResolver.getBooleanProp("JDROID_JAVA_HTTP_AS_PROJECT_DEPENDENCY", false)) {
 		testImplementation project(":jdroid-java-http-okhttp")
 	} else {
-		testImplementation(libs.jdroid_java_http_okhttp) {
+		testImplementation(Libs.jdroid_java_http_okhttp) {
 			exclude module: "slf4j-api"
 			exclude module: "jdroid-java-core"
 		}
 	}
 
-	testImplementation(libs.junit)
-	testImplementation(libs.robolectric)
+	testImplementation(Libs.junit)
+	testImplementation(Libs.robolectric)
 }
 
 android {

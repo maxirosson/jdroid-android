@@ -4,9 +4,8 @@ ext.PROJECT_NAME = "Jdroid Android - Google Play Games"
 description = "Jdroid dependency project for Google Play GAmes"
 
 buildscript {
-	apply from: "$rootDir/build_dependencies.gradle"
 	dependencies {
-		classpath(libs.jdroid_gradle_android_plugin)
+		classpath(BuildLibs.jdroid_gradle_android_plugin)
 	}
 }
 
@@ -15,8 +14,8 @@ dependencies {
 	api project(":jdroid-android-core")
 	implementation project(":jdroid-android-google-signin")
 
-	api(libs.play_services_games)
+	api(Libs.play_services_games)
 
-	testImplementation(libs.junit)
-	testImplementation(libs.robolectric)
+	testImplementation(Libs.junit)
+	testImplementation(Libs.robolectric)
 }
