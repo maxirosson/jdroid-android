@@ -137,7 +137,7 @@ jobs:
                 if [[ ! -d "${destination}/${module}" ]]; then
                   mkdir -p "${destination}/${module}"
                 fi
-                cp -R "${reports_dir}/." "${destination}/${module}/"
+                cp -R "${reports_dir}/." "${destination}/${module}/" || :
               fi
             done < "settings.gradle"
           when: always
@@ -169,7 +169,7 @@ jobs:
               if [[ ! -d "${destination}/${module}" ]]; then
                 mkdir -p "${destination}/${module}"
               fi
-              cp "$lint_result" "${destination}/${module}/${file_name}"
+              cp "$lint_result" "${destination}/${module}/${file_name}" || :
             done < "settings.gradle"
           when: always
 
