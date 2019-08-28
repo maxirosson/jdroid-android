@@ -29,7 +29,7 @@ class FirebaseDatabaseFragment : AbstractFragment() {
             AppExecutors.networkIOExecutor.execute {
                 val entity = SampleFirebaseEntity()
                 lastId = RandomUtils.getLong().toString()
-                entity.setId(lastId)
+                entity.setId(lastId!!)
                 entity.field = RandomUtils.getLong().toString()
                 repository.add(entity)
             }
@@ -38,7 +38,7 @@ class FirebaseDatabaseFragment : AbstractFragment() {
         findView<View>(R.id.firebaseUpdate).setOnClickListener {
             AppExecutors.networkIOExecutor.execute {
                 val entity = SampleFirebaseEntity()
-                entity.setId(lastId)
+                entity.setId(lastId!!)
                 entity.field = RandomUtils.getLong().toString()
                 repository.update(entity)
             }
@@ -46,14 +46,14 @@ class FirebaseDatabaseFragment : AbstractFragment() {
 
         findView<View>(R.id.firebaseGetAll).setOnClickListener {
             AppExecutors.networkIOExecutor.execute {
-                val results = repository.all
+                val results = repository.getAll()
                 executeOnUIThread(Runnable { (findView<View>(R.id.results) as TextView).text = results.toString() })
             }
         }
 
         findView<View>(R.id.firebaseRemove).setOnClickListener {
             AppExecutors.networkIOExecutor.execute {
-                repository.remove(lastId)
+                repository.remove(lastId!!)
                 lastId = null
             }
         }
