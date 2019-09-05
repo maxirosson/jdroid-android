@@ -2,13 +2,10 @@ package com.jdroid.android.firebase.crashlytics
 
 import android.content.Context
 import androidx.core.util.Pair
-
 import com.crashlytics.android.Crashlytics
 import com.jdroid.android.debug.info.DebugInfoAppender
 import com.jdroid.android.debug.info.DebugInfoHelper
 import com.jdroid.android.lifecycle.ApplicationLifecycleCallback
-import com.jdroid.java.collections.Lists
-
 import io.fabric.sdk.android.Fabric
 
 class DebugFirebaseCrashlyticsAppLifecycleCallback : ApplicationLifecycleCallback() {
@@ -23,7 +20,7 @@ class DebugFirebaseCrashlyticsAppLifecycleCallback : ApplicationLifecycleCallbac
     override fun onCreate(context: Context) {
         DebugInfoHelper.addDebugInfoAppender(object : DebugInfoAppender {
             override fun getDebugInfoProperties(): List<Pair<String, Any>> {
-                val properties = Lists.newArrayList<Pair<String, Any>>()
+                val properties = mutableListOf<Pair<String, Any>>()
                 properties.add(
                     Pair(
                         "Firebase Crashlytics Enabled",

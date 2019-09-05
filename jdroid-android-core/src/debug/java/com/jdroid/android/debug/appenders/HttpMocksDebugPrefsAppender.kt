@@ -10,7 +10,6 @@ import com.jdroid.android.debug.PreferencesAppender
 import com.jdroid.android.debug.crash.ExceptionType
 import com.jdroid.android.debug.http.HttpDebugConfiguration
 import com.jdroid.android.debug.mocks.AndroidJsonMockHttpService
-import com.jdroid.java.collections.Lists
 
 class HttpMocksDebugPrefsAppender : PreferencesAppender() {
 
@@ -38,7 +37,7 @@ class HttpMocksDebugPrefsAppender : PreferencesAppender() {
         preference.setTitle(R.string.jdroid_httpMockCrashType)
         preference.setDialogTitle(R.string.jdroid_httpMockCrashType)
         preference.setSummary(R.string.jdroid_httpMockCrashTypeDescription)
-        val entries = Lists.newArrayList<CharSequence>()
+        val entries = mutableListOf<CharSequence>()
         entries.add("None")
         for (each in ExceptionType.values()) {
             entries.add(each.name)

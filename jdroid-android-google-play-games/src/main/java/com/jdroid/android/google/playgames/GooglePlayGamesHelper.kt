@@ -14,7 +14,6 @@ import com.jdroid.android.application.AbstractApplication
 import com.jdroid.android.fragment.AbstractFragment
 import com.jdroid.android.google.signin.GoogleSignInHelper
 import com.jdroid.android.google.signin.GoogleSignInListener
-import com.jdroid.java.collections.Lists
 import com.jdroid.java.utils.LoggerUtils
 import com.jdroid.java.utils.RandomUtils
 
@@ -128,7 +127,7 @@ class GooglePlayGamesHelper(abstractFragment: AbstractFragment, googleSignInList
                 }
                 LOGGER.info("Events loaded: $count")
 
-                val events = Lists.newArrayList<Event>()
+                val events = mutableListOf<Event>()
                 for (i in 0 until count) {
                     val event = eventBuffer!!.get(i)
                     LOGGER.info("Event: " + event.name + " -> " + event.value)

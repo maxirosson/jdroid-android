@@ -8,7 +8,6 @@ import com.jdroid.android.debug.info.DebugInfoAppender
 import com.jdroid.android.debug.info.DebugInfoHelper
 import com.jdroid.android.firebase.fcm.instanceid.InstanceIdHelper
 import com.jdroid.android.lifecycle.ApplicationLifecycleCallback
-import com.jdroid.java.collections.Lists
 
 abstract class AbstractFcmDebugAppLifecycleCallback : ApplicationLifecycleCallback() {
 
@@ -19,7 +18,7 @@ abstract class AbstractFcmDebugAppLifecycleCallback : ApplicationLifecycleCallba
     override fun onCreate(context: Context) {
         DebugInfoHelper.addDebugInfoAppender(object : DebugInfoAppender {
             override fun getDebugInfoProperties(): List<Pair<String, Any>> {
-                val properties = Lists.newArrayList<Pair<String, Any>>()
+                val properties = mutableListOf<Pair<String, Any>>()
                 properties.add(Pair("Instance ID", InstanceIdHelper.getInstanceId()))
                 return properties
             }

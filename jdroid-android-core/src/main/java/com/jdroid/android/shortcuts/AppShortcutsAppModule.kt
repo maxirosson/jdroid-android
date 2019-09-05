@@ -20,6 +20,7 @@ class AppShortcutsAppModule : AbstractAppModule() {
         }
     }
 
+    @Suppress("UNCHECKED_CAST")
     override fun createModuleAnalyticsSender(analyticsTrackers: List<AnalyticsTracker>): AnalyticsSender<out AnalyticsTracker> {
         return AppShortcutsAnalyticsSender(analyticsTrackers as List<AppShortcutsAnalyticsTracker>)
     }

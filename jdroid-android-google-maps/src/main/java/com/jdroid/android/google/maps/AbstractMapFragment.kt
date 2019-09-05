@@ -97,7 +97,7 @@ abstract class AbstractMapFragment : SupportMapFragment(), FragmentIf {
                     val locationPermissionGranted = locationPermissionHelper!!.checkPermission(false)
                     if (locationPermissionGranted) {
                         map?.isMyLocationEnabled = true
-                    } else if (snackbarToSuggestLocationPermissionEnabled()!!) {
+                    } else if (snackbarToSuggestLocationPermissionEnabled()) {
                         locationPermissionHelper!!.setOnRequestPermissionsResultListener(object :
                             PermissionHelper.OnRequestPermissionsResultListener {
 

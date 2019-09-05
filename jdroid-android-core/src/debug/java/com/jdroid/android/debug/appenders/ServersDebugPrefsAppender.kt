@@ -7,7 +7,6 @@ import android.preference.PreferenceGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.jdroid.android.R
 import com.jdroid.android.debug.PreferencesAppender
-import com.jdroid.java.collections.Lists
 import com.jdroid.java.http.Server
 
 class ServersDebugPrefsAppender(val serversMap: Map<Class<out Server>, List<Server>>?) : PreferencesAppender() {
@@ -24,7 +23,7 @@ class ServersDebugPrefsAppender(val serversMap: Map<Class<out Server>, List<Serv
             preference.dialogTitle = key.simpleName
             preference.summary = key.simpleName
 
-            val entries = Lists.newArrayList<CharSequence>()
+            val entries = mutableListOf<CharSequence>()
             for (each in value) {
                 entries.add(each.getServerName())
             }

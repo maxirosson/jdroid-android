@@ -19,7 +19,7 @@ class DebugSettingsFragment : AbstractRecyclerFragment() {
 
         val debugContext = AbstractApplication.get().debugContext
 
-        val appenders = Lists.newArrayList<PreferencesAppender>()
+        val appenders = mutableListOf<PreferencesAppender>()
         addAppender(appenders, debugContext.createServersDebugPrefsAppender())
         addAppender(appenders, debugContext.createHttpMocksDebugPrefsAppender())
         addAppender(appenders, debugContext.createNavDrawerDebugPrefsAppender())

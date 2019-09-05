@@ -44,7 +44,7 @@ class ShareView : FrameLayout {
         fun initShareSectionV2(activity: Activity, sharingItems: List<SharingItem>, sharingData: SharingData): Boolean {
             val result = initShareSection(activity, sharingItems)
             activity.findViewById<View>(R.id.shareMore).setOnClickListener {
-                ShareUtils.shareTextContent(activity, sharingData.shareKey, AbstractApplication.get().getString(R.string.jdroid_share), sharingData.defaultSharingDataItem!!.subject, sharingData.defaultSharingDataItem!!.text)
+                ShareUtils.shareTextContent(activity, sharingData.shareKey, AbstractApplication.get().getString(R.string.jdroid_share), sharingData.defaultSharingDataItem.subject, sharingData.defaultSharingDataItem.text)
             }
             return result
         }

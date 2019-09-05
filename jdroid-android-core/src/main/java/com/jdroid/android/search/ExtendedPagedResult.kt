@@ -1,6 +1,5 @@
 package com.jdroid.android.search
 
-import com.jdroid.java.collections.Lists
 import com.jdroid.java.search.PagedResult
 
 /**
@@ -8,7 +7,7 @@ import com.jdroid.java.search.PagedResult
 </T> */
 class ExtendedPagedResult<T> : PagedResult<T>() {
 
-    private val extraResults = Lists.newArrayList<T>()
+    private val extraResults = mutableListOf<T>()
 
     /**
      * Adds a result item to the extra list.

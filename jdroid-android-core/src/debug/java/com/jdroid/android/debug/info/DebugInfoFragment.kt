@@ -15,11 +15,10 @@ import com.jdroid.android.utils.AndroidUtils
 import com.jdroid.android.utils.AppUtils
 import com.jdroid.android.utils.DeviceUtils
 import com.jdroid.android.utils.ScreenUtils
-import com.jdroid.java.collections.Lists
 
 class DebugInfoFragment : AbstractRecyclerFragment() {
 
-    private val properties = Lists.newArrayList<Pair<String, Any>>()
+    private val properties = mutableListOf<Pair<String, Any>>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

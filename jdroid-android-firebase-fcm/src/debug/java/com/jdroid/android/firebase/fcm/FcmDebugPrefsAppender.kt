@@ -7,7 +7,6 @@ import android.preference.PreferenceGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.messaging.RemoteMessage
 import com.jdroid.android.debug.PreferencesAppender
-import com.jdroid.java.collections.Lists
 import com.jdroid.java.collections.Maps
 
 class FcmDebugPrefsAppender : PreferencesAppender() {
@@ -21,7 +20,7 @@ class FcmDebugPrefsAppender : PreferencesAppender() {
         preference.setTitle(R.string.jdroid_emulateFcmMessageTitle)
         preference.setDialogTitle(R.string.jdroid_emulateFcmMessageTitle)
         preference.setSummary(R.string.jdroid_emulateFcmMessageDescription)
-        val entries = Lists.newArrayList<CharSequence>()
+        val entries = mutableListOf<CharSequence>()
         for (entry in fcmMessagesMap.keys) {
             entries.add(entry.javaClass.simpleName)
         }

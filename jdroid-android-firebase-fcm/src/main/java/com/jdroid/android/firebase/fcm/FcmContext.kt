@@ -1,12 +1,10 @@
 package com.jdroid.android.firebase.fcm
 
-import com.jdroid.java.collections.Lists
-
 object FcmContext {
 
-    private val fcmMessages = Lists.newArrayList<FcmMessage>()
+    private val fcmMessages = mutableListOf<FcmMessage>()
 
-    private val fcmEventsListeners = Lists.newArrayList<FcmEventsListener>()
+    private val fcmEventsListeners = mutableListOf<FcmEventsListener>()
 
     fun addFcmMessage(fcmMessage: FcmMessage) {
         fcmMessages.add(fcmMessage)

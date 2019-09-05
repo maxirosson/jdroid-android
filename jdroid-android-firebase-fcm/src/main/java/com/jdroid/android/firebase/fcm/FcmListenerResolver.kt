@@ -32,7 +32,7 @@ class FcmListenerResolver {
         }
 
         val fcmResolver = AbstractFcmAppModule.get().fcmMessageResolver
-        var fcmMessage: FcmMessage? = null
+        var fcmMessage: FcmMessage?
         try {
             fcmMessage = fcmResolver.resolve(remoteMessage)
         } catch (e: Exception) {

@@ -1,7 +1,6 @@
 package com.jdroid.android.application
 
 import androidx.annotation.WorkerThread
-import com.jdroid.java.collections.Lists
 import com.jdroid.java.utils.LoggerUtils
 
 internal class UpdateManager {
@@ -10,7 +9,7 @@ internal class UpdateManager {
         private val LOGGER = LoggerUtils.getLogger(UpdateManager::class.java)
     }
 
-    private val updatedSteps = Lists.newArrayList<UpdateStep>()
+    private val updatedSteps = mutableListOf<UpdateStep>()
 
     @WorkerThread
     fun update(fromVersionCode: Int) {

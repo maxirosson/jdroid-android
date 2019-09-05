@@ -2,7 +2,6 @@ package com.jdroid.android.debug
 
 import android.preference.PreferenceGroup
 import androidx.appcompat.app.AppCompatActivity
-import com.jdroid.java.collections.Lists
 import java.io.Serializable
 
 abstract class PreferencesAppender : Serializable {
@@ -16,7 +15,7 @@ abstract class PreferencesAppender : Serializable {
     }
 
     open fun getRequiredPermissions(): List<String> {
-        return Lists.newArrayList()
+        return listOf()
     }
 
     open fun getSharedPreferencesName(): String? {

@@ -1,10 +1,8 @@
 package com.jdroid.android.debug.info
 
-import com.jdroid.java.collections.Lists
-
 object DebugInfoHelper {
 
-    private val debugInfoAppenders = Lists.newArrayList<DebugInfoAppender>()
+    private val debugInfoAppenders = mutableListOf<DebugInfoAppender>()
 
     fun getDebugInfoAppenders(): List<DebugInfoAppender> {
         return debugInfoAppenders

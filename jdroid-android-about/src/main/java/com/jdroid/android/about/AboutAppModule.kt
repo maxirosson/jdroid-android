@@ -7,7 +7,6 @@ import com.jdroid.android.application.AbstractAppModule
 import com.jdroid.android.application.AbstractApplication
 import com.jdroid.java.analytics.AnalyticsSender
 import com.jdroid.java.analytics.AnalyticsTracker
-import com.jdroid.java.collections.Lists
 import com.jdroid.java.remoteconfig.RemoteConfigParameter
 import java.util.Arrays
 
@@ -32,12 +31,13 @@ open class AboutAppModule : AbstractAppModule() {
         return AboutContext()
     }
 
+    @Suppress("UNCHECKED_CAST")
     override fun createModuleAnalyticsSender(analyticsTrackers: List<AnalyticsTracker>): AnalyticsSender<out AnalyticsTracker> {
         return AboutAnalyticsSender(analyticsTrackers as List<AboutAnalyticsTracker>)
     }
 
     override fun createModuleAnalyticsTrackers(): List<AnalyticsTracker> {
-        return Lists.newArrayList(FirebaseAboutAnalyticsTracker())
+        return listOf(FirebaseAboutAnalyticsTracker())
     }
 
     override fun getModuleAnalyticsSender(): AboutAnalyticsSender {

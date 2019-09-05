@@ -4,7 +4,6 @@ import android.view.ViewGroup
 import androidx.annotation.MainThread
 import com.jdroid.android.application.AbstractApplication
 import com.jdroid.android.fragment.AbstractFragment
-import com.jdroid.java.collections.Lists
 import com.jdroid.java.http.exception.ConnectionException
 import com.twitter.sdk.android.core.Callback
 import com.twitter.sdk.android.core.Result
@@ -26,7 +25,7 @@ abstract class TwitterHelper {
     var tweetContainer: ViewGroup? = null
 
     private var searchTimelineBuilder: SearchTimeline.Builder? = null
-    var tweets = Lists.newArrayList<Tweet>()
+    var tweets = mutableListOf<Tweet>()
         private set
 
     var twitterQuery: TwitterQuery? = null

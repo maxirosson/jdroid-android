@@ -12,7 +12,7 @@ abstract class AppSharingItem(private val sharingData: SharingData) : SharingIte
             sharingDataItem = sharingData.defaultSharingDataItem
         }
 
-        var text = if (sharingDataItem!!.text != null) sharingDataItem.text else sharingData.defaultSharingDataItem.text
+        var text = if (sharingDataItem.text != null) sharingDataItem.text else sharingData.defaultSharingDataItem.text
         val link = if (sharingDataItem.link != null) sharingDataItem.link else sharingData.defaultSharingDataItem.link
         if (link != null) {
             text = text.replace("\${link}", link)

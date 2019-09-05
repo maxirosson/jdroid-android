@@ -16,7 +16,6 @@ import com.jdroid.android.lifecycle.ApplicationLifecycleHelper
 import com.jdroid.android.notification.NotificationChannelType
 import com.jdroid.android.notification.NotificationUtils
 import com.jdroid.android.utils.ProcessUtils
-import com.jdroid.java.collections.Lists
 import com.jdroid.java.remoteconfig.RemoteConfigLoader
 import com.jdroid.java.utils.LoggerUtils
 import org.koin.android.ext.koin.androidContext
@@ -158,7 +157,7 @@ abstract class KotlinAbstractApplication : Application() {
     }
 
     open fun getNotificationChannelTypes(): List<NotificationChannelType> {
-        return Lists.newArrayList()
+        return listOf()
     }
 
     open fun getDefaultNotificationChannelType(): NotificationChannelType? {

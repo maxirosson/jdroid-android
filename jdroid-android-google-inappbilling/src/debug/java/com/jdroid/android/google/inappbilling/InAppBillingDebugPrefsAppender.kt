@@ -7,7 +7,6 @@ import android.preference.PreferenceGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.jdroid.android.debug.PreferencesAppender
 import com.jdroid.android.google.inappbilling.client.SimpleDeveloperPayloadVerificationStrategy
-import com.jdroid.java.collections.Lists
 
 class InAppBillingDebugPrefsAppender : PreferencesAppender() {
 
@@ -44,7 +43,7 @@ class InAppBillingDebugPrefsAppender : PreferencesAppender() {
             preference.setTitle(R.string.jdroid_inAppBillingPurchasedProductTypeTitle)
             preference.setDialogTitle(R.string.jdroid_inAppBillingPurchasedProductTypeTitle)
             preference.setSummary(R.string.jdroid_inAppBillingPurchasedProductTypeTitle)
-            val entries = Lists.newArrayList<CharSequence>()
+            val entries = mutableListOf<CharSequence>()
             for (each in InAppBillingAppModule.get().inAppBillingContext!!.purchasedProductTypes) {
                 entries.add(each.getProductId())
             }

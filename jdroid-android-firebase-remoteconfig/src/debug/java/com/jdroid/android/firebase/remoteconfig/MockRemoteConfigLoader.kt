@@ -45,6 +45,7 @@ class MockRemoteConfigLoader(fetch: Boolean) : RemoteConfigLoader {
     private val cache: MutableMap<String, String>
 
     init {
+        @Suppress("UNCHECKED_CAST")
         cache = if (fetch) sharedPreferencesHelper.loadAllPreferences() as MutableMap<String, String> else hashMapOf()
     }
 
@@ -61,6 +62,7 @@ class MockRemoteConfigLoader(fetch: Boolean) : RemoteConfigLoader {
         return value?.toString()
     }
 
+    @Suppress("UNCHECKED_CAST")
     override fun getStringList(remoteConfigParameter: RemoteConfigParameter): List<String>? {
         return getValue(remoteConfigParameter, StringUtils.splitWithCommaSeparator(getString(remoteConfigParameter))) as List<String>?
     }

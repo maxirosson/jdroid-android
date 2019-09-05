@@ -5,7 +5,6 @@ import com.jdroid.android.application.AbstractApplication
 import com.jdroid.android.context.BuildConfigUtils
 import com.jdroid.android.http.HttpConfiguration
 import com.jdroid.android.lifecycle.ApplicationLifecycleCallback
-import com.jdroid.java.collections.Lists
 import com.jdroid.java.http.HttpServiceFactory
 import com.jdroid.java.utils.LoggerUtils
 import com.jdroid.java.utils.ReflectionUtils
@@ -32,7 +31,7 @@ class StethoApplicationLifecycleCallback : ApplicationLifecycleCallback() {
                 val stethoInterceptor = ReflectionUtils.newInstance<Any>(STETHO_OKHTTP_INTERCEPTOR)
                 ReflectionUtils.invokeMethod(
                     OKHTTP_SERVICE_FACTORY, okhttpServiceFactory, ADD_NETWORK_INTERCEPTOR,
-                    Lists.newArrayList(interceptorClass), Lists.newArrayList(stethoInterceptor)
+                    listOf(interceptorClass), listOf(stethoInterceptor)
                 )
                 HttpConfiguration.httpServiceFactory = okhttpServiceFactory
                 LOGGER.info("Stetho $STETHO_OKHTTP_INTERCEPTOR initialized")
@@ -46,7 +45,7 @@ class StethoApplicationLifecycleCallback : ApplicationLifecycleCallback() {
         try {
             ReflectionUtils.invokeStaticMethod(
                 STETHO, INITIALIZE_WITH_DEFAULTS,
-                Lists.newArrayList<Class<*>>(Context::class.java), Lists.newArrayList<Any>(AbstractApplication.get())
+                listOf<Class<*>>(Context::class.java), listOf<Any>(AbstractApplication.get())
             )
             LOGGER.info("Stetho initialized")
         } catch (e: Exception) {

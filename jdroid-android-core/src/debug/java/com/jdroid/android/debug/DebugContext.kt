@@ -2,7 +2,6 @@ package com.jdroid.android.debug
 
 import android.app.Activity
 import androidx.core.util.Pair
-
 import com.jdroid.android.activity.ActivityLauncher
 import com.jdroid.android.debug.appenders.ExceptionHandlingDebugPrefsAppender
 import com.jdroid.android.debug.appenders.HttpCacheDebugPrefsAppender
@@ -13,14 +12,13 @@ import com.jdroid.android.debug.appenders.NotificationsDebugPrefsAppender
 import com.jdroid.android.debug.appenders.ServersDebugPrefsAppender
 import com.jdroid.android.debug.appenders.UriMapperPrefsAppender
 import com.jdroid.android.debug.appenders.UsageStatsDebugPrefsAppender
-import com.jdroid.java.collections.Lists
 import com.jdroid.java.collections.Maps
 import com.jdroid.java.http.Server
 import com.jdroid.java.remoteconfig.RemoteConfigParameter
 
 open class DebugContext {
 
-    private val customDebugInfoProperties = Lists.newArrayList<Pair<String, Any>>()
+    private val customDebugInfoProperties = mutableListOf<Pair<String, Any>>()
 
     fun launchActivityDebugSettingsActivity(activity: Activity) {
         ActivityLauncher.startActivity(activity, DebugSettingsActivity::class.java)
@@ -75,14 +73,14 @@ open class DebugContext {
     }
 
     open fun getCustomPreferencesAppenders(): List<PreferencesAppender> {
-        return Lists.newArrayList()
+        return listOf()
     }
 
     open fun getUrlsToTest(): List<String> {
-        return Lists.newArrayList()
+        return listOf()
     }
 
     open fun getRemoteConfigParameters(): List<RemoteConfigParameter> {
-        return Lists.newArrayList()
+        return listOf()
     }
 }

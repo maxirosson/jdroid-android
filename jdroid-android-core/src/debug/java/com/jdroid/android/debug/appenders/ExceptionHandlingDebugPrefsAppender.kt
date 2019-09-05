@@ -12,7 +12,6 @@ import com.jdroid.android.debug.PreferencesAppender
 import com.jdroid.android.debug.crash.CrashGenerator
 import com.jdroid.android.debug.crash.ExceptionType
 import com.jdroid.android.utils.SharedPreferencesHelper
-import com.jdroid.java.collections.Lists
 import com.jdroid.java.utils.IdGenerator
 
 class ExceptionHandlingDebugPrefsAppender : PreferencesAppender() {
@@ -33,7 +32,7 @@ class ExceptionHandlingDebugPrefsAppender : PreferencesAppender() {
         preference.setTitle(R.string.jdroid_exceptionType)
         preference.setDialogTitle(R.string.jdroid_exceptionType)
         preference.setSummary(R.string.jdroid_exceptionType)
-        val entries = Lists.newArrayList<CharSequence>()
+        val entries = mutableListOf<CharSequence>()
         for (each in ExceptionType.values()) {
             entries.add(each.name)
         }

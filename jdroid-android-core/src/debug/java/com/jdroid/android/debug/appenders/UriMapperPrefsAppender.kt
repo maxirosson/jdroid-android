@@ -13,7 +13,6 @@ import com.jdroid.android.debug.PreferencesAppender
 import com.jdroid.android.permission.PermissionHelper
 import com.jdroid.android.utils.AppUtils
 import com.jdroid.android.utils.ExternalAppsUtils
-import com.jdroid.java.collections.Lists
 import com.jdroid.java.exception.UnexpectedException
 import com.jdroid.java.utils.FileUtils
 import java.io.File
@@ -86,6 +85,6 @@ class UriMapperPrefsAppender(private var htmlRawId: Int? = null) : PreferencesAp
     }
 
     override fun getRequiredPermissions(): List<String> {
-        return Lists.newArrayList(PermissionHelper.WRITE_EXTERNAL_STORAGE_PERMISSION)
+        return listOf(PermissionHelper.WRITE_EXTERNAL_STORAGE_PERMISSION)
     }
 }

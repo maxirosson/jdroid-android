@@ -4,7 +4,6 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import com.jdroid.android.application.AbstractApplication
-import com.jdroid.java.collections.Lists
 import com.jdroid.java.collections.Maps
 
 object RoomHelper {
@@ -13,12 +12,13 @@ object RoomHelper {
 
     private val roomDatabasesMap = Maps.newHashMap<String, RoomDatabase>()
 
-    private val migrations = Lists.newArrayList<Migration>()
+    private val migrations = mutableListOf<Migration>()
 
     fun <T : RoomDatabase> getDefaultDatabase(klass: Class<T>): T {
         return getDatabase(klass, DEFAULT_DATABASE_NAME)
     }
 
+    @Suppress("UNCHECKED_CAST")
     fun <T : RoomDatabase> getDatabase(klass: Class<T>, name: String): T {
         if (roomDatabasesMap.containsKey(name)) {
             return roomDatabasesMap[name] as T

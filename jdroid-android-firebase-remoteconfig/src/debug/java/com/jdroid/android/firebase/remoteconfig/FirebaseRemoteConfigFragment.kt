@@ -12,7 +12,6 @@ import com.jdroid.android.recycler.AbstractRecyclerFragment
 import com.jdroid.android.recycler.RecyclerViewAdapter
 import com.jdroid.android.recycler.RecyclerViewContainer
 import com.jdroid.android.recycler.RecyclerViewType
-import com.jdroid.java.collections.Lists
 import com.jdroid.java.date.DateUtils
 import com.jdroid.java.remoteconfig.RemoteConfigParameter
 import com.jdroid.java.utils.StringUtils
@@ -23,13 +22,13 @@ class FirebaseRemoteConfigFragment : AbstractRecyclerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val items = Lists.newArrayList<Any>()
+        val items = mutableListOf<Any>()
         items.add("")
         for (appModule in AbstractApplication.get().appModules) {
             items.addAll(appModule.getRemoteConfigParameters())
         }
         items.addAll(AbstractApplication.get().debugContext.getRemoteConfigParameters())
-        val recyclerViewTypes = Lists.newArrayList(HeaderRecyclerViewType(), RemoteConfigParameterRecyclerViewType())
+        val recyclerViewTypes = listOf(HeaderRecyclerViewType(), RemoteConfigParameterRecyclerViewType())
         setAdapter(RecyclerViewAdapter(recyclerViewTypes, items))
     }
 
@@ -61,7 +60,7 @@ class FirebaseRemoteConfigFragment : AbstractRecyclerFragment() {
 
             holder.mocksEnabled.setOnCheckedChangeListener(null)
             holder.mocksEnabled.isChecked = MockRemoteConfigLoader.isMocksEnabled()
-            holder.mocksEnabled.setOnCheckedChangeListener { buttonView, isChecked ->
+            holder.mocksEnabled.setOnCheckedChangeListener { _, isChecked ->
                 MockRemoteConfigLoader.setMocksEnabled(isChecked)
                 getRecyclerViewAdapter().notifyDataSetChanged()
             }
