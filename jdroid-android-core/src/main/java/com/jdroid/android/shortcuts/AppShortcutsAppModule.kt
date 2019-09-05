@@ -7,7 +7,6 @@ import com.jdroid.android.shortcuts.analytics.AppShortcutsAnalyticsTracker
 import com.jdroid.android.shortcuts.analytics.FirebaseAppShortcutsAnalyticsTracker
 import com.jdroid.java.analytics.AnalyticsSender
 import com.jdroid.java.analytics.AnalyticsTracker
-import com.jdroid.java.collections.Lists
 
 class AppShortcutsAppModule : AbstractAppModule() {
 
@@ -26,7 +25,7 @@ class AppShortcutsAppModule : AbstractAppModule() {
     }
 
     override fun createModuleAnalyticsTrackers(): List<AnalyticsTracker> {
-        return Lists.newArrayList(FirebaseAppShortcutsAnalyticsTracker())
+        return listOf(FirebaseAppShortcutsAnalyticsTracker())
     }
 
     override fun getModuleAnalyticsSender(): AppShortcutsAnalyticsSender {
