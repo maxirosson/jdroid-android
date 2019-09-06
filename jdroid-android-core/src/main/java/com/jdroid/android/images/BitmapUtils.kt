@@ -55,7 +55,7 @@ object BitmapUtils {
             options.inJustDecodeBounds = true
             var openInputStream = context.contentResolver.openInputStream(uri)
             BitmapFactory.decodeStream(openInputStream, null, options)
-            openInputStream.close()
+            openInputStream?.close()
 
             // Calculate inSampleSize
             if (maxWidth != null && maxHeight != null) {
@@ -67,7 +67,7 @@ object BitmapUtils {
             openInputStream = context.contentResolver.openInputStream(uri)
             options.inJustDecodeBounds = false
             val result = BitmapFactory.decodeStream(openInputStream, null, options)
-            openInputStream.close()
+            openInputStream?.close()
             return result
         } catch (e: Exception) {
             LOGGER.error(e.message, e)

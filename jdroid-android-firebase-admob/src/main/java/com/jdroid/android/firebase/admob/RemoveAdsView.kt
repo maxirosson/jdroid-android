@@ -30,9 +30,9 @@ class RemoveAdsView : RelativeLayout {
         (view.findViewById<View>(R.id.icon) as ImageView).setImageResource(AbstractApplication.get().launcherIconResId)
     }
 
-    override fun setOnClickListener(removeAdsClickListener: OnClickListener) {
+    override fun setOnClickListener(removeAdsClickListener: OnClickListener?) {
         super.setOnClickListener { v ->
-            removeAdsClickListener.onClick(v)
+            removeAdsClickListener?.onClick(v)
             AdMobAppModule.get().getModuleAnalyticsSender().trackRemoveAdsBannerClicked()
         }
     }

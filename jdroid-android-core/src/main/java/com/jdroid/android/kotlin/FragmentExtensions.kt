@@ -79,7 +79,7 @@ fun <T : Parcelable> Fragment.getParcelableArrayListArgument(key: String?): Arra
 }
 
 fun <T : Parcelable> Fragment.getRequiredParcelableArrayListArgument(key: String): ArrayList<T> {
-    return requireArguments.getParcelableArrayList(key)
+    return requireArguments.getParcelableArrayList(key)!!
 }
 
 fun <T : Parcelable> Fragment.getParcelableArgument(key: String?): T? {
