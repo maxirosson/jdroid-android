@@ -12,7 +12,6 @@ if (propsFile.exists()) {
 version = "3.0.0"
 
 ext.GITHUB_REPOSITORY_NAME = "jdroid-android"
-ext.RELEASES_HUB_GRADLE_PLUGIN_ENABLED = true
 
 apply plugin: "com.jdroidtools.component.builder"
 apply plugin: "com.jdroidtools.android.root"
