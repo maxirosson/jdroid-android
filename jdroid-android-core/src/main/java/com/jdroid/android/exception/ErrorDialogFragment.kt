@@ -12,7 +12,7 @@ class ErrorDialogFragment : AlertDialogFragment() {
         handleStrategy()
     }
 
-    override fun onCancel(dialog: DialogInterface?) {
+    override fun onCancel(dialog: DialogInterface) {
         super.onCancel(dialog)
         handleStrategy()
     }

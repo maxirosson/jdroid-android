@@ -65,7 +65,7 @@ class FcmRegistrationCommand : ServiceCommand() {
         @WorkerThread
         fun getRegistrationToken(senderId: String?): String? {
             if (GooglePlayServicesUtils.isGooglePlayServicesAvailable(AbstractApplication.get())) {
-                val registrationToken: String
+                val registrationToken: String?
                 try {
                     if (senderId != null) {
                         registrationToken = FirebaseInstanceId.getInstance().getToken(senderId, "FCM")

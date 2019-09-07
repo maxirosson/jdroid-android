@@ -32,7 +32,7 @@ class PictureDialogFragment : AbstractDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        dialog.setTitle(com.jdroid.android.R.string.jdroid_selectPhoto)
+        dialog?.setTitle(com.jdroid.android.R.string.jdroid_selectPhoto)
 
         // Configure the take photo button.
         val camera = findView<Button>(com.jdroid.android.R.id.camera)
