@@ -277,6 +277,10 @@ workflows:
           requires:
             - build
       - publish:
+          filters:
+            branches:
+              only:
+                - master
           requires:
             - unitTest
             - lint
