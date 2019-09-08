@@ -83,8 +83,8 @@ object Libs {
     const val glide_okhttp3 = "com.github.bumptech.glide:okhttp3-integration:4.9.0"
 
     // https://developers.facebook.com/docs/android
-    const val facebook_core = "com.facebook.android:facebook-core:4.41.0"
-    const val facebook_login = "com.facebook.android:facebook-login:4.41.0"
+    const val facebook_core = "com.facebook.android:facebook-core:5.5.1"
+    const val facebook_login = "com.facebook.android:facebook-login:5.5.1"
 
     const val junit = "junit:junit:4.12"
 
