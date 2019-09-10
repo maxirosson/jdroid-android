@@ -79,7 +79,7 @@ dependencies {
 	if (jdroid.propertyResolver.getBooleanProp("JDROID_JAVA_FIREBASE_DYNAMICLINKS_AS_PROJECT_DEPENDENCY", false)) {
 		implementation project(":jdroid-java-firebase-dynamiclink")
 	} else {
-		implementation(Libs.firebase_dynamiclinks) {
+		implementation(Libs.jdroid_firebase_dynamiclinks) {
 			exclude module: "slf4j-api"
 			exclude module: "jdroid-java-core"
 		}
