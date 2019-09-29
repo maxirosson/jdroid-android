@@ -63,6 +63,7 @@ buildscript {
 			url = "https://oss.sonatype.org/content/repositories/snapshots/"
 			content {
 				includeGroup("com.jdroidtools")
+				includeGroup("com.releaseshub")
 			}
 			mavenContent {
 				snapshotsOnly()
@@ -130,6 +131,7 @@ allprojects {
 				url = "https://oss.sonatype.org/content/repositories/snapshots/"
 				content {
 					includeGroup("com.jdroidtools")
+					includeGroup("com.releaseshub")
 				}
 				mavenContent {
 					snapshotsOnly()
