@@ -38,7 +38,7 @@ dependencies {
 	api(Libs.play_core)
 
 	// https://firebase.google.com/support/release-notes/android
-	api(Libs.firebase_core)
+	api(Libs.firebase_analytics)
 	api(Libs.firebase_appindexing)
 	api(Libs.firebase_perf)
 	api(Libs.firebase_dynamic_links)

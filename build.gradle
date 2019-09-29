@@ -189,5 +189,5 @@ allprojects {
 }
 
 releasesHub {
-	excludes = ["com.android.billingclient:billing", "com.facebook.android"]
+	excludes = ["com.android.billingclient:billing", "com.facebook.android", "org.slf4j"]
 }
