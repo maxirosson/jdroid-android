@@ -6,10 +6,10 @@ object Libs {
     // https://firebase.google.com/support/release-notes/android
     const val firebase_ads = "com.google.firebase:firebase-ads:18.2.0"
     const val firebase_analytics = "com.google.firebase:firebase-analytics:17.2.0"
-    const val firebase_auth = "com.google.firebase:firebase-auth:19.1.0"
+    const val firebase_auth = "com.google.firebase:firebase-auth:19.0.0"
     const val firebase_appindexing = "com.google.firebase:firebase-appindexing:19.0.0"
     const val firebase_client_android = "com.firebase:firebase-client-android:2.5.2"
-    const val firebase_config = "com.google.firebase:firebase-config:19.0.1"
+    const val firebase_config = "com.google.firebase:firebase-config:19.0.2"
     const val firebase_database = "com.google.firebase:firebase-database:19.1.0"
     const val firebase_dynamic_links = "com.google.firebase:firebase-dynamic-links:19.0.0"
     const val firebase_perf = "com.google.firebase:firebase-perf:19.0.0"
