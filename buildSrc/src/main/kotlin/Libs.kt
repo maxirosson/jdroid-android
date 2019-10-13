@@ -28,7 +28,7 @@ object Libs {
     const val androidx_vectordrawable = "androidx.vectordrawable:vectordrawable:1.1.0"
 
     // https://developer.android.com/jetpack/androidx/releases/room
-    const val androidx_room_runtime = "androidx.room:room-runtime:2.1.0"
+    const val androidx_room_runtime = "androidx.room:room-runtime:2.2.0"
     const val androidx_room_compiler = "androidx.room:room-compiler:2.1.0"
 
     const val jdroid_firebase_dynamiclinks = "com.jdroidtools:jdroid-java-firebase-dynamiclinks:1.0.0"
