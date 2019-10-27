@@ -27,5 +27,3 @@ fun <T : Parcelable> Intent.requireParcelableExtra(name: String): T {
 fun <T : Parcelable> Intent.requiredParcelableArrayListExtra(name: String): ArrayList<T> {
     return getParcelableArrayListExtra(name)!!
 }
-
-
