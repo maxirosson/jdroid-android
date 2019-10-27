@@ -96,6 +96,12 @@ object SplitInstallHelper {
                                 moduleInstallListener.onFailure()
                                 splitInstallManager.unregisterListener(this)
                             }
+                            SplitInstallSessionStatus.UNKNOWN -> {
+                                LOGGER.debug("Split install [$moduleName] unknown status")
+                                AbstractApplication.get().coreAnalyticsSender.trackSplitInstallStatus(moduleName, state)
+                                moduleInstallListener.onFailure()
+                                splitInstallManager.unregisterListener(this)
+                            }
                         }
                     }
                 }

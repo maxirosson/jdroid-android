@@ -166,6 +166,10 @@ class FirebaseCoreAnalyticsTracker : AbstractFirebaseAnalyticsTracker(), CoreAna
             SplitInstallSessionStatus.CANCELED -> {
                 evenName = "split_install_canceled"
             }
+            SplitInstallSessionStatus.UNKNOWN -> {
+                evenName = "split_install_unknown"
+            }
+            else -> { }
         }
         if (evenName != null) {
             getFirebaseAnalyticsFacade().sendEvent(evenName, params)
