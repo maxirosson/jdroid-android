@@ -127,19 +127,22 @@ jobs:
       - run:
           name: Save test results
           command: |
+            modules_file="buildSrc/src/main/kotlin/Module.kt"
             destination="test-results"
             while read line
             do
-              module=$(echo "$line" | sed -E "s/include \":(.+)\"/\1/g")
+              module=$(echo "$line" | sed -nE "s/.+\(\":(.+)\"\)[,;]/\1/p")
               module="${module//://}" #replace ':' by "/"
-              reports_dir="./${module}/build/reports/tests/testDebugUnitTest"
-              if [[ -d "${reports_dir}" ]]; then
+              if [[ ! -z "$module" ]]; then
+                reports_dir="./${module}/build/reports/tests/testDebugUnitTest"
+                if [[ -d "${reports_dir}" ]]; then
                 if [[ ! -d "${destination}/${module}" ]]; then
                   mkdir -p "${destination}/${module}"
                 fi
-                cp -R "${reports_dir}/." "${destination}/${module}/" || :
+                  cp -R "${reports_dir}/." "${destination}/${module}/" || :
+                fi
               fi
-            done < "settings.gradle"
+            done < "$modules_file"
           when: always
 
       - store_artifacts:
@@ -159,18 +162,21 @@ jobs:
       - run:
           name: Save lint results
           command: |
+            modules_file="buildSrc/src/main/kotlin/Module.kt"
             destination="lint-results"
             file_name="lint-results.html"
             while read line
             do
-              module=$(echo "$line" | sed -E "s/include \":(.+)\"/\1/g")
+              module=$(echo "$line" | sed -nE "s/.+\(\":(.+)\"\)[,;]/\1/p")
               module="${module//://}" #replace ':' by "/"
-              lint_result="./${module}/build/reports/${file_name}"
-              if [[ ! -d "${destination}/${module}" ]]; then
-                mkdir -p "${destination}/${module}"
+              if [[ ! -z "$module" ]]; then
+                lint_result="./${module}/build/reports/${file_name}"
+                if [[ ! -d "${destination}/${module}" ]]; then
+                  mkdir -p "${destination}/${module}"
+                fi
+                cp "$lint_result" "${destination}/${module}/${file_name}" || :
               fi
-              cp "$lint_result" "${destination}/${module}/${file_name}" || :
-            done < "settings.gradle"
+            done < "$modules_file"
           when: always
 
       - store_artifacts:

@@ -1,17 +1,3 @@
-include ":jdroid-android-core"
-include ":jdroid-android-about"
-include ":jdroid-android-firebase-admob"
-include ":jdroid-android-firebase-crashlytics"
-include ":jdroid-android-firebase-database"
-include ":jdroid-android-firebase-fcm"
-include ":jdroid-android-firebase-remoteconfig"
-include ":jdroid-android-glide"
-include ":jdroid-android-google-inappbilling"
-include ":jdroid-android-google-play-games"
-include ":jdroid-android-google-signin"
-include ":jdroid-android-google-maps"
-include ":jdroid-android-facebook-login"
-include ":jdroid-android-room"
-include ":jdroid-android-sample"
-include ":features:dynamic_feature_sample"
-include ":jdroid-android-twitter"
+Module.values().each { module ->
+	include(module.moduleName)
+}

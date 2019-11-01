@@ -11,8 +11,8 @@ buildscript {
 
 dependencies {
 
-	api project(":jdroid-android-core")
-	implementation project(":jdroid-android-google-signin")
+	api project(Module.JDROID_ANDROID_CORE.moduleName)
+	implementation project(Module.JDROID_ANDROID_GOOGLE_SIGNIN.moduleName)
 
 	api(Libs.play_services_games)
 

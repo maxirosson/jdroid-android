@@ -15,7 +15,7 @@ buildscript {
 
 dependencies {
 
-	api project(":jdroid-android-sample")
+	api project(Module.JDROID_ANDROID_SAMPLE.moduleName)
 
 }
 
