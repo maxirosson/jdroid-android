@@ -80,7 +80,7 @@ object Libs {
     const val slf4j_android = "org.slf4j:slf4j-android:1.6.1-RC1"
 
     // https://github.com/bumptech/glide/releases
-    const val glide = "com.github.bumptech.glide:glide:4.9.0"
+    const val glide = "com.github.bumptech.glide:glide:4.10.0"
     const val glide_compiler = "com.github.bumptech.glide:compiler:4.9.0"
     const val glide_okhttp3 = "com.github.bumptech.glide:okhttp3-integration:4.9.0"
 
