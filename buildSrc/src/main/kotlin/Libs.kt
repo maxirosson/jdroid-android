@@ -5,12 +5,12 @@ object Libs {
 
     // https://firebase.google.com/support/release-notes/android
     const val firebase_ads = "com.google.firebase:firebase-ads:18.2.0"
-    const val firebase_analytics = "com.google.firebase:firebase-analytics:17.2.0"
+    const val firebase_analytics = "com.google.firebase:firebase-analytics:17.2.1"
     const val firebase_auth = "com.google.firebase:firebase-auth:19.1.0"
     const val firebase_appindexing = "com.google.firebase:firebase-appindexing:19.0.0"
     const val firebase_client_android = "com.firebase:firebase-client-android:2.5.2"
-    const val firebase_config = "com.google.firebase:firebase-config:19.0.2"
-    const val firebase_database = "com.google.firebase:firebase-database:19.1.0"
+    const val firebase_config = "com.google.firebase:firebase-config:19.0.3"
+    const val firebase_database = "com.google.firebase:firebase-database:19.2.0"
     const val firebase_dynamic_links = "com.google.firebase:firebase-dynamic-links:19.0.0"
     const val firebase_perf = "com.google.firebase:firebase-perf:19.0.1"
 
@@ -28,8 +28,8 @@ object Libs {
     const val androidx_vectordrawable = "androidx.vectordrawable:vectordrawable:1.1.0"
 
     // https://developer.android.com/jetpack/androidx/releases/room
-    const val androidx_room_runtime = "androidx.room:room-runtime:2.2.0"
-    const val androidx_room_compiler = "androidx.room:room-compiler:2.2.0"
+    const val androidx_room_runtime = "androidx.room:room-runtime:2.2.1"
+    const val androidx_room_compiler = "androidx.room:room-compiler:2.2.1"
 
     const val jdroid_firebase_dynamiclinks = "com.jdroidtools:jdroid-java-firebase-dynamiclinks:1.0.0"
 
