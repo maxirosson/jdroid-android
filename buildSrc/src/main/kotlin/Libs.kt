@@ -4,7 +4,7 @@ object Libs {
     const val play_core = "com.google.android.play:core:1.6.4"
 
     // https://firebase.google.com/support/release-notes/android
-    const val firebase_ads = "com.google.firebase:firebase-ads:18.2.0"
+    const val firebase_ads = "com.google.firebase:firebase-ads:18.3.0"
     const val firebase_analytics = "com.google.firebase:firebase-analytics:17.2.1"
     const val firebase_auth = "com.google.firebase:firebase-auth:19.1.0"
     const val firebase_appindexing = "com.google.firebase:firebase-appindexing:19.0.0"
