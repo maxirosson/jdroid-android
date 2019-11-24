@@ -1,3 +1,5 @@
 Module.values().each { module ->
 	include(module.moduleName)
 }
+
+apply from: new File(settingsDir, "buildCacheSettings.gradle")
