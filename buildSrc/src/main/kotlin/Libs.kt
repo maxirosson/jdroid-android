@@ -46,7 +46,7 @@ object Libs {
     const val firebase_messaging = "com.google.firebase:firebase-messaging:20.0.0"
 
     // https://github.com/firebase/firebase-jobdispatcher-android/releases
-    @Deprecated(message = "Use workmanager")
+    @Deprecated("Use workmanager")
     const val firebase_jobdispatcher = "com.firebase:firebase-jobdispatcher:0.8.6"
 
     const val crashlytics = "com.crashlytics.sdk.android:crashlytics:2.10.1"
@@ -69,9 +69,9 @@ object Libs {
     const val leakcanary_no_op = "com.squareup.leakcanary:leakcanary-android-no-op:1.6.3"
 
     // https://github.com/InsertKoinIO/koin/blob/master/CHANGELOG.md
-    @Deprecated(message = "Use dagger")
+    @Deprecated("Use dagger")
     const val koin = "org.koin:koin-android:2.0.1"
-    @Deprecated(message = "Use dagger")
+    @Deprecated("Use dagger")
     const val koin_viewmodel = "org.koin:koin-androidx-viewmodel:2.0.1"
 
     // https://github.com/twitter/twitter-kit-android/wiki/Changelog

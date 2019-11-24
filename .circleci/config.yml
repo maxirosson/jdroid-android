@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 
 references:
 
@@ -21,9 +21,8 @@ references:
         - ~/.gradle
         - ~/.m2
 
-  ## Docker image configurations
-
-  android_config: &android_config
+executors:
+  android_executor:
     working_directory: *workspace
     docker:
       - image: circleci/android:api-28
@@ -34,33 +33,58 @@ references:
       PRE_DEX_LIBRARIES: false
       JAVA_MAX_HEAP_SIZE: 4096m
 
-  gcloud_config: &gcloud_config
+  gcloud_executor:
     working_directory: *workspace
     docker:
       - image: google/cloud-sdk:latest
 
 
-  # Commands
+commands:
+  restore_gradle_cache:
+    steps:
+      - restore_cache:
+          keys:
+            - v2-gradle_cache-{{ .Branch }}-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}-{{ checksum "buildSrc/src/main/kotlin/Libs.kt" }}-{{ checksum "buildSrc/src/main/kotlin/BuildLibs.kt" }}
+            - v2-gradle_cache-{{ .Branch }}
+            - v2-gradle_cache-
 
-  gcloud_auth: &gcloud_auth
-    run:
-      name: Authenticating on gcloud
-      command: |
-        echo "$GOOGLE_SERVICE_ACCOUNT" > /tmp/service-account.json
-        gcloud auth activate-service-account --key-file=/tmp/service-account.json --project=jdroid-staging
+  save_gradle_cache:
+    steps:
+      - save_cache:
+          key: v2-gradle_cache-{{ .Branch }}-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}-{{ checksum "buildSrc/src/main/kotlin/Libs.kt" }}-{{ checksum "buildSrc/src/main/kotlin/BuildLibs.kt" }}
+          paths:
+            - ~/.gradle
+            - ~/.m2
+
+  attach_to_workspace:
+    steps:
+      - attach_workspace:
+          at: *workspace
+
+  persist_gradle_build_cache:
+    steps:
+      - persist_to_workspace:
+          root: *workspace
+          paths:
+            - gradle-build-cache
+
+  gcloud_auth:
+    steps:
+      - run:
+          name: Authenticating on gcloud
+          command: |
+            echo "$GOOGLE_SERVICE_ACCOUNT" > /tmp/service-account.json
+            gcloud auth activate-service-account --key-file=/tmp/service-account.json --project=jdroid-staging
 
 jobs:
   build:
-    <<: *android_config
+    executor: android_executor
     steps:
       - checkout
-
-      - *restore_cache
+      - restore_gradle_cache
       - run:
           name: Download dependencies
           command: ./gradlew androidDependencies --refresh-dependencies --stacktrace
-      - *save_cache
-
       - run:
           name: Assembling Components
           command: |
@@ -78,13 +102,15 @@ jobs:
             ./gradlew jdroid-android-google-play-games:assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
             ./gradlew jdroid-android-google-signin:assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
             ./gradlew jdroid-android-room:assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
+      - save_gradle_cache
+      - persist_gradle_build_cache
 
   buildSample:
-    <<: *android_config
+    executor: android_executor
     steps:
       - checkout
-      - *restore_cache
-
+      - restore_gradle_cache
+      - attach_to_workspace
       - run:
           name: Assembling Samples
           command: |
@@ -105,15 +131,14 @@ jobs:
           destination: apks
 
   unitTest:
-    <<: *android_config
+    executor: android_executor
     steps:
       - checkout
-      - *restore_cache
-
+      - restore_gradle_cache
+      - attach_to_workspace
       - run: 
           name: Testing
           command: ./gradlew testDebugUnitTest -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
-
       - run:
           name: Save test XML results
           command: |
@@ -150,15 +175,14 @@ jobs:
           destination: test-results
 
   lint:
-    <<: *android_config
+    executor: android_executor
     steps:
       - checkout
-      - *restore_cache
-
-      - run: 
+      - restore_gradle_cache
+      - attach_to_workspace
+      - run:
           name: Linting
           command: ./gradlew lint --stacktrace
-
       - run:
           name: Save lint results
           command: |
@@ -184,7 +208,7 @@ jobs:
           destination: lint-results
 
   ktlint:
-    <<: *android_config
+    executor: android_executor
     steps:
       - checkout
       - *restore_cache
@@ -192,22 +216,20 @@ jobs:
       - run: ./gradlew ktlint --stacktrace
 
   publish:
-    <<: *android_config
+    executor: android_executor
     steps:
       - checkout
-      - *restore_cache
-
-      # TODO We shouldn't need the --refresh-dependencies if we persist the workspace
+      - restore_gradle_cache
       - run:
           name: Uploading to Nexus Sonatype
-          command: ./gradlew publish -PLOCAL_UPLOAD=false -PRELEASE_BUILD_TYPE_ENABLED=true -PFAKE_RELEASE_BUILD_TYPE_ENABLED=true --stacktrace --refresh-dependencies
+          command: ./gradlew publish -PLOCAL_UPLOAD=false -PRELEASE_BUILD_TYPE_ENABLED=true -PFAKE_RELEASE_BUILD_TYPE_ENABLED=true --stacktrace
 
   buildAutomationTest:
-    <<: *android_config
+    executor: android_executor
     steps:
     - checkout
-    - *restore_cache
-
+    - restore_gradle_cache
+    - attach_to_workspace
     - run:
         name: Assembling automation & android test APKs
         command: |
@@ -215,10 +237,10 @@ jobs:
           for file in "./jdroid-android-sample/build/outputs/apk/automation"/*.apk; do mv ${file} ./jdroid-android-sample/build/outputs/apk/automation/jdroid-automation.apk; done
 
     - persist_to_workspace:
-        root: jdroid-android-sample/build/outputs/apk
+        root: .
         paths:
-          - automation/jdroid-automation.apk
-          - androidTest/automation/jdroid-android-sample-automation-androidTest.apk
+          - jdroid-android-sample/build/outputs/apk/automation/jdroid-automation.apk
+          - jdroid-android-sample/build/outputs/apk/androidTest/automation/jdroid-android-sample-automation-androidTest.apk
 
     - store_artifacts:
         path: ./jdroid-android-sample/build/outputs/apk/automation/jdroid-automation.apk
@@ -228,30 +250,22 @@ jobs:
         destination: jdroid-android-sample-automation-androidTest.apk
 
   runRoboTest:
-    <<: *gcloud_config
+    executor: gcloud_executor
     steps:
     - checkout
-
-    - attach_workspace:
-        at: jdroid-android-sample/build/outputs/apk
-
-    - *gcloud_auth
-
+    - attach_to_workspace
+    - gcloud_auth
     - run:
         name: Running Robo tests
         command: gcloud firebase test android run firebase_test_lab.yml:robo-tests-virtual --async --app ./jdroid-android-sample/build/outputs/apk/automation/jdroid-automation.apk
         no_output_timeout: 30m
 
   runInstrumentationTest:
-    <<: *gcloud_config
+    executor: gcloud_executor
     steps:
     - checkout
-
-    - attach_workspace:
-        at: jdroid-android-sample/build/outputs/apk
-
-    - *gcloud_auth
-
+    - attach_to_workspace
+    - gcloud_auth
     - run:
         name: Running Instrumentation tests
         command: |
@@ -260,19 +274,21 @@ jobs:
         no_output_timeout: 30m
 
   upgradeDependencies:
-    <<: *android_config
+    executor: anddroid_executor
     steps:
     - checkout
+    - restore_gradle_cache
     - run:
         name: Upgrade Dependencies
         command: ./gradlew upgradeDependencies -PpullRequestEnabled=true --stacktrace
 
 workflows:
-  version: 2
   commit:
     jobs:
       - ktlint
-      - build
+      - build:
+          requires:
+            - ktlint
       - lint:
           requires:
             - build
