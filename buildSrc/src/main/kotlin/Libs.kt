@@ -43,7 +43,7 @@ object Libs {
     const val jdroid_java_firebase_database = "com.jdroidtools:jdroid-java-firebase-database:3.0.0"
 
     // https://firebase.google.com/support/release-notes/android
-    const val firebase_messaging = "com.google.firebase:firebase-messaging:20.0.0"
+    const val firebase_messaging = "com.google.firebase:firebase-messaging:20.0.1"
 
     // https://github.com/firebase/firebase-jobdispatcher-android/releases
     @Deprecated(message = "Use workmanager")
