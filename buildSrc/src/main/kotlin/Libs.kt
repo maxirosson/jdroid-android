@@ -54,7 +54,7 @@ object Libs {
     // https://developers.google.com/android/guides/releases
     const val play_services_base = "com.google.android.gms:play-services-base:17.1.0"
     const val play_services_maps = "com.google.android.gms:play-services-maps:17.0.0"
-    const val play_services_games = "com.google.android.gms:play-services-games:18.0.1"
+    const val play_services_games = "com.google.android.gms:play-services-games:19.0.0"
     const val play_services_auth = "com.google.android.gms:play-services-auth:17.0.0"
 
     // https://jcenter.bintray.com/com/android/billingclient/billing/
