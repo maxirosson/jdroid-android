@@ -274,7 +274,7 @@ jobs:
         no_output_timeout: 30m
 
   upgradeDependencies:
-    executor: anddroid_executor
+    executor: android_executor
     steps:
     - checkout
     - restore_gradle_cache
