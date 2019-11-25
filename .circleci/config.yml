@@ -2,14 +2,12 @@ version: 2.1
 
 references:
 
-  ## Workspace
-
-  workspace: &workspace
-    ~/workspace
+  working_dir: &working_dir
+                 ~/project
 
 executors:
   android_executor:
-    working_directory: *workspace
+    working_directory: *working_dir
     docker:
       - image: circleci/android:api-28
     environment:
@@ -20,7 +18,7 @@ executors:
       JAVA_MAX_HEAP_SIZE: 4096m
 
   gcloud_executor:
-    working_directory: *workspace
+    working_directory: *working_dir
     docker:
       - image: google/cloud-sdk:latest
 
@@ -45,12 +43,12 @@ commands:
   attach_to_workspace:
     steps:
       - attach_workspace:
-          at: *workspace
+          at: ~/
 
   persist_gradle_build_cache:
     steps:
       - persist_to_workspace:
-          root: *workspace
+          root: ~/
           paths:
             - gradle-build-cache
 
@@ -223,10 +221,10 @@ jobs:
           for file in "./jdroid-android-sample/build/outputs/apk/automation"/*.apk; do mv ${file} ./jdroid-android-sample/build/outputs/apk/automation/jdroid-automation.apk; done
 
     - persist_to_workspace:
-        root: .
+        root: ~/
         paths:
-          - jdroid-android-sample/build/outputs/apk/automation/jdroid-automation.apk
-          - jdroid-android-sample/build/outputs/apk/androidTest/automation/jdroid-android-sample-automation-androidTest.apk
+          - project/jdroid-android-sample/build/outputs/apk/automation/jdroid-automation.apk
+          - project/jdroid-android-sample/build/outputs/apk/androidTest/automation/jdroid-android-sample-automation-androidTest.apk
 
     - store_artifacts:
         path: ./jdroid-android-sample/build/outputs/apk/automation/jdroid-automation.apk
