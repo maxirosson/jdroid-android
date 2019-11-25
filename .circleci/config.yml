@@ -205,6 +205,7 @@ jobs:
     steps:
       - checkout
       - restore_gradle_cache
+      - attach_to_workspace
       - run:
           name: Uploading to Nexus Sonatype
           command: ./gradlew publish -PLOCAL_UPLOAD=false -PRELEASE_BUILD_TYPE_ENABLED=true -PFAKE_RELEASE_BUILD_TYPE_ENABLED=true --stacktrace
