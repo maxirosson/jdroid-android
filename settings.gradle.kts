@@ -1,3 +1,7 @@
+plugins {
+	id("com.gradle.enterprise").version("3.1.1")
+}
+
 val regex = Regex("\\(\"([^,]*)\"\\)")
 File(rootDir, "buildSrc/src/main/kotlin/Module.kt").forEachLine { line ->
 	val matchResult = regex.find(line.trim())
