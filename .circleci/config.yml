@@ -269,10 +269,10 @@ jobs:
 workflows:
   commit:
     jobs:
-      - ktlint
-      - build:
+      - build
+      - ktlint:
           requires:
-            - ktlint
+            - build
       - lint:
           requires:
             - build
@@ -290,6 +290,7 @@ workflows:
           requires:
             - unitTest
             - lint
+            - ktlint
   nightly:
     triggers:
       - schedule:
