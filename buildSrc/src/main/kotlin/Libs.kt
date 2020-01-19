@@ -6,20 +6,20 @@ object Libs {
     // https://firebase.google.com/support/release-notes/android
     const val firebase_ads = "com.google.firebase:firebase-ads:18.3.0"
     const val firebase_analytics = "com.google.firebase:firebase-analytics:17.2.1"
-    const val firebase_auth = "com.google.firebase:firebase-auth:19.1.0"
+    const val firebase_auth = "com.google.firebase:firebase-auth:19.2.0"
     const val firebase_appindexing = "com.google.firebase:firebase-appindexing:19.0.0"
     const val firebase_client_android = "com.firebase:firebase-client-android:2.5.2"
-    const val firebase_config = "com.google.firebase:firebase-config:19.0.3"
+    const val firebase_config = "com.google.firebase:firebase-config:19.1.0"
     const val firebase_database = "com.google.firebase:firebase-database:19.2.0"
     const val firebase_dynamic_links = "com.google.firebase:firebase-dynamic-links:19.0.0"
-    const val firebase_perf = "com.google.firebase:firebase-perf:19.0.1"
+    const val firebase_perf = "com.google.firebase:firebase-perf:19.0.4"
 
     // https://developer.android.com/topic/libraries/support-library/androidx-rn
     const val androidx_annotation = "androidx.annotation:annotation:1.1.0"
     const val androidx_appcompat = "androidx.appcompat:appcompat:1.1.0"
     const val androidx_cardview = "androidx.cardview:cardview:1.0.0"
     const val androidx_core = "androidx.core:core:1.1.0"
-    const val androidx_coordinatorlayout = "androidx.coordinatorlayout:coordinatorlayout:1.0.0"
+    const val androidx_coordinatorlayout = "androidx.coordinatorlayout:coordinatorlayout:1.1.0"
     const val androidx_drawerlayout = "androidx.drawerlayout:drawerlayout:1.0.0"
     const val androidx_fragment = "androidx.fragment:fragment:1.1.0"
     const val androidx_lifecycle = "androidx.lifecycle:lifecycle-extensions:2.1.0"
@@ -28,8 +28,8 @@ object Libs {
     const val androidx_vectordrawable = "androidx.vectordrawable:vectordrawable:1.1.0"
 
     // https://developer.android.com/jetpack/androidx/releases/room
-    const val androidx_room_runtime = "androidx.room:room-runtime:2.2.2"
-    const val androidx_room_compiler = "androidx.room:room-compiler:2.2.2"
+    const val androidx_room_runtime = "androidx.room:room-runtime:2.2.3"
+    const val androidx_room_compiler = "androidx.room:room-compiler:2.2.3"
 
     const val jdroid_firebase_dynamiclinks = "com.jdroidtools:jdroid-java-firebase-dynamiclinks:1.0.0"
 
@@ -43,7 +43,7 @@ object Libs {
     const val jdroid_java_firebase_database = "com.jdroidtools:jdroid-java-firebase-database:3.0.0"
 
     // https://firebase.google.com/support/release-notes/android
-    const val firebase_messaging = "com.google.firebase:firebase-messaging:20.0.0"
+    const val firebase_messaging = "com.google.firebase:firebase-messaging:20.1.0"
 
     // https://github.com/firebase/firebase-jobdispatcher-android/releases
     @Deprecated("Use workmanager")
@@ -88,7 +88,7 @@ object Libs {
     const val facebook_core = "com.facebook.android:facebook-core:4.41.0"
     const val facebook_login = "com.facebook.android:facebook-login:4.41.0"
 
-    const val junit = "junit:junit:4.12"
+    const val junit = "junit:junit:4.13"
 
     // https://github.com/robolectric/robolectric
     const val robolectric = "org.robolectric:robolectric:4.3.1"
