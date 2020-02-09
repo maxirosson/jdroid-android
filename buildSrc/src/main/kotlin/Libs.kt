@@ -18,7 +18,7 @@ object Libs {
     const val androidx_annotation = "androidx.annotation:annotation:1.1.0"
     const val androidx_appcompat = "androidx.appcompat:appcompat:1.1.0"
     const val androidx_cardview = "androidx.cardview:cardview:1.0.0"
-    const val androidx_core = "androidx.core:core:1.1.0"
+    const val androidx_core = "androidx.core:core:1.2.0"
     const val androidx_coordinatorlayout = "androidx.coordinatorlayout:coordinatorlayout:1.1.0"
     const val androidx_drawerlayout = "androidx.drawerlayout:drawerlayout:1.0.0"
     const val androidx_fragment = "androidx.fragment:fragment:1.1.0"
