@@ -21,7 +21,7 @@ object Libs {
     const val androidx_core = "androidx.core:core:1.1.0"
     const val androidx_coordinatorlayout = "androidx.coordinatorlayout:coordinatorlayout:1.1.0"
     const val androidx_drawerlayout = "androidx.drawerlayout:drawerlayout:1.0.0"
-    const val androidx_fragment = "androidx.fragment:fragment:1.2.0"
+    const val androidx_fragment = "androidx.fragment:fragment:1.2.1"
     const val androidx_lifecycle = "androidx.lifecycle:lifecycle-extensions:2.1.0"
     const val androidx_recyclerview = "androidx.recyclerview:recyclerview:1.1.0"
     const val androidx_swiperefreshlayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
