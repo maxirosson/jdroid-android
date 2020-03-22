@@ -29,7 +29,7 @@ object Libs {
 
     // https://developer.android.com/jetpack/androidx/releases/room
     const val androidx_room_runtime = "androidx.room:room-runtime:2.2.4"
-    const val androidx_room_compiler = "androidx.room:room-compiler:2.2.4"
+    const val androidx_room_compiler = "androidx.room:room-compiler:2.2.5"
 
     const val jdroid_firebase_dynamiclinks = "com.jdroidtools:jdroid-java-firebase-dynamiclinks:1.0.0"
 
