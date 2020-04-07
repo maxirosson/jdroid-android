@@ -1,19 +1,20 @@
 package com.jdroid.android.navdrawer;
 
-import androidx.annotation.NonNull;
-import com.google.android.material.navigation.NavigationView;
-import androidx.appcompat.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.google.android.material.navigation.NavigationView;
 import com.jdroid.android.R;
 import com.jdroid.android.activity.AbstractFragmentActivity;
 import com.jdroid.android.application.AbstractApplication;
-import com.jdroid.android.context.SecurityContext;
+import com.jdroid.android.auth.SecurityContext;
 import com.jdroid.android.domain.User;
 import com.jdroid.android.images.loader.ImageViewLoader;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 
 public abstract class DefaultNavDrawer extends NavDrawer {
 
@@ -65,7 +66,7 @@ public abstract class DefaultNavDrawer extends NavDrawer {
 
 	private NavDrawerItem findNavDrawerByMenu(MenuItem menuItem) {
 		for (NavDrawerItem each : navDrawerItems) {
-			if (each.getItemId().equals(menuItem.getItemId())) {
+			if (each.getItemId() == menuItem.getItemId()) {
 				return each;
 			}
 		}
@@ -75,7 +76,7 @@ public abstract class DefaultNavDrawer extends NavDrawer {
 	protected abstract List<NavDrawerItem> createNavDrawerItems();
 
 	protected void initNavDrawerHeader(NavDrawerHeader navDrawerHeader) {
-		User user = SecurityContext.get().getUser();
+		User user = SecurityContext.INSTANCE.getUser();
 		if (user != null) {
 			String coverPictureUrl = user.getCoverPictureUrl();
 			String profilePictureUrl = user.getProfilePictureUrl();
@@ -95,7 +96,9 @@ public abstract class DefaultNavDrawer extends NavDrawer {
 			navDrawerHeader.setTitle(getActivity().getString(R.string.jdroid_appName));
 			String website = AbstractApplication.get().getAppContext().getWebsite();
 			if (website != null) {
-				navDrawerHeader.setSubTitle(website.replaceAll("http://", ""));
+				website = website.replaceAll("http://", "");
+				website = website.replaceAll("https://", "");
+				navDrawerHeader.setSubTitle(website);
 			}
 		}
 	}

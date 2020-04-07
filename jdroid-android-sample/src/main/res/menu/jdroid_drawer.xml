@@ -11,11 +11,4 @@
 				android:icon="@drawable/jdroid_ic_about_black_24dp"
 				android:title="@string/jdroid_about" />
 	</group>
-	<group android:id="@+id/groupId2"
-		   android:checkableBehavior="single">
-		<item
-				android:id="@+id/inviteFriends"
-				android:icon="@drawable/jdroid_ic_mail_outline_black_24dp"
-				android:title="@string/jdroid_appInviteButtonTitle" />
-	</group>
 </menu>

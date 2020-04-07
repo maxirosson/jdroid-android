@@ -3,7 +3,8 @@
 		  xmlns:tools="http://schemas.android.com/tools"
 		  package="com.jdroid.android.about">
 
-	<application>
+	<application
+			android:supportsRtl="false">
 
 		<activity android:name="com.jdroid.android.about.AboutActivity"
 				  android:label="@string/jdroid_about" />

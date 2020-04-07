@@ -2,14 +2,16 @@ package com.jdroid.android.google.inappbilling.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
 import android.view.View;
 
 import com.jdroid.android.google.inappbilling.client.Product;
 import com.jdroid.android.recycler.AbstractRecyclerFragment;
 import com.jdroid.android.recycler.RecyclerViewAdapter;
+import com.jdroid.android.recycler.RecyclerViewContainer;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
 
 public abstract class InAppBillingRecyclerFragment extends AbstractRecyclerFragment implements InAppBillingListener {
 
@@ -29,7 +31,7 @@ public abstract class InAppBillingRecyclerFragment extends AbstractRecyclerFragm
 
 			@NonNull
 			@Override
-			public AbstractRecyclerFragment getAbstractRecyclerFragment() {
+			public RecyclerViewContainer getRecyclerViewContainer() {
 				return InAppBillingRecyclerFragment.this;
 			}
 
@@ -53,7 +55,7 @@ public abstract class InAppBillingRecyclerFragment extends AbstractRecyclerFragm
 	@Override
 	@SuppressWarnings("rawtypes")
 	public void onConsumed(Product product) {
-		getAdapter().notifyDataSetChanged();
+		getRecyclerViewAdapter().notifyDataSetChanged();
 	}
 
 	@Override
@@ -76,7 +78,7 @@ public abstract class InAppBillingRecyclerFragment extends AbstractRecyclerFragm
 	}
 
 	@Override
-	protected Boolean isDividerItemDecorationEnabled() {
+	protected boolean isDividerItemDecorationEnabled() {
 		return true;
 	}
 }

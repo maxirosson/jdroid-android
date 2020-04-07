@@ -19,11 +19,9 @@ Libray for Android apps. Support for Android 4.0 (api level 15) and higher versi
 * Jetpack
   * [Work Manager](https://developer.android.com/topic/libraries/architecture/workmanager)
 * [Navigation Drawer support](https://developer.android.com/design/patterns/navigation-drawer.html)
-* [Google Analytics v4 integration](https://developers.google.com/analytics/devguides/collection/android/v4/)
 * [Firebase Integration](https://firebase.google.com/docs/)
   * [Firebase Analytics](https://firebase.google.com/docs/analytics/)
   * [Firebase Dynamic Links](https://firebase.google.com/docs/dynamic-links/)
-  * [Firebase Invites](https://firebase.google.com/docs/invites/)
   * [Firebase Performance Monitor](https://firebase.google.com/docs/perf-mon/)
 * [Device year class integration](https://github.com/facebook/device-year-class)
 * [Facebook Stetho Integration](https://github.com/facebook/stetho)
@@ -102,11 +100,6 @@ Libray for Android apps. Support for Android 4.0 (api level 15) and higher versi
 
 ## [jdroid-android-google-play-games](https://github.com/maxirosson/jdroid/wiki/jdroid-Android)
  * [Google Play Games Services](https://developers.google.com/games/services/) integration
-
-## [jdroid-android-google-plus](https://github.com/maxirosson/jdroid/wiki/jdroid-Android)
-
- * [Google+ integration](http://developer.android.com/google/play-services/plus.html)
-   * +1 button, share
 
 ## [jdroid-android-google-signin](https://github.com/maxirosson/jdroid/wiki/jdroid-Android)
 

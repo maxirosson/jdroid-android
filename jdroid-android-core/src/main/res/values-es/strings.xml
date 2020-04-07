@@ -13,12 +13,6 @@
 	<string name="jdroid_retry">Reintentar</string>
 	<string name="jdroid_removeAdsNow">Ocultar publicidad</string>
 
-	<!-- App Invite -->
-	<string name="jdroid_appInviteButtonTitle">Invitar Amigos</string>
-	<string name="jdroid_appInviteButtonSubtitle">Recomienda %1$s a tus amigos</string>
-	<string name="jdroid_appInviteTitle">Invitar Amigos a %1$s</string>
-	<string name="jdroid_appInviteMessage">Descarga %1$s en tu android</string>
-
 	<!-- Permissions -->
 	<string name="jdroid_requiredPermission">Permiso Requerido</string>
 	<string name="jdroid_allow">Permitir</string>
@@ -83,6 +77,9 @@
 	<!-- Linkedin -->
 	<string name="jdroid_linkedin">LinkedIn</string>
 
+	<!-- CardView -->
+	<string name="jdroid_cardViewMore">Ver Más</string>
+
 	<!-- Rate App -->
 	<string name="jdroid_rateAppEnjoying">¿Disfrutando %1$s?</string>
 	<string name="jdroid_rateAppGooglePlay">¿Le gustaría calificarnos en Google Play?</string>
@@ -91,7 +88,5 @@
 	<string name="jdroid_rateAppNotThanks">No, gracias</string>
 	<string name="jdroid_rateAppOkSure">Si</string>
 	<string name="jdroid_rateAppYes">Si</string>
-
-	<string name="jdroid_more">Ver Mas</string>
 
 </resources>

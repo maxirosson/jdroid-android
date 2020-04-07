@@ -16,7 +16,8 @@
 	<uses-feature android:glEsVersion="0x00020000"
 				  android:required="true" />
 
-	<application>
+	<application
+			android:supportsRtl="false">
 
 		<!-- https://developers.google.com/maps/documentation/android-sdk/config#specify_requirement_for_apache_http_legacy_library -->
 		<uses-library

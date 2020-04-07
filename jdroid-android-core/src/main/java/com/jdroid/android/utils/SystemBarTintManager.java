@@ -54,34 +54,31 @@ public class SystemBarTintManager {
 	 *
 	 * @param activity The host activity.
 	 */
-	@TargetApi(19)
 	public SystemBarTintManager(Activity activity) {
 
 		Window win = activity.getWindow();
 		ViewGroup decorViewGroup = (ViewGroup)win.getDecorView();
 
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-			// check theme attrs
-			int[] attrs = { android.R.attr.windowTranslucentStatus, android.R.attr.windowTranslucentNavigation };
-			TypedArray a = activity.obtainStyledAttributes(attrs);
-			try {
-				mStatusBarAvailable = a.getBoolean(0, false);
-				//noinspection ResourceType
-				mNavBarAvailable = a.getBoolean(1, false);
-			} finally {
-				a.recycle();
-			}
+		// check theme attrs
+		int[] attrs = { android.R.attr.windowTranslucentStatus, android.R.attr.windowTranslucentNavigation };
+		TypedArray a = activity.obtainStyledAttributes(attrs);
+		try {
+			mStatusBarAvailable = a.getBoolean(0, false);
+			//noinspection ResourceType
+			mNavBarAvailable = a.getBoolean(1, false);
+		} finally {
+			a.recycle();
+		}
 
-			// check window flags
-			WindowManager.LayoutParams winParams = win.getAttributes();
-			int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
-			if ((winParams.flags & bits) != 0) {
-				mStatusBarAvailable = true;
-			}
-			bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION;
-			if ((winParams.flags & bits) != 0) {
-				mNavBarAvailable = true;
-			}
+		// check window flags
+		WindowManager.LayoutParams winParams = win.getAttributes();
+		int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+		if ((winParams.flags & bits) != 0) {
+			mStatusBarAvailable = true;
+		}
+		bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION;
+		if ((winParams.flags & bits) != 0) {
+			mNavBarAvailable = true;
 		}
 
 		mConfig = new SystemBarConfig(activity, mStatusBarAvailable, mNavBarAvailable);

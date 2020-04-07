@@ -1,95 +1,87 @@
-apply plugin: 'com.jdroid.android.library'
+apply from: "$rootDir/module.gradle"
 
-ext.PROJECT_NAME = 'Jdroid Android'
-description = 'Jdroid dependency project for Android apps'
+ext.PROJECT_NAME = "Jdroid Android"
+description = "Jdroid dependency project for Android apps"
 
 configurations {
 	compile.exclude group: "org.apache.httpcomponents", module: "httpclient"
-	compile.exclude group: "org.slf4j", module: "slf4j-api"
-}
-
-configurations.all {
-	// check for updates every build
-	resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
 }
 
 buildscript {
 	dependencies {
-		classpath "com.jdroidtools:jdroid-gradle-android-plugin:${JDROID_GRADLE_PLUGIN_VERSION}"
+		classpath(BuildLibs.jdroid_gradle_android_plugin)
 	}
 }
 
 dependencies {
 
-	api 'org.slf4j:slf4j-android:1.6.1-RC1'
+	api(Libs.slf4j_android)
 
-	api 'com.google.android.material:material:1.0.0'
+	api(Libs.google_material)
 
 	// https://developer.android.com/topic/libraries/support-library/androidx-rn
-	api 'androidx.annotation:annotation:1.0.0'
-	api 'androidx.appcompat:appcompat:1.0.0'
-	api 'androidx.cardview:cardview:1.0.0'
-	api 'androidx.core:core:1.0.0'
-	api 'androidx.coordinatorlayout:coordinatorlayout:1.0.0'
-	api 'androidx.drawerlayout:drawerlayout:1.0.0'
-	api 'androidx.fragment:fragment:1.0.0'
-	api 'androidx.recyclerview:recyclerview:1.0.0'
-	api 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
-	api 'androidx.vectordrawable:vectordrawable:1.0.0'
+	api(Libs.androidx_annotation)
+	api(Libs.androidx_appcompat)
+	api(Libs.androidx_cardview)
+	api(Libs.androidx_core)
+	api(Libs.androidx_coordinatorlayout)
+	api(Libs.androidx_drawerlayout)
+	api(Libs.androidx_fragment)
+	api(Libs.androidx_recyclerview)
+	api(Libs.androidx_swiperefreshlayout)
+	api(Libs.androidx_vectordrawable)
+	api(Libs.androidx_lifecycle)
 
 	// https://developers.google.com/android/guides/releases
-	api "com.google.android.gms:play-services-analytics:16.0.4"
-	api "com.google.android.gms:play-services-base:16.0.1"
+	api(Libs.play_services_base)
+
+	api(Libs.play_core)
 
 	// https://firebase.google.com/support/release-notes/android
-	api "com.google.firebase:firebase-core:16.0.4"
-	api "com.google.firebase:firebase-appindexing:16.0.2"
-	api "com.google.firebase:firebase-invites:16.0.4"
-	api "com.google.firebase:firebase-perf:16.1.2"
+	api(Libs.firebase_analytics)
+	api(Libs.firebase_appindexing)
+	api(Libs.firebase_perf)
+	api(Libs.firebase_dynamic_links)
 
 	// https://developer.android.com/jetpack/docs/release-notes
 	api 'android.arch.work:work-runtime:1.0.0-alpha10'
 	implementation 'android.arch.work:work-firebase:1.0.0-alpha10'
 
-	debugApi("com.squareup.leakcanary:leakcanary-android:${LEAK_CANARY_VERSION}") { force = true }
-	releaseApi("com.squareup.leakcanary:leakcanary-android-no-op:${LEAK_CANARY_VERSION}") { force = true }
-	testImplementation("com.squareup.leakcanary:leakcanary-android-no-op:${LEAK_CANARY_VERSION}") { force = true }
+	api(Libs.koin)
+	api(Libs.koin_viewmodel)
 
-	// https://github.com/facebook/device-year-class/blob/master/CHANGELOG.md
-	api 'com.facebook.device.yearclass:yearclass:2.1.0'
+	debugApi(Libs.leakcanary) { force = true }
+	releaseApi(Libs.leakcanary_no_op) { force = true }
+	testImplementation(Libs.leakcanary_no_op) { force = true }
+
+	api(Libs.facebook_yearclass)
 
 	// Jdroid dependencies
 
 	if (jdroid.propertyResolver.getBooleanProp("JDROID_JAVA_AS_PROJECT_DEPENDENCY", false)) {
-		api project(":jdroid-java-core")
-		api project(":jdroid-java-remote-config")
+		api project(":jdroid-java-core") {
+			exclude group: "org.slf4j", module: "slf4j-api"
+		}
+		api project(":jdroid-java-remote-config") {
+			exclude group: "org.slf4j", module: "slf4j-api"
+		}
 	} else {
-		api("com.jdroidtools:jdroid-java-core:${JDROID_JAVA_VERSION}")
-		api("com.jdroidtools:jdroid-java-remote-config:${JDROID_JAVA_VERSION}")
+		api(Libs.jdroid_java_core) {
+			exclude group: "org.slf4j", module: "slf4j-api"
+		}
+		api(Libs.jdroid_java_remote_config) {
+			exclude group: "org.slf4j", module: "slf4j-api"
+		}
 	}
 
 	if (jdroid.propertyResolver.getBooleanProp("JDROID_JAVA_HTTP_AS_PROJECT_DEPENDENCY", false)) {
 		api project(":jdroid-java-http-core")
 	} else {
-		api("com.jdroidtools:jdroid-java-http-core:${JDROID_JAVA_HTTP_VERSION}") {
-			exclude module: 'jdroid-java-core'
+		api(Libs.jdroid_java_http_core) {
+			exclude module: "jdroid-java-core"
 		}
 	}
 
-	testImplementation "junit:junit:${JUNIT_VERSION}"
-	testImplementation "org.robolectric:robolectric:${ROBOLECTRIC_VERSION}"
-}
-
-jdroid {
-	notDefaultLanguages = ['es']
-}
-
-android {
-	sourceSets.test.java.srcDirs += "build/generated/source/r/debug"
-	sourceSets.test.java.srcDirs += sourceSets.main.java.srcDirs
-	sourceSets.test.java.srcDirs += sourceSets.debug.java.srcDirs
-	sourceSets.test.resources.srcDirs += sourceSets.main.resources.srcDirs
-	sourceSets.test.resources.srcDirs += sourceSets.debug.resources.srcDirs
-	sourceSets.test.res.srcDirs += sourceSets.main.res.srcDirs
-	sourceSets.test.res.srcDirs += sourceSets.debug.res.srcDirs
+	testImplementation(Libs.junit)
+	testImplementation(Libs.robolectric)
 }

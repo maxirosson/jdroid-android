@@ -3,7 +3,8 @@
 		  xmlns:tools="http://schemas.android.com/tools"
 		  package="com.jdroid.android.firebase.fcm">
 
-	<application>
+	<application
+			android:supportsRtl="false">
 
 		<meta-data android:name="com.jdroid.android.firebase.fcm.FcmApplicationLifecycleCallback"
 				   android:value="ApplicationLifecycleCallback" />

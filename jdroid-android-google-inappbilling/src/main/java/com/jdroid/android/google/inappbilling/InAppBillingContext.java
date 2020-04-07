@@ -39,12 +39,12 @@ public class InAppBillingContext extends AbstractAppContext {
 	}
 
 	public Boolean isStaticResponsesEnabled() {
-		return !AppUtils.isReleaseBuildType() && getSharedPreferencesHelper().loadPreferenceAsBoolean(STATIC_RESPONSES_ENABLED, false);
+		return !AppUtils.INSTANCE.isReleaseBuildType() && getSharedPreferencesHelper().loadPreferenceAsBoolean(STATIC_RESPONSES_ENABLED, false);
 	}
 
 	public synchronized void setPurchasedProductTypes(Inventory inventory) {
-		purchasedProductTypes = Lists.newArrayList();
-		List<String> productIds = Lists.newArrayList();
+		purchasedProductTypes = Lists.INSTANCE.newArrayList();
+		List<String> productIds = Lists.INSTANCE.newArrayList();
 		for (Product each : inventory.getSupportedPurchasedProducts()) {
 			productIds.add(each.getId());
 			purchasedProductTypes.add(each.getProductType());
@@ -54,7 +54,7 @@ public class InAppBillingContext extends AbstractAppContext {
 
 	public synchronized void addPurchasedProductType(ProductType productType) {
 		if (purchasedProductTypes == null) {
-			purchasedProductTypes = Lists.newArrayList();
+			purchasedProductTypes = Lists.INSTANCE.newArrayList();
 		}
 		purchasedProductTypes.add(productType);
 		getSharedPreferencesHelper().appendPreferenceAsync(PURCHASED_PRODUCT_IDS, productType.getProductId());
@@ -62,10 +62,10 @@ public class InAppBillingContext extends AbstractAppContext {
 
 	public synchronized List<ProductType> getPurchasedProductTypes() {
 		if (purchasedProductTypes == null) {
-			purchasedProductTypes = Lists.newArrayList();
+			purchasedProductTypes = Lists.INSTANCE.newArrayList();
 			List<String> purchasedProductIds = getSharedPreferencesHelper().loadPreferenceAsStringList(PURCHASED_PRODUCT_IDS);
 			for (String each : purchasedProductIds) {
-				List<ProductType> supportedProductTypes = Lists.newArrayList();
+				List<ProductType> supportedProductTypes = Lists.INSTANCE.newArrayList();
 				supportedProductTypes.addAll(getManagedProductTypes());
 				supportedProductTypes.addAll(getSubscriptionsProductTypes());
 				for (ProductType supportedProductType : supportedProductTypes) {
@@ -80,11 +80,11 @@ public class InAppBillingContext extends AbstractAppContext {
 	}
 
 	public List<ProductType> getManagedProductTypes() {
-		return Lists.newArrayList();
+		return Lists.INSTANCE.newArrayList();
 	}
 
 	public List<ProductType> getSubscriptionsProductTypes() {
-		return Lists.newArrayList();
+		return Lists.INSTANCE.newArrayList();
 	}
 
 	public SharedPreferencesHelper getSharedPreferencesHelper() {

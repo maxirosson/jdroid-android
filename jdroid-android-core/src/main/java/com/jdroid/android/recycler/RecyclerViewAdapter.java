@@ -1,8 +1,5 @@
 package com.jdroid.android.recycler;
 
-import androidx.annotation.LayoutRes;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,11 +13,17 @@ import org.slf4j.Logger;
 import java.util.List;
 import java.util.Map;
 
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.RecyclerView;
+
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 	private static final Logger LOGGER = LoggerUtils.getLogger(RecyclerViewAdapter.class);
 
-	private Map<Integer, RecyclerViewType> recyclerViewTypeMap = Maps.newHashMap();
+	private Map<Integer, RecyclerViewType> recyclerViewTypeMap = Maps.INSTANCE.newHashMap();
 
 	private HeaderRecyclerViewType.HeaderItem headerItem;
 	private List<Object> items;
@@ -35,15 +38,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 	};
 
 	public RecyclerViewAdapter(RecyclerViewType recyclerViewType) {
-		this(Lists.newArrayList(recyclerViewType), Lists.newArrayList());
+		this(Lists.INSTANCE.newArrayList(recyclerViewType), Lists.INSTANCE.newArrayList());
 	}
 
 	public RecyclerViewAdapter(RecyclerViewType recyclerViewType, List<? extends Object> items) {
-		this(Lists.newArrayList(recyclerViewType), items);
+		this(Lists.INSTANCE.newArrayList(recyclerViewType), items);
 	}
 
 	public RecyclerViewAdapter(List<RecyclerViewType> recyclerViewTypes) {
-		this(recyclerViewTypes, Lists.newArrayList());
+		this(recyclerViewTypes, Lists.INSTANCE.newArrayList());
 	}
 
 	public RecyclerViewAdapter(List<RecyclerViewType> recyclerViewTypes, List<? extends Object> items) {
@@ -63,7 +66,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 			@Override
 			@Nullable
 			@SuppressWarnings("NullableProblems")
-			public AbstractRecyclerFragment getAbstractRecyclerFragment() {
+			public AbstractRecyclerFragment getRecyclerViewContainer() {
 				return null;
 			}
 		});
@@ -116,10 +119,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 				return footerResId;
 			}
 
+			@NonNull
 			@Override
-			@Nullable
 			@SuppressWarnings("NullableProblems")
-			public AbstractRecyclerFragment getAbstractRecyclerFragment() {
+			public RecyclerViewContainer getRecyclerViewContainer() {
 				return null;
 			}
 		});
@@ -226,8 +229,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 	}
 
 	public <T> void addItems(List<T> newItems) {
-		items.addAll(newItems);
+		items.addAll(Lists.INSTANCE.newArrayList(newItems));
 		notifyItemRangeInserted(getItemCount() - newItems.size(), newItems.size());
+	}
+
+	public <T> void replaceItems(List<T> newItems, @NonNull DiffUtil.Callback diffCallback) {
+		items.clear();
+		items.addAll(Lists.INSTANCE.newArrayList(newItems));
+		DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallback);
+		diffResult.dispatchUpdatesTo(this);
 	}
 
 	public <T> void removeItem(T item) {

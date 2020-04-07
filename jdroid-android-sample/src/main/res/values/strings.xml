@@ -14,8 +14,9 @@
 	<string name="houseAds">House Ads</string>
 	<string name="houseAd">House ad</string>
 
-	<!-- Firebase Invites -->
-	<string name="appInvite">Firebase Invites</string>
+	<!-- Architecture -->
+	<string name="architecture">Architecture</string>
+	<string name="forceRefresh">Force Refresh</string>
 
 	<!-- Date & Time -->
 	<string name="dateTime">Date &amp; Time</string>
@@ -31,23 +32,14 @@
 	<string name="invalidResourceUrl">invalidResourceUrl</string>
 	<string name="outOfMemory">outOfMemory</string>
 
-	<!-- Use Cases -->
-	<string name="useCases">Use Cases</string>
 	<string name="execute">Execute</string>
-	<string name="failExecution">Fail Execution</string>
-	<string name="failStartNotification">Fail Start Notification</string>
-	<string name="failFinishNotification">Fail Finish Notification</string>
-	<string name="failFinishFailedNotification">Fail Finish Failed Notification</string>
-	<string name="noListener">No Listener (Reload fragment if you change this)</string>
-	<string name="onStartUseCase">Starting Use Case</string>
-	<string name="onFinishedUseCase">On Finished Use Case</string>
-	<string name="onFinishedFailUseCase">On Finished Fail Use Case</string>
-	<string name="manualUseCaseTrigger">Manual Use Case Trigger</string>
-	<string name="onceUseCaseTrigger">Once Use Case Trigger</string>
-	<string name="alwaysUseCaseTrigger">Always Use Case Trigger</string>
-	<string name="useCaseTrigger">Use Case Trigger (Reload fragment if you change this)</string>
+	<string name="failLoadFromNetwork">Fail Load from Network</string>
+	<string name="loadFromNetworkDelaySeconds">Delay (seconds) Load from Network</string>
+	<string name="failLoadFromDb">Fail Load from Db</string>
+	<string name="saveToDbDelaySeconds">Delay (seconds) Load from Db</string>
+	<string name="failSaveToDb">Fail Save to Db</string>
+	<string name="loadFromDbDelaySeconds">Delay (seconds) Save to Db</string>
 	<string name="delay">Delay (seconds)</string>
-
 	<!-- Floating Action Button -->
 
 	<string name="floatingActionButton">Floating Action Button</string>
@@ -100,12 +92,14 @@
 	<string name="registerDeviceAndUpdateLastActiveTimestamp">Register Device &amp; Update Last Active Timestamp</string>
 	<string name="removeInstanceId">Remove Instance Id</string>
 	<string name="removeDevice">Remove Device</string>
+	<string name="subscribeToTopic">Subscribe to Topic</string>
+	<string name="unsubscribeFromTopic">Unsubscribe from Topic</string>
 	<string name="sendPush">Send Push</string>
 	<string name="messageKey">Message Key</string>
 	<string name="minAppVersionCode">MinAppVersionCode</string>
 	<string name="minDeviceOsVersion">MinDeviceOsVersion</string>
 	<string name="senderId">Sender Id</string>
-	<string name="googleServerApiKey">Google Server Api Key</string>
+	<string name="topic">Topic</string>
 
 	<!-- Google Maps -->
 	<string name="googleMaps">Google Maps</string>
@@ -243,6 +237,8 @@
 	<string name="noResults">No Results</string>
 	<string name="addItem">Add Item</string>
 	<string name="addItems">Add Items</string>
+	<string name="replaceWithSameItems">Replace with same Items</string>
+	<string name="replaceWithDifferentItems">Replace with different Items</string>
 	<string name="removeFirstItem">Remove First Item</string>
 	<string name="removeSecondItem">Remove Second Item</string>
 	<string name="addHeader">Add header</string>
@@ -257,14 +253,24 @@
 	<string name="footer">footer</string>
 	<string name="header">header</string>
 
-	<!-- SQLite -->
-	<string name="sqlite">SQLite</string>
-	<string name="sqliteAdd">Add</string>
-	<string name="sqliteUpdate">Update</string>
-	<string name="sqliteRemove">Remove</string>
-	<string name="sqliteRemoveAll">Remove All</string>
-	<string name="sqliteGetAll">Get All</string>
-	<string name="sqliteReplaceAll">Replace All</string>
+	<!-- Room -->
+	<string name="room">Room</string>
+	<string name="roomAdd">Add</string>
+	<string name="roomUpdate">Update</string>
+	<string name="roomUpsert">Upsert</string>
+	<string name="roomRemove">Remove</string>
+	<string name="roomRemoveAll">Remove All</string>
+	<string name="roomGetAll">Get All</string>
+	<string name="roomInsertAll">Insert All</string>
+
+	<!-- Split Install -->
+	<string name="splitInstall">Split Install</string>
+	<string name="splitInstallInvokeDynamicFeatureSample">Install and Invoke dynamic feature sample</string>
+	<string name="splitInstallInstallModule">Install module</string>
+	<string name="splitInstallDeferredUninstallModule">Deferred Uninstall module</string>
+	<string name="splitInstallGetInstalledModules">Get installed modules</string>
+	<string name="splitInstallModuleName">Module name</string>
+	<string name="splitInstallSuccessfulFeatureInstallation">Successful feature installation</string>
 
 	<!-- Service -->
 	<string name="service">Service</string>
@@ -280,6 +286,11 @@
 	<string name="sampleWorker2Description">Success or ConnectionException</string>
 	<string name="sampleWorker3Description">Success after 30 seconds</string>
 	<string name="sampleWorker4Description">Minimum time between executions: 1 minute</string>
+
+	<!-- AppShortcuts -->
+	<string name="appShortcuts">App Shortcuts</string>
+	<string name="requestPinShortcutWithoutCallback">requestPinShortcut without Callback</string>
+	<string name="requestPinShortcutWithCallback">requestPinShortcut with Callback</string>
 
 	<!-- StrictMode -->
 	<string name="strictMode">Strict Mode</string>

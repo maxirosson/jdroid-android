@@ -2,22 +2,13 @@ package com.jdroid.android.activity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import androidx.annotation.MainThread;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresPermission;
-import androidx.core.app.ActivityCompat;
-import androidx.core.app.TaskStackBuilder;
-import androidx.appcompat.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -31,7 +22,6 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.appindexing.Action;
 import com.google.firebase.appindexing.FirebaseUserActions;
-import com.google.firebase.appinvite.FirebaseAppInvite;
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
 import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
 import com.jdroid.android.application.AbstractApplication;
@@ -47,7 +37,6 @@ import com.jdroid.android.notification.NotificationBuilder;
 import com.jdroid.android.uri.ReferrerUtils;
 import com.jdroid.android.uri.UriHandler;
 import com.jdroid.android.uri.UriUtils;
-import com.jdroid.android.utils.AndroidUtils;
 import com.jdroid.android.utils.AppUtils;
 import com.jdroid.android.utils.ToastUtils;
 import com.jdroid.java.collections.Maps;
@@ -60,13 +49,21 @@ import org.slf4j.Logger;
 import java.util.Map;
 import java.util.Set;
 
+import androidx.annotation.MainThread;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresPermission;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.TaskStackBuilder;
+
 public class ActivityHelper implements ActivityIf {
 
 	private final static Logger LOGGER = LoggerUtils.getLogger(ActivityHelper.class);
 
 	private static final String REFERRER = "referrer";
 
-	private static final int LOCATION_UPDATE_TIMER_CODE = IdGenerator.getIntId();
+	private static final int LOCATION_UPDATE_TIMER_CODE = IdGenerator.INSTANCE.getIntId();
 
 	private AbstractFragmentActivity activity;
 	private Handler locationHandler;
@@ -112,19 +109,24 @@ public class ActivityHelper implements ActivityIf {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <V extends View> V findView(int id) {
-		return (V)activity.findViewById(id);
+		V view = (V)activity.findViewById(id);
+		if (view != null) {
+			return view;
+		} else {
+			throw new RuntimeException("View id not found");
+		}
 	}
 
 	@Override
-	public View inflate(int resource) {
-		return LayoutInflater.from(activity).inflate(resource, null);
+	public <V extends View> V inflate(int resource) {
+		return (V)LayoutInflater.from(activity).inflate(resource, null);
 	}
 
 
 	// //////////////////////// Life cycle //////////////////////// //
 
 	@Override
-	public Boolean onBeforeSetContentView() {
+	public boolean onBeforeSetContentView() {
 		return true;
 	}
 
@@ -144,7 +146,7 @@ public class ActivityHelper implements ActivityIf {
 
 		verifyGooglePlayServicesAvailability();
 
-		activityDelegatesMap = Maps.newHashMap();
+		activityDelegatesMap = Maps.INSTANCE.newHashMap();
 		for (AppModule appModule : AbstractApplication.get().getAppModules()) {
 			ActivityDelegate activityDelegate = getActivityIf().createActivityDelegate(appModule);
 			if (activityDelegate != null) {
@@ -155,6 +157,7 @@ public class ActivityHelper implements ActivityIf {
 		if (firstActivityCreate == null) {
 			firstActivityCreate = true;
 			UsageStats.incrementAppLoadAsync();
+			AbstractApplication.get().getCoreAnalyticsSender().trackErrorCustomKey("installerPackageName", AppUtils.INSTANCE.getSafeInstallerPackageName());
 			AbstractApplication.get().getCoreAnalyticsSender().onFirstActivityCreate(activity);
 		} else {
 			firstActivityCreate = false;
@@ -170,9 +173,9 @@ public class ActivityHelper implements ActivityIf {
 			uriHandler = getActivityIf().createUriHandler();
 			uriHandled = AbstractApplication.get().getUriMapper().handleUri(activity, activity.getIntent(), uriHandler, true);
 			referrer = ReferrerUtils.getReferrerCategory(activity);
-			if ((uriHandled && !UriUtils.isInternalReferrerCategory(referrer)) || isHomeActivity()) {
+			if ((uriHandled && !UriUtils.INSTANCE.isInternalReferrerCategory(referrer)) || isHomeActivity()) {
 
-				if (FirebaseDynamicLinksAppContext.isFirebaseDynamicLinksEnabled()) {
+				if (FirebaseDynamicLinksAppContext.INSTANCE.isFirebaseDynamicLinksEnabled()) {
 					FirebaseDynamicLinks.getInstance().getDynamicLink(activity.getIntent()).addOnSuccessListener(getActivity(), new OnSuccessListener<PendingDynamicLinkData>() {
 
 						@MainThread
@@ -183,15 +186,6 @@ public class ActivityHelper implements ActivityIf {
 								Uri deepLink = pendingDynamicLinkData != null ? pendingDynamicLinkData.getLink() : null;
 								if (deepLink != null) {
 									LOGGER.debug("Pending dynamic link: " + deepLink);
-
-									// Extract invite
-									FirebaseAppInvite invite = FirebaseAppInvite.getInvitation(pendingDynamicLinkData);
-									if (invite != null) {
-										String invitationId = invite.getInvitationId();
-										LOGGER.debug("AppInvite invitation id: " + invitationId);
-										getActivityIf().onAppInvite(deepLink, invitationId);
-									}
-
 									redirect(deepLink.toString());
 								} else {
 									redirect(activity.getIntent().getStringExtra("url"));
@@ -238,7 +232,7 @@ public class ActivityHelper implements ActivityIf {
 			} else {
 				Intent targetIntent = new Intent();
 				targetIntent.setData(Uri.parse(uri));
-				targetIntent.setPackage(AppUtils.getApplicationId());
+				targetIntent.setPackage(AppUtils.INSTANCE.getApplicationId());
 				ReferrerUtils.setReferrer(targetIntent, ActivityCompat.getReferrer(activity));
 				try {
 					activity.startActivity(targetIntent);
@@ -256,7 +250,7 @@ public class ActivityHelper implements ActivityIf {
 
 	private void initGoogleApiClient() {
 		if (isGooglePlayServicesAvailable) {
-			Set<Api<? extends Api.ApiOptions.NotRequiredOptions>> googleApis = Sets.newHashSet();
+			Set<Api<? extends Api.ApiOptions.NotRequiredOptions>> googleApis = Sets.INSTANCE.newHashSet();
 			googleApis.addAll(getCustomGoogleApis());
 			if (!googleApis.isEmpty()) {
 				GoogleApiClient.Builder builder = new GoogleApiClient.Builder(activity);
@@ -276,23 +270,15 @@ public class ActivityHelper implements ActivityIf {
 	}
 
 	protected Set<Api<? extends Api.ApiOptions.NotRequiredOptions>> getCustomGoogleApis() {
-		return Sets.newHashSet();
+		return Sets.INSTANCE.newHashSet();
 	}
 
 	protected void onInitGoogleApiClientBuilder(GoogleApiClient.Builder builder) {
 		// Do nothing
 	}
 
-	@Override
-	public void onAppInvite(Uri deepLink, String invitationId) {
-		// Do Nothing
-	}
-
-	@TargetApi(Build.VERSION_CODES.LOLLIPOP)
 	protected void overrideStatusBarColor() {
-		if (!AndroidUtils.isPreLollipop()) {
-			activity.getWindow().setStatusBarColor(activity.getResources().getColor(android.R.color.transparent));
-		}
+		activity.getWindow().setStatusBarColor(activity.getResources().getColor(android.R.color.transparent));
 	}
 
 	public void onPostCreate(Bundle savedInstanceState) {
@@ -308,7 +294,7 @@ public class ActivityHelper implements ActivityIf {
 	}
 
 	@Override
-	public Boolean isLauncherActivity() {
+	public boolean isLauncherActivity() {
 		return false;
 	}
 
@@ -385,7 +371,7 @@ public class ActivityHelper implements ActivityIf {
 
 	private void verifyGooglePlayServicesAvailability(Boolean displayDialog) {
 		Boolean oldIsGooglePlayServicesAvailable = isGooglePlayServicesAvailable;
-		isGooglePlayServicesAvailable = displayDialog && !isGooglePlayServicesDialogDisplayed ? GooglePlayServicesUtils.verifyGooglePlayServices(activity).isAvailable() : GooglePlayServicesUtils.isGooglePlayServicesAvailable(activity);
+		isGooglePlayServicesAvailable = displayDialog && !isGooglePlayServicesDialogDisplayed ? GooglePlayServicesUtils.INSTANCE.verifyGooglePlayServices(activity).isAvailable() : GooglePlayServicesUtils.INSTANCE.isGooglePlayServicesAvailable(activity);
 		if (!isGooglePlayServicesAvailable && displayDialog) {
 			isGooglePlayServicesDialogDisplayed = true;
 		}
@@ -567,12 +553,12 @@ public class ActivityHelper implements ActivityIf {
 	}
 
 	@Override
-	public Boolean isActivityDestroyed() {
+	public boolean isActivityDestroyed() {
 		return isDestroyed;
 	}
 
 	@Override
-	public Boolean onBackPressedHandled() {
+	public boolean onBackPressedHandled() {
 		if (navDrawer != null) {
 			return navDrawer.onBackPressed();
 		}
@@ -640,7 +626,7 @@ public class ActivityHelper implements ActivityIf {
 	}
 
 	@Override
-	public Boolean isNavDrawerEnabled() {
+	public boolean isNavDrawerEnabled() {
 		return false;
 	}
 
@@ -671,7 +657,7 @@ public class ActivityHelper implements ActivityIf {
 	}
 
 	@Override
-	public Boolean isGooglePlayServicesVerificationEnabled() {
+	public boolean isGooglePlayServicesVerificationEnabled() {
 		return false;
 	}
 

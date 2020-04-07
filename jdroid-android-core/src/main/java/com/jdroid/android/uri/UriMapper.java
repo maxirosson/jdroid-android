@@ -3,9 +3,6 @@ package com.jdroid.android.uri;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RestrictTo;
 
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.java.collections.Lists;
@@ -16,6 +13,10 @@ import org.slf4j.Logger;
 
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RestrictTo;
+
 import static androidx.annotation.RestrictTo.Scope.LIBRARY;
 
 /**
@@ -25,11 +26,11 @@ public class UriMapper {
 
 	private static final Logger LOGGER = LoggerUtils.getLogger(UriMapper.class);
 
-	private List<UriWatcher> uriWatchers = Lists.newArrayList();
+	private List<UriWatcher> uriWatchers = Lists.INSTANCE.newArrayList();
 
 	@RestrictTo(LIBRARY)
 	public Boolean handleUri(@NonNull Activity activity, Intent intent, @Nullable UriHandler uriHandler, Boolean onActivityCreation) {
-		Uri uri = UriUtils.getUri(intent);
+		Uri uri = UriUtils.INSTANCE.getUri(intent);
 		if (uri != null) {
 			notifyToUriWatchers(uri);
 			if (uriHandler != null) {
@@ -69,7 +70,7 @@ public class UriMapper {
 			if (dot != -1) {
 				className = className.substring(dot + 1);
 			}
-			if (!UriUtils.isInternalReferrerCategory(referrerCategory)) {
+			if (!UriUtils.INSTANCE.isInternalReferrerCategory(referrerCategory)) {
 				AbstractApplication.get().getCoreAnalyticsSender().trackUriOpened(className, uri, referrerCategory);
 			}
 			if (activity.getIntent().getComponent().equals(intent.getComponent())) {
@@ -82,7 +83,7 @@ public class UriMapper {
 				activity.startActivity(intent);
 			}
 		} else {
-			if (!UriUtils.isInternalReferrerCategory(referrerCategory)) {
+			if (!UriUtils.INSTANCE.isInternalReferrerCategory(referrerCategory)) {
 				AbstractApplication.get().getCoreAnalyticsSender().trackUriOpened(activity.getClass().getSimpleName(), uri, referrerCategory);
 			}
 		}
@@ -94,7 +95,7 @@ public class UriMapper {
 	}
 
 	private void notifyToUriWatchers(final Uri uri) {
-		if (!Lists.isNullOrEmpty(uriWatchers)) {
+		if (!Lists.INSTANCE.isNullOrEmpty(uriWatchers)) {
 			for (UriWatcher each : uriWatchers) {
 				LOGGER.debug("Notifying opened Uri to " + each.getClass().getSimpleName());
 				try {

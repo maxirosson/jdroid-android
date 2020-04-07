@@ -1,11 +1,11 @@
 package com.jdroid.android.context;
 
+import com.jdroid.android.concurrent.AppExecutors;
+import com.jdroid.android.utils.SharedPreferencesHelper;
+import com.jdroid.java.date.DateUtils;
+
 import androidx.annotation.MainThread;
 import androidx.annotation.WorkerThread;
-
-import com.jdroid.android.utils.SharedPreferencesHelper;
-import com.jdroid.java.concurrent.ExecutorUtils;
-import com.jdroid.java.date.DateUtils;
 
 public class UsageStats {
 
@@ -16,12 +16,12 @@ public class UsageStats {
 
 	private static SharedPreferencesHelper sharedPreferencesHelper;
 
-	private static Long lastStopTime = DateUtils.nowMillis();
+	private static Long lastStopTime = DateUtils.INSTANCE.nowMillis();
 	private static Long appLoads;
 
 	@MainThread
 	public static void incrementAppLoadAsync() {
-		ExecutorUtils.execute(new Runnable() {
+		AppExecutors.INSTANCE.getDiskIOExecutor().execute(new Runnable() {
 			@Override
 			public void run() {
 				incrementAppLoad();
@@ -49,11 +49,11 @@ public class UsageStats {
 	}
 
 	public static void setLastStopTime() {
-		lastStopTime = DateUtils.nowMillis();
+		lastStopTime = DateUtils.INSTANCE.nowMillis();
 	}
 
 	public static void setLastCrashTimestamp() {
-		getSharedPreferencesHelper().savePreferenceAsync(LAST_CRASH_TIMESTAMP, DateUtils.nowMillis());
+		getSharedPreferencesHelper().savePreferenceAsync(LAST_CRASH_TIMESTAMP, DateUtils.INSTANCE.nowMillis());
 	}
 
 	@WorkerThread
@@ -65,7 +65,7 @@ public class UsageStats {
 	public static Long getFirstAppLoadTimestamp() {
 		Long firstAppLoadTimestamp = getSharedPreferencesHelper().loadPreferenceAsLong(FIRST_APP_LOAD_TIMESTAMP);
 		if (firstAppLoadTimestamp == null) {
-			firstAppLoadTimestamp = DateUtils.nowMillis();
+			firstAppLoadTimestamp = DateUtils.INSTANCE.nowMillis();
 			getSharedPreferencesHelper().savePreferenceAsync(FIRST_APP_LOAD_TIMESTAMP, firstAppLoadTimestamp);
 		}
 		return firstAppLoadTimestamp;

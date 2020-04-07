@@ -3,13 +3,7 @@ package com.jdroid.android.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.net.Uri;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,11 +11,16 @@ import android.view.View;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.application.AppModule;
-import com.jdroid.android.fragment.UseCaseFragment;
 import com.jdroid.android.loading.ActivityLoading;
 import com.jdroid.android.navdrawer.NavDrawer;
 import com.jdroid.android.uri.UriHandler;
 import com.jdroid.java.exception.UnexpectedException;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 /**
  * Base {@link Activity}
@@ -35,7 +34,7 @@ public abstract class AbstractFragmentActivity extends AppCompatActivity impleme
 	}
 
 	@Override
-	public Boolean onBeforeSetContentView() {
+	public boolean onBeforeSetContentView() {
 		return activityHelper.onBeforeSetContentView();
 	}
 
@@ -136,38 +135,13 @@ public abstract class AbstractFragmentActivity extends AppCompatActivity impleme
 	}
 
 	@Override
-	public View inflate(int resource) {
+	public <V extends View> V inflate(int resource) {
 		return activityHelper.inflate(resource);
 	}
 
 	@Override
 	public <E> E getExtra(String key) {
 		return activityHelper.getExtra(key);
-	}
-
-	public void loadUseCaseFragment(Bundle savedInstanceState, Class<? extends UseCaseFragment<?>> useCaseFragmentClass) {
-
-		if (savedInstanceState == null) {
-			try {
-				FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-				fragmentTransaction.add(useCaseFragmentClass.newInstance(), useCaseFragmentClass.getSimpleName());
-				fragmentTransaction.commit();
-			} catch (InstantiationException e) {
-				throw new UnexpectedException(e);
-			} catch (IllegalAccessException e) {
-				throw new UnexpectedException(e);
-			}
-		}
-	}
-
-	public void removeUseCaseFragment(Class<? extends UseCaseFragment<?>> useCaseFragmentClass) {
-		FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-		fragmentTransaction.remove(getUseCaseUseCaseFragment(useCaseFragmentClass));
-		fragmentTransaction.commit();
-	}
-
-	public UseCaseFragment<?> getUseCaseUseCaseFragment(Class<? extends UseCaseFragment<?>> useCaseFragmentClass) {
-		return (UseCaseFragment<?>)getSupportFragmentManager().findFragmentByTag(useCaseFragmentClass.getSimpleName());
 	}
 
 	@SuppressWarnings("unchecked")
@@ -213,7 +187,7 @@ public abstract class AbstractFragmentActivity extends AppCompatActivity impleme
 	}
 
 	@Override
-	public Boolean isLauncherActivity() {
+	public boolean isLauncherActivity() {
 		return activityHelper.isLauncherActivity();
 	}
 
@@ -246,12 +220,12 @@ public abstract class AbstractFragmentActivity extends AppCompatActivity impleme
 	}
 
 	@Override
-	public Boolean isActivityDestroyed() {
+	public boolean isActivityDestroyed() {
 		return activityHelper.isActivityDestroyed();
 	}
 
 	@Override
-	public Boolean isGooglePlayServicesVerificationEnabled() {
+	public boolean isGooglePlayServicesVerificationEnabled() {
 		return activityHelper.isGooglePlayServicesVerificationEnabled();
 	}
 
@@ -285,7 +259,7 @@ public abstract class AbstractFragmentActivity extends AppCompatActivity impleme
 		}
 	}
 
-	public Boolean onBackPressedHandled() {
+	public boolean onBackPressedHandled() {
 		return activityHelper.onBackPressedHandled();
 	}
 
@@ -302,7 +276,7 @@ public abstract class AbstractFragmentActivity extends AppCompatActivity impleme
 	}
 
 	@Override
-	public Boolean isNavDrawerEnabled() {
+	public boolean isNavDrawerEnabled() {
 		return activityHelper.isNavDrawerEnabled();
 	}
 
@@ -316,17 +290,14 @@ public abstract class AbstractFragmentActivity extends AppCompatActivity impleme
 		return activityHelper.getActivityDelegate(appModule);
 	}
 
-	// //////////////////////// Uri, Dynamic Links & App Invites //////////////////////// //
+	// //////////////////////// Uri //////////////////////// //
 
 	@Override
 	public UriHandler createUriHandler() {
 		return activityHelper.createUriHandler();
 	}
 
-	@Override
-	public void onAppInvite(Uri deepLink, String invitationId) {
-		activityHelper.onAppInvite(deepLink, invitationId);
-	}
+	// //////////////////////// Others //////////////////////// //
 
 	@Override
 	public GoogleApiClient getGoogleApiClient() {

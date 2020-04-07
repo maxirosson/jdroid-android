@@ -1,9 +1,6 @@
 package com.jdroid.android.recycler;
 
 import android.app.Activity;
-import android.content.Context;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +8,9 @@ import android.view.ViewGroup;
 import com.jdroid.java.utils.LoggerUtils;
 
 import org.slf4j.Logger;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 public abstract class RecyclerViewType<ITEM, VIEWHOLDER extends RecyclerView.ViewHolder> implements View.OnClickListener {
 
@@ -22,6 +22,7 @@ public abstract class RecyclerViewType<ITEM, VIEWHOLDER extends RecyclerView.Vie
 		return inflater.inflate(getLayoutResourceId(), parent, false);
 	}
 
+	@NonNull
 	protected abstract Integer getLayoutResourceId();
 
 	/**
@@ -41,27 +42,36 @@ public abstract class RecyclerViewType<ITEM, VIEWHOLDER extends RecyclerView.Vie
 	public abstract void fillHolderFromItem(ITEM item, VIEWHOLDER holder);
 
 	@NonNull
-	public abstract AbstractRecyclerFragment getAbstractRecyclerFragment();
+	public abstract RecyclerViewContainer getRecyclerViewContainer();
 
-	protected Boolean isClickable() {
+	protected boolean isClickable() {
 		return true;
 	}
 
 	@Override
 	@SuppressWarnings("unchecked")
 	public void onClick(View view) {
-		int itemPosition = getAbstractRecyclerFragment().getRecyclerView().getChildAdapterPosition(view);
+		int itemPosition = getRecyclerViewContainer().getRecyclerView().getChildAdapterPosition(view);
 		if (itemPosition != RecyclerView.NO_POSITION) {
 			if (recyclerViewTypeListener != null) {
 				recyclerViewTypeListener.onItemSelected(itemPosition);
 			}
-			onItemSelected((ITEM)getAbstractRecyclerFragment().getAdapter().getItem(itemPosition), view);
+			ITEM item = (ITEM)getRecyclerViewContainer().getRecyclerViewAdapter().getItem(itemPosition);
+			if (item != null) {
+				onItemSelected(item, view);
+			} else {
+				onNullItemSelected(view);
+			}
 		} else {
 			LOGGER.warn("Ignored onClick for item with no position");
 		}
 	}
 
-	public void onItemSelected(ITEM item, View view) {
+	protected void onNullItemSelected(View view) {
+		LOGGER.warn("Ignored onClick for null item");
+	}
+
+	protected void onItemSelected(@NonNull ITEM item, View view) {
 		// Do Nothing
 	}
 
@@ -78,12 +88,8 @@ public abstract class RecyclerViewType<ITEM, VIEWHOLDER extends RecyclerView.Vie
 		return (V)containerView.findViewById(id);
 	}
 
-	protected Context getContext() {
-		return getAbstractRecyclerFragment().getContext();
-	}
-
 	protected Activity getActivity() {
-		return getAbstractRecyclerFragment().getActivity();
+		return getRecyclerViewContainer().getActivity();
 	}
 
 	public Boolean matchViewType(Object item) {

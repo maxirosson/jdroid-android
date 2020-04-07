@@ -65,7 +65,8 @@
 						android:layout_height="wrap_content"
 						android:inputType="text"
 						android:layout_gravity="center_horizontal"
-						android:hint="@string/leaderboardId" />
+						android:hint="@string/leaderboardId"
+						android:importantForAutofill="no" />
 
 
 				<Button
@@ -84,7 +85,8 @@
 						android:layout_height="wrap_content"
 						android:inputType="text"
 						android:layout_gravity="center_horizontal"
-						android:hint="@string/score" />
+						android:hint="@string/score"
+						android:importantForAutofill="no" />
 
 
 				<Button
@@ -103,7 +105,8 @@
 						android:layout_height="wrap_content"
 						android:inputType="text"
 						android:layout_gravity="center_horizontal"
-						android:hint="@string/achievementId" />
+						android:hint="@string/achievementId"
+						android:importantForAutofill="no" />
 
 
 				<Button
@@ -142,7 +145,8 @@
 						android:layout_height="wrap_content"
 						android:inputType="text"
 						android:layout_gravity="center_horizontal"
-						android:hint="@string/eventId" />
+						android:hint="@string/eventId"
+						android:importantForAutofill="no" />
 
 				<Button
 						android:id="@+id/incrementEvent"

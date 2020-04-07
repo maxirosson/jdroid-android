@@ -1,7 +1,6 @@
 package com.jdroid.android;
 
 import android.app.Activity;
-import androidx.annotation.NonNull;
 
 import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.context.AppContext;
@@ -16,10 +15,12 @@ import com.jdroid.java.utils.ReflectionUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+
 public class TestAndroidApplication extends AbstractApplication {
 
 	public TestAndroidApplication() {
-		HttpConfiguration.setHttpServiceFactory(new OkHttpServiceFactory());
+		HttpConfiguration.INSTANCE.setHttpServiceFactory(new OkHttpServiceFactory());
 	}
 
 	@Override
@@ -28,6 +29,11 @@ public class TestAndroidApplication extends AbstractApplication {
 
 		BuildConfigUtils.setBuildConfigResolver(new com.jdroid.android.TestBuildConfigResolver());
 		ReflectionUtils.setStaticField(ApplicationLifecycleHelper.class, "applicationLifecycleCallbacks", createApplicationLifecycleCallbacks());
+	}
+
+	@Override
+	protected void initKoin() {
+		// Do nothing
 	}
 
 	/**
@@ -40,7 +46,7 @@ public class TestAndroidApplication extends AbstractApplication {
 	}
 
 	@Override
-	protected Boolean isMultiProcessSupportEnabled() {
+	protected boolean isMultiProcessSupportEnabled() {
 		return false;
 	}
 

@@ -112,11 +112,11 @@ public class DefaultExceptionHandler implements ExceptionHandler {
 	}
 
 	protected List<String> getDefaultThrowableTags() {
-		return Lists.newArrayList();
+		return Lists.INSTANCE.newArrayList();
 	}
 
 	public static Boolean matchAnyErrorCode(Throwable throwable, ErrorCode... errorCodes) {
-		List<ErrorCode> errorCodesList = Lists.newArrayList(errorCodes);
+		List<ErrorCode> errorCodesList = Lists.INSTANCE.newArrayList(errorCodes);
 		if (throwable instanceof ErrorCodeException) {
 			ErrorCodeException errorCodeException = (ErrorCodeException)throwable;
 			return errorCodesList.contains(errorCodeException.getErrorCode());
@@ -125,7 +125,7 @@ public class DefaultExceptionHandler implements ExceptionHandler {
 	}
 
 	protected List<String> getThrowableTags(Throwable throwable, Integer priorityLevel) {
-		List<String> tags = Lists.newArrayList();
+		List<String> tags = Lists.INSTANCE.newArrayList();
 		if (priorityLevel != null) {
 			tags.add("level" + String.format(Locale.getDefault(), "%02d", priorityLevel));
 		}
@@ -133,7 +133,7 @@ public class DefaultExceptionHandler implements ExceptionHandler {
 	}
 
 	public static void addTags(Throwable throwable, List<String> tags) {
-		if (!Lists.isNullOrEmpty(tags)) {
+		if (!Lists.INSTANCE.isNullOrEmpty(tags)) {
 			StringBuilder builder = new StringBuilder();
 			builder.append(StringUtils.join(tags, " "));
 
@@ -180,7 +180,7 @@ public class DefaultExceptionHandler implements ExceptionHandler {
 	}
 
 	public static void setMessageOnConnectionTimeout(RuntimeException runtimeException, int resId) {
-		setMessageOnConnectionTimeout(runtimeException, LocalizationUtils.getString(resId));
+		setMessageOnConnectionTimeout(runtimeException, LocalizationUtils.INSTANCE.getString(resId));
 	}
 
 	public static void setMessageOnConnectionTimeout(RuntimeException runtimeException, String text) {

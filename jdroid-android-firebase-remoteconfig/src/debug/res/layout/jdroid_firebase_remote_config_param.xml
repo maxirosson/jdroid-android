@@ -30,7 +30,8 @@
 					  android:layout_weight="1"
 					  android:layout_height="wrap_content"
 					  android:inputType="text"
-					  tools:text="value" />
+					  tools:text="value"
+					  android:importantForAutofill="no" />
 
 			<TextView android:id="@+id/source"
 					  android:layout_width="wrap_content"

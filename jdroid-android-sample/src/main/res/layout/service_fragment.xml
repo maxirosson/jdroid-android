@@ -20,11 +20,11 @@
 				android:layout_height="wrap_content"
 				android:text="@string/delay" />
 
-		<EditText
-				android:id="@+id/delay"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:inputType="number" />
+		<EditText android:id="@+id/delay"
+				  android:layout_width="match_parent"
+				  android:layout_height="wrap_content"
+				  android:inputType="number"
+				  android:importantForAutofill="no" />
 
 		<TextView
 				android:id="@+id/status"

@@ -25,6 +25,9 @@
 
 		<item name="alertDialogTheme">@style/Jdroid.Dialog.Alert</item>
 		<item name="dialogTheme">@style/Jdroid.Dialog</item>
+
+		<item name="android:windowDrawsSystemBarBackgrounds">true</item>
+		<item name="android:statusBarColor">@color/jdroid_colorPrimaryDark</item>
 	</style>
 
 	<!-- Styles -->

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.jdroid.android.loading.LoadingLayout android:id="@+id/loadingLayout"
+										  android:layout_width="match_parent"
+										  android:layout_height="match_parent"
+										  xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:layout_margin="8dp">
+
+		<TextView android:id="@+id/result"
+				  android:layout_width="wrap_content"
+				  android:layout_height="wrap_content" />
+
+		<CheckBox android:id="@+id/failLoadFromNetwork"
+				  android:layout_width="wrap_content"
+				  android:layout_height="wrap_content"
+				  android:text="@string/failLoadFromNetwork" />
+
+		<com.google.android.material.textfield.TextInputLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="20dp">
+			<EditText
+					android:id="@+id/loadFromNetworkDelaySeconds"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:hint="@string/loadFromNetworkDelaySeconds"
+					android:width="200dp"
+					android:inputType="number"
+					android:importantForAutofill="no" />
+		</com.google.android.material.textfield.TextInputLayout>
+
+		<CheckBox android:id="@+id/failLoadFromDb"
+				  android:layout_width="wrap_content"
+				  android:layout_height="wrap_content"
+				  android:text="@string/failLoadFromDb" />
+
+		<com.google.android.material.textfield.TextInputLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="20dp">
+			<EditText
+					android:id="@+id/loadFromDbDelaySeconds"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:hint="@string/loadFromDbDelaySeconds"
+					android:width="200dp"
+					android:inputType="number"
+					android:importantForAutofill="no" />
+		</com.google.android.material.textfield.TextInputLayout>
+
+		<CheckBox android:id="@+id/failSaveToDb"
+				  android:layout_width="wrap_content"
+				  android:layout_height="wrap_content"
+				  android:text="@string/failSaveToDb" />
+
+		<com.google.android.material.textfield.TextInputLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="20dp">
+			<EditText
+					android:id="@+id/saveToDbDelaySeconds"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:hint="@string/saveToDbDelaySeconds"
+					android:width="200dp"
+					android:inputType="number"
+					android:importantForAutofill="no" />
+		</com.google.android.material.textfield.TextInputLayout>
+
+		<Button
+				android:id="@+id/execute"
+				android:text="@string/execute"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content" />
+
+		<ProgressBar android:id="@+id/internalLoading"
+					 style="?android:attr/progressBarStyle"
+					 android:layout_width="50dp"
+					 android:layout_height="50dp"
+					 android:layout_gravity="center"
+					 android:visibility="gone" />
+	</LinearLayout>
+
+</com.jdroid.android.loading.LoadingLayout>

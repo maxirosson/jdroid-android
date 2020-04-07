@@ -1,9 +1,6 @@
 package com.jdroid.android.context;
 
-import com.jdroid.android.R;
-import com.jdroid.android.application.AbstractApplication;
 import com.jdroid.android.utils.AppUtils;
-import com.jdroid.android.utils.LocalizationUtils;
 import com.jdroid.android.utils.SharedPreferencesHelper;
 import com.jdroid.java.http.Server;
 import com.jdroid.java.remoteconfig.RemoteConfigParameter;
@@ -28,13 +25,13 @@ public class AppContext extends AbstractAppContext {
 
 	@SuppressWarnings("unchecked")
 	protected <T extends Server> T getServer(Server defaultServer) {
-		if (AppUtils.isReleaseBuildType() || !isDebugSettingsEnabled()) {
+		if (AppUtils.INSTANCE.isReleaseBuildType() || !isDebugSettingsEnabled()) {
 			return (T)defaultServer;
 		} else {
 			Class<?> clazz = defaultServer.getClass().getEnclosingClass() != null ? defaultServer.getClass().getEnclosingClass()
 				: defaultServer.getClass();
 			return (T)defaultServer.instance(SharedPreferencesHelper.get().loadPreference(
-				clazz.getSimpleName(), defaultServer.getName()).toUpperCase(Locale.US));
+				clazz.getSimpleName(), defaultServer.getServerName()).toUpperCase(Locale.US));
 		}
 	}
 
@@ -96,23 +93,7 @@ public class AppContext extends AbstractAppContext {
 		return null;
 	}
 
-	public String getGooglePlusCommunityId() {
-		return null;
-	}
-
 	public RemoteConfigParameter getPrivacyPolicyUrl() {
 		return null;
-	}
-
-	public String getAppInviteTitle() {
-		return LocalizationUtils.getString(R.string.jdroid_appInviteTitle, LocalizationUtils.getString(R.string.jdroid_appName));
-	}
-
-	public String getAppInviteMessage() {
-		return LocalizationUtils.getString(R.string.jdroid_appInviteMessage, LocalizationUtils.getString(R.string.jdroid_appName));
-	}
-
-	public String getAppInviteDeeplink() {
-		return AbstractApplication.get().getAppContext().getWebsite();
 	}
 }

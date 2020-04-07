@@ -9,41 +9,85 @@ if (propsFile.exists()) {
 	}
 }
 
-version = '2.1.0'
+version = "3.0.0"
 
-ext.JDROID_GITHUB_REPOSITORY_NAME = 'jdroid-android'
+ext.GITHUB_REPOSITORY_NAME = "jdroid-android"
 
-apply from: rootProject.file('libraryVersions.gradle')
-
-apply plugin: 'com.jdroid.component.builder'
-apply plugin: 'com.jdroid.root'
+apply plugin: "com.jdroidtools.component.builder"
+apply plugin: "com.jdroidtools.android.root"
 
 buildscript {
 
 	repositories {
-		jcenter()
-		google()
-		maven { url 'https://maven.fabric.io/public' }
-		maven { url "https://plugins.gradle.org/m2/" }
-		String localMavenRepoEnabled = project.hasProperty('LOCAL_MAVEN_REPO_ENABLED') ? project.ext.get('LOCAL_MAVEN_REPO_ENABLED') : System.getenv('LOCAL_MAVEN_REPO_EMABLED')
-		boolean isLocalMavenRepoEnabled = localMavenRepoEnabled != null && localMavenRepoEnabled == "true"
-		if (isLocalMavenRepoEnabled) {
-			String localMavenRepo = project.hasProperty('LOCAL_MAVEN_REPO') ? project.ext.get('LOCAL_MAVEN_REPO') : System.getenv('LOCAL_MAVEN_REPO')
-			if (localMavenRepo != null) {
-				maven { url localMavenRepo }
+		jcenter {
+			mavenContent {
+				releasesOnly()
 			}
 		}
-		maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-		mavenCentral()
+		google() {
+			mavenContent {
+				releasesOnly()
+			}
+		}
+		maven {
+			url = "https://maven.fabric.io/public"
+			content {
+				includeGroup("io.fabric.tools")
+			}
+		}
+
+
+		String localMavenRepoEnabled = null
+		File propsFile2 = new File("$project.rootDir/gradle-local.properties")
+		if (propsFile2.exists()) {
+			def props = new Properties()
+			props.load(new FileInputStream(propsFile2))
+			localMavenRepoEnabled = props.getProperty("LOCAL_MAVEN_REPO_ENABLED")
+		}
+		if (localMavenRepoEnabled == null) {
+			localMavenRepoEnabled = project.hasProperty("LOCAL_MAVEN_REPO_ENABLED") ? project.ext.get("LOCAL_MAVEN_REPO_ENABLED") : System.getenv("LOCAL_MAVEN_REPO_EMABLED")
+		}
+		boolean isLocalMavenRepoEnabled = localMavenRepoEnabled != null && localMavenRepoEnabled == "true"
+		if (isLocalMavenRepoEnabled) {
+			String localMavenRepo = project.hasProperty("LOCAL_MAVEN_REPO") ? project.ext.get("LOCAL_MAVEN_REPO") : System.getenv("LOCAL_MAVEN_REPO")
+			if (localMavenRepo != null) {
+				maven {
+					url = localMavenRepo
+					content {
+						includeGroup("com.jdroidtools")
+					}
+				}
+			}
+		}
+		maven {
+			url = "https://oss.sonatype.org/content/repositories/snapshots/"
+			content {
+				includeGroup("com.jdroidtools")
+				includeGroup("com.releaseshub")
+			}
+			mavenContent {
+				snapshotsOnly()
+			}
+		}
+		mavenCentral() {
+			mavenContent {
+				releasesOnly()
+			}
+		}
+		maven {
+			url = "https://plugins.gradle.org/m2/"
+			content {
+				excludeGroup("com.jdroidtools")
+			}
+			mavenContent {
+				releasesOnly()
+			}
+		}
 	}
 
 	dependencies {
-
-		// https://github.com/maxirosson/jdroid-component-builder/blob/master/CHANGELOG.md
-		classpath 'com.jdroidtools:jdroid-component-builder:1.1.0-SNAPSHOT'
-
-		// https://github.com/maxirosson/jdroid-gradle-plugin/blob/master/CHANGELOG.md
-		classpath 'com.jdroidtools:jdroid-gradle-root-plugin:2.0.0-SNAPSHOT'
+		classpath(BuildLibs.jdroid_component_builder_plugin)
+		classpath(BuildLibs.jdroid_gradle_android_plugin)
 	}
 }
 
@@ -54,34 +98,98 @@ allprojects {
 
 	buildscript {
 		repositories {
-			jcenter()
-			google()
-			maven { url 'https://maven.fabric.io/public' }
-			maven { url "https://plugins.gradle.org/m2/" }
-			String localMavenRepoEnabled = project.hasProperty('LOCAL_MAVEN_REPO_ENABLED') ? project.ext.get('LOCAL_MAVEN_REPO_ENABLED') : System.getenv('LOCAL_MAVEN_REPO_EMABLED')
-			boolean isLocalMavenRepoEnabled = localMavenRepoEnabled != null && localMavenRepoEnabled == "true"
-			if (isLocalMavenRepoEnabled) {
-				String localMavenRepo = project.hasProperty('LOCAL_MAVEN_REPO') ? project.ext.get('LOCAL_MAVEN_REPO') : System.getenv('LOCAL_MAVEN_REPO')
-				if (localMavenRepo != null) {
-					maven { url localMavenRepo }
+			jcenter {
+				mavenContent {
+					releasesOnly()
 				}
 			}
-			maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-			mavenCentral()
+			google() {
+				mavenContent {
+					releasesOnly()
+				}
+			}
+			maven {
+				url = "https://maven.fabric.io/public"
+				content {
+					includeGroup("io.fabric.tools")
+				}
+			}
+			String localMavenRepoEnabled = project.hasProperty("LOCAL_MAVEN_REPO_ENABLED") ? project.ext.get("LOCAL_MAVEN_REPO_ENABLED") : System.getenv("LOCAL_MAVEN_REPO_EMABLED")
+			boolean isLocalMavenRepoEnabled = localMavenRepoEnabled != null && localMavenRepoEnabled == "true"
+			if (isLocalMavenRepoEnabled) {
+				String localMavenRepo = project.hasProperty("LOCAL_MAVEN_REPO") ? project.ext.get("LOCAL_MAVEN_REPO") : System.getenv("LOCAL_MAVEN_REPO")
+				if (localMavenRepo != null) {
+					maven {
+						url = localMavenRepo
+						content {
+							includeGroup("com.jdroidtools")
+						}
+					}
+				}
+			}
+			maven {
+				url = "https://oss.sonatype.org/content/repositories/snapshots/"
+				content {
+					includeGroup("com.jdroidtools")
+					includeGroup("com.releaseshub")
+				}
+				mavenContent {
+					snapshotsOnly()
+				}
+			}
+			mavenCentral() {
+				mavenContent {
+					releasesOnly()
+				}
+			}
+			maven {
+				url = "https://plugins.gradle.org/m2/"
+				content {
+					excludeGroup("com.jdroidtools")
+				}
+				mavenContent {
+					releasesOnly()
+				}
+			}
 		}
 	}
 
 	repositories {
-		jcenter()
-		String localMavenRepoEnabled = project.hasProperty('LOCAL_MAVEN_REPO_ENABLED') ? project.ext.get('LOCAL_MAVEN_REPO_ENABLED') : System.getenv('LOCAL_MAVEN_REPO_EMABLED')
-		boolean isLocalMavenRepoEnabled = localMavenRepoEnabled != null && localMavenRepoEnabled == "true"
-		if (isLocalMavenRepoEnabled) {
-			String localMavenRepo = project.hasProperty('LOCAL_MAVEN_REPO') ? project.ext.get('LOCAL_MAVEN_REPO') : System.getenv('LOCAL_MAVEN_REPO')
-			if (localMavenRepo != null) {
-				maven { url localMavenRepo }
+		jcenter {
+			mavenContent {
+				releasesOnly()
 			}
 		}
-		maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-		mavenCentral()
+		String localMavenRepoEnabled = project.hasProperty("LOCAL_MAVEN_REPO_ENABLED") ? project.ext.get("LOCAL_MAVEN_REPO_ENABLED") : System.getenv("LOCAL_MAVEN_REPO_EMABLED")
+		boolean isLocalMavenRepoEnabled = localMavenRepoEnabled != null && localMavenRepoEnabled == "true"
+		if (isLocalMavenRepoEnabled) {
+			String localMavenRepo = project.hasProperty("LOCAL_MAVEN_REPO") ? project.ext.get("LOCAL_MAVEN_REPO") : System.getenv("LOCAL_MAVEN_REPO")
+			if (localMavenRepo != null) {
+				maven {
+					url = localMavenRepo
+					content {
+						includeGroup("com.jdroidtools")
+					}
+				}
+			}
+		}
+		maven {
+			url = "https://oss.sonatype.org/content/repositories/snapshots/"
+			content {
+				includeGroup("com.jdroidtools")
+			}
+			mavenContent {
+				snapshotsOnly()
+			}
+		}
+		mavenCentral() {
+			mavenContent {
+				releasesOnly()
+			}
+		}
 	}
+}
+
+releasesHub {
+	excludes = ["com.android.billingclient:billing", "com.facebook.android", "org.slf4j"]
 }

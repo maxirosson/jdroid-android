@@ -1,40 +1,20 @@
-apply plugin: 'com.jdroid.android.library'
+apply from: "$rootDir/module.gradle"
 
-ext.PROJECT_NAME = 'Jdroid Android - Google Sign In'
-description = 'Jdroid dependency project for Google Sign In'
-
-configurations.all {
-	// check for updates every build
-	resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
-}
+ext.PROJECT_NAME = "Jdroid Android - Google Sign In"
+description = "Jdroid dependency project for Google Sign In"
 
 buildscript {
 	dependencies {
-		classpath "com.jdroidtools:jdroid-gradle-android-plugin:${JDROID_GRADLE_PLUGIN_VERSION}"
+		classpath(BuildLibs.jdroid_gradle_android_plugin)
 	}
 }
 
 dependencies {
 
-	api project(":jdroid-android-core")
+	api project(Module.JDROID_ANDROID_CORE.moduleName)
 
-	api "com.google.android.gms:play-services-auth:16.0.1"
+	api(Libs.play_services_auth)
 
-	testImplementation "junit:junit:${JUNIT_VERSION}"
-	testImplementation "org.robolectric:robolectric:${ROBOLECTRIC_VERSION}"
-
-}
-
-jdroid {
-	notDefaultLanguages = ['es']
-}
-
-android {
-	sourceSets.test.java.srcDirs += "build/generated/source/r/debug"
-	sourceSets.test.java.srcDirs += sourceSets.main.java.srcDirs
-	sourceSets.test.java.srcDirs += sourceSets.debug.java.srcDirs
-	sourceSets.test.resources.srcDirs += sourceSets.main.resources.srcDirs
-	sourceSets.test.resources.srcDirs += sourceSets.debug.resources.srcDirs
-	sourceSets.test.res.srcDirs += sourceSets.main.res.srcDirs
-	sourceSets.test.res.srcDirs += sourceSets.debug.res.srcDirs
+	testImplementation(Libs.junit)
+	testImplementation(Libs.robolectric)
 }

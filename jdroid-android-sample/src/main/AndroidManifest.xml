@@ -29,6 +29,7 @@
 				 android:logo="@mipmap/ic_launcher"
 				 android:label="@string/jdroid_appName"
 				 android:allowBackup="false"
+				 android:supportsRtl="false"
 				 android:name="com.jdroid.android.sample.application.AndroidApplication"
 				 android:hardwareAccelerated="true"
 				 android:theme="@style/App.Theme">
@@ -37,6 +38,13 @@
 				   android:value="${googleMapsApiKey}" />
 		<meta-data android:name="com.facebook.sdk.ApplicationId"
 				   android:value="${facebookAppId}" />
+		<meta-data android:name="com.google.android.gms.ads.APPLICATION_ID"
+				   android:value="${adMobAppId}" />
+
+		<meta-data android:name="com.google.android.gms.games.APP_ID"
+				   android:value="361779001695" />
+		<meta-data android:name="com.google.android.gms.version"
+				   android:value="@integer/google_play_services_version"/>
 
 		<meta-data android:name="com.jdroid.android.sample.application.lifecycle.SampleApplicationLifecycleCallback"
 				   android:value="ApplicationLifecycleCallback" />
@@ -71,8 +79,8 @@
 
 		<!-- App Invite -->
 
-		<activity android:name="com.jdroid.android.sample.ui.appinvite.AppInviteActivity"
-				  android:label="@string/appInvite"
+		<activity android:name="com.jdroid.android.sample.androidx.ArchitectureActivity"
+				  android:label="@string/architecture"
 				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
 				  tools:ignore="UnusedAttribute" />
 
@@ -349,13 +357,6 @@
 
 		<activity android:name="com.jdroid.android.sample.ui.rateme.RateAppActivity"
 				  android:label="@string/rateApp"
-				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
-				  tools:ignore="UnusedAttribute" />
-
-		<!-- SQLite -->
-
-		<activity android:name="com.jdroid.android.sample.ui.sqlite.SQLiteActivity"
-				  android:label="@string/sqlite"
 				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
 				  tools:ignore="UnusedAttribute" />
 
@@ -639,13 +640,6 @@
 			</intent-filter>
 		</activity>
 
-		<!-- Use Cases -->
-
-		<activity android:name="com.jdroid.android.sample.ui.usecases.UseCasesActivity"
-				  android:label="@string/useCases"
-				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
-				  tools:ignore="UnusedAttribute" />
-
 		<!-- Google Play Services -->
 
 		<activity android:name="com.jdroid.android.sample.ui.google.playservices.GooglePlayServicesActivity"
@@ -666,6 +660,24 @@
 				  android:label="@string/strictMode"
 				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" />
 
+		<!-- Room -->
+
+		<activity android:name="com.jdroid.android.sample.database.room.RoomActivity"
+				  android:label="@string/room"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" />
+
+		<!-- Split Install -->
+
+		<activity android:name="com.jdroid.android.sample.google.dynamicfeature.SplitInstallActivity"
+				  android:label="@string/room"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" />
+
+		<!-- AppShortcuts -->
+
+		<activity android:name="com.jdroid.android.sample.ui.shortcuts.AppShortcutsActivity"
+				  android:label="@string/appShortcuts"
+				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" />
+
 		<!-- WebView -->
 
 		<activity android:name="com.jdroid.android.sample.ui.webview.WebViewActivity"
@@ -675,8 +687,6 @@
 		<service android:name="com.jdroid.android.sample.ui.leakcanary.LeakCanaryService"
 				 android:exported="false" />
 
-		<service android:name="com.jdroid.android.usecase.service.UseCaseService"
-				 android:exported="false" />
 		<service android:name="com.jdroid.android.sample.ui.service.SampleWorkerService"
 				 android:exported="false" />
 

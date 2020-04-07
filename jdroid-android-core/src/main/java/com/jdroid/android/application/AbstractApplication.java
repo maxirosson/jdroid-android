@@ -2,35 +2,22 @@ package com.jdroid.android.application;
 
 import android.app.Activity;
 import android.app.ActivityManager;
-import android.app.Application;
-import android.content.Context;
-import android.content.pm.ApplicationInfo;
-import android.content.res.Configuration;
-import androidx.annotation.CallSuper;
-import androidx.annotation.MainThread;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.WorkerThread;
-import androidx.fragment.app.Fragment;
 
-import com.jdroid.android.BuildConfig;
 import com.jdroid.android.R;
 import com.jdroid.android.activity.AbstractFragmentActivity;
 import com.jdroid.android.activity.ActivityHelper;
 import com.jdroid.android.activity.ActivityLifecycleHandler;
 import com.jdroid.android.analytics.CoreAnalyticsSender;
 import com.jdroid.android.analytics.CoreAnalyticsTracker;
+import com.jdroid.android.concurrent.AppExecutors;
 import com.jdroid.android.context.AndroidGitContext;
 import com.jdroid.android.context.AppContext;
 import com.jdroid.android.debug.DebugContext;
 import com.jdroid.android.exception.DefaultExceptionHandler;
 import com.jdroid.android.exception.ExceptionHandler;
-import com.jdroid.android.firebase.testlab.FirebaseTestLab;
 import com.jdroid.android.fragment.FragmentHelper;
 import com.jdroid.android.http.cache.CacheManager;
-import com.jdroid.android.leakcanary.LeakCanaryHelper;
 import com.jdroid.android.lifecycle.ApplicationLifecycleHelper;
-import com.jdroid.android.notification.NotificationChannelType;
 import com.jdroid.android.notification.NotificationUtils;
 import com.jdroid.android.repository.UserRepository;
 import com.jdroid.android.strictmode.StrictModeHelper;
@@ -42,29 +29,26 @@ import com.jdroid.android.utils.SharedPreferencesHelper;
 import com.jdroid.android.utils.ToastUtils;
 import com.jdroid.java.collections.Lists;
 import com.jdroid.java.collections.Maps;
-import com.jdroid.java.concurrent.ExecutorUtils;
 import com.jdroid.java.context.GitContext;
 import com.jdroid.java.date.DateUtils;
 import com.jdroid.java.domain.Identifiable;
-import com.jdroid.java.remoteconfig.RemoteConfigLoader;
 import com.jdroid.java.repository.Repository;
 import com.jdroid.java.utils.LoggerUtils;
 import com.jdroid.java.utils.ReflectionUtils;
 import com.jdroid.java.utils.StringUtils;
 
-import org.slf4j.Logger;
-
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.List;
 import java.util.Map;
 
-public abstract class AbstractApplication extends Application {
+import androidx.annotation.CallSuper;
+import androidx.annotation.MainThread;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
+import androidx.fragment.app.Fragment;
 
-	/**
-	 * The LOGGER variable is initialized in the "OnCreate" method, after that "LoggerUtils" has been properly
-	 * configured by the superclass.
-	 */
-	protected static Logger LOGGER;
+public abstract class AbstractApplication extends KotlinAbstractApplication {
 
 	private static final String INSTALLATION_SOURCE = "installationSource";
 	private static final String VERSION_CODE_KEY = "versionCodeKey";
@@ -75,15 +59,15 @@ public abstract class AbstractApplication extends Application {
 	private GitContext gitContext;
 	private DebugContext debugContext;
 
-	private List<CoreAnalyticsTracker> coreAnalyticsTrackers = Lists.newArrayList();
+	private List<CoreAnalyticsTracker> coreAnalyticsTrackers = Lists.INSTANCE.newArrayList();
 	private CoreAnalyticsSender<? extends CoreAnalyticsTracker> coreAnalyticsSender;
 	private UriMapper uriMapper;
 
 	private AppLaunchStatus appLaunchStatus;
 
-	private Map<Class<? extends Identifiable>, Repository<? extends Identifiable>> repositories = Maps.newHashMap();
+	private Map<Class<? extends Identifiable>, Repository<? extends Identifiable>> repositories = Maps.INSTANCE.newHashMap();
 
-	private Map<String, AppModule> appModulesMap = Maps.newLinkedHashMap();
+	private Map<String, AppModule> appModulesMap = Maps.INSTANCE.newLinkedHashMap();
 
 	private UpdateManager updateManager;
 	private CacheManager cacheManager;
@@ -94,7 +78,7 @@ public abstract class AbstractApplication extends Application {
 
 	private ActivityLifecycleHandler activityLifecycleHandler;
 
-	private RemoteConfigLoader remoteConfigLoader;
+
 
 	public AbstractApplication() {
 		INSTANCE = this;
@@ -104,67 +88,25 @@ public abstract class AbstractApplication extends Application {
 		return INSTANCE;
 	}
 
-	private void initLogging() {
-		if (LOGGER == null) {
-			LoggerUtils.setEnabled(isLoggingEnabled());
-			LOGGER = LoggerUtils.getLogger(AbstractApplication.class);
-		}
-	}
-
-	@MainThread
-	@CallSuper
-	@Override
-	protected final void attachBaseContext(Context base) {
-		super.attachBaseContext(base);
-
-		onInitMultiDex();
-
-		if (!isMultiProcessSupportEnabled() || ProcessUtils.isMainProcess(this)) {
-			initLogging();
-			ApplicationLifecycleHelper.attachBaseContext(this);
-			onMainProcessAttachBaseContext();
-		} else {
-			onSecondaryProcessAttachBaseContext(ProcessUtils.getProcessInfo(this));
-		}
-	}
-
-	@MainThread
-	protected void onInitMultiDex() {
-		// Do nothing
-	}
-
-	@MainThread
-	protected void onMainProcessAttachBaseContext() {
-		// Do nothing
-	}
-
-	@MainThread
-	protected void onSecondaryProcessAttachBaseContext(ActivityManager.RunningAppProcessInfo processInfo) {
-		// Do nothing
-	}
-
-	@MainThread
-	public void onProviderInit() {
-		// Do nothing
-	}
-
 	@MainThread
 	@CallSuper
 	@Override
 	public final void onCreate() {
 
-		if (!isMultiProcessSupportEnabled() || ProcessUtils.isMainProcess(this)) {
+		if (!isMultiProcessSupportEnabled() || ProcessUtils.INSTANCE.isMainProcess(this)) {
 			initStrictMode();
 		}
 
 		super.onCreate();
 
-		if (!isMultiProcessSupportEnabled() || ProcessUtils.isMainProcess(this)) {
+		if (!isMultiProcessSupportEnabled() || ProcessUtils.INSTANCE.isMainProcess(this)) {
 			ApplicationLifecycleHelper.onCreate(this);
 
 			appContext = createAppContext();
 
-			NotificationUtils.createNotificationChannelsByType(getNotificationChannelTypes());
+			initKoin();
+
+			NotificationUtils.INSTANCE.createNotificationChannelsByType(getNotificationChannelTypes());
 
 			initAppModule(appModulesMap);
 
@@ -180,13 +122,13 @@ public abstract class AbstractApplication extends Application {
 
 			// This is required to initialize the statics fields of the utils classes.
 			ToastUtils.init();
-			DateUtils.init();
+			DateUtils.INSTANCE.init();
 
-			ExecutorUtils.execute(new Runnable() {
+			AppExecutors.INSTANCE.getDiskIOExecutor().execute(new Runnable() {
 
 				@Override
 				public void run() {
-					DeviceUtils.getDeviceYearClass();
+					DeviceUtils.INSTANCE.getDeviceYearClass();
 					fetchInstallationSource();
 					verifyAppLaunchStatus();
 
@@ -201,31 +143,8 @@ public abstract class AbstractApplication extends Application {
 
 			onMainProcessCreate();
 		} else {
-			onSecondaryProcessCreate(ProcessUtils.getProcessInfo(this));
+			onSecondaryProcessCreate(ProcessUtils.INSTANCE.getProcessInfo(this));
 		}
-	}
-
-	@MainThread
-	protected void onMainProcessCreate() {
-		// Do nothing
-	}
-
-	@MainThread
-	protected void onSecondaryProcessCreate(ActivityManager.RunningAppProcessInfo processInfo) {
-		// Do nothing
-	}
-
-	private boolean isDebuggable() {
-		int flags = this.getApplicationInfo().flags;
-		return (flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
-	}
-
-	protected Boolean isLoggingEnabled() {
-		return isDebuggable() || (isFirebaseTestLabLoggingEnabled() && FirebaseTestLab.isRunningInstrumentedTests());
-	}
-
-	protected Boolean isFirebaseTestLabLoggingEnabled() {
-		return true;
 	}
 
 	protected void initAppModule(Map<String, AppModule> appModulesMap) {
@@ -235,38 +154,14 @@ public abstract class AbstractApplication extends Application {
 	@MainThread
 	@CallSuper
 	@Override
-	public final void onConfigurationChanged(Configuration newConfig) {
-		super.onConfigurationChanged(newConfig);
-
-		if (!isMultiProcessSupportEnabled() || ProcessUtils.isMainProcess(this)) {
-			ApplicationLifecycleHelper.onConfigurationChanged(this, newConfig);
-			onMainProcessConfigurationChanged();
-		} else {
-			onSecondaryProcessConfigurationChanged(ProcessUtils.getProcessInfo(this));
-		}
-	}
-
-	@MainThread
-	protected void onMainProcessConfigurationChanged() {
-		// Do nothing
-	}
-
-	@MainThread
-	protected void onSecondaryProcessConfigurationChanged(ActivityManager.RunningAppProcessInfo processInfo) {
-		// Do nothing
-	}
-
-	@MainThread
-	@CallSuper
-	@Override
 	public final void onLowMemory() {
 		super.onLowMemory();
 
-		if (!isMultiProcessSupportEnabled() || ProcessUtils.isMainProcess(this)) {
+		if (!isMultiProcessSupportEnabled() || ProcessUtils.INSTANCE.isMainProcess(this)) {
 			ApplicationLifecycleHelper.onLowMemory(this);
 			onMainProcessLowMemory();
 		} else {
-			onSecondaryProcessLowMemory(ProcessUtils.getProcessInfo(this));
+			onSecondaryProcessLowMemory(ProcessUtils.INSTANCE.getProcessInfo(this));
 		}
 	}
 
@@ -286,10 +181,10 @@ public abstract class AbstractApplication extends Application {
 	public final void onTrimMemory(int level) {
 		super.onTrimMemory(level);
 
-		if (!isMultiProcessSupportEnabled() || ProcessUtils.isMainProcess(this)) {
+		if (!isMultiProcessSupportEnabled() || ProcessUtils.INSTANCE.isMainProcess(this)) {
 			onMainProcessTrimMemory();
 		} else {
-			onSecondaryProcessTrimMemory(ProcessUtils.getProcessInfo(this));
+			onSecondaryProcessTrimMemory(ProcessUtils.INSTANCE.getProcessInfo(this));
 		}
 	}
 
@@ -303,25 +198,21 @@ public abstract class AbstractApplication extends Application {
 		// Do nothing
 	}
 
-	protected Boolean isMultiProcessSupportEnabled() {
-		return BuildConfig.DEBUG && LeakCanaryHelper.isLeakCanaryEnabled();
-	}
-
 	@WorkerThread
 	protected void verifyAppLaunchStatus() {
 		Integer fromVersionCode = SharedPreferencesHelper.get().loadPreferenceAsInteger(VERSION_CODE_KEY);
 		if (fromVersionCode == null) {
 			appLaunchStatus = AppLaunchStatus.NEW_INSTALLATION;
 		} else {
-			if (AppUtils.getVersionCode().equals(fromVersionCode)) {
+			if (fromVersionCode.equals(AppUtils.INSTANCE.getVersionCode())) {
 				appLaunchStatus = AppLaunchStatus.NORMAL;
 			} else {
 				appLaunchStatus = AppLaunchStatus.VERSION_UPGRADE;
 			}
 		}
-		LOGGER.debug("App launch status: " + appLaunchStatus);
+		KotlinAbstractApplication.Companion.getLOGGER().debug("App launch status: " + appLaunchStatus);
 		if (!appLaunchStatus.equals(AppLaunchStatus.NORMAL)) {
-			SharedPreferencesHelper.get().savePreferenceAsync(VERSION_CODE_KEY, AppUtils.getVersionCode());
+			SharedPreferencesHelper.get().savePreferenceAsync(VERSION_CODE_KEY, AppUtils.INSTANCE.getVersionCode());
 		}
 
 		if (appLaunchStatus.equals(AppLaunchStatus.VERSION_UPGRADE) && updateManager != null) {
@@ -335,7 +226,7 @@ public abstract class AbstractApplication extends Application {
 	}
 
 	protected List<? extends CoreAnalyticsTracker> createCoreAnalyticsTrackers() {
-		return Lists.newArrayList();
+		return Lists.INSTANCE.newArrayList();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -345,7 +236,7 @@ public abstract class AbstractApplication extends Application {
 	}
 
 	protected void initStrictMode() {
-		StrictModeHelper.initStrictMode();
+		StrictModeHelper.INSTANCE.initStrictMode();
 	}
 
 	public void initExceptionHandlers() {
@@ -360,7 +251,7 @@ public abstract class AbstractApplication extends Application {
 				builder.append(exceptionHandlerClass.getCanonicalName());
 				builder.append(" initialized, wrapping ");
 				builder.append(currentExceptionHandler.getClass().getCanonicalName());
-				LOGGER.info(builder.toString());
+				KotlinAbstractApplication.Companion.getLOGGER().info(builder.toString());
 				getCoreAnalyticsSender().trackErrorLog(builder.toString());
 			}
 		}
@@ -505,7 +396,7 @@ public abstract class AbstractApplication extends Application {
 	}
 
 	public List<AppModule> getAppModules() {
-		return Lists.newArrayList(appModulesMap.values());
+		return Lists.INSTANCE.newArrayList(appModulesMap.values());
 	}
 
 	public AppModule getAppModule(String appModuleName) {
@@ -516,37 +407,14 @@ public abstract class AbstractApplication extends Application {
 
 	public abstract int getNotificationIconResId();
 
+	@NonNull
 	public abstract String getManifestPackageName();
 
 	public void addAppModulesMap(String name, AppModule appModule) {
 		this.appModulesMap.put(name, appModule);
 	}
 
-	@MainThread
-	@CallSuper
-	public void onLocaleChanged() {
-		NotificationUtils.createNotificationChannelsByType(getNotificationChannelTypes());
-	}
-
 	public void addCoreAnalyticsTracker(CoreAnalyticsTracker coreAnalyticsTracker) {
 		this.coreAnalyticsTrackers.add(coreAnalyticsTracker);
-	}
-
-	@NonNull
-	public List<NotificationChannelType> getNotificationChannelTypes() {
-		return Lists.newArrayList();
-	}
-
-	@Nullable
-	public NotificationChannelType getDefaultNotificationChannelType() {
-		return getNotificationChannelTypes().isEmpty() ? null : getNotificationChannelTypes().iterator().next();
-	}
-
-	public RemoteConfigLoader getRemoteConfigLoader() {
-		return remoteConfigLoader;
-	}
-
-	public void setRemoteConfigLoader(RemoteConfigLoader remoteConfigLoader) {
-		this.remoteConfigLoader = remoteConfigLoader;
 	}
 }

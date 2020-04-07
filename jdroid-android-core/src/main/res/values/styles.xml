@@ -59,7 +59,8 @@
 		<item name="android:paddingTop">4dp</item>
 		<item name="android:paddingBottom">4dp</item>
 		<item name="android:textColor">@android:color/white</item>
-		<item name="android:background">@drawable/jdroid_textview_button_selector</item>
+		<item name="android:background">@drawable/jdroid_raised_button_selector</item>
+		<item name="android:foreground">?android:attr/selectableItemBackground</item>
 		<item name="android:minWidth">100dp</item>
 		<item name="android:minHeight">40dp</item>
 	</style>
@@ -176,6 +177,15 @@
 	<style name="jdroid_cardViewTitle" parent="@style/jdroid_textMedium">
 		<item name="android:textStyle">bold</item>
 		<item name="android:layout_marginBottom">8dp</item>
+	</style>
+
+	<style name="jdroid_cardViewMore" parent="@style/jdroid_cardViewTitle">
+		<item name="android:layout_alignParentRight">true</item>
+		<item name="android:layout_centerVertical">true</item>
+		<item name="android:text">@string/jdroid_cardViewMore</item>
+		<item name="android:textAllCaps">true</item>
+		<item name="android:textSize">@dimen/jdroid_textSmall</item>
+		<item name="android:textColor">@color/jdroid_colorPrimaryDark</item>
 	</style>
 
 	<!-- Ads -->

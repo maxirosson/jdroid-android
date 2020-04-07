@@ -1,11 +1,6 @@
 package com.jdroid.android.recycler;
 
 import android.os.Bundle;
-import androidx.annotation.MainThread;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -15,7 +10,13 @@ import com.jdroid.android.fragment.AbstractFragment;
 import com.jdroid.android.loading.FragmentLoading;
 import com.jdroid.android.loading.NonBlockingLoading;
 
-public abstract class AbstractRecyclerFragment extends AbstractFragment {
+import androidx.annotation.MainThread;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+public abstract class AbstractRecyclerFragment extends AbstractFragment implements RecyclerViewContainer {
 
 	private static final String SELECTED_ITEM_POSITION_EXTRA = "selectedItemPositionExtra";
 
@@ -76,7 +77,7 @@ public abstract class AbstractRecyclerFragment extends AbstractFragment {
 	}
 
 	@MainThread
-	protected Boolean isDividerItemDecorationEnabled() {
+	protected boolean isDividerItemDecorationEnabled() {
 		return false;
 	}
 
@@ -143,7 +144,7 @@ public abstract class AbstractRecyclerFragment extends AbstractFragment {
 
 	@MainThread
 	protected View createEmptyView() {
-		TextView emptyTextView = (TextView)inflate(R.layout.jdroid_empty_view);
+		TextView emptyTextView = inflate(R.layout.jdroid_empty_view);
 		emptyTextView.setText(getNoResultsResId());
 		return emptyTextView;
 	}
@@ -152,13 +153,17 @@ public abstract class AbstractRecyclerFragment extends AbstractFragment {
 		return R.string.jdroid_noResults;
 	}
 
-	public RecyclerViewAdapter getAdapter() {
-		return adapter;
-	}
-
+	@Override
 	public RecyclerView getRecyclerView() {
 		return recyclerView;
 	}
+
+
+	@Override
+	public RecyclerViewAdapter getRecyclerViewAdapter() {
+		return adapter;
+	}
+
 
 	public RecyclerView.LayoutManager getLayoutManager() {
 		return layoutManager;
@@ -174,7 +179,7 @@ public abstract class AbstractRecyclerFragment extends AbstractFragment {
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		if (adapter != null) {
-			outState.putSerializable(SELECTED_ITEM_POSITION_EXTRA, getAdapter().getSelectedItemPosition());
+			outState.putSerializable(SELECTED_ITEM_POSITION_EXTRA, getRecyclerViewAdapter().getSelectedItemPosition());
 		}
 	}
 }

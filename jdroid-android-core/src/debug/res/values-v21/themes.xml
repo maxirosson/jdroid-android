@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-	<style name="Jdroid.Theme.Light.Debug" parent="@style/Jdroid.Theme.Light.NoActionBar">
-		<item name="android:statusBarColor">@color/jdroid_colorPrimaryDark</item>
-	</style>
-
-</resources>

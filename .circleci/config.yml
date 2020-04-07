@@ -1,269 +1,311 @@
-defaults: &defaults
-  working_directory: ~/jdroid
-  docker:
-    - image: circleci/android:api-28-alpha
-  environment:
-    JVM_OPTS: -Xmx3200m
-    LOCAL_MAVEN_REPO: ~/repo
-    GRADLE_OPTS: -Dorg.gradle.caching=true
-    DEX_IN_PROCESS: true
-version: 2
-jobs:
-  build:
-    <<: *defaults
+version: 2.1
+
+references:
+
+  working_dir: &working_dir
+                 ~/project
+
+executors:
+  android_executor:
+    working_directory: *working_dir
+    docker:
+      - image: circleci/android:api-28
+    environment:
+      LOCAL_MAVEN_REPO: ~/repo
+      GRADLE_OPTS: -Dorg.gradle.caching=true -Dorg.gradle.daemon=false -Dorg.gradle.parallel=false -Dorg.gradle.jvmargs="-Xmx4g -Xms1g"
+      DEX_IN_PROCESS: true
+      PRE_DEX_LIBRARIES: false
+      JAVA_MAX_HEAP_SIZE: 4096m
+
+  gcloud_executor:
+    working_directory: *working_dir
+    docker:
+      - image: google/cloud-sdk:latest
+
+
+commands:
+  restore_gradle_cache:
     steps:
-      - checkout
-
-      # Download and cache dependencies
       - restore_cache:
-          key: app-{{ .Branch }}-{{ checksum "build.gradle" }}
+          keys:
+            - v2-gradle_cache-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}-{{ .Branch }}-{{ checksum "buildSrc/src/main/kotlin/Libs.kt" }}-{{ checksum "buildSrc/src/main/kotlin/BuildLibs.kt" }}
+            - v2-gradle_cache-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}-{{ .Branch }}
+            - v2-gradle_cache-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}-
 
-      - run: 
-          name: Assembling
-          command: ./gradlew assemble -PRELEASE_BUILD_TYPE_ENABLED=true -PFAKE_RELEASE_BUILD_TYPE_ENABLED=true --stacktrace --scan
-
+  save_gradle_cache:
+    steps:
       - save_cache:
+          key: v2-gradle_cache-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}-{{ .Branch }}-{{ checksum "buildSrc/src/main/kotlin/Libs.kt" }}-{{ checksum "buildSrc/src/main/kotlin/BuildLibs.kt" }}
           paths:
             - ~/.gradle
-          key: app-{{ .Branch }}-{{ checksum "build.gradle" }}
 
-      - run:
-          name: Saving apks
-          command: |
-            mkdir -p ~/apks/
-            find . -type f -regex ".*/build/outputs/apk/.*apk" -exec cp {} ~/apks/ \;
-          when: always
-      
-      - store_artifacts:
-          path: ~/apks
-          destination: apks
-
-  test:
-    <<: *defaults
+  attach_to_workspace:
     steps:
-      - checkout
+      - attach_workspace:
+          at: ~/
 
-      - restore_cache:
-          key: app-{{ .Branch }}-{{ checksum "build.gradle" }}
-
-      - run: 
-          name: Testing
-          command: ./gradlew testDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
-      
-      - run:
-          name: Saving test results 
-          command: |
-            mkdir -p ~/junit/
-            find . -type f -regex ".*/build/test-results/testDebugUnitTest/.*xml" -exec cp {} ~/junit/ \;
-          when: always
-          
-      - store_test_results:
-          path: ~/junit
-          
-      - store_artifacts:
-          path: ./jdroid-android/build/reports/tests/testDebugUnitTest
-          destination: jdroid-android/tests
-          
-      - store_artifacts:
-          path: ./jdroid-android-about/build/reports/tests/testDebugUnitTest
-          destination: jdroid-android-about/tests
-
-      - store_artifacts:
-          path: ./jdroid-android-facebook-login/build/reports/tests/testDebugUnitTest
-          destination: jdroid-android-facebook-login/tests
-
-      - store_artifacts:
-          path: ./jdroid-android-firebase-admob/build/reports/tests/testDebugUnitTest
-          destination: jdroid-android-firebase-admob/tests
-
-      - store_artifacts:
-          path: ./jdroid-android-firebase-crashlytics/build/reports/tests/testDebugUnitTest
-          destination: jdroid-android-firebase-crashlytics/tests
-
-      - store_artifacts:
-          path: ./jdroid-android-firebase-database/build/reports/tests/testDebugUnitTest
-          destination: jdroid-android-firebase-database/tests
-
-      - store_artifacts:
-          path: ./jdroid-android-firebase-fcm/build/reports/tests/testDebugUnitTest
-          destination: jdroid-android-firebase-fcm/tests
-
-      - store_artifacts:
-          path: ./jdroid-android-firebase-remoteconfig/build/reports/tests/testDebugUnitTest
-          destination: jdroid-android-firebase-remoteconfig/tests
-
-      - store_artifacts:
-          path: ./jdroid-android-firebase-glide/build/reports/tests/testDebugUnitTest
-          destination: jdroid-android-firebase-glide/tests
-
-      - store_artifacts:
-          path: ./jdroid-android-google-inappbilling/build/reports/tests/testDebugUnitTest
-          destination: jdroid-android-google-inappbilling/tests
-
-      - store_artifacts:
-          path: ./jdroid-android-google-maps/build/reports/tests/testDebugUnitTest
-          destination: jdroid-android-google-maps/tests
-
-      - store_artifacts:
-          path: ./jdroid-android-google-play-games/build/reports/tests/testDebugUnitTest
-          destination: jdroid-android-google-play-games/tests
-
-      - store_artifacts:
-          path: ./jdroid-android-google-plus/build/reports/tests/testDebugUnitTest
-          destination: jdroid-android-google-plus/tests
-
-      - store_artifacts:
-          path: ./jdroid-android-google-signin/build/reports/tests/testDebugUnitTest
-          destination: jdroid-android-google-signin/tests
-
-      - store_artifacts:
-          path: ./jdroid-android-sample/build/reports/tests/testDebugUnitTest
-          destination: jdroid-android-sample/tests
-
-      - store_artifacts:
-          path: ./jdroid-android-sqlite/build/reports/tests/testDebugUnitTest
-          destination: jdroid-android-sqlite/tests
-
-      - store_artifacts:
-          path: ./jdroid-android-twitter/build/reports/tests/testDebugUnitTest
-          destination: jdroid-android-twitter/tests
-
-
-  testUI:
-    <<: *defaults
+  persist_gradle_build_cache:
     steps:
-      - checkout
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - gradle-build-cache
 
-      - restore_cache:
-          key: app-{{ .Branch }}-{{ checksum "build.gradle" }}
-
-      - run:
-          name: Assembling automation & android test APKs
-          command: |
-            ./gradlew :jdroid-android-sample:assembleAutomation :jdroid-android-sample:assembleAndroidTest
-            for file in "./jdroid-android-sample/build/outputs/apk/automation"/*.apk; do mv ${file} ./jdroid-android-sample/build/outputs/apk/automation/jdroid-automation.apk; done
-
+  gcloud_auth:
+    steps:
       - run:
           name: Authenticating on gcloud
           command: |
             echo "$GOOGLE_SERVICE_ACCOUNT" > /tmp/service-account.json
             gcloud auth activate-service-account --key-file=/tmp/service-account.json --project=jdroid-staging
 
+jobs:
+  build:
+    executor: android_executor
+    steps:
+      - checkout
+      - restore_gradle_cache
       - run:
-          name: Running Robo tests
-          command: gcloud firebase test android run firebase_test_lab.yml:robo-tests-virtual --async --app ./jdroid-android-sample/build/outputs/apk/automation/jdroid-automation.apk
-
+          name: Download dependencies
+          command: ./gradlew androidDependencies --refresh-dependencies --stacktrace
       - run:
-          name: Running Instrumentation tests
+          name: Assembling Components
           command: |
-            gcloud firebase test android run firebase_test_lab.yml:instrumentation-tests-physical --async --app ./jdroid-android-sample/build/outputs/apk/automation/jdroid-automation.apk --test ./jdroid-android-sample/build/outputs/apk/androidTest/automation/jdroid-android-sample-automation-androidTest.apk
-            gcloud firebase test android run firebase_test_lab.yml:instrumentation-tests-virtual --async --app ./jdroid-android-sample/build/outputs/apk/automation/jdroid-automation.apk --test ./jdroid-android-sample/build/outputs/apk/androidTest/automation/jdroid-android-sample-automation-androidTest.apk
+            ./gradlew jdroid-android-core:assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
+            ./gradlew jdroid-android-about:assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
+            ./gradlew jdroid-android-facebook-login:assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
+            ./gradlew jdroid-android-firebase-admob:assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
+            ./gradlew jdroid-android-firebase-crashlytics:assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
+            ./gradlew jdroid-android-firebase-database:assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
+            ./gradlew jdroid-android-firebase-fcm:assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
+            ./gradlew jdroid-android-firebase-remoteconfig:assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
+            ./gradlew jdroid-android-glide:assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
+            ./gradlew jdroid-android-google-inappbilling:assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
+            ./gradlew jdroid-android-google-maps:assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
+            ./gradlew jdroid-android-google-play-games:assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
+            ./gradlew jdroid-android-google-signin:assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
+            ./gradlew jdroid-android-room:assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
+      - save_gradle_cache
+      - persist_gradle_build_cache
 
-  verify:
-    <<: *defaults
+  buildSample:
+    executor: android_executor
     steps:
       - checkout
+      - restore_gradle_cache
+      - attach_to_workspace
+      - run:
+          name: Assembling Samples
+          command: |
+            ./gradlew assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
+            #./gradlew assembleUat -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
+            ./gradlew assembleAutomation --stacktrace
+            ./gradlew assembleRelease -PRELEASE_BUILD_TYPE_ENABLED=true -PFAKE_RELEASE_BUILD_TYPE_ENABLED=true --stacktrace
 
-      - restore_cache:
-          key: app-{{ .Branch }}-{{ checksum "build.gradle" }}
+      - run:
+          name: Saving apks
+          command: |
+            mkdir -p ~/apks/
+            find . -type f -regex ".*/build/outputs/apk/jdroid-.*apk" -exec cp {} ~/apks/ \;
+          when: always
 
+      - store_artifacts:
+          path: ~/apks
+          destination: apks
+
+  unitTest:
+    executor: android_executor
+    steps:
+      - checkout
+      - restore_gradle_cache
+      - attach_to_workspace
       - run: 
-          name: Linting
-          command: ./gradlew lintDebug --stacktrace
-      
-      - store_artifacts:
-          path: ./jdroid-android/build/reports/lint-results-debug.html
-          destination: jdroid-android/lint
+          name: Testing
+          command: ./gradlew testDebugUnitTest -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
+      - run:
+          name: Save test XML results
+          command: |
+            mkdir -p ~/junit/
+            find . -type f -regex ".*/build/test-results/testDebugUnitTest/.*xml" -exec cp {} ~/junit/ \;
+          when: always
+
+      - store_test_results:
+          path: ~/junit
+
+      - run:
+          name: Save test results
+          command: |
+            modules_file="buildSrc/src/main/kotlin/Module.kt"
+            destination="test-results"
+            while read line
+            do
+              module=$(echo "$line" | sed -nE "s/.+\(\":(.+)\"\)[,;]/\1/p")
+              module="${module//://}" #replace ':' by "/"
+              if [[ ! -z "$module" ]]; then
+                reports_dir="./${module}/build/reports/tests/testDebugUnitTest"
+                if [[ -d "${reports_dir}" ]]; then
+                if [[ ! -d "${destination}/${module}" ]]; then
+                  mkdir -p "${destination}/${module}"
+                fi
+                  cp -R "${reports_dir}/." "${destination}/${module}/" || :
+                fi
+              fi
+            done < "$modules_file"
+          when: always
 
       - store_artifacts:
-          path: ./jdroid-android-about/build/reports/lint-results-debug.html
-          destination: jdroid-android-about/lint
+          path: ./test-results
+          destination: test-results
 
-      - store_artifacts:
-          path: ./jdroid-android-facebook-login/build/reports/lint-results-debug.html
-          destination: jdroid-android-facebook-login/lint
-
-      - store_artifacts:
-          path: ./jdroid-android-firebase-admob/build/reports/lint-results-debug.html
-          destination: jdroid-android-firebase-admob/lint
-
-      - store_artifacts:
-          path: ./jdroid-android-firebase-crashlytics/build/reports/lint-results-debug.html
-          destination: jdroid-android-firebase-crashlytics/lint
-
-      - store_artifacts:
-          path: ./jdroid-android-firebase-database/build/reports/lint-results-debug.html
-          destination: jdroid-android-firebase-database/lint
-
-      - store_artifacts:
-          path: ./jdroid-android-firebase-fcm/build/reports/lint-results-debug.html
-          destination: jdroid-android-firebase-fcm/lint
-
-      - store_artifacts:
-          path: ./jdroid-android-firebase-remoteconfig/build/reports/lint-results-debug.html
-          destination: jdroid-android-firebase-remoteconfig/lint
-
-      - store_artifacts:
-          path: ./jdroid-android-firebase-glide/build/reports/lint-results-debug.html
-          destination: jdroid-android-firebase-glide/lint
-
-      - store_artifacts:
-          path: ./jdroid-android-google-inappbilling/build/reports/lint-results-debug.html
-          destination: jdroid-android-google-inappbilling/lint
-
-      - store_artifacts:
-          path: ./jdroid-android-google-maps/build/reports/lint-results-debug.html
-          destination: jdroid-android-google-maps/lint
-
-      - store_artifacts:
-          path: ./jdroid-android-google-play-games/build/reports/lint-results-debug.html
-          destination: jdroid-android-google-play-games/lint
-
-      - store_artifacts:
-          path: ./jdroid-android-google-plus/build/reports/lint-results-debug.html
-          destination: jdroid-android-google-plus/lint
-
-      - store_artifacts:
-          path: ./jdroid-android-google-signin/build/reports/lint-results-debug.html
-          destination: jdroid-android-google-signin/lint
-
-      - store_artifacts:
-          path: ./jdroid-android-sample/build/reports/lint-results-debug.html
-          destination: jdroid-android-sample/lint
-
-      - store_artifacts:
-          path: ./jdroid-android-sqlite/build/reports/lint-results-debug.html
-          destination: jdroid-android-sqlite/lint
-
-      - store_artifacts:
-          path: ./jdroid-android-twitter/build/reports/lint-results-debug.html
-          destination: jdroid-android-twitter/lint
-
-  deploy:
-    <<: *defaults
+  lint:
+    executor: android_executor
     steps:
       - checkout
-      
-      - restore_cache:
-          key: app-{{ .Branch }}-{{ checksum "build.gradle" }}
-          
-      - run: ./gradlew uploadArchives -PLOCAL_UPLOAD=false -PRELEASE_BUILD_TYPE_ENABLED=true -PFAKE_RELEASE_BUILD_TYPE_ENABLED=true --stacktrace
-  
+      - restore_gradle_cache
+      - attach_to_workspace
+      - run:
+          name: Linting
+          command: ./gradlew lint --stacktrace
+      - run:
+          name: Save lint results
+          command: |
+            modules_file="buildSrc/src/main/kotlin/Module.kt"
+            destination="lint-results"
+            file_name="lint-results.html"
+            while read line
+            do
+              module=$(echo "$line" | sed -nE "s/.+\(\":(.+)\"\)[,;]/\1/p")
+              module="${module//://}" #replace ':' by "/"
+              if [[ ! -z "$module" ]]; then
+                lint_result="./${module}/build/reports/${file_name}"
+                if [[ ! -d "${destination}/${module}" ]]; then
+                  mkdir -p "${destination}/${module}"
+                fi
+                cp "$lint_result" "${destination}/${module}/${file_name}" || :
+              fi
+            done < "$modules_file"
+          when: always
+
+      - store_artifacts:
+          path: ./lint-results
+          destination: lint-results
+
+  ktlint:
+    executor: android_executor
+    steps:
+      - checkout
+      - restore_gradle_cache
+      - run: ./gradlew ktlint --stacktrace
+
+  publish:
+    executor: android_executor
+    steps:
+      - checkout
+      - restore_gradle_cache
+      - attach_to_workspace
+      - run:
+          name: Uploading to Nexus Sonatype
+          command: ./gradlew publish -PLOCAL_UPLOAD=false -PRELEASE_BUILD_TYPE_ENABLED=true -PFAKE_RELEASE_BUILD_TYPE_ENABLED=true --stacktrace
+
+  buildAutomationTest:
+    executor: android_executor
+    steps:
+    - checkout
+    - restore_gradle_cache
+    - attach_to_workspace
+    - run:
+        name: Assembling automation & android test APKs
+        command: |
+          ./gradlew :jdroid-android-sample:assembleAutomation :jdroid-android-sample:assembleAndroidTest
+          for file in "./jdroid-android-sample/build/outputs/apk/automation"/*.apk; do mv ${file} ./jdroid-android-sample/build/outputs/apk/automation/jdroid-automation.apk; done
+
+    - persist_to_workspace:
+        root: ~/
+        paths:
+          - project/jdroid-android-sample/build/outputs/apk/automation/jdroid-automation.apk
+          - project/jdroid-android-sample/build/outputs/apk/androidTest/automation/jdroid-android-sample-automation-androidTest.apk
+
+    - store_artifacts:
+        path: ./jdroid-android-sample/build/outputs/apk/automation/jdroid-automation.apk
+        destination: jdroid-automation.apk
+    - store_artifacts:
+        path: ./jdroid-android-sample/build/outputs/apk/androidTest/automation/jdroid-android-sample-automation-androidTest.apk
+        destination: jdroid-android-sample-automation-androidTest.apk
+
+  runRoboTest:
+    executor: gcloud_executor
+    steps:
+    - checkout
+    - attach_to_workspace
+    - gcloud_auth
+    - run:
+        name: Running Robo tests
+        command: gcloud firebase test android run firebase_test_lab.yml:robo-tests-virtual --async --app ./jdroid-android-sample/build/outputs/apk/automation/jdroid-automation.apk
+        no_output_timeout: 30m
+
+  runInstrumentationTest:
+    executor: gcloud_executor
+    steps:
+    - checkout
+    - attach_to_workspace
+    - gcloud_auth
+    - run:
+        name: Running Instrumentation tests
+        command: |
+          gcloud firebase test android run firebase_test_lab.yml:instrumentation-tests-physical --async --app ./jdroid-android-sample/build/outputs/apk/automation/jdroid-automation.apk --test ./jdroid-android-sample/build/outputs/apk/androidTest/automation/jdroid-android-sample-automation-androidTest.apk
+          gcloud firebase test android run firebase_test_lab.yml:instrumentation-tests-virtual --async --app ./jdroid-android-sample/build/outputs/apk/automation/jdroid-automation.apk --test ./jdroid-android-sample/build/outputs/apk/androidTest/automation/jdroid-android-sample-automation-androidTest.apk
+        no_output_timeout: 30m
+
+  projectDependencyGraph:
+    executor: android_executor
+    resource_class: medium
+    steps:
+      - checkout
+      - restore_gradle_cache
+      - run:
+          name: Install graphviz
+          command: sudo apt-get install graphviz
+      - run:
+          name: Generate project dependency graph
+          command: ./gradlew projectDependencyGraph --stacktrace
+      - store_artifacts:
+          path: ./build/reports/dependency-graph/project.dot.png
+          destination: project-graph.png
+
+  upgradeDependencies:
+    executor: android_executor
+    steps:
+    - checkout
+    - restore_gradle_cache
+    - run:
+        name: Upgrade Dependencies
+        command: ./gradlew upgradeDependencies -PpullRequestEnabled=true --stacktrace
+
 workflows:
-  version: 2
   commit:
     jobs:
       - build
-      - test:
+      - ktlint:
           requires:
             - build
-      - verify:
+      - lint:
           requires:
             - build
-      - deploy:
+      - buildSample:
           requires:
-            - test
-            - verify
+            - build
+      - unitTest:
+          requires:
+            - build
+      - publish:
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - unitTest
+            - lint
+            - ktlint
   nightly:
     triggers:
       - schedule:
@@ -273,4 +315,21 @@ workflows:
               only:
                 - master
     jobs:
-      - testUI
+      - buildAutomationTest
+      - projectDependencyGraph
+      - runRoboTest:
+          requires:
+            - buildAutomationTest
+      - runInstrumentationTest:
+          requires:
+            - buildAutomationTest
+  weekly:
+    triggers:
+      - schedule:
+          cron: "0 0 * * 0"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - upgradeDependencies

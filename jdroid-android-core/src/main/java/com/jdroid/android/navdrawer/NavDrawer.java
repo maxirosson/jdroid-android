@@ -3,19 +3,21 @@ package com.jdroid.android.navdrawer;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.jdroid.android.R;
 import com.jdroid.android.activity.AbstractFragmentActivity;
+import com.jdroid.android.concurrent.AppExecutors;
 import com.jdroid.android.utils.SharedPreferencesHelper;
 import com.jdroid.java.concurrent.ExecutorUtils;
 
 import java.util.concurrent.TimeUnit;
+
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 public abstract class NavDrawer {
 
@@ -107,12 +109,12 @@ public abstract class NavDrawer {
 		contentView = createContentView();
 
 		if (isNavDrawerOpenedOnFirstSession) {
-			ExecutorUtils.schedule(new Runnable() {
+			ExecutorUtils.INSTANCE.schedule(new Runnable() {
 
 				@Override
 				public void run() {
 					navDrawerManuallyUsed = SharedPreferencesHelper.get().loadPreferenceAsBoolean(NAV_DRAWER_MANUALLY_USED, false);
-					activity.runOnUiThread(new Runnable() {
+					AppExecutors.INSTANCE.getMainThreadExecutor().execute(new Runnable() {
 
 						@Override
 						public void run() {
@@ -129,7 +131,7 @@ public abstract class NavDrawer {
 
 	private void saveNavDrawerManuallyUsed() {
 		if ((navDrawerManuallyUsed == null) || !navDrawerManuallyUsed) {
-			ExecutorUtils.execute(new Runnable() {
+			AppExecutors.INSTANCE.getDiskIOExecutor().execute(new Runnable() {
 
 				@Override
 				public void run() {

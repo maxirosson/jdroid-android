@@ -16,7 +16,8 @@
 					  android:layout_width="match_parent"
 					  android:layout_height="wrap_content"
 					  android:inputType="text"
-					  android:hint="@string/notificationName" />
+					  android:hint="@string/notificationName"
+					  android:importantForAutofill="no" />
 		</com.google.android.material.textfield.TextInputLayout>
 
 		<com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent"
@@ -27,7 +28,8 @@
 					  android:layout_width="match_parent"
 					  android:layout_height="wrap_content"
 					  android:inputType="text"
-					  android:hint="@string/notificationChannel" />
+					  android:hint="@string/notificationChannel"
+					  android:importantForAutofill="no" />
 		</com.google.android.material.textfield.TextInputLayout>
 
 		<com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent"
@@ -38,7 +40,8 @@
 					  android:layout_width="match_parent"
 					  android:layout_height="wrap_content"
 					  android:inputType="text"
-					  android:hint="@string/contentTitle" />
+					  android:hint="@string/contentTitle"
+					  android:importantForAutofill="no" />
 		</com.google.android.material.textfield.TextInputLayout>
 
 		<com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent"
@@ -49,7 +52,8 @@
 					  android:layout_width="match_parent"
 					  android:layout_height="wrap_content"
 					  android:inputType="text"
-					  android:hint="@string/contentText" />
+					  android:hint="@string/contentText"
+					  android:importantForAutofill="no" />
 		</com.google.android.material.textfield.TextInputLayout>
 
 		<com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent"
@@ -60,7 +64,8 @@
 					  android:inputType="textUri"
 					  android:layout_width="match_parent"
 					  android:layout_height="wrap_content"
-					  android:hint="@string/url" />
+					  android:hint="@string/url"
+					  android:importantForAutofill="no" />
 		</com.google.android.material.textfield.TextInputLayout>
 
 		<com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent"
@@ -71,7 +76,8 @@
 					  android:inputType="textUri"
 					  android:layout_width="match_parent"
 					  android:layout_height="wrap_content"
-					  android:hint="@string/largeIconUrl" />
+					  android:hint="@string/largeIconUrl"
+					  android:importantForAutofill="no" />
 		</com.google.android.material.textfield.TextInputLayout>
 
 		<com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent"

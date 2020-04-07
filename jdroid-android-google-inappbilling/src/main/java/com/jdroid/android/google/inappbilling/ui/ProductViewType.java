@@ -43,7 +43,7 @@ public abstract class ProductViewType extends RecyclerViewType<Product, ProductV
 		}
 		holder.title.setText(product.getTitle());
 		holder.description.setText(product.getDescription());
-		holder.price.setText(product.isAvailableToPurchase() ? product.getFormattedPrice() : LocalizationUtils.getString(
+		holder.price.setText(product.isAvailableToPurchase() ? product.getFormattedPrice() : LocalizationUtils.INSTANCE.getString(
 			R.string.jdroid_purchased));
 		holder.price.setOnClickListener(new OnClickListener() {
 

@@ -15,7 +15,9 @@
 						android:padding="12dp"
 						android:background="?android:attr/selectableItemBackground">
 
-			<TextView android:layout_width="wrap_content"
+			<TextView
+					  android:id="@+id/shareTitle"
+					  android:layout_width="wrap_content"
 					  android:layout_height="wrap_content"
 					  android:text="@string/jdroid_share"
 					  style="@style/jdroid_cardViewTitle"
@@ -23,8 +25,10 @@
 
 			<TextView android:layout_width="wrap_content"
 					  android:layout_height="wrap_content"
-					  android:text="@string/jdroid_more"
+					  android:text="@string/jdroid_cardViewMore"
 					  android:textAllCaps="true"
+					  android:gravity="right"
+					  android:layout_toRightOf="@+id/shareTitle"
 					  style="@style/jdroid_cardViewTitle"
 					  android:layout_alignParentRight="true"
 					  android:layout_centerVertical="true" />

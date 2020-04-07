@@ -2,10 +2,6 @@ package com.jdroid.android.dialog;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.MainThread;
-import androidx.annotation.NonNull;
-import androidx.fragment.app.DialogFragment;
-import androidx.appcompat.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,12 +17,16 @@ import com.jdroid.android.fragment.FragmentIf;
 import com.jdroid.android.loading.FragmentLoading;
 import com.jdroid.java.exception.AbstractException;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.DialogFragment;
+
 public class AbstractDialogFragment extends DialogFragment implements FragmentIf {
 
 	private FragmentHelper fragmentHelper;
 
 	@Override
-	public Boolean shouldRetainInstance() {
+	public boolean shouldRetainInstance() {
 		return fragmentHelper.shouldRetainInstance();
 	}
 
@@ -118,37 +118,13 @@ public class AbstractDialogFragment extends DialogFragment implements FragmentIf
 	}
 
 	@Override
-	public View inflate(int resource) {
+	public <V extends View> V inflate(int resource) {
 		return fragmentHelper.inflate(resource);
-	}
-
-	@MainThread
-	@Override
-	public void onStartUseCase() {
-		fragmentHelper.onStartUseCase();
-	}
-
-	@MainThread
-	@Override
-	public void onUpdateUseCase() {
-		fragmentHelper.onUpdateUseCase();
-	}
-
-	@MainThread
-	@Override
-	public void onFinishFailedUseCase(AbstractException abstractException) {
-		fragmentHelper.onFinishFailedUseCase(abstractException);
 	}
 
 	@Override
 	public ErrorDisplayer createErrorDisplayer(AbstractException abstractException) {
 		return fragmentHelper.createErrorDisplayer(abstractException);
-	}
-
-	@MainThread
-	@Override
-	public void onFinishUseCase() {
-		fragmentHelper.onFinishUseCase();
 	}
 
 	@Override
@@ -232,7 +208,7 @@ public class AbstractDialogFragment extends DialogFragment implements FragmentIf
 	}
 
 	@Override
-	public Boolean isSecondaryFragment() {
+	public boolean isSecondaryFragment() {
 		return fragmentHelper.isSecondaryFragment();
 	}
 
@@ -247,7 +223,7 @@ public class AbstractDialogFragment extends DialogFragment implements FragmentIf
 	}
 
 	@Override
-	public Boolean onBackPressedHandled() {
+	public boolean onBackPressedHandled() {
 		return fragmentHelper.onBackPressedHandled();
 	}
 }

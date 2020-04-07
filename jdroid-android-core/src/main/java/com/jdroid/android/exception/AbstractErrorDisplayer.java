@@ -29,29 +29,29 @@ public abstract class AbstractErrorDisplayer implements ErrorDisplayer {
 				if (((title == null) || (description == null)) && (abstractException instanceof ErrorCodeException)) {
 					ErrorCodeException errorCodeException = (ErrorCodeException)abstractException;
 					if (title == null) {
-						title = LocalizationUtils.getTitle(errorCodeException.getErrorCode());
+						title = LocalizationUtils.INSTANCE.getTitle(errorCodeException.getErrorCode());
 						if ((title == null)
 							&& errorCodeException.getErrorCode().equals(HttpErrorCode.CONNECTION_ERROR)) {
-							title = LocalizationUtils.getString(R.string.jdroid_connectionErrorTitle);
+							title = LocalizationUtils.INSTANCE.getString(R.string.jdroid_connectionErrorTitle);
 						}
 					}
 					if (description == null) {
-						description = LocalizationUtils.getDescription(errorCodeException.getErrorCode(),
+						description = LocalizationUtils.INSTANCE.getDescription(errorCodeException.getErrorCode(),
 							errorCodeException.getErrorCodeDescriptionArgs());
 						if ((description == null)
 							&& errorCodeException.getErrorCode().equals(HttpErrorCode.CONNECTION_ERROR)) {
-							description = LocalizationUtils.getString(R.string.jdroid_connectionErrorDescription);
+							description = LocalizationUtils.INSTANCE.getString(R.string.jdroid_connectionErrorDescription);
 						}
 					}
 				}
 			}
 
 			if (title == null) {
-				title = LocalizationUtils.getString(R.string.jdroid_defaultErrorTitle, AppUtils.getApplicationName());
+				title = LocalizationUtils.INSTANCE.getString(R.string.jdroid_defaultErrorTitle, AppUtils.INSTANCE.getApplicationName());
 			}
 
 			if (description == null) {
-				description = LocalizationUtils.getString(R.string.jdroid_defaultErrorDescription);
+				description = LocalizationUtils.INSTANCE.getString(R.string.jdroid_defaultErrorDescription);
 			}
 
 			onDisplayError(activity, title, description, throwable);
@@ -59,7 +59,7 @@ public abstract class AbstractErrorDisplayer implements ErrorDisplayer {
 	}
 
 	protected void handleInvalidApiVersionError(FragmentActivity activity) {
-		GooglePlayUtils.showUpdateDialog(activity);
+		GooglePlayUtils.INSTANCE.showUpdateDialog(activity);
 	}
 
 	protected abstract void onDisplayError(FragmentActivity activity, String title, String description, Throwable throwable);

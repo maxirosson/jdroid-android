@@ -22,7 +22,8 @@
 					  android:hint="@string/jdroid_typeHere"
 					  android:imeOptions="actionSearch"
 					  android:paddingRight="64dp"
-					  style="@style/jdroid_textMedium" />
+					  style="@style/jdroid_textMedium"
+					  android:importantForAutofill="no" />
 
 			<ProgressBar android:id="@+id/loading"
 						 android:layout_width="24dp"

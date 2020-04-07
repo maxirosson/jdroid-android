@@ -15,14 +15,13 @@
 	<supports-screens android:largeScreens="true"
 					  android:xlargeScreens="true" />
 
-	<application>
+	<application
+			android:supportsRtl="false">
 
 		<!-- Remove this comment to enable Firebase Performance logs-->
 		<!--<meta-data android:name="firebase_performance_logcat_enabled" android:value="true" />-->
 
 		<meta-data android:name="com.jdroid.android.application.AppLifecycleCallback"
-				   android:value="ApplicationLifecycleCallback" />
-		<meta-data android:name="com.jdroid.android.google.analytics.GoogleAnalyticsAppLifecycleCallback"
 				   android:value="ApplicationLifecycleCallback" />
 		<meta-data android:name="com.jdroid.android.firebase.analytics.FirebaseAnalyticsAppLifecycleCallback"
 				   android:value="ApplicationLifecycleCallback" />
@@ -38,26 +37,6 @@
 				  android:exported="true">
 			<intent-filter>
 				<action android:name="android.intent.action.LOCALE_CHANGED" />
-			</intent-filter>
-		</receiver>
-
-		<!-- Register AnalyticsReceiver and AnalyticsService to support background dispatching on non-Google Play devices -->
-		<receiver android:name="com.google.android.gms.analytics.AnalyticsReceiver"
-				  android:enabled="true">
-			<intent-filter>
-				<action android:name="com.google.android.gms.analytics.ANALYTICS_DISPATCH" />
-			</intent-filter>
-		</receiver>
-		<service android:name="com.google.android.gms.analytics.AnalyticsService"
-				 android:enabled="true"
-				 android:exported="false" />
-
-		<!-- Used for install referral measurement -->
-		<receiver android:name="com.google.android.gms.analytics.CampaignTrackingReceiver"
-				  android:exported="true"
-				  tools:ignore="ExportedReceiver">
-			<intent-filter>
-				<action android:name="com.android.vending.INSTALL_REFERRER" />
 			</intent-filter>
 		</receiver>
 

@@ -1,5 +1,6 @@
 package com.jdroid.android.utils;
 
+import android.annotation.SuppressLint;
 import android.os.Handler;
 import android.widget.Toast;
 
@@ -13,6 +14,7 @@ public final class ToastUtils {
 
 	private static WeakReference<Toast> currentToast;
 
+	@SuppressLint("HandlerLeak")
 	private static final Handler HANDLER = new Handler() {
 
 		@Override
@@ -53,7 +55,7 @@ public final class ToastUtils {
 	 * @param messageId The id of the text to show.
 	 */
 	public static void showToastOnUIThread(int messageId) {
-		showToastOnUIThread(LocalizationUtils.getString(messageId));
+		showToastOnUIThread(LocalizationUtils.INSTANCE.getString(messageId));
 	}
 
 	/**
@@ -62,7 +64,7 @@ public final class ToastUtils {
 	 * @param messageId The id of the text to show.
 	 */
 	public static void showToast(int messageId) {
-		showToast(LocalizationUtils.getString(messageId), DEFAULT_DURATION);
+		showToast(LocalizationUtils.INSTANCE.getString(messageId), DEFAULT_DURATION);
 	}
 
 	/**

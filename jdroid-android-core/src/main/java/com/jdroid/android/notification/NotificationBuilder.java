@@ -9,13 +9,6 @@ import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.annotation.ColorRes;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.annotation.WorkerThread;
-import androidx.core.app.NotificationCompat;
 import android.widget.RemoteViews;
 
 import com.jdroid.android.R;
@@ -28,6 +21,14 @@ import com.jdroid.android.utils.AppUtils;
 import com.jdroid.android.utils.LocalizationUtils;
 import com.jdroid.java.utils.RandomUtils;
 import com.jdroid.java.utils.StringUtils;
+
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.annotation.WorkerThread;
+import androidx.core.app.NotificationCompat;
 
 public class NotificationBuilder {
 
@@ -44,7 +45,7 @@ public class NotificationBuilder {
 
 	public NotificationBuilder(@NonNull String notificationName, @Nullable String channelId) {
 
-		if (NotificationUtils.findNotificationChannelType(channelId) == null) {
+		if (NotificationUtils.INSTANCE.findNotificationChannelType(channelId) == null) {
 			AbstractApplication.get().getExceptionHandler().logHandledException("Channel id not found: " + channelId);
 			NotificationChannelType defaultNotificationChannelType = AbstractApplication.get().getDefaultNotificationChannelType();
 			if (defaultNotificationChannelType != null) {
@@ -74,7 +75,7 @@ public class NotificationBuilder {
 	}
 
 	public void setTicker(int tickerId, Object... args) {
-		setTicker(LocalizationUtils.getString(tickerId, args));
+		setTicker(LocalizationUtils.INSTANCE.getString(tickerId, args));
 	}
 
 	public void setTicker(String tickerText) {
@@ -82,7 +83,7 @@ public class NotificationBuilder {
 	}
 
 	public void setContentTitle(@StringRes int contentTitleId, Object... args) {
-		setContentTitle(LocalizationUtils.getString(contentTitleId, args));
+		setContentTitle(LocalizationUtils.INSTANCE.getString(contentTitleId, args));
 	}
 
 	public void setContentTitle(String contentTitle) {
@@ -90,7 +91,7 @@ public class NotificationBuilder {
 	}
 
 	public void setContentText(@StringRes int contentTextId, Object... args) {
-		setContentText(LocalizationUtils.getString(contentTextId, args));
+		setContentText(LocalizationUtils.INSTANCE.getString(contentTextId, args));
 	}
 
 	public void setContentText(String contentText) {
@@ -131,7 +132,7 @@ public class NotificationBuilder {
 
 		ReferrerUtils.setReferrer(notificationIntent, generateNotificationsReferrer());
 
-		builder.setContentIntent(PendingIntent.getActivity(AbstractApplication.get(), RandomUtils.get16BitsInt(),
+		builder.setContentIntent(PendingIntent.getActivity(AbstractApplication.get(), RandomUtils.INSTANCE.get16BitsInt(),
 			notificationIntent, 0));
 	}
 
@@ -149,7 +150,7 @@ public class NotificationBuilder {
 
 	public void setUrl(@NonNull String url, Integer flags) {
 		if (StringUtils.isNotEmpty(url)) {
-			Intent notificationIntent = UriUtils.createIntent(AbstractApplication.get(), url, generateNotificationsReferrer());
+			Intent notificationIntent = UriUtils.INSTANCE.createIntent(AbstractApplication.get(), url, generateNotificationsReferrer());
 			if (flags != null) {
 				notificationIntent.setFlags(flags);
 			}
@@ -158,11 +159,11 @@ public class NotificationBuilder {
 	}
 
 	public static String generateNotificationsReferrer() {
-		return NOTIFICATION_SCHEME + "://" + AppUtils.getApplicationId();
+		return NOTIFICATION_SCHEME + "://" + AppUtils.INSTANCE.getApplicationId();
 	}
 
 	protected Uri createUniqueNotificationUri() {
-		return Uri.parse(NOTIFICATION_SCHEME + "://" + RandomUtils.getInt());
+		return Uri.parse(NOTIFICATION_SCHEME + "://" + RandomUtils.INSTANCE.getInt());
 	}
 
 	public void setWhen(Long when) {
@@ -172,7 +173,7 @@ public class NotificationBuilder {
 	}
 
 	public void setLargeIcon(@DrawableRes int resId) {
-		builder.setLargeIcon(BitmapUtils.toBitmap(resId));
+		builder.setLargeIcon(BitmapUtils.INSTANCE.toBitmap(resId));
 	}
 
 	public void setLargeIcon(Bitmap largeIcon) {
@@ -189,7 +190,7 @@ public class NotificationBuilder {
 	}
 
 	private Bitmap createLargeIconBitmap(BitmapLoader bitmapLoader) {
-		return bitmapLoader.load(NotificationUtils.getNotificationLargeIconHeightPx(), NotificationUtils.getNotificationLargeIconWidthPx());
+		return bitmapLoader.load(NotificationUtils.INSTANCE.getNotificationLargeIconHeightPx(), NotificationUtils.INSTANCE.getNotificationLargeIconWidthPx());
 	}
 
 	public void setInProgress(@DrawableRes int notificationIcon, int progress, int contentTitle, int actionText) {
@@ -227,7 +228,7 @@ public class NotificationBuilder {
 	}
 
 	public void setSound(int soundResId) {
-		Uri notificationSound = Uri.parse("android.resource://" + AppUtils.getApplicationId() + "/" + soundResId);
+		Uri notificationSound = Uri.parse("android.resource://" + AppUtils.INSTANCE.getApplicationId() + "/" + soundResId);
 		if (notificationSound != null) {
 			builder.setSound(notificationSound);
 		}
@@ -291,21 +292,21 @@ public class NotificationBuilder {
 	}
 
 	public void addStartActivityAction(@DrawableRes int icon, @StringRes int titleId, Intent intent) {
-		addStartActivityAction(icon, LocalizationUtils.getString(titleId), intent);
+		addStartActivityAction(icon, LocalizationUtils.INSTANCE.getString(titleId), intent);
 	}
 
 	public void addStartActivityAction(@DrawableRes int icon, String title, Intent intent) {
 		PendingIntent pendingIntent = PendingIntent.getActivity(AbstractApplication.get(),
-			RandomUtils.get16BitsInt(), intent, 0);
+			RandomUtils.INSTANCE.get16BitsInt(), intent, 0);
 		builder.addAction(icon, title, pendingIntent);
 	}
 
 	public void addStartServiceAction(@DrawableRes int icon, @StringRes int titleId, Intent intent) {
-		addStartServiceAction(icon, LocalizationUtils.getString(titleId), intent);
+		addStartServiceAction(icon, LocalizationUtils.INSTANCE.getString(titleId), intent);
 	}
 
 	public void addStartServiceAction(@DrawableRes int icon, String title, Intent intent) {
-		PendingIntent pendingIntent = PendingIntent.getService(AbstractApplication.get(), RandomUtils.getInt(),
+		PendingIntent pendingIntent = PendingIntent.getService(AbstractApplication.get(), RandomUtils.INSTANCE.getInt(),
 			intent, 0);
 		builder.addAction(icon, title, pendingIntent);
 	}

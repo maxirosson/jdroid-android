@@ -3,10 +3,6 @@ package com.jdroid.android.fragment;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.MainThread;
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.appcompat.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,6 +25,11 @@ import com.squareup.leakcanary.LeakCanary;
 import org.slf4j.Logger;
 
 import java.util.Map;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 
 public class FragmentHelper implements FragmentIf {
 
@@ -72,15 +73,26 @@ public class FragmentHelper implements FragmentIf {
 	}
 
 	@SuppressWarnings("unchecked")
+	@NonNull
 	@Override
 	public <V extends View> V findView(int id) {
-		return (V)fragment.getView().findViewById(id);
+		V view = (V)fragment.getView().findViewById(id);
+		if (view != null) {
+			return view;
+		} else {
+			throw new RuntimeException("View id not found");
+		}
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public <V extends View> V findViewOnActivity(int id) {
-		return (V)fragment.getActivity().findViewById(id);
+		V view = (V)fragment.getActivity().findViewById(id);
+		if (view != null) {
+			return view;
+		} else {
+			throw new RuntimeException("View id not found");
+		}
 	}
 
 	@Override
@@ -89,11 +101,11 @@ public class FragmentHelper implements FragmentIf {
 	}
 
 	@Override
-	public View inflate(int resource) {
+	public <V extends View> V inflate(int resource) {
 		return getActivityIf().inflate(resource);
 	}
 
-	public Boolean isSecondaryFragment() {
+	public boolean isSecondaryFragment() {
 		return false;
 	}
 
@@ -103,7 +115,7 @@ public class FragmentHelper implements FragmentIf {
 		LOGGER.debug("Executing onCreate on " + fragment);
 		fragment.setRetainInstance(getFragmentIf().shouldRetainInstance());
 
-		fragmentDelegatesMap = Maps.newHashMap();
+		fragmentDelegatesMap = Maps.INSTANCE.newHashMap();
 		for (AppModule appModule : AbstractApplication.get().getAppModules()) {
 			FragmentDelegate fragmentDelegate = getFragmentIf().createFragmentDelegate(appModule);
 			if (fragmentDelegate != null) {
@@ -113,12 +125,13 @@ public class FragmentHelper implements FragmentIf {
 		}
 	}
 
+	@Override
 	public void onNewIntent(Intent intent) {
 		LOGGER.debug("Executing onNewIntent on " + fragment);
 	}
 
 	@Override
-	public Boolean shouldRetainInstance() {
+	public boolean shouldRetainInstance() {
 		return true;
 	}
 
@@ -226,6 +239,7 @@ public class FragmentHelper implements FragmentIf {
 		return getActivityIf().getExtra(key);
 	}
 
+	@Nullable
 	@Override
 	public <E> E getArgument(String key) {
 		return getArgument(key, null);
@@ -245,7 +259,7 @@ public class FragmentHelper implements FragmentIf {
 	}
 
 	@Override
-	public Boolean onBackPressedHandled() {
+	public boolean onBackPressedHandled() {
 		return false;
 	}
 
@@ -271,34 +285,6 @@ public class FragmentHelper implements FragmentIf {
 	@Override
 	public ErrorDisplayer createErrorDisplayer(AbstractException abstractException) {
 		return AbstractErrorDisplayer.getErrorDisplayer(abstractException);
-	}
-
-	// //////////////////////// Use cases //////////////////////// //
-
-	@MainThread
-	@Override
-	public void onStartUseCase() {
-		getFragmentIf().showLoading();
-	}
-
-	@MainThread
-	@Override
-	public void onUpdateUseCase() {
-		// Do nothing by default
-	}
-
-	@MainThread
-	@Override
-	public void onFinishUseCase() {
-		getFragmentIf().dismissLoading();
-	}
-
-	@MainThread
-	@Override
-	public void onFinishFailedUseCase(AbstractException abstractException) {
-		getFragmentIf().dismissLoading();
-		// TODO This line shouldn't be executed outside the onStart/onStop cycle, to avoid IllegalStateException: Can not perform this action after onSaveInstanceState
-		getFragmentIf().createErrorDisplayer(abstractException).displayError(getFragment().getActivity(), abstractException);
 	}
 
 	// //////////////////////// Loading //////////////////////// //
