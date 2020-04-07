@@ -74,6 +74,11 @@ object Libs {
     @Deprecated("Use dagger")
     const val koin_viewmodel = "org.koin:koin-androidx-viewmodel:2.0.1"
 
+    // https://github.com/google/dagger/releases
+    const val DAGGER_ANDROID = "com.google.dagger:dagger-android-support:2.25.2"
+    const val DAGGER_ANDROID_PROCESSOR = "com.google.dagger:dagger-android-processor:2.25.2"
+    const val DAGGER_COMPILER = "com.google.dagger:dagger-compiler:2.25.2"
+
     // https://github.com/twitter/twitter-kit-android/wiki/Changelog
     const val twitter = "com.twitter.sdk.android:tweet-ui:3.3.0"
 

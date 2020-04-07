@@ -55,6 +55,9 @@ dependencies {
 
 	kapt(Libs.glide_compiler)
 
+	kapt(Libs.DAGGER_COMPILER)
+	kapt(Libs.DAGGER_ANDROID_PROCESSOR)
+
 	if (jdroid.propertyResolver.getBooleanProp("JDROID_JAVA_AS_PROJECT_DEPENDENCY", false)) {
 		implementation(project(":jdroid-java-firebase-database")) {
 			exclude module: "slf4j-api"
