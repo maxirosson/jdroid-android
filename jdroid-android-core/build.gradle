@@ -44,8 +44,7 @@ dependencies {
 	api(Libs.firebase_dynamic_links)
 
 	// https://developer.android.com/jetpack/docs/release-notes
-	api 'android.arch.work:work-runtime:1.0.0-alpha10'
-	implementation 'android.arch.work:work-firebase:1.0.0-alpha10'
+	api(Libs.WORK_MANAGER_RUNTIME_KTX)
 
 	api(Libs.koin)
 	api(Libs.koin_viewmodel)

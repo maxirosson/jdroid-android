@@ -66,7 +66,7 @@ enum class ApiServer private constructor(
         return "527857945512"
     }
 
-    override fun onRegisterOnServer(registrationToken: String, updateLastActiveTimestamp: Boolean, parameters: Map<String, Object>) {
+    override fun onRegisterOnServer(registrationToken: String, updateLastActiveTimestamp: Boolean, parameters: Map<String, Any>) {
         val service = SampleApiService()
         val device = Device(registrationToken, null)
         service.addDevice(device, updateLastActiveTimestamp)

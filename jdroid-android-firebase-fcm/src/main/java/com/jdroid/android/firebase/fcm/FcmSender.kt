@@ -13,5 +13,5 @@ interface FcmSender : Server {
      */
     fun getSenderId(): String
 
-    fun onRegisterOnServer(registrationToken: String, updateLastActiveTimestamp: Boolean, parameters: Map<String, Object>)
+    fun onRegisterOnServer(registrationToken: String, updateLastActiveTimestamp: Boolean, parameters: Map<String, Any>)
 }

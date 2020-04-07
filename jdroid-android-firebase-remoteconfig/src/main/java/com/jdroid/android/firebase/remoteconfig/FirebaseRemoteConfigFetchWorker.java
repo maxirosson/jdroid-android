@@ -47,7 +47,7 @@ public class FirebaseRemoteConfigFetchWorker extends AbstractWorker {
 		Long cacheExpirationSeconds = getInputData().getLong(CACHE_EXPIRATION_SECONDS, 0);
 		Boolean setExperimentUserProperty = getInputData().getBoolean(SET_EXPERIMENT_USER_PROPERTY, false);
 		FirebaseRemoteConfigLoader.get().fetch(cacheExpirationSeconds, setExperimentUserProperty);
-		return Result.SUCCESS;
+		return Result.success();
 	}
 	
 }

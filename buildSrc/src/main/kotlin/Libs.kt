@@ -31,6 +31,8 @@ object Libs {
     const val androidx_room_runtime = "androidx.room:room-runtime:2.2.5"
     const val androidx_room_compiler = "androidx.room:room-compiler:2.2.5"
 
+    const val WORK_MANAGER_RUNTIME_KTX = "androidx.work:work-runtime-ktx:2.3.4"
+
     const val jdroid_firebase_dynamiclinks = "com.jdroidtools:jdroid-java-firebase-dynamiclinks:1.0.0"
 
     // https://github.com/maxirosson/jdroid-java-http/blob/master/CHANGELOG.md

@@ -27,7 +27,7 @@ class SampleWorker2(context: Context, workerParams: WorkerParameters) : Abstract
             builder.setContentText(inputData.getString("a"))
 
             NotificationUtils.sendNotification(IdGenerator.getIntId(), builder)
-            return Result.SUCCESS
+            return Result.success()
         }
     }
 }

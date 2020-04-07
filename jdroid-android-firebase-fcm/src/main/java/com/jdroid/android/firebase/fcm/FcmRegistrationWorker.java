@@ -79,20 +79,20 @@ public class FcmRegistrationWorker extends AbstractWorker {
 	@NonNull
 	@Override
 	protected Result onWork() {
-		if (GooglePlayServicesUtils.isGooglePlayServicesAvailable(getApplicationContext())) {
+		if (GooglePlayServicesUtils.INSTANCE.isGooglePlayServicesAvailable(getApplicationContext())) {
 			Boolean updateLastActiveTimestamp = getInputData().getBoolean(UPDATE_LAST_ACTIVE_TIMESTAMP_EXTRA, false);
-			for (FcmSender fcmSender : AbstractFcmAppModule.get().getFcmSenders()) {
+			for (FcmSender fcmSender : AbstractFcmAppModule.Companion.get().getFcmSenders()) {
 				String registrationToken;
 				try {
 					registrationToken = getRegistrationToken(fcmSender.getSenderId());
 				} catch (Exception e) {
 					AbstractApplication.get().getExceptionHandler().logHandledException("Error when getting FCM registration token. Will retry later.", e);
-					return Result.RETRY;
+					return Result.retry();
 				}
 				
 				if (registrationToken == null) {
 					LOGGER.info("Null registration token. Will retry later.");
-					return Result.RETRY;
+					return Result.retry();
 				}
 
 				try {
@@ -100,21 +100,21 @@ public class FcmRegistrationWorker extends AbstractWorker {
 					fcmSender.onRegisterOnServer(registrationToken, updateLastActiveTimestamp, getInputData().getKeyValueMap());
 				} catch (Exception e) {
 					AbstractApplication.get().getExceptionHandler().logHandledException("Failed to register the device on server. Will retry later.", e);
-					return Result.RETRY;
+					return Result.retry();
 				}
 			}
 			startPeriodic(updateLastActiveTimestamp);
-			return Result.SUCCESS;
+			return Result.success();
 		} else {
 			LOGGER.warn("FCM not initialized because Google Play Services is not available");
-			return Result.RETRY;
+			return Result.retry();
 		}
 	}
 
 	@WorkerThread
 	@Nullable
 	public static String getRegistrationToken(String senderId) {
-		if (GooglePlayServicesUtils.isGooglePlayServicesAvailable(AbstractApplication.get())) {
+		if (GooglePlayServicesUtils.INSTANCE.isGooglePlayServicesAvailable(AbstractApplication.get())) {
 			String registrationToken;
 			try {
 				if (senderId != null) {

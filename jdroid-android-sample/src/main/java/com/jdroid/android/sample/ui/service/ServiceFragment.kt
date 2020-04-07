@@ -6,7 +6,9 @@ import android.view.View
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.TextView
+import androidx.work.Constraints
 import androidx.work.Data
+import androidx.work.NetworkType
 import androidx.work.OneTimeWorkRequest
 import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
@@ -36,76 +38,55 @@ class ServiceFragment : AbstractFragment() {
         delayEditText = findView(R.id.delay)
         status = findView(R.id.status)
 
-        findView<View>(R.id.workerService).setOnClickListener(object : OnClickListener() {
-            fun onClick(v: View?) {
-                val intent = Intent()
-                intent.putExtra("a", "1")
-                intent.putExtra("fail", failCheckBox.isChecked)
-                SampleWorkerService.runIntentInService(intent)
-            }
-        })
-        findView<View>(R.id.useCaseService).setOnClickListener(object : OnClickListener() {
-            fun onClick(v: View?) {
-                val sampleUseCase = SampleUseCase()
-                sampleUseCase.setFail(failCheckBox.isChecked)
-                UseCaseService.execute(sampleUseCase)
-            }
-        })
-        findView<View>(R.id.sampleWorker1).setOnClickListener(object : OnClickListener() {
-            fun onClick(v: View?) {
-                val sampleWorkRequestBuilder = OneTimeWorkRequest.Builder(SampleWorker1::class.java)
-                val dataBuilder = createCommonDataBuilder()
-                dataBuilder!!.putString("a", "3")
-                dataBuilder!!.putBoolean("fail", failCheckBox.isChecked)
-                sampleWorkRequestBuilder.setInputData(dataBuilder!!.build())
-                val constrainsBuilder: Constraints.Builder = Builder()
-                constrainsBuilder.setRequiredNetworkType(NetworkType.CONNECTED)
-                sampleWorkRequestBuilder.setConstraints(constrainsBuilder.build())
-                enqueue(sampleWorkRequestBuilder)
-            }
-        })
-        findView<View>(R.id.sampleWorker2).setOnClickListener(object : OnClickListener() {
-            fun onClick(v: View?) {
-                val sampleWorkRequestBuilder = OneTimeWorkRequest.Builder(SampleWorker2::class.java)
-                val dataBuilder = createCommonDataBuilder()
-                dataBuilder!!.putString("a", "4")
-                sampleWorkRequestBuilder.setInputData(dataBuilder!!.build())
-                enqueue(sampleWorkRequestBuilder)
-            }
-        })
-        findView<View>(R.id.sampleWorker3).setOnClickListener(object : OnClickListener() {
-            fun onClick(v: View?) {
-                val sampleWorkRequestBuilder = OneTimeWorkRequest.Builder(SampleWorker3::class.java)
-                val dataBuilder = createCommonDataBuilder()
-                dataBuilder!!.putString("a", "5")
-                sampleWorkRequestBuilder.setInputData(dataBuilder!!.build())
-                enqueue(sampleWorkRequestBuilder)
-            }
-        })
-        findView<View>(R.id.sampleWorker4).setOnClickListener(object : OnClickListener() {
-            fun onClick(v: View?) {
-                val sampleWorkRequestBuilder = OneTimeWorkRequest.Builder(SampleWorker4::class.java)
-                val dataBuilder = createCommonDataBuilder()
-                sampleWorkRequestBuilder.setInputData(dataBuilder!!.build())
-                enqueue(sampleWorkRequestBuilder)
-            }
-        })
+        findView<View>(R.id.workerService).setOnClickListener {
+            val intent = Intent()
+            intent.putExtra("a", "1")
+            intent.putExtra("fail", failCheckBox.isChecked)
+            SampleWorkerService.runIntentInService(intent)
+        }
+        findView<View>(R.id.sampleWorker1).setOnClickListener {
+            val sampleWorkRequestBuilder = OneTimeWorkRequest.Builder(SampleWorker1::class.java)
+            val dataBuilder = createCommonDataBuilder()
+            dataBuilder!!.putString("a", "3")
+            dataBuilder.putBoolean("fail", failCheckBox.isChecked)
+            sampleWorkRequestBuilder.setInputData(dataBuilder!!.build())
+            val constrainsBuilder: Constraints.Builder = Builder()
+            constrainsBuilder.setRequiredNetworkType(NetworkType.CONNECTED)
+            sampleWorkRequestBuilder.setConstraints(constrainsBuilder.build())
+            enqueue(sampleWorkRequestBuilder)
+        }
+        findView<View>(R.id.sampleWorker2).setOnClickListener {
+            val sampleWorkRequestBuilder = OneTimeWorkRequest.Builder(SampleWorker2::class.java)
+            val dataBuilder = createCommonDataBuilder()
+            dataBuilder!!.putString("a", "4")
+            sampleWorkRequestBuilder.setInputData(dataBuilder!!.build())
+            enqueue(sampleWorkRequestBuilder)
+        }
+        findView<View>(R.id.sampleWorker3).setOnClickListener {
+            val sampleWorkRequestBuilder = OneTimeWorkRequest.Builder(SampleWorker3::class.java)
+            val dataBuilder = createCommonDataBuilder()
+            dataBuilder!!.putString("a", "5")
+            sampleWorkRequestBuilder.setInputData(dataBuilder!!.build())
+            enqueue(sampleWorkRequestBuilder)
+        }
+        findView<View>(R.id.sampleWorker4).setOnClickListener {
+            val sampleWorkRequestBuilder = OneTimeWorkRequest.Builder(SampleWorker4::class.java)
+            val dataBuilder = createCommonDataBuilder()
+            sampleWorkRequestBuilder.setInputData(dataBuilder!!.build())
+            enqueue(sampleWorkRequestBuilder)
+        }
 
-        findView<View>(R.id.periodicWorker).setOnClickListener(object : OnClickListener() {
-            fun onClick(v: View?) {
-                val sampleWorkRequestBuilder =
-                    PeriodicWorkRequest.Builder(SampleWorker1::class.java, 15, TimeUnit.MINUTES)
-                val dataBuilder = createCommonDataBuilder()
-                sampleWorkRequestBuilder.setInputData(dataBuilder!!.build())
-                WorkManager.getInstance().enqueue(sampleWorkRequestBuilder.build())
-            }
-        })
+        findView<View>(R.id.periodicWorker).setOnClickListener {
+            val sampleWorkRequestBuilder =
+                PeriodicWorkRequest.Builder(SampleWorker1::class.java, 15, TimeUnit.MINUTES)
+            val dataBuilder = createCommonDataBuilder()
+            sampleWorkRequestBuilder.setInputData(dataBuilder!!.build())
+            WorkManager.getInstance().enqueue(sampleWorkRequestBuilder.build())
+        }
 
-        findView<View>(R.id.cancelAllWork).setOnClickListener(object : OnClickListener() {
-            fun onClick(v: View?) {
-                WorkManager.getInstance().cancelAllWork()
-            }
-        })
+        findView<View>(R.id.cancelAllWork).setOnClickListener {
+            WorkManager.getInstance().cancelAllWork()
+        }
     }
 
     private fun enqueue(sampleWorkRequestBuilder: OneTimeWorkRequest.Builder): UUID? {
@@ -135,5 +116,4 @@ class ServiceFragment : AbstractFragment() {
         dataBuilder.putBoolean("fail", failCheckBox.isChecked)
         return dataBuilder
     }
-
 }
