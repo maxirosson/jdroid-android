@@ -256,6 +256,22 @@ jobs:
           gcloud firebase test android run firebase_test_lab.yml:instrumentation-tests-virtual --async --app ./jdroid-android-sample/build/outputs/apk/automation/jdroid-automation.apk --test ./jdroid-android-sample/build/outputs/apk/androidTest/automation/jdroid-android-sample-automation-androidTest.apk
         no_output_timeout: 30m
 
+  projectDependencyGraph:
+    executor: android_executor
+    resource_class: medium
+    steps:
+      - checkout
+      - restore_gradle_cache
+      - run:
+          name: Install graphviz
+          command: sudo apt-get install graphviz
+      - run:
+          name: Generate project dependency graph
+          command: ./gradlew projectDependencyGraph --stacktrace
+      - store_artifacts:
+          path: ./build/reports/dependency-graph/project.dot.png
+          destination: project-graph.png
+
   upgradeDependencies:
     executor: android_executor
     steps:
@@ -300,6 +316,7 @@ workflows:
                 - master
     jobs:
       - buildAutomationTest
+      - projectDependencyGraph
       - runRoboTest:
           requires:
             - buildAutomationTest
