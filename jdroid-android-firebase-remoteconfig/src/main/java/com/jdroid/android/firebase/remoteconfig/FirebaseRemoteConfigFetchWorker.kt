@@ -25,10 +25,15 @@ class FirebaseRemoteConfigFetchWorker(context: Context, workerParams: WorkerPara
         private const val SET_EXPERIMENT_USER_PROPERTY = "setExperimentUserProperty"
 
         @JvmStatic
-        fun enqueue(setExperimentUserProperty: Boolean?) {
+        fun enqueue() {
+            enqueue(false)
+        }
+
+        @JvmStatic
+        fun enqueue(setExperimentUserProperty: Boolean) {
             val requestBuilder = OneTimeWorkRequest.Builder(FirebaseRemoteConfigFetchWorker::class.java)
             val dataBuilder = Data.Builder()
-            dataBuilder.putBoolean(SET_EXPERIMENT_USER_PROPERTY, setExperimentUserProperty!!)
+            dataBuilder.putBoolean(SET_EXPERIMENT_USER_PROPERTY, setExperimentUserProperty)
             requestBuilder.setInputData(dataBuilder.build())
             val constrainsBuilder = Constraints.Builder()
             constrainsBuilder.setRequiredNetworkType(NetworkType.CONNECTED)
