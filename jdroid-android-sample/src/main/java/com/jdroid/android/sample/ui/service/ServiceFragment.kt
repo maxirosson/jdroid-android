@@ -6,20 +6,17 @@ import android.view.View
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.TextView
+import androidx.lifecycle.Observer
 import androidx.work.Constraints
 import androidx.work.Data
 import androidx.work.NetworkType
 import androidx.work.OneTimeWorkRequest
 import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
-import androidx.work.WorkStatus
-import com.firebase.jobdispatcher.FirebaseJobDispatcher
-import com.firebase.jobdispatcher.GooglePlayDriver
 import com.jdroid.android.application.AbstractApplication
 import com.jdroid.android.fragment.AbstractFragment
 import com.jdroid.android.sample.R
 import com.jdroid.java.utils.TypeUtils
-import java.util.UUID
 import java.util.concurrent.TimeUnit
 
 class ServiceFragment : AbstractFragment() {
@@ -85,30 +82,28 @@ class ServiceFragment : AbstractFragment() {
         }
 
         findView<View>(R.id.cancelAllWork).setOnClickListener {
-            WorkManager.getInstance().cancelAllWork()
+            WorkManager.getInstance(AbstractApplication.get()).cancelAllWork()
         }
     }
 
-    private fun enqueue(sampleWorkRequestBuilder: OneTimeWorkRequest.Builder): UUID? {
+    private fun enqueue(sampleWorkRequestBuilder: OneTimeWorkRequest.Builder) {
         val delay: Int = TypeUtils.getSafeInteger(delayEditText.text)
         if (delay != null) {
             sampleWorkRequestBuilder.setInitialDelay(delay.toLong(), TimeUnit.SECONDS)
         }
         val oneTimeWorkRequest = sampleWorkRequestBuilder.build()
         WorkManager.getInstance(AbstractApplication.get()).enqueue(oneTimeWorkRequest)
-        val uuid: UUID = oneTimeWorkRequest.id
-        WorkManager.getInstance(AbstractApplication.get()).getStatusByIdLiveData(uuid).observe(this@ServiceFragment, object : Observer<WorkStatus?>() {
-            fun onChanged(workStatus: WorkStatus?) {
-                if (workStatus != null) {
-                    if (workStatus.state.isFinished) {
-                        status.setText("Result: " + workStatus.outputData.getString("result"))
+
+        WorkManager.getInstance(AbstractApplication.get()).getWorkInfoByIdLiveData(oneTimeWorkRequest.id)
+            .observe(this@ServiceFragment, Observer { workInfo ->
+                if (workInfo != null) {
+                    if (workInfo.state.isFinished) {
+                        status.text = "Result: " + workInfo.outputData.getString("result")
                     } else {
-                        status.setText("Status: " + workStatus.state)
+                        status.text = "Status: " + workInfo.state
                     }
                 }
-            }
-        })
-        return uuid
+            })
     }
 
     private fun createCommonDataBuilder(): Data.Builder {
