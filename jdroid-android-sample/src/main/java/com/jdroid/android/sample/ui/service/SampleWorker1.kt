@@ -13,7 +13,7 @@ import com.jdroid.java.utils.IdGenerator
 class SampleWorker1(context: Context, workerParams: WorkerParameters) : AbstractWorker(context, workerParams) {
 
     override fun onWork(): Result {
-        val fail = inputData.getBoolean("fail")
+        val fail = inputData.getBoolean("fail", true)
         if (fail) {
             throw UnexpectedException("Failing service")
         } else {

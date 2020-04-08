@@ -15,6 +15,7 @@ import androidx.work.WorkManager
 import androidx.work.WorkStatus
 import com.firebase.jobdispatcher.FirebaseJobDispatcher
 import com.firebase.jobdispatcher.GooglePlayDriver
+import com.jdroid.android.application.AbstractApplication
 import com.jdroid.android.fragment.AbstractFragment
 import com.jdroid.android.sample.R
 import com.jdroid.java.utils.TypeUtils
@@ -47,10 +48,9 @@ class ServiceFragment : AbstractFragment() {
         findView<View>(R.id.sampleWorker1).setOnClickListener {
             val sampleWorkRequestBuilder = OneTimeWorkRequest.Builder(SampleWorker1::class.java)
             val dataBuilder = createCommonDataBuilder()
-            dataBuilder!!.putString("a", "3")
-            dataBuilder.putBoolean("fail", failCheckBox.isChecked)
-            sampleWorkRequestBuilder.setInputData(dataBuilder!!.build())
-            val constrainsBuilder: Constraints.Builder = Builder()
+            dataBuilder.putString("a", "3")
+            sampleWorkRequestBuilder.setInputData(dataBuilder.build())
+            val constrainsBuilder: Constraints.Builder = Constraints.Builder()
             constrainsBuilder.setRequiredNetworkType(NetworkType.CONNECTED)
             sampleWorkRequestBuilder.setConstraints(constrainsBuilder.build())
             enqueue(sampleWorkRequestBuilder)
@@ -58,21 +58,21 @@ class ServiceFragment : AbstractFragment() {
         findView<View>(R.id.sampleWorker2).setOnClickListener {
             val sampleWorkRequestBuilder = OneTimeWorkRequest.Builder(SampleWorker2::class.java)
             val dataBuilder = createCommonDataBuilder()
-            dataBuilder!!.putString("a", "4")
-            sampleWorkRequestBuilder.setInputData(dataBuilder!!.build())
+            dataBuilder.putString("a", "4")
+            sampleWorkRequestBuilder.setInputData(dataBuilder.build())
             enqueue(sampleWorkRequestBuilder)
         }
         findView<View>(R.id.sampleWorker3).setOnClickListener {
             val sampleWorkRequestBuilder = OneTimeWorkRequest.Builder(SampleWorker3::class.java)
             val dataBuilder = createCommonDataBuilder()
-            dataBuilder!!.putString("a", "5")
-            sampleWorkRequestBuilder.setInputData(dataBuilder!!.build())
+            dataBuilder.putString("a", "5")
+            sampleWorkRequestBuilder.setInputData(dataBuilder.build())
             enqueue(sampleWorkRequestBuilder)
         }
         findView<View>(R.id.sampleWorker4).setOnClickListener {
             val sampleWorkRequestBuilder = OneTimeWorkRequest.Builder(SampleWorker4::class.java)
             val dataBuilder = createCommonDataBuilder()
-            sampleWorkRequestBuilder.setInputData(dataBuilder!!.build())
+            sampleWorkRequestBuilder.setInputData(dataBuilder.build())
             enqueue(sampleWorkRequestBuilder)
         }
 
@@ -80,8 +80,8 @@ class ServiceFragment : AbstractFragment() {
             val sampleWorkRequestBuilder =
                 PeriodicWorkRequest.Builder(SampleWorker1::class.java, 15, TimeUnit.MINUTES)
             val dataBuilder = createCommonDataBuilder()
-            sampleWorkRequestBuilder.setInputData(dataBuilder!!.build())
-            WorkManager.getInstance().enqueue(sampleWorkRequestBuilder.build())
+            sampleWorkRequestBuilder.setInputData(dataBuilder.build())
+            WorkManager.getInstance(AbstractApplication.get()).enqueue(sampleWorkRequestBuilder.build())
         }
 
         findView<View>(R.id.cancelAllWork).setOnClickListener {
@@ -95,10 +95,10 @@ class ServiceFragment : AbstractFragment() {
             sampleWorkRequestBuilder.setInitialDelay(delay.toLong(), TimeUnit.SECONDS)
         }
         val oneTimeWorkRequest = sampleWorkRequestBuilder.build()
-        WorkManager.getInstance().enqueue(oneTimeWorkRequest)
+        WorkManager.getInstance(AbstractApplication.get()).enqueue(oneTimeWorkRequest)
         val uuid: UUID = oneTimeWorkRequest.id
-        WorkManager.getInstance().getStatusByIdLiveData(uuid).observe(this@ServiceFragment, object : Observer<WorkStatus?>() {
-            fun onChanged(@Nullable workStatus: WorkStatus?) {
+        WorkManager.getInstance(AbstractApplication.get()).getStatusByIdLiveData(uuid).observe(this@ServiceFragment, object : Observer<WorkStatus?>() {
+            fun onChanged(workStatus: WorkStatus?) {
                 if (workStatus != null) {
                     if (workStatus.state.isFinished) {
                         status.setText("Result: " + workStatus.outputData.getString("result"))
@@ -111,8 +111,8 @@ class ServiceFragment : AbstractFragment() {
         return uuid
     }
 
-    private fun createCommonDataBuilder(): Data.Builder? {
-        val dataBuilder: Data.Builder = Builder()
+    private fun createCommonDataBuilder(): Data.Builder {
+        val dataBuilder: Data.Builder = Data.Builder()
         dataBuilder.putBoolean("fail", failCheckBox.isChecked)
         return dataBuilder
     }
