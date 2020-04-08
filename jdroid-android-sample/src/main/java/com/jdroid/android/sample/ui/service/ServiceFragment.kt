@@ -97,11 +97,7 @@ class ServiceFragment : AbstractFragment() {
         WorkManager.getInstance(AbstractApplication.get()).getWorkInfoByIdLiveData(oneTimeWorkRequest.id)
             .observe(this@ServiceFragment, Observer { workInfo ->
                 if (workInfo != null) {
-                    if (workInfo.state.isFinished) {
-                        status.text = "Result: " + workInfo.outputData.getString("result")
-                    } else {
-                        status.text = "Status: " + workInfo.state
-                    }
+                    status.text = "Status: " + workInfo.state + " | runAttemptCount: " + workInfo.runAttemptCount + " | OutputData: " + workInfo.outputData.getString("result")
                 }
             })
     }

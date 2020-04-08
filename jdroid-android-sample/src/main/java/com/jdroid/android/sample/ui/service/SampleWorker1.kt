@@ -15,7 +15,7 @@ class SampleWorker1(context: Context, workerParams: WorkerParameters) : Abstract
     override fun onWork(): Result {
         val fail = inputData.getBoolean("fail", true)
         if (fail) {
-            throw UnexpectedException("Failing service")
+            throw UnexpectedException("Failing sample worker 1")
         } else {
             val builder = NotificationBuilder("myNotification", AndroidNotificationChannelType.DEFAULT_IMPORTANCE)
             builder.setSmallIcon(AbstractApplication.get().notificationIconResId)
