@@ -18,7 +18,7 @@ abstract class AbstractWorker(context: Context, workerParams: WorkerParameters) 
         var result: Result? = null
         try {
             if (timingTrackingEnabled()) {
-                trace = startTrace(trackingTag!!)
+                trace = startTrace(trackingTag)
             }
             LoggerUtils.getLogger(trackingTag).info("Executing Worker.")
             val startTime = nowMillis()

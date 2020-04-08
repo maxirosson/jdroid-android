@@ -13,18 +13,19 @@ import com.jdroid.android.utils.AndroidUtils.getApiLevel
 
 class AppShortcutsWorker(context: Context, workerParams: WorkerParameters) : AbstractWorker(context, workerParams) {
 
-    @RequiresApi(api = Build.VERSION_CODES.N_MR1)
     override fun onWork(): Result {
-        AppShortcutsHelper.setDynamicShortcuts(AppShortcutsHelper.getInitialShortcutInfos())
+        val dynamicShortcutsLoader = AppShortcutsHelper.getDynamicShortcutsLoader()
+        AppShortcutsHelper.setDynamicShortcuts(dynamicShortcutsLoader.loadDynamicShortcuts())
         return Result.success()
     }
 
     companion object {
+
         const val WORK_MANAGER_TAG = "app_shortcuts"
 
         @JvmStatic
 		fun start() {
-            if (getApiLevel() >= Build.VERSION_CODES.N_MR1) {
+            if (AppShortcutsHelper.isDynamicAppShortcutsSupported() && AppShortcutsHelper.getDynamicShortcutsLoader() != null) {
                 val requestBuilder = OneTimeWorkRequest.Builder(AppShortcutsWorker::class.java)
                 requestBuilder.addTag(WORK_MANAGER_TAG)
                 WorkManager.getInstance(AbstractApplication.get())

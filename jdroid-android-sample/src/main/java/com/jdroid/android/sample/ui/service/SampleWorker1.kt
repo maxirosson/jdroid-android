@@ -4,13 +4,11 @@ import android.content.Context
 import androidx.work.WorkerParameters
 import com.jdroid.android.application.AbstractApplication
 import com.jdroid.android.jetpack.work.AbstractWorker
-import com.jdroid.android.kotlin.getRequiredString
 import com.jdroid.android.notification.NotificationBuilder
 import com.jdroid.android.notification.NotificationUtils
 import com.jdroid.android.sample.application.AndroidNotificationChannelType
 import com.jdroid.java.exception.UnexpectedException
 import com.jdroid.java.utils.IdGenerator
-import com.jdroid.java.utils.IdGenerator.getIntId
 
 class SampleWorker1(context: Context, workerParams: WorkerParameters) : AbstractWorker(context, workerParams) {
 
