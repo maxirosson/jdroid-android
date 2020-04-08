@@ -87,7 +87,7 @@ class ServiceFragment : AbstractFragment() {
     }
 
     private fun enqueue(sampleWorkRequestBuilder: OneTimeWorkRequest.Builder) {
-        val delay: Int = TypeUtils.getSafeInteger(delayEditText.text)
+        val delay: Int? = TypeUtils.getSafeInteger(delayEditText.text)
         if (delay != null) {
             sampleWorkRequestBuilder.setInitialDelay(delay.toLong(), TimeUnit.SECONDS)
         }

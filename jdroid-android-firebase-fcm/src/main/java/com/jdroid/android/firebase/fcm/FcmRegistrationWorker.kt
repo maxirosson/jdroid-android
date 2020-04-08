@@ -15,7 +15,6 @@ import com.google.android.gms.tasks.Tasks
 import com.google.firebase.iid.FirebaseInstanceId
 import com.jdroid.android.application.AbstractApplication
 import com.jdroid.android.firebase.fcm.AbstractFcmAppModule.Companion.get
-import com.jdroid.android.google.GooglePlayServicesUtils
 import com.jdroid.android.google.GooglePlayServicesUtils.isGooglePlayServicesAvailable
 import com.jdroid.android.jetpack.work.AbstractWorker
 import com.jdroid.java.exception.UnexpectedException
@@ -47,7 +46,7 @@ class FcmRegistrationWorker(context: Context, workerParams: WorkerParameters) : 
 
         @WorkerThread
         fun getRegistrationToken(senderId: String?): String? {
-            if (GooglePlayServicesUtils.isGooglePlayServicesAvailable(AbstractApplication.get())) {
+            if (isGooglePlayServicesAvailable(AbstractApplication.get())) {
                 val registrationToken: String?
                 try {
                     if (senderId != null) {
@@ -109,8 +108,8 @@ class FcmRegistrationWorker(context: Context, workerParams: WorkerParameters) : 
     // By Google recommendation, we should execute this worker every 2 weeks, to have always fresh tokens on server side
     private fun startPeriodic(updateLastActiveTimestamp: Boolean) {
         val requestBuilder = PeriodicWorkRequest.Builder(FcmRegistrationWorker::class.java,
-            14, TimeUnit.DAYS,
-            7, TimeUnit.DAYS
+            14L, TimeUnit.DAYS,
+            7L, TimeUnit.DAYS
         )
         val dataBuilder = Data.Builder()
         dataBuilder.putBoolean(UPDATE_LAST_ACTIVE_TIMESTAMP_EXTRA, updateLastActiveTimestamp)
