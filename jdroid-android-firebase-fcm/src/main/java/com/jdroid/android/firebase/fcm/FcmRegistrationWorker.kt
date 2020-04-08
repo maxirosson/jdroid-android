@@ -125,5 +125,4 @@ class FcmRegistrationWorker(context: Context, workerParams: WorkerParameters) : 
             requestBuilder.build()
         )
     }
-
 }

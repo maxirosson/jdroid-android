@@ -1,15 +1,12 @@
 package com.jdroid.android.shortcuts
 
 import android.content.Context
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
 import androidx.work.WorkerParameters
 import com.jdroid.android.application.AbstractApplication
 import com.jdroid.android.jetpack.work.AbstractWorker
-import com.jdroid.android.utils.AndroidUtils.getApiLevel
 
 class AppShortcutsWorker(context: Context, workerParams: WorkerParameters) : AbstractWorker(context, workerParams) {
 

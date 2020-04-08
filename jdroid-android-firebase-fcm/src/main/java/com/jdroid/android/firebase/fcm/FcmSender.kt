@@ -1,7 +1,5 @@
 package com.jdroid.android.firebase.fcm
 
-import android.os.Bundle
-
 import com.jdroid.java.http.Server
 
 interface FcmSender : Server {

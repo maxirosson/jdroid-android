@@ -1,7 +1,6 @@
 package com.jdroid.android.sample.ui.service
 
 import android.content.Context
-import androidx.work.Data
 import androidx.work.WorkerParameters
 import androidx.work.workDataOf
 import com.jdroid.android.jetpack.work.AbstractWorker
