@@ -49,7 +49,7 @@ abstract class AbstractFcmAppModule : AbstractAppModule() {
     }
 
     fun startFcmRegistration(updateLastActiveTimestamp: Boolean) {
-        FcmRegistrationWorker.start(updateLastActiveTimestamp);
+        FcmRegistrationWorker.enqueue(updateLastActiveTimestamp);
     }
 
     companion object {

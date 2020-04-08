@@ -9,7 +9,6 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.jdroid.android.concurrent.AppExecutors
 import com.jdroid.android.firebase.fcm.AbstractFcmAppModule
 import com.jdroid.android.firebase.fcm.DefaultFcmMessageResolver
-import com.jdroid.android.firebase.fcm.FcmRegistrationCommand
 import com.jdroid.android.firebase.fcm.FcmRegistrationWorker
 import com.jdroid.android.firebase.fcm.instanceid.InstanceIdHelper
 import com.jdroid.android.firebase.fcm.notification.NotificationFcmMessage

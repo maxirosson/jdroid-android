@@ -88,7 +88,7 @@ public class AppShortcutsHelper {
 	}
 
 	public static void registerDynamicShortcuts() {
-		AppShortcutsWorker.start();
+		AppShortcutsWorker.enqueue();
 	}
 
 	public static Boolean isDynamicAppShortcutsSupported() {

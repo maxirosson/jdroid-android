@@ -24,7 +24,7 @@ class AppShortcutsWorker(context: Context, workerParams: WorkerParameters) : Abs
         const val WORK_MANAGER_TAG = "app_shortcuts"
 
         @JvmStatic
-		fun start() {
+        fun enqueue() {
             if (AppShortcutsHelper.isDynamicAppShortcutsSupported() && AppShortcutsHelper.getDynamicShortcutsLoader() != null) {
                 val requestBuilder = OneTimeWorkRequest.Builder(AppShortcutsWorker::class.java)
                 requestBuilder.addTag(WORK_MANAGER_TAG)
