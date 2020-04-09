@@ -49,12 +49,7 @@ abstract class AbstractFcmAppModule : AbstractAppModule() {
     }
 
     fun startFcmRegistration(updateLastActiveTimestamp: Boolean) {
-        val fcmRegistrationCommand = createFcmRegistrationCommand()
-        fcmRegistrationCommand.start(updateLastActiveTimestamp)
-    }
-
-    protected open fun createFcmRegistrationCommand(): FcmRegistrationCommand {
-        return FcmRegistrationCommand()
+        FcmRegistrationWorker.enqueue(updateLastActiveTimestamp)
     }
 
     companion object {

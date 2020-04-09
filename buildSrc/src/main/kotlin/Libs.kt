@@ -31,6 +31,9 @@ object Libs {
     const val androidx_room_runtime = "androidx.room:room-runtime:2.2.5"
     const val androidx_room_compiler = "androidx.room:room-compiler:2.2.5"
 
+    const val WORK_MANAGER_RUNTIME_KTX = "androidx.work:work-runtime-ktx:2.3.4"
+    const val WORK_MANAGER_TESTING = "androidx.work:work-testing:2.3.4"
+
     const val jdroid_firebase_dynamiclinks = "com.jdroidtools:jdroid-java-firebase-dynamiclinks:1.0.0"
 
     // https://github.com/maxirosson/jdroid-java-http/blob/master/CHANGELOG.md
@@ -44,10 +47,6 @@ object Libs {
 
     // https://firebase.google.com/support/release-notes/android
     const val firebase_messaging = "com.google.firebase:firebase-messaging:20.1.0"
-
-    // https://github.com/firebase/firebase-jobdispatcher-android/releases
-    @Deprecated("Use workmanager")
-    const val firebase_jobdispatcher = "com.firebase:firebase-jobdispatcher:0.8.6"
 
     const val crashlytics = "com.crashlytics.sdk.android:crashlytics:2.10.1"
 
@@ -89,6 +88,7 @@ object Libs {
     const val facebook_login = "com.facebook.android:facebook-login:4.41.0"
 
     const val junit = "junit:junit:4.13"
+    const val TRUTH = "com.google.truth:truth:1.0.1"
 
     // https://github.com/robolectric/robolectric
     const val robolectric = "org.robolectric:robolectric:4.3.1"

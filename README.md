@@ -16,12 +16,13 @@ Components
 Libray for Android apps. Support for Android 4.0 (api level 15) and higher versions
 * Languages supported: english & spanish
 * Android M Permissions scheme support
+* Jetpack
+  * [Work Manager](https://developer.android.com/topic/libraries/architecture/workmanager)
 * [Navigation Drawer support](https://developer.android.com/design/patterns/navigation-drawer.html)
 * [Firebase Integration](https://firebase.google.com/docs/)
   * [Firebase Analytics](https://firebase.google.com/docs/analytics/)
   * [Firebase Dynamic Links](https://firebase.google.com/docs/dynamic-links/)
   * [Firebase Performance Monitor](https://firebase.google.com/docs/perf-mon/)
-  * [Firebase Job Dispatcher](https://github.com/firebase/firebase-jobdispatcher-android)
 * [Device year class integration](https://github.com/facebook/device-year-class)
 * [Facebook Stetho Integration](https://github.com/facebook/stetho)
 * [Leak Canary Integration](https://github.com/square/leakcanary)

@@ -13,7 +13,6 @@ import android.content.pm.ShortcutManager;
 import android.os.Build;
 
 import com.jdroid.android.application.AbstractApplication;
-import com.jdroid.android.firebase.jobdispatcher.ServiceCommand;
 import com.jdroid.android.utils.AndroidUtils;
 import com.jdroid.java.utils.LoggerUtils;
 
@@ -89,8 +88,7 @@ public class AppShortcutsHelper {
 	}
 
 	public static void registerDynamicShortcuts() {
-		ServiceCommand serviceCommand = new AppShortcutsCommand();
-		serviceCommand.start();
+		AppShortcutsWorker.enqueue();
 	}
 
 	public static Boolean isDynamicAppShortcutsSupported() {
