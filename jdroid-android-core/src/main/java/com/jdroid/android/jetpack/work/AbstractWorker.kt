@@ -1,11 +1,12 @@
 package com.jdroid.android.jetpack.work
 
 import android.content.Context
+import androidx.annotation.WorkerThread
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.google.firebase.perf.metrics.Trace
 import com.jdroid.android.application.AbstractApplication
-import com.jdroid.android.firebase.performance.TraceHelper.startTrace
+import com.jdroid.android.firebase.performance.TraceHelper
 import com.jdroid.java.date.DateUtils.formatDuration
 import com.jdroid.java.date.DateUtils.nowMillis
 import com.jdroid.java.http.exception.ConnectionException
@@ -13,12 +14,13 @@ import com.jdroid.java.utils.LoggerUtils
 
 abstract class AbstractWorker(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
 
+    @WorkerThread
     override fun doWork(): Result {
         var trace: Trace? = null
         var result: Result? = null
         try {
-            if (timingTrackingEnabled()) {
-                trace = startTrace(trackingTag)
+            if (isTimingTrackingEnabled()) {
+                trace = TraceHelper.startTrace(trackingTag)
             }
             LoggerUtils.getLogger(trackingTag).info("Executing Worker.")
             val startTime = nowMillis()
@@ -43,15 +45,16 @@ abstract class AbstractWorker(context: Context, workerParams: WorkerParameters) 
         return result!!
     }
 
+    @WorkerThread
     protected abstract fun onWork(): Result
 
-    protected fun getResult(throwable: Throwable?): Result {
+    protected open fun getResult(throwable: Throwable?): Result {
         return if (throwable is ConnectionException) Result.retry() else Result.failure()
     }
 
-    protected fun timingTrackingEnabled(): Boolean {
+    protected open fun isTimingTrackingEnabled(): Boolean {
         return true
     }
 
-    protected val trackingTag: String = javaClass.simpleName
+    protected open val trackingTag: String = javaClass.simpleName
 }

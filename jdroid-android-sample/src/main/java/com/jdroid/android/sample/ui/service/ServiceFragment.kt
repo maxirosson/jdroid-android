@@ -75,7 +75,7 @@ class ServiceFragment : AbstractFragment() {
 
         findView<View>(R.id.periodicWorker).setOnClickListener {
             val sampleWorkRequestBuilder =
-                PeriodicWorkRequest.Builder(SampleWorker1::class.java, 15, TimeUnit.MINUTES)
+                PeriodicWorkRequest.Builder(SampleWorker1::class.java, 15L, TimeUnit.MINUTES)
             val dataBuilder = createCommonDataBuilder()
             sampleWorkRequestBuilder.setInputData(dataBuilder.build())
             WorkManager.getInstance(AbstractApplication.get()).enqueue(sampleWorkRequestBuilder.build())

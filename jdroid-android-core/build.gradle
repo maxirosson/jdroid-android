@@ -82,5 +82,7 @@ dependencies {
 	}
 
 	testImplementation(Libs.junit)
+	testImplementation(Libs.TRUTH)
+	testImplementation(Libs.WORK_MANAGER_TESTING)
 	testImplementation(Libs.robolectric)
 }
