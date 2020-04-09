@@ -1,5 +1,6 @@
 package com.jdroid.android.sample.ui.service
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -86,6 +87,7 @@ class ServiceFragment : AbstractFragment() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun enqueue(sampleWorkRequestBuilder: OneTimeWorkRequest.Builder) {
         val delay: Int? = TypeUtils.getSafeInteger(delayEditText.text)
         if (delay != null) {
@@ -97,7 +99,7 @@ class ServiceFragment : AbstractFragment() {
         WorkManager.getInstance(AbstractApplication.get()).getWorkInfoByIdLiveData(oneTimeWorkRequest.id)
             .observe(this@ServiceFragment, Observer { workInfo ->
                 if (workInfo != null) {
-                    status.text = "Status: " + workInfo.state + " | runAttemptCount: " + workInfo.runAttemptCount + " | OutputData: " + workInfo.outputData.getString("result")
+                    status.text = "Status: ${workInfo.state} | runAttemptCount: ${workInfo.runAttemptCount} | OutputData: ${workInfo.outputData.getString("result")}"
                 }
             })
     }
