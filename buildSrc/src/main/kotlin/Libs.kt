@@ -1,7 +1,7 @@
 object Libs {
     const val google_material = "com.google.android.material:material:1.1.0"
 
-    const val play_core = "com.google.android.play:core:1.6.5"
+    const val play_core = "com.google.android.play:core:1.7.2"
 
     // https://firebase.google.com/support/release-notes/android
     const val firebase_ads = "com.google.firebase:firebase-ads:18.3.0"
@@ -18,7 +18,7 @@ object Libs {
     const val androidx_annotation = "androidx.annotation:annotation:1.1.0"
     const val androidx_appcompat = "androidx.appcompat:appcompat:1.1.0"
     const val androidx_cardview = "androidx.cardview:cardview:1.0.0"
-    const val androidx_core = "androidx.core:core:1.1.0"
+    const val androidx_core = "androidx.core:core:1.2.0"
     const val androidx_coordinatorlayout = "androidx.coordinatorlayout:coordinatorlayout:1.1.0"
     const val androidx_drawerlayout = "androidx.drawerlayout:drawerlayout:1.0.0"
     const val androidx_fragment = "androidx.fragment:fragment:1.1.0"
