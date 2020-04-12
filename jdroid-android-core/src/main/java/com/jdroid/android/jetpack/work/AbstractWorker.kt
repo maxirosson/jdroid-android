@@ -15,7 +15,7 @@ import com.jdroid.java.utils.LoggerUtils
 abstract class AbstractWorker(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
 
     @WorkerThread
-    override fun doWork(): Result {
+    final override fun doWork(): Result {
         var trace: Trace? = null
         var result: Result? = null
         try {
