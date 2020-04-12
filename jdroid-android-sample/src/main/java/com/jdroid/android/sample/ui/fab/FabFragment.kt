@@ -20,7 +20,7 @@ class FabFragment : AbstractFragment() {
             val snackbarBuilder = SnackbarBuilder()
             snackbarBuilder.setParentLayoutId(R.id.container)
             snackbarBuilder.setDescription(R.string.jdroid_ok)
-            snackbarBuilder.build(activity!!).show()
+            snackbarBuilder.build(requireActivity()).show()
         }
     }
 }
