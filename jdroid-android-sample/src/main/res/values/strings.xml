@@ -275,17 +275,17 @@
 	<!-- Service -->
 	<string name="service">Service</string>
 	<string name="workerService">Worker Service</string>
-	<string name="firebaseJobService">Firebase Job Service</string>
-	<string name="commandService1">Command Service 1</string>
-	<string name="commandService2">Command Service 2</string>
-	<string name="commandService3">Command Service 3</string>
-	<string name="commandService4">Command Service 4</string>
-	<string name="cancelAllJobs">Cancel All Jobs</string>
-	<string name="firebaseJobServiceDescription">Success or UnexpectedException.</string>
-	<string name="commandService1Description">Success or UnexpectedException</string>
-	<string name="commandService2Description">Success or ConnectionException</string>
-	<string name="commandService3Description">Success after 30 seconds</string>
-	<string name="commandService4Description">Minimum time between executions: 1 minute</string>
+	<string name="useCaseService">Use Case Service</string>
+	<string name="sampleWorker1">Sample Worker 1</string>
+	<string name="sampleWorker2">Sample Worker 2</string>
+	<string name="sampleWorker3">Sample Worker 3</string>
+	<string name="sampleWorker4">Sample Worker 4</string>
+	<string name="periodicWorker">Periodic Worker</string>
+	<string name="cancelAllWork">Cancel All Work</string>
+	<string name="sampleWorker1Description">Success or UnexpectedException</string>
+	<string name="sampleWorker2Description">Success or ConnectionException</string>
+	<string name="sampleWorker3Description">Success after 30 seconds</string>
+	<string name="sampleWorker4Description">Minimum time between executions: 1 minute</string>
 
 	<!-- AppShortcuts -->
 	<string name="appShortcuts">App Shortcuts</string>
