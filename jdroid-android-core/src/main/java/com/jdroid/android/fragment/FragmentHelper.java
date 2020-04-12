@@ -140,7 +140,7 @@ public class FragmentHelper implements FragmentIf {
 		Integer contentFragmentLayout = getFragmentIf().getContentFragmentLayout();
 		if (contentFragmentLayout != null) {
 			View view = inflater.inflate(getFragmentIf().getBaseFragmentLayout(), container, false);
-			ViewGroup viewGroup = (ViewGroup)view.findViewById(R.id.content);
+			ViewGroup viewGroup = view.findViewById(R.id.content);
 			viewGroup.addView(inflater.inflate(contentFragmentLayout, null, false));
 			return view;
 		}
