@@ -24,7 +24,7 @@ open class GoogleSignInHelper(protected val abstractFragment: AbstractFragment, 
     private val googleSignInClient: GoogleSignInClient
 
     init {
-        googleSignInClient = GoogleSignIn.getClient(abstractFragment.context!!, getGoogleSignInOptionsBuilder().build())
+        googleSignInClient = GoogleSignIn.getClient(abstractFragment.requireContext(), getGoogleSignInOptionsBuilder().build())
     }
 
     protected fun getGoogleSignInOptionsBuilder(): GoogleSignInOptions.Builder {
