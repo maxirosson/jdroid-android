@@ -9,7 +9,7 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.jdroid.android.concurrent.AppExecutors
 import com.jdroid.android.firebase.fcm.AbstractFcmAppModule
 import com.jdroid.android.firebase.fcm.DefaultFcmMessageResolver
-import com.jdroid.android.firebase.fcm.FcmRegistrationCommand
+import com.jdroid.android.firebase.fcm.FcmRegistrationWorker
 import com.jdroid.android.firebase.fcm.instanceid.InstanceIdHelper
 import com.jdroid.android.firebase.fcm.notification.NotificationFcmMessage
 import com.jdroid.android.fragment.AbstractFragment
@@ -73,7 +73,7 @@ class FcmFragment : AbstractFragment() {
         findView<View>(R.id.sendPush).setOnClickListener {
             AppExecutors.networkIOExecutor.execute {
                 val topic = if (topicEditText.text.isNotEmpty()) topicEditText.text.toString() else null
-                val registrationToken = FcmRegistrationCommand.getRegistrationToken(senderId.text.toString())
+                val registrationToken = FcmRegistrationWorker.getRegistrationToken(senderId.text.toString())
 
                 val params = Maps.newHashMap<String, String>()
                 if (minAppVersionCode.text.isNotEmpty()) {

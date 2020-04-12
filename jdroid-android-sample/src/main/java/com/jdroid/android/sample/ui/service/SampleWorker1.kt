@@ -1,31 +1,30 @@
 package com.jdroid.android.sample.ui.service
 
 import android.content.Context
-import android.os.Bundle
-
+import androidx.work.WorkerParameters
 import com.jdroid.android.application.AbstractApplication
-import com.jdroid.android.kotlin.getRequiredString
+import com.jdroid.android.jetpack.work.AbstractWorker
 import com.jdroid.android.notification.NotificationBuilder
 import com.jdroid.android.notification.NotificationUtils
 import com.jdroid.android.sample.application.AndroidNotificationChannelType
-import com.jdroid.java.http.exception.ConnectionException
+import com.jdroid.java.exception.UnexpectedException
 import com.jdroid.java.utils.IdGenerator
 
-class SampleServiceCommand2 : AbstractSampleServiceCommand() {
+class SampleWorker1(context: Context, workerParams: WorkerParameters) : AbstractWorker(context, workerParams) {
 
-    override fun execute(context: Context, bundle: Bundle): Boolean {
-        val fail = bundle.getBoolean("fail")
+    override fun onWork(): Result {
+        val fail = inputData.getBoolean("fail", true)
         if (fail) {
-            throw ConnectionException("Failing service")
+            throw UnexpectedException("Failing sample worker 1")
         } else {
             val builder = NotificationBuilder("myNotification", AndroidNotificationChannelType.DEFAULT_IMPORTANCE)
             builder.setSmallIcon(AbstractApplication.get().notificationIconResId)
             builder.setTicker("Sample Ticker")
             builder.setContentTitle(javaClass.simpleName)
-            builder.setContentText(bundle.getRequiredString("a"))
+            builder.setContentText(inputData.getString("a"))
 
             NotificationUtils.sendNotification(IdGenerator.getIntId(), builder)
-            return false
+            return Result.success()
         }
     }
 }

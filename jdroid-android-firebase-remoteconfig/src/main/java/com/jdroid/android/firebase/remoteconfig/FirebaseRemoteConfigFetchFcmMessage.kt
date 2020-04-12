@@ -12,6 +12,6 @@ class FirebaseRemoteConfigFetchFcmMessage : AbstractFcmMessage() {
 
     override fun handle(remoteMessage: RemoteMessage) {
         SharedPreferencesHelper.get().savePreferenceAsync(FirebaseRemoteConfigLoader.CONFIG_STALE, true)
-        FirebaseRemoteConfigFetchCommand().start()
+        FirebaseRemoteConfigFetchWorker.enqueue()
     }
 }
