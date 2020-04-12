@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-		  package="com.jdroid.android.sample"
-		  xmlns:tools="http://schemas.android.com/tools">
+		  xmlns:tools="http://schemas.android.com/tools"
+		  package="com.jdroid.android.sample">
 
 	<permission android:name="${applicationId}.permission.MAPS_RECEIVE"
 				android:protectionLevel="signature" />
@@ -689,12 +689,6 @@
 
 		<service android:name="com.jdroid.android.sample.ui.service.SampleWorkerService"
 				 android:exported="false" />
-		<service android:name="com.jdroid.android.sample.ui.service.SampleFirebaseJobService"
-				 android:exported="false">
-			<intent-filter>
-				<action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE" />
-			</intent-filter>
-		</service>
 
 		<!-- Widgets -->
 		<receiver android:name="com.jdroid.android.sample.ui.widget.SampleWidgetProvider"

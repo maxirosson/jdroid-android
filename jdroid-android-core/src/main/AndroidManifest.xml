@@ -12,9 +12,6 @@
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
-	<!-- Required permission to make the Firebase Job Dispatcher persistence across reboots work -->
-	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-
 	<supports-screens android:largeScreens="true"
 					  android:xlargeScreens="true" />
 
@@ -42,15 +39,6 @@
 				<action android:name="android.intent.action.LOCALE_CHANGED" />
 			</intent-filter>
 		</receiver>
-
-		<service android:name="com.jdroid.android.firebase.jobdispatcher.CommandWorkerService"
-				 android:exported="false" />
-		<service android:name="com.jdroid.android.firebase.jobdispatcher.CommandJobService"
-				 android:exported="false">
-			<intent-filter>
-				<action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE" />
-			</intent-filter>
-		</service>
 
 		<provider
 				android:name="com.jdroid.android.lifecycle.ApplicationLifecycleInitProvider"

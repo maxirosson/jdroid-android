@@ -43,7 +43,8 @@ dependencies {
 	api(Libs.firebase_perf)
 	api(Libs.firebase_dynamic_links)
 
-	api(Libs.firebase_jobdispatcher)
+	// https://developer.android.com/jetpack/docs/release-notes
+	api(Libs.WORK_MANAGER_RUNTIME_KTX)
 
 	api(Libs.koin)
 	api(Libs.koin_viewmodel)
@@ -81,5 +82,7 @@ dependencies {
 	}
 
 	testImplementation(Libs.junit)
+	testImplementation(Libs.TRUTH)
+	testImplementation(Libs.WORK_MANAGER_TESTING)
 	testImplementation(Libs.robolectric)
 }

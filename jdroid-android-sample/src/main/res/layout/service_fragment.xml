@@ -3,19 +3,22 @@
 			android:layout_height="match_parent"
 			android:layout_width="match_parent">
 
-	<LinearLayout android:layout_width="match_parent"
-				  android:layout_height="wrap_content"
-				  android:orientation="vertical"
-				  android:padding="8dp">
+	<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:padding="8dp">
 
-		<CheckBox android:id="@+id/fail"
-				  android:layout_width="wrap_content"
-				  android:layout_height="wrap_content"
-				  android:text="@string/fail" />
+		<CheckBox
+				android:id="@+id/fail"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/fail" />
 
-		<TextView android:layout_width="wrap_content"
-				  android:layout_height="wrap_content"
-				  android:text="@string/delay" />
+		<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/delay" />
 
 		<EditText android:id="@+id/delay"
 				  android:layout_width="match_parent"
@@ -23,65 +26,82 @@
 				  android:inputType="number"
 				  android:importantForAutofill="no" />
 
-		<Button android:id="@+id/workerService"
+		<TextView
+				android:id="@+id/status"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" />
+
+		<Button
+				android:id="@+id/workerService"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:text="@string/workerService" />
 
-		<TextView android:layout_width="wrap_content"
-				  android:layout_height="wrap_content"
-				  android:text="@string/firebaseJobServiceDescription"
-				  android:layout_marginTop="8dp" />
-
-		<Button android:id="@+id/firebaseJobService"
+		<TextView
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:text="@string/firebaseJobService" />
+				android:text="@string/sampleWorker1Description"
+				android:layout_marginTop="8dp" />
 
-		<TextView android:layout_width="wrap_content"
-				  android:layout_height="wrap_content"
-				  android:text="@string/commandService1Description"
-				  android:layout_marginTop="8dp" />
-
-		<Button android:id="@+id/commandService1"
+		<Button
+				android:id="@+id/sampleWorker1"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:text="@string/commandService1" />
+				android:text="@string/sampleWorker1" />
 
-		<TextView android:layout_width="wrap_content"
-				  android:layout_height="wrap_content"
-				  android:text="@string/commandService2Description"
-				  android:layout_marginTop="8dp" />
-
-		<Button android:id="@+id/commandService2"
+		<TextView
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:text="@string/commandService2" />
+				android:text="@string/sampleWorker2Description"
+				android:layout_marginTop="8dp" />
 
-		<TextView android:layout_width="wrap_content"
-				  android:layout_height="wrap_content"
-				  android:text="@string/commandService3Description"
-				  android:layout_marginTop="8dp" />
-
-		<Button android:id="@+id/commandService3"
+		<Button
+				android:id="@+id/sampleWorker2"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:text="@string/commandService3" />
+				android:text="@string/sampleWorker2" />
 
-		<TextView android:layout_width="wrap_content"
-				  android:layout_height="wrap_content"
-				  android:text="@string/commandService4Description"
-				  android:layout_marginTop="8dp" />
-
-		<Button android:id="@+id/commandService4"
+		<TextView
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:text="@string/commandService4" />
+				android:text="@string/sampleWorker3Description"
+				android:layout_marginTop="8dp" />
 
-		<Button android:id="@+id/cancelAllJobs"
+		<Button
+				android:id="@+id/sampleWorker3"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:text="@string/cancelAllJobs" />
+				android:text="@string/sampleWorker3" />
+
+		<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/sampleWorker4Description"
+				android:layout_marginTop="8dp" />
+
+		<Button
+				android:id="@+id/sampleWorker4"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/sampleWorker4" />
+
+		<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/sampleWorker1Description"
+				android:layout_marginTop="8dp" />
+
+		<Button
+				android:id="@+id/periodicWorker"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/periodicWorker" />
+
+		<Button
+				android:id="@+id/cancelAllWork"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/cancelAllWork" />
 
 	</LinearLayout>
 </ScrollView>
