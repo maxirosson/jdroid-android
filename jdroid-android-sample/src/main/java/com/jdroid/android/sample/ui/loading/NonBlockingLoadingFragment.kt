@@ -2,7 +2,7 @@ package com.jdroid.android.sample.ui.loading
 
 import android.os.Bundle
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.jdroid.android.androidx.lifecycle.Resource
 import com.jdroid.android.androidx.lifecycle.ResourceObserver
 import com.jdroid.android.fragment.AbstractFragment
@@ -37,9 +37,9 @@ class NonBlockingLoadingFragment : AbstractFragment() {
                 return this@NonBlockingLoadingFragment
             }
         }
-        sampleViewModel = ViewModelProviders.of(this).get(SampleViewModel::class.java)
+        sampleViewModel = ViewModelProvider(this).get(SampleViewModel::class.java)
         sampleViewModel.setLoadFromNetworkDelaySeconds(5)
-        sampleViewModel.load(SampleRepository.ID, true).observe(this, observer)
+        sampleViewModel.load(SampleRepository.ID, true).observe(viewLifecycleOwner, observer)
     }
 
     override fun getContentFragmentLayout(): Int? {

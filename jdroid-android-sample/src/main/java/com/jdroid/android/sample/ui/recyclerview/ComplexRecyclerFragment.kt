@@ -6,7 +6,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.jdroid.android.androidx.lifecycle.Resource
 import com.jdroid.android.androidx.lifecycle.ResourceObserver
@@ -52,8 +52,8 @@ class ComplexRecyclerFragment : AbstractRecyclerFragment() {
                 return this@ComplexRecyclerFragment
             }
         }
-        sampleListViewModel = ViewModelProviders.of(this).get(SampleListViewModel::class.java)
-        sampleListViewModel.loadMixedTypes().observe(this, observer)
+        sampleListViewModel = ViewModelProvider(this).get(SampleListViewModel::class.java)
+        sampleListViewModel.loadMixedTypes().observe(viewLifecycleOwner, observer)
     }
 
     override fun getMenuResourceId(): Int? {

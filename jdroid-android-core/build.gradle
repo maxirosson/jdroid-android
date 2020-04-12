@@ -30,7 +30,6 @@ dependencies {
 	api(Libs.androidx_recyclerview)
 	api(Libs.androidx_swiperefreshlayout)
 	api(Libs.androidx_vectordrawable)
-	api(Libs.androidx_lifecycle)
 
 	// https://developers.google.com/android/guides/releases
 	api(Libs.play_services_base)
