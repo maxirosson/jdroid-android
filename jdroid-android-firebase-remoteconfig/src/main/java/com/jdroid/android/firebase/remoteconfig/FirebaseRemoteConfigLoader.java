@@ -155,7 +155,7 @@ public class FirebaseRemoteConfigLoader implements RemoteConfigLoader {
 						retryCount++;
 
 						if (retryCount <= 3) {
-							new FirebaseRemoteConfigFetchCommand().start(setExperimentUserProperty);
+							FirebaseRemoteConfigFetchWorker.enqueue(setExperimentUserProperty);
 						}
 					}
 				});
@@ -168,7 +168,7 @@ public class FirebaseRemoteConfigLoader implements RemoteConfigLoader {
 				retryCount++;
 
 				if (retryCount <= 3) {
-					new FirebaseRemoteConfigFetchCommand().start(setExperimentUserProperty);
+					FirebaseRemoteConfigFetchWorker.enqueue(setExperimentUserProperty);
 				}
 			}
 		});
