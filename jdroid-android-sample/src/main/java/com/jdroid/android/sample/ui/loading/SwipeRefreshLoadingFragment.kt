@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.jdroid.android.androidx.lifecycle.Resource
 import com.jdroid.android.androidx.lifecycle.ResourceObserver
 import com.jdroid.android.fragment.AbstractFragment
@@ -51,7 +51,7 @@ class SwipeRefreshLoadingFragment : SwipeRecyclerFragment() {
                 return this@SwipeRefreshLoadingFragment
             }
         }
-        sampleListViewModel = ViewModelProviders.of(this).get(SampleListViewModel::class.java)
+        sampleListViewModel = ViewModelProvider(this).get(SampleListViewModel::class.java)
         execute(false)
     }
 
@@ -63,7 +63,7 @@ class SwipeRefreshLoadingFragment : SwipeRecyclerFragment() {
         if (sampleListViewModel.sampleEntities != null && forceRefresh) {
             sampleListViewModel.sampleEntities!!.removeObserver(observer)
         }
-        sampleListViewModel.load(forceRefresh, false).observe(this, observer)
+        sampleListViewModel.load(forceRefresh, false).observe(viewLifecycleOwner, observer)
     }
 
     override fun getMenuResourceId(): Int? {

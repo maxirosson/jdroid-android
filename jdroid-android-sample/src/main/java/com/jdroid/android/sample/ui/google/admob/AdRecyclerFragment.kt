@@ -3,7 +3,7 @@ package com.jdroid.android.sample.ui.google.admob
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.ads.AdSize
 import com.jdroid.android.androidx.lifecycle.Resource
@@ -58,8 +58,8 @@ class AdRecyclerFragment : AbstractRecyclerFragment() {
                 return this@AdRecyclerFragment
             }
         }
-        sampleListViewModel = ViewModelProviders.of(this).get(SampleListViewModel::class.java)
-        sampleListViewModel.loadStrings().observe(this, observer)
+        sampleListViewModel = ViewModelProvider(this).get(SampleListViewModel::class.java)
+        sampleListViewModel.loadStrings().observe(viewLifecycleOwner, observer)
     }
 
     inner class StringRecyclerViewType : RecyclerViewType<String, SimpleRecyclerFragment.StringViewHolder>() {

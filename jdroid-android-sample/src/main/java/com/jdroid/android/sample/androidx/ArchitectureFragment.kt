@@ -6,7 +6,7 @@ import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.TextView
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.jdroid.android.androidx.lifecycle.Resource
 import com.jdroid.android.androidx.lifecycle.ResourceObserver
 import com.jdroid.android.fragment.AbstractFragment
@@ -63,7 +63,7 @@ class ArchitectureFragment : AbstractFragment() {
                 return this@ArchitectureFragment
             }
         }
-        sampleViewModel = ViewModelProviders.of(this).get(SampleViewModel::class.java)
+        sampleViewModel = ViewModelProvider(this).get(SampleViewModel::class.java)
         execute(false)
     }
 
@@ -106,7 +106,7 @@ class ArchitectureFragment : AbstractFragment() {
         sampleViewModel.setLoadFromDbDelaySeconds(TypeUtils.getInteger(loadFromDbDelaySecondsEditText.text))
         sampleViewModel.setFailSaveToDb(failSaveToDb)
         sampleViewModel.setSaveToDbDelaySeconds(TypeUtils.getInteger(saveToDbDelaySecondsEditText.text))
-        sampleViewModel.load(SampleRepository.ID, forceRefresh).observe(this, observer)
+        sampleViewModel.load(SampleRepository.ID, forceRefresh).observe(viewLifecycleOwner, observer)
     }
 
     override fun getDefaultLoading(): FragmentLoading? {

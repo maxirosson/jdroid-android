@@ -1,5 +1,5 @@
 object Libs {
-    const val google_material = "com.google.android.material:material:1.1.0"
+    const val google_material = "com.google.android.material:material:1.0.0"
 
     const val play_core = "com.google.android.play:core:1.7.2"
 
@@ -22,7 +22,6 @@ object Libs {
     const val androidx_coordinatorlayout = "androidx.coordinatorlayout:coordinatorlayout:1.1.0"
     const val androidx_drawerlayout = "androidx.drawerlayout:drawerlayout:1.0.0"
     const val androidx_fragment = "androidx.fragment:fragment:1.2.4"
-    const val androidx_lifecycle = "androidx.lifecycle:lifecycle-extensions:2.1.0"
     const val androidx_recyclerview = "androidx.recyclerview:recyclerview:1.1.0"
     const val androidx_swiperefreshlayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
     const val androidx_vectordrawable = "androidx.vectordrawable:vectordrawable:1.1.0"
