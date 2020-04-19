@@ -4,6 +4,7 @@ import android.app.Activity
 import android.view.View
 import androidx.annotation.IdRes
 import androidx.annotation.StringRes
+import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import com.jdroid.android.R
 import com.jdroid.android.utils.LocalizationUtils
@@ -36,7 +37,7 @@ class SnackbarBuilder {
         this.parentLayoutId = parentLayoutId
     }
 
-    fun setDuration(@Snackbar.Duration duration: Int) {
+    fun setDuration(@BaseTransientBottomBar.Duration duration: Int) {
         this.duration = duration
     }
 

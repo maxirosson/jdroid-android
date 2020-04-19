@@ -30,7 +30,6 @@ dependencies {
 	api(Libs.androidx_recyclerview)
 	api(Libs.androidx_swiperefreshlayout)
 	api(Libs.androidx_vectordrawable)
-	api(Libs.androidx_lifecycle)
 
 	// https://developers.google.com/android/guides/releases
 	api(Libs.play_services_base)
@@ -43,7 +42,8 @@ dependencies {
 	api(Libs.firebase_perf)
 	api(Libs.firebase_dynamic_links)
 
-	api(Libs.firebase_jobdispatcher)
+	// https://developer.android.com/jetpack/docs/release-notes
+	api(Libs.WORK_MANAGER_RUNTIME_KTX)
 
 	api(Libs.koin)
 	api(Libs.koin_viewmodel)
@@ -81,5 +81,7 @@ dependencies {
 	}
 
 	testImplementation(Libs.junit)
+	testImplementation(Libs.TRUTH)
+	testImplementation(Libs.WORK_MANAGER_TESTING)
 	testImplementation(Libs.robolectric)
 }

@@ -1,6 +1,5 @@
 package com.jdroid.android.sample.api
 
-import android.os.Bundle
 import com.jdroid.android.application.AbstractApplication
 import com.jdroid.android.firebase.fcm.FcmSender
 import com.jdroid.android.firebase.fcm.device.Device
@@ -67,7 +66,7 @@ enum class ApiServer private constructor(
         return "527857945512"
     }
 
-    override fun onRegisterOnServer(registrationToken: String, updateLastActiveTimestamp: Boolean, bundle: Bundle) {
+    override fun onRegisterOnServer(registrationToken: String, updateLastActiveTimestamp: Boolean, parameters: Map<String, Any>) {
         val service = SampleApiService()
         val device = Device(registrationToken, null)
         service.addDevice(device, updateLastActiveTimestamp)

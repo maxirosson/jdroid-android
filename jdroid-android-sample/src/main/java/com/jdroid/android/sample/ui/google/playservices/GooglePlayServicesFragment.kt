@@ -16,7 +16,7 @@ class GooglePlayServicesFragment : AbstractFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        findView<View>(R.id.checkGooglePlayServices).setOnClickListener { GooglePlayServicesUtils.checkGooglePlayServices(activity!!) }
+        findView<View>(R.id.checkGooglePlayServices).setOnClickListener { GooglePlayServicesUtils.checkGooglePlayServices(requireActivity()) }
 
         findView<View>(R.id.openGooglePlayServices).setOnClickListener { GooglePlayServicesUtils.launchGooglePlayServicesUpdate() }
     }

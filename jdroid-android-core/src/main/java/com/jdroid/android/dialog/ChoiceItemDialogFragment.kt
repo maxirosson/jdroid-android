@@ -66,7 +66,7 @@ class ChoiceItemDialogFragment : AbstractDialogFragment() {
             bundle.putInt(RESOURCE_TITLE_ID_EXTRA, resourceTitleId)
             fragment.arguments = bundle
             fragment.setTargetFragment(targetFragment, 0)
-            val fragmentManager = targetFragment.requireFragmentManager()
+            val fragmentManager = targetFragment.getParentFragmentManager()
             if (fragmentManager.findFragmentByTag(ChoiceItemDialogFragment::class.java.simpleName) == null) {
                 fragment.show(fragmentManager, ChoiceItemDialogFragment::class.java.simpleName)
             }

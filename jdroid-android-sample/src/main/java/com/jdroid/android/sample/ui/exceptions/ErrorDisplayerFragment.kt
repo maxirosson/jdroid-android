@@ -3,7 +3,7 @@ package com.jdroid.android.sample.ui.exceptions
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.jdroid.android.androidx.lifecycle.Resource
 import com.jdroid.android.androidx.lifecycle.ResourceObserver
 import com.jdroid.android.exception.AbstractErrorDisplayer
@@ -46,7 +46,7 @@ class ErrorDisplayerFragment : AbstractFragment() {
                 return this@ErrorDisplayerFragment
             }
         }
-        sampleViewModel = ViewModelProviders.of(this).get(SampleViewModel::class.java)
+        sampleViewModel = ViewModelProvider(this).get(SampleViewModel::class.java)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -77,7 +77,7 @@ class ErrorDisplayerFragment : AbstractFragment() {
     private fun execute() {
         sampleViewModel.sampleEntity?.removeObserver(observer)
         sampleViewModel.setFailLoadFromNetwork(true)
-        sampleViewModel.load(SampleRepository.ID, true).observe(this, observer)
+        sampleViewModel.load(SampleRepository.ID, true).observe(viewLifecycleOwner, observer)
     }
 
     override fun createErrorDisplayer(abstractException: AbstractException): ErrorDisplayer {

@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.jdroid.android.androidx.lifecycle.Resource
 import com.jdroid.android.androidx.lifecycle.ResourceObserver
 import com.jdroid.android.fragment.AbstractFragment
@@ -41,7 +41,7 @@ open class BlockingLoadingFragment : AbstractFragment() {
                 return this@BlockingLoadingFragment
             }
         }
-        sampleViewModel = ViewModelProviders.of(this).get(SampleViewModel::class.java)
+        sampleViewModel = ViewModelProvider(this).get(SampleViewModel::class.java)
         execute()
     }
 
@@ -56,6 +56,6 @@ open class BlockingLoadingFragment : AbstractFragment() {
         sampleViewModel.sampleEntity?.removeObserver(observer)
         sampleViewModel.setFailLoadFromNetwork(true)
         sampleViewModel.setLoadFromNetworkDelaySeconds(5)
-        sampleViewModel.load(SampleRepository.ID, true).observe(this, observer)
+        sampleViewModel.load(SampleRepository.ID, true).observe(viewLifecycleOwner, observer)
     }
 }
