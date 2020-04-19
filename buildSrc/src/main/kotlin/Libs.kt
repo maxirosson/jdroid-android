@@ -12,7 +12,7 @@ object Libs {
     const val firebase_config = "com.google.firebase:firebase-config:19.1.3"
     const val firebase_database = "com.google.firebase:firebase-database:19.2.1"
     const val firebase_dynamic_links = "com.google.firebase:firebase-dynamic-links:19.1.0"
-    const val firebase_perf = "com.google.firebase:firebase-perf:19.0.5"
+    const val firebase_perf = "com.google.firebase:firebase-perf:19.0.6"
 
     // https://developer.android.com/topic/libraries/support-library/androidx-rn
     const val androidx_annotation = "androidx.annotation:annotation:1.1.0"
