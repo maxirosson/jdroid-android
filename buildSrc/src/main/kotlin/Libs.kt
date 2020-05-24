@@ -1,7 +1,7 @@
 object Libs {
     const val google_material = "com.google.android.material:material:1.0.0"
 
-    const val play_core = "com.google.android.play:core:1.7.2"
+    const val play_core = "com.google.android.play:core:1.7.3"
 
     // https://firebase.google.com/support/release-notes/android
     const val firebase_ads = "com.google.firebase:firebase-ads:18.3.0"
