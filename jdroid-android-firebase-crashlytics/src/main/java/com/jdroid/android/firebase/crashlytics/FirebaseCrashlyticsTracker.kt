@@ -3,7 +3,7 @@ package com.jdroid.android.firebase.crashlytics
 import android.app.Activity
 import android.os.Bundle
 
-import com.crashlytics.android.Crashlytics
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.jdroid.android.analytics.AbstractCoreAnalyticsTracker
 import com.jdroid.android.exception.DefaultExceptionHandler
 import com.jdroid.android.uri.ReferrerUtils
@@ -14,7 +14,7 @@ class FirebaseCrashlyticsTracker : AbstractCoreAnalyticsTracker() {
         if (areTagsEnabled()) {
             DefaultExceptionHandler.addTags(throwable, tags)
         }
-        Crashlytics.logException(throwable)
+        FirebaseCrashlytics.getInstance().recordException(throwable)
     }
 
     protected fun areTagsEnabled(): Boolean {
@@ -22,25 +22,25 @@ class FirebaseCrashlyticsTracker : AbstractCoreAnalyticsTracker() {
     }
 
     override fun trackErrorLog(message: String) {
-        Crashlytics.log(message)
+        FirebaseCrashlytics.getInstance().log(message)
     }
 
     override fun trackErrorCustomKey(key: String, value: Any) {
         if (value is Boolean) {
-            Crashlytics.setBool(key, value)
+            FirebaseCrashlytics.getInstance().setCustomKey(key, value)
         } else if (value is Double) {
-            Crashlytics.setDouble(key, value)
+            FirebaseCrashlytics.getInstance().setCustomKey(key, value)
         } else if (value is Float) {
-            Crashlytics.setFloat(key, value)
+            FirebaseCrashlytics.getInstance().setCustomKey(key, value)
         } else if (value is Int) {
-            Crashlytics.setInt(key, value)
+            FirebaseCrashlytics.getInstance().setCustomKey(key, value)
         } else {
-            Crashlytics.setString(key, value.toString())
+            FirebaseCrashlytics.getInstance().setCustomKey(key, value.toString())
         }
     }
 
     override fun onActivityCreate(activity: Activity, savedInstanceState: Bundle?) {
-        Crashlytics.log(activity.javaClass.simpleName + " created. SavedInstanceState " + if (savedInstanceState != null) "not null" else "null")
+        FirebaseCrashlytics.getInstance().log(activity.javaClass.simpleName + " created. SavedInstanceState " + if (savedInstanceState != null) "not null" else "null")
     }
 
     override fun onActivityStart(activity: Activity, referrer: String?, data: Any?) {
@@ -51,27 +51,27 @@ class FirebaseCrashlyticsTracker : AbstractCoreAnalyticsTracker() {
             messageBuilder.append(". Referrer: ")
             messageBuilder.append(referrer)
         }
-        Crashlytics.log(messageBuilder.toString())
+        FirebaseCrashlytics.getInstance().log(messageBuilder.toString())
     }
 
     override fun onActivityResume(activity: Activity) {
-        Crashlytics.log("${activity.javaClass.simpleName} resumed")
+        FirebaseCrashlytics.getInstance().log("${activity.javaClass.simpleName} resumed")
     }
 
     override fun onActivityPause(activity: Activity) {
-        Crashlytics.log("${activity.javaClass.simpleName} paused")
+        FirebaseCrashlytics.getInstance().log("${activity.javaClass.simpleName} paused")
     }
 
     override fun onActivityStop(activity: Activity) {
-        Crashlytics.log("${activity.javaClass.simpleName} stopped")
+        FirebaseCrashlytics.getInstance().log("${activity.javaClass.simpleName} stopped")
     }
 
     override fun onActivityDestroy(activity: Activity) {
-        Crashlytics.log("${activity.javaClass.simpleName} destroyed")
+        FirebaseCrashlytics.getInstance().log("${activity.javaClass.simpleName} destroyed")
     }
 
     override fun onFragmentStart(screenViewName: String) {
-        Crashlytics.log("$screenViewName started")
+        FirebaseCrashlytics.getInstance().log("$screenViewName started")
     }
 
     override fun isEnabled(): Boolean {

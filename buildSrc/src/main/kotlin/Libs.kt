@@ -13,6 +13,8 @@ object Libs {
     const val firebase_database = "com.google.firebase:firebase-database:19.3.0"
     const val firebase_dynamic_links = "com.google.firebase:firebase-dynamic-links:19.1.0"
     const val firebase_perf = "com.google.firebase:firebase-perf:19.0.7"
+    const val firebase_messaging = "com.google.firebase:firebase-messaging:20.2.0"
+    const val firebase_crashlytics = "com.google.firebase:firebase-crashlytics:17.0.1"
 
     // https://developer.android.com/topic/libraries/support-library/androidx-rn
     const val androidx_annotation = "androidx.annotation:annotation:1.1.0"
@@ -43,11 +45,6 @@ object Libs {
     const val jdroid_java_core = "com.jdroidtools:jdroid-java-core:3.0.0"
     const val jdroid_java_remote_config = "com.jdroidtools:jdroid-java-remote-config:3.0.0"
     const val jdroid_java_firebase_database = "com.jdroidtools:jdroid-java-firebase-database:3.0.0"
-
-    // https://firebase.google.com/support/release-notes/android
-    const val firebase_messaging = "com.google.firebase:firebase-messaging:20.2.0"
-
-    const val crashlytics = "com.crashlytics.sdk.android:crashlytics:2.10.1"
 
     // https://developers.google.com/android/guides/releases
     const val play_services_base = "com.google.android.gms:play-services-base:17.3.0"

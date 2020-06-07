@@ -96,6 +96,7 @@ public class DefaultExceptionHandler implements ExceptionHandler {
 				}
 			}
 
+			// TODO It seems that we are tracking the exception on logcat, but it was previously tracked by Android
 			if (trackable) {
 				LOGGER.error(errorMessage, throwableToLog);
 				List<String> tags = getThrowableTags(throwable, priorityLevel);

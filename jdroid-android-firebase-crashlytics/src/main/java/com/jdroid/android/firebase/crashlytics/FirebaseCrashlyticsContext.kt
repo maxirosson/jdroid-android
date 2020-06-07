@@ -5,6 +5,6 @@ import com.jdroid.android.context.BuildConfigUtils
 object FirebaseCrashlyticsContext {
 
     fun isFirebaseCrashlyticsEnabled(): Boolean {
-        return BuildConfigUtils.getBuildConfigValue<Boolean>("FIREBASE_CRASHLYTICS_ENABLED", true)
+        return BuildConfigUtils.getBuildConfigValue("FIREBASE_CRASHLYTICS_ENABLED", true)
     }
 }

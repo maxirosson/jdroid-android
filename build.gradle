@@ -29,13 +29,6 @@ buildscript {
 				releasesOnly()
 			}
 		}
-		maven {
-			url = "https://maven.fabric.io/public"
-			content {
-				includeGroup("io.fabric.tools")
-			}
-		}
-
 
 		String localMavenRepoEnabled = null
 		File propsFile2 = new File("$project.rootDir/gradle-local.properties")
@@ -106,12 +99,6 @@ allprojects {
 			google() {
 				mavenContent {
 					releasesOnly()
-				}
-			}
-			maven {
-				url = "https://maven.fabric.io/public"
-				content {
-					includeGroup("io.fabric.tools")
 				}
 			}
 			String localMavenRepoEnabled = project.hasProperty("LOCAL_MAVEN_REPO_ENABLED") ? project.ext.get("LOCAL_MAVEN_REPO_ENABLED") : System.getenv("LOCAL_MAVEN_REPO_EMABLED")

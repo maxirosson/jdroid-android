@@ -107,7 +107,7 @@ android {
 
 		jdroid.setBuildConfigBoolean(defaultConfig, "FIREBASE_ANALYTICS_ENABLED", true)
 		jdroid.setBuildConfigBoolean(defaultConfig, "FIREBASE_PERFORMANCE_MONITORING_ENABLED", true)
-		jdroid.setBuildConfigBoolean(defaultConfig, "FIREBASE_CRASHLYTICS_ENABLED", true)
+		jdroid.setBuildConfigBoolean(defaultConfig, "FIREBASE_CRASHLYTICS_ENABLED", false)
 
 		jdroid.setBuildConfigString(defaultConfig, "GOOGLE_SERVER_CLIENT_ID", "527857945512-qr7kk98nntlt44po5cblnrgq41ief65s.apps.googleusercontent.com")
 
@@ -132,7 +132,8 @@ android {
 		manifestPlaceholders = [
 			googleMapsApiKey: "AIzaSyA2UZNjUMaw7kFk9qvHeGLTppXxcgI3l1Y",
 			facebookAppId   : "fb1048902711862195",
-			adMobAppId      : adMobAppId
+			adMobAppId      : adMobAppId,
+			firebaseCrashlyticsEnabled : jdroid.propertyResolver.getBooleanProp("FIREBASE_CRASHLYTICS_ENABLED", false)
 		]
 
 		multiDexEnabled = true
@@ -190,6 +191,7 @@ android {
 					debuggable = jdroid.isReleaseBuildTypeDebuggable()
 
 					jdroid.setBuildConfigString(buildTypes.release, "SERVER_NAME", "PROD")
+					jdroid.setBuildConfigBoolean(defaultConfig, "FIREBASE_CRASHLYTICS_ENABLED", true)
 
 					// TODO Add GOOGLE_PLAY_PUBLIC_KEY
 					// TODO Add FIREBASE_AUTH_TOKEN
@@ -197,7 +199,8 @@ android {
 
 					manifestPlaceholders = [
 						googleMapsApiKey: jdroid.propertyResolver.getStringProp("GOOGLE_MAPS_API_KEY", ""),
-						facebookAppId   : jdroid.propertyResolver.getStringProp("FACEBOOK_APP_ID", "")
+						facebookAppId   : jdroid.propertyResolver.getStringProp("FACEBOOK_APP_ID", ""),
+						firebaseCrashlyticsEnabled : true
 					]
 				}
 			}

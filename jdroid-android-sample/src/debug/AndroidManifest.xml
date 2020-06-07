@@ -6,8 +6,6 @@
 	<application android:allowBackup="false"
 				 tools:ignore="GoogleAppIndexingWarning">
 
-		<meta-data android:name="firebase_crashlytics_collection_enabled"
-				   android:value="false" />
 		<meta-data android:name="com.jdroid.android.sample.debug.FcmDebugAppLifecycleCallback"
 				   android:value="ApplicationLifecycleCallback" />
 
