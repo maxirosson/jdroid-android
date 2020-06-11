@@ -65,9 +65,6 @@
 	<!-- Google Sign In -->
 	<string name="jdroid_googleSignIn">Google Sign In</string>
 
-	<!-- Leak Canary -->
-	<string name="jdroid_leakCanary">Leak Canary</string>
-
 	<!-- Twitter -->
 	<string name="jdroid_twitter">Twitter</string>
 

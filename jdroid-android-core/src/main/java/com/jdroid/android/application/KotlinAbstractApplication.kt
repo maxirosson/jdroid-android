@@ -11,7 +11,6 @@ import com.google.android.play.core.splitcompat.SplitCompat
 import com.jdroid.android.BuildConfig
 import com.jdroid.android.firebase.analytics.FirebaseAnalyticsFacade
 import com.jdroid.android.firebase.testlab.FirebaseTestLab
-import com.jdroid.android.leakcanary.LeakCanaryHelper
 import com.jdroid.android.lifecycle.ApplicationLifecycleHelper
 import com.jdroid.android.notification.NotificationChannelType
 import com.jdroid.android.notification.NotificationUtils
@@ -57,7 +56,7 @@ abstract class KotlinAbstractApplication : Application() {
     }
 
     protected open fun isMultiProcessSupportEnabled(): Boolean {
-        return BuildConfig.DEBUG && LeakCanaryHelper.isLeakCanaryEnabled()
+        return BuildConfig.DEBUG
     }
 
     @MainThread

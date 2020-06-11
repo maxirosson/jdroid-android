@@ -3,7 +3,6 @@ package com.jdroid.android.sample.unit
 import com.jdroid.android.application.AbstractApplication
 import com.jdroid.android.debug.http.HttpDebugConfiguration
 import com.jdroid.android.firebase.analytics.FirebaseAnalyticsHelper
-import com.jdroid.android.leakcanary.LeakCanaryHelper
 import com.jdroid.android.sample.AbstractUnitTest
 import com.jdroid.android.sample.TestAndroidApplication
 import com.jdroid.android.sample.TestAppContext
@@ -24,7 +23,6 @@ class ExampleUnitTest : AbstractUnitTest() {
         assertEquals(TestAndroidApplication::class.java, AbstractApplication.get().javaClass)
         assertNull(AbstractApplication.get().homeActivityClass)
         assertEquals(TestAppContext::class.java, AbstractApplication.get().appContext.javaClass)
-        assertFalse(LeakCanaryHelper.isLeakCanaryEnabled())
         assertFalse(StrictModeHelper.isStrictModeEnabled())
         assertFalse(AppUtils.isReleaseBuildType())
         assertTrue(FirebaseAnalyticsHelper.isFirebaseAnalyticsEnabled())

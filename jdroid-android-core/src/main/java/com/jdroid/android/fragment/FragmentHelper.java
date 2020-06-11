@@ -20,7 +20,6 @@ import com.jdroid.android.loading.FragmentLoading;
 import com.jdroid.java.collections.Maps;
 import com.jdroid.java.exception.AbstractException;
 import com.jdroid.java.utils.LoggerUtils;
-import com.squareup.leakcanary.LeakCanary;
 
 import org.slf4j.Logger;
 
@@ -230,8 +229,6 @@ public class FragmentHelper implements FragmentIf {
 
 	public void onDestroy() {
 		LOGGER.debug("Executing onDestroy on " + fragment);
-
-		LeakCanary.installedRefWatcher().watch(fragment);
 	}
 
 	@Override

@@ -21,7 +21,6 @@ open class LibrariesFragment : AbstractRecyclerFragment() {
         libraries.add(Library("androidJetpack", "Android Jetpack", "Google", "https://developer.android.com/jetpack"))
         libraries.add(Library("googlePlayServices", "Google Play Services", "Google", "https://developers.google.com/android/guides/overview"))
         libraries.add(Library("firebase", "Firebase", "Google", "https://firebase.google.com"))
-        libraries.add(Library("leakCanary", "Leak Canary", "Square", "https://github.com/square/leakcanary"))
         libraries.add(Library("yearclass", "Device Year Class", "Facebook", "https://github.com/facebook/device-year-class"))
         if (ReflectionUtils.getSafeClass("com.jdroid.android.twitter.TwitterAppLifecycleCallback") != null) {
             libraries.add(Library("tweetUi", "Tweet UI", "Twitter", "https://dev.twitter.com/twitterkit/overview"))

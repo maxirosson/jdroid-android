@@ -6,7 +6,6 @@ import androidx.core.util.Pair
 import com.jdroid.android.application.AbstractApplication
 import com.jdroid.android.context.UsageStats
 import com.jdroid.android.firebase.performance.FirebasePerformanceAppContext
-import com.jdroid.android.leakcanary.LeakCanaryHelper
 import com.jdroid.android.recycler.AbstractRecyclerFragment
 import com.jdroid.android.recycler.RecyclerViewAdapter
 import com.jdroid.android.recycler.RecyclerViewContainer
@@ -55,7 +54,6 @@ class DebugInfoFragment : AbstractRecyclerFragment() {
         properties.add(Pair("App Loads", UsageStats.getAppLoads()))
 
         properties.add(Pair("Strict Mode Enabled", StrictModeHelper.isStrictModeEnabled()))
-        properties.add(Pair("Leak Canary Enabled", LeakCanaryHelper.isLeakCanaryEnabled()))
 
         properties.add(Pair("Firebase Performance Enabled", FirebasePerformanceAppContext.isFirebasePerformanceEnabled()))
 

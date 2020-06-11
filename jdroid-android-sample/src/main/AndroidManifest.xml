@@ -183,13 +183,6 @@
 				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
 				  tools:ignore="UnusedAttribute" />
 
-		<!-- Leak Canary -->
-
-		<activity android:name="com.jdroid.android.sample.ui.leakcanary.LeakCanaryActivity"
-				  android:label="@string/jdroid_leakCanary"
-				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity"
-				  tools:ignore="UnusedAttribute" />
-
 		<!-- Loading -->
 
 		<activity android:name="com.jdroid.android.sample.ui.loading.LoadingActivity"
@@ -685,9 +678,6 @@
 		<activity android:name="com.jdroid.android.sample.ui.webview.WebViewActivity"
 				  android:label="@string/webView"
 				  android:parentActivityName="com.jdroid.android.sample.ui.home.HomeActivity" />
-
-		<service android:name="com.jdroid.android.sample.ui.leakcanary.LeakCanaryService"
-				 android:exported="false" />
 
 		<service android:name="com.jdroid.android.sample.ui.service.SampleWorkerService"
 				 android:exported="false" />

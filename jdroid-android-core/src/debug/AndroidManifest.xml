@@ -12,8 +12,6 @@
 				   android:value="ApplicationLifecycleCallback" />
 		<meta-data android:name="com.jdroid.android.debug.facebook.stetho.StethoApplicationLifecycleCallback"
 				   android:value="ApplicationLifecycleCallback" />
-		<meta-data android:name="com.jdroid.android.leakcanary.LeakCanaryAppLifecycleCallback"
-				   android:value="ApplicationLifecycleCallback" />
 
 		<activity android:name="com.jdroid.android.debug.DebugSettingsActivity"
 				  android:label="@string/jdroid_debugSettings" />

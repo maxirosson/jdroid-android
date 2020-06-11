@@ -59,10 +59,6 @@ object Libs {
     // https://github.com/facebook/device-year-class/blob/master/CHANGELOG.md
     const val facebook_yearclass = "com.facebook.device.yearclass:yearclass:2.1.0"
 
-    // https://github.com/square/leakcanary/blob/master/docs/changelog.md
-    const val leakcanary = "com.squareup.leakcanary:leakcanary-android:1.6.3"
-    const val leakcanary_no_op = "com.squareup.leakcanary:leakcanary-android-no-op:1.6.3"
-
     // https://github.com/InsertKoinIO/koin/blob/master/CHANGELOG.md
     @Deprecated("Use dagger")
     const val koin = "org.koin:koin-android:2.0.1"

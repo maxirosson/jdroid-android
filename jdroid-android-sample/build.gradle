@@ -103,7 +103,6 @@ android {
 
 		jdroid.setBuildConfigBoolean(defaultConfig, "DEBUG_SETTINGS_ENABLED", false)
 		jdroid.setBuildConfigBoolean(defaultConfig, "STRICT_MODE_ENABLED", false)
-		jdroid.setBuildConfigBoolean(defaultConfig, "LEAK_CANARY_ENABLED", false)
 
 		jdroid.setBuildConfigBoolean(defaultConfig, "FIREBASE_ANALYTICS_ENABLED", true)
 		jdroid.setBuildConfigBoolean(defaultConfig, "FIREBASE_PERFORMANCE_MONITORING_ENABLED", true)

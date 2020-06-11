@@ -28,7 +28,6 @@ import com.jdroid.android.sample.ui.google.playservices.GooglePlayServicesActivi
 import com.jdroid.android.sample.ui.google.signin.GoogleSignInActivity
 import com.jdroid.android.sample.ui.hero.HeroActivity
 import com.jdroid.android.sample.ui.http.HttpActivity
-import com.jdroid.android.sample.ui.leakcanary.LeakCanaryActivity
 import com.jdroid.android.sample.ui.loading.LoadingActivity
 import com.jdroid.android.sample.ui.navdrawer.NavDrawerActivity
 import com.jdroid.android.sample.ui.notifications.NotificationsActivity
@@ -73,7 +72,6 @@ enum class HomeItem private constructor(
     GOOGLE_SIGN_IN(R.string.jdroid_googleSignIn, R.drawable.ic_sign_in_24dp, GoogleSignInActivity::class.java),
     HERO(R.string.hero, R.drawable.ic_photo, HeroActivity::class.java),
     HTTP(R.string.http, R.drawable.ic_http, HttpActivity::class.java),
-    LEAK_CANARY(R.string.jdroid_leakCanary, R.drawable.ic_exception_handling, LeakCanaryActivity::class.java),
     LOADING(R.string.loading, R.drawable.ic_loading, LoadingActivity::class.java),
     NAVDRAWER(R.string.navDrawer, R.drawable.ic_nav_drawer, NavDrawerActivity::class.java),
     NOTIFICATIONS(R.string.notifications, R.drawable.ic_notifications, NotificationsActivity::class.java),

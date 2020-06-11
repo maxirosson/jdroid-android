@@ -48,10 +48,6 @@ dependencies {
 	api(Libs.koin)
 	api(Libs.koin_viewmodel)
 
-	debugApi(Libs.leakcanary) { force = true }
-	releaseApi(Libs.leakcanary_no_op) { force = true }
-	testImplementation(Libs.leakcanary_no_op) { force = true }
-
 	api(Libs.facebook_yearclass)
 
 	// Jdroid dependencies
