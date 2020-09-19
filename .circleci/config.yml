@@ -168,18 +168,18 @@ jobs:
       - run:
           name: Save test results
           command: |
-            modules_file="buildSrc/src/main/kotlin/Module.kt"
+            modules_file="buildSrc/src/main/kotlin/com/jdroid/android/Module.kt"
             destination="test-results"
             while read line
             do
-              module=$(echo "$line" | sed -nE "s/.+\(\":(.+)\"\)[,;]/\1/p")
+              module=$(echo "$line" | sed -nE "s/.+\(\"(.+)\"\)[,;]/\1/p")
               module="${module//://}" #replace ':' by "/"
               if [[ ! -z "$module" ]]; then
                 reports_dir="./${module}/build/reports/tests/testDebugUnitTest"
                 if [[ -d "${reports_dir}" ]]; then
-                if [[ ! -d "${destination}/${module}" ]]; then
-                  mkdir -p "${destination}/${module}"
-                fi
+                  if [[ ! -d "${destination}/${module}" ]]; then
+                    mkdir -p "${destination}/${module}"
+                  fi
                   cp -R "${reports_dir}/." "${destination}/${module}/" || :
                 fi
               fi
@@ -203,12 +203,12 @@ jobs:
       - run:
           name: Save lint results
           command: |
-            modules_file="buildSrc/src/main/kotlin/Module.kt"
+            modules_file="buildSrc/src/main/kotlin/com/jdroid/androidModule.kt"
             destination="lint-results"
             file_name="lint-results.html"
             while read line
             do
-              module=$(echo "$line" | sed -nE "s/.+\(\":(.+)\"\)[,;]/\1/p")
+              module=$(echo "$line" | sed -nE "s/.+\(\"(.+)\"\)[,;]/\1/p")
               module="${module//://}" #replace ':' by "/"
               if [[ ! -z "$module" ]]; then
                 lint_result="./${module}/build/reports/${file_name}"
