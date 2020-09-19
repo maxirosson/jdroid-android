@@ -25,7 +25,7 @@ object Libs {
     const val androidx_drawerlayout = "androidx.drawerlayout:drawerlayout:1.1.0"
     const val androidx_fragment = "androidx.fragment:fragment:1.2.5"
     const val androidx_recyclerview = "androidx.recyclerview:recyclerview:1.1.0"
-    const val androidx_swiperefreshlayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+    const val androidx_swiperefreshlayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
     const val androidx_vectordrawable = "androidx.vectordrawable:vectordrawable:1.1.0"
 
     // https://developer.android.com/jetpack/androidx/releases/room
