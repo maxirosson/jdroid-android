@@ -45,9 +45,6 @@ dependencies {
 	// https://developer.android.com/jetpack/docs/release-notes
 	api(Libs.WORK_MANAGER_RUNTIME_KTX)
 
-	api(Libs.koin)
-	api(Libs.koin_viewmodel)
-
 	api(Libs.facebook_yearclass)
 
 	// Jdroid dependencies

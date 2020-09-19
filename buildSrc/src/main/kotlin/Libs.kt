@@ -59,12 +59,6 @@ object Libs {
     // https://github.com/facebook/device-year-class/blob/master/CHANGELOG.md
     const val facebook_yearclass = "com.facebook.device.yearclass:yearclass:2.1.0"
 
-    // https://github.com/InsertKoinIO/koin/blob/master/CHANGELOG.md
-    @Deprecated("Use dagger")
-    const val koin = "org.koin:koin-android:2.0.1"
-    @Deprecated("Use dagger")
-    const val koin_viewmodel = "org.koin:koin-androidx-viewmodel:2.0.1"
-
     // https://github.com/twitter/twitter-kit-android/wiki/Changelog
     const val twitter = "com.twitter.sdk.android:tweet-ui:3.3.0"
 
