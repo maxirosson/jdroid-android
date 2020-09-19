@@ -22,10 +22,10 @@ object Libs {
     const val androidx_cardview = "androidx.cardview:cardview:1.0.0"
     const val androidx_core = "androidx.core:core:1.3.0"
     const val androidx_coordinatorlayout = "androidx.coordinatorlayout:coordinatorlayout:1.1.0"
-    const val androidx_drawerlayout = "androidx.drawerlayout:drawerlayout:1.0.0"
+    const val androidx_drawerlayout = "androidx.drawerlayout:drawerlayout:1.1.0"
     const val androidx_fragment = "androidx.fragment:fragment:1.2.5"
     const val androidx_recyclerview = "androidx.recyclerview:recyclerview:1.1.0"
-    const val androidx_swiperefreshlayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+    const val androidx_swiperefreshlayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
     const val androidx_vectordrawable = "androidx.vectordrawable:vectordrawable:1.1.0"
 
     // https://developer.android.com/jetpack/androidx/releases/room
@@ -58,12 +58,6 @@ object Libs {
 
     // https://github.com/facebook/device-year-class/blob/master/CHANGELOG.md
     const val facebook_yearclass = "com.facebook.device.yearclass:yearclass:2.1.0"
-
-    // https://github.com/InsertKoinIO/koin/blob/master/CHANGELOG.md
-    @Deprecated("Use dagger")
-    const val koin = "org.koin:koin-android:2.0.1"
-    @Deprecated("Use dagger")
-    const val koin_viewmodel = "org.koin:koin-androidx-viewmodel:2.0.1"
 
     // https://github.com/twitter/twitter-kit-android/wiki/Changelog
     const val twitter = "com.twitter.sdk.android:tweet-ui:3.3.0"

@@ -1,3 +1,5 @@
+import com.jdroid.android.Module
+
 ext.COMPONENTS = ["jdroid-android", "jdroid-java-okhttp"]
 ext.RES_CONFIGS = ["en"]
 ext.PROJECT_NAME = "Jdroid Android - Sample"
@@ -36,21 +38,21 @@ buildscript {
 }
 
 dependencies {
-	api project(Module.JDROID_ANDROID_CORE.moduleName)
-	implementation project(Module.JDROID_ANDROID_ABOUT.moduleName)
-	implementation project(Module.JDROID_ANDROID_FACEBOOK_LOGIN.moduleName)
-	implementation project(Module.JDROID_ANDROID_FIREBASE_ADMOB.moduleName)
-	implementation project(Module.JDROID_ANDROID_FIREBASE_CRASHLYTICS.moduleName)
-	implementation project(Module.JDROID_ANDROID_GLIDE.moduleName)
-	implementation project(Module.JDROID_ANDROID_GOOGLE_MAPS.moduleName)
-	implementation project(Module.JDROID_ANDROID_GOOGLE_INAPPBILLING.moduleName)
-	implementation project(Module.JDROID_ANDROID_FIREBASE_DATABASE.moduleName)
-	implementation project(Module.JDROID_ANDROID_FIREBASE_FCM.moduleName)
-	implementation project(Module.JDROID_ANDROID_FIREBASE_REMOTECONFIG.moduleName)
-	implementation project(Module.JDROID_ANDROID_GOOGLE_SIGNIN.moduleName)
-	implementation project(Module.JDROID_ANDROID_GOOGLE_PLAY_GAMES.moduleName)
-	implementation project(Module.JDROID_ANDROID_ROOM.moduleName)
-	implementation project(Module.JDROID_ANDROID_TWITTER.moduleName)
+	api project(Module.JDROID_ANDROID_CORE.gradlePath)
+	implementation project(Module.JDROID_ANDROID_ABOUT.gradlePath)
+	implementation project(Module.JDROID_ANDROID_FACEBOOK_LOGIN.gradlePath)
+	implementation project(Module.JDROID_ANDROID_FIREBASE_ADMOB.gradlePath)
+	implementation project(Module.JDROID_ANDROID_FIREBASE_CRASHLYTICS.gradlePath)
+	implementation project(Module.JDROID_ANDROID_GLIDE.gradlePath)
+	implementation project(Module.JDROID_ANDROID_GOOGLE_MAPS.gradlePath)
+	implementation project(Module.JDROID_ANDROID_GOOGLE_INAPPBILLING.gradlePath)
+	implementation project(Module.JDROID_ANDROID_FIREBASE_DATABASE.gradlePath)
+	implementation project(Module.JDROID_ANDROID_FIREBASE_FCM.gradlePath)
+	implementation project(Module.JDROID_ANDROID_FIREBASE_REMOTECONFIG.gradlePath)
+	implementation project(Module.JDROID_ANDROID_GOOGLE_SIGNIN.gradlePath)
+	implementation project(Module.JDROID_ANDROID_GOOGLE_PLAY_GAMES.gradlePath)
+	implementation project(Module.JDROID_ANDROID_ROOM.gradlePath)
+	implementation project(Module.JDROID_ANDROID_TWITTER.gradlePath)
 	implementation(Libs.firebase_client_android)
 
 	kapt(Libs.glide_compiler)

@@ -1,3 +1,5 @@
+import com.jdroid.android.Module
+
 apply from: "$rootDir/module.gradle"
 
 ext.PROJECT_NAME = "Jdroid Android - Google AdMob"
@@ -11,7 +13,7 @@ buildscript {
 
 dependencies {
 
-	api project(Module.JDROID_ANDROID_CORE.moduleName)
+	api project(Module.JDROID_ANDROID_CORE.gradlePath)
 
 	api(Libs.firebase_ads)
 

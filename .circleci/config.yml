@@ -1,5 +1,31 @@
 version: 2.1
 
+parameters:
+
+  # Gradle Build Cache
+
+  gradleBuildCacheKey:
+    type: string
+    default: v1-gradle_build_cache-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
+
+  gradleBuildCachePath:
+    type: string
+    default: /home/circleci/gradle-build-cache
+
+  # Gradle Cache
+
+  gradleCacheKey:
+    type: string
+    default: v3-gradle_cache-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
+
+  gradleCacheDependenciesKey:
+    type: string
+    default: "{{ checksum \"buildSrc/src/main/kotlin/Libs.kt\" }}-{{ checksum \"buildSrc/src/main/kotlin/BuildLibs.kt\" }}"
+
+  gradleCachePath:
+    type: string
+    default: /home/circleci/.gradle
+
 references:
 
   working_dir: &working_dir
@@ -28,28 +54,35 @@ commands:
     steps:
       - restore_cache:
           keys:
-            - v2-gradle_cache-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}-{{ .Branch }}-{{ checksum "buildSrc/src/main/kotlin/Libs.kt" }}-{{ checksum "buildSrc/src/main/kotlin/BuildLibs.kt" }}
-            - v2-gradle_cache-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}-{{ .Branch }}
-            - v2-gradle_cache-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}-
+            - << pipeline.parameters.gradleCacheKey >>-{{ .Branch }}-<< pipeline.parameters.gradleCacheDependenciesKey >>
+            - << pipeline.parameters.gradleCacheKey >>-{{ .Branch }}
+            - << pipeline.parameters.gradleCacheKey >>-master
 
   save_gradle_cache:
     steps:
       - save_cache:
-          key: v2-gradle_cache-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}-{{ .Branch }}-{{ checksum "buildSrc/src/main/kotlin/Libs.kt" }}-{{ checksum "buildSrc/src/main/kotlin/BuildLibs.kt" }}
+          key: << pipeline.parameters.gradleCacheKey >>-{{ .Branch }}-<< pipeline.parameters.gradleCacheDependenciesKey >>
           paths:
-            - ~/.gradle
+            - << pipeline.parameters.gradleCachePath >>
+
+  restore_gradle_build_cache:
+    steps:
+      - restore_cache:
+          keys:
+            - << pipeline.parameters.gradleBuildCacheKey >>-{{ .Branch }}
+            - << pipeline.parameters.gradleBuildCacheKey >>-master
+
+  save_gradle_build_cache:
+    steps:
+      - save_cache:
+          key: << pipeline.parameters.gradleBuildCacheKey >>-{{ .Branch }}-{{ epoch }}
+          paths:
+            - << pipeline.parameters.gradleBuildCachePath >>
 
   attach_to_workspace:
     steps:
       - attach_workspace:
           at: ~/
-
-  persist_gradle_build_cache:
-    steps:
-      - persist_to_workspace:
-          root: ~/
-          paths:
-            - gradle-build-cache
 
   gcloud_auth:
     steps:
@@ -65,9 +98,7 @@ jobs:
     steps:
       - checkout
       - restore_gradle_cache
-      - run:
-          name: Download dependencies
-          command: ./gradlew androidDependencies --refresh-dependencies --stacktrace
+      - restore_gradle_build_cache
       - run:
           name: Assembling Components
           command: |
@@ -86,13 +117,14 @@ jobs:
             ./gradlew jdroid-android-google-signin:assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
             ./gradlew jdroid-android-room:assembleDebug -PFIREBASE_PERFORMANCE_MONITORING_ENABLED=false --stacktrace
       - save_gradle_cache
-      - persist_gradle_build_cache
+      - save_gradle_build_cache
 
   buildSample:
     executor: android_executor
     steps:
       - checkout
       - restore_gradle_cache
+      - restore_gradle_build_cache
       - attach_to_workspace
       - run:
           name: Assembling Samples
@@ -118,6 +150,7 @@ jobs:
     steps:
       - checkout
       - restore_gradle_cache
+      - restore_gradle_build_cache
       - attach_to_workspace
       - run: 
           name: Testing
@@ -135,18 +168,18 @@ jobs:
       - run:
           name: Save test results
           command: |
-            modules_file="buildSrc/src/main/kotlin/Module.kt"
+            modules_file="buildSrc/src/main/kotlin/com/jdroid/android/Module.kt"
             destination="test-results"
             while read line
             do
-              module=$(echo "$line" | sed -nE "s/.+\(\":(.+)\"\)[,;]/\1/p")
+              module=$(echo "$line" | sed -nE "s/.+\(\"(.+)\"\)[,;]/\1/p")
               module="${module//://}" #replace ':' by "/"
               if [[ ! -z "$module" ]]; then
                 reports_dir="./${module}/build/reports/tests/testDebugUnitTest"
                 if [[ -d "${reports_dir}" ]]; then
-                if [[ ! -d "${destination}/${module}" ]]; then
-                  mkdir -p "${destination}/${module}"
-                fi
+                  if [[ ! -d "${destination}/${module}" ]]; then
+                    mkdir -p "${destination}/${module}"
+                  fi
                   cp -R "${reports_dir}/." "${destination}/${module}/" || :
                 fi
               fi
@@ -162,6 +195,7 @@ jobs:
     steps:
       - checkout
       - restore_gradle_cache
+      - restore_gradle_build_cache
       - attach_to_workspace
       - run:
           name: Linting
@@ -169,12 +203,12 @@ jobs:
       - run:
           name: Save lint results
           command: |
-            modules_file="buildSrc/src/main/kotlin/Module.kt"
+            modules_file="buildSrc/src/main/kotlin/com/jdroid/android/Module.kt"
             destination="lint-results"
             file_name="lint-results.html"
             while read line
             do
-              module=$(echo "$line" | sed -nE "s/.+\(\":(.+)\"\)[,;]/\1/p")
+              module=$(echo "$line" | sed -nE "s/.+\(\"(.+)\"\)[,;]/\1/p")
               module="${module//://}" #replace ':' by "/"
               if [[ ! -z "$module" ]]; then
                 lint_result="./${module}/build/reports/${file_name}"
@@ -195,6 +229,7 @@ jobs:
     steps:
       - checkout
       - restore_gradle_cache
+      - restore_gradle_build_cache
       - run: ./gradlew ktlint --stacktrace
 
   publish:
@@ -202,6 +237,7 @@ jobs:
     steps:
       - checkout
       - restore_gradle_cache
+      - restore_gradle_build_cache
       - attach_to_workspace
       - run:
           name: Uploading to Nexus Sonatype
@@ -212,6 +248,7 @@ jobs:
     steps:
     - checkout
     - restore_gradle_cache
+    - restore_gradle_build_cache
     - attach_to_workspace
     - run:
         name: Assembling automation & android test APKs

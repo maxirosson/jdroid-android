@@ -1,3 +1,5 @@
+import com.jdroid.android.Module
+
 apply from: "$rootDir/module.gradle"
 
 ext.PROJECT_NAME = "Jdroid Android - Firebase Remote Config"
@@ -11,8 +13,8 @@ buildscript {
 
 dependencies {
 
-	api project(Module.JDROID_ANDROID_CORE.moduleName)
-	implementation project(Module.JDROID_ANDROID_FIREBASE_FCM.moduleName)
+	api project(Module.JDROID_ANDROID_CORE.gradlePath)
+	implementation project(Module.JDROID_ANDROID_FIREBASE_FCM.gradlePath)
 
 	api(Libs.firebase_config)
 
