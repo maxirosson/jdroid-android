@@ -1,3 +1,5 @@
+import com.jdroid.android.Module
+
 apply plugin: "com.jdroidtools.android.dynamic-feature"
 
 ext.PROJECT_NAME = "Jdroid Android Sample - Dynamic Feature"
@@ -15,7 +17,7 @@ buildscript {
 
 dependencies {
 
-	api project(Module.JDROID_ANDROID_SAMPLE.moduleName)
+	api project(Module.JDROID_ANDROID_SAMPLE.gradlePath)
 
 }
 

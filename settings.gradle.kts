@@ -3,11 +3,11 @@ plugins {
 }
 
 val regex = Regex("""    \w*\("([^,]*)"\).*""")
-File(rootDir, "buildSrc/src/main/kotlin/Module.kt").forEachLine { line ->
-	val matchResult = regex.find(line.trim())
+File(rootDir, "buildSrc/src/main/kotlin/com/jdroid/android/Module.kt").forEachLine { line ->
+	val matchResult = regex.matchEntire(line)
 	if (matchResult != null && matchResult.groupValues.size > 1) {
 		val module = matchResult.groupValues[1]
-		include(module)
+		include(":$module")
 	}
 }
 
