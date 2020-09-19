@@ -2,7 +2,7 @@ plugins {
 	id("com.gradle.enterprise").version("3.1.1")
 }
 
-val regex = Regex("\\(\"([^,]*)\"\\)")
+val regex = Regex("""    \w*\("([^,]*)"\).*""")
 File(rootDir, "buildSrc/src/main/kotlin/Module.kt").forEachLine { line ->
 	val matchResult = regex.find(line.trim())
 	if (matchResult != null && matchResult.groupValues.size > 1) {
