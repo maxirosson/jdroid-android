@@ -85,7 +85,7 @@ object Libs {
     // https://github.com/robolectric/robolectric
     const val robolectric = "org.robolectric:robolectric:4.3.1"
 
-    const val espresso_core = "androidx.test.espresso:espresso-core:3.2.0"
+    const val espresso_core = "androidx.test.espresso:espresso-core:3.3.0"
     const val espresso_contrib = "androidx.test.espresso:espresso-contrib:3.2.0"
     const val test_runner = "androidx.test:runner:1.2.0"
 }
