@@ -345,23 +345,23 @@ workflows:
             - unitTest
             - lint
             - ktlint
-  nightly:
-    triggers:
-      - schedule:
-          cron: "0 0 * * *"
-          filters:
-            branches:
-              only:
-                - master
-    jobs:
-      - buildAutomationTest
-      - projectDependencyGraph
-      - runRoboTest:
-          requires:
-            - buildAutomationTest
-      - runInstrumentationTest:
-          requires:
-            - buildAutomationTest
+ # nightly:
+ #   triggers:
+ #     - schedule:
+ #         cron: "0 0 * * *"
+ #         filters:
+ #           branches:
+ #             only:
+ #               - master
+ #   jobs:
+ #     - buildAutomationTest
+ #     - projectDependencyGraph
+ #     - runRoboTest:
+ #         requires:
+ #           - buildAutomationTest
+ #     - runInstrumentationTest:
+ #         requires:
+ #           - buildAutomationTest
   weekly:
     triggers:
       - schedule:
