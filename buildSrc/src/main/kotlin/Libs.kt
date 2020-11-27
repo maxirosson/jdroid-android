@@ -22,7 +22,7 @@ object Libs {
     const val androidx_cardview = "androidx.cardview:cardview:1.0.0"
     const val androidx_core = "androidx.core:core:1.3.1"
     const val androidx_coordinatorlayout = "androidx.coordinatorlayout:coordinatorlayout:1.1.0"
-    const val androidx_drawerlayout = "androidx.drawerlayout:drawerlayout:1.1.0"
+    const val androidx_drawerlayout = "androidx.drawerlayout:drawerlayout:1.1.1"
     const val androidx_fragment = "androidx.fragment:fragment:1.2.5"
     const val androidx_recyclerview = "androidx.recyclerview:recyclerview:1.1.0"
     const val androidx_swiperefreshlayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
