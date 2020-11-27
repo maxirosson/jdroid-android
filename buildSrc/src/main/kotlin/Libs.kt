@@ -83,7 +83,7 @@ object Libs {
     const val TRUTH = "com.google.truth:truth:1.0.1"
 
     // https://github.com/robolectric/robolectric
-    const val robolectric = "org.robolectric:robolectric:4.3.1"
+    const val robolectric = "org.robolectric:robolectric:4.4"
 
     const val espresso_core = "androidx.test.espresso:espresso-core:3.2.0"
     const val espresso_contrib = "androidx.test.espresso:espresso-contrib:3.2.0"
