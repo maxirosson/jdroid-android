@@ -44,7 +44,7 @@ object Libs {
     // https://github.com/maxirosson/jdroid-java/blob/master/CHANGELOG.md
     const val jdroid_java_core = "com.jdroidtools:jdroid-java-core:3.1.0"
     const val jdroid_java_remote_config = "com.jdroidtools:jdroid-java-remote-config:3.1.0"
-    const val jdroid_java_firebase_database = "com.jdroidtools:jdroid-java-firebase-database:3.0.0"
+    const val jdroid_java_firebase_database = "com.jdroidtools:jdroid-java-firebase-database:3.1.0"
 
     // https://developers.google.com/android/guides/releases
     const val play_services_base = "com.google.android.gms:play-services-base:17.4.0"
