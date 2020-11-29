@@ -13,7 +13,7 @@ object Libs {
     const val firebase_database = "com.google.firebase:firebase-database:19.5.1"
     const val firebase_dynamic_links = "com.google.firebase:firebase-dynamic-links:19.1.1"
     const val firebase_perf = "com.google.firebase:firebase-perf:19.0.8"
-    const val firebase_messaging = "com.google.firebase:firebase-messaging:20.2.4"
+    const val firebase_messaging = "com.google.firebase:firebase-messaging:21.0.0"
     const val firebase_crashlytics = "com.google.firebase:firebase-crashlytics:17.2.1"
 
     // https://developer.android.com/topic/libraries/support-library/androidx-rn
