@@ -1,5 +1,5 @@
 object Libs {
-    const val google_material = "com.google.android.material:material:1.1.0"
+    const val google_material = "com.google.android.material:material:1.2.1"
 
     const val play_core = "com.google.android.play:core:1.8.0"
 
