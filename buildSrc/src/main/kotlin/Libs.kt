@@ -1,28 +1,28 @@
 object Libs {
-    const val google_material = "com.google.android.material:material:1.1.0"
+    const val google_material = "com.google.android.material:material:1.2.1"
 
-    const val play_core = "com.google.android.play:core:1.7.3"
+    const val play_core = "com.google.android.play:core:1.8.0"
 
     // https://firebase.google.com/support/release-notes/android
-    const val firebase_ads = "com.google.firebase:firebase-ads:19.4.0"
-    const val firebase_analytics = "com.google.firebase:firebase-analytics:17.5.0"
-    const val firebase_auth = "com.google.firebase:firebase-auth:19.4.0"
+    const val firebase_ads = "com.google.firebase:firebase-ads:19.5.0"
+    const val firebase_analytics = "com.google.firebase:firebase-analytics:18.0.0"
+    const val firebase_auth = "com.google.firebase:firebase-auth:20.0.1"
     const val firebase_appindexing = "com.google.firebase:firebase-appindexing:19.1.0"
     const val firebase_client_android = "com.firebase:firebase-client-android:2.5.2"
-    const val firebase_config = "com.google.firebase:firebase-config:19.2.0"
-    const val firebase_database = "com.google.firebase:firebase-database:19.4.0"
-    const val firebase_dynamic_links = "com.google.firebase:firebase-dynamic-links:19.1.0"
-    const val firebase_perf = "com.google.firebase:firebase-perf:19.0.8"
-    const val firebase_messaging = "com.google.firebase:firebase-messaging:20.2.4"
-    const val firebase_crashlytics = "com.google.firebase:firebase-crashlytics:17.2.1"
+    const val firebase_config = "com.google.firebase:firebase-config:20.0.1"
+    const val firebase_database = "com.google.firebase:firebase-database:19.5.1"
+    const val firebase_dynamic_links = "com.google.firebase:firebase-dynamic-links:19.1.1"
+    const val firebase_perf = "com.google.firebase:firebase-perf:19.0.10"
+    const val firebase_messaging = "com.google.firebase:firebase-messaging:21.0.0"
+    const val firebase_crashlytics = "com.google.firebase:firebase-crashlytics:17.3.0"
 
     // https://developer.android.com/topic/libraries/support-library/androidx-rn
     const val androidx_annotation = "androidx.annotation:annotation:1.1.0"
-    const val androidx_appcompat = "androidx.appcompat:appcompat:1.1.0"
+    const val androidx_appcompat = "androidx.appcompat:appcompat:1.2.0"
     const val androidx_cardview = "androidx.cardview:cardview:1.0.0"
-    const val androidx_core = "androidx.core:core:1.3.1"
+    const val androidx_core = "androidx.core:core:1.3.2"
     const val androidx_coordinatorlayout = "androidx.coordinatorlayout:coordinatorlayout:1.1.0"
-    const val androidx_drawerlayout = "androidx.drawerlayout:drawerlayout:1.1.0"
+    const val androidx_drawerlayout = "androidx.drawerlayout:drawerlayout:1.1.1"
     const val androidx_fragment = "androidx.fragment:fragment:1.2.5"
     const val androidx_recyclerview = "androidx.recyclerview:recyclerview:1.1.0"
     const val androidx_swiperefreshlayout = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
@@ -83,9 +83,9 @@ object Libs {
     const val TRUTH = "com.google.truth:truth:1.0.1"
 
     // https://github.com/robolectric/robolectric
-    const val robolectric = "org.robolectric:robolectric:4.3.1"
+    const val robolectric = "org.robolectric:robolectric:4.4"
 
-    const val espresso_core = "androidx.test.espresso:espresso-core:3.2.0"
-    const val espresso_contrib = "androidx.test.espresso:espresso-contrib:3.2.0"
-    const val test_runner = "androidx.test:runner:1.2.0"
+    const val espresso_core = "androidx.test.espresso:espresso-core:3.3.0"
+    const val espresso_contrib = "androidx.test.espresso:espresso-contrib:3.3.0"
+    const val test_runner = "androidx.test:runner:1.3.0"
 }
