@@ -61,7 +61,7 @@ object Libs {
 
     // https://github.com/InsertKoinIO/koin/blob/master/CHANGELOG.md
     @Deprecated("Use dagger")
-    const val koin = "org.koin:koin-android:2.1.6"
+    const val koin = "org.koin:koin-android:2.2.1"
     @Deprecated("Use dagger")
     const val koin_viewmodel = "org.koin:koin-androidx-viewmodel:2.2.1"
 
