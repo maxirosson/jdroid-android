@@ -79,7 +79,7 @@ object Libs {
     const val facebook_core = "com.facebook.android:facebook-core:4.41.0"
     const val facebook_login = "com.facebook.android:facebook-login:4.41.0"
 
-    const val junit = "junit:junit:4.13"
+    const val junit = "junit:junit:4.13.1"
     const val TRUTH = "com.google.truth:truth:1.0.1"
 
     // https://github.com/robolectric/robolectric
