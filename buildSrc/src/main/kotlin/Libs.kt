@@ -12,7 +12,7 @@ object Libs {
     const val firebase_config = "com.google.firebase:firebase-config:20.0.2"
     const val firebase_database = "com.google.firebase:firebase-database:19.6.0"
     const val firebase_dynamic_links = "com.google.firebase:firebase-dynamic-links:19.1.1"
-    const val firebase_perf = "com.google.firebase:firebase-perf:19.0.11"
+    const val firebase_perf = "com.google.firebase:firebase-perf:19.1.0"
     const val firebase_messaging = "com.google.firebase:firebase-messaging:21.0.1"
     const val firebase_crashlytics = "com.google.firebase:firebase-crashlytics:17.3.0"
 
