@@ -30,7 +30,7 @@ object Libs {
 
     // https://developer.android.com/jetpack/androidx/releases/room
     const val androidx_room_runtime = "androidx.room:room-runtime:2.2.6"
-    const val androidx_room_compiler = "androidx.room:room-compiler:2.2.5"
+    const val androidx_room_compiler = "androidx.room:room-compiler:2.2.6"
 
     const val WORK_MANAGER_RUNTIME_KTX = "androidx.work:work-runtime-ktx:2.4.0"
     const val WORK_MANAGER_TESTING = "androidx.work:work-testing:2.4.0"
