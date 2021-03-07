@@ -9,7 +9,7 @@ object Libs {
     const val firebase_auth = "com.google.firebase:firebase-auth:20.0.3"
     const val firebase_appindexing = "com.google.firebase:firebase-appindexing:19.2.0"
     const val firebase_client_android = "com.firebase:firebase-client-android:2.5.2"
-    const val firebase_config = "com.google.firebase:firebase-config:20.0.3"
+    const val firebase_config = "com.google.firebase:firebase-config:20.0.4"
     const val firebase_database = "com.google.firebase:firebase-database:19.6.0"
     const val firebase_dynamic_links = "com.google.firebase:firebase-dynamic-links:19.1.1"
     const val firebase_perf = "com.google.firebase:firebase-perf:19.1.1"
